@@ -24,23 +24,23 @@ De ha létezik, akkor nagyon hatékony!
 
 #### Példa: *Töredékes hátizsák feladat*
 
-**Bemenet**: A hátizsák S kapacitása, n tárgy, Si tárgy súlyok, Ei tárgy értékek
+**Bemenet**: A hátizsák $S$ kapacitása, $n$ tárgy, $S_i$ tárgy súlyok, $E_i$ tárgy értékek
 
-**Kimenet**: Mi a legnagyobb érték, ami S kapacitásba belefér?
+**Kimenet**: Mi a legnagyobb érték, ami $S$ kapacitásba belefér?
 
 Minden tárgyból 1db van, de az darabolható.
 
 **Algoritmus**:
 
-- Számoljuk ki minden tárgyra az Ei / Si arányt
+- Számoljuk ki minden tárgyra az $\frac{E_i}{S_i}$ arányt
 
-- Tegyünk bele a legnagyobb Ei / Si-vel rendelkező, még rendelkezésre álló tárgyból annyit a zsákba, amennyi belefér
+- Tegyünk bele a legnagyobb $\frac{E_i}{S_i}$-vel rendelkező, még rendelkezésre álló tárgyból annyit a zsákba, amennyi belefér
 
 <img title="" src="../img/toredekes_hatizsak.png" alt=" " data-align="center" width="395">
 
 Futás a fenti példán: 
 
-- Kiszámoljuk az Ei / Si értékeket
+- Kiszámoljuk az $\frac{E_i}{S_i}$ értékeket
   
   1. Tárgy: 6
   
@@ -48,15 +48,15 @@ Futás a fenti példán:
   
   3. Tárgy: 4
 
-- Végighaladunk a tárgyakon az Ei / Si arányok szerint
+- Végighaladunk a tárgyakon az $\frac{E_i}{S_i}$ arányok szerint
   
-  - Az első tárgy teljes egészében belefér, azt beválasztjuk
+  - Az első tárgy teljes egészében belefér, azt beválasztjuk.
   
-  - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk
+  - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
   
-  - A 3. tárgy már nem fét be, beválasztunk annyit, amennyi kitölti a szabad helyet, a 2/3-át
+  - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy $\frac{2}{3}$-át.
 
-> A probléma törések nélküli verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
+> A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
 
 ### Oszd-meg-és-uralkodj algoritmusok
 
@@ -64,19 +64,19 @@ A feladatot több **részfeladatra** bontjuk, ezek hasonlóak az eredeti feladat
 
 **Rekurzív módon** megoldjuk ezeket a részfeladatokat (azaz ezeket is kisebb részfeladatokra bontjuk egészen addig, amíg elemi feladatokig jutunk, amelyekre a megoldás triviális), majd **összevonjuk őket**, hogy az eredeti feladatra megoldást adjanak.
 
-A részfeladatok ne legyenek átfedőek. Bár az algoritmus ettől még működhet, de nem hatékony
+> A részfeladatok ne legyenek átfedőek. Bár az algoritmus ettől még működhet, de nem hatékony.
 
 #### Lépések
 
-1. **Felosztás**: Hogyan osztjuk fel a feladatot több kisebb részfeladatra
+1. **Felosztás**: Hogyan osztjuk fel a feladatot több kisebb részfeladatra.
 
-2. **Uralkodás**: A feladatokat rekurzív módon megoldjuk. Ha a részfeladatok mérete elég kicsi, akkor közvetlenül meg tudjuk oldani a részfeladatot, ilyenkor nem osztjuk tovább rekurzívan
+2. **Uralkodás**: A feladatokat rekurzív módon megoldjuk. Ha a részfeladatok mérete elég kicsi, akkor közvetlenül meg tudjuk oldani a részfeladatot, ilyenkor nem osztjuk tovább rekurzívan.
 
-3. **Összevonás**: A részfeladatok megoldásait összevonjuk az eredeti feladat megoldásává
+3. **Összevonás**: A részfeladatok megoldásait összevonjuk az eredeti feladat megoldásává.
 
 #### Példa: *Összefésülő rendezés*
 
-1. **Felosztás**: Az *n* elemű rendezendő sorozatot felosztja két *n / 2* elemű részsorozatra.
+1. **Felosztás**: Az $n$ elemű rendezendő sorozatot felosztja két $\frac{n}{2}$ elemű részsorozatra.
 
 2. **Uralkodás**: A két részsorozatra rekurzívan tovább hívjuk az összefésülő rendezés eljárást. Az elemi eset az egy elemű részsorozat, hiszen az már rendezett, ilyenkor csak visszatérünk vele.
 
@@ -100,13 +100,13 @@ A részfeladatok ne legyenek átfedőek. Bár az algoritmus ettől még működh
            [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-> Az összefésülés folyamata egyszerű, csak két mutatót vezetünk a két rendezett tömbön, lépkedünk, mindig a kisebbet adjuk rakjuk egy másik tömb megfelelő indexére.
+> Az összefésülés folyamata egyszerű, csak két mutatót vezetünk a két rendezett tömbön, lépkedünk, mindig a kisebbet fűzzük egy másik, kezdetben üres tömbhöz.
 
 #### Példa: *Felező csúcskereső algoritmus*
 
 Vizsgáljuk meg a középső elemet. Ha csúcs, térjünk vissza vele, ha nem csúcs, akkor az egyik szomszédja nagyobb, vizsgáljuk tovább a bemenet felét ezen szomszéd irányába. Azért megyünk ebbe az irányba, mert erre biztosan van csúcs. Ezt onnan tudjuk, hogy maga ez a nagyobbik szomszéd is egy potenciális csúcs. Ha mindkét szomszédja nagyobb, akkor mindegy melyik irányba haladunk tovább, egyszerűen azzal, amiről előbb megtudtuk, hogy nagyobb.
 
-1. **Felosztás**: *n* elemű sorozatot felosztjuk két *(n - 1) / 2* elemű részsorozatra
+1. **Felosztás**: $n$ elemű sorozatot felosztjuk két $\frac{n - 1}{2}$ elemű részsorozatra
 2. **Uralkodás**: A megfelelő részsorozatban rekurzívan tovább keresünk csúcsot
 3. **Összevonás**: Ha csúcsot találtunk, adjuk vissza
 
@@ -131,7 +131,7 @@ Ez az algoritmus logaritmikus időigényű. Ezzel szemben az egyszerű megoldás
 
 Olyan feladatok esetén alkalmazzuk, amikor a **részproblémák nem függetlenek**, azaz vannak közös részproblémák.
 
-**Optimalizálási feladatok** tipikusan ilyenek.
+> **Optimalizálási feladatok** tipikusan ilyenek.
 
 A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblázatban), így ha azok mégegyszer elő kerülnek, nem kell újra kiszámolni, csak elővenni memóriából az eredményt.
 
@@ -153,7 +153,7 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 
 #### Példa: *Pénzváltás feladat*
 
-Adott Pi érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni F forint.
+Adott $P_i$ érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni $F$ forint.
 
 ```c
 // Input:
@@ -216,17 +216,17 @@ F  = 9;
 
 #### Rendezés
 
-- **Input**: Egészek egy *n* hosszú tömbje (egy `<a1, a2, ..., an>` sorozat)
+- **Input**: Egészek egy $n$ hosszú tömbje (egy `<a1, a2, ..., an>` sorozat)
 
-- **Output**: *n* hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
+- **Output**: $n$ hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
 > 
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
 > 
-> - Vanegy fügvényünk, ami megondja képt kollekció-elemről, hogy melyik a "nagyobb": `(a: Objektum, b: Objektum) => -1 | 0 | 1`
+> - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
 > 
-> Ezek együttesével már megfelelően absztrakt módon tudjuk használni a rendező algoritmusokat bármilyen esetben.
+> Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 #### Beszúró rendezés
 
