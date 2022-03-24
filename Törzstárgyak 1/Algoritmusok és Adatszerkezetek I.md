@@ -22,7 +22,7 @@ De ha létezik, akkor nagyon hatékony!
 
 3. Bizonyítsuk be, hogy a mohó választással olyan részprobléma keletkezik, amelynek egy **optimális megoldásához hozzávéve a mohó választást**, az eredeti probléma egy optimális megoldását kapjuk.
 
-#### Példa: *Töredékes hátizsák feladat*
+#### Példa: _Töredékes hátizsák feladat_
 
 **Bemenet**: A hátizsák $S$ kapacitása, $n$ tárgy, $S_i$ tárgy súlyok, $E_i$ tárgy értékek
 
@@ -38,25 +38,27 @@ Minden tárgyból 1db van, de az darabolható.
 
 <img title="" src="../img/toredekes_hatizsak.png" alt=" " data-align="center" width="395">
 
-Futás a fenti példán: 
+Futás a fenti példán:
 
 - Kiszámoljuk az $\frac{E_i}{S_i}$ értékeket
-  
+
   1. Tárgy: 6
-  
+
   2. Tárgy: 5
-  
+
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az $\frac{E_i}{S_i}$ arányok szerint
-  
+
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-  
+
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-  
+
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy $\frac{2}{3}$-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
+
+> test
 
 ### Oszd-meg-és-uralkodj algoritmusok
 
@@ -74,7 +76,7 @@ A feladatot több **részfeladatra** bontjuk, ezek hasonlóak az eredeti feladat
 
 3. **Összevonás**: A részfeladatok megoldásait összevonjuk az eredeti feladat megoldásává.
 
-#### Példa: *Összefésülő rendezés*
+#### Példa: _Összefésülő rendezés_
 
 1. **Felosztás**: Az $n$ elemű rendezendő sorozatot felosztja két $\frac{n}{2}$ elemű részsorozatra.
 
@@ -102,7 +104,7 @@ A feladatot több **részfeladatra** bontjuk, ezek hasonlóak az eredeti feladat
 
 > Az összefésülés folyamata egyszerű, csak két mutatót vezetünk a két rendezett tömbön, lépkedünk, mindig a kisebbet fűzzük egy másik, kezdetben üres tömbhöz.
 
-#### Példa: *Felező csúcskereső algoritmus*
+#### Példa: _Felező csúcskereső algoritmus_
 
 Vizsgáljuk meg a középső elemet. Ha csúcs, térjünk vissza vele, ha nem csúcs, akkor az egyik szomszédja nagyobb, vizsgáljuk tovább a bemenet felét ezen szomszéd irányába. Azért megyünk ebbe az irányba, mert erre biztosan van csúcs. Ezt onnan tudjuk, hogy maga ez a nagyobbik szomszéd is egy potenciális csúcs. Ha mindkét szomszédja nagyobb, akkor mindegy melyik irányba haladunk tovább, egyszerűen azzal, amiről előbb megtudtuk, hogy nagyobb.
 
@@ -148,10 +150,10 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-  
+
   - Ha ki kell mindent számolni, érdemesebb az iteratív megköelítést választani a függvényhívások overhead-je miatt.
 
-#### Példa: *Pénzváltás feladat*
+#### Példa: _Pénzváltás feladat_
 
 Adott $P_i$ érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni $F$ forint.
 
@@ -221,11 +223,11 @@ F  = 9;
 - **Output**: $n$ hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
-> 
+>
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
-> 
+>
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
-> 
+>
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 #### Beszúró rendezés
@@ -235,15 +237,15 @@ F  = 9;
 ```ts
 const beszuroRendezes = (A: number[]) => {
   for (let j = 1; j < A.length; j++) {
-      const beillesztendo = A[j];
-      let i = j - 1;
-      for (; i >= 0 && A[i] > beillesztendo; i--) {
-          A[i + 1] = A[i];
-      }
-      A[i + 1] = beillesztendo;
+    const beillesztendo = A[j];
+    let i = j - 1;
+    for (; i >= 0 && A[i] > beillesztendo; i--) {
+      A[i + 1] = A[i];
+    }
+    A[i + 1] = beillesztendo;
   }
   return A;
-}
+};
 ```
 
 ![  ](../img/beszuro_rendezes.png)
@@ -251,8 +253,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-|:--------:|:---------------------------------:|
-| $O(n^2)$ | $O(n)$ ~ $O(1)$                   |
+| :------: | :-------------------------------: |
+| $O(n^2)$ |          $O(n)$ ~ $O(1)$          |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -275,9 +277,9 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 ![  ](../img/kupac_rendezes.png)
 
-| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
-|:-------------:|:---------------------------------:|
-| $O(n*log(n))$ | $O(n)$ ~ $O(1)$                   |
+|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
+| :-----------: | :-------------------------------: |
+| $O(n*log(n))$ |          $O(n)$ ~ $O(1)$          |
 
 #### Gyorsrendezés
 
@@ -291,35 +293,35 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 ```ts
 const feloszt = (A: number[], p: number, r: number) => {
-    const x = A[r];
-    let i = p - 1;
-    for (let j = p; j <= r - 1; j++) {
-        if (A[j] <= x) {
-            i++;
-            [A[i], A[j]] = [A[j], A[i]];
-        }
+  const x = A[r];
+  let i = p - 1;
+  for (let j = p; j <= r - 1; j++) {
+    if (A[j] <= x) {
+      i++;
+      [A[i], A[j]] = [A[j], A[i]];
     }
-    [A[r], A[i + 1]] = [A[i + 1], A[r]];
-    return i + 1;
-}
+  }
+  [A[r], A[i + 1]] = [A[i + 1], A[r]];
+  return i + 1;
+};
 ```
 
 ```ts
 const _gyorsRendezes = (A: number[], p: number, r: number) => {
-    if (p < r) {
-        const q = feloszt(A, p, r);
-        _gyorsRendezes(A, p, q - 1);
-        _gyorsRendezes(A, q + 1, r); 
-    }
-    return A;
-}
+  if (p < r) {
+    const q = feloszt(A, p, r);
+    _gyorsRendezes(A, p, q - 1);
+    _gyorsRendezes(A, q + 1, r);
+  }
+  return A;
+};
 
-const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1)
+const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- |:--------:|
-| $O(n^2)$ | $O(n)$   |
+| -------- | :------: |
+| $O(n^2)$ |  $O(n)$  |
 
 > Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság $O(logn)$, ami mivel egy hívás futásideje $O(n)$, így az átlagos futásidő $O(n * logn)$. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
