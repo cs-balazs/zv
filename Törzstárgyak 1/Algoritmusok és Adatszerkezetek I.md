@@ -41,19 +41,19 @@ Minden tárgyból 1db van, de az darabolható.
 Futás a fenti példán:
 
 - Kiszámoljuk az $\frac{E_i}{S_i}$ értékeket
-
+  
   1. Tárgy: 6
-
+  
   2. Tárgy: 5
-
+  
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az $\frac{E_i}{S_i}$ arányok szerint
-
+  
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-
+  
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-
+  
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy $\frac{2}{3}$-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
@@ -150,7 +150,7 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-
+  
   - Ha ki kell mindent számolni, érdemesebb az iteratív megköelítést választani a függvényhívások overhead-je miatt.
 
 #### Példa: _Pénzváltás feladat_
@@ -223,11 +223,11 @@ F  = 9;
 - **Output**: $n$ hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
->
+> 
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
->
+> 
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
->
+> 
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 #### Beszúró rendezés
@@ -253,8 +253,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-| :------: | :-------------------------------: |
-| $O(n^2)$ |          $O(n)$ ~ $O(1)$          |
+|:--------:|:---------------------------------:|
+| $O(n^2)$ | $O(n)$ ~ $O(1)$                   |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -277,9 +277,9 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 ![  ](../img/kupac_rendezes.png)
 
-|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
-| :-----------: | :-------------------------------: |
-| $O(n*log(n))$ |          $O(n)$ ~ $O(1)$          |
+| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
+|:-------------:|:---------------------------------:|
+| $O(n*log(n))$ | $O(n)$ ~ $O(1)$                   |
 
 #### Gyorsrendezés
 
@@ -320,8 +320,8 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- | :------: |
-| $O(n^2)$ |  $O(n)$  |
+| -------- |:--------:|
+| $O(n^2)$ | $O(n)$   |
 
 > Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság $O(logn)$, ami mivel egy hívás futásideje $O(n)$, így az átlagos futásidő $O(n * logn)$. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
@@ -335,4 +335,164 @@ Minden összehasonlító rendező algoritmus legrosszabb esetben $\Omega(n * log
 
 > Eddigi algoritmusok mind összahasonlító rendezések voltak, a kövezkező már nem az.
 
+Ezt döntési fával lehet bebizonyítani, aminek belső csúcsai meghatároznak két tömbelemet, amiket épp összehasonlítunk, a levelek pedig hogy az oda vezető összehasonlítások milyen sorrendhez vezettek. Nem konkrét inputra írható fel döntési fa, hanem az algoritmushoz. Így ennek a fának a legrosszabb esetben vett magassága lesz az algoritmus futásidejének felső korlátja.
+
 #### Leszámoló rendezés
+
+Feltételezzük, hogy az összes bemeneti elem $0$ és $k$ közé esik.
+
+Minden lehetséges bemeneti elemhez megszámoljuk, hányszor fordul elő az inputban.
+
+Majd ez alapján azt, hogy hány nála kisebb van.
+
+Ez alapján már tudjuk, hogy az egyes elemeknek hova kell kerülni. Mert ha pl 5 elem van, ami kisebb, vagy egyenlő, mint 2, akkor tudjuk, hogy az 5. pozíción 2-es kell, hogy legyen.
+
+```ts
+const leszamoloRendezes = (A: number[], k: number) => {
+  const C = [...new Array(k + 1)].map(() => 0)
+  A.forEach(szam => {
+    C[szam]++
+  })
+  // Itt a C-ben azon elemek száma van, aminek értéke i
+
+  for (let i = 1; i < C.length; i++) {
+    C[i] += C[i - 1]
+  }
+  // Itt C-ben i indexen azon elemek száma van, amik értéke kisebb, vagy egyenlő, mint i
+
+  const B = [...new Array(A.length)] // B egy A-val egyező hosszú tömb
+
+  for (let i = A.length - 1; i >= 0; i--) {
+    B[C[A[i]] - 1] = A[i]
+    C[A[i]]--
+  }
+
+  return B
+}
+```
+
+| Futásidő        | Tárigény     |
+|:---------------:|:------------:|
+| $\Theta(k + n)$ | $\Theta(2n)$ |
+
+> A gyakorlatban akkor használjuk, ha $k = O(n)$, mert ekkor a futásidő $\Theta(n)$
+
+### Gráfalgoritmusok
+
+Gráfog ábrázolása: **éllista** vagy **szomszédsági mátrix**
+
+![ ](../img/graf_abrazolas.png)
+
+#### Szélességi keresés
+
+Gráf bejárására szolgál.
+
+A bejárás során kijelöl egy "szélességi fát", ami egy kiindulási csúcsból indulva mindig az adott csúcsból elérhető csúcsokat reprezentálja.
+
+Amilyen távol van a kiindulási csúcstól egy csúcs, az olyan mélységen helyezkedik el ebben a fában.
+
+Irányított, irányítatlan gráfog esetén is alkalmazható.
+
+A csúcsok távolsága alapján kalad a bejárás (a kijelölt kezdeti csúcstól), minden $k$ távolságra levő csúcsot elérünk az előtt, hogy egy $k + 1$ távolságra levőt elérnénk.
+
+Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
+
+- **fehér**: Kiindulási szín, egy ilyen színű csúcsot még nem értünk el.
+
+- **szürke**: Elért csúcs, de még van fehér szomszédja.
+
+- **fekete**: Elért csúcs, és már minden szomszédja is elért (vagy szürke vagy fekete).
+
+![ ](/Users/balazs/zv/img/szelessegi.png)
+
+```js
+// A G a gráf, s a kiindulási csúcs
+szelessegiKereses(G, s) {
+    for G grás minden nem s csúcsára {
+        szín[csucs] = "fehér"
+    }
+    szín[s] = "szürke"
+    d[s] = 0 // Távolság s-től
+    szülő[s] = null
+    Q = [] // Üres SOR
+    sorba(Q, s)
+    while Q nem üres {
+        u = sorból(Q)
+        for u minden v szomszédjára {
+            if (szín[v] === "fehér") {
+                szín[v] = "szürke"
+                d[v] = d[u] + 1
+                szülő[v] = u
+                sorba(Q, v) // Tovább feldolgozzuk majd neki a szomszédjait
+            }
+        }
+        szín[u] = "fekete" // Itt már végigmentünk minden szomszédján
+    }
+}
+```
+
+##### Futásidő:
+
+- Minden csúcsot egyszer érintünk csak, ez $V$ db csúcs.
+
+- Sorba, és sorból $O(1)$, így a sorműveletek összesen $O(V).$
+
+- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza $\theta(E)$, így  összesen $O(E)$ időt fordítunk a szomszédsági listák vizsgálására.
+
+- Az algoritmus elején a kezdeti értékadások ideje $O(V)$.
+
+- Összesített futásidő: $O(E + V)$
+
+#### Mélységi keresés
+
+Addig megy a kivezető élek mentén, ameddig tud, majd visszafele indulva minden érintett csúcs kivezető élein addig megy mélyre, amíg lehet.
+
+Ugyan azokat a színekez használja a csúcsok színezésére, mint a szélességi keresés.
+
+Minden csúcshoz feljegyzi, hogy mikor (hány lépés után) érte el, és hagyta el azt.
+
+```js
+melysegiKereses(G) {
+    for G minden u csúcsára {
+        szín[u] = "fehér"
+        szülő[u] = null
+    }
+    idő = 0
+    for G minden u csúcsára {
+        if (szín[u] === "fehér") {
+            melysegiBejaras(u)
+        }
+    }
+}
+
+melysegiBejaras(u) {
+    szín[u] = "szürke"
+    idő++
+    d[u] = idő // Ekkor értük el
+    for u minden v szomszédjára {
+        if (szín[v] === "fehér") {
+            szülő[v] = u
+            melysegiBejaras(v) // Azonnal már indulunk is el a talált csúcsból
+        }
+    }
+    szín[u] = "fehete"
+    ido++
+    f[u] = ido // Ekkor hafytuk el
+}
+```
+
+![ ](/Users/balazs/zv/img/melysegi.png)
+
+##### Futásidő
+
+A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve $\Theta(V)$. A melysegiBejaras() hívások össz futásideje $\Theta(E)$, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő $O(E + V)$
+
+> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy $\Theta(E)$. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a mélységiBejárás().
+
+#### Minimális feszítőfák
+
+Cél: megtalálni éleknek azon **körmentes** részhalmazát, amely élek mentén **minden csúcs összeköthető,** és az élek **összesített súlya** legyen a **lehető legkisebb**.
+
+#### Legrövidebb utak
+
+TODO
