@@ -403,7 +403,7 @@ Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 
 - **fekete**: Elért csúcs, és már minden szomszédja is elért (vagy szürke vagy fekete).
 
-![ ](/Users/balazs/zv/img/szelessegi.png)
+![ ](../img/szelessegi.png)
 
 ```js
 // A G a gráf, s a kiindulási csúcs
@@ -431,7 +431,7 @@ szelessegiKereses(G, s) {
 }
 ```
 
-##### Futásidő:
+##### Futásidő
 
 - Minden csúcsot egyszer érintünk csak, ez $V$ db csúcs.
 
@@ -481,7 +481,7 @@ melysegiBejaras(u) {
 }
 ```
 
-![ ](/Users/balazs/zv/img/melysegi.png)
+![ ](../img/melysegi.png)
 
 ##### Futásidő
 
@@ -493,6 +493,291 @@ A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve $\The
 
 Cél: megtalálni éleknek azon **körmentes** részhalmazát, amely élek mentén **minden csúcs összeköthető,** és az élek **összesített súlya** legyen a **lehető legkisebb**.
 
+Az így kiválasztott élek egy fát alkotnak, ez a **feszítőfa**.
+
+Két **mohó** algoritmus: **Prim**, **Kruskal**
+
+##### Kruskal
+
+A gráf csúcsait diszjunkt halmazokba sorolja. Kezdetben minden csúcs 1-1 egy elemú csúcs.
+
+> Erre van speciális diszjunkt-halmaz adatszerkezet
+
+Minden iterációban beveszi a legkisebb súlyú élet, aminek végpontjai különböző halmazokban vannak.
+
+Ez által egy erdőt kezel, mit a végére egy fává alakít. Ez lesz a feszítőfa.
+
+```js
+kruskal(G, w) { // Az élsúlyokat megadó függvény
+    A = 0
+    for minden v csúcsra {
+        halmaztKeszit(v)
+    }
+    for minden (u, v) élre, az élsúlyok szerin növekvő sorrendben {
+        if halmaztKeres(u) != halmaztKeres(v) {
+            A = A unió { (u, v) }
+            egyesít(u, v)
+        }
+    }
+}
+```
+
+`halmaztKeszit`, `halmaztKeres` és `egyesít` a diszjunkt halmazokat kezelő függvények.
+
+![ ](../img/kruskal.png)
+
+###### Futásidő
+
+Az élek rendezése $O(E * logE)$.
+
+A halmaz műveletek a kezdeti értékadásokkal együtt $O((V + E) * \alpha * (V)$. Ahol az $\alpha$ egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet jasátossága. Mivek összefüggő gráf esetén $O(|E| \ge |V| + 1)$, így a diszjunkt-halmaz műveletek $O((E) * \alpha * (V))$ idejűek. $\alpha(|V|) = O(log E)$ miatt $O(E * log E)$.
+
+Így a teljes futásidő $O(E * logE)$.
+
+#### Prim algoritmus
+
+A Kruskallal ellentétben folyamatosan egy darab fát kezel, ezt növeli az iterációkban.
+
+Egy megadott kiindulási csúcsból indulva minden iterációban hozzávesszük azt a csúcsot, amit a legkisebb súlyú él köt a meglévő fához.
+
+```js
+prim(G, w, r) { // Az élsúlyokat megadó függvény
+    for minden v csúcsra {
+        kulcs[v] = Végtelen
+        szülő[v] = null
+    }
+    kulcs[r] = 0
+    Q = G csúcsai // Prioritási sor kulcs[] szerint minimális
+    while Q nem üres {
+        u = kiveszMin(Q)
+        for u minden v szomszédjára {
+            if v eleme Q, és w(u, v) < kulcs[v] {
+                szülő[v] = u
+                kulcs[v] = w(u, v)
+            }
+        }
+    }
+}
+```
+
+![ ](../img/prim.png)
+
+###### Futásidő
+
+Bináris minimum kupac megvalósítással:
+
+Kezdeti értékadások: $O(V)$
+
+Egy db kiveszMin művelet: $O(logV)$. Összesen: $O(V * log V)$, mivel $V$-szer fut le a ciklus.
+
+Belső for ciklus $O(E)$-szer fut, mivel szomszédsági listák hosszainak összege: $O(2|E|)$. (Ez megintcsak additív, nem kell a külső ciklussal felszorozni, mert a szomszédsági listák alapján tudjuk, hogy ennyiszer fog maximum összesen lefutni.) Ezen a cikulson belül a $Q$-hoz tartozás vizsgálata konstans idejű, ha erre fenntartunk egy jelölő bitet. A kulcs-nak való értékadás valójában egy kulcsotCsökkent művelet, ami $O(logV)$ idejű.
+
+Agy tehát az összesített futásidő: $O(VlogV + ElogV) = O(E log V)$.
+
+> Fibonacchi-kupaccal gyorsítható az algoritmus, ekkor a kiveszMin $O(logV)$-s, kulcsotCsökkent $O(1)$-es, teljes futásidő: $O(E + V * logV)$
+
 #### Legrövidebb utak
 
-TODO
+Lehetséges problémák:
+
+- **Adott csúcsból induló legrövidebb utak problémája**: Egy adott kezdőcsúcsból meg szeretnénk találni minden másik csúcshoz vezető legrövidebb utat.
+
+- **Adott csúcsba érkező legrövidebb utak problémája**: Minden csúcsból egy adott csúcsba. Ugyan az, mint az előbbi, ha az élek irányát megfordítjuk.
+
+- **Adott csúcspár közti legrövidebb út problémája:** Ha az elsőt megoldjuk, ezt is megoldottuk. Nem ismert olyan algoritmus, ami aszimptotikusan gyorsabban megoldaná ezt a feladatot, de az elsőt nem.
+
+- **Összes csúcspár közti legrövidebb utak problémája**: Ez persze megoldható lenne az elsővel, ha minden csúcsból elindítjuk, de ennél léteznek gyorsabb megoldások.
+
+**Optimális részstruktúra**: Azt jelenti jelen esetben, hogy két csúcs közti legrövidebb út magában foglalja sokszor másik két csúcs közti legrövidebb utat. Az algoritmusok ezt használják ki.
+
+**Negatív súlyú élek**: Lehetnek, de a gráf nem tartalmazhat **negatív összsúlyú kört**. Ugyanis ekkor nem definiált a legrövidebb út, hiszen a körön mégegyszer végig haladva mindig kisebb súlyú utat kapunk.
+
+**Kör a legrövidebb útban**: Negatív összsúlyú tehát nem lehet, mert ekkor maga a feladat nem definiált. **Pozitív összsúlyú sem lehet**, hiszen ekkor jobban járnánk, ha nem járnánk be a kört. **Nulla összsúlyúnak pedig nincsen értelme**, hogy szerepeljen legrövidebb útban, hiszen ekkor ugyan annyi az összsúly a kör megtétele nélkül is. Tehát általánosságban feltételezhetjük, hogy a **legrövoidebb út nem tartalmaz kört**.
+
+Két függvény, amit használni fognak az algoritmusok:
+
+```js
+egyForrasKezdoertek(G, s) { // Kezdőértékek beállítása, ha egy csúcsból indul
+    for minden v csúcsra {
+        f[v] = Végtelen
+        szülő[v] = null
+    }
+    d[s] = 0
+}
+
+
+közelít(u, v, w) { // (u, v) él alapján v távolságának frissítése (ha u-ból jőve kisebb, akkor csökkentjük)
+    if d[v] > d[u] + w(u, v) {
+        d[v] = d[u] + w(u, v) // A d[v] becslést csökkenti 
+        szülő[v] = u
+    }
+}
+```
+
+##### Bellman-Ford algoritmus
+
+**Lehetnek negatív élek**, ha van negatív összsúlyú él, azt felismeri az algoritmus, jelzi azzal, hogy hamissal tér vissza.
+
+```js
+bellmanFord(G, w, s) {
+    egyForrasKezdoertek(G, s)
+    for i = 1 to |V[G]| - 1 {
+        for minden (u, v) élre {
+            közelít(u, v, w)
+        }
+    }
+    for minden (u, v) élre { // Itt ellenőrzi, hogy volt-e negatív kör
+        if d[v] > d[u] + w(u, v) {
+            return false
+        }
+    }
+    return true
+}
+```
+
+![  ](../img/belmann_ford.png)
+
+###### Futásidő
+
+$O(V * E)$ hiszen a kezdőértékek beállítésa $\Theta(V)$, az egymásba ágyazott for ciklus $O(V * E)$, a második ciklus pedig $O(E)$.
+
+##### Dijkstra algoritmusa
+
+**Nemnegatív élsúlyok** esetén működik.
+
+**S halmaz**: Azon csúcsok kerülnek bele, amikhez már meghatározta a legrövidebb utat a kezdőcsúcsból.
+
+```js
+dijkstra(G, s) {
+    egyForrasKezdoertek(G, s)
+    S = üresHalmaz
+    Q = V[G] // Q minimum prioritási sor
+    while Q nem üres {
+        u = kiveszMin(Q)
+        S = S unió { u }
+        for u minden v szomszádjára {
+            közelít(u, v, w)
+        }
+    }
+}
+```
+
+A Q sorban azok a csúcsok vannak, amik nincsenek S-ben, tehát még nem tudjuk a hozzájuk vezető legrövidebb utat. A sort a $d$ érték szerint azaz az ismert legrövidebb út szerint indexeljük.
+
+![ ](../img/dijkstra.png)
+
+###### Futásidő
+
+Minden csúcs pontosan egyszer kerül át az $S$ halmazba, emiatt amikor szomszédokat vizsgálunk, azt minden csúcsra egyszer tesszük meg, ezen szomszédok vizsgálata összesen $O(E)$-szer fut le, mert ennyi a szomszédsági listák össz hossza. Így a közelít, és ez által a `kulcsotCsökkent` művelet legfejlebb $O(E)$-szer hívódik meg.
+
+Az összesített futásidő nagyban függ a **prioritási sor implementációtól**, a legegyszerűbb eset, ha egy **tömbbel implementáljuk**. Ekkor a `beszúr` és `kulcsotCsokkent` műveletek $O(1)$-esek, a `kiveszMin` pedig $O(V)$, mivel az egész tömbön végig kell menni. Így a teljes futásidő $O(V^2 + E)$.
+**Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és látalánossagban gyorsítható fibonacchi kupaccal.
+
+##### Floyd-Warshall algoritmus
+
+**Dinamikus programozási** algoritmus legrövidebb utak **minden csúcspárra** problémára.
+
+Lehetnek negatív élsúlyok, de negatív összsúlyú körök nem.
+
+Az algoritmus lényege, hogy dinamikus programozással haladunk, egyre több csúcsot használunk fel, és azt figyeljük, hogy a két csúcs között vezető úton jobb eredményt érnénk-e el, ha az adott iteráció csúcsán keresztül mennénk.
+
+Ez a következő rekurziós képlettel írható fel:
+
+![ ](../img/flowd_warshall_keplet.png)
+
+```js
+floydWarshall(W) { // W szomszédsági mártix
+    n = sorokSzama(W)
+    D(0) = W
+    for k = 1-től n-ig { // Ezt vizsgáljuk mindig majd, mint köztes csúcs
+        for i = 1-től n-ig {
+            for j = 1-től n-ig {
+                d(k)[i, j] = min(
+                    d(k - 1)[i, j],
+                    d(k - 1)[i, k] + d(k - 1)[k, j]
+                )
+            }
+        }
+    }
+}
+```
+
+A belső értékadás magyarázata: A k. iterációban a legrövidebb út, ami i-ből j-be vezet, az vagy a már megtalált k - 1-edik iterációbeli eredmény, vagy a az előzőz iterációbeli út i-ből k-ba, plusz k-ból j-be, azaz **felhasználjuk-e a k-t, mint egy köztesen érintett csúcsot**.
+
+###### Futásidő
+
+A három for ciklus határozza meg, mert annak a magja $O(1)$-es, így a futásidő $\Theta(n^3)$, ahol $n$ a sorok száma.
+
+
+
+## 2. Elemi adatszerkezetek, bináris keresőfák, hasító táblázatok, gráfok és fák számítógépes reprezentációja
+
+Az **adatszerkezet** adatok tárolására, és szervezésére szolgáló módszer, amely lehetővé teszi a hatékony hozzáférést és módosítést.
+
+Algoritmushoz válasszuk ki az adatszerkezetet. Előfordulhat, hogy az algoritmus a megfelelő adatszerkezeten alapul.
+
+**Absztrakt adatszerkezet**: műveletek által definiált adaszerkezet, nem konkrét implementáció.
+
+**Adatszerkezetek**: Absztrakt adatszerkezetek konkrét megvalósításai. Általában egyes implementációk egyes műveleteket gyorsabban, míg másokat lassaban tudnak végrehajtani. Ez alapján kell az algoritmushoz kiválasztani a megfelelőt.
+
+> Absztrakt adatszerkezetek olyanok, mint **interfészek**, az adatszerkezetek pedig azt implementáló **osztályok**.
+
+### Listák
+
+Absztrakt adatszerkezet.
+
+Benne az adatok lineárisan követik egymást, egy kulcs többször is előfordulhat benne.
+
+| Művelet            | Magyarázat                                                        |
+| ------------------ | ----------------------------------------------------------------- |
+| `ÉRTÉK(H, i)`      | `i`. pozíción (index-en) a kulcs értékének visszaadása            |
+| `ÉRTÉKAD(H, i, k)` | `i`. pozíción levő értéknek a `k` érték értéküladása              |
+| `KERES(H, k)`      | A `k` kulcs (érték) megkerekéke a listában, indexének visszaadása |
+| `BESZÚR(H, k, i)`  | Az `i`-edik pozíctó után a `k` beszúrása                          |
+| `TÖRÖL(H, k)`      | Első `k` értékű elem törlése                                      |
+
+#### Közvetlen elérésű lista
+
+Összefüggő memóriaterületet foglalunk le, így minden index közvetlen elérésű.
+
+| Művelet            | Futásidő |
+| ------------------ | -------- |
+| `ÉRTÉK(H, i)`      | $O(1)$   |
+| `ÉRTÉKAD(H, i, k)` | $O(1)$   |
+| `KERES(H, k)`      | $O(n)$   |
+| `BESZÚR(H, k, i)`  | $O(n)$   |
+| `TÖRÖL(H, k)`      | $O(n)$   |
+
+> Beszúrásnál újra kellhet allokálni egyel nagyobb emmóriaterületet.
+
+> Jellemzően úgy implementáljuk, hogy definiálunk egy **kapacitást**, és amikor kell, akkor eggyivel allokálunk többet az új memóriaterületen. Illetve jellemzően azt is definiáljuk, hogy mikor kell zsugorítani a területet, azaz hány üresen maradó cella esetén (nem lyukak! az nem lehet, csak a terület végén levő üres cellák) allokáljunk kevesebb területet.
+
+**Előnye**: O(1)-es indexelés.
+
+**Hártánya**: Módosító műveletek lassúal, egy nagy memóriablokk kell.
+
+#### Láncolt lista
+
+Minden kulcs mellett tárolunk egy mutatót a következő, és egy mutatót a megelőző elemre.
+
+**Egyszeresen láncolt lista**: csak a következőre tárolunk mutatót.
+
+**Kétszeresen láncolt lista**: Következőre, előzőre is tárolunk mutatót.
+
+**Ciklikus lista**: Utolsó elem rákövetkezője az első elem, első megelőzője az uolsó elem.
+
+**Őrszem / fej**: Egy NULL elem, ami mindig a lista eleje.
+
+| Művelet            | Futásidő |
+| ------------------ | -------- |
+| `ÉRTÉK(H, i)`      | $O(n)$   |
+| `ÉRTÉKAD(H, i, k)` | $O(n)$   |
+| `KERES(H, k)`      | $O(n)$   |
+| `BESZÚR(H, k, i)`  | $O(1)$   |
+| `TÖRÖL(H, k)`      | $O(1)$   |
+
+> Beszúrás, és törlés valójában $O(n)$. Csak akkor $O(1)$, ha már a megfelelő pozíción vagyunk, azaz már tudjuk, melyik mutatókat kell átírni.
+
+**Előnye**: Nem egy nagy összefüggő memória blokk kell.
+
+**Hártánya**: Nem lehet gyorsan indexelni. Tárigény szempontjából rosszabb, minden kulcs mellett tárolunk legalább egy mutatót.
