@@ -708,8 +708,6 @@ A belső értékadás magyarázata: A k. iterációban a legrövidebb út, ami i
 
 A három for ciklus határozza meg, mert annak a magja $O(1)$-es, így a futásidő $\Theta(n^3)$, ahol $n$ a sorok száma.
 
-
-
 ## 2. Elemi adatszerkezetek, bináris keresőfák, hasító táblázatok, gráfok és fák számítógépes reprezentációja
 
 Az **adatszerkezet** adatok tárolására, és szervezésére szolgáló módszer, amely lehetővé teszi a hatékony hozzáférést és módosítést.
@@ -781,3 +779,430 @@ Minden kulcs mellett tárolunk egy mutatót a következő, és egy mutatót a me
 **Előnye**: Nem egy nagy összefüggő memória blokk kell.
 
 **Hártánya**: Nem lehet gyorsan indexelni. Tárigény szempontjából rosszabb, minden kulcs mellett tárolunk legalább egy mutatót.
+
+### Verem
+
+Lista, amiben csak a legutoljára beszúrt elemet lehet kivenni. (**LIFO**)
+
+Emiatt a speciális művelet végzés miatt gyorsabb, mint a sima lista.
+
+Alkalmazásokra pl.: Függvényhívások veremben, undo-redo, böngésző előzmények.
+
+#### Verem megvalósítás fix méretű tömbbel
+
+Fenntartunk egy mutatót a verem tetejére, eddig van feltöltve a lefoglalt memóriaterület. (A verem alja a 0. index.)
+
+```js
+üresVerem(V) {
+    return tető[V] == 0
+}
+```
+
+```js
+verembe(V, x) {
+    tető[V]++ // Tető mutató frissítése, hiszen egyel több elem lesz
+    V[tető[V]] = x
+}
+```
+
+```js
+veremből(V) {
+    if üresVerem(V) {
+        throw Error("alulcsordulás")
+    } else {
+        tető[V]--
+        return V[tető[V] + 1] // Ez az index nincs felszabadítva, vagy átírva, egyszerűen a mutató van csökkentves
+    }        
+}
+```
+
+Mind a 3 művelet $O(1)$-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
+
+> Hasonlóan a tömbbel megvalósított listához, itt is érdemes lehet kapacitást meghatározni.
+
+### Sor
+
+Mindig a legelőször beszúrt elemet lehet kivenni. (**FIFO**)
+
+Lefoglalunk egy valamekkora egybefüggő memória szegmenst, de nem mindig használjuk az egészet. Két mutatót tartunk fent, a `fej` és a `vége` mutatókat, ezek jelölik, hogy éppen mekkora részét használjuk a lefoglalt területnek sorként.
+
+```js
+sorba(S, x) {
+    S[vége[S]] = x // A vége egy üres pozícióra mutat alapból, ezért növeljük utólag.
+    if vége[S] = hossz[S] {
+        vége[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+    } else {
+        vége[S]++
+    }    
+}
+```
+
+```js
+sorból(S) {
+    x = S[fej[S]] // A fej mutat a sor "elejére", azaz a legrégebben betett elemre.
+    if fej[S] == hossz[S] {
+        fej[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+    } else {
+        fej[S]++
+    }
+}
+```
+
+Mind a két művelet $O(1)$-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
+
+### Prioritási sor
+
+Absztrakt adatszerketet.
+
+Nem a kulcsok beszúrásának sorrendje határozza meg, mit lehet kivenni, hanem mindig a maximális (vagy minimális) kulcsú elemet tudjuk kivenni.
+
+| Művelet         | Magyarázat                                      |
+| --------------- | ----------------------------------------------- |
+| `BESZÚR(H, k)`  | Új elem beszúrása a prioritási sorba            |
+| `MAX(H)`        | Maximális kulcs értékének visszaadása           |
+| `KIVESZ-MAX(H)` | Maximális kulcsú elem kivétele (vagy minimális) |
+
+#### Kupac
+
+Hatékony **prioritási sor megvalósítás**.
+
+A kupac egy **majdnem teljes bináris fa**, amiben minden csúcs értéke legalább akkora, mint a gyerekeié, ezáltal a maximális (minimális) kulcsú elem a gyökérben van.
+
+Majdnem teljes bináris fa alatt azt értjük, hogy a fa legmélyebb szintjén megengedett, hogy balról jobbra haladva egyszer csak már ne álljon fenn a bináris fa tulajdonság.
+
+##### Tömbös megvalósítás
+
+Egybefüggő memóriaterületen van a teljes kupac.
+
+A **szülő**, a **bal gyerek**, és a **jobb gyerek** gyorsan számolható a tömb indexelésével.
+
+```js
+szülő(i) { // i indexő elem szülője
+    return alsoEgeszResz(i / 2)
+}
+```
+
+```js
+balGyerek(i) { // i indexű elem bal gyereke
+    return 2i
+}
+```
+
+```js
+jobbGyerek(i) { // i indexű elem jobb gyereke
+    return 2i + 1
+}
+```
+
+```mermaid
+graph TD;
+    100 --> 50;
+    100 --> 40;
+    50 --> 20
+    50 --> 10
+    40 --> 30
+    40 --> 25
+    20 --> 5
+    10 --> 7
+    20 --> 6    
+```
+
+Ennek a kupacnak a tömbös reprezentációja:
+
+```js
+[100, 50, 40, 20, 10, 25, 30, 5, 6, 7]
+```
+
+###### Kupactulajdonság fenntartása
+
+Garanálnunk kell, hogy az egyes beszúrások, kivételek után a kupacra jellemző tulajdonságok fennmaradnak.
+
+A tulajdonság fenntartására ez a függvény fog felelni:
+
+```js
+maximumKupacol(A, i) {
+    l = balGyerek(i)
+    r = jobbGyerek(i)
+    if l <= kupacMéret[A] és A[l] > A[i] { // l <= kupacMéret[A] ellenőrzés csak azért kell, hogy az A[l] indexelés biztonságos legyen. 
+        legnagyobb = l
+    } else {
+        legnagyobb = i
+    }
+    if r <= kupacMéret[A] és A[r] > A[i] { // r <= kupacMéret[A] ellenőrzés csak azért kell, hogy az A[r] indexelés biztonságos legyen.
+        legnagyobb = r
+    }
+    if legnagyobb != i {
+        csere(A[i], A[legnagyobb])
+        maximumKupacol(A, legnagyobb)
+    }
+}
+```
+
+Tehát a vizsgált indexű elem et összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
+
+`maximumKupacol()` futásideje $O(logn)$, mert ennyi a majdnem teljes bináris fa mélysége, és legrosszabb esetben az egészen végig kell lépkedni.
+
+###### Maximum lekérése
+
+A prioritási sor `MAX(H)` függvényének megvalósítása egyszerű, csak vissza kell adnunk a tömb első elemét, ami a kupac gyökere.
+
+```js
+kupacMaximuma(A) {
+    return A[1]
+}
+```
+
+###### Maximum kivétele
+
+Ilyenkor az történik, hogy a kupac utolsó elemét áthelyezzük a gyökérbe, és a gyökérből indulva helyreállítjuk a kupac tulajdonságot, "lekupacoljuk" az elemet.
+
+```js
+kupacbólKiveszMaximum(A) {
+    if kupacMéret[A] < 1 {
+        throw Error("kupacméter alulcsordulás")
+    }
+    max = A[1]
+    A[1] = A[kupacMéret[A]]
+    kupacMéret[A]-- // Méter csökkentése, az érték a memóriában marad, csak nem értelmezzük a kupac részeként.
+    maxumimKupacol(A, 1) // Mivel beszúrtuk ide az utolsó elemet, helyre kell állítani ("lefelé kupacolni")
+    return max
+}
+```
+
+###### Beszúrás
+
+Új elem beszúrása egyszerű, csak szúrjuk be a kupac végére, és onnan kiindulva végezzünk egy helyreállítást, ezzel az új elemet a helyére "felkupacolva".
+
+```js
+kupacbaBeszur(A, x) {
+    kupacMéter[A]++
+    A[kupacMéret[A]] = x
+    maximumKupacol(A, kupacMéret[A])
+}
+```
+
+###### Futásidők
+
+| Művelet         | Futásidő    |
+| --------------- | ----------- |
+| `BESZÚR(H, k)`  | $O(logn)$   |
+| `MAX(H)`        | $\Theta(1)$ |
+| `KIVESZ-MAX(H)` | $O(logn)$   |
+
+### Fák, és számítógépes reprezenzációjuk
+
+#### Fa
+
+- Összefüggő, körmentes gráf
+
+- Bármely két csúcsát pontosan egy út köti össze
+
+- Elsőfokú csúcsi: **levél**
+
+- Nem levél csúcsai: **belső csúcs**
+
+##### Bináris fa
+
+- **Gyökeres fa**: Van egy kitűntetett gyökér csúcsa
+
+- **Bináris fa**: Gyökeres fa, ahol minden csúcsnak legfeljebb két gyereke van.
+
+#### Számítógépes reprezentáció
+
+Csúcsokat, és éleket reprezentálunk.
+
+Maga a fa objektumunk egy mutató a gyükérre.
+
+##### Gyerek éllistás reprezentáció
+
+```java
+class Node {
+    Object key;
+    Node parent;
+    List<Node> children; // Gyerekek éllistája
+}
+```
+
+##### Első fiú - apa - testvér reprezentáció
+
+```java
+class Node {
+    Object key;
+    Node parent;
+    Node firstChild;
+    Node sibling;
+}
+```
+
+##### Bináris fa reprezentációja
+
+```java
+class Node {
+    Object key;
+    Node parent;
+    Node left;
+    Node right;
+}
+```
+
+> Mindegyik esetben, ha nincs Node, akkor NULL-al jelezhetjük. Pl. a gyökér szülője esetében.
+
+### Bináris keresőfák
+
+Absztrakt adatszerkezet a következő műveletekkel:
+
+| Művelet                           | Magyarázat                                                                        |
+| --------------------------------- | --------------------------------------------------------------------------------- |
+| `KERES(T, x)`                     | Megkeresi a fában az `x` kulcsot, és visszaadja azt a csúcsot                     |
+| `BESZÚR(T, x)`                    | Fába az `x` kulcs beszúrása                                                       |
+| `TÖRÖL(T, x)`                     | Fából az `x` kulcsú csúcs törlése                                                 |
+| `MIN(T)` / `MAX(T)`               | A fa maximális, vagy minimális kulcsú csúcsának visszaadása                       |
+| `KÖVETKEZŐ(T, x)` / `ELŐZŐ(T, x)` | A fában az `x` kulcsnál egyel nagyobb, vagy egyel kisebb értékű csúcs visszaadása |
+
+> A `T` a fa gyökerére mutató mutató.
+
+> Cél: Minden művelet legalább $O(logn)$-es legyen
+
+#### Bináris keresőfa tulajdonság
+
+Egy $x$ csúcs értéke annak a bal részfájában minden csúcsnál nagyobb vagy egyenlő, jobb részfájában minden csúcsnál kisebb vagy egyenlő.
+
+#### Keresés
+
+A bináris fa tulajdonságot kihasználva fa keresendő kulcsot hasonlítgatjuk a bal, jobb gyerekekhez, és ennek megfelelően lépünk jobbra / balra.
+
+```js
+fábanKeres(x, k) {
+    while x != NULL és k != kulcs[x] {
+        if k < kulcs[x] {
+            x = bal[x]
+        } else {
+            x = jobb[x]
+        }
+    }
+    return x
+}
+```
+
+#### Minimum / Maximum keresés
+
+A minimum elem a "legbaloldali" elem
+
+```js
+fábanMinimum(x) {
+    while bal[x] != NULL {
+        x = bal[x]
+    }
+    return x
+}
+```
+
+A maximum elem a "legjobboldali" elem
+
+```js
+fábanMaximum(x) {
+    while jobb[x] != NULL {
+        x = jobb[x]
+    }
+    return x
+}
+```
+
+#### Következő / Megelőző
+
+```js
+fábanKövetkező(x) {
+    if jobb[x] == NULL {
+        return fábanMinimum(jobb[x])
+    }
+    y = szülő[x]
+    while y != NULL és x == jobb[y] {
+        x = y
+        y = szülő[y]
+    }
+    return y
+}
+```
+
+Azaz, ha van jobb részfája a fának, amiben keresünk, akkor annak a mimimuma a rákövetkező, ha nincs, akkor pedig addig lépkedünk fel, amíg az aktuális csúcs a szülőjének bal gyereke nem lesz, ugyanis ekkor a szülő a rákövetkező.
+
+TODO: Hasonlóan a megelőzőre.
+
+#### Beszúr
+
+```js
+fábaBeszúr(T, z) {
+    y = null
+    x = gyökér[T]
+    while x != null {
+        y = x
+        if kulcs[z] < kulcs[x] {
+            x = bal[x]
+        } else {
+            x = jobb[x]
+        }
+    }
+    szülő[z] = y
+    if y = null {
+        gyökér[T] = z
+    } else if kulcs[z] < kulcs[y] {
+        bal[y] = z
+    } else {
+        jobb[y] = z
+    }
+}
+```
+
+Tehát megkeressük az új elem helyét, az által, hogy jobbra, balra lépkedünk, majd beszúrjuk a megfelelő csúcs alá jobbra, vagy balra.
+
+#### Töröl
+
+```js
+fábólTöröl(T, z) {
+    if bal[z] == null vagy jobb[z] == null {
+        y = z
+    } else {
+        y = fábanKövetkező(z)
+    }
+
+    if bal[y] != null {
+        x = bal[y]
+    } else {
+        x = jobb[y]
+    }
+
+    if x != null { // x akkor null, ha y = fábanKövetkező(z)
+        szülő[x] = szülő[y] // "átkötés"
+    }
+
+    if szülő[y] == null {
+        gyökér[T] = x // Ha gyökérbe lett kötve az y, akkor ezt is frissítjük
+    } else if y == bal[szülő[y]] {
+        bal[szülő[y]] = x // "átkötés"
+    } else {
+        jobb[szülő[y]] = x // "átkötés"
+    }
+
+    if y != x {
+        kulcs[z] = kulcs[y]
+    }
+
+    return y
+}
+```
+
+##### Levél törlése
+
+Ha a kitörlendő csúcs egy levél, akkor egyszerűen kitöröljük azt, a szülőkénél a rá mutató mutatót `null`-ra állítjuk.
+
+##### Egy gyerekes belső csúcs
+
+Ebben az esetben a törlendő csúcs helyére bekötjük annak a részfáját ()amiből, mivel egy gyereke van, csak egy van).
+
+##### Két gyerekes belső csúcs
+
+Ebben az esetben a csúcs helyére kötjük annak a rákövetkezőjét. Mivel ebben az esetben van biztosan jobb gyereke, így a jobb gyerekének a minimumát fogjuk a helyére rakni (ami mivel egy levél, csak egyszerűen törölhetjük az eredeti helyéről).
+
+#### Futásidők
+
+Az összes művelet (`KERES`, `MAX / MIN`, `BESZÚR`, `TÖRÖL`, `KÖVETKEZŐ / ELŐZŐ`) $O(h)$-s, azaz a fa magasságával arányos. Ez alap esetben nem feltétlen olyan jó, de kiegyensúlyozott fák esetén jó, hiszen akkor $O(logn)$-es.
