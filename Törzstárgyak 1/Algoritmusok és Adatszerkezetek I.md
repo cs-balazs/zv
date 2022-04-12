@@ -379,7 +379,7 @@ const leszamoloRendezes = (A: number[], k: number) => {
 
 ### Gráfalgoritmusok
 
-Gráfog ábrázolása: **éllista** vagy **szomszédsági mátrix**
+Gráfok ábrázolása: **éllista** vagy **szomszédsági mátrix**
 
 ![ ](../img/graf_abrazolas.png)
 
@@ -1206,3 +1206,93 @@ Ebben az esetben a csúcs helyére kötjük annak a rákövetkezőjét. Mivel eb
 #### Futásidők
 
 Az összes művelet (`KERES`, `MAX / MIN`, `BESZÚR`, `TÖRÖL`, `KÖVETKEZŐ / ELŐZŐ`) $O(h)$-s, azaz a fa magasságával arányos. Ez alap esetben nem feltétlen olyan jó, de kiegyensúlyozott fák esetén jó, hiszen akkor $O(logn)$-es.
+
+> Pl. AVL-fa, bináris kereső fa kiegyensúlyozott.
+
+### Halmaz
+
+Absztrakt adatszerkezet.
+
+Egy elem legfejlebb egyszer szerepelhet benne.
+
+| Művelet                                | Magyarázat                         |
+| -------------------------------------- | ---------------------------------- |
+| `TARTALMAZ(k)` (lényegében `KERES(k)`) | Benne van-e egy e `k` a halmazban? |
+| `BESZÚR(K)`                            | Elem behelyezése a halmazba.       |
+| `TÖRÖL(K)`                             | Elem törlése a halmzból.           |
+
+> Egyéb extra műveletek definiálhatóak, pl.: `METSZET`, `UNIÓ`
+
+#### Közvetlen címzésű táblázat
+
+Egy akkora tömb lefoglalása, mint amekkora a teljes érték univerzum mérete, és ha egy szám eleme a halmaznak, egyszerűen beírjuk ezt a megfelelő indexre.
+
+Jó, mert nagyon gyors megoldás.
+
+Viszont nagy probléma, hogy a tárigény az univerzum méretével arányos, nem pedig a ténylegesen felhasznált elemekkel.
+
+Kis méretű univerzum esetén ajánlatos csak.
+
+### Szótár
+
+Absztrakt adatszerkezet.
+
+Egy halmaz elemeihez (kulcsok) egy-egy érték tartozik. Kulcs egyedi, érték ismétlődhet.
+
+> dict, asszociatív tömb, map
+
+### Hasító tábla
+
+Szótár, és halmaz hatékony megvalósítása.
+
+Cél.: `TARTALMAZ`, `BESZÚR`, `TÖRÖL` műveletek legyenek gyorsak.
+
+#### Hasító függvény
+
+Kulcsok $U$ univerzumának elemeit (lehetséges kulcsokat) képezi le a hasító táblázat **rés**eire.
+
+Pl.: $h(k) = k ~ mod ~ m$
+
+$k$ a hasító táblázat mérete, azaz a **rések száma**.
+
+Mivel az unicerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
+
+Ezeket az **ütközéseket fel kell oldani**.
+
+#### Ütközésfeloldás láncolással
+
+A résekben láncolt listák vannak.
+
+Ha olyan helyre akarunk beszúrni, ahol már van elem, akkor a lista elejére szúrjuk be az újat (ez konstans idejű).
+
+**Keresés, törlés valamivel romlik**, hiszen egy lsitán is végig kelhet menni.
+
+Kitöltési tényező: $\alpha = \frac{n}{m}$ (**láncok átlagos hossza**)
+
+$m$: rések száma
+
+$n$: elemek a táblában
+
+**Egyszerű egyenletes hasítási feltétel**: Minden elem egyforma valószínűséggel képződik le bármelyik résre.
+
+Ha egy hasító függvény ezt biztosítja, akkor a keresések (mind sikeres, mind sikertelen) átlagos ideje (nem legrosszabb!) $\Theta(1 + \alpha)$
+
+Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések számát úgy, hogy az $\alpha$ egy konstans legyen, ekkor `KERES`, `TÖRÖL`, `BESZÚR` mind $O(1)$.
+
+### Gráfok számítógépes reprezentációja
+
+![ ](../img/graf_abrazolas.png)
+
+- Csúcsok + élek halmaza
+
+- Szomszédsági mártix
+
+- Szomszédsági lista
+
+|                        | Létezik (u, v) él?       | Összes él listázása | Egy csúcs szomszédainak listázása |
+| ---------------------- |:------------------------:|:-------------------:|:---------------------------------:|
+| Csúcsok + élek halmaza | $\Theta(\|E\|)$          | $\Theta(\|E\|)$     | $\Theta(\|E\|)$                   |
+| Szomszédsági mátrix    | $\Theta(1)$              | $\Theta(\|V\|^2)$   | $\Theta(\|V\|)$                   |
+| Szomszédsági lista     | $\Theta(\text{fokszám})$ | $\Theta(\|E\|)$     | $\Theta(\text{fokszám})$          |
+
+Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.
