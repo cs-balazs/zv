@@ -207,46 +207,6 @@ Tetszőleges $L \subseteq \Sigma^*$ nyelv esetén a következő három állítá
 
 Ezt külön három párra lehet belátni.
 
-##### \* Környezetfüggetlen nyelvtan
-
-Egy $G = (N, \Sigma, P, S)$ négyes, ahol:
-
-- $N$ egy ábécé, a **nemterminális ábécé**
-
-- $\Sigma$ egy ábécé a **terminális ábécé**, amire $N \cap \Sigma = \emptyset$
-
-- $S \in N$ a **kezdő szimbólum**
-
-- $P$ pedig $A \to \alpha$ alakú ún. **átírási szabályok véges halmaza**, ahol $A \in N$, és $\alpha \in (N \cup \Sigma)$
-
-Az összes környezetfüggetlen nyelvek halmazát $CF$-el jelöljük.
-
-##### \* Deriváció
-
-Tetszőleges $\gamma, \delta \in (N \cup \Sigma)^*$ esetén $\gamma \Rightarrow_G \delta$, ha van olyan $A \to \alpha \in P$ szabály és vannak olyan $\alpha', \beta' \in (N \cup \Sigma)^*$ szavak, amelyekre fennállnak, hogy $\gamma = \alpha' A \beta'$, $ \delta = \alpha'\alpha\beta'$.
-
-> Azaz, ha egy átírással (valamelyik $P$-beli szabály mentén) átvihatő.
-
-###### \* Fajtái
-
-- $\gamma \Rightarrow_G \delta$: Egy lépés, közvetlen levezetés, közvetlen deriváció
-
-- $\gamma \Rightarrow^n_G \delta, n \ge 0$: $n$ lépés (0 lépés önmagába viszi)
-
-- $\gamma \Rightarrow^+_G \delta$: Legalább egy lépés
-
-- $\gamma \Rightarrow^*_G \delta$: Valamennyi (akár 0) lépés
-
-> A $G$ alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
-
-##### \* Generált nyelv
-
-A $G = (N, \Sigma, P, S)$ környezetfüggetlen nyelvtan által generált nyelv:
-
-$L(G) = \{~ w \in \Sigma^* ~ | ~ S \Rightarrow^*_G w ~\}$
-
-> Azaz az összes olyan szó, ami $G$-ből levezethető.
-
 ##### \* Reguláris nyelvtan
 
 Egy $G = (N, \Sigma, P, S)$ nyelvtan reguláris (vagy jobblineáris), ja $P$-ben minden szabály $A \to xB$ vagy $A \to x$ alakú.
@@ -345,3 +305,97 @@ Mivel $|w_1w_2| \le k$, a középső $w_2$ szó csak $a$ betűkből áll. Továb
 - Egy automata nem képes számolni, hogy két betű ugyanannyiszor szerepel-e.
 
 - Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz $REG \subset CF$. Például ilyen az előző $L$ nyelv.
+
+### 2. A környezetfüggetlen nyelvtan, és nyelv definíciója. Derivációk, és derivációs fák kapcsolata. Veremautomaták, és környezetfüggetlen nyelvtanok ekvivalenciája. A Bar-Hillel lemma és alkalmazása.
+
+#### Környezetfüggetlen nyelvtan
+
+Egy $G = (N, \Sigma, P, S)$ négyes, ahol:
+
+- $N$ egy ábécé, a **nemterminális ábécé**
+
+- $\Sigma$ egy ábécé a **terminális ábécé**, amire $N \cap \Sigma = \emptyset$
+
+- $S \in N$ a **kezdő szimbólum**
+
+- $P$ pedig $A \to \alpha$ alakú ún. **átírási szabályok véges halmaza**, ahol $A \in N$, és $\alpha \in (N \cup \Sigma)$
+
+##### Környezetfüggetlen nyelvek
+
+Egy $L$ nyelvet környezetfüggetlennek hívunk, ha van olyan $G$ környezetfüggetlen nyelvtan, melyre $L = L(G)$.
+
+Az összes környezetfüggetlen nyelvek halmazát $CF$-fel jelöljük.
+
+Például az $\{ ~ a^nb^n ~ | ~ n \ge 0 ~ \}$ nyelv környezetfüggetlen.
+
+##### Deriváció
+
+Tetszőleges $\gamma, \delta \in (N \cup \Sigma)^*$ esetén $\gamma \Rightarrow_G \delta$, ha van olyan $A \to \alpha \in P$ szabály és vannak olyan $\alpha', \beta' \in (N \cup \Sigma)^*$ szavak, amelyekre fennállnak, hogy $\gamma = \alpha' A \beta', \delta = \alpha'\alpha\beta'$.
+
+> Azaz, ha egy átírással (valamelyik P-beli szabály mentén) átvihető.
+
+###### Fajtái
+
+- $\gamma \Rightarrow_G \delta$: Egy lépés, közvetlen levezetés, közvetlen deriváció
+
+- $\gamma \Rightarrow^n_G \delta, n \ge 0$: n lépés (0 lépés önmagába viszi)
+
+- $\gamma \Rightarrow^+_G \delta$: Legalább egy lépés
+
+- $\gamma \Rightarrow^*_G \delta$: Valamennyi (akár 0) lépés
+
+> A $G$ alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
+
+##### Generált (környezetfüggetlen) nyelv
+
+A $G = (N, \Sigma, P, S)$ környezetfüggetlen nyelvtan által generált nyelv:
+
+$L(G) = \{~ w \in \Sigma^* ~ | ~ S \Rightarrow^*_G w ~ \}$
+
+> Azaz az összes olyan szó, ami $G$-ből levezethető.
+
+#### Derivációs fák, kapcsolatuk a derivációkkal
+
+Az $X \in (N \cup \Sigma)$ gyökerű derivációs fák halmaza a legszűkebb olyan $D_X$ halmaz, amelyre:
+
+- Az a fa, amelynek egyetlen szögpontja (vagyis csak gyökere) az $X$, eleme $D_X$-nek.
+- Ha $X \to \epsilon \in P$, akkor az a fa, amelynek gyökere $X$, a gyökerének egyetlen leszármazottja az $\epsilon$, eleme $D_X$-nek.
+- Ha $X \to X_1...X_k \in P$, továbbá $t_1 \in D_{X_1}, ..., t_k \in D_{X_k}$, akkor az a fa, amelynek gyökere $X$, a gyökeréből $k$ él indul rendre a $t_1, ..., t_k$ fák gyökeréhez, eleme $D_X$-nek.
+
+![ ](../img/derivacios_fa.png)
+
+ Legyen $t$ egy $X$ gyökerű derivációs fa. Akkor $t$ magassságát $h(t)$-vel, a határát pedig $fr(t)$-vel jelöljük és az alábbi módon definiáljuk:
+
+- Ha $t$ az egyetlen $X$ szögpontból álló fa, akkor $h(t) = 0$ és $fr(t) = X$.
+
+- Ha $t$ gyökere $X$, aminek egyetlen leszármazottja $\epsilon$, akkor $h(t) = 1$, és $fr(t) = \epsilon$.
+
+- Ha $t$ gyökere $X$, amiből $k$ él indul rendre a $t_1, ..., t_k$ közvetlen részfák gyökeréhez, akkor $h(t) = 1 + max\{ ~ h(t_i ~ | ~ 1 \le i \le k) ~ \}$ és $fr(t) = fr(t_1)...fr(t_k)$.
+
+> Azaz $h(t)$ a $t$-ben levő olyan utak hosszának maximuma, amelyek $t$ gyökeréből annak valamely leveléhez vezetnek.
+
+> Azaz $fr(t)$ azon $(N \cup \Sigma)^*$-beli szó, amelyet $t$ leveleinek balról jobbra (vagy: preorder bejárással) történő leolvasásával kapunk.
+
+##### Az összefüggés derivációs fák, és derivációk közt
+
+Tetszőleges $X \in (N \cup \Sigma)$ és $\alpha \in (N \cup \Sigma)^*$ esetén $X \Rightarrow^* \alpha$ akkor, és csak akkor, ha van olyan $t \in D_X$ derivációs fa, amelyre $fr(t) = \alpha$.
+
+##### Az összefüggés következményei
+
+- Tetszőleges $w \in \Sigma^*$ esetén $S \Rightarrow^* w$ akkor és csak akkor, ha van olyan $S$ gyökerű derivációs fa, amelynek határa $w$.
+
+> Ez csak a korábbi tétel alkalmazása $S$-re, és egy $w$-re.
+
+- Tetszőleges $w \in \Sigma^*$ esetén a következő állítások ekvivalensek:
+  
+  - $w \in L(G)$
+  
+  - $S \Rightarrow^* w$
+  
+  - $S \Rightarrow^*_l w$ (ez bal oldali deriváció, mindig a legbaloldalibb nemterminálist lehet csak helyettesíteni)
+  
+  - van olyan $S$ gyökerű derivációs fa, amelynek határa $w$.
+
+##### Generált nyelv definiálása derivációs fákkal
+
+$L(G) = \{ ~ fr(t) ~ | ~ t \in D_S, fr(t) \in \Sigma^* ~ \}$
