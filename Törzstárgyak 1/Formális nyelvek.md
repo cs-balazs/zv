@@ -1,0 +1,230 @@
+## Formális Nyelvek
+
+### 1. Véges automata és változatai, a felismert nyelv definíciója. A reguláris nyelvtanok, a véges automaták, és a reguláris kifejezések ekvivalenciája. Reguláris nyelvekre vonatkozó pumpáló lemma, alkalmazása és következményei.
+
+#### Véges automata
+
+Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **determinisztikus automatának** nevezzük, ahol:
+
+- $Q$ egy nem üres, véges halmaz, az **állapotok halmaza**
+
+- $\Sigma$ egy ábécé, au **input ábécé**
+
+- $q_0 \in Q$ a **kezdő állapot**
+
+- $F \sube Q$ a **végállapotok halmaza**
+
+- $\delta: Q \times \Sigma \to Q$ egy leképezés, az **átmenetfüggvény**
+
+Példa:
+
+- $Q = \{ ~ q_0, q_1, q_2 ~ \}$
+
+- $\Sigma = \{ ~ a, b ~ \}$
+
+- $F = \{ ~ q_0 ~\}$
+
+- $\delta$
+
+  - $\delta(q_0, a) = q_1$
+
+  - $\delta(q_1, a) = q_2$
+
+  - $\delta(q_2, a) = q_0$
+
+  - $\delta(q_0, b) = q_0$
+
+  - $\delta(q_1, b) = q_1$
+
+  - $\delta(q_2, b) = q_2$
+
+##### Automata megadása irányított gráfként
+
+Gráf csúcsai az automata állapotai
+
+Ha $\delta(q, a) = p$, akkor a $q$ csúcsból egy élet irányítunk a $p$ csúcsba, és az élet ellátjuk az $a$ címkével
+
+```mermaid
+graph LR;
+    q((q)) --a--> p((p))
+```
+
+> Itt az automata a $q$ állapotból az $a$ input szimbólum hatására átmegy a $p$ állapotba.
+
+A korább példa automata megadása gráffal:
+
+```mermaid
+graph LR;
+    q0((q0)) --a--> q1((q1));
+    q0((q0)) --b--> q0((q0));
+    q1((q1)) --a--> q2((q2));
+    q1((q1)) --b--> q1((q1));
+    q2((q2)) --a--> q0((q0));
+    q2((q2)) --b--> q2((q2));
+
+    style q0 stroke-width:3px
+```
+
+> A $q_0$ állapot jelen példában a végállapot is, amit a vastagított szél jelez.
+
+##### Automata megadása táblázatként
+
+Első sorban a kezdőállapot, végállapotokat meg kell jelölni (itt most csillag).
+
+A korább példa automata megadása táblázattal:
+
+| $\delta$ |  $a$  |  $b$  |
+| :------: | :---: | :---: |
+| \* $q_0$ | $q_1$ | $q_0$ |
+|  $q_1$   | $q_2$ | $q_1$ |
+|  $q_2$   | $q_0$ | $q_2$ |
+
+> Csillag jelzi, hogy az adott sor állapota végállapot.
+
+##### Automata átmenetei
+
+$M$ **konfigurációinak halmaza**: $C = Q \times \Sigma^*$
+
+A $(q, a_1...a_n)$ **konfiguráció** azt jelenti, hogy $M$ a $q$ állapotban van ás az $a_1...a_n$ szót kapja inputként.
+
+###### Átmeneti reláció
+
+$(q, w), (q', w') \in C$ esetén $(q, w) \vdash_M (q', w')$, ha $w = aw'$, valamely $a \in \Sigma$-ra, és $\delta(q, a) = q'$.
+
+> Azaz aminkor az automata átmegy $q$-ból $q'$-be, akkor az ehhez "felhasznált" szimbólumot leveszi az input szó elejéről. Pl. itt $a$ hatására ment, és $w = aw'$, így az átmenet után az input szó már csak $w'$ az $a$ nélkül. Mondhatni, hogy az $a$-t felhasználta az átmenethez.
+
+####### Átmeneti reláció fajtái
+
+- $(q, w) \vdash_M (q', w')$: Egy lépés
+
+- $(q, w) \vdash^n_M (q', w'), n \ge 0$: $n$ lépés
+
+- $(q, w) \vdash^+_M (q', w')$: Legalább egy lépés
+
+- $(q, w) \vdash^*_M (q', w')$: Valamennyi (esetleg 0) lépés
+
+> Az $M$ jelölés egy automatát azonosít, elhagyható, ha éppen csak 1 automatáról beszélünk, mert ilyenkor egyértelmű
+
+> \*, és + itt is, és mindenhol ebben a tárgyban úgy működik, mint megszokott regexeknél
+
+##### Felismert nyelv
+
+Az $M = (Q, \Sigma, \delta, q_0, F)$ automata által felismert nyelven az $L(M) = \{ ~ w \in \Sigma^* ~ | ~ (q_0, w) \vdash^*_M (q, \epsilon) ~ \text{és} ~ q \in F ~ \}$ nyelvet értjük.
+
+> Azaz $q_0$-ból $w$ hatására valamelyik $q \in F$ végállapotba jutunk
+
+> $\epsilon$ az üres szó
+
+##### Nemdeterminisztikus automata
+
+Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **nemdeterminisztikus automatának** nevezzük, ahol:
+
+- $Q$ egy nem üres, véges halmaz, az **állapotok halmaza**
+
+- $\Sigma$ egy ábécé, az **input ábécé**
+
+- $q_0 \in Q$ a **kezdő állapot**
+
+- $F \sube Q$ a **végállapotok halmaza**
+
+- $$\delta: Q \times \Sigma \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény\***
+
+> Azaz ugyan az, mint a determinisztikus, csak egy input szimbólum hatására egy állapotból többe is átmehet.
+
+A determinisztikus automata ezen általánosítása (hiszen ez egy általánosítás, a determinisztikus automata is lényehében olyan nemdeterminisztikus ami mindig állapotoknak egy egyelemű halmazába tér át) **nem növeli meg a felismerő kapacitást**, tehát egy nyelv akkor és csak akkor ismerhető fel nemdeterminisztikus automatával, ha felismerhető determinisztikus automatával.
+
+> Ezt "hatvány halmaz módszerrel" lehet bebizonyítani, meg kell nézni, hogy $a$ hatására milyen állapotokba tud kerülni a nemdeterminisztikus automata, és azonkah az uniója lesz egy állapot. Ez a "determinizálás", aminek a során az állapotok száma nagyban megnőhet (akár exponenciálisan).
+
+###### Átmeneti reláció
+
+$(q, w), (q', w') \in C$ esetén $(q, w) \vdash_M (q', w')$, ha $w = aw'$, valamely $a \in \Sigma$-ra, és $q' \in \delta(q, a)$.
+
+###### Felismert nyelv
+
+Az $M = (Q, \Sigma, \delta, q_0, F)$ (nemdeterminisztikus) automata által felismert nyelven az $L(M) = \{ ~ w \in \Sigma^* ~ | ~ (q_0, w) \vdash^*_M (q, \epsilon) ~ \text{valamely} ~ q \in F \text{-re} ~ \}$ nyelvet értjük.
+
+> Azaz $q_0$-ból a $w$ hatására elérhető valamely $q \in F$ végállapot. DE! Nem baj, ha elérhetően nem-végállapotok is.
+
+###### Teljesen definiált automata
+
+Akkor teljesen definiált egy automat, ha minden szót végig tud olvasni.
+
+Azaz nem tud pl. egy $\delta(q, a) = \emptyset$ átmenet miatt elakadni.
+
+Azaz akkor teljesen definiált, ha minden $q \in Q$ és $a \in \Sigma$ esetén $\delta(q, a)$ **legalább** egy elemű.
+
+Determinisztikus automaták teljesen definiáltak, hiszen pontosan egy állapotba léphetünk tovább.
+
+Nemdeterminisztikus automaták pedig teljesen definiálhatóvá tehetőek "csapda" állapot bevezetésével, anélkül, hogy a felismert nyelv megváltozna.
+
+- Felveszünk egy $q_c$ állapotot (ez a "csapda") állapot.
+
+- $\delta(q, a) = \emptyset$ esetén legyen $\delta(q, a) = \{~ q_c ~\}$
+
+- Legyen $\delta(q_c, a) = \{~ q_c ~\}$ minden $a \in \Sigma$-ra.
+
+> A 3. pont az, ami miatt ez egy "csapda", nem lehet már ebből az állapotból kijönni.
+
+##### Nemdeterminisztikus $\epsilon$-automata
+
+Tartalmaz $\epsilon$-átmeneteket.
+
+Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **nemdeterminisztikus $\epsilon$-automatának** nevezzük, ahol:
+
+- $Q$ egy nem üres, véges halmaz, az **állapotok halmaza**
+
+- $\Sigma$ egy ábécé, az **input ábécé**
+
+- $q_0 \in Q$ a **kezdő állapot**
+
+- $F \sube Q$ a **végállapotok halmaza**
+
+- $\delta: Q \times (\Sigma \cup \{~\epsilon~\}) \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény**
+
+> Azaz ugyan olyan, mint a nemdeterminisztikus, csak lehet olyan átmenete, ami "nem fogyasztja" az inputot. Ez az $\epsilon$-átmenet.
+
+**Ez sem bővíti a felismerő kapacitást**, egy nyelv akkor és csak akkor ismerhető fel nemdeterminisztikus $\epsilon$-átmenetes automatával, ha felismerhető nemdeterminisztikus automatával. $\epsilon$ automata $\epsilon$-mentesítéssel átalakítható nemdeterminisztikus automatává, ekkor az automaza a $q$ állapotból az $a$ hatására azon állapotokba megy át, amelyekre $M$ valamennyi (akár 0) $\epsilon$-átmenettel, majd egy $a$-átmenettel jut el, továbbá az automata végállapotai azon az állapotok, amikből valamennyi (akár 0) $\epsilon$-átmenettel egy $F$-beli állapotba jut.
+
+###### Átmeneti reláció
+
+$(q, w), (q', w') \in C$ esetén $(q, w) \vdash_M (q', w')$, ha $w = aw'$, valamely $a \in (\Sigma \cup \{~\epsilon~\})$-ra, és $q' \in \delta(q, a)$.
+
+> Ha $a = \epsilon$, akkor éppen $w = w'$
+
+###### Felismert nyelv
+
+Felismert nyelv definíciója ugyan az, mint a sima nemdeterminisztikus esetben.
+
+#### Ekvivalencia tétel
+
+Tetszőleges $L \sube \Sigma^*$ nyelv esetén a következő három állítás ekvivalens:
+
+1. $L$ reguláris (generálható reguláris nyelvtannal).
+
+2. $L$ felismerhető automatával.
+
+3. $L$ reprezentálható reguláris kifejezéssel.
+
+Ezt külön három párra lehet belátni.
+
+TODO: Ide reguláris nyelvtanokról, reguláris kifejezésekről röviden kéne, hiszen ezekről is szól a tétel
+
+##### Reprezentálható nyelvek regulárisak
+
+> $3 \to 1$ az ekvivalencia tételben.
+
+Ha $L \sube \Sigma^*$ nyelv reprezentálható reguláris kifejezéssel, akkor generálható reguláris nyelvtannal.
+
+Ez $R$ struktúrája szerinti indukcióval belátható.
+
+##### Reguláris nyelvek felismerhetők automatával
+
+> $1 \to 2$ az ekvikalencia tételben.
+
+Ha $L \sube \Sigma^*$ nyelv reguláris, akkor felismerhető automatával.
+
+Ennek bizonyítását ez a két lemma képezi:
+
+- Minden $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz megadható vele ekvivalens $G' = (N', \Sigma, P', S)$ reguláris nyelvtan, úgy, hogy $P'$-ben minden szabály $A \to B, A \to aB$, vagy $A \to \epsilon$ alakú, ahol $A, B \in N$ és $a \in \Sigma$.
+
+- Minden olyan $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz, melynek csak $A \to B, A \to aB$ vagy $A \to \epsilon$ alakú szabályai vannak, megadható olyan $M = (Q, \Sigma, \delta, q_0, F)$ nemdeterminisztikus $\epsilon$-automata, amelyre $L(M) = L(G)$.

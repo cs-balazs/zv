@@ -1,0 +1,12 @@
+html {
+  padding: 10mm;
+  -webkit-print-color-adjust: exact;
+}
+
+.page-break {
+  page-break-after: always;
+}
+
+.markdown-body pre > code {
+  white-space: pre-wrap;
+}
