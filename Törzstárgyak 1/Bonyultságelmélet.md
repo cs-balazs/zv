@@ -95,9 +95,9 @@ Tehát a cél egy $G$ gráfból egy $\phi_G$ CNF előállítása választartó m
 - A cél egy olyan CNF előállítása, amiben a következőt formalizáljuk: Minden csúcsra felítjuk, hogy pontosan egy él illeszkedik rá, majd ezeket összeéseljük. Ha így egy csúcsra sikerül megfelelő CNF-et alkotni, akkor azok összeéselése is CNF, hiszen CNF-ek éselése CNF.
 
 - Egy csúcshoz annak formalizálása, hogy pontosan egy él fedi: legalább egy él fedi ÉS legfeljebb egy él fedi.
-
+  
   - Legalább egy: Egyetlen CNF kell hozzá: $(x_1 \lor x_2 \lor ... \lor x_k)$.
-
+  
   - Legfeljebb egy: Négyzetesen sok klóz kell hozzá, minden csúcspárra megkötjük, hogy "nem ez a kettő egyszerre": $\land ~ 1 \le i < j \le k ~ \neg(x_i \land x_j)$
 
 > $x_1, ..., x_k$ az adott viszgált csúcsra illeszkedő élek.

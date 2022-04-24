@@ -25,17 +25,17 @@ Példa:
 - $F = \{ ~ q_0 ~\}$
 
 - $\delta$
-
+  
   - $\delta(q_0, a) = q_1$
-
+  
   - $\delta(q_1, a) = q_2$
-
+  
   - $\delta(q_2, a) = q_0$
-
+  
   - $\delta(q_0, b) = q_0$
-
+  
   - $\delta(q_1, b) = q_1$
-
+  
   - $\delta(q_2, b) = q_2$
 
 ##### Automata megadása irányított gráfként
@@ -73,11 +73,11 @@ Első sorban a kezdőállapot, végállapotokat meg kell jelölni (itt most csil
 
 A korább példa automata megadása táblázattal:
 
-| $\delta$ |  $a$  |  $b$  |
-| :------: | :---: | :---: |
+| $\delta$ | $a$   | $b$   |
+|:--------:|:-----:|:-----:|
 | \* $q_0$ | $q_1$ | $q_0$ |
-|  $q_1$   | $q_2$ | $q_1$ |
-|  $q_2$   | $q_0$ | $q_2$ |
+| $q_1$    | $q_2$ | $q_1$ |
+| $q_2$    | $q_0$ | $q_2$ |
 
 > Csillag jelzi, hogy az adott sor állapota végállapot.
 
@@ -207,7 +207,87 @@ Tetszőleges $L \sube \Sigma^*$ nyelv esetén a következő három állítás ek
 
 Ezt külön három párra lehet belátni.
 
-TODO: Ide reguláris nyelvtanokról, reguláris kifejezésekről röviden kéne, hiszen ezekről is szól a tétel
+##### * Környezetfüggetlen nyelvtan
+
+Egy $G = (N, \Sigma, P, S)$ négyes, ahol:
+
+- $N$ egy ábécé, a **nemterminális ábécé**
+
+- $\Sigma$ egy ábécé a **terminális ábécé**, amire $N \cap \Sigma = \emptyset$
+
+- $S \in N$ a **kezdő szimbólum**
+
+- $P$ pedig $A \to \alpha$ alakú ún. **átírási szabályok véges halmaza**, ahol $A \in N$, és $\alpha \in (N \cup \Sigma)$
+
+Az összes környezetfüggetlen nyelvek halmazát $CF$-el jelöljük.
+
+##### * Deriváció
+
+Tetszőleges $\gamma, \delta \in (N \cup \Sigma)^*$ esetén $\gamma \Rightarrow_G \delta$, ha van olyan $A \to \alpha \in P$ szabály és vannak olyan $\alpha', \beta' \in (N \cup \Sigma)^*$ szavak, amelyekre fennállnak, hogy $\gamma = \alpha' A \beta'$, $ \delta = \alpha'\alpha\beta'$.
+
+> Azaz, ha egy átírással (valamelyik $P$-beli szabály mentén) átvihatő.
+
+###### * Fajtái
+
+- $\gamma \Rightarrow_G \delta$: Egy lépés, közvetlen levezetés, közvetlen deriváció
+
+- $\gamma \Rightarrow^n_G \delta, n \ge 0$: $n$ lépés (0 lépés önmagába viszi)
+
+- $\gamma \Rightarrow^+_G \delta$: Legalább egy lépés
+
+- $\gamma \Rightarrow^*_G \delta$: Valamennyi (akár 0) lépés
+
+> A $G$ alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
+
+##### * Generált nyelv
+
+A $G = (N, \Sigma, P, S)$ környezetfüggetlen nyelvtan által generált nyelv:
+
+$L(G) = \{~ w \in \Sigma^* ~|~ S \Rightarrow^*_G w ~\}$
+
+> Azaz az összes olyan szó, ami $G$-ből levezethető.
+
+##### * Reguláris nyelvtan
+
+Egy $G = (N, \Sigma, P, S)$ nyelvtan reguláris (vagy jobblineáris), ja $P$-ben minden szabály $A \to xB$ vagy $A \to x$ alakú.
+
+Egy $L$ nyelvet reguláris nyelvnek hívunk, ha van olyan $G$ reguláris nyelvtan, melyre $L = L(G)$ (azaz őt generálja).
+
+Az összes reguláris nyelvek halmazát $REG$-el jelöljük.
+
+$REG \subset CF$
+
+> Azaz vannak olyan környezetfüggetlen nyelvek, amik nem regulárisak.
+
+##### * Reguláris kifejezések
+
+Egy $\Sigma$ ábécé feletti reguláris kifejezések halmaza a $(\Sigma \cup \{~ \emptyset, \epsilon, (, ), +, * ~\})^*$ halmaz legszűkebb olyan $U$ részhalmaza, amelyre az alábbi feltételek teljesülnek:
+
+1. Az $\emptyset$ szimbólum eleme $U$-nak
+
+2. Az $\epsilon$ szimbólum eleme $U$-nak
+
+3. Minden $a \in \Sigma$-ra az $a$ szimbólum eleme $U$-nak
+
+4. Ha $R_1, R_2 \in U$, akkor $(R_1) + (R_2), (R_1)(R_2)$ és $(R_1)^*$ is elemei $U$-nak.
+
+> $U$-ban tehár maguk a kifejezések vannak.
+
+Az $R$ reguláris kifejezés által meghatározott (reprezentált) nyelvet $|R|$-el jelöljük, és a következőképp definiáljuk:
+
+- Ha $R = \emptyset$, akkor $|R| = \emptyset$ (üres nyelv)
+
+- Ha $R = \epsilon$, akkor $|R| = \{~ \epsilon ~\}$ 
+
+- Ha $R = a$, akkor $|R| = \{~ a ~\}$
+
+- Ha:
+  
+  - $R = (R_1)+(R_2)$, akkor $|R| = |R_1| \cup |R_2|$
+  
+  - $R = (R_1)(R_2)$, akkor $|R| = |R_1||R_2|$
+  
+  - $R = (R_1)^*$, akkor $|R| = |R_1|^*$
 
 ##### Reprezentálható nyelvek regulárisak
 
@@ -223,8 +303,45 @@ Ez $R$ struktúrája szerinti indukcióval belátható.
 
 Ha $L \sube \Sigma^*$ nyelv reguláris, akkor felismerhető automatával.
 
-Ennek bizonyítását ez a két lemma képezi:
+Ennek bizonyítását ez a két lemma képezi, ezekkel fel tudunk írni egy automatát a nyelvtanból:
 
 - Minden $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz megadható vele ekvivalens $G' = (N', \Sigma, P', S)$ reguláris nyelvtan, úgy, hogy $P'$-ben minden szabály $A \to B, A \to aB$, vagy $A \to \epsilon$ alakú, ahol $A, B \in N$ és $a \in \Sigma$.
+  
+  > Ez az átalakítás EZ, csak láncolva új szabályokat kell felvenni, pl. $A \to bbB$ helyett $A \to bA_1, A_1 \to bB$ 
 
 - Minden olyan $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz, melynek csak $A \to B, A \to aB$ vagy $A \to \epsilon$ alakú szabályai vannak, megadható olyan $M = (Q, \Sigma, \delta, q_0, F)$ nemdeterminisztikus $\epsilon$-automata, amelyre $L(M) = L(G)$.
+
+> Ez is EZ, hiszen az $A \to aB$ jellegű szabályok könnyen felírjatóak automataként, $A$-ból megy $a$ hatására $B$-be
+
+##### Automatával felismerhető nyelvek reprezentálhatók
+
+> $2 \to 3$ az ekvivalencia tételben
+
+Minden, automatával felismerhető nyelv reprezentálható reguláris kifejezéssel.
+
+#### Pumpáló lemma reguláris nyelvekre
+
+Minden $L \subseteq \Sigma^*$ reguláris nyelv esetén megadható olyan ($L$-től függő) $k > 0$ egész szám, hogy minden $w \in L$-re ha $|w| \ge k$, akkor van olyan $w = w_1w_2w_3$ felbontás, melyre $0 < |w_2|$ és $|w_1w_2| \le k$, és minden $n \ge 0$-ra, $w_1w_2^nw_3 \in L$
+
+> Ha egy $L$ nyelvhez nem adható meg ilyen $k$, akkor az nem reguláris. Így ezen lemma segítségével bebizonyítható nyelvekről, hogy azok nem regulárisak.
+
+> A $k$ szám az $L$-et felismerő egyik determinisztikus automata (több is felismeri) állapotainak száma.
+
+#### A pumpáló lemma alkalmazása
+
+A lemma arra használható, hogy nyelvekről belássuk, hogy az nem reguláris.
+
+**Példa**: Az $L = \{~ a^nb^n ~|~ n \ge 0 ~\}$ nyelv nem reguláris.
+
+**Bizonyítás**: Tegyük fel, hogy $L$ reguláris. Akkor megadható olyan $k$ szám, ami teljesíti a pumpáló lemma feltételeit.
+Vegyük az $a^kb^k \in L$ szót, melynek hossza $2k \ge k$.
+A pumpáló lemmában szereplő feltételek szerint létezik $a^kb^k = w_1w_2w_3$ felbontás, melyre $0 < |w_2|$, $|w_1w_2| \le k$ és minden $n \ge 0$-ra $w_1w_2^nw_3 \in L$.
+Mivel $|w_1w_2| \le k$, a középső $w_2$ szó csak $a$ betűkből áll. Továbbá a $0 < |w_2|$ feltétel miatt a $w_1w_2^2w_3$, $w_1w_2^3w_3$, stb szavakban az $a$-k száma nagyobb, mint a $b$-k száma, tehát ezen szavak egyike sincs $L$-ben. Ellentmondás, tehát nem létezik ilyen $k$ szám. Akkor viszont az $L$ nyelv nem reguláris.
+
+> Tehát az a baj ezzel a nyelvvel, hogy csak $a$-kat tudnánk bele pumpálni, de ez kivezet a nyelvből.
+
+#### Következmények
+
+- Egy automata nem képes számolni, hogy két betű ugyanannyiszor szerepel-e.
+
+- Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz $REG \subset CF$. Például ilyen az előző $L$ nyelv.
