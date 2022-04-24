@@ -95,9 +95,9 @@ Tehát a cél egy $G$ gráfból egy $\phi_G$ CNF előállítása választartó m
 - A cél egy olyan CNF előállítása, amiben a következőt formalizáljuk: Minden csúcsra felítjuk, hogy pontosan egy él illeszkedik rá, majd ezeket összeéseljük. Ha így egy csúcsra sikerül megfelelő CNF-et alkotni, akkor azok összeéselése is CNF, hiszen CNF-ek éselése CNF.
 
 - Egy csúcshoz annak formalizálása, hogy pontosan egy él fedi: legalább egy él fedi ÉS legfeljebb egy él fedi.
-  
+
   - Legalább egy: Egyetlen CNF kell hozzá: $(x_1 \lor x_2 \lor ... \lor x_k)$.
-  
+
   - Legfeljebb egy: Négyzetesen sok klóz kell hozzá, minden csúcspárra megkötjük, hogy "nem ez a kettő egyszerre": $\land ~ 1 \le i < j \le k ~ \neg(x_i \land x_j)$
 
 > $x_1, ..., x_k$ az adott viszgált csúcsra illeszkedő élek.
@@ -144,11 +144,11 @@ Ennek az algoritmusnak a nemdeterminisztikus időigénye $O(n)$, hiszen $n$ vál
 
 A **SAT** a korábbi példa alapján például **NP-beli**.
 
-$P \sube NP$ természetesen igaz, hiszen egy determinisztikusan polinom idejű algoritmus felfogható olyan nemdeterminisztikusnak, ami sosem ágazik el. $P = coP$ miatt $P \sube NP \cap coNP$.
+$P \subseteq NP$ természetesen igaz, hiszen egy determinisztikusan polinom idejű algoritmus felfogható olyan nemdeterminisztikusnak, ami sosem ágazik el. $P = coP$ miatt $P \subseteq NP \cap coNP$.
 
 Ennél többet nem tudunk, nem tudjuk, hogy $P = NP$ igaz-e. Széleskörben elfogadott sejtés, hogy nem. Hasonlóan az sem ismert, hogy $NP = coNP$ igaz-e, erről is az az elfogadtott álláspont, hogy nem.
 
-Persze $NP \sube R$ is igaz, mert a nemdeterminisztikus számítás szimulálható determinisztikusan, bár ez exponenciálisan lassú.
+Persze $NP \subseteq R$ is igaz, mert a nemdeterminisztikus számítás szimulálható determinisztikusan, bár ez exponenciálisan lassú.
 
 ![ ](../img/bonyolultsagi_osztalyok.png)
 
@@ -208,35 +208,35 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 ###### Párosítás
 
-**Input**: Két egyforma méretű halmaz, $A$, és $B$, és egy $R \sube A \times B$ reláció.
+**Input**: Két egyforma méretű halmaz, $A$, és $B$, és egy $R \subseteq A \times B$ reláció.
 
-**Output**: Van-e olyan $M \sube R$ részhalmaza a megengedett pároknak, melyben minden $A \cup B$-beli elem pontosan egyszer van fedve?
+**Output**: Van-e olyan $M \subseteq R$ részhalmaza a megengedett pároknak, melyben minden $A \cup B$-beli elem pontosan egyszer van fedve?
 
 > $A$ halmaz: lányok, $B$ halmaz: fiúk, reláció: ki hajlandó kivel táncolni. Kérdés: Párokba lehet-e osztani mindenkit?
 
 ###### Hármasítás
 
-**Input**: Két egyforma méretű halmaz, $A$, $B$, és $C$, és egy $R \sube A \times B \times C$ reláció.
+**Input**: Két egyforma méretű halmaz, $A$, $B$, és $C$, és egy $R \subseteq A \times B \times C$ reláció.
 
-**Output**: Van-e olyan $M \sube R$ részhalmaza a megengedett pároknak, melyben minden $A \cup B \cup C$-beli elem pontosan egyszer van fedve?
+**Output**: Van-e olyan $M \subseteq R$ részhalmaza a megengedett pároknak, melyben minden $A \cup B \cup C$-beli elem pontosan egyszer van fedve?
 
 > Hasonló példa áll, $C$ halmaz házak, ahol táncolnak.
 
 ###### Pontos lefedés hármasokkal
 
-**Input**: Egy $U$ $3m$ elemű halmaz, és háromelemű részhalmazainak egy $S_1, ..., S_n \sube U$ rendszere.
+**Input**: Egy $U$ $3m$ elemű halmaz, és háromelemű részhalmazainak egy $S_1, ..., S_n \subseteq U$ rendszere.
 
 **Output**: Van-e az $S_i$-k közt $m$, amiknek uniója $U$?
 
 ###### Halmazfedés
 
-**Input**: Egy $U$ halmaz, részhalmazainak egy $S_1, ..., S_n \sube U$ rendszere, és egy $K$ szám.
+**Input**: Egy $U$ halmaz, részhalmazainak egy $S_1, ..., S_n \subseteq U$ rendszere, és egy $K$ szám.
 
 **Output**: Van-e az $S_i$-k közt $K$ darab, amiknek uniója $U$?
 
 ###### Halmazpakolás
 
-**Input**: Egy $U$ halmaz, részhalmazainak egy $S_1, ..., S_n \sube U$ rendszere, és egy $K$ szám.
+**Input**: Egy $U$ halmaz, részhalmazainak egy $S_1, ..., S_n \subseteq U$ rendszere, és egy $K$ szám.
 
 **Output**: Van-e az $S_i$-k közt $K$ darab páronként diszjunkt?
 
@@ -286,7 +286,7 @@ PSPACE-beli problémák még **nehezebbek, mint az NP-beliek**.
 
 ##### Fontos összefüggés NSPACE és SPACE között
 
-$NSPACE(f(n)) \sube SPACE(f^2(n))$
+$NSPACE(f(n)) \subseteq SPACE(f^2(n))$
 
 Ebből következik ez is:
 
@@ -376,7 +376,7 @@ Ha $f$ és $g$ logtáras függvények, akkor kompozíciójuk is az. Ez azért j�
 
 #### NL-teljes problémák
 
-Legyen $L \sub C \sube P$ problémák egy osztálya. Azt mondjuk, hogy az $A$ probléma $C$-nehéz, ha $C$ minden eleme **logtárban** visszavezethető $A$-ra.
+Legyen $L \sub C \subseteq P$ problémák egy osztálya. Azt mondjuk, hogy az $A$ probléma $C$-nehéz, ha $C$ minden eleme **logtárban** visszavezethető $A$-ra.
 
 Ha ezen kívül $A$ még ráadásul $C$-beli is, akkor $A$ egy $C$-teljes probléma.
 

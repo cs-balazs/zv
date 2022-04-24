@@ -12,7 +12,7 @@ Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **determinisztikus automatának**
 
 - $q_0 \in Q$ a **kezdő állapot**
 
-- $F \sube Q$ a **végállapotok halmaza**
+- $F \subseteq Q$ a **végállapotok halmaza**
 
 - $\delta: Q \times \Sigma \to Q$ egy leképezés, az **átmenetfüggvény**
 
@@ -125,9 +125,9 @@ Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **nemdeterminisztikus automatána
 
 - $q_0 \in Q$ a **kezdő állapot**
 
-- $F \sube Q$ a **végállapotok halmaza**
+- $F \subseteq Q$ a **végállapotok halmaza**
 
-- $$\delta: Q \times \Sigma \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény\***
+- $\delta: Q \times \Sigma \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény\***
 
 > Azaz ugyan az, mint a determinisztikus, csak egy input szimbólum hatására egy állapotból többe is átmehet.
 
@@ -177,9 +177,9 @@ Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **nemdeterminisztikus $\epsilon$-
 
 - $q_0 \in Q$ a **kezdő állapot**
 
-- $F \sube Q$ a **végállapotok halmaza**
+- $F \subseteq Q$ a **végállapotok halmaza**
 
-- $\delta: Q \times (\Sigma \cup \{~\epsilon~\}) \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény**
+- $\delta: Q \times (\Sigma \cup \{ ~ \epsilon ~ \}) \to \mathcal{P}(Q)$ egy leképezés, az **átmenetfüggvény**
 
 > Azaz ugyan olyan, mint a nemdeterminisztikus, csak lehet olyan átmenete, ami "nem fogyasztja" az inputot. Ez az $\epsilon$-átmenet.
 
@@ -187,7 +187,7 @@ Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **nemdeterminisztikus $\epsilon$-
 
 ###### Átmeneti reláció
 
-$(q, w), (q', w') \in C$ esetén $(q, w) \vdash_M (q', w')$, ha $w = aw'$, valamely $a \in (\Sigma \cup \{~\epsilon~\})$-ra, és $q' \in \delta(q, a)$.
+$(q, w), (q', w') \in C$ esetén $(q, w) \vdash_M (q', w')$, ha $w = aw'$, valamely $a \in (\Sigma \cup \{ ~ \epsilon ~ \})$-ra, és $q' \in \delta(q, a)$.
 
 > Ha $a = \epsilon$, akkor éppen $w = w'$
 
@@ -197,7 +197,7 @@ Felismert nyelv definíciója ugyan az, mint a sima nemdeterminisztikus esetben.
 
 #### Ekvivalencia tétel
 
-Tetszőleges $L \sube \Sigma^*$ nyelv esetén a következő három állítás ekvivalens:
+Tetszőleges $L \subseteq \Sigma^*$ nyelv esetén a következő három állítás ekvivalens:
 
 1. $L$ reguláris (generálható reguláris nyelvtannal).
 
@@ -207,7 +207,7 @@ Tetszőleges $L \sube \Sigma^*$ nyelv esetén a következő három állítás ek
 
 Ezt külön három párra lehet belátni.
 
-##### * Környezetfüggetlen nyelvtan
+##### \* Környezetfüggetlen nyelvtan
 
 Egy $G = (N, \Sigma, P, S)$ négyes, ahol:
 
@@ -221,13 +221,13 @@ Egy $G = (N, \Sigma, P, S)$ négyes, ahol:
 
 Az összes környezetfüggetlen nyelvek halmazát $CF$-el jelöljük.
 
-##### * Deriváció
+##### \* Deriváció
 
 Tetszőleges $\gamma, \delta \in (N \cup \Sigma)^*$ esetén $\gamma \Rightarrow_G \delta$, ha van olyan $A \to \alpha \in P$ szabály és vannak olyan $\alpha', \beta' \in (N \cup \Sigma)^*$ szavak, amelyekre fennállnak, hogy $\gamma = \alpha' A \beta'$, $ \delta = \alpha'\alpha\beta'$.
 
 > Azaz, ha egy átírással (valamelyik $P$-beli szabály mentén) átvihatő.
 
-###### * Fajtái
+###### \* Fajtái
 
 - $\gamma \Rightarrow_G \delta$: Egy lépés, közvetlen levezetés, közvetlen deriváció
 
@@ -239,15 +239,15 @@ Tetszőleges $\gamma, \delta \in (N \cup \Sigma)^*$ esetén $\gamma \Rightarrow_
 
 > A $G$ alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
 
-##### * Generált nyelv
+##### \* Generált nyelv
 
 A $G = (N, \Sigma, P, S)$ környezetfüggetlen nyelvtan által generált nyelv:
 
-$L(G) = \{~ w \in \Sigma^* ~|~ S \Rightarrow^*_G w ~\}$
+$L(G) = \{~ w \in \Sigma^* ~ | ~ S \Rightarrow^*_G w ~\}$
 
 > Azaz az összes olyan szó, ami $G$-ből levezethető.
 
-##### * Reguláris nyelvtan
+##### \* Reguláris nyelvtan
 
 Egy $G = (N, \Sigma, P, S)$ nyelvtan reguláris (vagy jobblineáris), ja $P$-ben minden szabály $A \to xB$ vagy $A \to x$ alakú.
 
@@ -259,7 +259,7 @@ $REG \subset CF$
 
 > Azaz vannak olyan környezetfüggetlen nyelvek, amik nem regulárisak.
 
-##### * Reguláris kifejezések
+##### \* Reguláris kifejezések
 
 Egy $\Sigma$ ábécé feletti reguláris kifejezések halmaza a $(\Sigma \cup \{~ \emptyset, \epsilon, (, ), +, * ~\})^*$ halmaz legszűkebb olyan $U$ részhalmaza, amelyre az alábbi feltételek teljesülnek:
 
@@ -277,7 +277,7 @@ Az $R$ reguláris kifejezés által meghatározott (reprezentált) nyelvet $|R|$
 
 - Ha $R = \emptyset$, akkor $|R| = \emptyset$ (üres nyelv)
 
-- Ha $R = \epsilon$, akkor $|R| = \{~ \epsilon ~\}$ 
+- Ha $R = \epsilon$, akkor $|R| = \{~ \epsilon ~\}$
 
 - Ha $R = a$, akkor $|R| = \{~ a ~\}$
 
@@ -293,7 +293,7 @@ Az $R$ reguláris kifejezés által meghatározott (reprezentált) nyelvet $|R|$
 
 > $3 \to 1$ az ekvivalencia tételben.
 
-Ha $L \sube \Sigma^*$ nyelv reprezentálható reguláris kifejezéssel, akkor generálható reguláris nyelvtannal.
+Ha $L \subseteq \Sigma^*$ nyelv reprezentálható reguláris kifejezéssel, akkor generálható reguláris nyelvtannal.
 
 Ez $R$ struktúrája szerinti indukcióval belátható.
 
@@ -301,13 +301,13 @@ Ez $R$ struktúrája szerinti indukcióval belátható.
 
 > $1 \to 2$ az ekvikalencia tételben.
 
-Ha $L \sube \Sigma^*$ nyelv reguláris, akkor felismerhető automatával.
+Ha $L \subseteq \Sigma^*$ nyelv reguláris, akkor felismerhető automatával.
 
 Ennek bizonyítását ez a két lemma képezi, ezekkel fel tudunk írni egy automatát a nyelvtanból:
 
 - Minden $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz megadható vele ekvivalens $G' = (N', \Sigma, P', S)$ reguláris nyelvtan, úgy, hogy $P'$-ben minden szabály $A \to B, A \to aB$, vagy $A \to \epsilon$ alakú, ahol $A, B \in N$ és $a \in \Sigma$.
   
-  > Ez az átalakítás EZ, csak láncolva új szabályokat kell felvenni, pl. $A \to bbB$ helyett $A \to bA_1, A_1 \to bB$ 
+  > Ez az átalakítás EZ, csak láncolva új szabályokat kell felvenni, pl. $A \to bbB$ helyett $A \to bA_1, A_1 \to bB$
 
 - Minden olyan $G = (N, \Sigma, P, S)$ reguláris nyelvtanhoz, melynek csak $A \to B, A \to aB$ vagy $A \to \epsilon$ alakú szabályai vannak, megadható olyan $M = (Q, \Sigma, \delta, q_0, F)$ nemdeterminisztikus $\epsilon$-automata, amelyre $L(M) = L(G)$.
 
@@ -331,7 +331,7 @@ Minden $L \subseteq \Sigma^*$ reguláris nyelv esetén megadható olyan ($L$-tő
 
 A lemma arra használható, hogy nyelvekről belássuk, hogy az nem reguláris.
 
-**Példa**: Az $L = \{~ a^nb^n ~|~ n \ge 0 ~\}$ nyelv nem reguláris.
+**Példa**: Az $L = \{~ a^nb^n ~ | ~ n \ge 0 ~\}$ nyelv nem reguláris.
 
 **Bizonyítás**: Tegyük fel, hogy $L$ reguláris. Akkor megadható olyan $k$ szám, ami teljesíti a pumpáló lemma feltételeit.
 Vegyük az $a^kb^k \in L$ szót, melynek hossza $2k \ge k$.
