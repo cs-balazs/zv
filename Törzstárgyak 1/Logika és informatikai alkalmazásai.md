@@ -242,10 +242,216 @@ Ha $\Sigma \vdash F$, akkor $\Sigma \vDash F$.
 
 ###### Teljesség
 
-TODO
+**Dedukciós tétel**: Tetszőleges $\Sigma$ formulahalmazra, és $F$, $G$ formulákra $\Sigma \vdash (F \to G) \Leftrightarrow \Sigma \cup \{ ~ F ~ \} \vdash G$ 
+
+**H-konzisztens halmazok**: Egy $\Sigma$ formulahalmazt H-konzisztensnek nevezünk, ha **nem igaz**, hogy $\Sigma \vdash \downarrow$
+
+> Csak simán az, hogy **konzisztens** formulahalmaz, az azt jelenti, hogy **kielégíthető**.
+
+Ekvikalens állítások tetszőleges $\Sigma$ formulahalmazra:
+
+- Van olyan $F$ formula, melyre $\Sigma \vdash F$ és $\Sigma \vdash (F \to \downarrow)$ is igaz.
+
+- $\Sigma$ **nem** H-kozisztens.
+
+- $\Sigma \vdash F$ minden $F$ formulára.
+
+**Maximális H-konzisztens halmazok**: Egy $\Sigma$ formulahalmazt maximális H-konzisztensnek nevezünk, ha
+
+- $\Sigma$ H-konzisztens, és
+
+- minden $F \notin \Sigma$-ra $\Sigma \cup \{ ~ F ~ \}$ már nem H-konzisztens.
+
+> Minden $\Sigma$ H-konzisztens halmazhoz van $\Sigma' \supseteq \Sigma$ maximális H-konzisztens halmaz. "A halmmazt fel lehet fújni."
+
+Ha $\Sigma$ maximális H-konzisztens halmaz, akkor tetszőleges $F$ formulára vagy $F \in \Sigma$, vagy $(F \to \downarrow ) \in \Sigma$, de nem mindkettő.
+
+> Azaz minden **formulát, vagy a negáltját** tartalmazzák, de csak az egyiket.
+
+Tetszőleges $\Sigma$ formulahalmaz pontosan akkor kielégíthető, ha H-konzisztens.
+
+**A Hilbert-rendszer helyessége és teljessége**:
+
+Ezt kell belátni: $\Sigma \vDash F \Leftrightarrow \Sigma \vdash F$
+
+> Most itt egyszerre van belátva mindkettő, de a helyesség fentebbi alapján külön is belátható.
+
+Sorban minden ekvivalenciát tovább feltünk ekvivalencia mentén:
+
+$\Sigma \vDash F ~ ~ \Leftrightarrow ~ ~ \Sigma \cup \{ ~ F \to \downarrow ~ \} \vDash \downarrow$
+
+> Ennek az alapja egy tétel: $\Sigma \vDash F$ pontosan akkor igaz, ha $\Sigma \cup \{ ~ \neg F ~ \}$ kielégíthetetlen. Ez van itt felírva Hilbert-rendszerében.
+
+$\Leftrightarrow ~ ~ \Sigma \cup \{ ~ F \to \downarrow ~ \} \vdash \downarrow$
+
+> Itt a bal oldal azt jelenti, hogy az a halmaz kielágíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
+
+$\Leftrightarrow ~ ~ \Sigma \vdash (F \to \downarrow ) \to \downarrow$
+
+> Dedukciós tétel alkalmazása.
+
+$\Leftrightarrow ~ ~ \Sigma \vdash F$
+
+Ennek a legutolsó lépésnek a belátása kicsit nehezebb:
+
+- Egyik irány: $(\Sigma \vdash (F \to \downarrow ) \to \downarrow) \to (\Sigma \vdash F)$
+  
+  - $((F \to \downarrow ) \to \downarrow ) \to F$
+  
+  - > A 3. axióma példányosítása
+  
+  - $\Sigma \vdash F$
+  
+  - > Modus ponens alkalmazása
+
+- Másik irány: $(\Sigma \vdash F) \to (\Sigma \vdash (F \to \downarrow ) \to \downarrow)$
+  
+  - $((F \to \downarrow) \to (F \to \downarrow )) \to (((F \to \downarrow) \to F) \to ((F \to \downarrow) \to \downarrow ))$
+  
+  - > Az 1. axióma példányosítása
+  
+  - $(F \to \downarrow) \to (F \to \downarrow)$
+  
+  - > Ilyet ér felvenni, hiszen $G \to G$ alakú, és erre volt példa, hogy az ilyenek az $\emptyset$-nak is logikai következményei.
+  
+  - $((F \to \downarrow ) \to F) \to ((F \to \downarrow) \to \downarrow)$
+  
+  - > Előző kettő MP-el
+  
+  - $F \to ((F \to \downarrow) \to F )$
+  
+  - > A 2. axióma példánya
+  
+  - $(F \to \downarrow) \to F$
+  
+  - > Előző formula, és feltevés miatt $F$ MP-e
+  
+  - $(F \to \downarrow) \to \downarrow$
+  
+  - > Előző, és az előtt kettővel levő formulák MP-je
+
+Az ekvivalenciák mentén beláttuk, hogy **Hilbert-rendszere helyes, és teljes**. Azaz tetszőleges $\Sigma$ halmazból Hilbert rendszerében **pontosan** $\Sigma$ következményei vezethetőek le.
 
 #### Rezolúció
 
-TODO
+##### Rezolúciós következtetés
+
+$\{ ~ F \lor G, \neg F \lor H ~ \} \vDash G \lor H$
+
+> Nyílván, mert ha az $F$ igaz, akkor $H$ igaz kell, hogy legyen, ha $F$ hamis, akkor $G$ igaz kell, hogy legyen.
+
+> Emlékeztető: Logikai következmény jelentése: Bármely értékadás mellett ha a bal oldal igaz (jelen esetben bal oldalon minden igaz, mert egy halmaz áll ott), akkor a jobb is.
+
+##### Rezolvens
+
+Ha $C$ és $D$ klózok, $p \in C$ és $\neg p \in D$, akkor $C$ és $D$ ($p$ menti) rezolvense a $(C - \{ ~ p ~ \}) \cup (D - \{ ~ \neg p ~ \})$ klóz.
+
+> Egy új, harmadik klóz keletkezik.
+
+##### Rezolúciós algoritmus
+
+**Input**: Klózok $\Sigma$ halmaza.
+
+**Output**: Kielégíthetetlen-e $\Sigma$?
+
+**Algoritmus**: Listát vezetünk klózokról. Egy klózt felveszünk, ha 
+
+- $\Sigma$-beli, vagy
+
+- két, a listán már szereplő klóz rezolvense.
+
+Ha az $\square$ üres klóz rákerül a listára, a $\Sigma$ kielégíthetetlen.
+
+Ha már nem tudunk új klózt felvenni és $\square$ nincs köztük, $\Sigma$ kielégíthető.
+
+> Kielégíthető formulahalmazra nem feltétlen áll meg az algoritmus. Ezért kérdezzük inkább, hogy kielégíthetetlen-e.
+
+> Egyszerre több literál mentén nem ér rezolválni!!
+
+###### Helyesség
+
+Ha az algoritmus "kielégíthetetlen" válasszal áll meg, akkor az input $\Sigma$ valóban kielégíthetetlen.
+
+Azt látjuk be, hogy minden klóz, ami a listára kerül, az logikai következménye $\Sigma$-nak. Ezt indukcióval tesszük: ha a $C$ klóz $n$. elemként kerül a listára, akkor:
+
+- Ha $C \in \Sigma$, akkor $\Sigma \vDash C$ mindig teljesül.
+
+- Ha $C$ a korábban felvett $C_1$ és $C_2$ klózok **rezolvense**, akkor
+  
+  - indukciós feltevés szerint $\Sigma \vDash C_1$ és $\Sigma \vDash C_2$
+  
+  - tehát $\Sigma \vDash \{ ~ C_1, C_2 ~ \}$ (nyílván, összevagyolni ér őket)
+  
+  - a **rezolúciós következtetés** szerint pedig $\{ ~ C_1, C_2 ~ \} \vDash C$ (rezolúciós rész eleje) (onnan tudjuk, hogy $C$ a rezolvense $C_1$-nek, és $C_2$-nek, hogy ez a feltevés ebben a második esetben)
+  
+  - így a $\vDash$ tranzitivitása miatt $\Sigma \vDash C$.
+
+Így tehát ha $\Sigma \vDash \square$, akkor $\Sigma$ valóban kielégíthetetlen, mert kövezketménye a *hamis*. ($Mod(\square) = \emptyset$, nincs őt kielégítő értékadás)
+
+###### Teljesség
+
+Ha $\Sigma$ kielégíthetetlen, akkor az algoritmus mindig a "kielégíthetetlen" válasszal áll meg.
+
+**Minimális kielégíthetetlen részhalmaz**:
+A $\Sigma$ kielégíthetetlen klózhalmaznak a $\Sigma' \subseteq \Sigma$ egy **minimális kielégíthetetlen részhalmaza**, ha $\Sigma'$ is kielégíthetetlen, de $\Sigma'$ bármelyik valódi részhalmaza már kielégíthető. 
+
+**Lineáris rezolúció**:
+**Input**: $\Sigma$ klózhalmaz.
+**Output**: Kielégíthetetlen-e $\Sigma$?
+**Algoritmus**: Listát vezetünk klózokról:
+
+- Az első lépésben felvehetjük $\Sigma$ **bármelyik elemét**, ez lesz a levezetés **bázisa**.
+
+- Minden további lépésben felvehetjük az előző lépésben felvett klóznak, és egy vagy már a listán szereplő, vagy $\Sigma$-beli klóznak a rezolvensét. Ezt a másik klózt hívjuk ennek a lépésnek az **oldalklózának**.
+
+**Lineáris rezolúció teljessége**:
+
+Ha $\Sigma$ kielégíthetetlen, és $C \in \Sigma$ benne van a $\Sigma$ egy **minimális kielégíthetetlen részhalmazában**, akkor $\Sigma$-ból levezethető az üres klóz olyan **lineáris rezolúciós** levezetéssel, melynek **bázisa** $C$.
+
+**Bizonyítás**:
+
+Az állítást a $\Sigma$-beli változók $n$ száma szerinti indukcióval látjuk be.
+
+- Ha $n = 0$, azaz $\Sigma$-ban nincs változó, akkor vagy $\Sigma = \{ \}$ (ekkor nincsen benne klóz), vagy $\Sigma = \{ ~ \square ~ \}$ (ekkor van benn egy klóz, az üres klóz)
+  
+  - A kettő közül $\Sigma = \{ ~ \square ~ \}$ a kielégíthetetlen.
+  
+  - Ennek $\square$ az egyetlen eleme, ez egy minimális kielégíthetetlen részhalmazának is eleme.
+  
+  - Ha felvesszük bázisként, már le is vezettük az üres klózt.
+
+- Ha $n > 0$, akkor vegyünk egy $C$ klózt, mely szerepel $\Sigma$ egy minimális kielégíthetetlen részhalmazában. Legyen ez a részhalmaz $\Sigma'$.
+  
+  - Ha $C = \square$, kész vagyunk: vegyük fel bázisnak.
+  
+  - Különben legyen $l \in C$ egy $C$-beli literál.
+  
+  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha $l$ pure literál lenne, akkor $\Sigma$-nak egy valódi részhalmaza $\Sigma'|_{l = 1}$ is kielágíthetetlen lenne. Tehát $\Sigma'$-ben $\overline{l}$ is szerepel valahol.
+
+- Vegyük a $\Sigma'|_{l = 0}$ és $\Sigma'|_{l = 1}$ klózhalmazokat.
+
+- Mivel $\Sigma'$ kielégíthetetlen, ezek is azok.
+
+- Bennük csak legfeljebb $n - 1$ változó szerepel (mert $l$ változója kiesik), így alkalmazhatjuk az indukciós feltevést.
+
+- A $\Sigma'|_{l=0}$ klózhalmaznak $C - \{ ~ l ~ \}$ is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben $\Sigma' - \{ ~ C ~ \}$ is kielégíthetetlen lenne).
+
+- Tehát $\Sigma'|_{l = 0}$-ból az indukciós feltevés szerinte van $\square$-nak egy $C_1, C_2, ..., C_m$ lineáris rezolúciós levezetése, melynek $C_1 = C - \{ ~ l ~ \}$ a bázisa.
+
+- "Visszaemelve" a $\Sigma|_{l = 0}$ cáfolatot $\Sigma'$ fölötti levezetéssé, az új levezetésben minden klózba bekerül az $l$ literál.
+
+- Ez igaz a bázisra, és minden lépésben az eredeti $C_1$ és $C_2$ klózok rezolvense helyett a $C \cup \{ ~ l ~ \}$ és $C_2$ vagy $C_2 \cup \{ ~ l ~ \}$ klózok rezolvensét kapjuk, ami rezolvens, plusz $l$
+
+- Tehát a konstrukciónak a végén az $\{ ~ l ~ \}$ egységklóznál jár a lineáris rezolúciós levezetés.
+
+- Mivel $\Sigma'$ minimális kielégíthetetlen, kell legyen benne olyan $C$ klóz is, mely $\overline{l}$-t tartalmazza.
+
+- Akkor $\Sigma'|_{l = 1}$-nek egy minimális kielégíthetetlen részhalmazában szerepel $C - \{ ~ \overline{l} ~ \}$
+
+- Ebből a klózból indulva az indukciós feltevés szerint van $\Sigma'|_{l = 1}$-nek lineáris rezolúciós cáfolata
+
+- Az előző fázisban kapott $\{ ~ l ~ \}$ egységklózt tudjuk rezolválni ezzel a $C$ klózzal, tehát a $\Sigma'|_{l = 1}$ cáfolatát "fel tudjuk emelni" $\Sigma'$ fölötti levezetéssé.
+
+- A felemelt levezetés végén vagy $\square$-t, vagy $\{ ~ \overline{l} ~ \}$-t kapunk. Utóbbi esetben még egyszer rezolválunk $\{ ~ l ~ \}$-lel mint oldalklózzal, és kész vagyunk
 
 ### 2. Normálformák az elsőrendű logikában. Egyesítési algoritmus. Következtető módszerek: Alap rezolúció, és elsőrendű rezolúció, ezek helyessége és teljessége.
