@@ -455,3 +455,105 @@ Az állítást a $\Sigma$-beli változók $n$ száma szerinti indukcióval látj
 - A felemelt levezetés végén vagy $\square$-t, vagy $\{ ~ \overline{l} ~ \}$-t kapunk. Utóbbi esetben még egyszer rezolválunk $\{ ~ l ~ \}$-lel mint oldalklózzal, és kész vagyunk
 
 ### 2. Normálformák az elsőrendű logikában. Egyesítési algoritmus. Következtető módszerek: Alap rezolúció, és elsőrendű rezolúció, ezek helyessége és teljessége.
+
+#### * Elsőrendű logika alapfogalmak
+
+Függvényjelek, predikátumjelek **aritása / rangja**: Hány változósak
+
+**Alapterm**: Olyan term, amiben nincs változó
+
+##### * Struktúra
+
+Egy $\mathcal{A} = (A, I, \phi)$ hármas, ahol
+
+- $A$ egy nemüres halmaz, az **univerzum**
+
+- > A változók ebből vehetnek fel értékeket
+
+- $\phi$ a változóknak egy "default" **értékadása**, minde $x$ változóhoz egy $\phi(x) \in A$ objektumot rendel
+
+- $I$ az **interpretációs függvény**, ez rendel a függvény és predikárumjelekhez szemantikát, "értelmet" az adott struktúrában:
+  
+  - ha $f/n$ **függvényjel**, akkor $I(f)$ egy $A^n \to A$ függvény
+  
+  - > Objektum(ok)ból objektumot csinál
+  
+  - ha $p / n$ **predikátumjel**, akkor $I(p)$ egy $A^n \to \{ ~ 0, 1 ~ \}$ predikárum
+  
+  - > Objektum(ok)ból igazságértéket csinál
+
+> Az $=$ bináris predikátumjelet minden struktúrában ténylegesen az egyenlőséggel kell interpretálnunk!
+
+###### * Term kiértékelése
+
+- Ha $t = x$ változó, akkor $\mathcal{A}(t) := \phi(x)$
+
+- Ha $t = f(t_1, ..., t_n)$, akkor $\mathcal{A}(t) := I(f)(\mathcal{A}(t_1), ..., \mathcal{A}(t_n))$
+
+> Emlékeztető, a term lehet egy változó, vagy egy függvény, aminek paraméterei termek.
+
+> Egy struktúra megadásakor **elég csak azon változókat specifikálni**, amik **ténylegesen használtak** (szerepelnek a termekben).
+
+###### * Formulák kiértékelése
+
+$\mathcal{A}_{[x ~ \mapsto ~ a]}$: Az a struktúra, ami az $\mathcal{A}$ struktúrát úgy változtatja, hogy benne a $\phi(x) := a$ 
+
+Ha $F$ formula, $\mathcal{A} = (A, I, \phi)$ pedig struktúra, akkor az $F$ értéke $\mathcal{A}$-ban egy igazságérték, amit $\mathcal{A}(F)$ jelöl, és az $F$ felépítése szerinti indukcióval adunk meg:
+
+- Logikai konstansok: $\mathcal{A}(\uparrow) := 1, \mathcal{A}(\downarrow) := 0$
+
+- Konnektívák: $\mathcal{A}(F \land G) := \mathcal{A}(F) \land \mathcal{A}(G)$, $\mathcal{A}(F \lor G) := \mathcal{A}(F) \lor \mathcal{A}(G)$, $\mathcal{A}(\neg F) := \neg \mathcal{A}(F)$, ...
+
+- Atomi formulák: $\mathcal{A}(p(t_1, ..., t_n)) := I(p)(\mathcal{A}(t_1), ..., \mathcal{A}(t_n))$
+
+> Azaz $\mathcal{A}$-ban elöször kiértékeljük $t_1, ..., t_n$ termeket, majd a kapott $a_1, ..., a_n$ objektumokat befejettesítjük abba a predikátumba, amit ebben a struktúrában $p$ jelöl.
+
+- Kvantorok:
+  
+  - $\mathcal{A}( \exists xF)$: $1$, ha van olyan $a \in A$, melyre $\mathcal{A}_{[x \mapsto a]} (F) = 1$, különben $0$
+  
+  - $\mathcal{A}( \forall xF)$: $1$, ha minden $a \in A$-ra igaz, hogy $\mathcal{A}_{[x \mapsto a]}(F) = 1$, különben 0
+
+#### Normálformák az elsörendű logikában
+
+##### Zárt Skolem alak
+
+1. **Nyilak eliminálása** ($F \to G \equiv \neg F \lor G$)
+
+2. **Kiigazítás**: Ne legyen **változónév-ütközés**
+
+3. **Prenex alak**ra hozás: Összes **kvantor előre** kerül
+
+> Idáig volt ekvivalens az átalakítás
+
+1. **Skolem alak**ra hozás: Összes kvantor elöl, és mind $\forall$
+
+2. **Lezárás**: Ne maradjon **szabad változó-előfordulás**
+
+###### Kiigazítás
+
+- Különböző helyeken levő kvantorok **különböző változókat kötnek** és
+
+- Nincs olyan változó, mely **szabadon is és kötötten is** előfordul.
+
+> Gyakorlatban annyi ez a lépés, hogy a kötött változókat átnevezzük, jellemzően indexeléssel.
+
+> **Átnevezni csak kötött** változókat ér, szabad változót nem, akkor marad ekvivalens.
+
+###### Prenex alak
+
+Egy formula **Prenex alak**ú, ha $Q_1x_1Q_2x_2...Q_nx_n(F)$ alakú, ahol $F$ **kvantormentes** formula, és mindegyik $Q_I$ egy **kvantor**.
+
+Minden formula ekvivalens Prenex alakra hozható.
+
+Első lépésként **ki kell igazítani a formulát** (előző lépés).
+
+- Ha egy negálást áthúzunk egy kvantoron, megfordul a kvantor: $\neg \exists xF \equiv \forall x \neg F$
+
+- $\exists x F \lor G \equiv \exists x (F \lor G)$
+  
+  - Ha $x$ nem szerepel $G$-ben szabadon, ezért kell előtte kiigazírani!
+
+###### Skolem alak
+
+Egy formula **Skolem alakú**, ha $F = \forall x_1 \forall x_2 ... \forall x_n (F^*)$, ahol $F^*$-ben (a formula magjában) már nincs kvantor.
