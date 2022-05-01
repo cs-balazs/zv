@@ -514,7 +514,7 @@ Ha $F$ formula, $\mathcal{A} = (A, I, \phi)$ pedig struktúra, akkor az $F$ ért
   
   - $\mathcal{A}( \forall xF)$: $1$, ha minden $a \in A$-ra igaz, hogy $\mathcal{A}_{[x \mapsto a]}(F) = 1$, különben 0
 
-#### Normálformák az elsörendű logikában
+#### Normálformák az elsőrendű logikában
 
 ##### Zárt Skolem alak
 
@@ -557,3 +557,165 @@ Első lépésként **ki kell igazítani a formulát** (előző lépés).
 ###### Skolem alak
 
 Egy formula **Skolem alakú**, ha $F = \forall x_1 \forall x_2 ... \forall x_n (F^*)$, ahol $F^*$-ben (a formula magjában) már nincs kvantor.
+
+Skolem alak értelme: $\forall x_1 ... \forall x_n F^* \vDash F^* [x_1 / t_1, ..., x_n / t_n]$
+
+> Tehát termeket lehet a változók helyére helyettesíteni.
+
+A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden $F$ formulához konstruálható eg yolyan $F'$ Skolem alakú formula, ami pontosan akkor kielégíthatő, ha $F$ is az. Ennek jele: $F \equiv_S F'$
+
+- Prenex alakra hozzuk a formulát
+
+- Skolem-függvényekkel eltűntetjük a $\exists$ kvantorokat:
+  
+  - Minden $\exists y$-lekötött változót a formula magjában cseréljünk le egy $f(x_1, ..., x_n)$ termre, ahol:
+    
+    - $f$ egy teljesen új függvényszimbólum,
+    
+    - $x_1, ..., x_n$ pedig az $y$ előtt szereplő $\forall$-kötött vűétozók.
+
+###### Zárt Skolem alak
+
+- Minden $x$ szabad előfordulás helyett egy új $c_x$ konstansjelet vezetünk be
+
+- ezt úgy, hogy minden formulában az összes szabad $x$ helyére ugyanazt a $c_x$-et írjuk
+
+> Ez is s-ekvivalens átalakítás
+
+##### CNF elsőrendű logikában
+
+- **Literál**: Atomi formula (ekkor pozitív), vagy negáltja (ekkor negatív), pl.: $p(x, c), \neg q (x, f(x), z)$
+
+- **Klóz**: Literálok véges diszjunkciója, pl.: $q(x) \lor \neg q (x, c)$
+
+- **CNF**: Klózok konjukciója, pl.: $(p(x) \lor \neg q(y, c)) \land \neg p(x)$
+
+**Kvantormentes** elsőrendű logikai formulát az ítéletkalkulusban megszokott módon hozhatunk CNF-re.
+
+#### Alap rezolúció
+
+> Alap, mert alaptermek szerepelnek benne
+
+Input: Elsőrendű formulák egy $\Sigma$ halmaza
+
+Ha $\Sigma$ kielégíthetetlen, akkor az algoritmus ezt véges sok lépésben levezeti
+
+Ha kielégíthető, akkor vagy ezt vezeti le, vagy végtelen ciklusba esik
+
+##### Módszer
+
+- $\Sigma$ elemeit zárt Skolem alakra hozzuk, a kapott formulák magját CNF-re.
+  
+  - Jelölje $\Sigma'$ a kapott klóz halmazt
+
+- Ekkor $E(\Sigma)'$ a klózok **alap példányainak halmaza**
+
+> Ez annyit takar, hogy a klózban a változók helyére ízlés szerint alaptermeket helyettesítünk, minden ilyennek a halmaza
+
+- Az $E(\Sigma')$ halmazon futtatjuk az ítéletkalkulus-beli rezolúciós algoritmust
+
+Mivel $E(\Sigma')$ általában végtelen, így az algoritmus (mondjuk)
+
+- Egy lépésben legenerálja, és felveszi $E(\Sigma')$ egy elemét
+
+- az eddigi klózokkal rezolvenst képez, amíg csak lehet
+
+- ha közben megkapjuk az üres klózt, $\Sigma$ kielégíthetetlen
+
+- különben generáljuk a következő elemet.
+
+##### Helyesség, és teljesség
+
+- A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát $\Sigma$ pontosan akkor kielégíthetetlen, ha $\Sigma'$ az
+
+- A Herbrand-tétel következménye szerint $\Sigma'$ pontosan akkor kielégíthetetlen, ha $E(\Sigma')$ az
+
+> Mert a Herbrand-kiterjesztés s-ekvivalens transzformáció
+
+- Az ítéletkalkulus kompaktsági tétele szerint $E(\Sigma')$ pontosan akkor kielégíthetetlen, ha van egy véges $\Sigma_0$ kielégíthetetlen részhalmaza
+
+> Azaz elég véges sokat legyártani
+
+- A rezolúciós algoritmus teljessége szerinte ha a $\Sigma_0$ véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
+
+- Tehát ha $\Sigma$ kielégíthetetlen, akko az aalgoritmus leáll ezzel a válasszal akkor, amikor egy ilyen $\Sigma_0$ halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük $\square$-t) 
+
+> Az alap rezolúcióval az lehet a probléma, hogy nagy a keresési tere azáltal, hogy a változókat alaptermekkel helyettesítgetjük
+
+#### Elsőrendű rezolúció
+
+##### Elsőrendű rezolvensképzés
+
+Két elsőrendű logikai klóz, $C_1$ és $C_2$ elsőrendű rezolvensét így kapjuk:
+
+- Átnevezzük a klózokban a változókat úgy (legyenek a változóátnevezések $s_1$ és $s_2$), hogy a kapott $C_1 \cdot s_1$ és $C_2 \cdot s_2$ klózok ne tartalmazzanak közös változót.
+
+- Kiválasztunk $C_1 \cdot s_1$-ből $l_1, ..., l_m$és $C_2 \cdot s_2$-ből $l_1', ..., l_n'$ literálokat, mindkettőből legalább egyet-egyet.
+
+- Futtatjuk az egyesítési algoritmust a $C = \{ ~ l_1, ..., l_m, l_1', ..., l_n' ~ \}$ klózon.
+
+> Emiatt az egyesítési lépés miatt a korábbi literál kiválasztást érdemes úgy csinálni, hogy csak egy féle predikátumjeleket választunk ki, és az egyik klózból csak pozitív előfordulásokat, a másikból csak negatívakat. Így lesz esély arra, hogy egyesíthető legyen.
+
+- Ha $C$ egyesíthető az $s$ legáltalánosabb egyesítővel, akkor $s$-et végrehajtjuk a nem kiválasztott literálok halmazán: $R := ((C \cdot s_1 - \{ ~ l_1, ..., l_m ~ \}) \cup (C_2 \cdot s_2 - \{ ~ l_1', ..., l_n' ~ \})) \cdot s$
+
+A kapott $R$ klóz a $C_1$ és $C_2$ egy elsőrendű rezolvense.
+
+##### Algoritmus
+
+**Input**: Elsőrendű klózok egy $\Sigma$ halmaza. Úgy tekintjük, mintha a $\Sigma$-beli klózok változói univerzálisan lennének kvantálva.
+
+> Atért tekinthetjük így, mert $\forall x (F \land G) \equiv \forall F \land \forall G$
+
+**Output**:
+
+- Ha $\Sigma \vDash \downarrow$, akkor "kielégíthetetlen"
+
+- Különben "kielégíthető", vagy végtelen cikus
+
+Listát vezetünk klózokról, egy klózt felveszünk, ha
+
+- $\Sigma$-beli, vagy
+
+- két, már a listán szereplő klóz rezolvense.
+
+Ha $\square$ rálerül a listára, akkor $\Sigma$ kielégíthetetlen.
+
+Különben, ha már nem tudunk több klózt lebezetni, $\Sigma$ kielégíthető.
+
+> $Res(\Sigma)$ jelöli azt a halmazt, amely tartalmazza $\Sigma$ elemeit, és a belőlök egy rezolvensképzéssel levezethető klózokat.
+
+> $Res^*(\Sigma)$ pedig a $\Sigma$-ból rezolúcióval levezethető összes klóz halmazát jelöli.
+
+##### Helyesség
+
+- A helyesség a rezolvensképzés helyességéből következik
+
+- Mivel a klózik univerzálisan kvantáltak (a Skolem alakból), így tetszőleges $C$ klózra, és $s$ helyettesítésre $C \vDash C \cdot s$
+
+- Tehát a rezolvensképzésnél felírt $C_1$-nek $C_1 \cdot s_1 \cdot s$, $C_2$-nek pedig $C_2 \cdot s_2 \cdot s$ egy-egy logikai következménye
+
+- Tehát $\{ ~ C_1, C_2 ~ \} \vDash \{ ~ C_1s_1s, C_2s_2s ~ \}$
+
+- Ennek a két klóznak pedig a rezolvens következménye (az "eredeti" rezolúciós következtetés szerint)
+
+##### Teljesség
+
+- A teljességi irányhoz felhasználjuk az alap rezolúció teljességét
+
+- Tehát: Ha $\Sigma$ kielégíthetetlen, akkor az üres klóznak van egy $C_1', C_2', ..., C_n' = \square$ alaprezolúciós levezetése.
+
+- Ebből az alaprezolúciós levezetésből fogunk készíteni egy $C_1, C_2, ..., C_n$ elsőrendű rezolúciós levezetést.
+
+- A klózokat úgy fogjuk elkészíteni indukcióval $n$ szerint, hogy minden $i$-re a $C_i$-nek a $C_i'$ egy (alap) példánya lesz.
+  
+  - Ha $C_i' \in E(\Sigma)$, azaz $C_i'$ egy $\Sigma$-beli $C$ klóz (alap) példánya, akkor legyen $C_i := C$
+  
+  - A másik lehetőség, hogy $C_i'$ a $C_j'$ és $C_k'$ klózok, $j, k < i$, egy rezolvense.
+    
+    - Ennek az esetnek a belátásához felítjuk az ún. lift lemmát:
+    
+    - Ha $C_1$-nek $C_1'$, $C_2$-nek pedig $C_2'$ alap példányai, melyeknek $R'$ rezolvense, akkor van $C_1$-nek, és $C_2$-nek olyan elsőrendű $R$ rezolvense, melynek $R'$ alap példánya.
+
+> Lift lemma bizonyítása kell?
+
+- Mivel a $C_n' = \square$ üres klóz csak önmagának példánya, így $C_n = \square$ kell legyen.
