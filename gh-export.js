@@ -2,7 +2,7 @@ process.stdin.setEncoding("utf8");
 process.stdin.on("readable", () => {
   const input = process.stdin.read();
 
-  if (input) {
+  if (input && !input.includes("inlineMath")) {
     process.stdout.write(
       input?.replace(
         /\$(.*?)\$/g,
@@ -12,5 +12,7 @@ process.stdin.on("readable", () => {
           )}" />`
       )
     );
+  } else if (!!input) {
+    process.stdout.write(input);
   }
 });
