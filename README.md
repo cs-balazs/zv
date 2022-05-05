@@ -11,3 +11,5 @@
 [Iván Szabolcs - Logika és informatikai alkalmazásai előadás, 2020](https://www.youtube.com/playlist?list=PLn83WpoA-HnbLEEu5RVz25gveJTMfs1D0)
 
 [Iván Szabolcs - Logika és informatikai alkalmazásai előadás diák, 2022 (1.4MB PDF)](https://www.inf.u-szeged.hu/~szabivan/download/logika/slides2022.pdf)
+
+Virágh János - Numerikus matematika, 2003.
