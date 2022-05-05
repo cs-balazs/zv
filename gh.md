@@ -2144,6 +2144,106 @@ Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=X%2
 ##### Generált nyelv definiálása derivációs fákkal
 
 <img src="https://render.githubusercontent.com/render/math?math=L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
+## Közelítő és szimbolikus számítások
+
+### 1. Eliminációs módszerek, mátrixok trianguláris felbontásai. Lineáris egyenletrendszerek megoldása iterációs módszerekkel. Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása.
+
+#### Eliminációs módszerek
+
+**Lineáris egyenletrendszer** mátrixos reprezentációja:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{align}
+    a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n & = a_{1, n+1}\\
+    a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n & = a_{2, n+1}\\
+                                            & ~  ...\\
+    a_{n1}x_1 + a_{n2}x_2 + ... + a_{nn}x_n & = a_{n, n+1}\\
+\end{align}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Komponensek:
+
+- <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20n%7D" />  regulárisegyütthatómártix
+
+> Reguláris = determinánsa nem 0
+
+- <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5Cmathcal%7BR%7D%5En" /> jobb oldalhoz tartozó mátrix
+
+- <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_n" /> ismeretlenek
+
+> Jelölés: <img src="https://render.githubusercontent.com/render/math?math=%5Chat%7BA%7D%20%3A%3D%20(Aa)%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20(n%20%2B%201)%7D" />. Ez egy tömörebb írásmódja az együtthatóknak és a jobb oldalnak, ennek egy sora jellemzi az egyenletrendszer egy sorát.
+
+##### Eliminációs mátrix
+
+ A <img src="https://render.githubusercontent.com/render/math?math=G_j%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20n%7D" /> **eliminációs mátrix**, ha felírható <img src="https://render.githubusercontent.com/render/math?math=G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> alakban valamely <img src="https://render.githubusercontent.com/render/math?math=1%20%5Cle%20j%20%5Cle%20n" />-re egy olyan <img src="https://render.githubusercontent.com/render/math?math=g%5E%7B(j)%7D" /> vektorral, amelynek <img src="https://render.githubusercontent.com/render/math?math=j" />-dik komponense, <img src="https://render.githubusercontent.com/render/math?math=g_j%5E%7B(j)%7D%20%3D%200" />
+
+###### Példa
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+j = 3; G_j =
+\begin{bmatrix}1 & 0 & 2 \\
+0 & 1 & 3 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+<img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> a mátrix 3. oszlopában látszódik is, csak ott tér el egy egységmátrixtól.
+
+<img src="https://render.githubusercontent.com/render/math?math=G_j" /> komponensei:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+g^{(j)} = 
+\begin{bmatrix}
+2 \\
+3 \\
+0 \\
+\end{bmatrix} ;
+e_j^T =
+\begin{bmatrix}
+~ 0 ~ 0 ~ 1 ~ \\
+\end{bmatrix}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+<img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> miatt a <img src="https://render.githubusercontent.com/render/math?math=g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://render.githubusercontent.com/render/math?math=e_j%5ET" /> harmadik koordinátája is nulla.
+
+###### Eliminációs mártix jelentősége
+
+Egy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathcal%7Bn%20%5Ctimes%20n%7D" /> mátrixot a <img src="https://render.githubusercontent.com/render/math?math=G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> eliminációs mátrixszal balról szorozva a <img src="https://render.githubusercontent.com/render/math?math=B%20%3D%20G_jA" /> szorzatmátrix úgy áll elő, hogy <img src="https://render.githubusercontent.com/render/math?math=A" /> <img src="https://render.githubusercontent.com/render/math?math=1%2C%202%2C%20...%2C%20n" />-dik sorához rendre hozzáadjuk <img src="https://render.githubusercontent.com/render/math?math=A" /> <img src="https://render.githubusercontent.com/render/math?math=j" />-dik sorának <img src="https://render.githubusercontent.com/render/math?math=g_1%5Ej%2C%20g_2%5Ej%2C%20...%2C%20g_3%5Ej" />-szeresét.
+
+Például a következő mátrixok esetén:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+A = 
+\begin{bmatrix}
+1 & 2 & 4 \\
+6 & 8 & 2 \\
+9 & 1 & 0 \\
+\end{bmatrix}
+
+G_j = 
+\begin{bmatrix}
+1 & 0 & 2 \\
+0 & 1 & 3 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Az eredmény:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+G_jA = 
+\begin{bmatrix}
+19 & 4 & 4 \\
+33 & 11 & 2 \\
+9 & 1 & 0 \\
+\end{bmatrix}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix első sorához valóban kétszer a másodikhoz háromszor a harmadikhoz pedig nullaszor lett hozzáadva az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix harmadik sora.
+
+### 2. Érintő, szelő, és húr módszer, a konjugált gradiens eljárás. Lagrange interpoláció. Numberikus integrálás.
 ## Logika és informatikai alkalmazásai
 
 ### 1. Normálformák az ítéletkalkulusban, Boole-függvények teljes rendszerei. Következtető módszerek: Hilbert-kalkulus és rezolúció, ezek helyessége és teljessége.
