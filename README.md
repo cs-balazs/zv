@@ -13,3 +13,11 @@
 [Iván Szabolcs - Logika és informatikai alkalmazásai előadás diák, 2022 (1.4MB PDF)](https://www.inf.u-szeged.hu/~szabivan/download/logika/slides2022.pdf)
 
 Virágh János - Numerikus matematika, 2003.
+
+[Csendes Tibor - Közelítő és szimbolikus számítások I. (514KB PDF)](https://www.inf.u-szeged.hu/~csendes/koszikicsi.pdf)
+
+[Nagy Antal, Tanács Attila - Számítógépes Architektúrák 2019.](https://www.inf.u-szeged.hu/~tanacs/oktatas/okt_2019_osz_a.html#)
+
+Gyimóthy Tibor, Kertész Attila, Vidács László - Rendszerfejlesztés I. 2020.
+
+Nyékyné Gaizler Judit - Programozási nyelvek 2003.
