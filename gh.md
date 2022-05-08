@@ -2184,11 +2184,11 @@ Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=X%2
 
 #### Eliminációs módszerek
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Balign%7D%0A%20%20%20%20a_%7B11%7Dx_1%20%2B%20a_%7B12%7Dx_2%20%2B%20...%20%2B%20a_%7B1n%7Dx_n%20%26%20%3D%20b_1%5C%5C%0A%20%20%20%20a_%7B21%7Dx_1%20%2B%20a_%7B22%7Dx_2%20%2B%20...%20%2B%20a_%7B2n%7Dx_n%20%26%20%3D%20b_2%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20~%20%20...%5C%5C%0A%20%20%20%20a_%7Bn1%7Dx_1%20%2B%20a_%7Bn2%7Dx_2%20%2B%20...%20%2B%20a_%7Bnn%7Dx_n%20%26%20%3D%20b_n%5C%5C%0A%5Cend%7Balign%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0A%20%20%20%20a_%7B11%7Dx_1%20%2B%20a_%7B12%7Dx_2%20%2B%20...%20%2B%20a_%7B1n%7Dx_n%20%26%20%3D%20b_1%5C%5C%0A%20%20%20%20a_%7B21%7Dx_1%20%2B%20a_%7B22%7Dx_2%20%2B%20...%20%2B%20a_%7B2n%7Dx_n%20%26%20%3D%20b_2%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20~%20%20...%5C%5C%0A%20%20%20%20a_%7Bn1%7Dx_1%20%2B%20a_%7Bn2%7Dx_2%20%2B%20...%20%2B%20a_%7Bnn%7Dx_n%20%26%20%3D%20b_n%5C%5C%0A%5Cend%7Balign%7D%0A" />
 
 Tegyük fel, hogy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathbb%7BC%7D%5E%7Bn%20%5Ctimes%20n%7D" />, és <img src="https://render.githubusercontent.com/render/math?math=b%20%5Cin%20%5Cmathbb%7BC%7D%5En" />. Az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> lineáris egyenletrendszernek pontosan akkor van egyetlen megoldása, ha <img src="https://render.githubusercontent.com/render/math?math=A" /> nem szinguláris (azaz <img src="https://render.githubusercontent.com/render/math?math=detA%20%5Cne%200" />). Ekkor a megoldás <img src="https://render.githubusercontent.com/render/math?math=x%20%3D%20A%5E%7B-1%7D%20b" />. A megoldás <img src="https://render.githubusercontent.com/render/math?math=i" />. komponensét megadja a Cramer szabály is:
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ax_i%20%3D%20%5Cfrac%7Bdet%20A%5E%7B(i)%7D%7D%7BdetA%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ax_i%20%3D%20%5Cfrac%7Bdet%20A%5E%7B(i)%7D%7D%7BdetA%7D%0A" />
 
 > <img src="https://render.githubusercontent.com/render/math?math=A%5E%7B(i)%7D" /> mátrixot úgy kapjuk, hogy az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix <img src="https://render.githubusercontent.com/render/math?math=i" />. oszlopát kicseréljük a <img src="https://render.githubusercontent.com/render/math?math=b" /> vektorral.
 
@@ -2216,11 +2216,11 @@ Megengedett transzformációk:
 
 Ilyen átalakításokkal próbálunk háromszögmátrixot vagy diagonális mátrixot létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Bbmatrix%7D%0Au_%7B11%7D%20%26%20u_%7B12%7D%20%26%20u_%7B13%7D%20%5C%5C%0A0%20%26%20u_%7B22%7D%20%26%20u_%7B23%7D%20%5C%5C%0A0%20%26%200%20%26%20u_%7B33%7D%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ax_1%20%5C%5C%0Ax_2%20%5C%5C%0Ax_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ab_1%20%5C%5C%0Ab_2%20%5C%5C%0Ab_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Bbmatrix%7D%0Au_%7B11%7D%20%26%20u_%7B12%7D%20%26%20u_%7B13%7D%20%5C%5C%0A0%20%26%20u_%7B22%7D%20%26%20u_%7B23%7D%20%5C%5C%0A0%20%26%200%20%26%20u_%7B33%7D%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ax_1%20%5C%5C%0Ax_2%20%5C%5C%0Ax_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ab_1%20%5C%5C%0Ab_2%20%5C%5C%0Ab_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
 Ilyen az esetben a megoldás könnyen kifejezhető:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Balign%7D%0Ax_3%20%26%20%3D%20%5Cfrac%7Bb_3%7D%7Bu_%7B33%7D%7D%20%5C%5C%0A%5C%5C%0Ax_2%20%26%20%3D%20%5Cfrac%7Bb_2%20-%20u_%7B23%7Dx_3%7D%7Bu_%7B22%7D%7D%20%5C%5C%0A%5C%5C%0Ax_1%20%26%20%3D%20%5Cfrac%7Bb_1%20-%20u_%7B12%7Dx_2%20-%20u_%7B13%7Dx_3%7D%7Bu_%7B11%7D%7D%0A%5Cend%7Balign%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0Ax_3%20%26%20%3D%20%5Cfrac%7Bb_3%7D%7Bu_%7B33%7D%7D%20%5C%5C%0A%5C%5C%0Ax_2%20%26%20%3D%20%5Cfrac%7Bb_2%20-%20u_%7B23%7Dx_3%7D%7Bu_%7B22%7D%7D%20%5C%5C%0A%5C%5C%0Ax_1%20%26%20%3D%20%5Cfrac%7Bb_1%20-%20u_%7B12%7Dx_2%20-%20u_%7B13%7Dx_3%7D%7Bu_%7B11%7D%7D%0A%5Cend%7Balign%7D%0A" />
 
 ###### Matlab program
 
@@ -2245,13 +2245,13 @@ x(1) = b(1) / U(1, 1);
 
 ###### Példa
 
-<img src="https://latex.codecogs.com/gif.latex?%0Aj%20%3D%203%3B%20G_j%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%202%20%5C%5C%0A0%20%26%201%20%26%203%20%5C%5C%0A0%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A" />
+<img src="https://latex.codecogs.com/svg?%0Aj%20%3D%203%3B%20G_j%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%202%20%5C%5C%0A0%20%26%201%20%26%203%20%5C%5C%0A0%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A" />
 
 <img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> a mátrix 3. oszlopában látszódik is, csak ott tér el egy egységmátrixtól.
 
 <img src="https://render.githubusercontent.com/render/math?math=G_j" /> komponensei:
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ag%5E%7B(j)%7D%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A2%20%5C%5C%0A3%20%5C%5C%0A0%20%5C%5C%0A%5Cend%7Bbmatrix%7D%20%3B%0Ae_j%5ET%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A~%200%20~%200%20~%201%20~%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ag%5E%7B(j)%7D%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A2%20%5C%5C%0A3%20%5C%5C%0A0%20%5C%5C%0A%5Cend%7Bbmatrix%7D%20%3B%0Ae_j%5ET%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A~%200%20~%200%20~%201%20~%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
 <img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> miatt a <img src="https://render.githubusercontent.com/render/math?math=g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://render.githubusercontent.com/render/math?math=e_j%5ET" /> harmadik koordinátája is nulla.
 
@@ -2261,17 +2261,17 @@ Egy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20
 
 Például a következő mátrixok esetén:
 
-<img src="https://latex.codecogs.com/gif.latex?%0AA%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%202%20%26%204%20%5C%5C%0A6%20%26%208%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0AG_j%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%202%20%5C%5C%0A0%20%26%201%20%26%203%20%5C%5C%0A0%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A" />
+<img src="https://latex.codecogs.com/svg?%0AA%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%202%20%26%204%20%5C%5C%0A6%20%26%208%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0AG_j%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%202%20%5C%5C%0A0%20%26%201%20%26%203%20%5C%5C%0A0%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A" />
 
 Az eredmény:
 
-<img src="https://latex.codecogs.com/gif.latex?%0AG_jA%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A19%20%26%204%20%26%204%20%5C%5C%0A33%20%26%2011%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0AG_jA%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A19%20%26%204%20%26%204%20%5C%5C%0A33%20%26%2011%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
 Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix első sorához valóban kétszer a másodikhoz háromszor a harmadikhoz pedig nullaszor lett hozzáadva az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix harmadik sora.
 
 Könnyen megadható olyan eliminációs mátrix, amivel egyadott oszlop (vagy egy önálló vektor) **egy adott koordináta alatti elemei kinullázhatóak**, például a fentebbi <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixhoz (<img src="https://render.githubusercontent.com/render/math?math=a_%7B11%7D-et" /> módosítottam <img src="https://render.githubusercontent.com/render/math?math=2" />-re, hogy szemléletesebb legyen a példa):
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%200%20%5C%5C%0A-3%20%26%201%20%26%200%20%5C%5C%0A-%5Cfrac%7B9%7D%7B2%7D%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A6%20%26%208%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A0%20%26%202%20%26%20-10%20%5C%5C%0A0%20%26%20-8%20%26%20-18%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%200%20%5C%5C%0A-3%20%26%201%20%26%200%20%5C%5C%0A-%5Cfrac%7B9%7D%7B2%7D%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A6%20%26%208%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A0%20%26%202%20%26%20-10%20%5C%5C%0A0%20%26%20-8%20%26%20-18%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
 Az első oszlopban ténylegesen kinullázódott két sor, már csak a második oszlopban kellene az utolsó sort kinullázni, és egy könnyen megoldható egyenletrendszer együtthatómátrixát kapnánk.
 
@@ -2363,7 +2363,7 @@ Az ortogonális transzformációk megtartják a kettes normát, így numerikusan
 
 Lineáris egyenletrendszer megoldása az <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20QR" /> felbontással:
 
-<img src="https://latex.codecogs.com/gif.latex?%0ARx%20%3D%20Q%5ETb%0A" />
+<img src="https://latex.codecogs.com/svg?%0ARx%20%3D%20Q%5ETb%0A" />
 
 Matlabban
 
@@ -2394,11 +2394,11 @@ A módszer:
 
 ###### Példa
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Balign%7D%0A-2x_1%20%2B%20x_2%20%2B%205x_3%20%20%26%20%3D%204%20%5C%5C%0A%5C%5C%0A4x_1%20-%20x_2%20%2B%20x_3%20%26%20%3D%204%20%5C%5C%0A%5C%5C%0A2x_1%20-%204x_2%20%2B%20x_3%20%26%20%3D%20-1%0A%5Cend%7Balign%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0A-2x_1%20%2B%20x_2%20%2B%205x_3%20%20%26%20%3D%204%20%5C%5C%0A%5C%5C%0A4x_1%20-%20x_2%20%2B%20x_3%20%26%20%3D%204%20%5C%5C%0A%5C%5C%0A2x_1%20-%204x_2%20%2B%20x_3%20%26%20%3D%20-1%0A%5Cend%7Balign%7D%0A" />
 
 Ehhez tartozó **iterációs egyenletek**:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Balign%7D%0Ax_1%20%26%20%3D%20%5Cfrac%7B-4%20%2B%20x_2%20%2B%205x_3%7D%7B2%7D%20%5C%5C%0A%5C%5C%0Ax_2%20%26%20%3D%20-4%20%2B%204x_1%20%2B%20x_3%20%5C%5C%0A%5C%5C%0Ax_3%20%26%20%3D%20-1%20-%202x_1%20%2B%204x_2%0A%5Cend%7Balign%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0Ax_1%20%26%20%3D%20%5Cfrac%7B-4%20%2B%20x_2%20%2B%205x_3%7D%7B2%7D%20%5C%5C%0A%5C%5C%0Ax_2%20%26%20%3D%20-4%20%2B%204x_1%20%2B%20x_3%20%5C%5C%0A%5C%5C%0Ax_3%20%26%20%3D%20-1%20-%202x_1%20%2B%204x_2%0A%5Cend%7Balign%7D%0A" />
 
 > Ez éppenséggel az <img src="https://render.githubusercontent.com/render/math?math=x_1%20%3D%20(1%2C%202%2C%203)%5ET" /> kezdővektorral divergál a megoldástól.
 
@@ -2470,7 +2470,7 @@ Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=A" 
 
 A mátrix összes sajátértéke benne van a 
 
-<img src="https://latex.codecogs.com/gif.latex?%0AK_i%20%3D%20%5Cleft%5C%7B%20z%20%5Cin%20C%20~%20%5CBigg%7C%20~%20%7Cz%20-%20a_%7Bii%7D%7C%20%5Cle%20%5Csum_%7Bk%3D1%2C%20k%20%5Cne%20i%7D%5En%20%7Ca_%7Bik%7D%7C%20%5Cright%5C%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0AK_i%20%3D%20%5Cleft%5C%7B%20z%20%5Cin%20C%20~%20%5CBigg%7C%20~%20%7Cz%20-%20a_%7Bii%7D%7C%20%5Cle%20%5Csum_%7Bk%3D1%2C%20k%20%5Cne%20i%7D%5En%20%7Ca_%7Bik%7D%7C%20%5Cright%5C%7D%0A" />
 
 
 
@@ -2482,7 +2482,7 @@ A legnagyobb abszolútértékű sajátérték meghatározására szolgál.
 
 Az algoritmus iterációs képlete:
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ay%5Ek%20%3D%20Ax%5Ek%2C%20x%5E%7Bk%2B1%7D%20%3D%20%5Cfrac%7By%5Ek%7D%7B%7C%7Cy%5Ek%7C%7C%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ay%5Ek%20%3D%20Ax%5Ek%2C%20x%5E%7Bk%2B1%7D%20%3D%20%5Cfrac%7By%5Ek%7D%7B%7C%7Cy%5Ek%7C%7C%7D%0A" />
 
 Kiindulási vektor:
 
@@ -2521,7 +2521,7 @@ Tegyük fel, hogy az <img src="https://render.githubusercontent.com/render/math?
 
 Válasszunk ki ebből egy <img src="https://render.githubusercontent.com/render/math?math=x_0" /> kezdőértéket, majd képezzük az
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)%7D%7Bf'(x_k)%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)%7D%7Bf'(x_k)%7D%0A" />
 
 iterációs sorozatot.
 
@@ -2533,7 +2533,7 @@ Az aktuális <img src="https://render.githubusercontent.com/render/math?math=x_k
 
 Ha az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény kétszer folytonosan differenciálható az <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> zérushely egy környezetében, akkor van olyan pont, ahonnan indulva a Newton-módszer kvadratikusan konvergens sorozatot ad meg:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%7Cx%5E*%20-%20x_%7Bk%2B1%7D%20%7C%20%5Cle%20C%20%7Cx%5E*%20-%20x_k%20%7C%5E2%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%7Cx%5E*%20-%20x_%7Bk%2B1%7D%20%7C%20%5Cle%20C%20%7Cx%5E*%20-%20x_k%20%7C%5E2%0A" />
 
 valamely pozitív <img src="https://render.githubusercontent.com/render/math?math=C" /> konstanssal.
 
@@ -2541,11 +2541,11 @@ valamely pozitív <img src="https://render.githubusercontent.com/render/math?mat
 
 Legyen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%200" /> egyenlet egyszeres gyöke. Válasszunk alkalmas <img src="https://render.githubusercontent.com/render/math?math=x_0" /> és <img src="https://render.githubusercontent.com/render/math?math=x_1" /> kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)(x_k%20-%20x_%7Bk-1%7D)%7D%7Bf(x_k)%20-%20f(k_%7Bk-1%7D)%7D%20%3D%20%5Cfrac%7B%20f(x_k)%20x_%7Bk-1%7D%20-%20f(x_%7Bk-1%7D)%20x_k%20%7D%7B%20f(x_k)%20-%20f(x_%7Bk%20-%201%7D)%20%7D%20~%20~%20~%20~%20k%20%3D%201%2C%202%2C%20...%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)(x_k%20-%20x_%7Bk-1%7D)%7D%7Bf(x_k)%20-%20f(k_%7Bk-1%7D)%7D%20%3D%20%5Cfrac%7B%20f(x_k)%20x_%7Bk-1%7D%20-%20f(x_%7Bk-1%7D)%20x_k%20%7D%7B%20f(x_k)%20-%20f(x_%7Bk%20-%201%7D)%20%7D%20~%20~%20~%20~%20k%20%3D%201%2C%202%2C%20...%0A" />
 
 Valójában annyiban tér el a Newton-módszertől, hogy <img src="https://render.githubusercontent.com/render/math?math=f'(x_k)" /> helyett annak közelítéseként a **numerikus derivált**,
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cfrac%0A%7B%20f(x_k)%20-%20f(x_%7Bk-1%7D)%20%7D%0A%7B%20x_k%20-%20k_%7Bk-1%7D%20%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cfrac%0A%7B%20f(x_k)%20-%20f(x_%7Bk-1%7D)%20%7D%0A%7B%20x_k%20-%20k_%7Bk-1%7D%20%7D%0A" />
 
 szerepel.
 
@@ -2581,7 +2581,7 @@ Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de 
 
 Legyen <img src="https://render.githubusercontent.com/render/math?math=A" /> egy szimmetrikus, pozitív definit mátrix, akkor a 
 
-<img src="https://latex.codecogs.com/gif.latex?%0Aq(x)%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20x%5ET%20A%20x%20-%20x%5ET%20b%0A" />
+<img src="https://latex.codecogs.com/svg?%0Aq(x)%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20x%5ET%20A%20x%20-%20x%5ET%20b%0A" />
 
 kvadratikus függvénynek egyetlen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> minimumpontja van, és erre <img src="https://render.githubusercontent.com/render/math?math=Ax%5E*%20%3D%20b" /> teljesül.
 
@@ -2642,11 +2642,11 @@ end
 
 **Interpoláció másik jelentése**: A közelítő függvény segítségével az eredeti <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény értékét egy olyan <img src="https://render.githubusercontent.com/render/math?math=%5Chat%7Bx%7D" /> pontban becsüljük az interpoláló <img src="https://render.githubusercontent.com/render/math?math=p(x)" /> polinom <img src="https://render.githubusercontent.com/render/math?math=p(%5Chat%7Bx%7D)" /> helyettesítési értékével, amelyre:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Chat%7Bx%7D%20%5Cin%20%5B%20~%20min(x_1%2C%20x_2%2C%20...%2C%20x_m)%2C%20max(x_1%2C%20x_2%2C%20...%2C%20x_m)%20~%20%5D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Chat%7Bx%7D%20%5Cin%20%5B%20~%20min(x_1%2C%20x_2%2C%20...%2C%20x_m)%2C%20max(x_1%2C%20x_2%2C%20...%2C%20x_m)%20~%20%5D%0A" />
 
 Ezzel szemben ha
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Chat%7Bx%7D%20%5Cnotin%20%5B%20~%20min(x_1%2C%20x_2%2C%20...%2C%20x_m)%2C%20max(x_1%2C%20x_2%2C%20...%2C%20x_m)%20~%20%5D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Chat%7Bx%7D%20%5Cnotin%20%5B%20~%20min(x_1%2C%20x_2%2C%20...%2C%20x_m)%2C%20max(x_1%2C%20x_2%2C%20...%2C%20x_m)%20~%20%5D%0A" />
 
 teljesül, akkor **extrapolációról** van szó.
 
@@ -2668,11 +2668,11 @@ Amennyiben egy olyan polinomot illesztünk, amelynek fokszáma kisebb, mint <img
 
 A Lagrange interpoláció az interpoláló polinomokat
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ap_n(x)%20%3D%20%5Csum_%7Bi%3D0%7D%5En%20f(x_i)L_i(x)%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ap_n(x)%20%3D%20%5Csum_%7Bi%3D0%7D%5En%20f(x_i)L_i(x)%0A" />
 
 alakban adja meg, ahol
 
-<img src="https://latex.codecogs.com/gif.latex?%0AL_i(x)%20%3D%20%5Cprod_%7Bj%3D0%2C%20j%5Cne%20i%7D%5En%20%5Cfrac%7Bx-x_j%7D%7Bx_i-x_j%7D%20%3D%20%0A%5Cfrac%0A%7B(x%20-%20x_0)(x%20-%20x_1)%20...%20(x%20-%20x_%7Bi-1%7D)(x%20-%20x_%7Bi%2B1%7D)%20...%20(x%20-%20x_n)%7D%0A%7B(x_i%20-%20x_0)(x_i%20-%20x_1)%20...%20(x_i%20-%20x_%7Bi-1%7D)(x_i%20-%20x_%7Bi%2B1%7D)%20...%20(x_i%20-%20x_n)%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0AL_i(x)%20%3D%20%5Cprod_%7Bj%3D0%2C%20j%5Cne%20i%7D%5En%20%5Cfrac%7Bx-x_j%7D%7Bx_i-x_j%7D%20%3D%20%0A%5Cfrac%0A%7B(x%20-%20x_0)(x%20-%20x_1)%20...%20(x%20-%20x_%7Bi-1%7D)(x%20-%20x_%7Bi%2B1%7D)%20...%20(x%20-%20x_n)%7D%0A%7B(x_i%20-%20x_0)(x_i%20-%20x_1)%20...%20(x_i%20-%20x_%7Bi-1%7D)(x_i%20-%20x_%7Bi%2B1%7D)%20...%20(x_i%20-%20x_n)%7D%0A" />
 
 Legyenek adottak az <img src="https://render.githubusercontent.com/render/math?math=x_0%2C%20...%2C%20x_n" /> páronként különböző alappontok. Ekkor az <img src="https://render.githubusercontent.com/render/math?math=f(x_i)%2C%20i%20%3D%200%2C%201%2C%20...%2C%20n" /> függvényértékekhez egyértelműen létezik olyan legfeljebb <img src="https://render.githubusercontent.com/render/math?math=n" />-edfokú interpoláló polinom, amely megegyezik a Lagrange interpolációs polinommal.
 
@@ -2704,7 +2704,7 @@ C = Y * L;
 
 A kvadratúra a numerikus integrálás szinonimája, amikor a
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%3D%20F(b)%20-%20F(a)%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%3D%20F(b)%20-%20F(a)%0A" />
 
 határozott integrál közelítése a feladat. Itt <img src="https://render.githubusercontent.com/render/math?math=F(x)" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> integrálandó függvény primitív függvénye. Ez utóbbi nem minden esetben áll rendelkezésre, sőt sokszor nem is elemi függvény, nem adható meg zárt alakban.
 
@@ -2712,7 +2712,7 @@ határozott integrál közelítése a feladat. Itt <img src="https://render.gith
 
 A határozott integrálokat szokás
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cint_a%5Eb%20%3D%20f(x)%20~%20dx%20%5Capprox%20Q_n(f)%20%3D%20%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20f(x_i)%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20%3D%20f(x)%20~%20dx%20%5Capprox%20Q_n(f)%20%3D%20%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20f(x_i)%0A" />
 
 alakban közelíteni, ahol <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)" />-et **kvadratúra-formulának** nevezzük.
 
@@ -2722,7 +2722,7 @@ A <img src="https://render.githubusercontent.com/render/math?math=w_i" /> számo
 
 ##### Integrál, és kvadratúra-formula tulajdonságai
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cint_a%5Eb%20f(x)%20%2B%20g(x)%20~%20dx%20%20%3D%20%5Cint_a%5Eb%20f(x)%20~%20dx%20%2B%20%5Cint_a%5Eb%20g(x)%20~%20dx%0A%0A%5C%5C%0A%0AQ_n%20(f%20%2B%20g)%20%3D%20%0A%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20(f(x_i)%20%2B%20g(x_i))%20%20%3D%20%0A%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20f(x_i)%20%2B%20%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20g(x_i)%20%3D%20%0AQ_n(f)%20%2B%20Q_n(g)%0A%0A%5C%5C%0A%0A%5Cint_a%5Eb%20%5Calpha%20f(x)%20~%20dx%20%20%3D%20%5Calpha%20%5Cint_a%5Eb%20f(x)%20~%20dx%0A%0A%5C%5C%0A%0A%0AQ_n(%5Calpha%20f)%20%3D%20%0A%5Csum_%7Bi%3D1%7D%5En%20w_i%20%5Calpha%20f(x_i)%20%3D%20%0A%5Calpha%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)%20%3D%20%0A%5Calpha%20Q_n(f)%0A%0A%5C%5C%0A%0A%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%3D%20%0A%5Cint_a%5E%7Bz_1%7D%20f(x)%20~%20dx%20%2B%20...%20%2B%20%5Cint_%7Bz_%7Bm-1%7D%7D%5E%7Bz_m%7D%20f(x)%20~%20dx%20%2B%20%5Cint_%7Bz_m%7D%5Eb%20f(x)%20~%20dx%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20f(x)%20%2B%20g(x)%20~%20dx%20%20%3D%20%5Cint_a%5Eb%20f(x)%20~%20dx%20%2B%20%5Cint_a%5Eb%20g(x)%20~%20dx%0A%0A%5C%5C%0A%0AQ_n%20(f%20%2B%20g)%20%3D%20%0A%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20(f(x_i)%20%2B%20g(x_i))%20%20%3D%20%0A%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20f(x_i)%20%2B%20%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20g(x_i)%20%3D%20%0AQ_n(f)%20%2B%20Q_n(g)%0A%0A%5C%5C%0A%0A%5Cint_a%5Eb%20%5Calpha%20f(x)%20~%20dx%20%20%3D%20%5Calpha%20%5Cint_a%5Eb%20f(x)%20~%20dx%0A%0A%5C%5C%0A%0A%0AQ_n(%5Calpha%20f)%20%3D%20%0A%5Csum_%7Bi%3D1%7D%5En%20w_i%20%5Calpha%20f(x_i)%20%3D%20%0A%5Calpha%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)%20%3D%20%0A%5Calpha%20Q_n(f)%0A%0A%5C%5C%0A%0A%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%3D%20%0A%5Cint_a%5E%7Bz_1%7D%20f(x)%20~%20dx%20%2B%20...%20%2B%20%5Cint_%7Bz_%7Bm-1%7D%7D%5E%7Bz_m%7D%20f(x)%20~%20dx%20%2B%20%5Cint_%7Bz_m%7D%5Eb%20f(x)%20~%20dx%0A" />
 
 ##### Kvadratúra-formula képlethibája
 
@@ -2738,7 +2738,7 @@ A <img src="https://render.githubusercontent.com/render/math?math=Q_n" />, <img 
 
 Azt mondjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)" /> egy interpolációs kvadratúra-formula, ha az előáll az alappontokra felírt Lagrange polinom integrálásával:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%5Capprox%20%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%20%3D%201%7D%5En%20f(x_i)%20L_i(x)%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D1%7D%5En%20f(x_i)%20%5Cint_a%5Eb%20L_i(x)%20~%20dx%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%5Capprox%20%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%20%3D%201%7D%5En%20f(x_i)%20L_i(x)%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D1%7D%5En%20f(x_i)%20%5Cint_a%5Eb%20L_i(x)%20~%20dx%0A" />
 
 ahonnan <img src="https://render.githubusercontent.com/render/math?math=w_i%20%3D%20%5Cint_a%5Eb%20L_i(x)%20~%20dx" />.
 
@@ -2758,17 +2758,17 @@ Az interpolációs alappontok: <img src="https://render.githubusercontent.com/re
 
 Az adott <img src="https://render.githubusercontent.com/render/math?math=x_k" /> alappontokhoz és <img src="https://render.githubusercontent.com/render/math?math=f_k%20%3D%20f(x_k)" /> függvény értékekhez tartozó <img src="https://render.githubusercontent.com/render/math?math=%5CDelta%5Ei%20f_k" /> *i-edrendű véges differenciákat* a következő kettős rekurzióval definiáljuk:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbegin%7Balign%7D%0A%5CDelta%5E0%20f_k%20%26%20%3D%20f_k%20%5C%5C%0A%5CDelta%5Ei%20f_k%20%26%20%3D%20%5CDelta%5E%7Bi%20-%201%7D%20f_%7Bk%20%2B%201%7D%20-%20%5CDelta%5E%7Bi%20-%201%7D%20f_k%0A%5Cend%7Balign%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0A%5CDelta%5E0%20f_k%20%26%20%3D%20f_k%20%5C%5C%0A%5CDelta%5Ei%20f_k%20%26%20%3D%20%5CDelta%5E%7Bi%20-%201%7D%20f_%7Bk%20%2B%201%7D%20-%20%5CDelta%5E%7Bi%20-%201%7D%20f_k%0A%5Cend%7Balign%7D%0A" />
 
 Természetes számokra értelmezett binomiális együtthatók általánostásaként vezessük be a:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cbinom%7Bt%7D%7Bj%7D%20%3D%20%5Cfrac%7Bt(t%20-%201)%20...%20(t-j%20%2B%201)%7D%7Bj!%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cbinom%7Bt%7D%7Bj%7D%20%3D%20%5Cfrac%7Bt(t%20-%201)%20...%20(t-j%20%2B%201)%7D%7Bj!%7D%0A" />
 
 jelölést a <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> transzformációhoz.
 
 A véges differenciákkal felírt Lagrange interpolációs polinom:
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ap_%7Bn-1%7D(x_0%20%2B%20th)%20%3D%20f_0%20%2B%20%5Cbinom%7Bt%7D%7B1%7D%20%5CDelta%20f_0%20%2B%20%5Cbinom%7Bt%7D%7B2%7D%20%5CDelta%5E2%20f_0%20%2B%20...%20%2B%20%5Cbinom%7Bt%7D%7Bn%20-%201%7D%20%5CDelta%5E%7Bn-1%7D%20f_0%20%3D%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%20-%201%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20%5CDelta%5Ei%20f_0%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ap_%7Bn-1%7D(x_0%20%2B%20th)%20%3D%20f_0%20%2B%20%5Cbinom%7Bt%7D%7B1%7D%20%5CDelta%20f_0%20%2B%20%5Cbinom%7Bt%7D%7B2%7D%20%5CDelta%5E2%20f_0%20%2B%20...%20%2B%20%5Cbinom%7Bt%7D%7Bn%20-%201%7D%20%5CDelta%5E%7Bn-1%7D%20f_0%20%3D%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%20-%201%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20%5CDelta%5Ei%20f_0%0A" />
 
 ##### Newton-Cotes formulák
 
@@ -2782,17 +2782,17 @@ Ha az integrál határai szerepelnek az alappontok közt, akkor *zárt-,* ha a h
 
 ###### Zárt formulákra összefüggések
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ah%20%3D%20%5Cfrac%7Bb%20-%20a%7D%7Bn%20-%201%7D%2C%20a%20%3D%20x_0%2C%20b%20%3D%20x_%7Bn-1%7D%2C%20x_i%20%3D%20x_0%20%2B%20ih%20~%20~%20~%20~%200%20%5Cle%20i%20%5Cle%20n%20-%201%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ah%20%3D%20%5Cfrac%7Bb%20-%20a%7D%7Bn%20-%201%7D%2C%20a%20%3D%20x_0%2C%20b%20%3D%20x_%7Bn-1%7D%2C%20x_i%20%3D%20x_0%20%2B%20ih%20~%20~%20~%20~%200%20%5Cle%20i%20%5Cle%20n%20-%201%0A" />
 
 ###### Nyitott formulákra összefüggések
 
-<img src="https://latex.codecogs.com/gif.latex?%0Ah%20%3D%20%5Cfrac%7Bb%20-%20a%7D%7Bn%20%2B%201%7D%2C%20a%20%3D%20x_0%20-%20h%2C%20b%20%3D%20x_%7Bn-1%7D%20%2B%20h%2C%20x_i%20%3D%20x_0%20%2B%20ih%20~%20~%20~%20~%200%20%5Cle%20i%20%5Cle%20n%20-%201%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ah%20%3D%20%5Cfrac%7Bb%20-%20a%7D%7Bn%20%2B%201%7D%2C%20a%20%3D%20x_0%20-%20h%2C%20b%20%3D%20x_%7Bn-1%7D%20%2B%20h%2C%20x_i%20%3D%20x_0%20%2B%20ih%20~%20~%20~%20~%200%20%5Cle%20i%20%5Cle%20n%20-%201%0A" />
 
 ###### <img src="https://render.githubusercontent.com/render/math?math=n" />-edik Newton-Cotes formula
 
 <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> új változó mellett az <img src="https://render.githubusercontent.com/render/math?math=n" />-edig Newton-Cotes formula:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x_0%20%2B%20th)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%3D0%7D%5E%7Bn-1%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20%5CDelta%5Ei%20f_0%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x_0%20%2B%20th)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%3D0%7D%5E%7Bn-1%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20%5CDelta%5Ei%20f_0%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%0A" />
 
 > A <img src="https://render.githubusercontent.com/render/math?math=t" /> lényegében az adott változó eltolását fejezi ki az <img src="https://render.githubusercontent.com/render/math?math=x_0" />-tól.
 
@@ -2800,11 +2800,11 @@ Ha az integrál határai szerepelnek az alappontok közt, akkor *zárt-,* ha a h
 
 Ha a formula zárt:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%20%3D%20%0Ah%20%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_0%5E%7Bn%20-%201%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dt%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%20%3D%20%0Ah%20%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_0%5E%7Bn%20-%201%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dt%0A" />
 
 Ha a formula nyitott:
 
-<img src="https://latex.codecogs.com/gif.latex?%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%20%3D%20%0Ah%20%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_%7B-1%7D%5E%7Bn%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dt%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%20%3D%20%0Ah%20%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_%7B-1%7D%5E%7Bn%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dt%0A" />
 
 ###### Első négy zárt Newton-Cotes formula
 
