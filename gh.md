@@ -1,6 +1,6 @@
 ---
 script:
-  - content: "MathJax = { tex: { inlineMath: [ ['<img src="https://render.githubusercontent.com/render/math?math='%2C%20'" />'] ] } };"
+  - content: "MathJax = { tex: { inlineMath: [ ['<img src="https://latex.codecogs.com/svg?'%2C%20'" />'] ] } };"
   - url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
 ---
 
@@ -54,23 +54,23 @@ De ha létezik, akkor nagyon hatékony!
 
 ##### Példa: _Töredékes hátizsák feladat_
 
-**Bemenet**: A hátizsák <img src="https://render.githubusercontent.com/render/math?math=S" /> kapacitása, <img src="https://render.githubusercontent.com/render/math?math=n" /> tárgy, <img src="https://render.githubusercontent.com/render/math?math=S_i" /> tárgy súlyok, <img src="https://render.githubusercontent.com/render/math?math=E_i" /> tárgy értékek
+**Bemenet**: A hátizsák <img src="https://latex.codecogs.com/svg?S" /> kapacitása, <img src="https://latex.codecogs.com/svg?n" /> tárgy, <img src="https://latex.codecogs.com/svg?S_i" /> tárgy súlyok, <img src="https://latex.codecogs.com/svg?E_i" /> tárgy értékek
 
-**Kimenet**: Mi a legnagyobb érték, ami <img src="https://render.githubusercontent.com/render/math?math=S" /> kapacitásba belefér?
+**Kimenet**: Mi a legnagyobb érték, ami <img src="https://latex.codecogs.com/svg?S" /> kapacitásba belefér?
 
 Minden tárgyból 1db van, de az darabolható.
 
 **Algoritmus**:
 
-- Számoljuk ki minden tárgyra az <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányt
+- Számoljuk ki minden tárgyra az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányt
 
-- Tegyünk bele a legnagyobb <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7BE_i%7D%7BS_i%7D" />-vel rendelkező, még rendelkezésre álló tárgyból annyit a zsákba, amennyi belefér
+- Tegyünk bele a legnagyobb <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" />-vel rendelkező, még rendelkezésre álló tárgyból annyit a zsákba, amennyi belefér
 
 <img title="" src="../img/toredekes_hatizsak.png" alt=" " data-align="center" width="395">
 
 Futás a fenti példán:
 
-- Kiszámoljuk az <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7BE_i%7D%7BS_i%7D" /> értékeket
+- Kiszámoljuk az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> értékeket
   
   1. Tárgy: 6
   
@@ -78,13 +78,13 @@ Futás a fenti példán:
   
   3. Tárgy: 4
 
-- Végighaladunk a tárgyakon az <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányok szerint
+- Végighaladunk a tárgyakon az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányok szerint
   
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
   
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
   
-  - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7B2%7D%7B3%7D" />-át.
+  - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy <img src="https://latex.codecogs.com/svg?%5Cfrac%7B2%7D%7B3%7D" />-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
 
@@ -108,7 +108,7 @@ A feladatot több **részfeladatra** bontjuk, ezek hasonlóak az eredeti feladat
 
 ##### Példa: _Összefésülő rendezés_
 
-1. **Felosztás**: Az <img src="https://render.githubusercontent.com/render/math?math=n" /> elemű rendezendő sorozatot felosztja két <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7Bn%7D%7B2%7D" /> elemű részsorozatra.
+1. **Felosztás**: Az <img src="https://latex.codecogs.com/svg?n" /> elemű rendezendő sorozatot felosztja két <img src="https://latex.codecogs.com/svg?%5Cfrac%7Bn%7D%7B2%7D" /> elemű részsorozatra.
 
 2. **Uralkodás**: A két részsorozatra rekurzívan tovább hívjuk az összefésülő rendezés eljárást. Az elemi eset az egy elemű részsorozat, hiszen az már rendezett, ilyenkor csak visszatérünk vele.
 
@@ -138,7 +138,7 @@ A feladatot több **részfeladatra** bontjuk, ezek hasonlóak az eredeti feladat
 
 Vizsgáljuk meg a középső elemet. Ha csúcs, térjünk vissza vele, ha nem csúcs, akkor az egyik szomszédja nagyobb, vizsgáljuk tovább a bemenet felét ezen szomszéd irányába. Azért megyünk ebbe az irányba, mert erre biztosan van csúcs. Ezt onnan tudjuk, hogy maga ez a nagyobbik szomszéd is egy potenciális csúcs. Ha mindkét szomszédja nagyobb, akkor mindegy melyik irányba haladunk tovább, egyszerűen azzal, amiről előbb megtudtuk, hogy nagyobb.
 
-1. **Felosztás**: <img src="https://render.githubusercontent.com/render/math?math=n" /> elemű sorozatot felosztjuk két <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7Bn%20-%201%7D%7B2%7D" /> elemű részsorozatra
+1. **Felosztás**: <img src="https://latex.codecogs.com/svg?n" /> elemű sorozatot felosztjuk két <img src="https://latex.codecogs.com/svg?%5Cfrac%7Bn%20-%201%7D%7B2%7D" /> elemű részsorozatra
 2. **Uralkodás**: A megfelelő részsorozatban rekurzívan tovább keresünk csúcsot
 3. **Összevonás**: Ha csúcsot találtunk, adjuk vissza
 
@@ -185,7 +185,7 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 
 ##### Példa: _Pénzváltás feladat_
 
-Adott <img src="https://render.githubusercontent.com/render/math?math=P_i" /> érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni <img src="https://render.githubusercontent.com/render/math?math=F" /> forint.
+Adott <img src="https://latex.codecogs.com/svg?P_i" /> érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni <img src="https://latex.codecogs.com/svg?F" /> forint.
 
 ```c
 // Input:
@@ -248,9 +248,9 @@ F  = 9;
 
 ##### Rendezés
 
-- **Input**: Egészek egy <img src="https://render.githubusercontent.com/render/math?math=n" /> hosszú tömbje (egy `<a1, a2, ..., an>` sorozat)
+- **Input**: Egészek egy <img src="https://latex.codecogs.com/svg?n" /> hosszú tömbje (egy `<a1, a2, ..., an>` sorozat)
 
-- **Output**: <img src="https://render.githubusercontent.com/render/math?math=n" /> hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
+- **Output**: <img src="https://latex.codecogs.com/svg?n" /> hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
 > 
@@ -284,7 +284,7 @@ Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeress�
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
 |:--------:|:---------------------------------:|
-| <img src="https://render.githubusercontent.com/render/math?math=O(n%5E2)" /> | <img src="https://render.githubusercontent.com/render/math?math=O(n)" /> ~ <img src="https://render.githubusercontent.com/render/math?math=O(1)" />                   |
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -309,7 +309,7 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 | Futásidő      | Tárigény ( össz ~ inputon kívül ) |
 |:-------------:|:---------------------------------:|
-| <img src="https://render.githubusercontent.com/render/math?math=O(n*log(n))" /> | <img src="https://render.githubusercontent.com/render/math?math=O(n)" /> ~ <img src="https://render.githubusercontent.com/render/math?math=O(1)" />                   |
+| <img src="https://latex.codecogs.com/svg?O(n*log(n))" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
 
 ##### Gyorsrendezés
 
@@ -351,15 +351,15 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 
 | Futásidő | Tárigény |
 | -------- |:--------:|
-| <img src="https://render.githubusercontent.com/render/math?math=O(n%5E2)" /> | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" />   |
 
-> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />, ami mivel egy hívás futásideje <img src="https://render.githubusercontent.com/render/math?math=O(n)" />, így az átlagos futásidő <img src="https://render.githubusercontent.com/render/math?math=O(n%20*%20logn)" />. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
+> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság <img src="https://latex.codecogs.com/svg?O(logn)" />, ami mivel egy hívás futásideje <img src="https://latex.codecogs.com/svg?O(n)" />, így az átlagos futásidő <img src="https://latex.codecogs.com/svg?O(n%20*%20logn)" />. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
-> Lehet úgy implementálni, hogy <img src="https://render.githubusercontent.com/render/math?math=O(logn)" /> tárigénye legyen, ez egy helyben rendező, farok-rekurzív ejlárás.
+> Lehet úgy implementálni, hogy <img src="https://latex.codecogs.com/svg?O(logn)" /> tárigénye legyen, ez egy helyben rendező, farok-rekurzív ejlárás.
 
 ##### Összehasonlító rendezések teljesítményének alsó korlátja
 
-Minden összehasonlító rendező algoritmus legrosszabb esetben <img src="https://render.githubusercontent.com/render/math?math=%5COmega(n%20*%20logn)" /> összehasonlítást végez.
+Minden összehasonlító rendező algoritmus legrosszabb esetben <img src="https://latex.codecogs.com/svg?%5COmega(n%20*%20logn)" /> összehasonlítást végez.
 
 > Ez alapján pl. az összefésülő, vagy a kupac rendezés **aszimptotikusan optimális**.
 
@@ -369,7 +369,7 @@ Ezt döntési fával lehet bebizonyítani, aminek belső csúcsai meghatároznak
 
 ##### Leszámoló rendezés
 
-Feltételezzük, hogy az összes bemeneti elem <img src="https://render.githubusercontent.com/render/math?math=0" /> és <img src="https://render.githubusercontent.com/render/math?math=k" /> közé esik.
+Feltételezzük, hogy az összes bemeneti elem <img src="https://latex.codecogs.com/svg?0" /> és <img src="https://latex.codecogs.com/svg?k" /> közé esik.
 
 Minden lehetséges bemeneti elemhez megszámoljuk, hányszor fordul elő az inputban.
 
@@ -403,9 +403,9 @@ const leszamoloRendezes = (A: number[], k: number) => {
 
 | Futásidő        | Tárigény     |
 |:---------------:|:------------:|
-| <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(k%20%2B%20n)" /> | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(2n)" /> |
+| <img src="https://latex.codecogs.com/svg?%5CTheta(k%20%2B%20n)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(2n)" /> |
 
-> A gyakorlatban akkor használjuk, ha <img src="https://render.githubusercontent.com/render/math?math=k%20%3D%20O(n)" />, mert ekkor a futásidő <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(n)" />
+> A gyakorlatban akkor használjuk, ha <img src="https://latex.codecogs.com/svg?k%20%3D%20O(n)" />, mert ekkor a futásidő <img src="https://latex.codecogs.com/svg?%5CTheta(n)" />
 
 #### Gráfalgoritmusok
 
@@ -423,7 +423,7 @@ Amilyen távol van a kiindulási csúcstól egy csúcs, az olyan mélységen hel
 
 Irányított, irányítatlan gráfog esetén is alkalmazható.
 
-A csúcsok távolsága alapján kalad a bejárás (a kijelölt kezdeti csúcstól), minden <img src="https://render.githubusercontent.com/render/math?math=k" /> távolságra levő csúcsot elérünk az előtt, hogy egy <img src="https://render.githubusercontent.com/render/math?math=k%20%2B%201" /> távolságra levőt elérnénk.
+A csúcsok távolsága alapján kalad a bejárás (a kijelölt kezdeti csúcstól), minden <img src="https://latex.codecogs.com/svg?k" /> távolságra levő csúcsot elérünk az előtt, hogy egy <img src="https://latex.codecogs.com/svg?k%20%2B%201" /> távolságra levőt elérnénk.
 
 Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 
@@ -463,15 +463,15 @@ szelessegiKereses(G, s) {
 
 ###### Futásidő
 
-- Minden csúcsot egyszer érintünk csak, ez <img src="https://render.githubusercontent.com/render/math?math=V" /> db csúcs.
+- Minden csúcsot egyszer érintünk csak, ez <img src="https://latex.codecogs.com/svg?V" /> db csúcs.
 
-- Sorba, és sorból <img src="https://render.githubusercontent.com/render/math?math=O(1)" />, így a sorműveletek összesen <img src="https://render.githubusercontent.com/render/math?math=O(V)." />
+- Sorba, és sorból <img src="https://latex.codecogs.com/svg?O(1)" />, így a sorműveletek összesen <img src="https://latex.codecogs.com/svg?O(V)." />
 
-- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza <img src="https://render.githubusercontent.com/render/math?math=%5Ctheta(E)" />, így összesen <img src="https://render.githubusercontent.com/render/math?math=O(E)" /> időt fordítunk a szomszédsági listák vizsgálására.
+- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza <img src="https://latex.codecogs.com/svg?%5Ctheta(E)" />, így összesen <img src="https://latex.codecogs.com/svg?O(E)" /> időt fordítunk a szomszédsági listák vizsgálására.
 
-- Az algoritmus elején a kezdeti értékadások ideje <img src="https://render.githubusercontent.com/render/math?math=O(V)" />.
+- Az algoritmus elején a kezdeti értékadások ideje <img src="https://latex.codecogs.com/svg?O(V)" />.
 
-- Összesített futásidő: <img src="https://render.githubusercontent.com/render/math?math=O(E%20%2B%20V)" />
+- Összesített futásidő: <img src="https://latex.codecogs.com/svg?O(E%20%2B%20V)" />
 
 ##### Mélységi keresés
 
@@ -515,9 +515,9 @@ melysegiBejaras(u) {
 
 ###### Futásidő
 
-A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(V)" />. A melysegiBejaras() hívások össz futásideje <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(E)" />, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő <img src="https://render.githubusercontent.com/render/math?math=O(E%20%2B%20V)" />
+A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve <img src="https://latex.codecogs.com/svg?%5CTheta(V)" />. A melysegiBejaras() hívások össz futásideje <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő <img src="https://latex.codecogs.com/svg?O(E%20%2B%20V)" />
 
-> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(E)" />. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a mélységiBejárás().
+> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a mélységiBejárás().
 
 ##### Minimális feszítőfák
 
@@ -558,11 +558,11 @@ kruskal(G, w) { // Az élsúlyokat megadó függvény
 
 ####### Futásidő
 
-Az élek rendezése <img src="https://render.githubusercontent.com/render/math?math=O(E%20*%20logE)" />.
+Az élek rendezése <img src="https://latex.codecogs.com/svg?O(E%20*%20logE)" />.
 
-A halmaz műveletek a kezdeti értékadásokkal együtt <img src="https://render.githubusercontent.com/render/math?math=O((V%20%2B%20E)%20*%20%5Calpha%20*%20(V)" />. Ahol az <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet jasátossága. Mivek összefüggő gráf esetén <img src="https://render.githubusercontent.com/render/math?math=O(%7CE%7C%20%5Cge%20%7CV%7C%20%2B%201)" />, így a diszjunkt-halmaz műveletek <img src="https://render.githubusercontent.com/render/math?math=O((E)%20*%20%5Calpha%20*%20(V))" /> idejűek. <img src="https://render.githubusercontent.com/render/math?math=%5Calpha(%7CV%7C)%20%3D%20O(log%20E)" /> miatt <img src="https://render.githubusercontent.com/render/math?math=O(E%20*%20log%20E)" />.
+A halmaz műveletek a kezdeti értékadásokkal együtt <img src="https://latex.codecogs.com/svg?O((V%20%2B%20E)%20*%20%5Calpha%20*%20(V)" />. Ahol az <img src="https://latex.codecogs.com/svg?%5Calpha" /> egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet jasátossága. Mivek összefüggő gráf esetén <img src="https://latex.codecogs.com/svg?O(%7CE%7C%20%5Cge%20%7CV%7C%20%2B%201)" />, így a diszjunkt-halmaz műveletek <img src="https://latex.codecogs.com/svg?O((E)%20*%20%5Calpha%20*%20(V))" /> idejűek. <img src="https://latex.codecogs.com/svg?%5Calpha(%7CV%7C)%20%3D%20O(log%20E)" /> miatt <img src="https://latex.codecogs.com/svg?O(E%20*%20log%20E)" />.
 
-Így a teljes futásidő <img src="https://render.githubusercontent.com/render/math?math=O(E%20*%20logE)" />.
+Így a teljes futásidő <img src="https://latex.codecogs.com/svg?O(E%20*%20logE)" />.
 
 ##### Prim algoritmus
 
@@ -596,15 +596,15 @@ prim(G, w, r) { // Az élsúlyokat megadó függvény
 
 Bináris minimum kupac megvalósítással:
 
-Kezdeti értékadások: <img src="https://render.githubusercontent.com/render/math?math=O(V)" />
+Kezdeti értékadások: <img src="https://latex.codecogs.com/svg?O(V)" />
 
-Egy db kiveszMin művelet: <img src="https://render.githubusercontent.com/render/math?math=O(logV)" />. Összesen: <img src="https://render.githubusercontent.com/render/math?math=O(V%20*%20log%20V)" />, mivel <img src="https://render.githubusercontent.com/render/math?math=V" />-szer fut le a ciklus.
+Egy db kiveszMin művelet: <img src="https://latex.codecogs.com/svg?O(logV)" />. Összesen: <img src="https://latex.codecogs.com/svg?O(V%20*%20log%20V)" />, mivel <img src="https://latex.codecogs.com/svg?V" />-szer fut le a ciklus.
 
-Belső for ciklus <img src="https://render.githubusercontent.com/render/math?math=O(E)" />-szer fut, mivel szomszédsági listák hosszainak összege: <img src="https://render.githubusercontent.com/render/math?math=O(2%7CE%7C)" />. (Ez megintcsak additív, nem kell a külső ciklussal felszorozni, mert a szomszédsági listák alapján tudjuk, hogy ennyiszer fog maximum összesen lefutni.) Ezen a cikulson belül a <img src="https://render.githubusercontent.com/render/math?math=Q" />-hoz tartozás vizsgálata konstans idejű, ha erre fenntartunk egy jelölő bitet. A kulcs-nak való értékadás valójában egy kulcsotCsökkent művelet, ami <img src="https://render.githubusercontent.com/render/math?math=O(logV)" /> idejű.
+Belső for ciklus <img src="https://latex.codecogs.com/svg?O(E)" />-szer fut, mivel szomszédsági listák hosszainak összege: <img src="https://latex.codecogs.com/svg?O(2%7CE%7C)" />. (Ez megintcsak additív, nem kell a külső ciklussal felszorozni, mert a szomszédsági listák alapján tudjuk, hogy ennyiszer fog maximum összesen lefutni.) Ezen a cikulson belül a <img src="https://latex.codecogs.com/svg?Q" />-hoz tartozás vizsgálata konstans idejű, ha erre fenntartunk egy jelölő bitet. A kulcs-nak való értékadás valójában egy kulcsotCsökkent művelet, ami <img src="https://latex.codecogs.com/svg?O(logV)" /> idejű.
 
-Agy tehát az összesített futásidő: <img src="https://render.githubusercontent.com/render/math?math=O(VlogV%20%2B%20ElogV)%20%3D%20O(E%20log%20V)" />.
+Agy tehát az összesített futásidő: <img src="https://latex.codecogs.com/svg?O(VlogV%20%2B%20ElogV)%20%3D%20O(E%20log%20V)" />.
 
-> Fibonacchi-kupaccal gyorsítható az algoritmus, ekkor a kiveszMin <img src="https://render.githubusercontent.com/render/math?math=O(logV)" />-s, kulcsotCsökkent <img src="https://render.githubusercontent.com/render/math?math=O(1)" />-es, teljes futásidő: <img src="https://render.githubusercontent.com/render/math?math=O(E%20%2B%20V%20*%20logV)" />
+> Fibonacchi-kupaccal gyorsítható az algoritmus, ekkor a kiveszMin <img src="https://latex.codecogs.com/svg?O(logV)" />-s, kulcsotCsökkent <img src="https://latex.codecogs.com/svg?O(1)" />-es, teljes futásidő: <img src="https://latex.codecogs.com/svg?O(E%20%2B%20V%20*%20logV)" />
 
 ##### Legrövidebb utak
 
@@ -669,7 +669,7 @@ bellmanFord(G, w, s) {
 
 ####### Futásidő
 
-<img src="https://render.githubusercontent.com/render/math?math=O(V%20*%20E)" /> hiszen a kezdőértékek beállítésa <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(V)" />, az egymásba ágyazott for ciklus <img src="https://render.githubusercontent.com/render/math?math=O(V%20*%20E)" />, a második ciklus pedig <img src="https://render.githubusercontent.com/render/math?math=O(E)" />.
+<img src="https://latex.codecogs.com/svg?O(V%20*%20E)" /> hiszen a kezdőértékek beállítésa <img src="https://latex.codecogs.com/svg?%5CTheta(V)" />, az egymásba ágyazott for ciklus <img src="https://latex.codecogs.com/svg?O(V%20*%20E)" />, a második ciklus pedig <img src="https://latex.codecogs.com/svg?O(E)" />.
 
 ###### Dijkstra algoritmusa
 
@@ -692,15 +692,15 @@ dijkstra(G, s) {
 }
 ```
 
-A Q sorban azok a csúcsok vannak, amik nincsenek S-ben, tehát még nem tudjuk a hozzájuk vezető legrövidebb utat. A sort a <img src="https://render.githubusercontent.com/render/math?math=d" /> érték szerint azaz az ismert legrövidebb út szerint indexeljük.
+A Q sorban azok a csúcsok vannak, amik nincsenek S-ben, tehát még nem tudjuk a hozzájuk vezető legrövidebb utat. A sort a <img src="https://latex.codecogs.com/svg?d" /> érték szerint azaz az ismert legrövidebb út szerint indexeljük.
 
 ![ ](../img/dijkstra.png)
 
 ####### Futásidő
 
-Minden csúcs pontosan egyszer kerül át az <img src="https://render.githubusercontent.com/render/math?math=S" /> halmazba, emiatt amikor szomszédokat vizsgálunk, azt minden csúcsra egyszer tesszük meg, ezen szomszédok vizsgálata összesen <img src="https://render.githubusercontent.com/render/math?math=O(E)" />-szer fut le, mert ennyi a szomszédsági listák össz hossza. Így a közelít, és ez által a `kulcsotCsökkent` művelet legfejlebb <img src="https://render.githubusercontent.com/render/math?math=O(E)" />-szer hívódik meg.
+Minden csúcs pontosan egyszer kerül át az <img src="https://latex.codecogs.com/svg?S" /> halmazba, emiatt amikor szomszédokat vizsgálunk, azt minden csúcsra egyszer tesszük meg, ezen szomszédok vizsgálata összesen <img src="https://latex.codecogs.com/svg?O(E)" />-szer fut le, mert ennyi a szomszédsági listák össz hossza. Így a közelít, és ez által a `kulcsotCsökkent` művelet legfejlebb <img src="https://latex.codecogs.com/svg?O(E)" />-szer hívódik meg.
 
-Az összesített futásidő nagyban függ a **prioritási sor implementációtól**, a legegyszerűbb eset, ha egy **tömbbel implementáljuk**. Ekkor a `beszúr` és `kulcsotCsokkent` műveletek <img src="https://render.githubusercontent.com/render/math?math=O(1)" />-esek, a `kiveszMin` pedig <img src="https://render.githubusercontent.com/render/math?math=O(V)" />, mivel az egész tömbön végig kell menni. Így a teljes futásidő <img src="https://render.githubusercontent.com/render/math?math=O(V%5E2%20%2B%20E)" />.
+Az összesített futásidő nagyban függ a **prioritási sor implementációtól**, a legegyszerűbb eset, ha egy **tömbbel implementáljuk**. Ekkor a `beszúr` és `kulcsotCsokkent` műveletek <img src="https://latex.codecogs.com/svg?O(1)" />-esek, a `kiveszMin` pedig <img src="https://latex.codecogs.com/svg?O(V)" />, mivel az egész tömbön végig kell menni. Így a teljes futásidő <img src="https://latex.codecogs.com/svg?O(V%5E2%20%2B%20E)" />.
 **Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és látalánossagban gyorsítható fibonacchi kupaccal.
 
 ###### Floyd-Warshall algoritmus
@@ -736,7 +736,7 @@ A belső értékadás magyarázata: A k. iterációban a legrövidebb út, ami i
 
 ####### Futásidő
 
-A három for ciklus határozza meg, mert annak a magja <img src="https://render.githubusercontent.com/render/math?math=O(1)" />-es, így a futásidő <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(n%5E3)" />, ahol <img src="https://render.githubusercontent.com/render/math?math=n" /> a sorok száma.
+A három for ciklus határozza meg, mert annak a magja <img src="https://latex.codecogs.com/svg?O(1)" />-es, így a futásidő <img src="https://latex.codecogs.com/svg?%5CTheta(n%5E3)" />, ahol <img src="https://latex.codecogs.com/svg?n" /> a sorok száma.
 
 ### 2. Elemi adatszerkezetek, bináris keresőfák, hasító táblázatok, gráfok és fák számítógépes reprezentációja
 
@@ -770,11 +770,11 @@ Benne az adatok lineárisan követik egymást, egy kulcs többször is előfordu
 
 | Művelet            | Futásidő |
 | ------------------ | -------- |
-| `ÉRTÉK(H, i)`      | <img src="https://render.githubusercontent.com/render/math?math=O(1)" />   |
-| `ÉRTÉKAD(H, i, k)` | <img src="https://render.githubusercontent.com/render/math?math=O(1)" />   |
-| `KERES(H, k)`      | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
-| `BESZÚR(H, k, i)`  | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
-| `TÖRÖL(H, k)`      | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
+| `ÉRTÉK(H, i)`      | <img src="https://latex.codecogs.com/svg?O(1)" />   |
+| `ÉRTÉKAD(H, i, k)` | <img src="https://latex.codecogs.com/svg?O(1)" />   |
+| `KERES(H, k)`      | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| `BESZÚR(H, k, i)`  | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| `TÖRÖL(H, k)`      | <img src="https://latex.codecogs.com/svg?O(n)" />   |
 
 > Beszúrásnál újra kellhet allokálni egyel nagyobb emmóriaterületet.
 
@@ -798,13 +798,13 @@ Minden kulcs mellett tárolunk egy mutatót a következő, és egy mutatót a me
 
 | Művelet            | Futásidő |
 | ------------------ | -------- |
-| `ÉRTÉK(H, i)`      | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
-| `ÉRTÉKAD(H, i, k)` | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
-| `KERES(H, k)`      | <img src="https://render.githubusercontent.com/render/math?math=O(n)" />   |
-| `BESZÚR(H, k, i)`  | <img src="https://render.githubusercontent.com/render/math?math=O(1)" />   |
-| `TÖRÖL(H, k)`      | <img src="https://render.githubusercontent.com/render/math?math=O(1)" />   |
+| `ÉRTÉK(H, i)`      | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| `ÉRTÉKAD(H, i, k)` | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| `KERES(H, k)`      | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| `BESZÚR(H, k, i)`  | <img src="https://latex.codecogs.com/svg?O(1)" />   |
+| `TÖRÖL(H, k)`      | <img src="https://latex.codecogs.com/svg?O(1)" />   |
 
-> Beszúrás, és törlés valójában <img src="https://render.githubusercontent.com/render/math?math=O(n)" />. Csak akkor <img src="https://render.githubusercontent.com/render/math?math=O(1)" />, ha már a megfelelő pozíción vagyunk, azaz már tudjuk, melyik mutatókat kell átírni.
+> Beszúrás, és törlés valójában <img src="https://latex.codecogs.com/svg?O(n)" />. Csak akkor <img src="https://latex.codecogs.com/svg?O(1)" />, ha már a megfelelő pozíción vagyunk, azaz már tudjuk, melyik mutatókat kell átírni.
 
 **Előnye**: Nem egy nagy összefüggő memória blokk kell.
 
@@ -846,7 +846,7 @@ veremből(V) {
 }
 ```
 
-Mind a 3 művelet <img src="https://render.githubusercontent.com/render/math?math=O(1)" />-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
+Mind a 3 művelet <img src="https://latex.codecogs.com/svg?O(1)" />-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
 
 > Hasonlóan a tömbbel megvalósított listához, itt is érdemes lehet kapacitást meghatározni.
 
@@ -878,7 +878,7 @@ sorból(S) {
 }
 ```
 
-Mind a két művelet <img src="https://render.githubusercontent.com/render/math?math=O(1)" />-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
+Mind a két művelet <img src="https://latex.codecogs.com/svg?O(1)" />-es, hiszen csak indexeléseket, értékadásokat tartalmaznak.
 
 #### Prioritási sor
 
@@ -970,7 +970,7 @@ maximumKupacol(A, i) {
 
 Tehát a vizsgált indexű elem et összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
 
-`maximumKupacol()` futásideje <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />, mert ennyi a majdnem teljes bináris fa mélysége, és legrosszabb esetben az egészen végig kell lépkedni.
+`maximumKupacol()` futásideje <img src="https://latex.codecogs.com/svg?O(logn)" />, mert ennyi a majdnem teljes bináris fa mélysége, és legrosszabb esetben az egészen végig kell lépkedni.
 
 ####### Maximum lekérése
 
@@ -1015,9 +1015,9 @@ kupacbaBeszur(A, x) {
 
 | Művelet         | Futásidő    |
 | --------------- | ----------- |
-| `BESZÚR(H, k)`  | <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />   |
-| `MAX(H)`        | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(1)" /> |
-| `KIVESZ-MAX(H)` | <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />   |
+| `BESZÚR(H, k)`  | <img src="https://latex.codecogs.com/svg?O(logn)" />   |
+| `MAX(H)`        | <img src="https://latex.codecogs.com/svg?%5CTheta(1)" /> |
+| `KIVESZ-MAX(H)` | <img src="https://latex.codecogs.com/svg?O(logn)" />   |
 
 #### Fák, és számítógépes reprezenzációjuk
 
@@ -1091,11 +1091,11 @@ Absztrakt adatszerkezet a következő műveletekkel:
 
 > A `T` a fa gyökerére mutató mutató.
 
-> Cél: Minden művelet legalább <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />-es legyen
+> Cél: Minden művelet legalább <img src="https://latex.codecogs.com/svg?O(logn)" />-es legyen
 
 ##### Bináris keresőfa tulajdonság
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=x" /> csúcs értéke annak a bal részfájában minden csúcsnál nagyobb vagy egyenlő, jobb részfájában minden csúcsnál kisebb vagy egyenlő.
+Egy <img src="https://latex.codecogs.com/svg?x" /> csúcs értéke annak a bal részfájában minden csúcsnál nagyobb vagy egyenlő, jobb részfájában minden csúcsnál kisebb vagy egyenlő.
 
 ##### Keresés
 
@@ -1235,7 +1235,7 @@ Ebben az esetben a csúcs helyére kötjük annak a rákövetkezőjét. Mivel eb
 
 ##### Futásidők
 
-Az összes művelet (`KERES`, `MAX / MIN`, `BESZÚR`, `TÖRÖL`, `KÖVETKEZŐ / ELŐZŐ`) <img src="https://render.githubusercontent.com/render/math?math=O(h)" />-s, azaz a fa magasságával arányos. Ez alap esetben nem feltétlen olyan jó, de kiegyensúlyozott fák esetén jó, hiszen akkor <img src="https://render.githubusercontent.com/render/math?math=O(logn)" />-es.
+Az összes művelet (`KERES`, `MAX / MIN`, `BESZÚR`, `TÖRÖL`, `KÖVETKEZŐ / ELŐZŐ`) <img src="https://latex.codecogs.com/svg?O(h)" />-s, azaz a fa magasságával arányos. Ez alap esetben nem feltétlen olyan jó, de kiegyensúlyozott fák esetén jó, hiszen akkor <img src="https://latex.codecogs.com/svg?O(logn)" />-es.
 
 > Pl. AVL-fa, bináris kereső fa kiegyensúlyozott.
 
@@ -1279,11 +1279,11 @@ Cél.: `TARTALMAZ`, `BESZÚR`, `TÖRÖL` műveletek legyenek gyorsak.
 
 ##### Hasító függvény
 
-Kulcsok <img src="https://render.githubusercontent.com/render/math?math=U" /> univerzumának elemeit (lehetséges kulcsokat) képezi le a hasító táblázat **rés**eire.
+Kulcsok <img src="https://latex.codecogs.com/svg?U" /> univerzumának elemeit (lehetséges kulcsokat) képezi le a hasító táblázat **rés**eire.
 
-Pl.: <img src="https://render.githubusercontent.com/render/math?math=h(k)%20%3D%20k%20~%20mod%20~%20m" />
+Pl.: <img src="https://latex.codecogs.com/svg?h(k)%20%3D%20k%20~%20mod%20~%20m" />
 
-<img src="https://render.githubusercontent.com/render/math?math=k" /> a hasító táblázat mérete, azaz a **rések száma**.
+<img src="https://latex.codecogs.com/svg?k" /> a hasító táblázat mérete, azaz a **rések száma**.
 
 Mivel az unicerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
 
@@ -1297,17 +1297,17 @@ Ha olyan helyre akarunk beszúrni, ahol már van elem, akkor a lista elejére sz
 
 **Keresés, törlés valamivel romlik**, hiszen egy lsitán is végig kelhet menni.
 
-Kitöltési tényező: <img src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%3D%20%5Cfrac%7Bn%7D%7Bm%7D" /> (**láncok átlagos hossza**)
+Kitöltési tényező: <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%20%5Cfrac%7Bn%7D%7Bm%7D" /> (**láncok átlagos hossza**)
 
-<img src="https://render.githubusercontent.com/render/math?math=m" />: rések száma
+<img src="https://latex.codecogs.com/svg?m" />: rések száma
 
-<img src="https://render.githubusercontent.com/render/math?math=n" />: elemek a táblában
+<img src="https://latex.codecogs.com/svg?n" />: elemek a táblában
 
 **Egyszerű egyenletes hasítási feltétel**: Minden elem egyforma valószínűséggel képződik le bármelyik résre.
 
-Ha egy hasító függvény ezt biztosítja, akkor a keresések (mind sikeres, mind sikertelen) átlagos ideje (nem legrosszabb!) <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(1%20%2B%20%5Calpha)" />
+Ha egy hasító függvény ezt biztosítja, akkor a keresések (mind sikeres, mind sikertelen) átlagos ideje (nem legrosszabb!) <img src="https://latex.codecogs.com/svg?%5CTheta(1%20%2B%20%5Calpha)" />
 
-Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések számát úgy, hogy az <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> egy konstans legyen, ekkor `KERES`, `TÖRÖL`, `BESZÚR` mind <img src="https://render.githubusercontent.com/render/math?math=O(1)" />.
+Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések számát úgy, hogy az <img src="https://latex.codecogs.com/svg?%5Calpha" /> egy konstans legyen, ekkor `KERES`, `TÖRÖL`, `BESZÚR` mind <img src="https://latex.codecogs.com/svg?O(1)" />.
 
 #### Gráfok számítógépes reprezentációja
 
@@ -1321,9 +1321,9 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 |                        | Létezik (u, v) él?       | Összes él listázása | Egy csúcs szomszédainak listázása |
 | ---------------------- |:------------------------:|:-------------------:|:---------------------------------:|
-| Csúcsok + élek halmaza | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CE%5C%7C)" />          | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CE%5C%7C)" />                   |
-| Szomszédsági mátrix    | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(1)" />              | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CV%5C%7C%5E2)" />   | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CV%5C%7C)" />                   |
-| Szomszédsági lista     | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />          |
+| Csúcsok + élek halmaza | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />          | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />                   |
+| Szomszédsági mátrix    | <img src="https://latex.codecogs.com/svg?%5CTheta(1)" />              | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CV%5C%7C%5E2)" />   | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CV%5C%7C)" />                   |
+| Szomszédsági lista     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />          |
 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.
 ## Bonyolultságelmélet
@@ -1336,7 +1336,7 @@ R az eldönthető problémák osztálya.
 
 Polinomidőben eldönthető problémák osztálya.
 
-Tehát minden olyan **eldöntési probléma** P-ben van, amire létezik <img src="https://render.githubusercontent.com/render/math?math=O(n%5Ek)" /> időigényű algoritmus, valamely konstans <img src="https://render.githubusercontent.com/render/math?math=k" />-ra.
+Tehát minden olyan **eldöntési probléma** P-ben van, amire létezik <img src="https://latex.codecogs.com/svg?O(n%5Ek)" /> időigényű algoritmus, valamely konstans <img src="https://latex.codecogs.com/svg?k" />-ra.
 
 > Ezeket a problémákat tartjuk **hatékonyan megoldhatónak**.
 
@@ -1344,19 +1344,19 @@ Tehát minden olyan **eldöntési probléma** P-ben van, amire létezik <img src
 
 P-beli probléma.
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(V%2C%20E)" /> irányított gráf. Feltehető, hogy <img src="https://render.githubusercontent.com/render/math?math=V%20%3D%20%5C%7B%20~%201%2C%20...%2C%20N%20~%20%5C%7D" />
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G%20%3D%20(V%2C%20E)" /> irányított gráf. Feltehető, hogy <img src="https://latex.codecogs.com/svg?V%20%3D%20%5C%7B%20~%201%2C%20...%2C%20N%20~%20%5C%7D" />
 
-**Output**: Vezet-e <img src="https://render.githubusercontent.com/render/math?math=G" />-ben (irányított) út <img src="https://render.githubusercontent.com/render/math?math=1" />-ből <img src="https://render.githubusercontent.com/render/math?math=N" />-be?
+**Output**: Vezet-e <img src="https://latex.codecogs.com/svg?G" />-ben (irányított) út <img src="https://latex.codecogs.com/svg?1" />-ből <img src="https://latex.codecogs.com/svg?N" />-be?
 
 Erre van algoritmus:
 
-- Kiindulásnak veszünk egy <img src="https://render.githubusercontent.com/render/math?math=X%20%3D%20%5C%7B1%5C%7D" /> és <img src="https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5C%7B1%5C%7D" /> halmazt.
+- Kiindulásnak veszünk egy <img src="https://latex.codecogs.com/svg?X%20%3D%20%5C%7B1%5C%7D" /> és <img src="https://latex.codecogs.com/svg?Y%20%3D%20%5C%7B1%5C%7D" /> halmazt.
 
-- Mindig kiveszünk egy elemet <img src="https://render.githubusercontent.com/render/math?math=X" />-ből, és annak szomszédait betesszük <img src="https://render.githubusercontent.com/render/math?math=X" />-be, és <img src="https://render.githubusercontent.com/render/math?math=Y" />-ba is.
+- Mindig kiveszünk egy elemet <img src="https://latex.codecogs.com/svg?X" />-ből, és annak szomszédait betesszük <img src="https://latex.codecogs.com/svg?X" />-be, és <img src="https://latex.codecogs.com/svg?Y" />-ba is.
 
-- Ez által <img src="https://render.githubusercontent.com/render/math?math=X%20%5Ccup%20Y" />-ban lesznek az <img src="https://render.githubusercontent.com/render/math?math=1" />-ből elérhető csúcsok.
+- Ez által <img src="https://latex.codecogs.com/svg?X%20%5Ccup%20Y" />-ban lesznek az <img src="https://latex.codecogs.com/svg?1" />-ből elérhető csúcsok.
 
-Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerjezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban <img src="https://render.githubusercontent.com/render/math?math=O(N%5E3)" />-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így <img src="https://render.githubusercontent.com/render/math?math=O(n%5E3)" />-ös a futásideje az algoritmusnak (hiszen <img src="https://render.githubusercontent.com/render/math?math=N%20%5Cle%20n" />, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
+Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerjezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban <img src="https://latex.codecogs.com/svg?O(N%5E3)" />-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így <img src="https://latex.codecogs.com/svg?O(n%5E3)" />-ös a futásideje az algoritmusnak (hiszen <img src="https://latex.codecogs.com/svg?N%20%5Cle%20n" />, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
 
 #### Hatékony visszavezetés
 
@@ -1364,19 +1364,19 @@ Erre a konkrét implementációnk futásideje változó lehet, függhet példáu
 
 > A.K.A. Turing-visszavezetés
 
-Az <img src="https://render.githubusercontent.com/render/math?math=A" /> eldöntési probléma **rekurzívan visszavezethető** a <img src="https://render.githubusercontent.com/render/math?math=B" /> eldöntési problémára, jelben <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cle_R%20B" />, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=f" /> **rekurzív függvény**, mely <img src="https://render.githubusercontent.com/render/math?math=A" /> inputjaiból <img src="https://render.githubusercontent.com/render/math?math=B" /> inputjait készíti **választartó** módon, azaz minden <img src="https://render.githubusercontent.com/render/math?math=x" /> inputra <img src="https://render.githubusercontent.com/render/math?math=A(x)%20%3D%20B(f(x))" />
+Az <img src="https://latex.codecogs.com/svg?A" /> eldöntési probléma **rekurzívan visszavezethető** a <img src="https://latex.codecogs.com/svg?B" /> eldöntési problémára, jelben <img src="https://latex.codecogs.com/svg?A%20%5Cle_R%20B" />, ha van olyan <img src="https://latex.codecogs.com/svg?f" /> **rekurzív függvény**, mely <img src="https://latex.codecogs.com/svg?A" /> inputjaiból <img src="https://latex.codecogs.com/svg?B" /> inputjait készíti **választartó** módon, azaz minden <img src="https://latex.codecogs.com/svg?x" /> inputra <img src="https://latex.codecogs.com/svg?A(x)%20%3D%20B(f(x))" />
 
 > Itt a _rekurzió_ azt jelenti, hogy kiszámítható, adható rá algoritmus.
 
-Ebben az esetben ha <img src="https://render.githubusercontent.com/render/math?math=B" /> eldönthető, akkor <img src="https://render.githubusercontent.com/render/math?math=A" /> is eldönthető, illetve ha <img src="https://render.githubusercontent.com/render/math?math=A" /> eldönthetetlen, akkor <img src="https://render.githubusercontent.com/render/math?math=B" /> is eldönthetetlen.
+Ebben az esetben ha <img src="https://latex.codecogs.com/svg?B" /> eldönthető, akkor <img src="https://latex.codecogs.com/svg?A" /> is eldönthető, illetve ha <img src="https://latex.codecogs.com/svg?A" /> eldönthetetlen, akkor <img src="https://latex.codecogs.com/svg?B" /> is eldönthetetlen.
 
-Lényegében ez azt fejezi ki, hogy "<img src="https://render.githubusercontent.com/render/math?math=B" /> legalább olyan nehéz, mint <img src="https://render.githubusercontent.com/render/math?math=A" />".
+Lényegében ez azt fejezi ki, hogy "<img src="https://latex.codecogs.com/svg?B" /> legalább olyan nehéz, mint <img src="https://latex.codecogs.com/svg?A" />".
 
-**Probléma ezzel a megközelítéssel**: Ha <img src="https://render.githubusercontent.com/render/math?math=A" /> eldönthető probléma, <img src="https://render.githubusercontent.com/render/math?math=B" /> pedig nemtriviális, akkor <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cle_R%20B" />.
+**Probléma ezzel a megközelítéssel**: Ha <img src="https://latex.codecogs.com/svg?A" /> eldönthető probléma, <img src="https://latex.codecogs.com/svg?B" /> pedig nemtriviális, akkor <img src="https://latex.codecogs.com/svg?A%20%5Cle_R%20B" />.
 
 - Tehát nehézség szempontjából nem mondtunk valójában semmit.
 
-- Ennek oka, hogy ebben az esetben az <img src="https://render.githubusercontent.com/render/math?math=f" /> inputkonvertáló függvényben van lehetőségünk egyszerűen az <img src="https://render.githubusercontent.com/render/math?math=A" /> probléma megoldására, és ennek megfelelően <img src="https://render.githubusercontent.com/render/math?math=B" /> egy _igen_, vagy _nem_ példányának visszaadására.
+- Ennek oka, hogy ebben az esetben az <img src="https://latex.codecogs.com/svg?f" /> inputkonvertáló függvényben van lehetőségünk egyszerűen az <img src="https://latex.codecogs.com/svg?A" /> probléma megoldására, és ennek megfelelően <img src="https://latex.codecogs.com/svg?B" /> egy _igen_, vagy _nem_ példányának visszaadására.
 
 - Ez alapján az összes nemtriviális probléma (azaz az olyanok, amik nem minden inputra ugyan azt adják) "ugyan olyan nehéznek" tűnik.
 
@@ -1388,13 +1388,13 @@ Lényegében ez azt fejezi ki, hogy "<img src="https://render.githubusercontent.
 
 > A.K.A. Polinomidejű visszavezetés
 
-Az <img src="https://render.githubusercontent.com/render/math?math=A" /> eldöntési probléma **hatékonyan visszavezethető** a <img src="https://render.githubusercontent.com/render/math?math=B" /> eldöntési problémára, jelben <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cle_P%20B" />, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=f" /> **polinomidőben kiszámítható** függvény, mely <img src="https://render.githubusercontent.com/render/math?math=A" /> inputjaiból <img src="https://render.githubusercontent.com/render/math?math=B" /> inputjait készíti **választartó** módon.
+Az <img src="https://latex.codecogs.com/svg?A" /> eldöntési probléma **hatékonyan visszavezethető** a <img src="https://latex.codecogs.com/svg?B" /> eldöntési problémára, jelben <img src="https://latex.codecogs.com/svg?A%20%5Cle_P%20B" />, ha van olyan <img src="https://latex.codecogs.com/svg?f" /> **polinomidőben kiszámítható** függvény, mely <img src="https://latex.codecogs.com/svg?A" /> inputjaiból <img src="https://latex.codecogs.com/svg?B" /> inputjait készíti **választartó** módon.
 
-Ekkor ha <img src="https://render.githubusercontent.com/render/math?math=B" /> **polinomidőben** eldönthető, akkor <img src="https://render.githubusercontent.com/render/math?math=A" /> is eldönthető **polinomidőben**, illetve ha <img src="https://render.githubusercontent.com/render/math?math=A" />-ra nincs polinomidejű algoritmus, akkor <img src="https://render.githubusercontent.com/render/math?math=B" />-re sincs.
+Ekkor ha <img src="https://latex.codecogs.com/svg?B" /> **polinomidőben** eldönthető, akkor <img src="https://latex.codecogs.com/svg?A" /> is eldönthető **polinomidőben**, illetve ha <img src="https://latex.codecogs.com/svg?A" />-ra nincs polinomidejű algoritmus, akkor <img src="https://latex.codecogs.com/svg?B" />-re sincs.
 
 ##### Példa
 
-Egy példa a hatékony visszavezetésre a <img src="https://render.githubusercontent.com/render/math?math=P%C3%81ROS%C3%8DT%C3%81S%20%5Cle%20SAT" />
+Egy példa a hatékony visszavezetésre a <img src="https://latex.codecogs.com/svg?P%C3%81ROS%C3%8DT%C3%81S%20%5Cle%20SAT" />
 
 ###### PÁROSÍTÁS
 
@@ -1406,15 +1406,15 @@ Egy példa a hatékony visszavezetésre a <img src="https://render.githubusercon
 
 ###### SAT
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G" /> gráf
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G" /> gráf
 
-**Output**: Van-e <img src="https://render.githubusercontent.com/render/math?math=G" />-ben teljes párosítás?
+**Output**: Van-e <img src="https://latex.codecogs.com/svg?G" />-ben teljes párosítás?
 
 > Közös csúccsal nem rendelkező élek halmaza, amik lefednek minden csúcsot.
 
 ###### Visszavezetés
 
-Tehát a cél egy <img src="https://render.githubusercontent.com/render/math?math=G" /> gráfból egy <img src="https://render.githubusercontent.com/render/math?math=%5Cphi_G" /> CNF előállítása választartó módon, polinomidőben úgy, hogy **<img src="https://render.githubusercontent.com/render/math?math=G" />-ben pontosan akkor legyen teljes párosítás, ha <img src="https://render.githubusercontent.com/render/math?math=%5Cphi_G" /> kielégíthető**.
+Tehát a cél egy <img src="https://latex.codecogs.com/svg?G" /> gráfból egy <img src="https://latex.codecogs.com/svg?%5Cphi_G" /> CNF előállítása választartó módon, polinomidőben úgy, hogy **<img src="https://latex.codecogs.com/svg?G" />-ben pontosan akkor legyen teljes párosítás, ha <img src="https://latex.codecogs.com/svg?%5Cphi_G" /> kielégíthető**.
 
 - Minden élhez rendelünk egy logikai változót.
 
@@ -1424,11 +1424,11 @@ Tehát a cél egy <img src="https://render.githubusercontent.com/render/math?mat
 
 - Egy csúcshoz annak formalizálása, hogy pontosan egy él fedi: legalább egy él fedi ÉS legfeljebb egy él fedi.
   
-  - Legalább egy: Egyetlen CNF kell hozzá: <img src="https://render.githubusercontent.com/render/math?math=(x_1%20%5Clor%20x_2%20%5Clor%20...%20%5Clor%20x_k)" />.
+  - Legalább egy: Egyetlen CNF kell hozzá: <img src="https://latex.codecogs.com/svg?(x_1%20%5Clor%20x_2%20%5Clor%20...%20%5Clor%20x_k)" />.
   
-  - Legfeljebb egy: Négyzetesen sok klóz kell hozzá, minden csúcspárra megkötjük, hogy "nem ez a kettő egyszerre": <img src="https://render.githubusercontent.com/render/math?math=%5Cland%20~%201%20%5Cle%20i%20%3C%20j%20%5Cle%20k%20~%20%5Cneg(x_i%20%5Cland%20x_j)" />
+  - Legfeljebb egy: Négyzetesen sok klóz kell hozzá, minden csúcspárra megkötjük, hogy "nem ez a kettő egyszerre": <img src="https://latex.codecogs.com/svg?%5Cland%20~%201%20%5Cle%20i%20%3C%20j%20%5Cle%20k%20~%20%5Cneg(x_i%20%5Cland%20x_j)" />
 
-> <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_k" /> az adott viszgált csúcsra illeszkedő élek.
+> <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_k" /> az adott viszgált csúcsra illeszkedő élek.
 
 ![ ](../img/hatekony_visszavezetes_1.png)
 
@@ -1452,19 +1452,19 @@ A fenti képen egy **számítási fa** van, minden elégazás egy nemdeterminisz
 
 ##### Nemdeterminisztikus algoritmus a SAT-ra
 
-Input formulánkban az <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_k" /> változók fordulnak elő.
+Input formulánkban az <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_k" /> változók fordulnak elő.
 
-1. Generáljunk minden <img src="https://render.githubusercontent.com/render/math?math=x_i" />-hez egy nemdeterminisztikus bitet, így kapunk egy értékadást.
+1. Generáljunk minden <img src="https://latex.codecogs.com/svg?x_i" />-hez egy nemdeterminisztikus bitet, így kapunk egy értékadást.
 
 2. Ha a generált értékadás kielégíti a formulát, adjunk vissza `true`-t, egyébként `false`-t.
 
-Példa input: <img src="https://render.githubusercontent.com/render/math?math=(x_1%20%5Clor%20%5Cneg%20x_2)%20%5Cland%20(x_2%20%5Clor%20%5Cneg%20x_3)%20%5Cland%20(%5Cneg%20x_1%20%5Clor%20x_3)" />
+Példa input: <img src="https://latex.codecogs.com/svg?(x_1%20%5Clor%20%5Cneg%20x_2)%20%5Cland%20(x_2%20%5Clor%20%5Cneg%20x_3)%20%5Cland%20(%5Cneg%20x_1%20%5Clor%20x_3)" />
 
 Ehhez az inputhoz a számítási fa:
 
 ![ ](../img/szamitasi_fa.png)
 
-Ennek az algoritmusnak a nemdeterminisztikus időigénye <img src="https://render.githubusercontent.com/render/math?math=O(n)" />, hiszen <img src="https://render.githubusercontent.com/render/math?math=n" /> változónak adunk értéket, és a behelyettesítés, ellenőrzés is lineáris időigényű.
+Ennek az algoritmusnak a nemdeterminisztikus időigénye <img src="https://latex.codecogs.com/svg?O(n)" />, hiszen <img src="https://latex.codecogs.com/svg?n" /> változónak adunk értéket, és a behelyettesítés, ellenőrzés is lineáris időigényű.
 
 #### Az NP osztály
 
@@ -1472,31 +1472,31 @@ Ennek az algoritmusnak a nemdeterminisztikus időigénye <img src="https://rende
 
 A **SAT** a korábbi példa alapján például **NP-beli**.
 
-<img src="https://render.githubusercontent.com/render/math?math=P%20%5Csubseteq%20NP" /> természetesen igaz, hiszen egy determinisztikusan polinom idejű algoritmus felfogható olyan nemdeterminisztikusnak, ami sosem ágazik el. <img src="https://render.githubusercontent.com/render/math?math=P%20%3D%20coP" /> miatt <img src="https://render.githubusercontent.com/render/math?math=P%20%5Csubseteq%20NP%20%5Ccap%20coNP" />.
+<img src="https://latex.codecogs.com/svg?P%20%5Csubseteq%20NP" /> természetesen igaz, hiszen egy determinisztikusan polinom idejű algoritmus felfogható olyan nemdeterminisztikusnak, ami sosem ágazik el. <img src="https://latex.codecogs.com/svg?P%20%3D%20coP" /> miatt <img src="https://latex.codecogs.com/svg?P%20%5Csubseteq%20NP%20%5Ccap%20coNP" />.
 
-Ennél többet nem tudunk, nem tudjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=P%20%3D%20NP" /> igaz-e. Széleskörben elfogadott sejtés, hogy nem. Hasonlóan az sem ismert, hogy <img src="https://render.githubusercontent.com/render/math?math=NP%20%3D%20coNP" /> igaz-e, erről is az az elfogadtott álláspont, hogy nem.
+Ennél többet nem tudunk, nem tudjuk, hogy <img src="https://latex.codecogs.com/svg?P%20%3D%20NP" /> igaz-e. Széleskörben elfogadott sejtés, hogy nem. Hasonlóan az sem ismert, hogy <img src="https://latex.codecogs.com/svg?NP%20%3D%20coNP" /> igaz-e, erről is az az elfogadtott álláspont, hogy nem.
 
-Persze <img src="https://render.githubusercontent.com/render/math?math=NP%20%5Csubseteq%20R" /> is igaz, mert a nemdeterminisztikus számítás szimulálható determinisztikusan, bár ez exponenciálisan lassú.
+Persze <img src="https://latex.codecogs.com/svg?NP%20%5Csubseteq%20R" /> is igaz, mert a nemdeterminisztikus számítás szimulálható determinisztikusan, bár ez exponenciálisan lassú.
 
 ![ ](../img/bonyolultsagi_osztalyok.png)
 
 #### NP-teljes problémák
 
-**<img src="https://render.githubusercontent.com/render/math?math=C" />-teljesség definíciója**: Ha <img src="https://render.githubusercontent.com/render/math?math=C" /> problémák egy osztálya, akkor az <img src="https://render.githubusercontent.com/render/math?math=A" /> probléma
+**<img src="https://latex.codecogs.com/svg?C" />-teljesség definíciója**: Ha <img src="https://latex.codecogs.com/svg?C" /> problémák egy osztálya, akkor az <img src="https://latex.codecogs.com/svg?A" /> probléma
 
-- **<img src="https://render.githubusercontent.com/render/math?math=C" />-nehéz**, ha minden <img src="https://render.githubusercontent.com/render/math?math=C" />-beli probléma visszavezethető <img src="https://render.githubusercontent.com/render/math?math=A" />-ra
+- **<img src="https://latex.codecogs.com/svg?C" />-nehéz**, ha minden <img src="https://latex.codecogs.com/svg?C" />-beli probléma visszavezethető <img src="https://latex.codecogs.com/svg?A" />-ra
 
-- **<img src="https://render.githubusercontent.com/render/math?math=C" />-teljes**, ha <img src="https://render.githubusercontent.com/render/math?math=A" /> még ráadásul <img src="https://render.githubusercontent.com/render/math?math=C" />-ben is van
+- **<img src="https://latex.codecogs.com/svg?C" />-teljes**, ha <img src="https://latex.codecogs.com/svg?A" /> még ráadásul <img src="https://latex.codecogs.com/svg?C" />-ben is van
 
 ##### Polinomidőben verifikálhatóság
 
-Az <img src="https://render.githubusercontent.com/render/math?math=A" /> probléma polinomidőben verifikálható, ha van egy olyan <img src="https://render.githubusercontent.com/render/math?math=R" /> reláció, **inputok**, és **tanúk** között, melyre:
+Az <img src="https://latex.codecogs.com/svg?A" /> probléma polinomidőben verifikálható, ha van egy olyan <img src="https://latex.codecogs.com/svg?R" /> reláció, **inputok**, és **tanúk** között, melyre:
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=R(I%2C%20T)" /> az <img src="https://render.githubusercontent.com/render/math?math=I" /> inputra és a <img src="https://render.githubusercontent.com/render/math?math=T" /> tanúsítványra, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CT%7C%20%5Cle%20%7CI%7C%5Ec" /> valamilyen <img src="https://render.githubusercontent.com/render/math?math=c" /> konstansra (azaz a tanúk "nem túl hosszúak")
+- Ha <img src="https://latex.codecogs.com/svg?R(I%2C%20T)" /> az <img src="https://latex.codecogs.com/svg?I" /> inputra és a <img src="https://latex.codecogs.com/svg?T" /> tanúsítványra, akkor <img src="https://latex.codecogs.com/svg?%7CT%7C%20%5Cle%20%7CI%7C%5Ec" /> valamilyen <img src="https://latex.codecogs.com/svg?c" /> konstansra (azaz a tanúk "nem túl hosszúak")
 
-- Ha kapunk egy <img src="https://render.githubusercontent.com/render/math?math=(I%2C%20T)" /> párt, arról determinisztikusan polinomidőben el tudjuk dönteni, hogy <img src="https://render.githubusercontent.com/render/math?math=R(I%2C%20T)" /> fennáll-e, vagy sem (azaz egy tanú könnyen ellenőrizhető)
+- Ha kapunk egy <img src="https://latex.codecogs.com/svg?(I%2C%20T)" /> párt, arról determinisztikusan polinomidőben el tudjuk dönteni, hogy <img src="https://latex.codecogs.com/svg?R(I%2C%20T)" /> fennáll-e, vagy sem (azaz egy tanú könnyen ellenőrizhető)
 
-- Pontosan akkor létezik <img src="https://render.githubusercontent.com/render/math?math=I" />-hez olyan <img src="https://render.githubusercontent.com/render/math?math=T" />, melyre <img src="https://render.githubusercontent.com/render/math?math=R(I%2C%20T)" /> igaz, ha <img src="https://render.githubusercontent.com/render/math?math=I" /> az <img src="https://render.githubusercontent.com/render/math?math=A" />-nak egy "igen" példánya (azaz <img src="https://render.githubusercontent.com/render/math?math=R" /> tényleg egy jó "tanúsítvány-rendszer" az <img src="https://render.githubusercontent.com/render/math?math=A" /> problémához)
+- Pontosan akkor létezik <img src="https://latex.codecogs.com/svg?I" />-hez olyan <img src="https://latex.codecogs.com/svg?T" />, melyre <img src="https://latex.codecogs.com/svg?R(I%2C%20T)" /> igaz, ha <img src="https://latex.codecogs.com/svg?I" /> az <img src="https://latex.codecogs.com/svg?A" />-nak egy "igen" példánya (azaz <img src="https://latex.codecogs.com/svg?R" /> tényleg egy jó "tanúsítvány-rendszer" az <img src="https://latex.codecogs.com/svg?A" /> problémához)
 
 > SAT esetében pl. lineáris időben tudjuk ellenőrizni, hogy egy adott értékadás kielégíti-e a CNF-et.
 
@@ -1506,7 +1506,7 @@ Az <img src="https://render.githubusercontent.com/render/math?math=A" /> problé
 
 Cook tétele kimondja, hogy a **SAT egy NP-teljes probléma**.
 
-Variánsok: FORMSAT, 3SAT is NP-teljes (és minden kSAT <img src="https://render.githubusercontent.com/render/math?math=k%20%5Cge%203" />-ra), DE 2SAT P-beli, visszavezethető ugyanis az elérhetőségre.
+Variánsok: FORMSAT, 3SAT is NP-teljes (és minden kSAT <img src="https://latex.codecogs.com/svg?k%20%5Cge%203" />-ra), DE 2SAT P-beli, visszavezethető ugyanis az elérhetőségre.
 
 Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
@@ -1516,83 +1516,83 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 ###### Független csúcshalmaz
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G" /> irányítatlan gráf, és egy <img src="https://render.githubusercontent.com/render/math?math=K" /> szám
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G" /> irányítatlan gráf, és egy <img src="https://latex.codecogs.com/svg?K" /> szám
 
-**Output**: Van-e <img src="https://render.githubusercontent.com/render/math?math=G" />-ben <img src="https://render.githubusercontent.com/render/math?math=K" /> darab **független**, azaz páronként nem szomszédos csúcs?
+**Output**: Van-e <img src="https://latex.codecogs.com/svg?G" />-ben <img src="https://latex.codecogs.com/svg?K" /> darab **független**, azaz páronként nem szomszédos csúcs?
 
 ###### Klikk
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G" /> gráf, és egy <img src="https://render.githubusercontent.com/render/math?math=K" /> szám.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G" /> gráf, és egy <img src="https://latex.codecogs.com/svg?K" /> szám.
 
-**Output**: Van-e <img src="https://render.githubusercontent.com/render/math?math=G" />-ben <img src="https://render.githubusercontent.com/render/math?math=K" /> darab páronként szomszédos csúcs?
+**Output**: Van-e <img src="https://latex.codecogs.com/svg?G" />-ben <img src="https://latex.codecogs.com/svg?K" /> darab páronként szomszédos csúcs?
 
 ###### Hamilton-út
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G" /> gráf.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G" /> gráf.
 
-**Output**: Van-e <img src="https://render.githubusercontent.com/render/math?math=G" />-ben Hamilton-út?
+**Output**: Van-e <img src="https://latex.codecogs.com/svg?G" />-ben Hamilton-út?
 
 ##### Halmazelméleti NP-teljes problémák
 
 ###### Párosítás
 
-**Input**: Két egyforma méretű halmaz, <img src="https://render.githubusercontent.com/render/math?math=A" />, és <img src="https://render.githubusercontent.com/render/math?math=B" />, és egy <img src="https://render.githubusercontent.com/render/math?math=R%20%5Csubseteq%20A%20%5Ctimes%20B" /> reláció.
+**Input**: Két egyforma méretű halmaz, <img src="https://latex.codecogs.com/svg?A" />, és <img src="https://latex.codecogs.com/svg?B" />, és egy <img src="https://latex.codecogs.com/svg?R%20%5Csubseteq%20A%20%5Ctimes%20B" /> reláció.
 
-**Output**: Van-e olyan <img src="https://render.githubusercontent.com/render/math?math=M%20%5Csubseteq%20R" /> részhalmaza a megengedett pároknak, melyben minden <img src="https://render.githubusercontent.com/render/math?math=A%20%5Ccup%20B" />-beli elem pontosan egyszer van fedve?
+**Output**: Van-e olyan <img src="https://latex.codecogs.com/svg?M%20%5Csubseteq%20R" /> részhalmaza a megengedett pároknak, melyben minden <img src="https://latex.codecogs.com/svg?A%20%5Ccup%20B" />-beli elem pontosan egyszer van fedve?
 
-> <img src="https://render.githubusercontent.com/render/math?math=A" /> halmaz: lányok, <img src="https://render.githubusercontent.com/render/math?math=B" /> halmaz: fiúk, reláció: ki hajlandó kivel táncolni. Kérdés: Párokba lehet-e osztani mindenkit?
+> <img src="https://latex.codecogs.com/svg?A" /> halmaz: lányok, <img src="https://latex.codecogs.com/svg?B" /> halmaz: fiúk, reláció: ki hajlandó kivel táncolni. Kérdés: Párokba lehet-e osztani mindenkit?
 
 ###### Hármasítás
 
-**Input**: Két egyforma méretű halmaz, <img src="https://render.githubusercontent.com/render/math?math=A" />, <img src="https://render.githubusercontent.com/render/math?math=B" />, és <img src="https://render.githubusercontent.com/render/math?math=C" />, és egy <img src="https://render.githubusercontent.com/render/math?math=R%20%5Csubseteq%20A%20%5Ctimes%20B%20%5Ctimes%20C" /> reláció.
+**Input**: Két egyforma méretű halmaz, <img src="https://latex.codecogs.com/svg?A" />, <img src="https://latex.codecogs.com/svg?B" />, és <img src="https://latex.codecogs.com/svg?C" />, és egy <img src="https://latex.codecogs.com/svg?R%20%5Csubseteq%20A%20%5Ctimes%20B%20%5Ctimes%20C" /> reláció.
 
-**Output**: Van-e olyan <img src="https://render.githubusercontent.com/render/math?math=M%20%5Csubseteq%20R" /> részhalmaza a megengedett pároknak, melyben minden <img src="https://render.githubusercontent.com/render/math?math=A%20%5Ccup%20B%20%5Ccup%20C" />-beli elem pontosan egyszer van fedve?
+**Output**: Van-e olyan <img src="https://latex.codecogs.com/svg?M%20%5Csubseteq%20R" /> részhalmaza a megengedett pároknak, melyben minden <img src="https://latex.codecogs.com/svg?A%20%5Ccup%20B%20%5Ccup%20C" />-beli elem pontosan egyszer van fedve?
 
-> Hasonló példa áll, <img src="https://render.githubusercontent.com/render/math?math=C" /> halmaz házak, ahol táncolnak.
+> Hasonló példa áll, <img src="https://latex.codecogs.com/svg?C" /> halmaz házak, ahol táncolnak.
 
 ###### Pontos lefedés hármasokkal
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=U" /> <img src="https://render.githubusercontent.com/render/math?math=3m" /> elemű halmaz, és háromelemű részhalmazainak egy <img src="https://render.githubusercontent.com/render/math?math=S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?U" /> <img src="https://latex.codecogs.com/svg?3m" /> elemű halmaz, és háromelemű részhalmazainak egy <img src="https://latex.codecogs.com/svg?S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere.
 
-**Output**: Van-e az <img src="https://render.githubusercontent.com/render/math?math=S_i" />-k közt <img src="https://render.githubusercontent.com/render/math?math=m" />, amiknek uniója <img src="https://render.githubusercontent.com/render/math?math=U" />?
+**Output**: Van-e az <img src="https://latex.codecogs.com/svg?S_i" />-k közt <img src="https://latex.codecogs.com/svg?m" />, amiknek uniója <img src="https://latex.codecogs.com/svg?U" />?
 
 ###### Halmazfedés
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=U" /> halmaz, részhalmazainak egy <img src="https://render.githubusercontent.com/render/math?math=S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere, és egy <img src="https://render.githubusercontent.com/render/math?math=K" /> szám.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?U" /> halmaz, részhalmazainak egy <img src="https://latex.codecogs.com/svg?S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere, és egy <img src="https://latex.codecogs.com/svg?K" /> szám.
 
-**Output**: Van-e az <img src="https://render.githubusercontent.com/render/math?math=S_i" />-k közt <img src="https://render.githubusercontent.com/render/math?math=K" /> darab, amiknek uniója <img src="https://render.githubusercontent.com/render/math?math=U" />?
+**Output**: Van-e az <img src="https://latex.codecogs.com/svg?S_i" />-k közt <img src="https://latex.codecogs.com/svg?K" /> darab, amiknek uniója <img src="https://latex.codecogs.com/svg?U" />?
 
 ###### Halmazpakolás
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=U" /> halmaz, részhalmazainak egy <img src="https://render.githubusercontent.com/render/math?math=S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere, és egy <img src="https://render.githubusercontent.com/render/math?math=K" /> szám.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?U" /> halmaz, részhalmazainak egy <img src="https://latex.codecogs.com/svg?S_1%2C%20...%2C%20S_n%20%5Csubseteq%20U" /> rendszere, és egy <img src="https://latex.codecogs.com/svg?K" /> szám.
 
-**Output**: Van-e az <img src="https://render.githubusercontent.com/render/math?math=S_i" />-k közt <img src="https://render.githubusercontent.com/render/math?math=K" /> darab páronként diszjunkt?
+**Output**: Van-e az <img src="https://latex.codecogs.com/svg?S_i" />-k közt <img src="https://latex.codecogs.com/svg?K" /> darab páronként diszjunkt?
 
 ##### Számelméleti NP-teljes problémák
 
 ###### Egész értékű programozás
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=Ax%20%5Cle%20b" /> egyenlőtlenség-rendszer, <img src="https://render.githubusercontent.com/render/math?math=A" />-ban és <img src="https://render.githubusercontent.com/render/math?math=b" />-ben egész számok szerepelnek.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?Ax%20%5Cle%20b" /> egyenlőtlenség-rendszer, <img src="https://latex.codecogs.com/svg?A" />-ban és <img src="https://latex.codecogs.com/svg?b" />-ben egész számok szerepelnek.
 
-**Output**: Van-e egész koordinátájú <img src="https://render.githubusercontent.com/render/math?math=x" /> vektor, mely kielégíti az egyenlőtlenségeket?
+**Output**: Van-e egész koordinátájú <img src="https://latex.codecogs.com/svg?x" /> vektor, mely kielégíti az egyenlőtlenségeket?
 
 ###### Részletösszeg
 
-**Input**: Pozitív egészek egy <img src="https://render.githubusercontent.com/render/math?math=a_1%2C%20...%2C%20a_k" /> sorozata, és egy <img src="https://render.githubusercontent.com/render/math?math=K" /> célszám.
+**Input**: Pozitív egészek egy <img src="https://latex.codecogs.com/svg?a_1%2C%20...%2C%20a_k" /> sorozata, és egy <img src="https://latex.codecogs.com/svg?K" /> célszám.
 
-**Output**: Van-e ezeknek olyan részhalmaza, melynek összege épp <img src="https://render.githubusercontent.com/render/math?math=K" />?
+**Output**: Van-e ezeknek olyan részhalmaza, melynek összege épp <img src="https://latex.codecogs.com/svg?K" />?
 
 ###### Partíció
 
-**Input**: Pozitív egészek egy <img src="https://render.githubusercontent.com/render/math?math=a_1%2C%20...%2C%20a_k" /> sorozata.
+**Input**: Pozitív egészek egy <img src="https://latex.codecogs.com/svg?a_1%2C%20...%2C%20a_k" /> sorozata.
 
-**Output**: Van-e ezeknek egy olyan részhalmaza, melynek összege épp <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Csum_%7Bi%20%3D%201%7D%5E%7Bk%7D%20a_i%7D%7B2%7D" />?
+**Output**: Van-e ezeknek egy olyan részhalmaza, melynek összege épp <img src="https://latex.codecogs.com/svg?%5Cfrac%7B%5Csum_%7Bi%20%3D%201%7D%5E%7Bk%7D%20a_i%7D%7B2%7D" />?
 
 ###### Hátizsák
 
-**Input**: <img src="https://render.githubusercontent.com/render/math?math=i" /> darab tárgy, mindegyiknek egy <img src="https://render.githubusercontent.com/render/math?math=w_i" /> súlya, és egy <img src="https://render.githubusercontent.com/render/math?math=c_i" /> értéke, egy <img src="https://render.githubusercontent.com/render/math?math=W" /> összkapacitás és egy <img src="https://render.githubusercontent.com/render/math?math=C" /> célérték.
+**Input**: <img src="https://latex.codecogs.com/svg?i" /> darab tárgy, mindegyiknek egy <img src="https://latex.codecogs.com/svg?w_i" /> súlya, és egy <img src="https://latex.codecogs.com/svg?c_i" /> értéke, egy <img src="https://latex.codecogs.com/svg?W" /> összkapacitás és egy <img src="https://latex.codecogs.com/svg?C" /> célérték.
 
-**Output**: Van-e a tárgyaknak olyan részhalmaza, melynek összsúlya legfeljebb <img src="https://render.githubusercontent.com/render/math?math=W" />, összértéke pedig legalább <img src="https://render.githubusercontent.com/render/math?math=C" />?
+**Output**: Van-e a tárgyaknak olyan részhalmaza, melynek összsúlya legfeljebb <img src="https://latex.codecogs.com/svg?W" />, összértéke pedig legalább <img src="https://latex.codecogs.com/svg?C" />?
 
 > TODO: erős-, gyenge NP-teljesség kell-e ide?
 
@@ -1602,31 +1602,31 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 Determinisztikusan (vagy nemdeterminisztikusan), polinomidőben megoldható problémák osztálya.
 
-- <img src="https://render.githubusercontent.com/render/math?math=SPACE(f(n))" />: Az <img src="https://render.githubusercontent.com/render/math?math=O(f(n))" /> tárban eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?SPACE(f(n))" />: Az <img src="https://latex.codecogs.com/svg?O(f(n))" /> tárban eldönthető problémák osztálya.
 
-- <img src="https://render.githubusercontent.com/render/math?math=NSPACE(f(n))" />: Az <img src="https://render.githubusercontent.com/render/math?math=O(f(n))" /> tárban **nemdeterminisztikusan** eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?NSPACE(f(n))" />: Az <img src="https://latex.codecogs.com/svg?O(f(n))" /> tárban **nemdeterminisztikusan** eldönthető problémák osztálya.
 
-- <img src="https://render.githubusercontent.com/render/math?math=TIME(f(n))" />: Az <img src="https://render.githubusercontent.com/render/math?math=O(f(n))" /> időben eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?TIME(f(n))" />: Az <img src="https://latex.codecogs.com/svg?O(f(n))" /> időben eldönthető problémák osztálya.
 
-- <img src="https://render.githubusercontent.com/render/math?math=NTIME(f(n))" />: Az <img src="https://render.githubusercontent.com/render/math?math=O(f(n))" /> időben **nemdeterminisztikusan** eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?NTIME(f(n))" />: Az <img src="https://latex.codecogs.com/svg?O(f(n))" /> időben **nemdeterminisztikusan** eldönthető problémák osztálya.
 
 PSPACE-beli problémák még **nehezebbek, mint az NP-beliek**.
 
 ##### Fontos összefüggés NSPACE és SPACE között
 
-<img src="https://render.githubusercontent.com/render/math?math=NSPACE(f(n))%20%5Csubseteq%20SPACE(f%5E2(n))" />
+<img src="https://latex.codecogs.com/svg?NSPACE(f(n))%20%5Csubseteq%20SPACE(f%5E2(n))" />
 
 Ebből következik ez is:
 
-<img src="https://render.githubusercontent.com/render/math?math=PSPACE%20%3D%20NPSPACE" />
+<img src="https://latex.codecogs.com/svg?PSPACE%20%3D%20NPSPACE" />
 
-Hiszen a kettes hatványtól függetlenül <img src="https://render.githubusercontent.com/render/math?math=f(n)" /> ugyan úgy csak egy **polinom**iális függvény.
+Hiszen a kettes hatványtól függetlenül <img src="https://latex.codecogs.com/svg?f(n)" /> ugyan úgy csak egy **polinom**iális függvény.
 
-> Ennek az összefüggésnek az oka, hogy a tár **újra felhasználható**. Emiatt viszonylag kevés tár is elég sok probléma eldöntésére. Az idő ezzel szemben sokkal problémásabb, nem tudjuk, hogy egy <img src="https://render.githubusercontent.com/render/math?math=f(n)" /> időigényű nemdeterminisztikus algoritmust lehet-e <img src="https://render.githubusercontent.com/render/math?math=2%5E%7BO(f(n))%7D" />-nél gyorsabban szimulálni.
+> Ennek az összefüggésnek az oka, hogy a tár **újra felhasználható**. Emiatt viszonylag kevés tár is elég sok probléma eldöntésére. Az idő ezzel szemben sokkal problémásabb, nem tudjuk, hogy egy <img src="https://latex.codecogs.com/svg?f(n)" /> időigényű nemdeterminisztikus algoritmust lehet-e <img src="https://latex.codecogs.com/svg?2%5E%7BO(f(n))%7D" />-nél gyorsabban szimulálni.
 
 ##### Lineáris tárigény
 
-Az előbb említett előny miatt elég sok probléma eldönthető <img src="https://render.githubusercontent.com/render/math?math=O(n)" /> tárban.
+Az előbb említett előny miatt elég sok probléma eldönthető <img src="https://latex.codecogs.com/svg?O(n)" /> tárban.
 
 Pl. **SAT**, **HAMILTON-ÚT,** és a **3-SZÍNEZÉS** mind eldönthető lineáris tárban. Csak lehetséges tanúkat kell generálni, fontos, hogy egyszerre csak egyet, ezt a tárat használjuk fel újra és újra. Ellenőrizzük a tanút, ha nem jó generáljuk a következőt.
 
@@ -1638,77 +1638,77 @@ Ha az algoritmus az inputot csak olvassa, és az outputot _stream-mód_-ban írj
 
 #### Az NL-osztály
 
-- <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20SPACE(logn)" />: Determinisztikusan logaritmikus tárban eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?L%20%3D%20SPACE(logn)" />: Determinisztikusan logaritmikus tárban eldönthető problémák osztálya.
 
-- <img src="https://render.githubusercontent.com/render/math?math=NL%20%3D%20NSPACE(logn)" />: Nemdeterminisztikusan logaritmikus tárban eldönthető problémák osztálya.
+- <img src="https://latex.codecogs.com/svg?NL%20%3D%20NSPACE(logn)" />: Nemdeterminisztikusan logaritmikus tárban eldönthető problémák osztálya.
 
-Immermann-Szelepcsényi tétel szerint: <img src="https://render.githubusercontent.com/render/math?math=NL%20%3D%20coNL" />
+Immermann-Szelepcsényi tétel szerint: <img src="https://latex.codecogs.com/svg?NL%20%3D%20coNL" />
 
 ##### Mit nem szabad, hogy legyen esély NL-beli algoritmust készíteni?
 
 - Az **inputot írni**.
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CTheta(n)" /> méretű bináris tömböt felvenni.
+- <img src="https://latex.codecogs.com/svg?%5CTheta(n)" /> méretű bináris tömböt felvenni.
 
 ##### Mit szabad?
 
-- Olyan **változót létrehozni**, amibe <img src="https://render.githubusercontent.com/render/math?math=0" /> és <img src="https://render.githubusercontent.com/render/math?math=n" /> közti számokat írunk, hiszen ezek <img src="https://render.githubusercontent.com/render/math?math=logn" /> tárat igényelnek.
+- Olyan **változót létrehozni**, amibe <img src="https://latex.codecogs.com/svg?0" /> és <img src="https://latex.codecogs.com/svg?n" /> közti számokat írunk, hiszen ezek <img src="https://latex.codecogs.com/svg?logn" /> tárat igényelnek.
 
-- Nem csak <img src="https://render.githubusercontent.com/render/math?math=n" />-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha <img src="https://render.githubusercontent.com/render/math?math=n%5E3" />-ig számolunk, az is elfér <img src="https://render.githubusercontent.com/render/math?math=log%5E3%20%3D%203%20*%20logn" /> biten, tehát <img src="https://render.githubusercontent.com/render/math?math=O(logn)" /> a tárkorlátja.
+- Nem csak <img src="https://latex.codecogs.com/svg?n" />-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha <img src="https://latex.codecogs.com/svg?n%5E3" />-ig számolunk, az is elfér <img src="https://latex.codecogs.com/svg?log%5E3%20%3D%203%20*%20logn" /> biten, tehát <img src="https://latex.codecogs.com/svg?O(logn)" /> a tárkorlátja.
 
-- Az **input valamelyik elemére rámutatni** egy pointerrel, hiszen lényegében ez is egy <img src="https://render.githubusercontent.com/render/math?math=0" />-tól <img src="https://render.githubusercontent.com/render/math?math=n" />-ig értékeket felvevő változó.
+- Az **input valamelyik elemére rámutatni** egy pointerrel, hiszen lényegében ez is egy <img src="https://latex.codecogs.com/svg?0" />-tól <img src="https://latex.codecogs.com/svg?n" />-ig értékeket felvevő változó.
 
 ##### Elérhetőség
 
-**Determinisztikusan** Savitch tétele szerint az ELÉRHETŐSÉG eldönthető <img src="https://render.githubusercontent.com/render/math?math=O(log%5E2n)" /> tárban. Ennek oka a rekurzió, hiszen egy példányunk <img src="https://render.githubusercontent.com/render/math?math=O(logn)" /> táras, de ebből egyszerre akár <img src="https://render.githubusercontent.com/render/math?math=logn" /> darab is lehet a memóriában.
+**Determinisztikusan** Savitch tétele szerint az ELÉRHETŐSÉG eldönthető <img src="https://latex.codecogs.com/svg?O(log%5E2n)" /> tárban. Ennek oka a rekurzió, hiszen egy példányunk <img src="https://latex.codecogs.com/svg?O(logn)" /> táras, de ebből egyszerre akár <img src="https://latex.codecogs.com/svg?logn" /> darab is lehet a memóriában.
 
-**Nemdeterminisztikusan** bele férünk a logtárba. Ekkor "nemdeterminisztikusan bolyongunk" a gráfban, és ha <img src="https://render.githubusercontent.com/render/math?math=N" /> lépésben elértünk a csúcsig, akkor `true` amúgy `false`. Tehát minden iterációban átlépünk nemdeterminisztikusan minden szomszédra, ha megtaláltuk a cél csúcsot, `true`, ha nem tudunk már tovább lépni, vagy lefutott mind az <img src="https://render.githubusercontent.com/render/math?math=N" /> iteráció, akkor `false`.
+**Nemdeterminisztikusan** bele férünk a logtárba. Ekkor "nemdeterminisztikusan bolyongunk" a gráfban, és ha <img src="https://latex.codecogs.com/svg?N" /> lépésben elértünk a csúcsig, akkor `true` amúgy `false`. Tehát minden iterációban átlépünk nemdeterminisztikusan minden szomszédra, ha megtaláltuk a cél csúcsot, `true`, ha nem tudunk már tovább lépni, vagy lefutott mind az <img src="https://latex.codecogs.com/svg?N" /> iteráció, akkor `false`.
 
 Ezek alapján tehát:
 
-<img src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BEL%C3%89RHET%C5%90S%C3%89G%7D%20%5Cin%20%5Ctextbf%7BNL%7D" />
+<img src="https://latex.codecogs.com/svg?%5Ctext%7BEL%C3%89RHET%C5%90S%C3%89G%7D%20%5Cin%20%5Ctextbf%7BNL%7D" />
 
 ![ ](../img/bonya_osztalyok.png)
 
 #### Logtáras visszavezetés
 
-<img src="https://render.githubusercontent.com/render/math?math=P" />-n belül ugye a polinomidejű visszavezetésnek nincs értelme. Hiszen ekkor az inputkonverziót végző függvényben meg tudjuk oldani a problémát, és csak visszaadni egy ismerten `true` vagy `false` inputot.
+<img src="https://latex.codecogs.com/svg?P" />-n belül ugye a polinomidejű visszavezetésnek nincs értelme. Hiszen ekkor az inputkonverziót végző függvényben meg tudjuk oldani a problémát, és csak visszaadni egy ismerten `true` vagy `false` inputot.
 
 ##### Definíció
 
-Legyenek <img src="https://render.githubusercontent.com/render/math?math=A" /> és <img src="https://render.githubusercontent.com/render/math?math=B" /> eldöntési problémák. Ha <img src="https://render.githubusercontent.com/render/math?math=f" /> egy olyan függvény, mely
+Legyenek <img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> eldöntési problémák. Ha <img src="https://latex.codecogs.com/svg?f" /> egy olyan függvény, mely
 
-- <img src="https://render.githubusercontent.com/render/math?math=A" /> inputjaiból <img src="https://render.githubusercontent.com/render/math?math=B" /> inputjait készíti,
+- <img src="https://latex.codecogs.com/svg?A" /> inputjaiból <img src="https://latex.codecogs.com/svg?B" /> inputjait készíti,
 
-- választartó módon: <img src="https://render.githubusercontent.com/render/math?math=A" /> "igen" példányiból <img src="https://render.githubusercontent.com/render/math?math=B" /> "igen" példányait, "nem" példányaiból pedig "nem" példányt,
+- választartó módon: <img src="https://latex.codecogs.com/svg?A" /> "igen" példányiból <img src="https://latex.codecogs.com/svg?B" /> "igen" példányait, "nem" példányaiból pedig "nem" példányt,
 
 - és logaritmikus tárban kiszámítható,
 
-akkor <img src="https://render.githubusercontent.com/render/math?math=f" /> egy logtáras visszavezetés <img src="https://render.githubusercontent.com/render/math?math=A" />-ról <img src="https://render.githubusercontent.com/render/math?math=B" />-re. Ha <img src="https://render.githubusercontent.com/render/math?math=A" /> és <img src="https://render.githubusercontent.com/render/math?math=B" /> közt létezik ilyen, akkor azt mondjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=A" /> logtárban visszavezethető <img src="https://render.githubusercontent.com/render/math?math=B" />-re, jelben <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cle_L%20B" />.
+akkor <img src="https://latex.codecogs.com/svg?f" /> egy logtáras visszavezetés <img src="https://latex.codecogs.com/svg?A" />-ról <img src="https://latex.codecogs.com/svg?B" />-re. Ha <img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> közt létezik ilyen, akkor azt mondjuk, hogy <img src="https://latex.codecogs.com/svg?A" /> logtárban visszavezethető <img src="https://latex.codecogs.com/svg?B" />-re, jelben <img src="https://latex.codecogs.com/svg?A%20%5Cle_L%20B" />.
 
-> <img src="https://render.githubusercontent.com/render/math?math=f" /> biztosan lyukszalagos, hiszen szublineárisnak kell lennie.
+> <img src="https://latex.codecogs.com/svg?f" /> biztosan lyukszalagos, hiszen szublineárisnak kell lennie.
 
 ##### Tulajdonságok
 
-A logaritmikus tárigényű algoritmusok polinom időben megállnak, hiszen <img src="https://render.githubusercontent.com/render/math?math=O(logn)" /> tárat <img src="https://render.githubusercontent.com/render/math?math=2%5E%7BO(logn)%7D" /> féleképp lehet teleírni, minden pillanatban a program <img src="https://render.githubusercontent.com/render/math?math=K" /> darab konstans utasítás egyikét hajtja éppen végre, így összesen <img src="https://render.githubusercontent.com/render/math?math=K%20*%202%5E%7BO(logn)%7D" />-féle különböző konfigurációja lehet, ami polinom.
+A logaritmikus tárigényű algoritmusok polinom időben megállnak, hiszen <img src="https://latex.codecogs.com/svg?O(logn)" /> tárat <img src="https://latex.codecogs.com/svg?2%5E%7BO(logn)%7D" /> féleképp lehet teleírni, minden pillanatban a program <img src="https://latex.codecogs.com/svg?K" /> darab konstans utasítás egyikét hajtja éppen végre, így összesen <img src="https://latex.codecogs.com/svg?K%20*%202%5E%7BO(logn)%7D" />-féle különböző konfigurációja lehet, ami polinom.
 
-Ebből következik: <img src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BHa%20%7D%20A%20%5Cle_L%20B%20%5Ctext%7B%2C%20akkor%7D%20A%20%5Cle_P%20B" />
+Ebből következik: <img src="https://latex.codecogs.com/svg?%5Ctext%7BHa%20%7D%20A%20%5Cle_L%20B%20%5Ctext%7B%2C%20akkor%7D%20A%20%5Cle_P%20B" />
 
 > Azaz a logtáras visszavezetés formailag "gyengébb".
 
-Valójában nem tudjuk, hogy ténylegesen gyengébb-e ez a visszavezetés, de azt tudjuk, hogy akkor lesz gyengébb, ha <img src="https://render.githubusercontent.com/render/math?math=L%20%5Cne%20P" />.
+Valójában nem tudjuk, hogy ténylegesen gyengébb-e ez a visszavezetés, de azt tudjuk, hogy akkor lesz gyengébb, ha <img src="https://latex.codecogs.com/svg?L%20%5Cne%20P" />.
 
-<img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20P" /> pontosan akkor teljesül, ha <img src="https://render.githubusercontent.com/render/math?math=%5Cle_L%20~%20%3D%20~%20%5Cle_P" />
+<img src="https://latex.codecogs.com/svg?L%20%3D%20P" /> pontosan akkor teljesül, ha <img src="https://latex.codecogs.com/svg?%5Cle_L%20~%20%3D%20~%20%5Cle_P" />
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=f" /> és <img src="https://render.githubusercontent.com/render/math?math=g" /> logtáras függvények, akkor kompozíciójuk is az. Ez azért jó, mert akkor itt is be lehet vetni azt a trükköt, amit a polinomidejű visszavezetésnél, azaz a <img src="https://render.githubusercontent.com/render/math?math=C" />-nehézség bizonyításához elég egy már ismert <img src="https://render.githubusercontent.com/render/math?math=C" />-nehéz problémát visszavezetni az adott problémára. Hiszen ekkor tranzitívan minden <img src="https://render.githubusercontent.com/render/math?math=C" />-beli probléma visszavezethető lesz az aktuális problémára is.
+Ha <img src="https://latex.codecogs.com/svg?f" /> és <img src="https://latex.codecogs.com/svg?g" /> logtáras függvények, akkor kompozíciójuk is az. Ez azért jó, mert akkor itt is be lehet vetni azt a trükköt, amit a polinomidejű visszavezetésnél, azaz a <img src="https://latex.codecogs.com/svg?C" />-nehézség bizonyításához elég egy már ismert <img src="https://latex.codecogs.com/svg?C" />-nehéz problémát visszavezetni az adott problémára. Hiszen ekkor tranzitívan minden <img src="https://latex.codecogs.com/svg?C" />-beli probléma visszavezethető lesz az aktuális problémára is.
 
 #### NL-teljes problémák
 
-Legyen <img src="https://render.githubusercontent.com/render/math?math=L%20%5Csub%20C%20%5Csubseteq%20P" /> problémák egy osztálya. Azt mondjuk, hogy az <img src="https://render.githubusercontent.com/render/math?math=A" /> probléma <img src="https://render.githubusercontent.com/render/math?math=C" />-nehéz, ha <img src="https://render.githubusercontent.com/render/math?math=C" /> minden eleme **logtárban** visszavezethető <img src="https://render.githubusercontent.com/render/math?math=A" />-ra.
+Legyen <img src="https://latex.codecogs.com/svg?L%20%5Csub%20C%20%5Csubseteq%20P" /> problémák egy osztálya. Azt mondjuk, hogy az <img src="https://latex.codecogs.com/svg?A" /> probléma <img src="https://latex.codecogs.com/svg?C" />-nehéz, ha <img src="https://latex.codecogs.com/svg?C" /> minden eleme **logtárban** visszavezethető <img src="https://latex.codecogs.com/svg?A" />-ra.
 
-Ha ezen kívül <img src="https://render.githubusercontent.com/render/math?math=A" /> még ráadásul <img src="https://render.githubusercontent.com/render/math?math=C" />-beli is, akkor <img src="https://render.githubusercontent.com/render/math?math=A" /> egy <img src="https://render.githubusercontent.com/render/math?math=C" />-teljes probléma.
+Ha ezen kívül <img src="https://latex.codecogs.com/svg?A" /> még ráadásul <img src="https://latex.codecogs.com/svg?C" />-beli is, akkor <img src="https://latex.codecogs.com/svg?A" /> egy <img src="https://latex.codecogs.com/svg?C" />-teljes probléma.
 
-> Szóval ugyan az, mint <img src="https://render.githubusercontent.com/render/math?math=P" />-n kívül, csak logtárban, mivel <img src="https://render.githubusercontent.com/render/math?math=P" />-n belül a polinomidejű visszavezetésnek nincs értelme.
+> Szóval ugyan az, mint <img src="https://latex.codecogs.com/svg?P" />-n kívül, csak logtárban, mivel <img src="https://latex.codecogs.com/svg?P" />-n belül a polinomidejű visszavezetésnek nincs értelme.
 
 ##### P-teljes problémák
 
@@ -1722,7 +1722,7 @@ Ha ezen kívül <img src="https://render.githubusercontent.com/render/math?math=
 
 - **ELÉRHETŐSÉG** úgy, hogy az input irányított, **körmentes** gráf
 
-- **ELÉRHETETLENSÉG** (mivel ez az ELÉRHETŐSÉG komplementere, igy <img src="https://render.githubusercontent.com/render/math?math=coNL" />-teljes, így <img src="https://render.githubusercontent.com/render/math?math=NL" />-teljes, hiszen <img src="https://render.githubusercontent.com/render/math?math=NL%20%3D%20coNL" /> az Immermann-Szelepcsényi tétel szerint)
+- **ELÉRHETETLENSÉG** (mivel ez az ELÉRHETŐSÉG komplementere, igy <img src="https://latex.codecogs.com/svg?coNL" />-teljes, így <img src="https://latex.codecogs.com/svg?NL" />-teljes, hiszen <img src="https://latex.codecogs.com/svg?NL%20%3D%20coNL" /> az Immermann-Szelepcsényi tétel szerint)
 
 - **2SAT** (, és annak a komplementere, megintcsak az Immermann-Szelepcsényi tétel miatt)
 
@@ -1730,11 +1730,11 @@ Ha ezen kívül <img src="https://render.githubusercontent.com/render/math?math=
 
 ##### QSAT
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=%5Cexists%20x_1%20%5Cforall%20x_2%20%5Cexists%20x_3%20...%20%5Cforall%20x_%7B2m%7D%5Cphi" /> alakú **kvantifikált ítéletlogikai** formula, melynek magja, a <img src="https://render.githubusercontent.com/render/math?math=%5Cphi" /> konjunktív normálformájú, **kvantormentes** formula, melyben csak az <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_%7B2m%7D" /> változók fordulnak elő.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?%5Cexists%20x_1%20%5Cforall%20x_2%20%5Cexists%20x_3%20...%20%5Cforall%20x_%7B2m%7D%5Cphi" /> alakú **kvantifikált ítéletlogikai** formula, melynek magja, a <img src="https://latex.codecogs.com/svg?%5Cphi" /> konjunktív normálformájú, **kvantormentes** formula, melyben csak az <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_%7B2m%7D" /> változók fordulnak elő.
 
-**Output**: Igaz-e <img src="https://render.githubusercontent.com/render/math?math=%5Cphi" />?
+**Output**: Igaz-e <img src="https://latex.codecogs.com/svg?%5Cphi" />?
 
-> Ez nem első rendű logika, az <img src="https://render.githubusercontent.com/render/math?math=x_i" /> változók csak igaz / hamis értékeket vehetnek fel.
+> Ez nem első rendű logika, az <img src="https://latex.codecogs.com/svg?x_i" /> változók csak igaz / hamis értékeket vehetnek fel.
 
 A QSAT egy **PSPACE-teljes** probléma.
 
@@ -1742,21 +1742,21 @@ Egy QSAT-ot megoldó rekurzív algoritmus rekurziós fája:
 
 ![ ](../img/qsat_alg.png)
 
-Tárigénye <img src="https://render.githubusercontent.com/render/math?math=O(n%5E2)" />, mert a rekurziókor lemásoljuk az inputot, ami <img src="https://render.githubusercontent.com/render/math?math=O(n)" /> méretű, és a mélység <img src="https://render.githubusercontent.com/render/math?math=O(n)" />
+Tárigénye <img src="https://latex.codecogs.com/svg?O(n%5E2)" />, mert a rekurziókor lemásoljuk az inputot, ami <img src="https://latex.codecogs.com/svg?O(n)" /> méretű, és a mélység <img src="https://latex.codecogs.com/svg?O(n)" />
 
 ###### QSAT, mint kétszemélyes, zéró összegű játék
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=%5Cexists%20x_1%20%5Cforall%20x_2%20%5Cexists%20x_3%20...%20%5Cforall%20x_%7B2m%7D%5Cphi" /> alakú **kvantifikált ítéletlogikai** formula, melynek magja, a <img src="https://render.githubusercontent.com/render/math?math=%5Cphi" /> konjunktív normálformájú, **kvantormentes** formula, melyben csak az <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_%7B2m%7D" /> változók fordulnak elő.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?%5Cexists%20x_1%20%5Cforall%20x_2%20%5Cexists%20x_3%20...%20%5Cforall%20x_%7B2m%7D%5Cphi" /> alakú **kvantifikált ítéletlogikai** formula, melynek magja, a <img src="https://latex.codecogs.com/svg?%5Cphi" /> konjunktív normálformájú, **kvantormentes** formula, melyben csak az <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_%7B2m%7D" /> változók fordulnak elő.
 
 **Output**: Az első játékosnak van-e nyerő stratégiája a következő játékban?
 
-- A játékosok sorban értéket adnak a változóknak, előbb az első játékos <img src="https://render.githubusercontent.com/render/math?math=x_1" />-nek, majd a második <img src="https://render.githubusercontent.com/render/math?math=x_2" />-nek, megint az első stb., végül a második <img src="https://render.githubusercontent.com/render/math?math=x_%7B2m%7D" />-nek.
+- A játékosok sorban értéket adnak a változóknak, előbb az első játékos <img src="https://latex.codecogs.com/svg?x_1" />-nek, majd a második <img src="https://latex.codecogs.com/svg?x_2" />-nek, megint az első stb., végül a második <img src="https://latex.codecogs.com/svg?x_%7B2m%7D" />-nek.
 
 - Ha a formula értéke igaz lesz, az első játékos nyert, ha hamis, a második.
 
 ##### FÖLDRAJZI JÁTÉK
 
-**Input**: Egy <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(V%2C%20E)" /> irányított gráf. és egy kijelölt "kezdő" csúcsa.
+**Input**: Egy <img src="https://latex.codecogs.com/svg?G%20%3D%20(V%2C%20E)" /> irányított gráf. és egy kijelölt "kezdő" csúcsa.
 
 **Output**: Az első játékosnak van-e nyerő stratégiája a következő játékban?
 
@@ -1766,67 +1766,67 @@ Tárigénye <img src="https://render.githubusercontent.com/render/math?math=O(n%
 
 ##### További PSPACE-teljes problémák
 
-- Adott egy <img src="https://render.githubusercontent.com/render/math?math=M" /> determinisztikus RAM program, és egy <img src="https://render.githubusercontent.com/render/math?math=I" /> inputja. Igaz-e, hogy <img src="https://render.githubusercontent.com/render/math?math=M" /> elfogadja <img src="https://render.githubusercontent.com/render/math?math=I" />-t, méghozzá <img src="https://render.githubusercontent.com/render/math?math=O(n)" /> tárat használva?
+- Adott egy <img src="https://latex.codecogs.com/svg?M" /> determinisztikus RAM program, és egy <img src="https://latex.codecogs.com/svg?I" /> inputja. Igaz-e, hogy <img src="https://latex.codecogs.com/svg?M" /> elfogadja <img src="https://latex.codecogs.com/svg?I" />-t, méghozzá <img src="https://latex.codecogs.com/svg?O(n)" /> tárat használva?
 
 - Adott két reguláris kifejezés. Igaz-e hogy ugyan azokra a szavakra illeszkednek?
 
 - Adott két nemdeterminisztikus automata. Ekvivalensek-e?
 
-- <img src="https://render.githubusercontent.com/render/math?math=n%20%5Ctimes%20n" />-es SOKOBAN
+- <img src="https://latex.codecogs.com/svg?n%20%5Ctimes%20n" />-es SOKOBAN
 
-- <img src="https://render.githubusercontent.com/render/math?math=n%20%5Ctimes%20n" />-es RUSH HOUR
+- <img src="https://latex.codecogs.com/svg?n%20%5Ctimes%20n" />-es RUSH HOUR
 ## Formális Nyelvek
 
 ### 1. Véges automata és változatai, a felismert nyelv definíciója. A reguláris nyelvtanok, a véges automaták, és a reguláris kifejezések ekvivalenciája. Reguláris nyelvekre vonatkozó pumpáló lemma, alkalmazása és következményei.
 
 #### Véges automata
 
-Az <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **determinisztikus automatának** nevezzük, ahol:
+Az <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **determinisztikus automatának** nevezzük, ahol:
 
-- <img src="https://render.githubusercontent.com/render/math?math=Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy ábécé, au **input ábécé**
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy ábécé, au **input ábécé**
 
-- <img src="https://render.githubusercontent.com/render/math?math=q_0%20%5Cin%20Q" /> a **kezdő állapot**
+- <img src="https://latex.codecogs.com/svg?q_0%20%5Cin%20Q" /> a **kezdő állapot**
 
-- <img src="https://render.githubusercontent.com/render/math?math=F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta%3A%20Q%20%5Ctimes%20%5CSigma%20%5Cto%20Q" /> egy leképezés, az **átmenetfüggvény**
+- <img src="https://latex.codecogs.com/svg?%5Cdelta%3A%20Q%20%5Ctimes%20%5CSigma%20%5Cto%20Q" /> egy leképezés, az **átmenetfüggvény**
 
 Példa:
 
-- <img src="https://render.githubusercontent.com/render/math?math=Q%20%3D%20%5C%7B%20~%20q_0%2C%20q_1%2C%20q_2%20~%20%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?Q%20%3D%20%5C%7B%20~%20q_0%2C%20q_1%2C%20q_2%20~%20%5C%7D" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%3D%20%5C%7B%20~%20a%2C%20b%20~%20%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20~%20a%2C%20b%20~%20%5C%7D" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=F%20%3D%20%5C%7B%20~%20q_0%20~%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?F%20%3D%20%5C%7B%20~%20q_0%20~%5C%7D" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta" />
+- <img src="https://latex.codecogs.com/svg?%5Cdelta" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_0%2C%20a)%20%3D%20q_1" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_0%2C%20a)%20%3D%20q_1" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_1%2C%20a)%20%3D%20q_2" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_1%2C%20a)%20%3D%20q_2" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_2%2C%20a)%20%3D%20q_0" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_2%2C%20a)%20%3D%20q_0" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_0%2C%20b)%20%3D%20q_0" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_0%2C%20b)%20%3D%20q_0" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_1%2C%20b)%20%3D%20q_1" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_1%2C%20b)%20%3D%20q_1" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_2%2C%20b)%20%3D%20q_2" />
+  - <img src="https://latex.codecogs.com/svg?%5Cdelta(q_2%2C%20b)%20%3D%20q_2" />
 
 ##### Automata megadása irányított gráfként
 
 Gráf csúcsai az automata állapotai
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)%20%3D%20p" />, akkor a <img src="https://render.githubusercontent.com/render/math?math=q" /> csúcsból egy élet irányítunk a <img src="https://render.githubusercontent.com/render/math?math=p" /> csúcsba, és az élet ellátjuk az <img src="https://render.githubusercontent.com/render/math?math=a" /> címkével
+Ha <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)%20%3D%20p" />, akkor a <img src="https://latex.codecogs.com/svg?q" /> csúcsból egy élet irányítunk a <img src="https://latex.codecogs.com/svg?p" /> csúcsba, és az élet ellátjuk az <img src="https://latex.codecogs.com/svg?a" /> címkével
 
 ```mermaid
 graph LR;
     q((q)) --a--> p((p))
 ```
 
-> Itt az automata a <img src="https://render.githubusercontent.com/render/math?math=q" /> állapotból az <img src="https://render.githubusercontent.com/render/math?math=a" /> input szimbólum hatására átmegy a <img src="https://render.githubusercontent.com/render/math?math=p" /> állapotba.
+> Itt az automata a <img src="https://latex.codecogs.com/svg?q" /> állapotból az <img src="https://latex.codecogs.com/svg?a" /> input szimbólum hatására átmegy a <img src="https://latex.codecogs.com/svg?p" /> állapotba.
 
 A korább példa automata megadása gráffal:
 
@@ -1842,7 +1842,7 @@ graph LR;
     style q0 stroke-width:3px
 ```
 
-> A <img src="https://render.githubusercontent.com/render/math?math=q_0" /> állapot jelen példában a végállapot is, amit a vastagított szél jelez.
+> A <img src="https://latex.codecogs.com/svg?q_0" /> állapot jelen példában a végállapot is, amit a vastagított szél jelez.
 
 ##### Automata megadása táblázatként
 
@@ -1850,123 +1850,123 @@ Első sorban a kezdőállapot, végállapotokat meg kell jelölni (itt most csil
 
 A korább példa automata megadása táblázattal:
 
-| <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta" /> | <img src="https://render.githubusercontent.com/render/math?math=a" />   | <img src="https://render.githubusercontent.com/render/math?math=b" />   |
+| <img src="https://latex.codecogs.com/svg?%5Cdelta" /> | <img src="https://latex.codecogs.com/svg?a" />   | <img src="https://latex.codecogs.com/svg?b" />   |
 |:--------:|:-----:|:-----:|
-| \* <img src="https://render.githubusercontent.com/render/math?math=q_0" /> | <img src="https://render.githubusercontent.com/render/math?math=q_1" /> | <img src="https://render.githubusercontent.com/render/math?math=q_0" /> |
-| <img src="https://render.githubusercontent.com/render/math?math=q_1" />    | <img src="https://render.githubusercontent.com/render/math?math=q_2" /> | <img src="https://render.githubusercontent.com/render/math?math=q_1" /> |
-| <img src="https://render.githubusercontent.com/render/math?math=q_2" />    | <img src="https://render.githubusercontent.com/render/math?math=q_0" /> | <img src="https://render.githubusercontent.com/render/math?math=q_2" /> |
+| \* <img src="https://latex.codecogs.com/svg?q_0" /> | <img src="https://latex.codecogs.com/svg?q_1" /> | <img src="https://latex.codecogs.com/svg?q_0" /> |
+| <img src="https://latex.codecogs.com/svg?q_1" />    | <img src="https://latex.codecogs.com/svg?q_2" /> | <img src="https://latex.codecogs.com/svg?q_1" /> |
+| <img src="https://latex.codecogs.com/svg?q_2" />    | <img src="https://latex.codecogs.com/svg?q_0" /> | <img src="https://latex.codecogs.com/svg?q_2" /> |
 
 > Csillag jelzi, hogy az adott sor állapota végállapot.
 
 ##### Automata átmenetei
 
-<img src="https://render.githubusercontent.com/render/math?math=M" /> **konfigurációinak halmaza**: <img src="https://render.githubusercontent.com/render/math?math=C%20%3D%20Q%20%5Ctimes%20%5CSigma%5E*" />
+<img src="https://latex.codecogs.com/svg?M" /> **konfigurációinak halmaza**: <img src="https://latex.codecogs.com/svg?C%20%3D%20Q%20%5Ctimes%20%5CSigma%5E*" />
 
-A <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20a_1...a_n)" /> **konfiguráció** azt jelenti, hogy <img src="https://render.githubusercontent.com/render/math?math=M" /> a <img src="https://render.githubusercontent.com/render/math?math=q" /> állapotban van ás az <img src="https://render.githubusercontent.com/render/math?math=a_1...a_n" /> szót kapja inputként.
+A <img src="https://latex.codecogs.com/svg?(q%2C%20a_1...a_n)" /> **konfiguráció** azt jelenti, hogy <img src="https://latex.codecogs.com/svg?M" /> a <img src="https://latex.codecogs.com/svg?q" /> állapotban van ás az <img src="https://latex.codecogs.com/svg?a_1...a_n" /> szót kapja inputként.
 
 ###### Átmeneti reláció
 
-<img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20aw'" />, valamely <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" />-ra, és <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)%20%3D%20q'" />.
+<img src="https://latex.codecogs.com/svg?(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://latex.codecogs.com/svg?w%20%3D%20aw'" />, valamely <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" />-ra, és <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)%20%3D%20q'" />.
 
-> Azaz aminkor az automata átmegy <img src="https://render.githubusercontent.com/render/math?math=q" />-ból <img src="https://render.githubusercontent.com/render/math?math=q'" />-be, akkor az ehhez "felhasznált" szimbólumot leveszi az input szó elejéről. Pl. itt <img src="https://render.githubusercontent.com/render/math?math=a" /> hatására ment, és <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20aw'" />, így az átmenet után az input szó már csak <img src="https://render.githubusercontent.com/render/math?math=w'" /> az <img src="https://render.githubusercontent.com/render/math?math=a" /> nélkül. Mondhatni, hogy az <img src="https://render.githubusercontent.com/render/math?math=a" />-t felhasználta az átmenethez.
+> Azaz aminkor az automata átmegy <img src="https://latex.codecogs.com/svg?q" />-ból <img src="https://latex.codecogs.com/svg?q'" />-be, akkor az ehhez "felhasznált" szimbólumot leveszi az input szó elejéről. Pl. itt <img src="https://latex.codecogs.com/svg?a" /> hatására ment, és <img src="https://latex.codecogs.com/svg?w%20%3D%20aw'" />, így az átmenet után az input szó már csak <img src="https://latex.codecogs.com/svg?w'" /> az <img src="https://latex.codecogs.com/svg?a" /> nélkül. Mondhatni, hogy az <img src="https://latex.codecogs.com/svg?a" />-t felhasználta az átmenethez.
 
 ####### Átmeneti reláció fajtái
 
-- <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />: Egy lépés
+- <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />: Egy lépés
 
-- <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash%5En_M%20(q'%2C%20w')%2C%20n%20%5Cge%200" />: <img src="https://render.githubusercontent.com/render/math?math=n" /> lépés
+- <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash%5En_M%20(q'%2C%20w')%2C%20n%20%5Cge%200" />: <img src="https://latex.codecogs.com/svg?n" /> lépés
 
-- <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash%5E%2B_M%20(q'%2C%20w')" />: Legalább egy lépés
+- <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash%5E%2B_M%20(q'%2C%20w')" />: Legalább egy lépés
 
-- <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash%5E*_M%20(q'%2C%20w')" />: Valamennyi (esetleg 0) lépés
+- <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash%5E*_M%20(q'%2C%20w')" />: Valamennyi (esetleg 0) lépés
 
-> Az <img src="https://render.githubusercontent.com/render/math?math=M" /> jelölés egy automatát azonosít, elhagyható, ha éppen csak 1 automatáról beszélünk, mert ilyenkor egyértelmű
+> Az <img src="https://latex.codecogs.com/svg?M" /> jelölés egy automatát azonosít, elhagyható, ha éppen csak 1 automatáról beszélünk, mert ilyenkor egyértelmű
 
 > \*, és + itt is, és mindenhol ebben a tárgyban úgy működik, mint megszokott regexeknél
 
 ##### Felismert nyelv
 
-Az <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> automata által felismert nyelven az <img src="https://render.githubusercontent.com/render/math?math=L(M)%20%3D%20%5C%7B%20~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20(q_0%2C%20w)%20%5Cvdash%5E*_M%20(q%2C%20%5Cepsilon)%20~%20%5Ctext%7B%C3%A9s%7D%20~%20q%20%5Cin%20F%20~%20%5C%7D" /> nyelvet értjük.
+Az <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> automata által felismert nyelven az <img src="https://latex.codecogs.com/svg?L(M)%20%3D%20%5C%7B%20~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20(q_0%2C%20w)%20%5Cvdash%5E*_M%20(q%2C%20%5Cepsilon)%20~%20%5Ctext%7B%C3%A9s%7D%20~%20q%20%5Cin%20F%20~%20%5C%7D" /> nyelvet értjük.
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=q_0" />-ból <img src="https://render.githubusercontent.com/render/math?math=w" /> hatására valamelyik <img src="https://render.githubusercontent.com/render/math?math=q%20%5Cin%20F" /> végállapotba jutunk
+> Azaz <img src="https://latex.codecogs.com/svg?q_0" />-ból <img src="https://latex.codecogs.com/svg?w" /> hatására valamelyik <img src="https://latex.codecogs.com/svg?q%20%5Cin%20F" /> végállapotba jutunk
 
-> <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" /> az üres szó
+> <img src="https://latex.codecogs.com/svg?%5Cepsilon" /> az üres szó
 
 ##### Nemdeterminisztikus automata
 
-Az <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **nemdeterminisztikus automatának** nevezzük, ahol:
+Az <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **nemdeterminisztikus automatának** nevezzük, ahol:
 
-- <img src="https://render.githubusercontent.com/render/math?math=Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy ábécé, az **input ábécé**
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy ábécé, az **input ábécé**
 
-- <img src="https://render.githubusercontent.com/render/math?math=q_0%20%5Cin%20Q" /> a **kezdő állapot**
+- <img src="https://latex.codecogs.com/svg?q_0%20%5Cin%20Q" /> a **kezdő állapot**
 
-- <img src="https://render.githubusercontent.com/render/math?math=F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta%3A%20Q%20%5Ctimes%20%5CSigma%20%5Cto%20%5Cmathcal%7BP%7D(Q)" /> egy leképezés, az **átmenetfüggvény\***
+- <img src="https://latex.codecogs.com/svg?%5Cdelta%3A%20Q%20%5Ctimes%20%5CSigma%20%5Cto%20%5Cmathcal%7BP%7D(Q)" /> egy leképezés, az **átmenetfüggvény\***
 
 > Azaz ugyan az, mint a determinisztikus, csak egy input szimbólum hatására egy állapotból többe is átmehet.
 
 A determinisztikus automata ezen általánosítása (hiszen ez egy általánosítás, a determinisztikus automata is lényehében olyan nemdeterminisztikus ami mindig állapotoknak egy egyelemű halmazába tér át) **nem növeli meg a felismerő kapacitást**, tehát egy nyelv akkor és csak akkor ismerhető fel nemdeterminisztikus automatával, ha felismerhető determinisztikus automatával.
 
-> Ezt "hatvány halmaz módszerrel" lehet bebizonyítani, meg kell nézni, hogy <img src="https://render.githubusercontent.com/render/math?math=a" /> hatására milyen állapotokba tud kerülni a nemdeterminisztikus automata, és azonkah az uniója lesz egy állapot. Ez a "determinizálás", aminek a során az állapotok száma nagyban megnőhet (akár exponenciálisan).
+> Ezt "hatvány halmaz módszerrel" lehet bebizonyítani, meg kell nézni, hogy <img src="https://latex.codecogs.com/svg?a" /> hatására milyen állapotokba tud kerülni a nemdeterminisztikus automata, és azonkah az uniója lesz egy állapot. Ez a "determinizálás", aminek a során az állapotok száma nagyban megnőhet (akár exponenciálisan).
 
 ###### Átmeneti reláció
 
-<img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20aw'" />, valamely <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" />-ra, és <img src="https://render.githubusercontent.com/render/math?math=q'%20%5Cin%20%5Cdelta(q%2C%20a)" />.
+<img src="https://latex.codecogs.com/svg?(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://latex.codecogs.com/svg?w%20%3D%20aw'" />, valamely <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" />-ra, és <img src="https://latex.codecogs.com/svg?q'%20%5Cin%20%5Cdelta(q%2C%20a)" />.
 
 ###### Felismert nyelv
 
-Az <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> (nemdeterminisztikus) automata által felismert nyelven az <img src="https://render.githubusercontent.com/render/math?math=L(M)%20%3D%20%5C%7B%20~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20(q_0%2C%20w)%20%5Cvdash%5E*_M%20(q%2C%20%5Cepsilon)%20~%20%5Ctext%7Bvalamely%7D%20~%20q%20%5Cin%20F%20%5Ctext%7B-re%7D%20~%20%5C%7D" /> nyelvet értjük.
+Az <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> (nemdeterminisztikus) automata által felismert nyelven az <img src="https://latex.codecogs.com/svg?L(M)%20%3D%20%5C%7B%20~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20(q_0%2C%20w)%20%5Cvdash%5E*_M%20(q%2C%20%5Cepsilon)%20~%20%5Ctext%7Bvalamely%7D%20~%20q%20%5Cin%20F%20%5Ctext%7B-re%7D%20~%20%5C%7D" /> nyelvet értjük.
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=q_0" />-ból a <img src="https://render.githubusercontent.com/render/math?math=w" /> hatására elérhető valamely <img src="https://render.githubusercontent.com/render/math?math=q%20%5Cin%20F" /> végállapot. DE! Nem baj, ha elérhetően nem-végállapotok is.
+> Azaz <img src="https://latex.codecogs.com/svg?q_0" />-ból a <img src="https://latex.codecogs.com/svg?w" /> hatására elérhető valamely <img src="https://latex.codecogs.com/svg?q%20%5Cin%20F" /> végállapot. DE! Nem baj, ha elérhetően nem-végállapotok is.
 
 ###### Teljesen definiált automata
 
 Akkor teljesen definiált egy automat, ha minden szót végig tud olvasni.
 
-Azaz nem tud pl. egy <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)%20%3D%20%5Cemptyset" /> átmenet miatt elakadni.
+Azaz nem tud pl. egy <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)%20%3D%20%5Cemptyset" /> átmenet miatt elakadni.
 
-Azaz akkor teljesen definiált, ha minden <img src="https://render.githubusercontent.com/render/math?math=q%20%5Cin%20Q" /> és <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" /> esetén <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)" /> **legalább** egy elemű.
+Azaz akkor teljesen definiált, ha minden <img src="https://latex.codecogs.com/svg?q%20%5Cin%20Q" /> és <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" /> esetén <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)" /> **legalább** egy elemű.
 
 Determinisztikus automaták teljesen definiáltak, hiszen pontosan egy állapotba léphetünk tovább.
 
 Nemdeterminisztikus automaták pedig teljesen definiálhatóvá tehetőek "csapda" állapot bevezetésével, anélkül, hogy a felismert nyelv megváltozna.
 
-- Felveszünk egy <img src="https://render.githubusercontent.com/render/math?math=q_c" /> állapotot (ez a "csapda") állapot.
+- Felveszünk egy <img src="https://latex.codecogs.com/svg?q_c" /> állapotot (ez a "csapda") állapot.
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)%20%3D%20%5Cemptyset" /> esetén legyen <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q%2C%20a)%20%3D%20%5C%7B~%20q_c%20~%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)%20%3D%20%5Cemptyset" /> esetén legyen <img src="https://latex.codecogs.com/svg?%5Cdelta(q%2C%20a)%20%3D%20%5C%7B~%20q_c%20~%5C%7D" />
 
-- Legyen <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta(q_c%2C%20a)%20%3D%20%5C%7B~%20q_c%20~%5C%7D" /> minden <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" />-ra.
+- Legyen <img src="https://latex.codecogs.com/svg?%5Cdelta(q_c%2C%20a)%20%3D%20%5C%7B~%20q_c%20~%5C%7D" /> minden <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" />-ra.
 
 > A 3. pont az, ami miatt ez egy "csapda", nem lehet már ebből az állapotból kijönni.
 
-##### Nemdeterminisztikus <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-automata
+##### Nemdeterminisztikus <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-automata
 
-Tartalmaz <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-átmeneteket.
+Tartalmaz <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-átmeneteket.
 
-Az <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **nemdeterminisztikus <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-automatának** nevezzük, ahol:
+Az <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> rendszert **nemdeterminisztikus <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-automatának** nevezzük, ahol:
 
-- <img src="https://render.githubusercontent.com/render/math?math=Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?Q" /> egy nem üres, véges halmaz, az **állapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy ábécé, az **input ábécé**
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy ábécé, az **input ábécé**
 
-- <img src="https://render.githubusercontent.com/render/math?math=q_0%20%5Cin%20Q" /> a **kezdő állapot**
+- <img src="https://latex.codecogs.com/svg?q_0%20%5Cin%20Q" /> a **kezdő állapot**
 
-- <img src="https://render.githubusercontent.com/render/math?math=F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
+- <img src="https://latex.codecogs.com/svg?F%20%5Csubseteq%20Q" /> a **végállapotok halmaza**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cdelta%3A%20Q%20%5Ctimes%20(%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cepsilon%20~%20%5C%7D)%20%5Cto%20%5Cmathcal%7BP%7D(Q)" /> egy leképezés, az **átmenetfüggvény**
+- <img src="https://latex.codecogs.com/svg?%5Cdelta%3A%20Q%20%5Ctimes%20(%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cepsilon%20~%20%5C%7D)%20%5Cto%20%5Cmathcal%7BP%7D(Q)" /> egy leképezés, az **átmenetfüggvény**
 
-> Azaz ugyan olyan, mint a nemdeterminisztikus, csak lehet olyan átmenete, ami "nem fogyasztja" az inputot. Ez az <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-átmenet.
+> Azaz ugyan olyan, mint a nemdeterminisztikus, csak lehet olyan átmenete, ami "nem fogyasztja" az inputot. Ez az <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-átmenet.
 
-**Ez sem bővíti a felismerő kapacitást**, egy nyelv akkor és csak akkor ismerhető fel nemdeterminisztikus <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-átmenetes automatával, ha felismerhető nemdeterminisztikus automatával. <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" /> automata <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-mentesítéssel átalakítható nemdeterminisztikus automatává, ekkor az automaza a <img src="https://render.githubusercontent.com/render/math?math=q" /> állapotból az <img src="https://render.githubusercontent.com/render/math?math=a" /> hatására azon állapotokba megy át, amelyekre <img src="https://render.githubusercontent.com/render/math?math=M" /> valamennyi (akár 0) <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-átmenettel, majd egy <img src="https://render.githubusercontent.com/render/math?math=a" />-átmenettel jut el, továbbá az automata végállapotai azon az állapotok, amikből valamennyi (akár 0) <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-átmenettel egy <img src="https://render.githubusercontent.com/render/math?math=F" />-beli állapotba jut.
+**Ez sem bővíti a felismerő kapacitást**, egy nyelv akkor és csak akkor ismerhető fel nemdeterminisztikus <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-átmenetes automatával, ha felismerhető nemdeterminisztikus automatával. <img src="https://latex.codecogs.com/svg?%5Cepsilon" /> automata <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-mentesítéssel átalakítható nemdeterminisztikus automatává, ekkor az automaza a <img src="https://latex.codecogs.com/svg?q" /> állapotból az <img src="https://latex.codecogs.com/svg?a" /> hatására azon állapotokba megy át, amelyekre <img src="https://latex.codecogs.com/svg?M" /> valamennyi (akár 0) <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-átmenettel, majd egy <img src="https://latex.codecogs.com/svg?a" />-átmenettel jut el, továbbá az automata végállapotai azon az állapotok, amikből valamennyi (akár 0) <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-átmenettel egy <img src="https://latex.codecogs.com/svg?F" />-beli állapotba jut.
 
 ###### Átmeneti reláció
 
-<img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://render.githubusercontent.com/render/math?math=(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20aw'" />, valamely <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20(%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cepsilon%20~%20%5C%7D)" />-ra, és <img src="https://render.githubusercontent.com/render/math?math=q'%20%5Cin%20%5Cdelta(q%2C%20a)" />.
+<img src="https://latex.codecogs.com/svg?(q%2C%20w)%2C%20(q'%2C%20w')%20%5Cin%20C" /> esetén <img src="https://latex.codecogs.com/svg?(q%2C%20w)%20%5Cvdash_M%20(q'%2C%20w')" />, ha <img src="https://latex.codecogs.com/svg?w%20%3D%20aw'" />, valamely <img src="https://latex.codecogs.com/svg?a%20%5Cin%20(%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cepsilon%20~%20%5C%7D)" />-ra, és <img src="https://latex.codecogs.com/svg?q'%20%5Cin%20%5Cdelta(q%2C%20a)" />.
 
-> Ha <img src="https://render.githubusercontent.com/render/math?math=a%20%3D%20%5Cepsilon" />, akkor éppen <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20w'" />
+> Ha <img src="https://latex.codecogs.com/svg?a%20%3D%20%5Cepsilon" />, akkor éppen <img src="https://latex.codecogs.com/svg?w%20%3D%20w'" />
 
 ###### Felismert nyelv
 
@@ -1974,208 +1974,208 @@ Felismert nyelv definíciója ugyan az, mint a sima nemdeterminisztikus esetben.
 
 #### Ekvivalencia tétel
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv esetén a következő három állítás ekvivalens:
+Tetszőleges <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv esetén a következő három állítás ekvivalens:
 
-1. <img src="https://render.githubusercontent.com/render/math?math=L" /> reguláris (generálható reguláris nyelvtannal).
+1. <img src="https://latex.codecogs.com/svg?L" /> reguláris (generálható reguláris nyelvtannal).
 
-2. <img src="https://render.githubusercontent.com/render/math?math=L" /> felismerhető automatával.
+2. <img src="https://latex.codecogs.com/svg?L" /> felismerhető automatával.
 
-3. <img src="https://render.githubusercontent.com/render/math?math=L" /> reprezentálható reguláris kifejezéssel.
+3. <img src="https://latex.codecogs.com/svg?L" /> reprezentálható reguláris kifejezéssel.
 
 Ezt külön három párra lehet belátni.
 
 ##### \* Reguláris nyelvtan
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> nyelvtan reguláris (vagy jobblineáris), ja <img src="https://render.githubusercontent.com/render/math?math=P" />-ben minden szabály <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20xB" /> vagy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20x" /> alakú.
+Egy <img src="https://latex.codecogs.com/svg?G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> nyelvtan reguláris (vagy jobblineáris), ja <img src="https://latex.codecogs.com/svg?P" />-ben minden szabály <img src="https://latex.codecogs.com/svg?A%20%5Cto%20xB" /> vagy <img src="https://latex.codecogs.com/svg?A%20%5Cto%20x" /> alakú.
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=L" /> nyelvet reguláris nyelvnek hívunk, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=G" /> reguláris nyelvtan, melyre <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20L(G)" /> (azaz őt generálja).
+Egy <img src="https://latex.codecogs.com/svg?L" /> nyelvet reguláris nyelvnek hívunk, ha van olyan <img src="https://latex.codecogs.com/svg?G" /> reguláris nyelvtan, melyre <img src="https://latex.codecogs.com/svg?L%20%3D%20L(G)" /> (azaz őt generálja).
 
-Az összes reguláris nyelvek halmazát <img src="https://render.githubusercontent.com/render/math?math=REG" />-el jelöljük.
+Az összes reguláris nyelvek halmazát <img src="https://latex.codecogs.com/svg?REG" />-el jelöljük.
 
-<img src="https://render.githubusercontent.com/render/math?math=REG%20%5Csubset%20CF" />
+<img src="https://latex.codecogs.com/svg?REG%20%5Csubset%20CF" />
 
 > Azaz vannak olyan környezetfüggetlen nyelvek, amik nem regulárisak.
 
 ##### \* Reguláris kifejezések
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> ábécé feletti reguláris kifejezések halmaza a <img src="https://render.githubusercontent.com/render/math?math=(%5CSigma%20%5Ccup%20%5C%7B~%20%5Cemptyset%2C%20%5Cepsilon%2C%20(%2C%20)%2C%20%2B%2C%20*%20~%5C%7D)%5E*" /> halmaz legszűkebb olyan <img src="https://render.githubusercontent.com/render/math?math=U" /> részhalmaza, amelyre az alábbi feltételek teljesülnek:
+Egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> ábécé feletti reguláris kifejezések halmaza a <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Ccup%20%5C%7B~%20%5Cemptyset%2C%20%5Cepsilon%2C%20(%2C%20)%2C%20%2B%2C%20*%20~%5C%7D)%5E*" /> halmaz legszűkebb olyan <img src="https://latex.codecogs.com/svg?U" /> részhalmaza, amelyre az alábbi feltételek teljesülnek:
 
-1. Az <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset" /> szimbólum eleme <img src="https://render.githubusercontent.com/render/math?math=U" />-nak
+1. Az <img src="https://latex.codecogs.com/svg?%5Cemptyset" /> szimbólum eleme <img src="https://latex.codecogs.com/svg?U" />-nak
 
-2. Az <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" /> szimbólum eleme <img src="https://render.githubusercontent.com/render/math?math=U" />-nak
+2. Az <img src="https://latex.codecogs.com/svg?%5Cepsilon" /> szimbólum eleme <img src="https://latex.codecogs.com/svg?U" />-nak
 
-3. Minden <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" />-ra az <img src="https://render.githubusercontent.com/render/math?math=a" /> szimbólum eleme <img src="https://render.githubusercontent.com/render/math?math=U" />-nak
+3. Minden <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" />-ra az <img src="https://latex.codecogs.com/svg?a" /> szimbólum eleme <img src="https://latex.codecogs.com/svg?U" />-nak
 
-4. Ha <img src="https://render.githubusercontent.com/render/math?math=R_1%2C%20R_2%20%5Cin%20U" />, akkor <img src="https://render.githubusercontent.com/render/math?math=(R_1)%20%2B%20(R_2)%2C%20(R_1)(R_2)" /> és <img src="https://render.githubusercontent.com/render/math?math=(R_1)%5E*" /> is elemei <img src="https://render.githubusercontent.com/render/math?math=U" />-nak.
+4. Ha <img src="https://latex.codecogs.com/svg?R_1%2C%20R_2%20%5Cin%20U" />, akkor <img src="https://latex.codecogs.com/svg?(R_1)%20%2B%20(R_2)%2C%20(R_1)(R_2)" /> és <img src="https://latex.codecogs.com/svg?(R_1)%5E*" /> is elemei <img src="https://latex.codecogs.com/svg?U" />-nak.
 
-> <img src="https://render.githubusercontent.com/render/math?math=U" />-ban tehár maguk a kifejezések vannak.
+> <img src="https://latex.codecogs.com/svg?U" />-ban tehár maguk a kifejezések vannak.
 
-Az <img src="https://render.githubusercontent.com/render/math?math=R" /> reguláris kifejezés által meghatározott (reprezentált) nyelvet <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C" />-el jelöljük, és a következőképp definiáljuk:
+Az <img src="https://latex.codecogs.com/svg?R" /> reguláris kifejezés által meghatározott (reprezentált) nyelvet <img src="https://latex.codecogs.com/svg?%7CR%7C" />-el jelöljük, és a következőképp definiáljuk:
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20%5Cemptyset" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%5Cemptyset" /> (üres nyelv)
+- Ha <img src="https://latex.codecogs.com/svg?R%20%3D%20%5Cemptyset" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%5Cemptyset" /> (üres nyelv)
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20%5Cepsilon" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%5C%7B~%20%5Cepsilon%20~%5C%7D" />
+- Ha <img src="https://latex.codecogs.com/svg?R%20%3D%20%5Cepsilon" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%5C%7B~%20%5Cepsilon%20~%5C%7D" />
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20a" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%5C%7B~%20a%20~%5C%7D" />
+- Ha <img src="https://latex.codecogs.com/svg?R%20%3D%20a" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%5C%7B~%20a%20~%5C%7D" />
 
 - Ha:
   
-  - <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20(R_1)%2B(R_2)" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%7CR_1%7C%20%5Ccup%20%7CR_2%7C" />
+  - <img src="https://latex.codecogs.com/svg?R%20%3D%20(R_1)%2B(R_2)" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%7CR_1%7C%20%5Ccup%20%7CR_2%7C" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20(R_1)(R_2)" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%7CR_1%7C%7CR_2%7C" />
+  - <img src="https://latex.codecogs.com/svg?R%20%3D%20(R_1)(R_2)" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%7CR_1%7C%7CR_2%7C" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=R%20%3D%20(R_1)%5E*" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%7CR%7C%20%3D%20%7CR_1%7C%5E*" />
+  - <img src="https://latex.codecogs.com/svg?R%20%3D%20(R_1)%5E*" />, akkor <img src="https://latex.codecogs.com/svg?%7CR%7C%20%3D%20%7CR_1%7C%5E*" />
 
 ##### Reprezentálható nyelvek regulárisak
 
-> <img src="https://render.githubusercontent.com/render/math?math=3%20%5Cto%201" /> az ekvivalencia tételben.
+> <img src="https://latex.codecogs.com/svg?3%20%5Cto%201" /> az ekvivalencia tételben.
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv reprezentálható reguláris kifejezéssel, akkor generálható reguláris nyelvtannal.
+Ha <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv reprezentálható reguláris kifejezéssel, akkor generálható reguláris nyelvtannal.
 
-Ez <img src="https://render.githubusercontent.com/render/math?math=R" /> struktúrája szerinti indukcióval belátható.
+Ez <img src="https://latex.codecogs.com/svg?R" /> struktúrája szerinti indukcióval belátható.
 
 ##### Reguláris nyelvek felismerhetők automatával
 
-> <img src="https://render.githubusercontent.com/render/math?math=1%20%5Cto%202" /> az ekvikalencia tételben.
+> <img src="https://latex.codecogs.com/svg?1%20%5Cto%202" /> az ekvikalencia tételben.
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv reguláris, akkor felismerhető automatával.
+Ha <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20%5CSigma%5E*" /> nyelv reguláris, akkor felismerhető automatával.
 
 Ennek bizonyítását ez a két lemma képezi, ezekkel fel tudunk írni egy automatát a nyelvtanból:
 
-- Minden <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> reguláris nyelvtanhoz megadható vele ekvivalens <img src="https://render.githubusercontent.com/render/math?math=G'%20%3D%20(N'%2C%20%5CSigma%2C%20P'%2C%20S)" /> reguláris nyelvtan, úgy, hogy <img src="https://render.githubusercontent.com/render/math?math=P'" />-ben minden szabály <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20B%2C%20A%20%5Cto%20aB" />, vagy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20%5Cepsilon" /> alakú, ahol <img src="https://render.githubusercontent.com/render/math?math=A%2C%20B%20%5Cin%20N" /> és <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5CSigma" />.
+- Minden <img src="https://latex.codecogs.com/svg?G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> reguláris nyelvtanhoz megadható vele ekvivalens <img src="https://latex.codecogs.com/svg?G'%20%3D%20(N'%2C%20%5CSigma%2C%20P'%2C%20S)" /> reguláris nyelvtan, úgy, hogy <img src="https://latex.codecogs.com/svg?P'" />-ben minden szabály <img src="https://latex.codecogs.com/svg?A%20%5Cto%20B%2C%20A%20%5Cto%20aB" />, vagy <img src="https://latex.codecogs.com/svg?A%20%5Cto%20%5Cepsilon" /> alakú, ahol <img src="https://latex.codecogs.com/svg?A%2C%20B%20%5Cin%20N" /> és <img src="https://latex.codecogs.com/svg?a%20%5Cin%20%5CSigma" />.
   
-  > Ez az átalakítás EZ, csak láncolva új szabályokat kell felvenni, pl. <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20bbB" /> helyett <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20bA_1%2C%20A_1%20%5Cto%20bB" />
+  > Ez az átalakítás EZ, csak láncolva új szabályokat kell felvenni, pl. <img src="https://latex.codecogs.com/svg?A%20%5Cto%20bbB" /> helyett <img src="https://latex.codecogs.com/svg?A%20%5Cto%20bA_1%2C%20A_1%20%5Cto%20bB" />
 
-- Minden olyan <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> reguláris nyelvtanhoz, melynek csak <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20B%2C%20A%20%5Cto%20aB" /> vagy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20%5Cepsilon" /> alakú szabályai vannak, megadható olyan <img src="https://render.githubusercontent.com/render/math?math=M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> nemdeterminisztikus <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />-automata, amelyre <img src="https://render.githubusercontent.com/render/math?math=L(M)%20%3D%20L(G)" />.
+- Minden olyan <img src="https://latex.codecogs.com/svg?G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> reguláris nyelvtanhoz, melynek csak <img src="https://latex.codecogs.com/svg?A%20%5Cto%20B%2C%20A%20%5Cto%20aB" /> vagy <img src="https://latex.codecogs.com/svg?A%20%5Cto%20%5Cepsilon" /> alakú szabályai vannak, megadható olyan <img src="https://latex.codecogs.com/svg?M%20%3D%20(Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F)" /> nemdeterminisztikus <img src="https://latex.codecogs.com/svg?%5Cepsilon" />-automata, amelyre <img src="https://latex.codecogs.com/svg?L(M)%20%3D%20L(G)" />.
 
-> Ez is EZ, hiszen az <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20aB" /> jellegű szabályok könnyen felírjatóak automataként, <img src="https://render.githubusercontent.com/render/math?math=A" />-ból megy <img src="https://render.githubusercontent.com/render/math?math=a" /> hatására <img src="https://render.githubusercontent.com/render/math?math=B" />-be
+> Ez is EZ, hiszen az <img src="https://latex.codecogs.com/svg?A%20%5Cto%20aB" /> jellegű szabályok könnyen felírjatóak automataként, <img src="https://latex.codecogs.com/svg?A" />-ból megy <img src="https://latex.codecogs.com/svg?a" /> hatására <img src="https://latex.codecogs.com/svg?B" />-be
 
 ##### Automatával felismerhető nyelvek reprezentálhatók
 
-> <img src="https://render.githubusercontent.com/render/math?math=2%20%5Cto%203" /> az ekvivalencia tételben
+> <img src="https://latex.codecogs.com/svg?2%20%5Cto%203" /> az ekvivalencia tételben
 
 Minden, automatával felismerhető nyelv reprezentálható reguláris kifejezéssel.
 
 #### Pumpáló lemma reguláris nyelvekre
 
-Minden <img src="https://render.githubusercontent.com/render/math?math=L%20%5Csubseteq%20%5CSigma%5E*" /> reguláris nyelv esetén megadható olyan (<img src="https://render.githubusercontent.com/render/math?math=L" />-től függő) <img src="https://render.githubusercontent.com/render/math?math=k%20%3E%200" /> egész szám, hogy minden <img src="https://render.githubusercontent.com/render/math?math=w%20%5Cin%20L" />-re ha <img src="https://render.githubusercontent.com/render/math?math=%7Cw%7C%20%5Cge%20k" />, akkor van olyan <img src="https://render.githubusercontent.com/render/math?math=w%20%3D%20w_1w_2w_3" /> felbontás, melyre <img src="https://render.githubusercontent.com/render/math?math=0%20%3C%20%7Cw_2%7C" /> és <img src="https://render.githubusercontent.com/render/math?math=%7Cw_1w_2%7C%20%5Cle%20k" />, és minden <img src="https://render.githubusercontent.com/render/math?math=n%20%5Cge%200" />-ra, <img src="https://render.githubusercontent.com/render/math?math=w_1w_2%5Enw_3%20%5Cin%20L" />
+Minden <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20%5CSigma%5E*" /> reguláris nyelv esetén megadható olyan (<img src="https://latex.codecogs.com/svg?L" />-től függő) <img src="https://latex.codecogs.com/svg?k%20%3E%200" /> egész szám, hogy minden <img src="https://latex.codecogs.com/svg?w%20%5Cin%20L" />-re ha <img src="https://latex.codecogs.com/svg?%7Cw%7C%20%5Cge%20k" />, akkor van olyan <img src="https://latex.codecogs.com/svg?w%20%3D%20w_1w_2w_3" /> felbontás, melyre <img src="https://latex.codecogs.com/svg?0%20%3C%20%7Cw_2%7C" /> és <img src="https://latex.codecogs.com/svg?%7Cw_1w_2%7C%20%5Cle%20k" />, és minden <img src="https://latex.codecogs.com/svg?n%20%5Cge%200" />-ra, <img src="https://latex.codecogs.com/svg?w_1w_2%5Enw_3%20%5Cin%20L" />
 
-> Ha egy <img src="https://render.githubusercontent.com/render/math?math=L" /> nyelvhez nem adható meg ilyen <img src="https://render.githubusercontent.com/render/math?math=k" />, akkor az nem reguláris. Így ezen lemma segítségével bebizonyítható nyelvekről, hogy azok nem regulárisak.
+> Ha egy <img src="https://latex.codecogs.com/svg?L" /> nyelvhez nem adható meg ilyen <img src="https://latex.codecogs.com/svg?k" />, akkor az nem reguláris. Így ezen lemma segítségével bebizonyítható nyelvekről, hogy azok nem regulárisak.
 
-> A <img src="https://render.githubusercontent.com/render/math?math=k" /> szám az <img src="https://render.githubusercontent.com/render/math?math=L" />-et felismerő egyik determinisztikus automata (több is felismeri) állapotainak száma.
+> A <img src="https://latex.codecogs.com/svg?k" /> szám az <img src="https://latex.codecogs.com/svg?L" />-et felismerő egyik determinisztikus automata (több is felismeri) állapotainak száma.
 
 #### A pumpáló lemma alkalmazása
 
 A lemma arra használható, hogy nyelvekről belássuk, hogy az nem reguláris.
 
-**Példa**: Az <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20%5C%7B~%20a%5Enb%5En%20~%20%7C%20~%20n%20%5Cge%200%20~%5C%7D" /> nyelv nem reguláris.
+**Példa**: Az <img src="https://latex.codecogs.com/svg?L%20%3D%20%5C%7B~%20a%5Enb%5En%20~%20%7C%20~%20n%20%5Cge%200%20~%5C%7D" /> nyelv nem reguláris.
 
-**Bizonyítás**: Tegyük fel, hogy <img src="https://render.githubusercontent.com/render/math?math=L" /> reguláris. Akkor megadható olyan <img src="https://render.githubusercontent.com/render/math?math=k" /> szám, ami teljesíti a pumpáló lemma feltételeit.
-Vegyük az <img src="https://render.githubusercontent.com/render/math?math=a%5Ekb%5Ek%20%5Cin%20L" /> szót, melynek hossza <img src="https://render.githubusercontent.com/render/math?math=2k%20%5Cge%20k" />.
-A pumpáló lemmában szereplő feltételek szerint létezik <img src="https://render.githubusercontent.com/render/math?math=a%5Ekb%5Ek%20%3D%20w_1w_2w_3" /> felbontás, melyre <img src="https://render.githubusercontent.com/render/math?math=0%20%3C%20%7Cw_2%7C" />, <img src="https://render.githubusercontent.com/render/math?math=%7Cw_1w_2%7C%20%5Cle%20k" /> és minden <img src="https://render.githubusercontent.com/render/math?math=n%20%5Cge%200" />-ra <img src="https://render.githubusercontent.com/render/math?math=w_1w_2%5Enw_3%20%5Cin%20L" />.
-Mivel <img src="https://render.githubusercontent.com/render/math?math=%7Cw_1w_2%7C%20%5Cle%20k" />, a középső <img src="https://render.githubusercontent.com/render/math?math=w_2" /> szó csak <img src="https://render.githubusercontent.com/render/math?math=a" /> betűkből áll. Továbbá a <img src="https://render.githubusercontent.com/render/math?math=0%20%3C%20%7Cw_2%7C" /> feltétel miatt a <img src="https://render.githubusercontent.com/render/math?math=w_1w_2%5E2w_3" />, <img src="https://render.githubusercontent.com/render/math?math=w_1w_2%5E3w_3" />, stb szavakban az <img src="https://render.githubusercontent.com/render/math?math=a" />-k száma nagyobb, mint a <img src="https://render.githubusercontent.com/render/math?math=b" />-k száma, tehát ezen szavak egyike sincs <img src="https://render.githubusercontent.com/render/math?math=L" />-ben. Ellentmondás, tehát nem létezik ilyen <img src="https://render.githubusercontent.com/render/math?math=k" /> szám. Akkor viszont az <img src="https://render.githubusercontent.com/render/math?math=L" /> nyelv nem reguláris.
+**Bizonyítás**: Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?L" /> reguláris. Akkor megadható olyan <img src="https://latex.codecogs.com/svg?k" /> szám, ami teljesíti a pumpáló lemma feltételeit.
+Vegyük az <img src="https://latex.codecogs.com/svg?a%5Ekb%5Ek%20%5Cin%20L" /> szót, melynek hossza <img src="https://latex.codecogs.com/svg?2k%20%5Cge%20k" />.
+A pumpáló lemmában szereplő feltételek szerint létezik <img src="https://latex.codecogs.com/svg?a%5Ekb%5Ek%20%3D%20w_1w_2w_3" /> felbontás, melyre <img src="https://latex.codecogs.com/svg?0%20%3C%20%7Cw_2%7C" />, <img src="https://latex.codecogs.com/svg?%7Cw_1w_2%7C%20%5Cle%20k" /> és minden <img src="https://latex.codecogs.com/svg?n%20%5Cge%200" />-ra <img src="https://latex.codecogs.com/svg?w_1w_2%5Enw_3%20%5Cin%20L" />.
+Mivel <img src="https://latex.codecogs.com/svg?%7Cw_1w_2%7C%20%5Cle%20k" />, a középső <img src="https://latex.codecogs.com/svg?w_2" /> szó csak <img src="https://latex.codecogs.com/svg?a" /> betűkből áll. Továbbá a <img src="https://latex.codecogs.com/svg?0%20%3C%20%7Cw_2%7C" /> feltétel miatt a <img src="https://latex.codecogs.com/svg?w_1w_2%5E2w_3" />, <img src="https://latex.codecogs.com/svg?w_1w_2%5E3w_3" />, stb szavakban az <img src="https://latex.codecogs.com/svg?a" />-k száma nagyobb, mint a <img src="https://latex.codecogs.com/svg?b" />-k száma, tehát ezen szavak egyike sincs <img src="https://latex.codecogs.com/svg?L" />-ben. Ellentmondás, tehát nem létezik ilyen <img src="https://latex.codecogs.com/svg?k" /> szám. Akkor viszont az <img src="https://latex.codecogs.com/svg?L" /> nyelv nem reguláris.
 
-> Tehát az a baj ezzel a nyelvvel, hogy csak <img src="https://render.githubusercontent.com/render/math?math=a" />-kat tudnánk bele pumpálni, de ez kivezet a nyelvből.
+> Tehát az a baj ezzel a nyelvvel, hogy csak <img src="https://latex.codecogs.com/svg?a" />-kat tudnánk bele pumpálni, de ez kivezet a nyelvből.
 
 #### Következmények
 
 - Egy automata nem képes számolni, hogy két betű ugyanannyiszor szerepel-e.
 
-- Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz <img src="https://render.githubusercontent.com/render/math?math=REG%20%5Csubset%20CF" />. Például ilyen az előző <img src="https://render.githubusercontent.com/render/math?math=L" /> nyelv.
+- Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz <img src="https://latex.codecogs.com/svg?REG%20%5Csubset%20CF" />. Például ilyen az előző <img src="https://latex.codecogs.com/svg?L" /> nyelv.
 
 ### 2. A környezetfüggetlen nyelvtan, és nyelv definíciója. Derivációk, és derivációs fák kapcsolata. Veremautomaták, és környezetfüggetlen nyelvtanok ekvivalenciája. A Bar-Hillel lemma és alkalmazása.
 
 #### Környezetfüggetlen nyelvtan
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> négyes, ahol:
+Egy <img src="https://latex.codecogs.com/svg?G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> négyes, ahol:
 
-- <img src="https://render.githubusercontent.com/render/math?math=N" /> egy ábécé, a **nemterminális ábécé**
+- <img src="https://latex.codecogs.com/svg?N" /> egy ábécé, a **nemterminális ábécé**
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy ábécé a **terminális ábécé**, amire <img src="https://render.githubusercontent.com/render/math?math=N%20%5Ccap%20%5CSigma%20%3D%20%5Cemptyset" />
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy ábécé a **terminális ábécé**, amire <img src="https://latex.codecogs.com/svg?N%20%5Ccap%20%5CSigma%20%3D%20%5Cemptyset" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=S%20%5Cin%20N" /> a **kezdő szimbólum**
+- <img src="https://latex.codecogs.com/svg?S%20%5Cin%20N" /> a **kezdő szimbólum**
 
-- <img src="https://render.githubusercontent.com/render/math?math=P" /> pedig <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20%5Calpha" /> alakú ún. **átírási szabályok véges halmaza**, ahol <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20N" />, és <img src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%5Cin%20(N%20%5Ccup%20%5CSigma)" />
+- <img src="https://latex.codecogs.com/svg?P" /> pedig <img src="https://latex.codecogs.com/svg?A%20%5Cto%20%5Calpha" /> alakú ún. **átírási szabályok véges halmaza**, ahol <img src="https://latex.codecogs.com/svg?A%20%5Cin%20N" />, és <img src="https://latex.codecogs.com/svg?%5Calpha%20%5Cin%20(N%20%5Ccup%20%5CSigma)" />
 
 ##### Környezetfüggetlen nyelvek
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=L" /> nyelvet környezetfüggetlennek hívunk, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=G" /> környezetfüggetlen nyelvtan, melyre <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20L(G)" />.
+Egy <img src="https://latex.codecogs.com/svg?L" /> nyelvet környezetfüggetlennek hívunk, ha van olyan <img src="https://latex.codecogs.com/svg?G" /> környezetfüggetlen nyelvtan, melyre <img src="https://latex.codecogs.com/svg?L%20%3D%20L(G)" />.
 
-Az összes környezetfüggetlen nyelvek halmazát <img src="https://render.githubusercontent.com/render/math?math=CF" />-fel jelöljük.
+Az összes környezetfüggetlen nyelvek halmazát <img src="https://latex.codecogs.com/svg?CF" />-fel jelöljük.
 
-Például az <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20a%5Enb%5En%20~%20%7C%20~%20n%20%5Cge%200%20~%20%5C%7D" /> nyelv környezetfüggetlen.
+Például az <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20a%5Enb%5En%20~%20%7C%20~%20n%20%5Cge%200%20~%20%5C%7D" /> nyelv környezetfüggetlen.
 
 ##### Deriváció
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%2C%20%5Cdelta%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> esetén <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%5CRightarrow_G%20%5Cdelta" />, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cto%20%5Calpha%20%5Cin%20P" /> szabály és vannak olyan <img src="https://render.githubusercontent.com/render/math?math=%5Calpha'%2C%20%5Cbeta'%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> szavak, amelyekre fennállnak, hogy <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%3D%20%5Calpha'%20A%20%5Cbeta'%2C%20%5Cdelta%20%3D%20%5Calpha'%5Calpha%5Cbeta'" />.
+Tetszőleges <img src="https://latex.codecogs.com/svg?%5Cgamma%2C%20%5Cdelta%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> esetén <img src="https://latex.codecogs.com/svg?%5Cgamma%20%5CRightarrow_G%20%5Cdelta" />, ha van olyan <img src="https://latex.codecogs.com/svg?A%20%5Cto%20%5Calpha%20%5Cin%20P" /> szabály és vannak olyan <img src="https://latex.codecogs.com/svg?%5Calpha'%2C%20%5Cbeta'%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> szavak, amelyekre fennállnak, hogy <img src="https://latex.codecogs.com/svg?%5Cgamma%20%3D%20%5Calpha'%20A%20%5Cbeta'%2C%20%5Cdelta%20%3D%20%5Calpha'%5Calpha%5Cbeta'" />.
 
 > Azaz, ha egy átírással (valamelyik P-beli szabály mentén) átvihető.
 
 ###### Fajtái
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%5CRightarrow_G%20%5Cdelta" />: Egy lépés, közvetlen levezetés, közvetlen deriváció
+- <img src="https://latex.codecogs.com/svg?%5Cgamma%20%5CRightarrow_G%20%5Cdelta" />: Egy lépés, közvetlen levezetés, közvetlen deriváció
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%5CRightarrow%5En_G%20%5Cdelta%2C%20n%20%5Cge%200" />: n lépés (0 lépés önmagába viszi)
+- <img src="https://latex.codecogs.com/svg?%5Cgamma%20%5CRightarrow%5En_G%20%5Cdelta%2C%20n%20%5Cge%200" />: n lépés (0 lépés önmagába viszi)
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%5CRightarrow%5E%2B_G%20%5Cdelta" />: Legalább egy lépés
+- <img src="https://latex.codecogs.com/svg?%5Cgamma%20%5CRightarrow%5E%2B_G%20%5Cdelta" />: Legalább egy lépés
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cgamma%20%5CRightarrow%5E*_G%20%5Cdelta" />: Valamennyi (akár 0) lépés
+- <img src="https://latex.codecogs.com/svg?%5Cgamma%20%5CRightarrow%5E*_G%20%5Cdelta" />: Valamennyi (akár 0) lépés
 
-> A <img src="https://render.githubusercontent.com/render/math?math=G" /> alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
+> A <img src="https://latex.codecogs.com/svg?G" /> alsó indexben elhagyható, ha 1 db nyelvtanról van éppen szó.
 
 ##### Generált (környezetfüggetlen) nyelv
 
-A <img src="https://render.githubusercontent.com/render/math?math=G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> környezetfüggetlen nyelvtan által generált nyelv:
+A <img src="https://latex.codecogs.com/svg?G%20%3D%20(N%2C%20%5CSigma%2C%20P%2C%20S)" /> környezetfüggetlen nyelvtan által generált nyelv:
 
-<img src="https://render.githubusercontent.com/render/math?math=L(G)%20%3D%20%5C%7B~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20S%20%5CRightarrow%5E*_G%20w%20~%20%5C%7D" />
+<img src="https://latex.codecogs.com/svg?L(G)%20%3D%20%5C%7B~%20w%20%5Cin%20%5CSigma%5E*%20~%20%7C%20~%20S%20%5CRightarrow%5E*_G%20w%20~%20%5C%7D" />
 
-> Azaz az összes olyan szó, ami <img src="https://render.githubusercontent.com/render/math?math=G" />-ből levezethető.
+> Azaz az összes olyan szó, ami <img src="https://latex.codecogs.com/svg?G" />-ből levezethető.
 
 #### Derivációs fák, kapcsolatuk a derivációkkal
 
-Az <img src="https://render.githubusercontent.com/render/math?math=X%20%5Cin%20(N%20%5Ccup%20%5CSigma)" /> gyökerű derivációs fák halmaza a legszűkebb olyan <img src="https://render.githubusercontent.com/render/math?math=D_X" /> halmaz, amelyre:
+Az <img src="https://latex.codecogs.com/svg?X%20%5Cin%20(N%20%5Ccup%20%5CSigma)" /> gyökerű derivációs fák halmaza a legszűkebb olyan <img src="https://latex.codecogs.com/svg?D_X" /> halmaz, amelyre:
 
-- Az a fa, amelynek egyetlen szögpontja (vagyis csak gyökere) az <img src="https://render.githubusercontent.com/render/math?math=X" />, eleme <img src="https://render.githubusercontent.com/render/math?math=D_X" />-nek.
-- Ha <img src="https://render.githubusercontent.com/render/math?math=X%20%5Cto%20%5Cepsilon%20%5Cin%20P" />, akkor az a fa, amelynek gyökere <img src="https://render.githubusercontent.com/render/math?math=X" />, a gyökerének egyetlen leszármazottja az <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />, eleme <img src="https://render.githubusercontent.com/render/math?math=D_X" />-nek.
-- Ha <img src="https://render.githubusercontent.com/render/math?math=X%20%5Cto%20X_1...X_k%20%5Cin%20P" />, továbbá <img src="https://render.githubusercontent.com/render/math?math=t_1%20%5Cin%20D_%7BX_1%7D%2C%20...%2C%20t_k%20%5Cin%20D_%7BX_k%7D" />, akkor az a fa, amelynek gyökere <img src="https://render.githubusercontent.com/render/math?math=X" />, a gyökeréből <img src="https://render.githubusercontent.com/render/math?math=k" /> él indul rendre a <img src="https://render.githubusercontent.com/render/math?math=t_1%2C%20...%2C%20t_k" /> fák gyökeréhez, eleme <img src="https://render.githubusercontent.com/render/math?math=D_X" />-nek.
+- Az a fa, amelynek egyetlen szögpontja (vagyis csak gyökere) az <img src="https://latex.codecogs.com/svg?X" />, eleme <img src="https://latex.codecogs.com/svg?D_X" />-nek.
+- Ha <img src="https://latex.codecogs.com/svg?X%20%5Cto%20%5Cepsilon%20%5Cin%20P" />, akkor az a fa, amelynek gyökere <img src="https://latex.codecogs.com/svg?X" />, a gyökerének egyetlen leszármazottja az <img src="https://latex.codecogs.com/svg?%5Cepsilon" />, eleme <img src="https://latex.codecogs.com/svg?D_X" />-nek.
+- Ha <img src="https://latex.codecogs.com/svg?X%20%5Cto%20X_1...X_k%20%5Cin%20P" />, továbbá <img src="https://latex.codecogs.com/svg?t_1%20%5Cin%20D_%7BX_1%7D%2C%20...%2C%20t_k%20%5Cin%20D_%7BX_k%7D" />, akkor az a fa, amelynek gyökere <img src="https://latex.codecogs.com/svg?X" />, a gyökeréből <img src="https://latex.codecogs.com/svg?k" /> él indul rendre a <img src="https://latex.codecogs.com/svg?t_1%2C%20...%2C%20t_k" /> fák gyökeréhez, eleme <img src="https://latex.codecogs.com/svg?D_X" />-nek.
 
 ![ ](../img/derivacios_fa.png)
 
- Legyen <img src="https://render.githubusercontent.com/render/math?math=t" /> egy <img src="https://render.githubusercontent.com/render/math?math=X" /> gyökerű derivációs fa. Akkor <img src="https://render.githubusercontent.com/render/math?math=t" /> magassságát <img src="https://render.githubusercontent.com/render/math?math=h(t)" />-vel, a határát pedig <img src="https://render.githubusercontent.com/render/math?math=fr(t)" />-vel jelöljük és az alábbi módon definiáljuk:
+ Legyen <img src="https://latex.codecogs.com/svg?t" /> egy <img src="https://latex.codecogs.com/svg?X" /> gyökerű derivációs fa. Akkor <img src="https://latex.codecogs.com/svg?t" /> magassságát <img src="https://latex.codecogs.com/svg?h(t)" />-vel, a határát pedig <img src="https://latex.codecogs.com/svg?fr(t)" />-vel jelöljük és az alábbi módon definiáljuk:
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=t" /> az egyetlen <img src="https://render.githubusercontent.com/render/math?math=X" /> szögpontból álló fa, akkor <img src="https://render.githubusercontent.com/render/math?math=h(t)%20%3D%200" /> és <img src="https://render.githubusercontent.com/render/math?math=fr(t)%20%3D%20X" />.
+- Ha <img src="https://latex.codecogs.com/svg?t" /> az egyetlen <img src="https://latex.codecogs.com/svg?X" /> szögpontból álló fa, akkor <img src="https://latex.codecogs.com/svg?h(t)%20%3D%200" /> és <img src="https://latex.codecogs.com/svg?fr(t)%20%3D%20X" />.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=t" /> gyökere <img src="https://render.githubusercontent.com/render/math?math=X" />, aminek egyetlen leszármazottja <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon" />, akkor <img src="https://render.githubusercontent.com/render/math?math=h(t)%20%3D%201" />, és <img src="https://render.githubusercontent.com/render/math?math=fr(t)%20%3D%20%5Cepsilon" />.
+- Ha <img src="https://latex.codecogs.com/svg?t" /> gyökere <img src="https://latex.codecogs.com/svg?X" />, aminek egyetlen leszármazottja <img src="https://latex.codecogs.com/svg?%5Cepsilon" />, akkor <img src="https://latex.codecogs.com/svg?h(t)%20%3D%201" />, és <img src="https://latex.codecogs.com/svg?fr(t)%20%3D%20%5Cepsilon" />.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=t" /> gyökere <img src="https://render.githubusercontent.com/render/math?math=X" />, amiből <img src="https://render.githubusercontent.com/render/math?math=k" /> él indul rendre a <img src="https://render.githubusercontent.com/render/math?math=t_1%2C%20...%2C%20t_k" /> közvetlen részfák gyökeréhez, akkor <img src="https://render.githubusercontent.com/render/math?math=h(t)%20%3D%201%20%2B%20max%5C%7B%20~%20h(t_i%20~%20%7C%20~%201%20%5Cle%20i%20%5Cle%20k)%20~%20%5C%7D" /> és <img src="https://render.githubusercontent.com/render/math?math=fr(t)%20%3D%20fr(t_1)...fr(t_k)" />.
+- Ha <img src="https://latex.codecogs.com/svg?t" /> gyökere <img src="https://latex.codecogs.com/svg?X" />, amiből <img src="https://latex.codecogs.com/svg?k" /> él indul rendre a <img src="https://latex.codecogs.com/svg?t_1%2C%20...%2C%20t_k" /> közvetlen részfák gyökeréhez, akkor <img src="https://latex.codecogs.com/svg?h(t)%20%3D%201%20%2B%20max%5C%7B%20~%20h(t_i%20~%20%7C%20~%201%20%5Cle%20i%20%5Cle%20k)%20~%20%5C%7D" /> és <img src="https://latex.codecogs.com/svg?fr(t)%20%3D%20fr(t_1)...fr(t_k)" />.
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=h(t)" /> a <img src="https://render.githubusercontent.com/render/math?math=t" />-ben levő olyan utak hosszának maximuma, amelyek <img src="https://render.githubusercontent.com/render/math?math=t" /> gyökeréből annak valamely leveléhez vezetnek.
+> Azaz <img src="https://latex.codecogs.com/svg?h(t)" /> a <img src="https://latex.codecogs.com/svg?t" />-ben levő olyan utak hosszának maximuma, amelyek <img src="https://latex.codecogs.com/svg?t" /> gyökeréből annak valamely leveléhez vezetnek.
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=fr(t)" /> azon <img src="https://render.githubusercontent.com/render/math?math=(N%20%5Ccup%20%5CSigma)%5E*" />-beli szó, amelyet <img src="https://render.githubusercontent.com/render/math?math=t" /> leveleinek balról jobbra (vagy: preorder bejárással) történő leolvasásával kapunk.
+> Azaz <img src="https://latex.codecogs.com/svg?fr(t)" /> azon <img src="https://latex.codecogs.com/svg?(N%20%5Ccup%20%5CSigma)%5E*" />-beli szó, amelyet <img src="https://latex.codecogs.com/svg?t" /> leveleinek balról jobbra (vagy: preorder bejárással) történő leolvasásával kapunk.
 
 ##### Az összefüggés derivációs fák, és derivációk közt
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=X%20%5Cin%20(N%20%5Ccup%20%5CSigma)" /> és <img src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> esetén <img src="https://render.githubusercontent.com/render/math?math=X%20%5CRightarrow%5E*%20%5Calpha" /> akkor, és csak akkor, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=t%20%5Cin%20D_X" /> derivációs fa, amelyre <img src="https://render.githubusercontent.com/render/math?math=fr(t)%20%3D%20%5Calpha" />.
+Tetszőleges <img src="https://latex.codecogs.com/svg?X%20%5Cin%20(N%20%5Ccup%20%5CSigma)" /> és <img src="https://latex.codecogs.com/svg?%5Calpha%20%5Cin%20(N%20%5Ccup%20%5CSigma)%5E*" /> esetén <img src="https://latex.codecogs.com/svg?X%20%5CRightarrow%5E*%20%5Calpha" /> akkor, és csak akkor, ha van olyan <img src="https://latex.codecogs.com/svg?t%20%5Cin%20D_X" /> derivációs fa, amelyre <img src="https://latex.codecogs.com/svg?fr(t)%20%3D%20%5Calpha" />.
 
 ##### Az összefüggés következményei
 
-- Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=w%20%5Cin%20%5CSigma%5E*" /> esetén <img src="https://render.githubusercontent.com/render/math?math=S%20%5CRightarrow%5E*%20w" /> akkor és csak akkor, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=S" /> gyökerű derivációs fa, amelynek határa <img src="https://render.githubusercontent.com/render/math?math=w" />.
+- Tetszőleges <img src="https://latex.codecogs.com/svg?w%20%5Cin%20%5CSigma%5E*" /> esetén <img src="https://latex.codecogs.com/svg?S%20%5CRightarrow%5E*%20w" /> akkor és csak akkor, ha van olyan <img src="https://latex.codecogs.com/svg?S" /> gyökerű derivációs fa, amelynek határa <img src="https://latex.codecogs.com/svg?w" />.
 
-> Ez csak a korábbi tétel alkalmazása <img src="https://render.githubusercontent.com/render/math?math=S" />-re, és egy <img src="https://render.githubusercontent.com/render/math?math=w" />-re.
+> Ez csak a korábbi tétel alkalmazása <img src="https://latex.codecogs.com/svg?S" />-re, és egy <img src="https://latex.codecogs.com/svg?w" />-re.
 
-- Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=w%20%5Cin%20%5CSigma%5E*" /> esetén a következő állítások ekvivalensek:
+- Tetszőleges <img src="https://latex.codecogs.com/svg?w%20%5Cin%20%5CSigma%5E*" /> esetén a következő állítások ekvivalensek:
   
-  - <img src="https://render.githubusercontent.com/render/math?math=w%20%5Cin%20L(G)" />
+  - <img src="https://latex.codecogs.com/svg?w%20%5Cin%20L(G)" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=S%20%5CRightarrow%5E*%20w" />
+  - <img src="https://latex.codecogs.com/svg?S%20%5CRightarrow%5E*%20w" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=S%20%5CRightarrow%5E*_l%20w" /> (ez bal oldali deriváció, mindig a legbaloldalibb nemterminálist lehet csak helyettesíteni)
+  - <img src="https://latex.codecogs.com/svg?S%20%5CRightarrow%5E*_l%20w" /> (ez bal oldali deriváció, mindig a legbaloldalibb nemterminálist lehet csak helyettesíteni)
   
-  - van olyan <img src="https://render.githubusercontent.com/render/math?math=S" /> gyökerű derivációs fa, amelynek határa <img src="https://render.githubusercontent.com/render/math?math=w" />.
+  - van olyan <img src="https://latex.codecogs.com/svg?S" /> gyökerű derivációs fa, amelynek határa <img src="https://latex.codecogs.com/svg?w" />.
 
 ##### Generált nyelv definiálása derivációs fákkal
 
-<img src="https://render.githubusercontent.com/render/math?math=L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
+<img src="https://latex.codecogs.com/svg?L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
 ## Közelítő és szimbolikus számítások
 
 > Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása meggkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
@@ -2186,11 +2186,11 @@ Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=X%2
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0A%20%20%20%20a_%7B11%7Dx_1%20%2B%20a_%7B12%7Dx_2%20%2B%20...%20%2B%20a_%7B1n%7Dx_n%20%26%20%3D%20b_1%5C%5C%0A%20%20%20%20a_%7B21%7Dx_1%20%2B%20a_%7B22%7Dx_2%20%2B%20...%20%2B%20a_%7B2n%7Dx_n%20%26%20%3D%20b_2%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20~%20%20...%5C%5C%0A%20%20%20%20a_%7Bn1%7Dx_1%20%2B%20a_%7Bn2%7Dx_2%20%2B%20...%20%2B%20a_%7Bnn%7Dx_n%20%26%20%3D%20b_n%5C%5C%0A%5Cend%7Balign%7D%0A" />
 
-Tegyük fel, hogy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathbb%7BC%7D%5E%7Bn%20%5Ctimes%20n%7D" />, és <img src="https://render.githubusercontent.com/render/math?math=b%20%5Cin%20%5Cmathbb%7BC%7D%5En" />. Az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> lineáris egyenletrendszernek pontosan akkor van egyetlen megoldása, ha <img src="https://render.githubusercontent.com/render/math?math=A" /> nem szinguláris (azaz <img src="https://render.githubusercontent.com/render/math?math=detA%20%5Cne%200" />). Ekkor a megoldás <img src="https://render.githubusercontent.com/render/math?math=x%20%3D%20A%5E%7B-1%7D%20b" />. A megoldás <img src="https://render.githubusercontent.com/render/math?math=i" />. komponensét megadja a Cramer szabály is:
+Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?A%20%5Cin%20%5Cmathbb%7BC%7D%5E%7Bn%20%5Ctimes%20n%7D" />, és <img src="https://latex.codecogs.com/svg?b%20%5Cin%20%5Cmathbb%7BC%7D%5En" />. Az <img src="https://latex.codecogs.com/svg?Ax%20%3D%20b" /> lineáris egyenletrendszernek pontosan akkor van egyetlen megoldása, ha <img src="https://latex.codecogs.com/svg?A" /> nem szinguláris (azaz <img src="https://latex.codecogs.com/svg?detA%20%5Cne%200" />). Ekkor a megoldás <img src="https://latex.codecogs.com/svg?x%20%3D%20A%5E%7B-1%7D%20b" />. A megoldás <img src="https://latex.codecogs.com/svg?i" />. komponensét megadja a Cramer szabály is:
 
 <img src="https://latex.codecogs.com/svg?%0Ax_i%20%3D%20%5Cfrac%7Bdet%20A%5E%7B(i)%7D%7D%7BdetA%7D%0A" />
 
-> <img src="https://render.githubusercontent.com/render/math?math=A%5E%7B(i)%7D" /> mátrixot úgy kapjuk, hogy az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix <img src="https://render.githubusercontent.com/render/math?math=i" />. oszlopát kicseréljük a <img src="https://render.githubusercontent.com/render/math?math=b" /> vektorral.
+> <img src="https://latex.codecogs.com/svg?A%5E%7B(i)%7D" /> mátrixot úgy kapjuk, hogy az <img src="https://latex.codecogs.com/svg?A" /> mátrix <img src="https://latex.codecogs.com/svg?i" />. oszlopát kicseréljük a <img src="https://latex.codecogs.com/svg?b" /> vektorral.
 
 > Gyakorlatban ez a tétel nem használatos, mert az inverz számolás nagy műveletigényű lehet, a Cramer szabály pedig numerikusan nem stabilis.
 
@@ -2237,27 +2237,27 @@ end
 x(1) = b(1) / U(1, 1);
 ```
 
-> Műveletigénye <img src="https://render.githubusercontent.com/render/math?math=O(%5Cfrac%7Bn%5E2%7D%7B2%7D)" />
+> Műveletigénye <img src="https://latex.codecogs.com/svg?O(%5Cfrac%7Bn%5E2%7D%7B2%7D)" />
 
 ##### Eliminációs mátrix
 
- A <img src="https://render.githubusercontent.com/render/math?math=G_j%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20n%7D" /> **eliminációs mátrix**, ha felírható <img src="https://render.githubusercontent.com/render/math?math=G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> alakban valamely <img src="https://render.githubusercontent.com/render/math?math=1%20%5Cle%20j%20%5Cle%20n" />-re egy olyan <img src="https://render.githubusercontent.com/render/math?math=g%5E%7B(j)%7D" /> vektorral, amelynek <img src="https://render.githubusercontent.com/render/math?math=j" />-dik komponense, <img src="https://render.githubusercontent.com/render/math?math=g_j%5E%7B(j)%7D%20%3D%200" />
+ A <img src="https://latex.codecogs.com/svg?G_j%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20n%7D" /> **eliminációs mátrix**, ha felírható <img src="https://latex.codecogs.com/svg?G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> alakban valamely <img src="https://latex.codecogs.com/svg?1%20%5Cle%20j%20%5Cle%20n" />-re egy olyan <img src="https://latex.codecogs.com/svg?g%5E%7B(j)%7D" /> vektorral, amelynek <img src="https://latex.codecogs.com/svg?j" />-dik komponense, <img src="https://latex.codecogs.com/svg?g_j%5E%7B(j)%7D%20%3D%200" />
 
 ###### Példa
 
 <img src="https://latex.codecogs.com/svg?%0Aj%20%3D%203%3B%20G_j%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%202%20%5C%5C%0A0%20%26%201%20%26%203%20%5C%5C%0A0%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A" />
 
-<img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> a mátrix 3. oszlopában látszódik is, csak ott tér el egy egységmátrixtól.
+<img src="https://latex.codecogs.com/svg?j%20%3D%203" /> a mátrix 3. oszlopában látszódik is, csak ott tér el egy egységmátrixtól.
 
-<img src="https://render.githubusercontent.com/render/math?math=G_j" /> komponensei:
+<img src="https://latex.codecogs.com/svg?G_j" /> komponensei:
 
 <img src="https://latex.codecogs.com/svg?%0Ag%5E%7B(j)%7D%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A2%20%5C%5C%0A3%20%5C%5C%0A0%20%5C%5C%0A%5Cend%7Bbmatrix%7D%20%3B%0Ae_j%5ET%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A~%200%20~%200%20~%201%20~%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
-<img src="https://render.githubusercontent.com/render/math?math=j%20%3D%203" /> miatt a <img src="https://render.githubusercontent.com/render/math?math=g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://render.githubusercontent.com/render/math?math=e_j%5ET" /> harmadik koordinátája is nulla.
+<img src="https://latex.codecogs.com/svg?j%20%3D%203" /> miatt a <img src="https://latex.codecogs.com/svg?g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://latex.codecogs.com/svg?e_j%5ET" /> harmadik koordinátája is nulla.
 
 ###### Eliminációs mártix jelentősége
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathcal%7Bn%20%5Ctimes%20n%7D" /> mátrixot a <img src="https://render.githubusercontent.com/render/math?math=G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> eliminációs mátrixszal balról szorozva a <img src="https://render.githubusercontent.com/render/math?math=B%20%3D%20G_jA" /> szorzatmátrix úgy áll elő, hogy <img src="https://render.githubusercontent.com/render/math?math=A" /> <img src="https://render.githubusercontent.com/render/math?math=1%2C%202%2C%20...%2C%20n" />-dik sorához rendre hozzáadjuk <img src="https://render.githubusercontent.com/render/math?math=A" /> <img src="https://render.githubusercontent.com/render/math?math=j" />-dik sorának <img src="https://render.githubusercontent.com/render/math?math=g_1%5Ej%2C%20g_2%5Ej%2C%20...%2C%20g_3%5Ej" />-szeresét.
+Egy <img src="https://latex.codecogs.com/svg?A%20%5Cin%20%5Cmathcal%7Bn%20%5Ctimes%20n%7D" /> mátrixot a <img src="https://latex.codecogs.com/svg?G_j%20%3D%20I%20%2B%20g%5E%7B(j)%7De_j%5ET" /> eliminációs mátrixszal balról szorozva a <img src="https://latex.codecogs.com/svg?B%20%3D%20G_jA" /> szorzatmátrix úgy áll elő, hogy <img src="https://latex.codecogs.com/svg?A" /> <img src="https://latex.codecogs.com/svg?1%2C%202%2C%20...%2C%20n" />-dik sorához rendre hozzáadjuk <img src="https://latex.codecogs.com/svg?A" /> <img src="https://latex.codecogs.com/svg?j" />-dik sorának <img src="https://latex.codecogs.com/svg?g_1%5Ej%2C%20g_2%5Ej%2C%20...%2C%20g_3%5Ej" />-szeresét.
 
 Például a következő mátrixok esetén:
 
@@ -2267,9 +2267,9 @@ Az eredmény:
 
 <img src="https://latex.codecogs.com/svg?%0AG_jA%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A19%20%26%204%20%26%204%20%5C%5C%0A33%20%26%2011%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
-Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix első sorához valóban kétszer a másodikhoz háromszor a harmadikhoz pedig nullaszor lett hozzáadva az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix harmadik sora.
+Az <img src="https://latex.codecogs.com/svg?A" /> mátrix első sorához valóban kétszer a másodikhoz háromszor a harmadikhoz pedig nullaszor lett hozzáadva az <img src="https://latex.codecogs.com/svg?A" /> mátrix harmadik sora.
 
-Könnyen megadható olyan eliminációs mátrix, amivel egyadott oszlop (vagy egy önálló vektor) **egy adott koordináta alatti elemei kinullázhatóak**, például a fentebbi <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixhoz (<img src="https://render.githubusercontent.com/render/math?math=a_%7B11%7D-et" /> módosítottam <img src="https://render.githubusercontent.com/render/math?math=2" />-re, hogy szemléletesebb legyen a példa):
+Könnyen megadható olyan eliminációs mátrix, amivel egyadott oszlop (vagy egy önálló vektor) **egy adott koordináta alatti elemei kinullázhatóak**, például a fentebbi <img src="https://latex.codecogs.com/svg?A" /> mátrixhoz (<img src="https://latex.codecogs.com/svg?a_%7B11%7D-et" /> módosítottam <img src="https://latex.codecogs.com/svg?2" />-re, hogy szemléletesebb legyen a példa):
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Bbmatrix%7D%0A1%20%26%200%20%26%200%20%5C%5C%0A-3%20%26%201%20%26%200%20%5C%5C%0A-%5Cfrac%7B9%7D%7B2%7D%20%26%200%20%26%201%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A6%20%26%208%20%26%202%20%5C%5C%0A9%20%26%201%20%26%200%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20%26%204%20%5C%5C%0A0%20%26%202%20%26%20-10%20%5C%5C%0A0%20%26%20-8%20%26%20-18%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
@@ -2279,29 +2279,29 @@ Az első oszlopban ténylegesen kinullázódott két sor, már csak a második o
 
 ##### LU felbontás
 
-Át akarjuk alakítani az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> egyenletrendszert úgy, hogy a bal oldalon háromszögmátrix szerepeljen.
+Át akarjuk alakítani az <img src="https://latex.codecogs.com/svg?Ax%20%3D%20b" /> egyenletrendszert úgy, hogy a bal oldalon háromszögmátrix szerepeljen.
 
 Ezt valamennyi eliminációs mátrix sorozatával meg tudjuk tenni:
 
-<img src="https://render.githubusercontent.com/render/math?math=MAx%20%3D%20M_%7Bn%20-%201%7D%20...%20M_1A_x%20%3D%20M_%7Bn-1%7D%20...%20M_1%20b%20%3D%20Mb" />
+<img src="https://latex.codecogs.com/svg?MAx%20%3D%20M_%7Bn%20-%201%7D%20...%20M_1A_x%20%3D%20M_%7Bn-1%7D%20...%20M_1%20b%20%3D%20Mb" />
 
 > Hasonló felbontás megkezdése történt az előző példában.
 
-Ekkor <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20M%5E%7B-1%7D" />, <img src="https://render.githubusercontent.com/render/math?math=U%20%3D%20MA" />
+Ekkor <img src="https://latex.codecogs.com/svg?L%20%3D%20M%5E%7B-1%7D" />, <img src="https://latex.codecogs.com/svg?U%20%3D%20MA" />
 
 > Könnyű számolni, mert az eliminációs mátrix inverze úgy számolható, hogy a főátlón kívüli elemeket negáljuk.
 
 ###### Egyenletrendszer megoldása LU felbontással
 
-<img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> helyett az <img src="https://render.githubusercontent.com/render/math?math=LUx%20%3D%20b" /> egyenletrendszert oldhatjuk meg. Ezt **két lépésben** elvégezve végig háromszögmátrixokkal dolgozhatunk.
+<img src="https://latex.codecogs.com/svg?Ax%20%3D%20b" /> helyett az <img src="https://latex.codecogs.com/svg?LUx%20%3D%20b" /> egyenletrendszert oldhatjuk meg. Ezt **két lépésben** elvégezve végig háromszögmátrixokkal dolgozhatunk.
 
 Ezzel megkaptuk a **Gauss-elimináció** módszerét:
 
-1. Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix <img src="https://render.githubusercontent.com/render/math?math=LU" /> felbontása
+1. Az <img src="https://latex.codecogs.com/svg?A" /> mátrix <img src="https://latex.codecogs.com/svg?LU" /> felbontása
 
-2. <img src="https://render.githubusercontent.com/render/math?math=Ly%20%3D%20b" /> megoldása <img src="https://render.githubusercontent.com/render/math?math=y" />-ra (az <img src="https://render.githubusercontent.com/render/math?math=y" /> egy új, mesterséges változó)
+2. <img src="https://latex.codecogs.com/svg?Ly%20%3D%20b" /> megoldása <img src="https://latex.codecogs.com/svg?y" />-ra (az <img src="https://latex.codecogs.com/svg?y" /> egy új, mesterséges változó)
 
-3. <img src="https://render.githubusercontent.com/render/math?math=Ux%20%3D%20y" /> megoldása <img src="https://render.githubusercontent.com/render/math?math=x" />-re
+3. <img src="https://latex.codecogs.com/svg?Ux%20%3D%20y" /> megoldása <img src="https://latex.codecogs.com/svg?x" />-re
 
 ```matlab
 [L, U] = LU(A);
@@ -2324,13 +2324,13 @@ U = triu(A);
 
 ###### Főelemkiválasztás
 
-Az LU felbontás csak akkor sikeres, ha az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix nem szinguláris, és minden generáló elem (főátló-beli elemek) nullától különböző (mivel azokkal leosztunk). Ha az utóbbi nem teljesül, még lehet, hogy van felbontás, átrendezéssel, ami ekvivalens feladatot eredményez. Ezt az eljárást főelemkiválasztásnak hívjuk.
+Az LU felbontás csak akkor sikeres, ha az <img src="https://latex.codecogs.com/svg?A" /> mátrix nem szinguláris, és minden generáló elem (főátló-beli elemek) nullától különböző (mivel azokkal leosztunk). Ha az utóbbi nem teljesül, még lehet, hogy van felbontás, átrendezéssel, ami ekvivalens feladatot eredményez. Ezt az eljárást főelemkiválasztásnak hívjuk.
 
 Ezeket a sorcseréket egy **permutációs mátrixszal** való beszorzással végezzük.
 
-A <img src="https://render.githubusercontent.com/render/math?math=P_%7Bij%7D" /> permutációs mátrix egy egységmátrix, melyben az <img src="https://render.githubusercontent.com/render/math?math=i" />-edik, és <img src="https://render.githubusercontent.com/render/math?math=j" />-edik sor fel van cserélve. Dimenziószáma megegyezik a "permutálandó" mátrixéval.
+A <img src="https://latex.codecogs.com/svg?P_%7Bij%7D" /> permutációs mátrix egy egységmátrix, melyben az <img src="https://latex.codecogs.com/svg?i" />-edik, és <img src="https://latex.codecogs.com/svg?j" />-edik sor fel van cserélve. Dimenziószáma megegyezik a "permutálandó" mátrixéval.
 
-Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixot ezzel a <img src="https://render.githubusercontent.com/render/math?math=P_%7Bij%7D" />-vel balról szorozva egy olyan mátrixot kapunk, ami az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix, melyben az <img src="https://render.githubusercontent.com/render/math?math=i" />-edik, és <img src="https://render.githubusercontent.com/render/math?math=j" />-edik sor fel van cserélve.
+Az <img src="https://latex.codecogs.com/svg?A" /> mátrixot ezzel a <img src="https://latex.codecogs.com/svg?P_%7Bij%7D" />-vel balról szorozva egy olyan mátrixot kapunk, ami az <img src="https://latex.codecogs.com/svg?A" /> mátrix, melyben az <img src="https://latex.codecogs.com/svg?i" />-edik, és <img src="https://latex.codecogs.com/svg?j" />-edik sor fel van cserélve.
 
 Jobbról szorozva az oszlopok cserélődnek.
 
@@ -2338,7 +2338,7 @@ Jobbról szorozva az oszlopok cserélődnek.
 
 **Rirka mátrixok** esetén hatékonyabb, mint a Gauss-elimináció.
 
-Ha az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix szimmetrikus, és pozitív definit, akkor az LU felbontás <img src="https://render.githubusercontent.com/render/math?math=U%20%3D%20L%5ET" /> alakban létezik, tehát <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20LL%5ET" />, ahol <img src="https://render.githubusercontent.com/render/math?math=L" /> alsó háromszögmátrix, amelynek diagonális elemei pozitív számok. Az ilyen felbontást **Cholesky-felbontásnak** hívjuk.
+Ha az <img src="https://latex.codecogs.com/svg?A" /> mátrix szimmetrikus, és pozitív definit, akkor az LU felbontás <img src="https://latex.codecogs.com/svg?U%20%3D%20L%5ET" /> alakban létezik, tehát <img src="https://latex.codecogs.com/svg?A%20%3D%20LL%5ET" />, ahol <img src="https://latex.codecogs.com/svg?L" /> alsó háromszögmátrix, amelynek diagonális elemei pozitív számok. Az ilyen felbontást **Cholesky-felbontásnak** hívjuk.
 
 > Pozitív definit = minden sajátértéke pozitív
 
@@ -2353,15 +2353,15 @@ x = R \ y;
 
 > A `'` operátor transzponál, a `\` pedig: `1R \ y := Az Rx = y egyenletrendszer megoldása`
 
-A Cholesky felbontás numerikusan stabilis, műveletigénye <img src="https://render.githubusercontent.com/render/math?math=%20%5Cfrac%7B1%7D%7B3%7D%20n%5E3%20%2B%20O(n%5E2)" />. Feleannyi, mint egy általános mátrix LU felbontásáé.
+A Cholesky felbontás numerikusan stabilis, műveletigénye <img src="https://latex.codecogs.com/svg?%20%5Cfrac%7B1%7D%7B3%7D%20n%5E3%20%2B%20O(n%5E2)" />. Feleannyi, mint egy általános mátrix LU felbontásáé.
 
 ##### QR ortogonális felbontás
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=Q" /> négyzetes mátrix ortogonális, ha <img src="https://render.githubusercontent.com/render/math?math=QQ%5ET%20%3D%20Q%5ETQ%20%3D%20I" />.
+Egy <img src="https://latex.codecogs.com/svg?Q" /> négyzetes mátrix ortogonális, ha <img src="https://latex.codecogs.com/svg?QQ%5ET%20%3D%20Q%5ETQ%20%3D%20I" />.
 
 Az ortogonális transzformációk megtartják a kettes normát, így numerikusan stabilisak.
 
-Lineáris egyenletrendszer megoldása az <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20QR" /> felbontással:
+Lineáris egyenletrendszer megoldása az <img src="https://latex.codecogs.com/svg?A%20%3D%20QR" /> felbontással:
 
 <img src="https://latex.codecogs.com/svg?%0ARx%20%3D%20Q%5ETb%0A" />
 
@@ -2372,7 +2372,7 @@ Matlabban
 x = R \ (Q' * b);
 ```
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=A" /> négyzetes valós reguláris mátrixnak létezik az <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20QR" /> felbontása ortogonális és felső háromszögmátrixra.
+Tetszőleges <img src="https://latex.codecogs.com/svg?A" /> négyzetes valós reguláris mátrixnak létezik az <img src="https://latex.codecogs.com/svg?A%20%3D%20QR" /> felbontása ortogonális és felső háromszögmátrixra.
 
 #### Lineáris egyenletrendszerek megoldása iterációs módszerekkel
 
@@ -2386,9 +2386,9 @@ A módszer:
 
 1. Felírjuk az egyenleteket olyan formában, hogy a bal oldalra rendezünk 1-1 változót.
 
-2. Választunk egy kiindulási <img src="https://render.githubusercontent.com/render/math?math=x_0" /> vektort.
+2. Választunk egy kiindulási <img src="https://latex.codecogs.com/svg?x_0" /> vektort.
 
-3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett báltozó jobb oldalába (nulladik iterációban <img src="https://render.githubusercontent.com/render/math?math=x_0" />-t).
+3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett báltozó jobb oldalába (nulladik iterációban <img src="https://latex.codecogs.com/svg?x_0" />-t).
 
 4. Ezt addig ismételgethetjük, amíg az eltérés két eredmény között megfelelően kicsi.
 
@@ -2400,37 +2400,37 @@ Ehhez tartozó **iterációs egyenletek**:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0Ax_1%20%26%20%3D%20%5Cfrac%7B-4%20%2B%20x_2%20%2B%205x_3%7D%7B2%7D%20%5C%5C%0A%5C%5C%0Ax_2%20%26%20%3D%20-4%20%2B%204x_1%20%2B%20x_3%20%5C%5C%0A%5C%5C%0Ax_3%20%26%20%3D%20-1%20-%202x_1%20%2B%204x_2%0A%5Cend%7Balign%7D%0A" />
 
-> Ez éppenséggel az <img src="https://render.githubusercontent.com/render/math?math=x_1%20%3D%20(1%2C%202%2C%203)%5ET" /> kezdővektorral divergál a megoldástól.
+> Ez éppenséggel az <img src="https://latex.codecogs.com/svg?x_1%20%3D%20(1%2C%202%2C%203)%5ET" /> kezdővektorral divergál a megoldástól.
 
-> <img src="https://render.githubusercontent.com/render/math?math=Bx%5E%7B(k)%7D%20%2B%20c" /> az **iterációs egyenleteknek** az általános, tömör felírása.
+> <img src="https://latex.codecogs.com/svg?Bx%5E%7B(k)%7D%20%2B%20c" /> az **iterációs egyenleteknek** az általános, tömör felírása.
 
 ###### Jacobi iteráció konvergenciája
 
-Az, hogy a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **diagonálisan domináns**, elegendő feltétele a Jacobi iteráció konvergenciájának.
+Az, hogy a <img src="https://latex.codecogs.com/svg?B" /> mátrix **diagonálisan domináns**, elegendő feltétele a Jacobi iteráció konvergenciájának.
 
 > Egy mátrix akkor diagonálisan domináns, ha minden sorban a diagonális elem abszolútértékben nagyobb, mint az összes többi sor-beli elem abszolútértékben vett összege.
 
 ##### Iterációs módszerek konvergenciája
 
-Vizsgáljuk meg az <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció által definiált <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20x%5E%7B(k)%7D%20~%20%5C%7D" /> sorozat konvergenciáját. Jelöljük az eredeti egyenletrendszerünk megoldásár <img src="https://render.githubusercontent.com/render/math?math=x%5E*" />-al. Az <img src="https://render.githubusercontent.com/render/math?math=e_k%20%3D%20x%5E%7B(k)%7D%20-%20x%5E*" /> eltérésre a következő állítás érvényes:
+Vizsgáljuk meg az <img src="https://latex.codecogs.com/svg?x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció által definiált <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20x%5E%7B(k)%7D%20~%20%5C%7D" /> sorozat konvergenciáját. Jelöljük az eredeti egyenletrendszerünk megoldásár <img src="https://latex.codecogs.com/svg?x%5E*" />-al. Az <img src="https://latex.codecogs.com/svg?e_k%20%3D%20x%5E%7B(k)%7D%20-%20x%5E*" /> eltérésre a következő állítás érvényes:
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(0)%7D" /> kezdővektor, esetén a <img src="https://render.githubusercontent.com/render/math?math=k" />-adik közelítés eltérése az <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> megoldástól <img src="https://render.githubusercontent.com/render/math?math=e_k%20%3D%20B%5Ek%20e_0" />
+Tetszőleges <img src="https://latex.codecogs.com/svg?x%5E%7B(0)%7D" /> kezdővektor, esetén a <img src="https://latex.codecogs.com/svg?k" />-adik közelítés eltérése az <img src="https://latex.codecogs.com/svg?x%5E*" /> megoldástól <img src="https://latex.codecogs.com/svg?e_k%20%3D%20B%5Ek%20e_0" />
 
-Következmény: Ha a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **nilpotens**, akkor <img src="https://render.githubusercontent.com/render/math?math=B%5Ej%20e_0%20%3D%200" />, tehát az iterációs eljárás véges sok lépésben megtalálja  amegoldást.
+Következmény: Ha a <img src="https://latex.codecogs.com/svg?B" /> mátrix **nilpotens**, akkor <img src="https://latex.codecogs.com/svg?B%5Ej%20e_0%20%3D%200" />, tehát az iterációs eljárás véges sok lépésben megtalálja  amegoldást.
 
-> A nilpotens azt jelenti, hogy van olyan <img src="https://render.githubusercontent.com/render/math?math=j" /> index, amire <img src="https://render.githubusercontent.com/render/math?math=B%5Ej%20%3D0" />
+> A nilpotens azt jelenti, hogy van olyan <img src="https://latex.codecogs.com/svg?j" /> index, amire <img src="https://latex.codecogs.com/svg?B%5Ej%20%3D0" />
 
 **Globális konvergencia**: Akkor mondjuk, hogy egy iterációs sorozat globálisan konvergens, ha minden indulóvektorral ugyan azt a megoldást kapjuk.
 
-Az  <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció akkor és csak akkor globálisan konvergens, ha <img src="https://render.githubusercontent.com/render/math?math=%5Crho(B)%20%3C%201" />.
+Az  <img src="https://latex.codecogs.com/svg?x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció akkor és csak akkor globálisan konvergens, ha <img src="https://latex.codecogs.com/svg?%5Crho(B)%20%3C%201" />.
 
-> <img src="https://render.githubusercontent.com/render/math?math=%5Crho(B)" /> a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **spektrálrádiusz**-át jelenti, ami a sajátértékeinek abszolút értékben vett maximuma.
+> <img src="https://latex.codecogs.com/svg?%5Crho(B)" /> a <img src="https://latex.codecogs.com/svg?B" /> mátrix **spektrálrádiusz**-át jelenti, ami a sajátértékeinek abszolút értékben vett maximuma.
 
 ##### Gauss-Seidel iteráció
 
 Annyiban tér el a Jacobi-iterációtól, hogy az iterációs egyenletek jobb oldalán felhasználjuk az adott iterációban már megtalált közelítő értékeket.
 
-Például ha <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k%2B1)%7D" /> már ismert, akkot a továbbiakban <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k)%7D" /> helyett <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k%2B1)%7D" />-et használjunk.
+Például ha <img src="https://latex.codecogs.com/svg?x_1%5E%7B(k%2B1)%7D" /> már ismert, akkot a továbbiakban <img src="https://latex.codecogs.com/svg?x_1%5E%7B(k)%7D" /> helyett <img src="https://latex.codecogs.com/svg?x_1%5E%7B(k%2B1)%7D" />-et használjunk.
 
 Ez valamivel gyorsítja a konvergenciát.
 
@@ -2438,35 +2438,35 @@ Ez valamivel gyorsítja a konvergenciát.
 
 #### Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása
 
-Legyen adott egy <img src="https://render.githubusercontent.com/render/math?math=A" /> négyzetes mátrix. Adjuk meg a <img src="https://render.githubusercontent.com/render/math?math=%5Clambda" /> számot, és az <img src="https://render.githubusercontent.com/render/math?math=x%20%5Cne%200" /> vektort úgy, hogy <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20%5Clambda%20x" />.
+Legyen adott egy <img src="https://latex.codecogs.com/svg?A" /> négyzetes mátrix. Adjuk meg a <img src="https://latex.codecogs.com/svg?%5Clambda" /> számot, és az <img src="https://latex.codecogs.com/svg?x%20%5Cne%200" /> vektort úgy, hogy <img src="https://latex.codecogs.com/svg?Ax%20%3D%20%5Clambda%20x" />.
 
-Ekkor <img src="https://render.githubusercontent.com/render/math?math=%5Clambda" /> az <img src="https://render.githubusercontent.com/render/math?math=A" /> sajátértéke, és <img src="https://render.githubusercontent.com/render/math?math=x" /> az <img src="https://render.githubusercontent.com/render/math?math=A" /> sajátvektora.
+Ekkor <img src="https://latex.codecogs.com/svg?%5Clambda" /> az <img src="https://latex.codecogs.com/svg?A" /> sajátértéke, és <img src="https://latex.codecogs.com/svg?x" /> az <img src="https://latex.codecogs.com/svg?A" /> sajátvektora.
 
-> Baloldali sajátérték, sajátvektor: <img src="https://render.githubusercontent.com/render/math?math=y%5ET%20A%20%3D%20%5Clambda%20y%5ET" />
+> Baloldali sajátérték, sajátvektor: <img src="https://latex.codecogs.com/svg?y%5ET%20A%20%3D%20%5Clambda%20y%5ET" />
 
-Mátrix **spektruma**: Sajátértékeinek halmaza, jele: <img src="https://render.githubusercontent.com/render/math?math=%5Clambda(A)" />.
+Mátrix **spektruma**: Sajátértékeinek halmaza, jele: <img src="https://latex.codecogs.com/svg?%5Clambda(A)" />.
 
-Mátrix **spektrálrádiusza**: <img src="https://render.githubusercontent.com/render/math?math=max%5C%7B%20~%20%7C%20%5Clambda%20%7C%20%3A%20%5Clambda%20%5Cin%20%5Clambda(A)%20~%20%5C%7D" />, jele: <img src="https://render.githubusercontent.com/render/math?math=%5Crho(A)" />
+Mátrix **spektrálrádiusza**: <img src="https://latex.codecogs.com/svg?max%5C%7B%20~%20%7C%20%5Clambda%20%7C%20%3A%20%5Clambda%20%5Cin%20%5Clambda(A)%20~%20%5C%7D" />, jele: <img src="https://latex.codecogs.com/svg?%5Crho(A)" />
 
 ##### Sajátvektor, sajátérték jelentősége
 
-A sajátvektorok irányába eső vektorokat az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix megnyújtja az adott sajátvektorhoz tartozó sajátértéknek megfelelően.
+A sajátvektorok irányába eső vektorokat az <img src="https://latex.codecogs.com/svg?A" /> mátrix megnyújtja az adott sajátvektorhoz tartozó sajátértéknek megfelelően.
 
 ##### Sajátértékek, sajátvektorok nem egyértelműek
 
-- Egységmátrixnak az 1 <img src="https://render.githubusercontent.com/render/math?math=n" />-szeres sajátértéke
+- Egységmátrixnak az 1 <img src="https://latex.codecogs.com/svg?n" />-szeres sajátértéke
 
 - Egy sajátvektorral együtt annak minden nem nulla számmal szorzottja is ugyanahhoz a sajátértékhez tartozó sajátvektora
 
 ##### Sajátértékek, sajátvektorok meghatározása
 
-Megkaphatjuk a <img src="https://render.githubusercontent.com/render/math?math=(A%20-%20%5Clambda%20I)x%20%3D%200" /> homogén lineáris egyenletrendszerből. Ennek pontosan akkor van nulla vektortól különböző megoldása, ha az <img src="https://render.githubusercontent.com/render/math?math=A%20-%20%5Clambda%20I" /> mátrix szinguláris.
+Megkaphatjuk a <img src="https://latex.codecogs.com/svg?(A%20-%20%5Clambda%20I)x%20%3D%200" /> homogén lineáris egyenletrendszerből. Ennek pontosan akkor van nulla vektortól különböző megoldása, ha az <img src="https://latex.codecogs.com/svg?A%20-%20%5Clambda%20I" /> mátrix szinguláris.
 
-Emiatt a sajátértékeket leírja a <img src="https://render.githubusercontent.com/render/math?math=det%20(A%20-%20%5Clambda%20I)%20%3D%200" /> egyenlet. Ennek baloldalán levő <img src="https://render.githubusercontent.com/render/math?math=n" />-edfokú polinomot az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix **karakterisztikus polinomjának** nevezzük.
+Emiatt a sajátértékeket leírja a <img src="https://latex.codecogs.com/svg?det%20(A%20-%20%5Clambda%20I)%20%3D%200" /> egyenlet. Ennek baloldalán levő <img src="https://latex.codecogs.com/svg?n" />-edfokú polinomot az <img src="https://latex.codecogs.com/svg?A" /> mátrix **karakterisztikus polinomjának** nevezzük.
 
 ##### * Sajátértékek korlátai
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixra és bármely mátrixnormára <img src="https://render.githubusercontent.com/render/math?math=%5Crho(A)%20%5Cle%20%7C%7CA%7C%7C" />.
+Tetszőleges <img src="https://latex.codecogs.com/svg?A" /> mátrixra és bármely mátrixnormára <img src="https://latex.codecogs.com/svg?%5Crho(A)%20%5Cle%20%7C%7CA%7C%7C" />.
 
 A mátrix összes sajátértéke benne van a 
 
@@ -2486,9 +2486,9 @@ Az algoritmus iterációs képlete:
 
 Kiindulási vektor:
 
-- <img src="https://render.githubusercontent.com/render/math?math=x%5E0%20%5Cne%200" />, és
+- <img src="https://latex.codecogs.com/svg?x%5E0%20%5Cne%200" />, és
 
-- <img src="https://render.githubusercontent.com/render/math?math=x_0" /> nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
+- <img src="https://latex.codecogs.com/svg?x_0" /> nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
 
 ###### Matlabban
 
@@ -2517,9 +2517,9 @@ Az egyes iterációban kapott eredmények:
 
 > A.K.A. Newton-módszer
 
-Tegyük fel, hogy az <img src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%200" /> egyenlet <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> egyszeres, izolált zérushelyét akarjuk meghatározni, és hogy ennek a környezetében <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> differenciálható.
+Tegyük fel, hogy az <img src="https://latex.codecogs.com/svg?f(x)%20%3D%200" /> egyenlet <img src="https://latex.codecogs.com/svg?x%5E*" /> egyszeres, izolált zérushelyét akarjuk meghatározni, és hogy ennek a környezetében <img src="https://latex.codecogs.com/svg?f(x)" /> differenciálható.
 
-Válasszunk ki ebből egy <img src="https://render.githubusercontent.com/render/math?math=x_0" /> kezdőértéket, majd képezzük az
+Válasszunk ki ebből egy <img src="https://latex.codecogs.com/svg?x_0" /> kezdőértéket, majd képezzük az
 
 <img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)%7D%7Bf'(x_k)%7D%0A" />
 
@@ -2527,49 +2527,49 @@ iterációs sorozatot.
 
 ##### A módszer geometriai jelentése
 
-Az aktuális <img src="https://render.githubusercontent.com/render/math?math=x_k" /> pontban meghatározzuk az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény és deriváltja értékét, ezekkel képezzük az adott ponthoz húzott érintőt, és következő iterációs pontnak azt határozzuk meg, amelyben az érintő zérushelye van.
+Az aktuális <img src="https://latex.codecogs.com/svg?x_k" /> pontban meghatározzuk az <img src="https://latex.codecogs.com/svg?f(x)" /> függvény és deriváltja értékét, ezekkel képezzük az adott ponthoz húzott érintőt, és következő iterációs pontnak azt határozzuk meg, amelyben az érintő zérushelye van.
 
 ##### Megoldás garantálása
 
-Ha az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény kétszer folytonosan differenciálható az <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> zérushely egy környezetében, akkor van olyan pont, ahonnan indulva a Newton-módszer kvadratikusan konvergens sorozatot ad meg:
+Ha az <img src="https://latex.codecogs.com/svg?f(x)" /> függvény kétszer folytonosan differenciálható az <img src="https://latex.codecogs.com/svg?x%5E*" /> zérushely egy környezetében, akkor van olyan pont, ahonnan indulva a Newton-módszer kvadratikusan konvergens sorozatot ad meg:
 
 <img src="https://latex.codecogs.com/svg?%0A%7Cx%5E*%20-%20x_%7Bk%2B1%7D%20%7C%20%5Cle%20C%20%7Cx%5E*%20-%20x_k%20%7C%5E2%0A" />
 
-valamely pozitív <img src="https://render.githubusercontent.com/render/math?math=C" /> konstanssal.
+valamely pozitív <img src="https://latex.codecogs.com/svg?C" /> konstanssal.
 
 #### Szelő módszer
 
-Legyen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%200" /> egyenlet egyszeres gyöke. Válasszunk alkalmas <img src="https://render.githubusercontent.com/render/math?math=x_0" /> és <img src="https://render.githubusercontent.com/render/math?math=x_1" /> kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
+Legyen <img src="https://latex.codecogs.com/svg?x%5E*" /> az <img src="https://latex.codecogs.com/svg?f(x)%20%3D%200" /> egyenlet egyszeres gyöke. Válasszunk alkalmas <img src="https://latex.codecogs.com/svg?x_0" /> és <img src="https://latex.codecogs.com/svg?x_1" /> kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
 
 <img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)(x_k%20-%20x_%7Bk-1%7D)%7D%7Bf(x_k)%20-%20f(k_%7Bk-1%7D)%7D%20%3D%20%5Cfrac%7B%20f(x_k)%20x_%7Bk-1%7D%20-%20f(x_%7Bk-1%7D)%20x_k%20%7D%7B%20f(x_k)%20-%20f(x_%7Bk%20-%201%7D)%20%7D%20~%20~%20~%20~%20k%20%3D%201%2C%202%2C%20...%0A" />
 
-Valójában annyiban tér el a Newton-módszertől, hogy <img src="https://render.githubusercontent.com/render/math?math=f'(x_k)" /> helyett annak közelítéseként a **numerikus derivált**,
+Valójában annyiban tér el a Newton-módszertől, hogy <img src="https://latex.codecogs.com/svg?f'(x_k)" /> helyett annak közelítéseként a **numerikus derivált**,
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cfrac%0A%7B%20f(x_k)%20-%20f(x_%7Bk-1%7D)%20%7D%0A%7B%20x_k%20-%20k_%7Bk-1%7D%20%7D%0A" />
 
 szerepel.
 
-> Így tehát ez az eljárás csak egy <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvényt kiszámoló szubrutinra (függvényre) támaszkodik.
+> Így tehát ez az eljárás csak egy <img src="https://latex.codecogs.com/svg?f(x)" /> függvényt kiszámoló szubrutinra (függvényre) támaszkodik.
 
 ##### A módszer geometriai jelentése
 
-<img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%20%2B%201%7D" /> nem más, mint az <img src="https://render.githubusercontent.com/render/math?math=(x_k%2C%20f(x_k))" /> és az <img src="https://render.githubusercontent.com/render/math?math=(x_%7Bk-1%7D%2C%20f(x_%7Bk-1%7D))" /> pontokon átmenő egyenes és az <img src="https://render.githubusercontent.com/render/math?math=x" /> tengely metszéspontjának <img src="https://render.githubusercontent.com/render/math?math=x" /> koordinátája.
+<img src="https://latex.codecogs.com/svg?x_%7Bk%20%2B%201%7D" /> nem más, mint az <img src="https://latex.codecogs.com/svg?(x_k%2C%20f(x_k))" /> és az <img src="https://latex.codecogs.com/svg?(x_%7Bk-1%7D%2C%20f(x_%7Bk-1%7D))" /> pontokon átmenő egyenes és az <img src="https://latex.codecogs.com/svg?x" /> tengely metszéspontjának <img src="https://latex.codecogs.com/svg?x" /> koordinátája.
 
 ##### Tulajdonságok
 
-- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> gyököt.
+- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a <img src="https://latex.codecogs.com/svg?x%5E*" /> gyököt.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=f'(x%5E*)%20%3E%200" />, és <img src="https://render.githubusercontent.com/render/math?math=f''(x%5E*)%20%3E%200" />, akkor <img src="https://render.githubusercontent.com/render/math?math=x%5E*" />-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
+- Ha <img src="https://latex.codecogs.com/svg?f'(x%5E*)%20%3E%200" />, és <img src="https://latex.codecogs.com/svg?f''(x%5E*)%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?x%5E*" />-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
 
 #### Húr módszer
 
 A szelő módszer a következő módosításokkal:
 
-- A kezdeti <img src="https://render.githubusercontent.com/render/math?math=x_0%2C%20x_1" /> pontokban az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény **ellentétes előjelű**.
+- A kezdeti <img src="https://latex.codecogs.com/svg?x_0%2C%20x_1" /> pontokban az <img src="https://latex.codecogs.com/svg?f(x)" /> függvény **ellentétes előjelű**.
 
-- <img src="https://render.githubusercontent.com/render/math?math=f(x_%7Bk%2B1%7D)" /> előjelétől függően a megelőző két pontból **azt választja** a következő iterációs lépéshez, amelyikkel ez a **tulajdonság fennmarad**.
+- <img src="https://latex.codecogs.com/svg?f(x_%7Bk%2B1%7D)" /> előjelétől függően a megelőző két pontból **azt választja** a következő iterációs lépéshez, amelyikkel ez a **tulajdonság fennmarad**.
 
-> Például ha <img src="https://render.githubusercontent.com/render/math?math=x_2" /> pozitív, és <img src="https://render.githubusercontent.com/render/math?math=x_0" /> negatív, <img src="https://render.githubusercontent.com/render/math?math=x_1" /> pozitív, akkor a következő iterációban <img src="https://render.githubusercontent.com/render/math?math=x_2" /> mellett <img src="https://render.githubusercontent.com/render/math?math=x_0" />-t használja a módszer az <img src="https://render.githubusercontent.com/render/math?math=x_1" /> helyett.
+> Például ha <img src="https://latex.codecogs.com/svg?x_2" /> pozitív, és <img src="https://latex.codecogs.com/svg?x_0" /> negatív, <img src="https://latex.codecogs.com/svg?x_1" /> pozitív, akkor a következő iterációban <img src="https://latex.codecogs.com/svg?x_2" /> mellett <img src="https://latex.codecogs.com/svg?x_0" />-t használja a módszer az <img src="https://latex.codecogs.com/svg?x_1" /> helyett.
 
 #### Konjugált gradiens eljárás
 
@@ -2579,36 +2579,36 @@ Szimmetrikus pozitív definit mátrixú lineáris egyenletrendszerek megoldásá
 
 Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
 
-Legyen <img src="https://render.githubusercontent.com/render/math?math=A" /> egy szimmetrikus, pozitív definit mátrix, akkor a 
+Legyen <img src="https://latex.codecogs.com/svg?A" /> egy szimmetrikus, pozitív definit mátrix, akkor a 
 
 <img src="https://latex.codecogs.com/svg?%0Aq(x)%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20x%5ET%20A%20x%20-%20x%5ET%20b%0A" />
 
-kvadratikus függvénynek egyetlen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> minimumpontja van, és erre <img src="https://render.githubusercontent.com/render/math?math=Ax%5E*%20%3D%20b" /> teljesül.
+kvadratikus függvénynek egyetlen <img src="https://latex.codecogs.com/svg?x%5E*" /> minimumpontja van, és erre <img src="https://latex.codecogs.com/svg?Ax%5E*%20%3D%20b" /> teljesül.
 
-Azaz az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> lineáris egyenletrendszer megoldása ekvivalens a <img src="https://render.githubusercontent.com/render/math?math=q(x)" /> kvadratikus függvény minimumpontjának meghatározásával.
+Azaz az <img src="https://latex.codecogs.com/svg?Ax%20%3D%20b" /> lineáris egyenletrendszer megoldása ekvivalens a <img src="https://latex.codecogs.com/svg?q(x)" /> kvadratikus függvény minimumpontjának meghatározásával.
 
-A többdimenziós optimalizálási eljárások rendszerint az <img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha%20s_k" /> alakban keresik az új közelítő megoldást, ahol <img src="https://render.githubusercontent.com/render/math?math=s_k" /> egy keresési irány, és <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> a lépésköz.
+A többdimenziós optimalizálási eljárások rendszerint az <img src="https://latex.codecogs.com/svg?x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha%20s_k" /> alakban keresik az új közelítő megoldást, ahol <img src="https://latex.codecogs.com/svg?s_k" /> egy keresési irány, és <img src="https://latex.codecogs.com/svg?%5Calpha" /> a lépésköz.
 
 ##### Kvadratikus függvényekkel kapcsolatos összefüggések
 
-1. A negatív gradiens a rezudiális vektor: <img src="https://render.githubusercontent.com/render/math?math=-%20%5Cnabla%20q(x)%20%3D%20b%20-%20Ax%20%3D%20r" />
+1. A negatív gradiens a rezudiális vektor: <img src="https://latex.codecogs.com/svg?-%20%5Cnabla%20q(x)%20%3D%20b%20-%20Ax%20%3D%20r" />
 
-2. Adott keresési itány mentén nem kell adaptív módon meghatározni a lépésközt, mert az optimális <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> közvetlenül megadható. A keresési irány mentén ott lesz a célfüggvény minimális, ahol a rezudiális vektor merőleges <img src="https://render.githubusercontent.com/render/math?math=s_k" />-ra.
-   <img src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%3D%20%5Cfrac%7Br_k%5ET%20s_k%7D%7Bs_k%5ET%20A%20s_k%7D" />
+2. Adott keresési itány mentén nem kell adaptív módon meghatározni a lépésközt, mert az optimális <img src="https://latex.codecogs.com/svg?%5Calpha" /> közvetlenül megadható. A keresési irány mentén ott lesz a célfüggvény minimális, ahol a rezudiális vektor merőleges <img src="https://latex.codecogs.com/svg?s_k" />-ra.
+   <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%20%5Cfrac%7Br_k%5ET%20s_k%7D%7Bs_k%5ET%20A%20s_k%7D" />
 
 ##### A módszer
 
-Adott <img src="https://render.githubusercontent.com/render/math?math=x_0" /> kezdőpontra legyen <img src="https://render.githubusercontent.com/render/math?math=s_0%20%3D%20r_0%20%3D%20b%20-%20Ax_0" />, és iteráljuk <img src="https://render.githubusercontent.com/render/math?math=k%20%3D%201%2C%202%2C%20..." /> értékekre az alábbi lépéseket, amíg a megállási feltételek nem teljesülnek:
+Adott <img src="https://latex.codecogs.com/svg?x_0" /> kezdőpontra legyen <img src="https://latex.codecogs.com/svg?s_0%20%3D%20r_0%20%3D%20b%20-%20Ax_0" />, és iteráljuk <img src="https://latex.codecogs.com/svg?k%20%3D%201%2C%202%2C%20..." /> értékekre az alábbi lépéseket, amíg a megállási feltételek nem teljesülnek:
 
-1. <img src="https://render.githubusercontent.com/render/math?math=%5Calpha_k%20%3D%20%5Cfrac%7Br_k%5ET%20r_k%7D%7Bs_k%5ET%20As_k%7D" />: A **lépéshossz** meghatározása
+1. <img src="https://latex.codecogs.com/svg?%5Calpha_k%20%3D%20%5Cfrac%7Br_k%5ET%20r_k%7D%7Bs_k%5ET%20As_k%7D" />: A **lépéshossz** meghatározása
 
-2. <img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha_k%20s_k" />: Iterált **közelítő megoldás**
+2. <img src="https://latex.codecogs.com/svg?x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha_k%20s_k" />: Iterált **közelítő megoldás**
 
-3. <img src="https://render.githubusercontent.com/render/math?math=r_%7Bk%2B1%7D%20%3D%20r_k%20-%20%5Calpha_k%20A%20s_k" />: Új **rezudiális vektor**
+3. <img src="https://latex.codecogs.com/svg?r_%7Bk%2B1%7D%20%3D%20r_k%20-%20%5Calpha_k%20A%20s_k" />: Új **rezudiális vektor**
 
-4. <img src="https://render.githubusercontent.com/render/math?math=%5Cbeta_%7Bk%2B1%7D%20%3D%20%5Cfrac%7Br_%7Bk%2B1%7D%5ET%20r_%7Bk%2B1%7D%7D%7Br_k%5ET%20r_k%7D" />: Segédváltozó
+4. <img src="https://latex.codecogs.com/svg?%5Cbeta_%7Bk%2B1%7D%20%3D%20%5Cfrac%7Br_%7Bk%2B1%7D%5ET%20r_%7Bk%2B1%7D%7D%7Br_k%5ET%20r_k%7D" />: Segédváltozó
 
-5. <img src="https://render.githubusercontent.com/render/math?math=s_%7Bk%2B1%7D%20%3D%20r_%7Bk%2B1%7D%20%2B%20%5Cbeta_%7Bk%2B1%7D%20s_k" />: Új **keresési irány**
+5. <img src="https://latex.codecogs.com/svg?s_%7Bk%2B1%7D%20%3D%20r_%7Bk%2B1%7D%20%2B%20%5Cbeta_%7Bk%2B1%7D%20s_k" />: Új **keresési irány**
 
 > Korábbi gradiensmódszerek esetén egyszerűen a negatív gradienst követik minden iterációs lépésben, de felismerték hogy ez a meredek falú, enyhén lejtő völgyszerű függvények esetén szükségtelenül sok iterációs lépést eredményez a völgy két oldalán való oda-vissza ugrálás miatt. A kisebb meredekséggel rendelkező irányban viszont lényegesen gyorsabban lehetett volna haladni.
 > A konjugált gradiens módszer a lépésenkénti megfelelő irányváltoztatással kiküszöböli ezt a hibát.
@@ -2630,17 +2630,17 @@ for k = 1:20
 end
 ```
 
-> Az `rr` valójában <img src="https://render.githubusercontent.com/render/math?math=r_%7Bk%2B1%7D" />, csak mivel `s` kiszámolásához <img src="https://render.githubusercontent.com/render/math?math=r_k" />-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
+> Az `rr` valójában <img src="https://latex.codecogs.com/svg?r_%7Bk%2B1%7D" />, csak mivel `s` kiszámolásához <img src="https://latex.codecogs.com/svg?r_k" />-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
 
 #### Lagrange interpoláció
 
-**Interpoláció**: Az a feladat, amikor adott <img src="https://render.githubusercontent.com/render/math?math=(x_i%2C%20y_i)%2C%20i%20%3D1%2C%202%2C%20...%2C%20m" /> pontsorozaton állítunk elő egy függvényt, amely egy adott függvényosztályba tartozik, és minden ponton átmegy.
+**Interpoláció**: Az a feladat, amikor adott <img src="https://latex.codecogs.com/svg?(x_i%2C%20y_i)%2C%20i%20%3D1%2C%202%2C%20...%2C%20m" /> pontsorozaton állítunk elő egy függvényt, amely egy adott függvényosztályba tartozik, és minden ponton átmegy.
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=x_i" /> helyeken a megfelelő <img src="https://render.githubusercontent.com/render/math?math=y_i" /> értékeket vegye fel a függvény.
+> Azaz <img src="https://latex.codecogs.com/svg?x_i" /> helyeken a megfelelő <img src="https://latex.codecogs.com/svg?y_i" /> értékeket vegye fel a függvény.
 
-> Ha a keresett <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény polinom, akkor **polinominterpolációról** beszélünk.
+> Ha a keresett <img src="https://latex.codecogs.com/svg?f(x)" /> függvény polinom, akkor **polinominterpolációról** beszélünk.
 
-**Interpoláció másik jelentése**: A közelítő függvény segítségével az eredeti <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény értékét egy olyan <img src="https://render.githubusercontent.com/render/math?math=%5Chat%7Bx%7D" /> pontban becsüljük az interpoláló <img src="https://render.githubusercontent.com/render/math?math=p(x)" /> polinom <img src="https://render.githubusercontent.com/render/math?math=p(%5Chat%7Bx%7D)" /> helyettesítési értékével, amelyre:
+**Interpoláció másik jelentése**: A közelítő függvény segítségével az eredeti <img src="https://latex.codecogs.com/svg?f(x)" /> függvény értékét egy olyan <img src="https://latex.codecogs.com/svg?%5Chat%7Bx%7D" /> pontban becsüljük az interpoláló <img src="https://latex.codecogs.com/svg?p(x)" /> polinom <img src="https://latex.codecogs.com/svg?p(%5Chat%7Bx%7D)" /> helyettesítési értékével, amelyre:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Chat%7Bx%7D%20%5Cin%20%5B%20~%20min(x_1%2C%20x_2%2C%20...%2C%20x_m)%2C%20max(x_1%2C%20x_2%2C%20...%2C%20x_m)%20~%20%5D%0A" />
 
@@ -2654,17 +2654,17 @@ teljesül, akkor **extrapolációról** van szó.
 
 ##### Polinomok fokszáma
 
-Polinom interpoláció esetén a polinom fokszáma, <img src="https://render.githubusercontent.com/render/math?math=n" /> egyenlő <img src="https://render.githubusercontent.com/render/math?math=m%20-%201" />-el.
+Polinom interpoláció esetén a polinom fokszáma, <img src="https://latex.codecogs.com/svg?n" /> egyenlő <img src="https://latex.codecogs.com/svg?m%20-%201" />-el.
 
 Spline alkalmazásakor a fokszám lényegesen kisebb, mint az alappontok száma.
 
-Amennyiben egy olyan polinomot illesztünk, amelynek fokszáma kisebb, mint <img src="https://render.githubusercontent.com/render/math?math=m%20-%201" />, akkor **görbeillesztésről** beszélünk.
+Amennyiben egy olyan polinomot illesztünk, amelynek fokszáma kisebb, mint <img src="https://latex.codecogs.com/svg?m%20-%201" />, akkor **görbeillesztésről** beszélünk.
 
 > Görbeillesztéskor a polinom persze nem feltétlen megy át minden alapponton.
 
 ##### Lagrange interpoláció
 
-> Lagrange interpolációkor feltesszük, hogy az alappontok különbözőek, de ez nem egy túl erős feltétel, hiszen nem is lehet azonos <img src="https://render.githubusercontent.com/render/math?math=x" /> koordinátán két különböző <img src="https://render.githubusercontent.com/render/math?math=y" /> értéket érinteni egy függvénnyel.
+> Lagrange interpolációkor feltesszük, hogy az alappontok különbözőek, de ez nem egy túl erős feltétel, hiszen nem is lehet azonos <img src="https://latex.codecogs.com/svg?x" /> koordinátán két különböző <img src="https://latex.codecogs.com/svg?y" /> értéket érinteni egy függvénnyel.
 
 A Lagrange interpoláció az interpoláló polinomokat
 
@@ -2674,7 +2674,7 @@ alakban adja meg, ahol
 
 <img src="https://latex.codecogs.com/svg?%0AL_i(x)%20%3D%20%5Cprod_%7Bj%3D0%2C%20j%5Cne%20i%7D%5En%20%5Cfrac%7Bx-x_j%7D%7Bx_i-x_j%7D%20%3D%20%0A%5Cfrac%0A%7B(x%20-%20x_0)(x%20-%20x_1)%20...%20(x%20-%20x_%7Bi-1%7D)(x%20-%20x_%7Bi%2B1%7D)%20...%20(x%20-%20x_n)%7D%0A%7B(x_i%20-%20x_0)(x_i%20-%20x_1)%20...%20(x_i%20-%20x_%7Bi-1%7D)(x_i%20-%20x_%7Bi%2B1%7D)%20...%20(x_i%20-%20x_n)%7D%0A" />
 
-Legyenek adottak az <img src="https://render.githubusercontent.com/render/math?math=x_0%2C%20...%2C%20x_n" /> páronként különböző alappontok. Ekkor az <img src="https://render.githubusercontent.com/render/math?math=f(x_i)%2C%20i%20%3D%200%2C%201%2C%20...%2C%20n" /> függvényértékekhez egyértelműen létezik olyan legfeljebb <img src="https://render.githubusercontent.com/render/math?math=n" />-edfokú interpoláló polinom, amely megegyezik a Lagrange interpolációs polinommal.
+Legyenek adottak az <img src="https://latex.codecogs.com/svg?x_0%2C%20...%2C%20x_n" /> páronként különböző alappontok. Ekkor az <img src="https://latex.codecogs.com/svg?f(x_i)%2C%20i%20%3D%200%2C%201%2C%20...%2C%20n" /> függvényértékekhez egyértelműen létezik olyan legfeljebb <img src="https://latex.codecogs.com/svg?n" />-edfokú interpoláló polinom, amely megegyezik a Lagrange interpolációs polinommal.
 
 ##### Matlabban
 
@@ -2706,7 +2706,7 @@ A kvadratúra a numerikus integrálás szinonimája, amikor a
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%3D%20F(b)%20-%20F(a)%0A" />
 
-határozott integrál közelítése a feladat. Itt <img src="https://render.githubusercontent.com/render/math?math=F(x)" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> integrálandó függvény primitív függvénye. Ez utóbbi nem minden esetben áll rendelkezésre, sőt sokszor nem is elemi függvény, nem adható meg zárt alakban.
+határozott integrál közelítése a feladat. Itt <img src="https://latex.codecogs.com/svg?F(x)" /> az <img src="https://latex.codecogs.com/svg?f(x)" /> integrálandó függvény primitív függvénye. Ez utóbbi nem minden esetben áll rendelkezésre, sőt sokszor nem is elemi függvény, nem adható meg zárt alakban.
 
 ##### Kvadratúra-formula
 
@@ -2714,11 +2714,11 @@ A határozott integrálokat szokás
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20%3D%20f(x)%20~%20dx%20%5Capprox%20Q_n(f)%20%3D%20%5Csum_%7Bi%20%3D%201%7D%5En%20w_i%20f(x_i)%0A" />
 
-alakban közelíteni, ahol <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)" />-et **kvadratúra-formulának** nevezzük.
+alakban közelíteni, ahol <img src="https://latex.codecogs.com/svg?Q_n(f)" />-et **kvadratúra-formulának** nevezzük.
 
-Általában feltesszük, hogy <img src="https://render.githubusercontent.com/render/math?math=x_i%20%5Cin%20%5Ba%2C%20b%5D" /> teljesül az <img src="https://render.githubusercontent.com/render/math?math=x_i" /> **alappontokra**, és ezek **páronként különbözőek**.
+Általában feltesszük, hogy <img src="https://latex.codecogs.com/svg?x_i%20%5Cin%20%5Ba%2C%20b%5D" /> teljesül az <img src="https://latex.codecogs.com/svg?x_i" /> **alappontokra**, és ezek **páronként különbözőek**.
 
-A <img src="https://render.githubusercontent.com/render/math?math=w_i" /> számokat **súlyoknak** hívjuk.
+A <img src="https://latex.codecogs.com/svg?w_i" /> számokat **súlyoknak** hívjuk.
 
 ##### Integrál, és kvadratúra-formula tulajdonságai
 
@@ -2726,37 +2726,37 @@ A <img src="https://render.githubusercontent.com/render/math?math=w_i" /> számo
 
 ##### Kvadratúra-formula képlethibája
 
-<img src="https://render.githubusercontent.com/render/math?math=R_n(f)%20%3D%20%5Cint_a%5Eb%20f(x)%20~%20dx%20-%20Q_n(f)" />
+<img src="https://latex.codecogs.com/svg?R_n(f)%20%3D%20%5Cint_a%5Eb%20f(x)%20~%20dx%20-%20Q_n(f)" />
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=R_n(f)%20%3D%200" />, akkor a **kvadratúra-formula pontos** <img src="https://render.githubusercontent.com/render/math?math=f(x)" />-re.
+Ha <img src="https://latex.codecogs.com/svg?R_n(f)%20%3D%200" />, akkor a **kvadratúra-formula pontos** <img src="https://latex.codecogs.com/svg?f(x)" />-re.
 
-Kvadratúra-formula pontossági rendje az <img src="https://render.githubusercontent.com/render/math?math=r" /> természetes szám, ha az pontos az <img src="https://render.githubusercontent.com/render/math?math=1%2C%20x%2C%20x%5E2%2C%20...%2C%20x%5Er" /> hatványfüggvényekre, azaz <img src="https://render.githubusercontent.com/render/math?math=R_n(x%5Ek)%20%3D%200" /> minden <img src="https://render.githubusercontent.com/render/math?math=q%20%5Cle%20k%20%5Cle%20r" />-re, de nem pontos <img src="https://render.githubusercontent.com/render/math?math=x%5E%7Br%2B1%7D" />-re.
+Kvadratúra-formula pontossági rendje az <img src="https://latex.codecogs.com/svg?r" /> természetes szám, ha az pontos az <img src="https://latex.codecogs.com/svg?1%2C%20x%2C%20x%5E2%2C%20...%2C%20x%5Er" /> hatványfüggvényekre, azaz <img src="https://latex.codecogs.com/svg?R_n(x%5Ek)%20%3D%200" /> minden <img src="https://latex.codecogs.com/svg?q%20%5Cle%20k%20%5Cle%20r" />-re, de nem pontos <img src="https://latex.codecogs.com/svg?x%5E%7Br%2B1%7D" />-re.
 
-A <img src="https://render.githubusercontent.com/render/math?math=Q_n" />, <img src="https://render.githubusercontent.com/render/math?math=n" /> alappontos kvadratúra-formula rendje legfejlebb <img src="https://render.githubusercontent.com/render/math?math=2n%20-%201" /> lehet.
+A <img src="https://latex.codecogs.com/svg?Q_n" />, <img src="https://latex.codecogs.com/svg?n" /> alappontos kvadratúra-formula rendje legfejlebb <img src="https://latex.codecogs.com/svg?2n%20-%201" /> lehet.
 
 ##### Interpolációs kvadratúra-formulák
 
-Azt mondjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)" /> egy interpolációs kvadratúra-formula, ha az előáll az alappontokra felírt Lagrange polinom integrálásával:
+Azt mondjuk, hogy <img src="https://latex.codecogs.com/svg?Q_n(f)%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)" /> egy interpolációs kvadratúra-formula, ha az előáll az alappontokra felírt Lagrange polinom integrálásával:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20f(x)%20~%20dx%20%5Capprox%20%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%20%3D%201%7D%5En%20f(x_i)%20L_i(x)%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D1%7D%5En%20f(x_i)%20%5Cint_a%5Eb%20L_i(x)%20~%20dx%0A" />
 
-ahonnan <img src="https://render.githubusercontent.com/render/math?math=w_i%20%3D%20%5Cint_a%5Eb%20L_i(x)%20~%20dx" />.
+ahonnan <img src="https://latex.codecogs.com/svg?w_i%20%3D%20%5Cint_a%5Eb%20L_i(x)%20~%20dx" />.
 
 > Az alappont az interpolációra, és a kvadratúrára is vonatkozik.
 
-Minden <img src="https://render.githubusercontent.com/render/math?math=n" /> alappontra épülő <img src="https://render.githubusercontent.com/render/math?math=Q_n" /> interpolációs kvadratúra-formula rendje legalább <img src="https://render.githubusercontent.com/render/math?math=n%20-%201" />.
+Minden <img src="https://latex.codecogs.com/svg?n" /> alappontra épülő <img src="https://latex.codecogs.com/svg?Q_n" /> interpolációs kvadratúra-formula rendje legalább <img src="https://latex.codecogs.com/svg?n%20-%201" />.
 
-Ha egy <img src="https://render.githubusercontent.com/render/math?math=Q_n" /> kvadratúra-formula rendje legalább <img src="https://render.githubusercontent.com/render/math?math=n%20-%201" />, akkor az interpolációs kvadratúra-formula.
+Ha egy <img src="https://latex.codecogs.com/svg?Q_n" /> kvadratúra-formula rendje legalább <img src="https://latex.codecogs.com/svg?n%20-%201" />, akkor az interpolációs kvadratúra-formula.
 
 ##### Véges differenciák
 
 Ekvidisztáns alappontokat adunk meg.
 
-Szomszédos alappontok **távolsága állandó**: <img src="https://render.githubusercontent.com/render/math?math=h%20%3D%20x_%7Bi%20%2B%201%7D%20-%20x_i" />.
+Szomszédos alappontok **távolsága állandó**: <img src="https://latex.codecogs.com/svg?h%20%3D%20x_%7Bi%20%2B%201%7D%20-%20x_i" />.
 
-Az interpolációs alappontok: <img src="https://render.githubusercontent.com/render/math?math=x_i%20%3D%20x_0%20%2B%20ih%2C%20i%20%3D%200%2C%20...%2C%20n-1" />
+Az interpolációs alappontok: <img src="https://latex.codecogs.com/svg?x_i%20%3D%20x_0%20%2B%20ih%2C%20i%20%3D%200%2C%20...%2C%20n-1" />
 
-Az adott <img src="https://render.githubusercontent.com/render/math?math=x_k" /> alappontokhoz és <img src="https://render.githubusercontent.com/render/math?math=f_k%20%3D%20f(x_k)" /> függvény értékekhez tartozó <img src="https://render.githubusercontent.com/render/math?math=%5CDelta%5Ei%20f_k" /> *i-edrendű véges differenciákat* a következő kettős rekurzióval definiáljuk:
+Az adott <img src="https://latex.codecogs.com/svg?x_k" /> alappontokhoz és <img src="https://latex.codecogs.com/svg?f_k%20%3D%20f(x_k)" /> függvény értékekhez tartozó <img src="https://latex.codecogs.com/svg?%5CDelta%5Ei%20f_k" /> *i-edrendű véges differenciákat* a következő kettős rekurzióval definiáljuk:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Balign%7D%0A%5CDelta%5E0%20f_k%20%26%20%3D%20f_k%20%5C%5C%0A%5CDelta%5Ei%20f_k%20%26%20%3D%20%5CDelta%5E%7Bi%20-%201%7D%20f_%7Bk%20%2B%201%7D%20-%20%5CDelta%5E%7Bi%20-%201%7D%20f_k%0A%5Cend%7Balign%7D%0A" />
 
@@ -2764,7 +2764,7 @@ Természetes számokra értelmezett binomiális együtthatók általánostásak�
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbinom%7Bt%7D%7Bj%7D%20%3D%20%5Cfrac%7Bt(t%20-%201)%20...%20(t-j%20%2B%201)%7D%7Bj!%7D%0A" />
 
-jelölést a <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> transzformációhoz.
+jelölést a <img src="https://latex.codecogs.com/svg?t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> transzformációhoz.
 
 A véges differenciákkal felírt Lagrange interpolációs polinom:
 
@@ -2788,15 +2788,15 @@ Ha az integrál határai szerepelnek az alappontok közt, akkor *zárt-,* ha a h
 
 <img src="https://latex.codecogs.com/svg?%0Ah%20%3D%20%5Cfrac%7Bb%20-%20a%7D%7Bn%20%2B%201%7D%2C%20a%20%3D%20x_0%20-%20h%2C%20b%20%3D%20x_%7Bn-1%7D%20%2B%20h%2C%20x_i%20%3D%20x_0%20%2B%20ih%20~%20~%20~%20~%200%20%5Cle%20i%20%5Cle%20n%20-%201%0A" />
 
-###### <img src="https://render.githubusercontent.com/render/math?math=n" />-edik Newton-Cotes formula
+###### <img src="https://latex.codecogs.com/svg?n" />-edik Newton-Cotes formula
 
-<img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> új változó mellett az <img src="https://render.githubusercontent.com/render/math?math=n" />-edig Newton-Cotes formula:
+<img src="https://latex.codecogs.com/svg?t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> új változó mellett az <img src="https://latex.codecogs.com/svg?n" />-edig Newton-Cotes formula:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cint_a%5Eb%20p_%7Bn-1%7D%20(x_0%20%2B%20th)%20~%20dx%20%3D%20%0A%5Cint_a%5Eb%20%5Csum_%7Bi%3D0%7D%5E%7Bn-1%7D%20%5Cbinom%7Bt%7D%7Bi%7D%20%5CDelta%5Ei%20f_0%20~%20dx%20%3D%20%0A%5Csum_%7Bi%3D0%7D%5E%7Bn%20-%201%7D%20%5CDelta%5Ei%20f_0%20%5Cint_a%5Eb%20%5Cbinom%7Bt%7D%7Bi%7D%20~%20dx%0A" />
 
-> A <img src="https://render.githubusercontent.com/render/math?math=t" /> lényegében az adott változó eltolását fejezi ki az <img src="https://render.githubusercontent.com/render/math?math=x_0" />-tól.
+> A <img src="https://latex.codecogs.com/svg?t" /> lényegében az adott változó eltolását fejezi ki az <img src="https://latex.codecogs.com/svg?x_0" />-tól.
 
-> A <img src="https://render.githubusercontent.com/render/math?math=%5CDelta%5Ei" /> véges differenciál.
+> A <img src="https://latex.codecogs.com/svg?%5CDelta%5Ei" /> véges differenciál.
 
 Ha a formula zárt:
 
@@ -2808,13 +2808,13 @@ Ha a formula nyitott:
 
 ###### Első négy zárt Newton-Cotes formula
 
-1. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_1%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B2%7D(f_0%20%2B%20f_1)" />: **Trapéz szabály**
+1. <img src="https://latex.codecogs.com/svg?%5Cint_%7Bx_0%7D%5E%7Bx_1%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B2%7D(f_0%20%2B%20f_1)" />: **Trapéz szabály**
 
-2. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_2%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B3%7D(f_0%20%2B%204%20f_1%20%2B%20f_2)" />: **Simpson-szabály**
+2. <img src="https://latex.codecogs.com/svg?%5Cint_%7Bx_0%7D%5E%7Bx_2%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B3%7D(f_0%20%2B%204%20f_1%20%2B%20f_2)" />: **Simpson-szabály**
 
-3. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_3%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B3h%7D%7B8%7D(f_0%20%2B%203%20f_1%20%2B%203%20f_2%20%2B%20f_3)" />: **Simpson <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7B3%7D%7B8%7D" />-os szabálya**
+3. <img src="https://latex.codecogs.com/svg?%5Cint_%7Bx_0%7D%5E%7Bx_3%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B3h%7D%7B8%7D(f_0%20%2B%203%20f_1%20%2B%203%20f_2%20%2B%20f_3)" />: **Simpson <img src="https://latex.codecogs.com/svg?%5Cfrac%7B3%7D%7B8%7D" />-os szabálya**
 
-4. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_4%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B2h%7D%7B45%7D(7%20f_0%20%2B%2032%20f_1%20%2B%2012%20f_2%20%2B%2032%20f_3%20%2B%207%20f_4)" />: **Bool-szabály**
+4. <img src="https://latex.codecogs.com/svg?%5Cint_%7Bx_0%7D%5E%7Bx_4%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B2h%7D%7B45%7D(7%20f_0%20%2B%2032%20f_1%20%2B%2012%20f_2%20%2B%2032%20f_3%20%2B%207%20f_4)" />: **Bool-szabály**
 
 ##### Matlabban
 
@@ -2823,7 +2823,7 @@ function f = fxlog(x)
 f = x .* log(x);
 ```
 
-A fentebbi függvény az <img src="https://render.githubusercontent.com/render/math?math=xlog(x)" /> függvényértéket kiszámoló eljárás, ennek numerikus integrálása a <img src="https://render.githubusercontent.com/render/math?math=%5B2%2C%204%5D" /> intervallumon:
+A fentebbi függvény az <img src="https://latex.codecogs.com/svg?xlog(x)" /> függvényértéket kiszámoló eljárás, ennek numerikus integrálása a <img src="https://latex.codecogs.com/svg?%5B2%2C%204%5D" /> intervallumon:
 
 ```matlab
 quad(@fxlog, 2, 4);
@@ -2840,9 +2840,9 @@ quad(@fxlog, 2, 4);
 
 - Minden **változó**, és minden **logikai konstans** formula
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> formula, akkor <img src="https://render.githubusercontent.com/render/math?math=(%20%5Cneg%20F%20)" /> is formula
+- Ha <img src="https://latex.codecogs.com/svg?F" /> formula, akkor <img src="https://latex.codecogs.com/svg?(%20%5Cneg%20F%20)" /> is formula
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> és <img src="https://render.githubusercontent.com/render/math?math=G" /> formulák, akkor <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cland%20G)%2C%20(F%20%5Clor%20G)%2C%20(F%20%5Cleftrightarrow%20G)" /> is formulák
+- Ha <img src="https://latex.codecogs.com/svg?F" /> és <img src="https://latex.codecogs.com/svg?G" /> formulák, akkor <img src="https://latex.codecogs.com/svg?(F%20%5Cland%20G)%2C%20(F%20%5Clor%20G)%2C%20(F%20%5Cleftrightarrow%20G)" /> is formulák
 
 - **Más formula nincs**
 
@@ -2862,7 +2862,7 @@ quad(@fxlog, 2, 4);
     
     - Értéke minden értékadás mellett **hamis**.
     
-    - Jele: <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" />
+    - Jele: <img src="https://latex.codecogs.com/svg?%5Csquare" />
 
 - **CNF**: **Klózok konjunkciója** (éselése).
   
@@ -2870,21 +2870,21 @@ quad(@fxlog, 2, 4);
     
     - Értéke minden értékadás mellett **igaz**.
     
-    - Jele: <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset" />
+    - Jele: <img src="https://latex.codecogs.com/svg?%5Cemptyset" />
 
 > Üres klóz az inputban jellemzően nincs, de az algoritmusok generálhatnak.
 
 ###### Minden formula ekvivalens CNF alakra hozható.
 
-1. <img src="https://render.githubusercontent.com/render/math?math=%5Cto" /> és <img src="https://render.githubusercontent.com/render/math?math=%5Cleftrightarrow" /> konnektívák eliminálása.
+1. <img src="https://latex.codecogs.com/svg?%5Cto" /> és <img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> konnektívák eliminálása.
 
-2. <img src="https://render.githubusercontent.com/render/math?math=%5Cneg" />-k bevitele változók mellé deMorgan azonosságokkal.
+2. <img src="https://latex.codecogs.com/svg?%5Cneg" />-k bevitele változók mellé deMorgan azonosságokkal.
 
-3. <img src="https://render.githubusercontent.com/render/math?math=%5Clor" /> jelek bevitele a <img src="https://render.githubusercontent.com/render/math?math=%5Cland" /> jelek alá disztributivitás alkalmazásával.
+3. <img src="https://latex.codecogs.com/svg?%5Clor" /> jelek bevitele a <img src="https://latex.codecogs.com/svg?%5Cland" /> jelek alá disztributivitás alkalmazásával.
 
 > Disztributivitás szabályai:
-> <img src="https://render.githubusercontent.com/render/math?math=F%20%5Clor%20(G%20%5Cland%20H)%20%5Cequiv%20(F%20%5Clor%20G)%20%5Cland%20(F%20%5Clor%20H)" />
-> <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cland%20G)%20%5Clor%20H%20%5Cequiv%20(F%20%5Clor%20H)%20%5Cland%20(G%20%5Clor%20H)" />
+> <img src="https://latex.codecogs.com/svg?F%20%5Clor%20(G%20%5Cland%20H)%20%5Cequiv%20(F%20%5Clor%20G)%20%5Cland%20(F%20%5Clor%20H)" />
+> <img src="https://latex.codecogs.com/svg?(F%20%5Cland%20G)%20%5Clor%20H%20%5Cequiv%20(F%20%5Clor%20H)%20%5Cland%20(G%20%5Clor%20H)" />
 
 > A "konnektíva" azt jelenti, hogy az operátor formulákat vár (köt össze), nem változókat (az a Boole-függvény).
 
@@ -2896,7 +2896,7 @@ Nem stringként, hanem:
 
 - egy CNF-et pedig a klózainak halmazaként.
 
-> Ezt azért tehetjük meg, mert sem a vagyolás, sem az éselés esetén nem számít a sorrend, illetve az érintett változók multiplicitása sem, pl. <img src="https://render.githubusercontent.com/render/math?math=(p%20%5Clor%20p)%20%5Cland%20(q%20%5Clor%20q)" /> ugyan az, mint <img src="https://render.githubusercontent.com/render/math?math=q%20%5Clor%20p" /> (sorrend fordult, multiplicitás eltűnt).
+> Ezt azért tehetjük meg, mert sem a vagyolás, sem az éselés esetén nem számít a sorrend, illetve az érintett változók multiplicitása sem, pl. <img src="https://latex.codecogs.com/svg?(p%20%5Clor%20p)%20%5Cland%20(q%20%5Clor%20q)" /> ugyan az, mint <img src="https://latex.codecogs.com/svg?q%20%5Clor%20p" /> (sorrend fordult, multiplicitás eltűnt).
 
 ##### Diszjunktív normálforma
 
@@ -2904,31 +2904,31 @@ Ugyan az, mint a CNF, csak nem "vagyolások éselése", hanem "éselések vagyol
 
 ##### Negációs normálforma
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5Cneg" /> csak változó előtt szerepel, és <img src="https://render.githubusercontent.com/render/math?math=%5Cneg" />-en kívül csak <img src="https://render.githubusercontent.com/render/math?math=%5Clor" /> és <img src="https://render.githubusercontent.com/render/math?math=%5Cland" /> szerepel.
+Ha <img src="https://latex.codecogs.com/svg?%5Cneg" /> csak változó előtt szerepel, és <img src="https://latex.codecogs.com/svg?%5Cneg" />-en kívül csak <img src="https://latex.codecogs.com/svg?%5Clor" /> és <img src="https://latex.codecogs.com/svg?%5Cland" /> szerepel.
 
 > Ilyet kapunk ha a CNF-re hozást csak a 2. lépésig csináljuk.
 
 #### Boole-függvények teljes rendszerei
 
-##### * Boole függvény (<img src="https://render.githubusercontent.com/render/math?math=n" />-változós)
+##### * Boole függvény (<img src="https://latex.codecogs.com/svg?n" />-változós)
 
-Bitvektort egy bitbe képező függvény: <img src="https://render.githubusercontent.com/render/math?math=f%3A%20%5C%7B%20~%200%2C%201%20~%20%5C%7D%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" />
+Bitvektort egy bitbe képező függvény: <img src="https://latex.codecogs.com/svg?f%3A%20%5C%7B%20~%200%2C%201%20~%20%5C%7D%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" />
 
-<img src="https://render.githubusercontent.com/render/math?math=f" /> egy <img src="https://render.githubusercontent.com/render/math?math=n" />-változós függvény jelölése: <img src="https://render.githubusercontent.com/render/math?math=f%20%2F%20n" />
+<img src="https://latex.codecogs.com/svg?f" /> egy <img src="https://latex.codecogs.com/svg?n" />-változós függvény jelölése: <img src="https://latex.codecogs.com/svg?f%20%2F%20n" />
 
-A <img src="https://render.githubusercontent.com/render/math?math=%5Cneg" /> unáris, egyváltozós Boole-függvény
+A <img src="https://latex.codecogs.com/svg?%5Cneg" /> unáris, egyváltozós Boole-függvény
 
 A többi 4 megadható 4 soros igazságtáblával.
 
 ##### * Indukált Boole-függvény
 
-Ha az <img src="https://render.githubusercontent.com/render/math?math=F" /> formulában csak a <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20p_1%2C%20...%2C%20p_n%20~%20%5C%7D" /> változók szerepelnek, akkor <img src="https://render.githubusercontent.com/render/math?math=F" /> indukál egy <img src="https://render.githubusercontent.com/render/math?math=n" />-változós Boole-függvényt, melyet szintén <img src="https://render.githubusercontent.com/render/math?math=F" />-el jelölünk:
+Ha az <img src="https://latex.codecogs.com/svg?F" /> formulában csak a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20p_1%2C%20...%2C%20p_n%20~%20%5C%7D" /> változók szerepelnek, akkor <img src="https://latex.codecogs.com/svg?F" /> indukál egy <img src="https://latex.codecogs.com/svg?n" />-változós Boole-függvényt, melyet szintén <img src="https://latex.codecogs.com/svg?F" />-el jelölünk:
 
-- <img src="https://render.githubusercontent.com/render/math?math=p_i(x_1%2C%20...%2C%20x_n)%20%20%3A%3D%20x_i" /> (ez **projekció** / tömbelem kiválasztás)
+- <img src="https://latex.codecogs.com/svg?p_i(x_1%2C%20...%2C%20x_n)%20%20%3A%3D%20x_i" /> (ez **projekció** / tömbelem kiválasztás)
 
-- <img src="https://render.githubusercontent.com/render/math?math=(%5Cneg%20F)(x_1%2C%20...%2C%20x_n)%20%3A%3D%20%5Cneg%20(F(x_1%2C%20...%2C%20x_n))" />
+- <img src="https://latex.codecogs.com/svg?(%5Cneg%20F)(x_1%2C%20...%2C%20x_n)%20%3A%3D%20%5Cneg%20(F(x_1%2C%20...%2C%20x_n))" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Clor%20G)(x_1%2C%20...%2C%20x_n)%20%3A%3D%20F(x_1%2C%20...%2C%20x_n)%20%5Clor%20G(x_1%2C%20...%2C%20x_n)" />
+- <img src="https://latex.codecogs.com/svg?(F%20%5Clor%20G)(x_1%2C%20...%2C%20x_n)%20%3A%3D%20F(x_1%2C%20...%2C%20x_n)%20%5Clor%20G(x_1%2C%20...%2C%20x_n)" />
 
 - ...
 
@@ -2936,99 +2936,99 @@ Ha az <img src="https://render.githubusercontent.com/render/math?math=F" /> form
 
 ##### * Boole-függvények megszorítása
 
-Legyen <img src="https://render.githubusercontent.com/render/math?math=f%2Fn" /> a Boole-függvény, <img src="https://render.githubusercontent.com/render/math?math=n%20%3E%200" />. Ha <img src="https://render.githubusercontent.com/render/math?math=b%20%5Cin%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> igazságérték, úgy <img src="https://render.githubusercontent.com/render/math?math=f%7C_%7Bx_n%3Db%7D" /> jelöli azt az <img src="https://render.githubusercontent.com/render/math?math=(n%20-%201)" /> változós Boole-függvényt, melyet úgy kapunk, hogy <img src="https://render.githubusercontent.com/render/math?math=f" /> inputjában <img src="https://render.githubusercontent.com/render/math?math=x_n" /> értékét rögzítjük <img src="https://render.githubusercontent.com/render/math?math=b" />-re.
+Legyen <img src="https://latex.codecogs.com/svg?f%2Fn" /> a Boole-függvény, <img src="https://latex.codecogs.com/svg?n%20%3E%200" />. Ha <img src="https://latex.codecogs.com/svg?b%20%5Cin%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> igazságérték, úgy <img src="https://latex.codecogs.com/svg?f%7C_%7Bx_n%3Db%7D" /> jelöli azt az <img src="https://latex.codecogs.com/svg?(n%20-%201)" /> változós Boole-függvényt, melyet úgy kapunk, hogy <img src="https://latex.codecogs.com/svg?f" /> inputjában <img src="https://latex.codecogs.com/svg?x_n" /> értékét rögzítjük <img src="https://latex.codecogs.com/svg?b" />-re.
 
-Azaz: <img src="https://render.githubusercontent.com/render/math?math=f%7C_%7Bx_n%20%3D%20b%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D)%20%3A%3D%20f(x_1%2C%20...%2C%20x_%7Bn-1%7D%2C%20b)" />
+Azaz: <img src="https://latex.codecogs.com/svg?f%7C_%7Bx_n%20%3D%20b%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D)%20%3A%3D%20f(x_1%2C%20...%2C%20x_%7Bn-1%7D%2C%20b)" />
 
 Például:
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Clor%20%7C_%7Bx_2%20%3D%201%7D" /> a konstans 1 függvény.
+- <img src="https://latex.codecogs.com/svg?%5Clor%20%7C_%7Bx_2%20%3D%201%7D" /> a konstans 1 függvény.
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cland%20%7C_%7Bx_2%20%3D%200%7D" /> a konstans 0 függvény.
+- <img src="https://latex.codecogs.com/svg?%5Cland%20%7C_%7Bx_2%20%3D%200%7D" /> a konstans 0 függvény.
 
 > Bármenyik koordinátát lehet rögzíteni, nem csak az utolsót.
 
 ##### Teljes rendszerek
 
-Boole-függvények egy <img src="https://render.githubusercontent.com/render/math?math=H" /> rendszere teljes, vagy adekvált, ha minden <img src="https://render.githubusercontent.com/render/math?math=n" />-változós Boole-függvény előáll
+Boole-függvények egy <img src="https://latex.codecogs.com/svg?H" /> rendszere teljes, vagy adekvált, ha minden <img src="https://latex.codecogs.com/svg?n" />-változós Boole-függvény előáll
 
 - a **projekcióból**
 
-- és <img src="https://render.githubusercontent.com/render/math?math=H" /> elemeiből
+- és <img src="https://latex.codecogs.com/svg?H" /> elemeiből
 
 - alkalmas **kompozícióval**.
 
 ###### Kompozíció
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=f%2Fn" /> és <img src="https://render.githubusercontent.com/render/math?math=g_1%2Fk%2C%20...%2C%20g_n%2Fk" /> Boole-függvények, akkor az <img src="https://render.githubusercontent.com/render/math?math=f%20%5Ccirc%20%5Clang%20g_1%2C%20...%2C%20g_n%20%5Crang" /> az a <img src="https://render.githubusercontent.com/render/math?math=k" />-változós Boole-függvény, melyre: <img src="https://render.githubusercontent.com/render/math?math=(f%20%5Ccirc%20%5Clang%20g_1%2C%20...%2C%20g_n%20%5Crang)(x_1%2C%20...%2C%20x_n)%20%3D%20f(g_1(x_1%2C%20...%2C%20x_k)%2C%20...%2C%20g_n(x_1%2C%20...%2C%20x_k))" />
+Ha <img src="https://latex.codecogs.com/svg?f%2Fn" /> és <img src="https://latex.codecogs.com/svg?g_1%2Fk%2C%20...%2C%20g_n%2Fk" /> Boole-függvények, akkor az <img src="https://latex.codecogs.com/svg?f%20%5Ccirc%20%5Clang%20g_1%2C%20...%2C%20g_n%20%5Crang" /> az a <img src="https://latex.codecogs.com/svg?k" />-változós Boole-függvény, melyre: <img src="https://latex.codecogs.com/svg?(f%20%5Ccirc%20%5Clang%20g_1%2C%20...%2C%20g_n%20%5Crang)(x_1%2C%20...%2C%20x_n)%20%3D%20f(g_1(x_1%2C%20...%2C%20x_k)%2C%20...%2C%20g_n(x_1%2C%20...%2C%20x_k))" />
 
 > Azaz egy függvényt úgy hívunk meg, hogy az inputjai függvényhívások eredményei.
 
 ##### Shannon expanzió
 
-<img src="https://render.githubusercontent.com/render/math?math=f(x_1%2C%20...%2C%20x_n)%20%3D%20(x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%201%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))%20%5Clor%20(%20%5Cneg%20x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%200%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))" />
+<img src="https://latex.codecogs.com/svg?f(x_1%2C%20...%2C%20x_n)%20%3D%20(x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%201%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))%20%5Clor%20(%20%5Cneg%20x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%200%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))" />
 
-> Lényegében ezzel azt írtuk le, hogy az <img src="https://render.githubusercontent.com/render/math?math=x_n" /> értéke vagy úgy igaz a formula, hogy <img src="https://render.githubusercontent.com/render/math?math=x_n%20%3D%201" />, vagy úgy, hogy <img src="https://render.githubusercontent.com/render/math?math=x_n%20%3D%200" />.
+> Lényegében ezzel azt írtuk le, hogy az <img src="https://latex.codecogs.com/svg?x_n" /> értéke vagy úgy igaz a formula, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%201" />, vagy úgy, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%200" />.
 
-Ennek a következménye: Minden Boole függvény előáll a projekciók, és a <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cneg%2C%20%5Cland%2C%20%5Clor%20~%20%5C%7D" /> alkalmas kompozíciójaként. (Hiszen az előző összefüggésben csak ezeket használjuk fel, és ez ismételhető amíg nem kötöttünk le minden változót.)
+Ennek a következménye: Minden Boole függvény előáll a projekciók, és a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cneg%2C%20%5Cland%2C%20%5Clor%20~%20%5C%7D" /> alkalmas kompozíciójaként. (Hiszen az előző összefüggésben csak ezeket használjuk fel, és ez ismételhető amíg nem kötöttünk le minden változót.)
 
-Ezt úgy is lehet mondani, hogy a <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cneg%2C%20%5Clor%2C%20%5Cland%20~%20%5C%7D" /> **rendszer teljes**.
+Ezt úgy is lehet mondani, hogy a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cneg%2C%20%5Clor%2C%20%5Cland%20~%20%5C%7D" /> **rendszer teljes**.
 
-Ebből az is következik, hogy minden Boole-függvény indukálható olyan formulával, melyben csak a <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cneg%2C%20%5Cland%2C%20%5Clor%20~%20%5C%7D" /> konnektívák szerepelnek.
+Ebből az is következik, hogy minden Boole-függvény indukálható olyan formulával, melyben csak a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cneg%2C%20%5Cland%2C%20%5Clor%20~%20%5C%7D" /> konnektívák szerepelnek.
 
 ##### További teljes rendszerek
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cneg%2C%20%5Cland%20~%20%5C%7D" />: Mivel <img src="https://render.githubusercontent.com/render/math?math=x_1%20%5Cland%20x_1%20%3D%20%5Cneg%20(%5Cneg%20x_1%20%5Clor%20%5Cneg%20x_2)" />
+- <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cneg%2C%20%5Cland%20~%20%5C%7D" />: Mivel <img src="https://latex.codecogs.com/svg?x_1%20%5Cland%20x_1%20%3D%20%5Cneg%20(%5Cneg%20x_1%20%5Clor%20%5Cneg%20x_2)" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cto%2C%20%5Cdownarrow%20~%20%5C%7D" /> `// Hilbert rendszere`
+- <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cto%2C%20%5Cdownarrow%20~%20%5C%7D" /> `// Hilbert rendszere`
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Ctext%7BNAND%7D%20~%20%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Ctext%7BNAND%7D%20~%20%5C%7D" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Ctext%7BNOR%7D%20~%20%5C%7D" />
+- <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Ctext%7BNOR%7D%20~%20%5C%7D" />
 
-> A NAND-on, és NOR-on kívül nincs másik olyan <img src="https://render.githubusercontent.com/render/math?math=f%2F2" /> Boole-függvény, ami egyedül is teljes rendszert alkot.
+> A NAND-on, és NOR-on kívül nincs másik olyan <img src="https://latex.codecogs.com/svg?f%2F2" /> Boole-függvény, ami egyedül is teljes rendszert alkot.
 
 #### Hilbert rendszere
 
-Egy input <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> **formulahalmaz** összes következményét (és csak a következményeket) lehet vele levezetni.
+Egy input <img src="https://latex.codecogs.com/svg?%5CSigma" /> **formulahalmaz** összes következményét (és csak a következményeket) lehet vele levezetni.
 
-Az ítéletváltozókon kívül ebben a rendszerben csak a <img src="https://render.githubusercontent.com/render/math?math=%5Cto" /> konnektívát, és a <img src="https://render.githubusercontent.com/render/math?math=%5Cdownarrow" /> logikai konstanst használhatjuk.
+Az ítéletváltozókon kívül ebben a rendszerben csak a <img src="https://latex.codecogs.com/svg?%5Cto" /> konnektívát, és a <img src="https://latex.codecogs.com/svg?%5Cdownarrow" /> logikai konstanst használhatjuk.
 
-> Minden formula ilyan alakra hozható, mert <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Cto%2C%20%5Cdownarrow%20~%20%5C%7D" /> teljes rendszer.
+> Minden formula ilyan alakra hozható, mert <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cto%2C%20%5Cdownarrow%20~%20%5C%7D" /> teljes rendszer.
 
 ##### A Hilbert rendszer axiómái
 
-- <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cto%20(G%20%5Cto%20H))%20%5Cto%20((F%20%5Cto%20G)%20%5Cto%20(F%20%5Cto%20H))" />
+- <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20(G%20%5Cto%20H))%20%5Cto%20((F%20%5Cto%20G)%20%5Cto%20(F%20%5Cto%20H))" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cto%20(G%20%5Cto%20F)" />
+- <img src="https://latex.codecogs.com/svg?F%20%5Cto%20(G%20%5Cto%20F)" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=((F%20%5Cto%20%5Cdownarrow%20)%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
+- <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
 
 > EZen a formulák **tautológiák**. Azaz minden értékadás mellett igazak.
 
 ##### Az axiómák példányai
 
-A 3 axióma egy **példánya**: valamelyik axiómában szereplő <img src="https://render.githubusercontent.com/render/math?math=F%2C%20G%2C%20H" /> helyére **tetszőleges formulát** írunk.
+A 3 axióma egy **példánya**: valamelyik axiómában szereplő <img src="https://latex.codecogs.com/svg?F%2C%20G%2C%20H" /> helyére **tetszőleges formulát** írunk.
 
-Ennek van jelölése is: Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> egy formula, melyben a <img src="https://render.githubusercontent.com/render/math?math=p_1%2C%20...%2C%20p_n" /> változók szerepelnek, és <img src="https://render.githubusercontent.com/render/math?math=F_1%2C%20...%2C%20F_n" /> formulák, akkor <img src="https://render.githubusercontent.com/render/math?math=F%5Bp_1%2FF_1%2C%20...%2C%20p_n%2FF_n%5D" /> jelöli azt a formulát, melyet úgy kapunk <img src="https://render.githubusercontent.com/render/math?math=F" />-ből, hogy benne minden <img src="https://render.githubusercontent.com/render/math?math=p_i" /> helyére az <img src="https://render.githubusercontent.com/render/math?math=F_i" /> formulát írjuk.
+Ennek van jelölése is: Ha <img src="https://latex.codecogs.com/svg?F" /> egy formula, melyben a <img src="https://latex.codecogs.com/svg?p_1%2C%20...%2C%20p_n" /> változók szerepelnek, és <img src="https://latex.codecogs.com/svg?F_1%2C%20...%2C%20F_n" /> formulák, akkor <img src="https://latex.codecogs.com/svg?F%5Bp_1%2FF_1%2C%20...%2C%20p_n%2FF_n%5D" /> jelöli azt a formulát, melyet úgy kapunk <img src="https://latex.codecogs.com/svg?F" />-ből, hogy benne minden <img src="https://latex.codecogs.com/svg?p_i" /> helyére az <img src="https://latex.codecogs.com/svg?F_i" /> formulát írjuk.
 
 ##### Leválasztási következtetés, avagy modus ponens
 
-<img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20F%2C%20F%20%5Cto%20G%20~%20%5C%7D%20%5CvDash%20G" />
+<img src="https://latex.codecogs.com/svg?%5C%7B%20~%20F%2C%20F%20%5Cto%20G%20~%20%5C%7D%20%5CvDash%20G" />
 
-> Ha <img src="https://render.githubusercontent.com/render/math?math=F" />-et, és <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cto%20G" />-t már levezettük, azaz az eredeti formulánknak ők logikai következményei, akkor felvehetjük <img src="https://render.githubusercontent.com/render/math?math=G" />-t is, mert ő is logikai következmény.
+> Ha <img src="https://latex.codecogs.com/svg?F" />-et, és <img src="https://latex.codecogs.com/svg?F%20%5Cto%20G" />-t már levezettük, azaz az eredeti formulánknak ők logikai következményei, akkor felvehetjük <img src="https://latex.codecogs.com/svg?G" />-t is, mert ő is logikai következmény.
 
 ##### Levezetés Hilbert rendszerében
 
-Legyen <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulák egy halmaza, <img src="https://render.githubusercontent.com/render/math?math=F" /> pedig egy formula. Azt mondjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=F" /> **levezethető** <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-ból **Hilbert rendszerében**, jelben <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20F" />, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=F_1%2C%20F_1%2C%20...%2C%20F_n" /> formula-sorozat, melynek minden eleme
+Legyen <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulák egy halmaza, <img src="https://latex.codecogs.com/svg?F" /> pedig egy formula. Azt mondjuk, hogy <img src="https://latex.codecogs.com/svg?F" /> **levezethető** <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból **Hilbert rendszerében**, jelben <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />, ha van olyan <img src="https://latex.codecogs.com/svg?F_1%2C%20F_1%2C%20...%2C%20F_n" /> formula-sorozat, melynek minden eleme
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli vagy
+- <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli vagy
 
 - **axiómapéldány** vagy
 
 - előáll két korábbiból **modus ponenssel**
 
-és melyre <img src="https://render.githubusercontent.com/render/math?math=F_n%20%3D%20F" />. (Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> üres, akkor <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset%20%5Cvdash%20F" /> helyett <img src="https://render.githubusercontent.com/render/math?math=%5Cvdash%20F" />-et is írhatunk) 
+és melyre <img src="https://latex.codecogs.com/svg?F_n%20%3D%20F" />. (Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> üres, akkor <img src="https://latex.codecogs.com/svg?%5Cemptyset%20%5Cvdash%20F" /> helyett <img src="https://latex.codecogs.com/svg?%5Cvdash%20F" />-et is írhatunk) 
 
 ##### Helyesség, teljesség
 
@@ -3038,163 +3038,163 @@ Tehát a Hilbert-rendszer **axióma-példányai tautológiák**.
 
 Ez egy általánosabb összefüggés következménye:
 
-Legyenek az <img src="https://render.githubusercontent.com/render/math?math=F" /> formulában szereplő változók <img src="https://render.githubusercontent.com/render/math?math=p_1%2C%20...%2C%20p_n" />, és <img src="https://render.githubusercontent.com/render/math?math=F_1%2C%20...%2C%20F_n" /> további formulák (melyekben más változók is előfordulhatnak).
-Legyen <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D" /> egy tetszőleges értékadás.
-Definiáljuk <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BB%7D" /> értékadást a következőképpen: <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BB%7D(p_i)%20%3A%3D%20%5Cmathcal%7BA%7D(F_i)" />
-(a <img src="https://render.githubusercontent.com/render/math?math=p_i" /> értéke <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BB%7D" />-ben legyen az az érték, ami <img src="https://render.githubusercontent.com/render/math?math=F_i" /> értéke <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D" />-ban)
-Ekkor: <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BB%7D(F)%20%3D%20%5Cmathcal%7BA%7D(F%5Bp_1%2FF_1%2C%20...%2C%20p_n%2FF_n%5D)" />
+Legyenek az <img src="https://latex.codecogs.com/svg?F" /> formulában szereplő változók <img src="https://latex.codecogs.com/svg?p_1%2C%20...%2C%20p_n" />, és <img src="https://latex.codecogs.com/svg?F_1%2C%20...%2C%20F_n" /> további formulák (melyekben más változók is előfordulhatnak).
+Legyen <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" /> egy tetszőleges értékadás.
+Definiáljuk <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D" /> értékadást a következőképpen: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D(p_i)%20%3A%3D%20%5Cmathcal%7BA%7D(F_i)" />
+(a <img src="https://latex.codecogs.com/svg?p_i" /> értéke <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D" />-ben legyen az az érték, ami <img src="https://latex.codecogs.com/svg?F_i" /> értéke <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" />-ban)
+Ekkor: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D(F)%20%3D%20%5Cmathcal%7BA%7D(F%5Bp_1%2FF_1%2C%20...%2C%20p_n%2FF_n%5D)" />
 
 ###### Helyesség
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20F" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F" />.
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F" />.
 
-> Azaz, ha egy formulát le lehet vezetni <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-ból Hilbert rendszerében, akkor az következménye is <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-nak.
+> Azaz, ha egy formulát le lehet vezetni <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból Hilbert rendszerében, akkor az következménye is <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak.
 
 **Bizonyítás**:
 
-- Legyen <img src="https://render.githubusercontent.com/render/math?math=F_1%2C%20...%2C%20F_n" /> egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> fölötti levezetése <img src="https://render.githubusercontent.com/render/math?math=F" />-nek. Teljes indukcióval megmutatjuk, hogy minden <img src="https://render.githubusercontent.com/render/math?math=i" />-re <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_i" />
+- Legyen <img src="https://latex.codecogs.com/svg?F_1%2C%20...%2C%20F_n" /> egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> fölötti levezetése <img src="https://latex.codecogs.com/svg?F" />-nek. Teljes indukcióval megmutatjuk, hogy minden <img src="https://latex.codecogs.com/svg?i" />-re <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" />
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=F_i%20%5Cin%20%5CSigma" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_i" />
+- Ha <img src="https://latex.codecogs.com/svg?F_i%20%5Cin%20%5CSigma" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" />
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=F_i" /> axiómapéldány, akkor <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset%20%5CvDash%20F_i" /> (tautológiák minden elméletben szerepelnek, és az axiómapéldányok a korábbi szabály miatt tautológiák), így a monotonitás miatt <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_i" /> is igaz (nyílván ha az <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset" />-nak következménye, akkor egy bővebb halmaznak, a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-nak is).
+- Ha <img src="https://latex.codecogs.com/svg?F_i" /> axiómapéldány, akkor <img src="https://latex.codecogs.com/svg?%5Cemptyset%20%5CvDash%20F_i" /> (tautológiák minden elméletben szerepelnek, és az axiómapéldányok a korábbi szabály miatt tautológiák), így a monotonitás miatt <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" /> is igaz (nyílván ha az <img src="https://latex.codecogs.com/svg?%5Cemptyset" />-nak következménye, akkor egy bővebb halmaznak, a <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak is).
 
-- Ha pedig <img src="https://render.githubusercontent.com/render/math?math=F_i%20%3D%20MP(F_j%2C%20F_k)" /> a <img src="https://render.githubusercontent.com/render/math?math=j%2C%20k%20%3C%20i" /> indexekre, akkor
+- Ha pedig <img src="https://latex.codecogs.com/svg?F_i%20%3D%20MP(F_j%2C%20F_k)" /> a <img src="https://latex.codecogs.com/svg?j%2C%20k%20%3C%20i" /> indexekre, akkor
   
-  - Az indukciós feltevés szerint <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_j" /> és <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_k" /> (feltételezzük, hogy a korábban felvett formulák már logikai következmények)
+  - Az indukciós feltevés szerint <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_j" /> és <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_k" /> (feltételezzük, hogy a korábban felvett formulák már logikai következmények)
   
-  - Tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_k%20~%20%5C%7D" />
+  - Tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_k%20~%20%5C%7D" />
   
-  - MP def miatt <img src="https://render.githubusercontent.com/render/math?math=F_k%20%3D%20F_j%20%5Cto%20F_i%3A%20%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D" />
+  - MP def miatt <img src="https://latex.codecogs.com/svg?F_k%20%3D%20F_j%20%5Cto%20F_i%3A%20%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D" />
   
-  - A leválasztási következtetés: <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D%20%5CvDash%20F_i" />
+  - A leválasztási következtetés: <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D%20%5CvDash%20F_i" />
   
-  - A tranzitivitás miatt tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F_i" /> (tranzitivitást kihasználjuk, mivel <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%7D%20%5CvDash%20F_i" />)
+  - A tranzitivitás miatt tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" /> (tranzitivitást kihasználjuk, mivel <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%7D%20%5CvDash%20F_i" />)
 
 Így a **Hilbert-rendszer egy helyes következtető rendszer**.
 
 ###### Teljesség
 
-**Dedukciós tétel**: Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulahalmazra, és <img src="https://render.githubusercontent.com/render/math?math=F" />, <img src="https://render.githubusercontent.com/render/math?math=G" /> formulákra <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20(F%20%5Cto%20G)%20%5CLeftrightarrow%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20~%20%5C%7D%20%5Cvdash%20G" /> 
+**Dedukciós tétel**: Tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmazra, és <img src="https://latex.codecogs.com/svg?F" />, <img src="https://latex.codecogs.com/svg?G" /> formulákra <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20(F%20%5Cto%20G)%20%5CLeftrightarrow%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20~%20%5C%7D%20%5Cvdash%20G" /> 
 
-**H-konzisztens halmazok**: Egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulahalmazt H-konzisztensnek nevezünk, ha **nem igaz**, hogy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20%5Cdownarrow" />
+**H-konzisztens halmazok**: Egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmazt H-konzisztensnek nevezünk, ha **nem igaz**, hogy <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20%5Cdownarrow" />
 
 > Csak simán az, hogy **konzisztens** formulahalmaz, az azt jelenti, hogy **kielégíthető**.
 
-Ekvikalens állítások tetszőleges <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulahalmazra:
+Ekvikalens állítások tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmazra:
 
-- Van olyan <img src="https://render.githubusercontent.com/render/math?math=F" /> formula, melyre <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20F" /> és <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow)" /> is igaz.
+- Van olyan <img src="https://latex.codecogs.com/svg?F" /> formula, melyre <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" /> és <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow)" /> is igaz.
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> **nem** H-kozisztens.
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> **nem** H-kozisztens.
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20F" /> minden <img src="https://render.githubusercontent.com/render/math?math=F" /> formulára.
+- <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" /> minden <img src="https://latex.codecogs.com/svg?F" /> formulára.
 
-**Maximális H-konzisztens halmazok**: Egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulahalmazt maximális H-konzisztensnek nevezünk, ha
+**Maximális H-konzisztens halmazok**: Egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmazt maximális H-konzisztensnek nevezünk, ha
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> H-konzisztens, és
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> H-konzisztens, és
 
-- minden <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cnotin%20%5CSigma" />-ra <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20~%20%5C%7D" /> már nem H-konzisztens.
+- minden <img src="https://latex.codecogs.com/svg?F%20%5Cnotin%20%5CSigma" />-ra <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20~%20%5C%7D" /> már nem H-konzisztens.
 
-> Minden <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> H-konzisztens halmazhoz van <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%20%5Csupseteq%20%5CSigma" /> maximális H-konzisztens halmaz. "A halmmazt fel lehet fújni."
+> Minden <img src="https://latex.codecogs.com/svg?%5CSigma" /> H-konzisztens halmazhoz van <img src="https://latex.codecogs.com/svg?%5CSigma'%20%5Csupseteq%20%5CSigma" /> maximális H-konzisztens halmaz. "A halmmazt fel lehet fújni."
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> maximális H-konzisztens halmaz, akkor tetszőleges <img src="https://render.githubusercontent.com/render/math?math=F" /> formulára vagy <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cin%20%5CSigma" />, vagy <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cto%20%5Cdownarrow%20)%20%5Cin%20%5CSigma" />, de nem mindkettő.
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> maximális H-konzisztens halmaz, akkor tetszőleges <img src="https://latex.codecogs.com/svg?F" /> formulára vagy <img src="https://latex.codecogs.com/svg?F%20%5Cin%20%5CSigma" />, vagy <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow%20)%20%5Cin%20%5CSigma" />, de nem mindkettő.
 
 > Azaz minden **formulát, vagy a negáltját** tartalmazzák, de csak az egyiket.
 
-Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> formulahalmaz pontosan akkor kielégíthető, ha H-konzisztens.
+Tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmaz pontosan akkor kielégíthető, ha H-konzisztens.
 
 **A Hilbert-rendszer helyessége és teljessége**:
 
-Ezt kell belátni: <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F%20%5CLeftrightarrow%20%5CSigma%20%5Cvdash%20F" />
+Ezt kell belátni: <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F%20%5CLeftrightarrow%20%5CSigma%20%5Cvdash%20F" />
 
 > Most itt egyszerre van belátva mindkettő, de a helyesség fentebbi alapján külön is belátható.
 
 Sorban minden ekvivalenciát tovább feltünk ekvivalencia mentén:
 
-<img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F%20~%20~%20%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5CvDash%20%5Cdownarrow" />
+<img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F%20~%20~%20%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5CvDash%20%5Cdownarrow" />
 
-> Ennek az alapja egy tétel: <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20F" /> pontosan akkor igaz, ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cneg%20F%20~%20%5C%7D" /> kielégíthetetlen. Ez van itt felírva Hilbert-rendszerében.
+> Ennek az alapja egy tétel: <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F" /> pontosan akkor igaz, ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cneg%20F%20~%20%5C%7D" /> kielégíthetetlen. Ez van itt felírva Hilbert-rendszerében.
 
-<img src="https://render.githubusercontent.com/render/math?math=%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5Cvdash%20%5Cdownarrow" />
+<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5Cvdash%20%5Cdownarrow" />
 
 > Itt a bal oldal azt jelenti, hogy az a halmaz kielágíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
 
-<img src="https://render.githubusercontent.com/render/math?math=%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow" />
+<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow" />
 
 > Dedukciós tétel alkalmazása.
 
-<img src="https://render.githubusercontent.com/render/math?math=%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20F" />
+<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20F" />
 
 Ennek a legutolsó lépésnek a belátása kicsit nehezebb:
 
-- Egyik irány: <img src="https://render.githubusercontent.com/render/math?math=(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)%20%5Cto%20(%5CSigma%20%5Cvdash%20F)" />
+- Egyik irány: <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)%20%5Cto%20(%5CSigma%20%5Cvdash%20F)" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F" />
+  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F" />
   
   - > A 3. axióma példányosítása
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5Cvdash%20F" />
+  - <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />
   
   - > Modus ponens alkalmazása
 
-- Másik irány: <img src="https://render.githubusercontent.com/render/math?math=(%5CSigma%20%5Cvdash%20F)%20%5Cto%20(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)" />
+- Másik irány: <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Cvdash%20F)%20%5Cto%20(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow%20))%20%5Cto%20(((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow%20))" />
+  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow%20))%20%5Cto%20(((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow%20))" />
   
   - > Az 1. axióma példányosítása
   
-  - <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow)" />
+  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow)" />
   
-  - > Ilyet ér felvenni, hiszen <img src="https://render.githubusercontent.com/render/math?math=G%20%5Cto%20G" /> alakú, és erre volt példa, hogy az ilyenek az <img src="https://render.githubusercontent.com/render/math?math=%5Cemptyset" />-nak is logikai következményei.
+  - > Ilyet ér felvenni, hiszen <img src="https://latex.codecogs.com/svg?G%20%5Cto%20G" /> alakú, és erre volt példa, hogy az ilyenek az <img src="https://latex.codecogs.com/svg?%5Cemptyset" />-nak is logikai következményei.
   
-  - <img src="https://render.githubusercontent.com/render/math?math=((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow)" />
+  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow)" />
   
   - > Előző kettő MP-el
   
-  - <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F%20)" />
+  - <img src="https://latex.codecogs.com/svg?F%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F%20)" />
   
   - > A 2. axióma példánya
   
-  - <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
+  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
   
-  - > Előző formula, és feltevés miatt <img src="https://render.githubusercontent.com/render/math?math=F" /> MP-e
+  - > Előző formula, és feltevés miatt <img src="https://latex.codecogs.com/svg?F" /> MP-e
   
-  - <img src="https://render.githubusercontent.com/render/math?math=(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow" />
+  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow" />
   
   - > Előző, és az előtt kettővel levő formulák MP-je
 
-Az ekvivalenciák mentén beláttuk, hogy **Hilbert-rendszere helyes, és teljes**. Azaz tetszőleges <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> halmazból Hilbert rendszerében **pontosan** <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> következményei vezethetőek le.
+Az ekvivalenciák mentén beláttuk, hogy **Hilbert-rendszere helyes, és teljes**. Azaz tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmazból Hilbert rendszerében **pontosan** <img src="https://latex.codecogs.com/svg?%5CSigma" /> következményei vezethetőek le.
 
 #### Rezolúció
 
 ##### Rezolúciós következtetés
 
-<img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20F%20%5Clor%20G%2C%20%5Cneg%20F%20%5Clor%20H%20~%20%5C%7D%20%5CvDash%20G%20%5Clor%20H" />
+<img src="https://latex.codecogs.com/svg?%5C%7B%20~%20F%20%5Clor%20G%2C%20%5Cneg%20F%20%5Clor%20H%20~%20%5C%7D%20%5CvDash%20G%20%5Clor%20H" />
 
-> Nyílván, mert ha az <img src="https://render.githubusercontent.com/render/math?math=F" /> igaz, akkor <img src="https://render.githubusercontent.com/render/math?math=H" /> igaz kell, hogy legyen, ha <img src="https://render.githubusercontent.com/render/math?math=F" /> hamis, akkor <img src="https://render.githubusercontent.com/render/math?math=G" /> igaz kell, hogy legyen.
+> Nyílván, mert ha az <img src="https://latex.codecogs.com/svg?F" /> igaz, akkor <img src="https://latex.codecogs.com/svg?H" /> igaz kell, hogy legyen, ha <img src="https://latex.codecogs.com/svg?F" /> hamis, akkor <img src="https://latex.codecogs.com/svg?G" /> igaz kell, hogy legyen.
 
 > Emlékeztető: Logikai következmény jelentése: Bármely értékadás mellett ha a bal oldal igaz (jelen esetben bal oldalon minden igaz, mert egy halmaz áll ott), akkor a jobb is.
 
 ##### Rezolvens
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=C" /> és <img src="https://render.githubusercontent.com/render/math?math=D" /> klózok, <img src="https://render.githubusercontent.com/render/math?math=p%20%5Cin%20C" /> és <img src="https://render.githubusercontent.com/render/math?math=%5Cneg%20p%20%5Cin%20D" />, akkor <img src="https://render.githubusercontent.com/render/math?math=C" /> és <img src="https://render.githubusercontent.com/render/math?math=D" /> (<img src="https://render.githubusercontent.com/render/math?math=p" /> menti) rezolvense a <img src="https://render.githubusercontent.com/render/math?math=(C%20-%20%5C%7B%20~%20p%20~%20%5C%7D)%20%5Ccup%20(D%20-%20%5C%7B%20~%20%5Cneg%20p%20~%20%5C%7D)" /> klóz.
+Ha <img src="https://latex.codecogs.com/svg?C" /> és <img src="https://latex.codecogs.com/svg?D" /> klózok, <img src="https://latex.codecogs.com/svg?p%20%5Cin%20C" /> és <img src="https://latex.codecogs.com/svg?%5Cneg%20p%20%5Cin%20D" />, akkor <img src="https://latex.codecogs.com/svg?C" /> és <img src="https://latex.codecogs.com/svg?D" /> (<img src="https://latex.codecogs.com/svg?p" /> menti) rezolvense a <img src="https://latex.codecogs.com/svg?(C%20-%20%5C%7B%20~%20p%20~%20%5C%7D)%20%5Ccup%20(D%20-%20%5C%7B%20~%20%5Cneg%20p%20~%20%5C%7D)" /> klóz.
 
 > Egy új, harmadik klóz keletkezik.
 
 ##### Rezolúciós algoritmus
 
-**Input**: Klózok <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> halmaza.
+**Input**: Klózok <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmaza.
 
-**Output**: Kielégíthetetlen-e <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />?
+**Output**: Kielégíthetetlen-e <img src="https://latex.codecogs.com/svg?%5CSigma" />?
 
 **Algoritmus**: Listát vezetünk klózokról. Egy klózt felveszünk, ha 
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli, vagy
+- <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli, vagy
 
 - két, a listán már szereplő klóz rezolvense.
 
-Ha az <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" /> üres klóz rákerül a listára, a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen.
+Ha az <img src="https://latex.codecogs.com/svg?%5Csquare" /> üres klóz rákerül a listára, a <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen.
 
-Ha már nem tudunk új klózt felvenni és <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" /> nincs köztük, <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthető.
+Ha már nem tudunk új klózt felvenni és <img src="https://latex.codecogs.com/svg?%5Csquare" /> nincs köztük, <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthető.
 
 > Kielégíthető formulahalmazra nem feltétlen áll meg az algoritmus. Ezért kérdezzük inkább, hogy kielégíthetetlen-e.
 
@@ -3202,89 +3202,89 @@ Ha már nem tudunk új klózt felvenni és <img src="https://render.githubuserco
 
 ###### Helyesség
 
-Ha az algoritmus "kielégíthetetlen" válasszal áll meg, akkor az input <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> valóban kielégíthetetlen.
+Ha az algoritmus "kielégíthetetlen" válasszal áll meg, akkor az input <img src="https://latex.codecogs.com/svg?%5CSigma" /> valóban kielégíthetetlen.
 
-Azt látjuk be, hogy minden klóz, ami a listára kerül, az logikai következménye <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-nak. Ezt indukcióval tesszük: ha a <img src="https://render.githubusercontent.com/render/math?math=C" /> klóz <img src="https://render.githubusercontent.com/render/math?math=n" />. elemként kerül a listára, akkor:
+Azt látjuk be, hogy minden klóz, ami a listára kerül, az logikai következménye <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak. Ezt indukcióval tesszük: ha a <img src="https://latex.codecogs.com/svg?C" /> klóz <img src="https://latex.codecogs.com/svg?n" />. elemként kerül a listára, akkor:
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=C%20%5Cin%20%5CSigma" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20C" /> mindig teljesül.
+- Ha <img src="https://latex.codecogs.com/svg?C%20%5Cin%20%5CSigma" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C" /> mindig teljesül.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=C" /> a korábban felvett <img src="https://render.githubusercontent.com/render/math?math=C_1" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2" /> klózok **rezolvense**, akkor
+- Ha <img src="https://latex.codecogs.com/svg?C" /> a korábban felvett <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> klózok **rezolvense**, akkor
   
-  - indukciós feltevés szerint <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20C_1" /> és <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20C_2" />
+  - indukciós feltevés szerint <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C_1" /> és <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C_2" />
   
-  - tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D" /> (nyílván, összevagyolni ér őket)
+  - tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D" /> (nyílván, összevagyolni ér őket)
   
-  - a **rezolúciós következtetés** szerint pedig <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20C" /> (rezolúciós rész eleje) (onnan tudjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=C" /> a rezolvense <img src="https://render.githubusercontent.com/render/math?math=C_1" />-nek, és <img src="https://render.githubusercontent.com/render/math?math=C_2" />-nek, hogy ez a feltevés ebben a második esetben)
+  - a **rezolúciós következtetés** szerint pedig <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20C" /> (rezolúciós rész eleje) (onnan tudjuk, hogy <img src="https://latex.codecogs.com/svg?C" /> a rezolvense <img src="https://latex.codecogs.com/svg?C_1" />-nek, és <img src="https://latex.codecogs.com/svg?C_2" />-nek, hogy ez a feltevés ebben a második esetben)
   
-  - így a <img src="https://render.githubusercontent.com/render/math?math=%5CvDash" /> tranzitivitása miatt <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20C" />.
+  - így a <img src="https://latex.codecogs.com/svg?%5CvDash" /> tranzitivitása miatt <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C" />.
 
-Így tehát ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20%5Csquare" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> valóban kielégíthetetlen, mert kövezketménye a *hamis*. (<img src="https://render.githubusercontent.com/render/math?math=Mod(%5Csquare)%20%3D%20%5Cemptyset" />, nincs őt kielégítő értékadás)
+Így tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5Csquare" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> valóban kielégíthetetlen, mert kövezketménye a *hamis*. (<img src="https://latex.codecogs.com/svg?Mod(%5Csquare)%20%3D%20%5Cemptyset" />, nincs őt kielégítő értékadás)
 
 ###### Teljesség
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen, akkor az algoritmus mindig a "kielégíthetetlen" válasszal áll meg.
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az algoritmus mindig a "kielégíthetetlen" válasszal áll meg.
 
 **Minimális kielégíthetetlen részhalmaz**:
-A <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen klózhalmaznak a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%20%5Csubseteq%20%5CSigma" /> egy **minimális kielégíthetetlen részhalmaza**, ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> is kielégíthetetlen, de <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> bármelyik valódi részhalmaza már kielégíthető. 
+A <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen klózhalmaznak a <img src="https://latex.codecogs.com/svg?%5CSigma'%20%5Csubseteq%20%5CSigma" /> egy **minimális kielégíthetetlen részhalmaza**, ha <img src="https://latex.codecogs.com/svg?%5CSigma'" /> is kielégíthetetlen, de <img src="https://latex.codecogs.com/svg?%5CSigma'" /> bármelyik valódi részhalmaza már kielégíthető. 
 
 **Lineáris rezolúció**:
-**Input**: <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> klózhalmaz.
-**Output**: Kielégíthetetlen-e <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />?
+**Input**: <img src="https://latex.codecogs.com/svg?%5CSigma" /> klózhalmaz.
+**Output**: Kielégíthetetlen-e <img src="https://latex.codecogs.com/svg?%5CSigma" />?
 **Algoritmus**: Listát vezetünk klózokról:
 
-- Az első lépésben felvehetjük <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> **bármelyik elemét**, ez lesz a levezetés **bázisa**.
+- Az első lépésben felvehetjük <img src="https://latex.codecogs.com/svg?%5CSigma" /> **bármelyik elemét**, ez lesz a levezetés **bázisa**.
 
-- Minden további lépésben felvehetjük az előző lépésben felvett klóznak, és egy vagy már a listán szereplő, vagy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli klóznak a rezolvensét. Ezt a másik klózt hívjuk ennek a lépésnek az **oldalklózának**.
+- Minden további lépésben felvehetjük az előző lépésben felvett klóznak, és egy vagy már a listán szereplő, vagy <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli klóznak a rezolvensét. Ezt a másik klózt hívjuk ennek a lépésnek az **oldalklózának**.
 
 **Lineáris rezolúció teljessége**:
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen, és <img src="https://render.githubusercontent.com/render/math?math=C%20%5Cin%20%5CSigma" /> benne van a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy **minimális kielégíthetetlen részhalmazában**, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-ból levezethető az üres klóz olyan **lineáris rezolúciós** levezetéssel, melynek **bázisa** <img src="https://render.githubusercontent.com/render/math?math=C" />.
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, és <img src="https://latex.codecogs.com/svg?C%20%5Cin%20%5CSigma" /> benne van a <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy **minimális kielégíthetetlen részhalmazában**, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból levezethető az üres klóz olyan **lineáris rezolúciós** levezetéssel, melynek **bázisa** <img src="https://latex.codecogs.com/svg?C" />.
 
 **Bizonyítás**:
 
-Az állítást a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli változók <img src="https://render.githubusercontent.com/render/math?math=n" /> száma szerinti indukcióval látjuk be.
+Az állítást a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli változók <img src="https://latex.codecogs.com/svg?n" /> száma szerinti indukcióval látjuk be.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=n%20%3D%200" />, azaz <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-ban nincs változó, akkor vagy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%3D%20%5C%7B%20%5C%7D" /> (ekkor nincsen benne klóz), vagy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> (ekkor van benn egy klóz, az üres klóz)
+- Ha <img src="https://latex.codecogs.com/svg?n%20%3D%200" />, azaz <img src="https://latex.codecogs.com/svg?%5CSigma" />-ban nincs változó, akkor vagy <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20%5C%7D" /> (ekkor nincsen benne klóz), vagy <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> (ekkor van benn egy klóz, az üres klóz)
   
-  - A kettő közül <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> a kielégíthetetlen.
+  - A kettő közül <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> a kielégíthetetlen.
   
-  - Ennek <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" /> az egyetlen eleme, ez egy minimális kielégíthetetlen részhalmazának is eleme.
+  - Ennek <img src="https://latex.codecogs.com/svg?%5Csquare" /> az egyetlen eleme, ez egy minimális kielégíthetetlen részhalmazának is eleme.
   
   - Ha felvesszük bázisként, már le is vezettük az üres klózt.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=n%20%3E%200" />, akkor vegyünk egy <img src="https://render.githubusercontent.com/render/math?math=C" /> klózt, mely szerepel <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> egy minimális kielégíthetetlen részhalmazában. Legyen ez a részhalmaz <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" />.
+- Ha <img src="https://latex.codecogs.com/svg?n%20%3E%200" />, akkor vegyünk egy <img src="https://latex.codecogs.com/svg?C" /> klózt, mely szerepel <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy minimális kielégíthetetlen részhalmazában. Legyen ez a részhalmaz <img src="https://latex.codecogs.com/svg?%5CSigma'" />.
   
-  - Ha <img src="https://render.githubusercontent.com/render/math?math=C%20%3D%20%5Csquare" />, kész vagyunk: vegyük fel bázisnak.
+  - Ha <img src="https://latex.codecogs.com/svg?C%20%3D%20%5Csquare" />, kész vagyunk: vegyük fel bázisnak.
   
-  - Különben legyen <img src="https://render.githubusercontent.com/render/math?math=l%20%5Cin%20C" /> egy <img src="https://render.githubusercontent.com/render/math?math=C" />-beli literál.
+  - Különben legyen <img src="https://latex.codecogs.com/svg?l%20%5Cin%20C" /> egy <img src="https://latex.codecogs.com/svg?C" />-beli literál.
   
-  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha <img src="https://render.githubusercontent.com/render/math?math=l" /> pure literál lenne, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-nak egy valódi részhalmaza <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%201%7D" /> is kielágíthetetlen lenne. Tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" />-ben <img src="https://render.githubusercontent.com/render/math?math=%5Coverline%7Bl%7D" /> is szerepel valahol.
+  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha <img src="https://latex.codecogs.com/svg?l" /> pure literál lenne, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak egy valódi részhalmaza <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> is kielágíthetetlen lenne. Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'" />-ben <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" /> is szerepel valahol.
 
-- Vegyük a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%200%7D" /> és <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%201%7D" /> klózhalmazokat.
+- Vegyük a <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" /> és <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> klózhalmazokat.
 
-- Mivel <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> kielégíthetetlen, ezek is azok.
+- Mivel <img src="https://latex.codecogs.com/svg?%5CSigma'" /> kielégíthetetlen, ezek is azok.
 
-- Bennük csak legfeljebb <img src="https://render.githubusercontent.com/render/math?math=n%20-%201" /> változó szerepel (mert <img src="https://render.githubusercontent.com/render/math?math=l" /> változója kiesik), így alkalmazhatjuk az indukciós feltevést.
+- Bennük csak legfeljebb <img src="https://latex.codecogs.com/svg?n%20-%201" /> változó szerepel (mert <img src="https://latex.codecogs.com/svg?l" /> változója kiesik), így alkalmazhatjuk az indukciós feltevést.
 
-- A <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%3D0%7D" /> klózhalmaznak <img src="https://render.githubusercontent.com/render/math?math=C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%20-%20%5C%7B%20~%20C%20~%20%5C%7D" /> is kielégíthetetlen lenne).
+- A <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%3D0%7D" /> klózhalmaznak <img src="https://latex.codecogs.com/svg?C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben <img src="https://latex.codecogs.com/svg?%5CSigma'%20-%20%5C%7B%20~%20C%20~%20%5C%7D" /> is kielégíthetetlen lenne).
 
-- Tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%200%7D" />-ból az indukciós feltevés szerinte van <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" />-nak egy <img src="https://render.githubusercontent.com/render/math?math=C_1%2C%20C_2%2C%20...%2C%20C_m" /> lineáris rezolúciós levezetése, melynek <img src="https://render.githubusercontent.com/render/math?math=C_1%20%3D%20C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> a bázisa.
+- Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" />-ból az indukciós feltevés szerinte van <img src="https://latex.codecogs.com/svg?%5Csquare" />-nak egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_m" /> lineáris rezolúciós levezetése, melynek <img src="https://latex.codecogs.com/svg?C_1%20%3D%20C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> a bázisa.
 
-- "Visszaemelve" a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%7C_%7Bl%20%3D%200%7D" /> cáfolatot <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> fölötti levezetéssé, az új levezetésben minden klózba bekerül az <img src="https://render.githubusercontent.com/render/math?math=l" /> literál.
+- "Visszaemelve" a <img src="https://latex.codecogs.com/svg?%5CSigma%7C_%7Bl%20%3D%200%7D" /> cáfolatot <img src="https://latex.codecogs.com/svg?%5CSigma'" /> fölötti levezetéssé, az új levezetésben minden klózba bekerül az <img src="https://latex.codecogs.com/svg?l" /> literál.
 
-- Ez igaz a bázisra, és minden lépésben az eredeti <img src="https://render.githubusercontent.com/render/math?math=C_1" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2" /> klózok rezolvense helyett a <img src="https://render.githubusercontent.com/render/math?math=C%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2" /> vagy <img src="https://render.githubusercontent.com/render/math?math=C_2%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> klózok rezolvensét kapjuk, ami rezolvens, plusz <img src="https://render.githubusercontent.com/render/math?math=l" />
+- Ez igaz a bázisra, és minden lépésben az eredeti <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> klózok rezolvense helyett a <img src="https://latex.codecogs.com/svg?C%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> és <img src="https://latex.codecogs.com/svg?C_2" /> vagy <img src="https://latex.codecogs.com/svg?C_2%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> klózok rezolvensét kapjuk, ami rezolvens, plusz <img src="https://latex.codecogs.com/svg?l" />
 
-- Tehát a konstrukciónak a végén az <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20l%20~%20%5C%7D" /> egységklóznál jár a lineáris rezolúciós levezetés.
+- Tehát a konstrukciónak a végén az <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" /> egységklóznál jár a lineáris rezolúciós levezetés.
 
-- Mivel <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> minimális kielégíthetetlen, kell legyen benne olyan <img src="https://render.githubusercontent.com/render/math?math=C" /> klóz is, mely <img src="https://render.githubusercontent.com/render/math?math=%5Coverline%7Bl%7D" />-t tartalmazza.
+- Mivel <img src="https://latex.codecogs.com/svg?%5CSigma'" /> minimális kielégíthetetlen, kell legyen benne olyan <img src="https://latex.codecogs.com/svg?C" /> klóz is, mely <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" />-t tartalmazza.
 
-- Akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek egy minimális kielégíthetetlen részhalmazában szerepel <img src="https://render.githubusercontent.com/render/math?math=C%20-%20%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />
+- Akkor <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek egy minimális kielégíthetetlen részhalmazában szerepel <img src="https://latex.codecogs.com/svg?C%20-%20%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />
 
-- Ebből a klózból indulva az indukciós feltevés szerint van <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek lineáris rezolúciós cáfolata
+- Ebből a klózból indulva az indukciós feltevés szerint van <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek lineáris rezolúciós cáfolata
 
-- Az előző fázisban kapott <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20l%20~%20%5C%7D" /> egységklózt tudjuk rezolválni ezzel a <img src="https://render.githubusercontent.com/render/math?math=C" /> klózzal, tehát a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'%7C_%7Bl%20%3D%201%7D" /> cáfolatát "fel tudjuk emelni" <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> fölötti levezetéssé.
+- Az előző fázisban kapott <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" /> egységklózt tudjuk rezolválni ezzel a <img src="https://latex.codecogs.com/svg?C" /> klózzal, tehát a <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> cáfolatát "fel tudjuk emelni" <img src="https://latex.codecogs.com/svg?%5CSigma'" /> fölötti levezetéssé.
 
-- A felemelt levezetés végén vagy <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" />-t, vagy <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />-t kapunk. Utóbbi esetben még egyszer rezolválunk <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20l%20~%20%5C%7D" />-lel mint oldalklózzal, és kész vagyunk
+- A felemelt levezetés végén vagy <img src="https://latex.codecogs.com/svg?%5Csquare" />-t, vagy <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />-t kapunk. Utóbbi esetben még egyszer rezolválunk <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" />-lel mint oldalklózzal, és kész vagyunk
 
 ### 2. Normálformák az elsőrendű logikában. Egyesítési algoritmus. Következtető módszerek: Alap rezolúció, és elsőrendű rezolúció, ezek helyessége és teljessége.
 
@@ -3296,31 +3296,31 @@ Függvényjelek, predikátumjelek **aritása / rangja**: Hány változósak
 
 ##### * Struktúra
 
-Egy <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I%2C%20%5Cphi)" /> hármas, ahol
+Egy <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I%2C%20%5Cphi)" /> hármas, ahol
 
-- <img src="https://render.githubusercontent.com/render/math?math=A" /> egy nemüres halmaz, az **univerzum**
+- <img src="https://latex.codecogs.com/svg?A" /> egy nemüres halmaz, az **univerzum**
 
 - > A változók ebből vehetnek fel értékeket
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cphi" /> a változóknak egy "default" **értékadása**, minde <img src="https://render.githubusercontent.com/render/math?math=x" /> változóhoz egy <img src="https://render.githubusercontent.com/render/math?math=%5Cphi(x)%20%5Cin%20A" /> objektumot rendel
+- <img src="https://latex.codecogs.com/svg?%5Cphi" /> a változóknak egy "default" **értékadása**, minde <img src="https://latex.codecogs.com/svg?x" /> változóhoz egy <img src="https://latex.codecogs.com/svg?%5Cphi(x)%20%5Cin%20A" /> objektumot rendel
 
-- <img src="https://render.githubusercontent.com/render/math?math=I" /> az **interpretációs függvény**, ez rendel a függvény és predikárumjelekhez szemantikát, "értelmet" az adott struktúrában:
+- <img src="https://latex.codecogs.com/svg?I" /> az **interpretációs függvény**, ez rendel a függvény és predikárumjelekhez szemantikát, "értelmet" az adott struktúrában:
   
-  - ha <img src="https://render.githubusercontent.com/render/math?math=f%2Fn" /> **függvényjel**, akkor <img src="https://render.githubusercontent.com/render/math?math=I(f)" /> egy <img src="https://render.githubusercontent.com/render/math?math=A%5En%20%5Cto%20A" /> függvény
+  - ha <img src="https://latex.codecogs.com/svg?f%2Fn" /> **függvényjel**, akkor <img src="https://latex.codecogs.com/svg?I(f)" /> egy <img src="https://latex.codecogs.com/svg?A%5En%20%5Cto%20A" /> függvény
   
   - > Objektum(ok)ból objektumot csinál
   
-  - ha <img src="https://render.githubusercontent.com/render/math?math=p%20%2F%20n" /> **predikátumjel**, akkor <img src="https://render.githubusercontent.com/render/math?math=I(p)" /> egy <img src="https://render.githubusercontent.com/render/math?math=A%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> predikárum
+  - ha <img src="https://latex.codecogs.com/svg?p%20%2F%20n" /> **predikátumjel**, akkor <img src="https://latex.codecogs.com/svg?I(p)" /> egy <img src="https://latex.codecogs.com/svg?A%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> predikárum
   
   - > Objektum(ok)ból igazságértéket csinál
 
-> Az <img src="https://render.githubusercontent.com/render/math?math=%3D" /> bináris predikátumjelet minden struktúrában ténylegesen az egyenlőséggel kell interpretálnunk!
+> Az <img src="https://latex.codecogs.com/svg?%3D" /> bináris predikátumjelet minden struktúrában ténylegesen az egyenlőséggel kell interpretálnunk!
 
 ###### * Term kiértékelése
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20x" /> változó, akkor <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(t)%20%3A%3D%20%5Cphi(x)" />
+- Ha <img src="https://latex.codecogs.com/svg?t%20%3D%20x" /> változó, akkor <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(t)%20%3A%3D%20%5Cphi(x)" />
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20f(t_1%2C%20...%2C%20t_n)" />, akkor <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(t)%20%3A%3D%20I(f)(%5Cmathcal%7BA%7D(t_1)%2C%20...%2C%20%5Cmathcal%7BA%7D(t_n))" />
+- Ha <img src="https://latex.codecogs.com/svg?t%20%3D%20f(t_1%2C%20...%2C%20t_n)" />, akkor <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(t)%20%3A%3D%20I(f)(%5Cmathcal%7BA%7D(t_1)%2C%20...%2C%20%5Cmathcal%7BA%7D(t_n))" />
 
 > Emlékeztető, a term lehet egy változó, vagy egy függvény, aminek paraméterei termek.
 
@@ -3328,29 +3328,29 @@ Egy <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7
 
 ###### * Formulák kiértékelése
 
-<img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D_%7B%5Bx%20~%20%5Cmapsto%20~%20a%5D%7D" />: Az a struktúra, ami az <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D" /> struktúrát úgy változtatja, hogy benne a <img src="https://render.githubusercontent.com/render/math?math=%5Cphi(x)%20%3A%3D%20a" /> 
+<img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D_%7B%5Bx%20~%20%5Cmapsto%20~%20a%5D%7D" />: Az a struktúra, ami az <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" /> struktúrát úgy változtatja, hogy benne a <img src="https://latex.codecogs.com/svg?%5Cphi(x)%20%3A%3D%20a" /> 
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> formula, <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I%2C%20%5Cphi)" /> pedig struktúra, akkor az <img src="https://render.githubusercontent.com/render/math?math=F" /> értéke <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D" />-ban egy igazságérték, amit <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(F)" /> jelöl, és az <img src="https://render.githubusercontent.com/render/math?math=F" /> felépítése szerinti indukcióval adunk meg:
+Ha <img src="https://latex.codecogs.com/svg?F" /> formula, <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I%2C%20%5Cphi)" /> pedig struktúra, akkor az <img src="https://latex.codecogs.com/svg?F" /> értéke <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" />-ban egy igazságérték, amit <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(F)" /> jelöl, és az <img src="https://latex.codecogs.com/svg?F" /> felépítése szerinti indukcióval adunk meg:
 
-- Logikai konstansok: <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(%5Cuparrow)%20%3A%3D%201%2C%20%5Cmathcal%7BA%7D(%5Cdownarrow)%20%3A%3D%200" />
+- Logikai konstansok: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(%5Cuparrow)%20%3A%3D%201%2C%20%5Cmathcal%7BA%7D(%5Cdownarrow)%20%3A%3D%200" />
 
-- Konnektívák: <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(F%20%5Cland%20G)%20%3A%3D%20%5Cmathcal%7BA%7D(F)%20%5Cland%20%5Cmathcal%7BA%7D(G)" />, <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(F%20%5Clor%20G)%20%3A%3D%20%5Cmathcal%7BA%7D(F)%20%5Clor%20%5Cmathcal%7BA%7D(G)" />, <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(%5Cneg%20F)%20%3A%3D%20%5Cneg%20%5Cmathcal%7BA%7D(F)" />, ...
+- Konnektívák: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(F%20%5Cland%20G)%20%3A%3D%20%5Cmathcal%7BA%7D(F)%20%5Cland%20%5Cmathcal%7BA%7D(G)" />, <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(F%20%5Clor%20G)%20%3A%3D%20%5Cmathcal%7BA%7D(F)%20%5Clor%20%5Cmathcal%7BA%7D(G)" />, <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(%5Cneg%20F)%20%3A%3D%20%5Cneg%20%5Cmathcal%7BA%7D(F)" />, ...
 
-- Atomi formulák: <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(p(t_1%2C%20...%2C%20t_n))%20%3A%3D%20I(p)(%5Cmathcal%7BA%7D(t_1)%2C%20...%2C%20%5Cmathcal%7BA%7D(t_n))" />
+- Atomi formulák: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(p(t_1%2C%20...%2C%20t_n))%20%3A%3D%20I(p)(%5Cmathcal%7BA%7D(t_1)%2C%20...%2C%20%5Cmathcal%7BA%7D(t_n))" />
 
-> Azaz <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D" />-ban elöször kiértékeljük <img src="https://render.githubusercontent.com/render/math?math=t_1%2C%20...%2C%20t_n" /> termeket, majd a kapott <img src="https://render.githubusercontent.com/render/math?math=a_1%2C%20...%2C%20a_n" /> objektumokat befejettesítjük abba a predikátumba, amit ebben a struktúrában <img src="https://render.githubusercontent.com/render/math?math=p" /> jelöl.
+> Azaz <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" />-ban elöször kiértékeljük <img src="https://latex.codecogs.com/svg?t_1%2C%20...%2C%20t_n" /> termeket, majd a kapott <img src="https://latex.codecogs.com/svg?a_1%2C%20...%2C%20a_n" /> objektumokat befejettesítjük abba a predikátumba, amit ebben a struktúrában <img src="https://latex.codecogs.com/svg?p" /> jelöl.
 
 - Kvantorok:
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(%20%5Cexists%20xF)" />: <img src="https://render.githubusercontent.com/render/math?math=1" />, ha van olyan <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20A" />, melyre <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D_%7B%5Bx%20%5Cmapsto%20a%5D%7D%20(F)%20%3D%201" />, különben <img src="https://render.githubusercontent.com/render/math?math=0" />
+  - <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(%20%5Cexists%20xF)" />: <img src="https://latex.codecogs.com/svg?1" />, ha van olyan <img src="https://latex.codecogs.com/svg?a%20%5Cin%20A" />, melyre <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D_%7B%5Bx%20%5Cmapsto%20a%5D%7D%20(F)%20%3D%201" />, különben <img src="https://latex.codecogs.com/svg?0" />
   
-  - <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D(%20%5Cforall%20xF)" />: <img src="https://render.githubusercontent.com/render/math?math=1" />, ha minden <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20A" />-ra igaz, hogy <img src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BA%7D_%7B%5Bx%20%5Cmapsto%20a%5D%7D(F)%20%3D%201" />, különben 0
+  - <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D(%20%5Cforall%20xF)" />: <img src="https://latex.codecogs.com/svg?1" />, ha minden <img src="https://latex.codecogs.com/svg?a%20%5Cin%20A" />-ra igaz, hogy <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D_%7B%5Bx%20%5Cmapsto%20a%5D%7D(F)%20%3D%201" />, különben 0
 
 #### Normálformák az elsőrendű logikában
 
 ##### Zárt Skolem alak
 
-1. **Nyilak eliminálása** (<img src="https://render.githubusercontent.com/render/math?math=F%20%5Cto%20G%20%5Cequiv%20%5Cneg%20F%20%5Clor%20G" />)
+1. **Nyilak eliminálása** (<img src="https://latex.codecogs.com/svg?F%20%5Cto%20G%20%5Cequiv%20%5Cneg%20F%20%5Clor%20G" />)
 
 2. **Kiigazítás**: Ne legyen **változónév-ütközés**
 
@@ -3358,7 +3358,7 @@ Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> formula
 
 > Idáig volt ekvivalens az átalakítás
 
-1. **Skolem alak**ra hozás: Összes kvantor elöl, és mind <img src="https://render.githubusercontent.com/render/math?math=%5Cforall" />
+1. **Skolem alak**ra hozás: Összes kvantor elöl, és mind <img src="https://latex.codecogs.com/svg?%5Cforall" />
 
 2. **Lezárás**: Ne maradjon **szabad változó-előfordulás**
 
@@ -3374,53 +3374,53 @@ Ha <img src="https://render.githubusercontent.com/render/math?math=F" /> formula
 
 ###### Prenex alak
 
-Egy formula **Prenex alak**ú, ha <img src="https://render.githubusercontent.com/render/math?math=Q_1x_1Q_2x_2...Q_nx_n(F)" /> alakú, ahol <img src="https://render.githubusercontent.com/render/math?math=F" /> **kvantormentes** formula, és mindegyik <img src="https://render.githubusercontent.com/render/math?math=Q_I" /> egy **kvantor**.
+Egy formula **Prenex alak**ú, ha <img src="https://latex.codecogs.com/svg?Q_1x_1Q_2x_2...Q_nx_n(F)" /> alakú, ahol <img src="https://latex.codecogs.com/svg?F" /> **kvantormentes** formula, és mindegyik <img src="https://latex.codecogs.com/svg?Q_I" /> egy **kvantor**.
 
 Minden formula ekvivalens Prenex alakra hozható.
 
 Első lépésként **ki kell igazítani a formulát** (előző lépés).
 
-- Ha egy negálást áthúzunk egy kvantoron, megfordul a kvantor: <img src="https://render.githubusercontent.com/render/math?math=%5Cneg%20%5Cexists%20xF%20%5Cequiv%20%5Cforall%20x%20%5Cneg%20F" />
+- Ha egy negálást áthúzunk egy kvantoron, megfordul a kvantor: <img src="https://latex.codecogs.com/svg?%5Cneg%20%5Cexists%20xF%20%5Cequiv%20%5Cforall%20x%20%5Cneg%20F" />
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5Cexists%20x%20F%20%5Clor%20G%20%5Cequiv%20%5Cexists%20x%20(F%20%5Clor%20G)" />
+- <img src="https://latex.codecogs.com/svg?%5Cexists%20x%20F%20%5Clor%20G%20%5Cequiv%20%5Cexists%20x%20(F%20%5Clor%20G)" />
   
-  - Ha <img src="https://render.githubusercontent.com/render/math?math=x" /> nem szerepel <img src="https://render.githubusercontent.com/render/math?math=G" />-ben szabadon, ezért kell előtte kiigazírani!
+  - Ha <img src="https://latex.codecogs.com/svg?x" /> nem szerepel <img src="https://latex.codecogs.com/svg?G" />-ben szabadon, ezért kell előtte kiigazírani!
 
 ###### Skolem alak
 
-Egy formula **Skolem alakú**, ha <img src="https://render.githubusercontent.com/render/math?math=F%20%3D%20%5Cforall%20x_1%20%5Cforall%20x_2%20...%20%5Cforall%20x_n%20(F%5E*)" />, ahol <img src="https://render.githubusercontent.com/render/math?math=F%5E*" />-ben (a formula magjában) már nincs kvantor.
+Egy formula **Skolem alakú**, ha <img src="https://latex.codecogs.com/svg?F%20%3D%20%5Cforall%20x_1%20%5Cforall%20x_2%20...%20%5Cforall%20x_n%20(F%5E*)" />, ahol <img src="https://latex.codecogs.com/svg?F%5E*" />-ben (a formula magjában) már nincs kvantor.
 
-Skolem alak értelme: <img src="https://render.githubusercontent.com/render/math?math=%5Cforall%20x_1%20...%20%5Cforall%20x_n%20F%5E*%20%5CvDash%20F%5E*%20%5Bx_1%20%2F%20t_1%2C%20...%2C%20x_n%20%2F%20t_n%5D" />
+Skolem alak értelme: <img src="https://latex.codecogs.com/svg?%5Cforall%20x_1%20...%20%5Cforall%20x_n%20F%5E*%20%5CvDash%20F%5E*%20%5Bx_1%20%2F%20t_1%2C%20...%2C%20x_n%20%2F%20t_n%5D" />
 
 > Tehát termeket lehet a változók helyére helyettesíteni.
 
-A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden <img src="https://render.githubusercontent.com/render/math?math=F" /> formulához konstruálható eg yolyan <img src="https://render.githubusercontent.com/render/math?math=F'" /> Skolem alakú formula, ami pontosan akkor kielégíthatő, ha <img src="https://render.githubusercontent.com/render/math?math=F" /> is az. Ennek jele: <img src="https://render.githubusercontent.com/render/math?math=F%20%5Cequiv_S%20F'" />
+A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden <img src="https://latex.codecogs.com/svg?F" /> formulához konstruálható eg yolyan <img src="https://latex.codecogs.com/svg?F'" /> Skolem alakú formula, ami pontosan akkor kielégíthatő, ha <img src="https://latex.codecogs.com/svg?F" /> is az. Ennek jele: <img src="https://latex.codecogs.com/svg?F%20%5Cequiv_S%20F'" />
 
 - Prenex alakra hozzuk a formulát
 
-- Skolem-függvényekkel eltűntetjük a <img src="https://render.githubusercontent.com/render/math?math=%5Cexists" /> kvantorokat:
+- Skolem-függvényekkel eltűntetjük a <img src="https://latex.codecogs.com/svg?%5Cexists" /> kvantorokat:
   
-  - Minden <img src="https://render.githubusercontent.com/render/math?math=%5Cexists%20y" />-lekötött változót a formula magjában cseréljünk le egy <img src="https://render.githubusercontent.com/render/math?math=f(x_1%2C%20...%2C%20x_n)" /> termre, ahol:
+  - Minden <img src="https://latex.codecogs.com/svg?%5Cexists%20y" />-lekötött változót a formula magjában cseréljünk le egy <img src="https://latex.codecogs.com/svg?f(x_1%2C%20...%2C%20x_n)" /> termre, ahol:
     
-    - <img src="https://render.githubusercontent.com/render/math?math=f" /> egy teljesen új függvényszimbólum,
+    - <img src="https://latex.codecogs.com/svg?f" /> egy teljesen új függvényszimbólum,
     
-    - <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_n" /> pedig az <img src="https://render.githubusercontent.com/render/math?math=y" /> előtt szereplő <img src="https://render.githubusercontent.com/render/math?math=%5Cforall" />-kötött vűétozók.
+    - <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_n" /> pedig az <img src="https://latex.codecogs.com/svg?y" /> előtt szereplő <img src="https://latex.codecogs.com/svg?%5Cforall" />-kötött vűétozók.
 
 ###### Zárt Skolem alak
 
-- Minden <img src="https://render.githubusercontent.com/render/math?math=x" /> szabad előfordulás helyett egy új <img src="https://render.githubusercontent.com/render/math?math=c_x" /> konstansjelet vezetünk be
+- Minden <img src="https://latex.codecogs.com/svg?x" /> szabad előfordulás helyett egy új <img src="https://latex.codecogs.com/svg?c_x" /> konstansjelet vezetünk be
 
-- ezt úgy, hogy minden formulában az összes szabad <img src="https://render.githubusercontent.com/render/math?math=x" /> helyére ugyanazt a <img src="https://render.githubusercontent.com/render/math?math=c_x" />-et írjuk
+- ezt úgy, hogy minden formulában az összes szabad <img src="https://latex.codecogs.com/svg?x" /> helyére ugyanazt a <img src="https://latex.codecogs.com/svg?c_x" />-et írjuk
 
 > Ez is s-ekvivalens átalakítás
 
 ##### CNF elsőrendű logikában
 
-- **Literál**: Atomi formula (ekkor pozitív), vagy negáltja (ekkor negatív), pl.: <img src="https://render.githubusercontent.com/render/math?math=p(x%2C%20c)%2C%20%5Cneg%20q%20(x%2C%20f(x)%2C%20z)" />
+- **Literál**: Atomi formula (ekkor pozitív), vagy negáltja (ekkor negatív), pl.: <img src="https://latex.codecogs.com/svg?p(x%2C%20c)%2C%20%5Cneg%20q%20(x%2C%20f(x)%2C%20z)" />
 
-- **Klóz**: Literálok véges diszjunkciója, pl.: <img src="https://render.githubusercontent.com/render/math?math=q(x)%20%5Clor%20%5Cneg%20q%20(x%2C%20c)" />
+- **Klóz**: Literálok véges diszjunkciója, pl.: <img src="https://latex.codecogs.com/svg?q(x)%20%5Clor%20%5Cneg%20q%20(x%2C%20c)" />
 
-- **CNF**: Klózok konjukciója, pl.: <img src="https://render.githubusercontent.com/render/math?math=(p(x)%20%5Clor%20%5Cneg%20q(y%2C%20c))%20%5Cland%20%5Cneg%20p(x)" />
+- **CNF**: Klózok konjukciója, pl.: <img src="https://latex.codecogs.com/svg?(p(x)%20%5Clor%20%5Cneg%20q(y%2C%20c))%20%5Cland%20%5Cneg%20p(x)" />
 
 **Kvantormentes** elsőrendű logikai formulát az ítéletkalkulusban megszokott módon hozhatunk CNF-re.
 
@@ -3428,49 +3428,49 @@ A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden <img src="h
 
 > Alap, mert alaptermek szerepelnek benne
 
-Input: Elsőrendű formulák egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> halmaza
+Input: Elsőrendű formulák egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmaza
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen, akkor az algoritmus ezt véges sok lépésben levezeti
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az algoritmus ezt véges sok lépésben levezeti
 
 Ha kielégíthető, akkor vagy ezt vezeti le, vagy végtelen ciklusba esik
 
 ##### Módszer
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> elemeit zárt Skolem alakra hozzuk, a kapott formulák magját CNF-re.
+- <img src="https://latex.codecogs.com/svg?%5CSigma" /> elemeit zárt Skolem alakra hozzuk, a kapott formulák magját CNF-re.
   
-  - Jelölje <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> a kapott klóz halmazt
+  - Jelölje <img src="https://latex.codecogs.com/svg?%5CSigma'" /> a kapott klóz halmazt
 
-- Ekkor <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma)'" /> a klózok **alap példányainak halmaza**
+- Ekkor <img src="https://latex.codecogs.com/svg?E(%5CSigma)'" /> a klózok **alap példányainak halmaza**
 
 > Ez annyit takar, hogy a klózban a változók helyére ízlés szerint alaptermeket helyettesítünk, minden ilyennek a halmaza
 
-- Az <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma')" /> halmazon futtatjuk az ítéletkalkulus-beli rezolúciós algoritmust
+- Az <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> halmazon futtatjuk az ítéletkalkulus-beli rezolúciós algoritmust
 
-Mivel <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma')" /> általában végtelen, így az algoritmus (mondjuk)
+Mivel <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> általában végtelen, így az algoritmus (mondjuk)
 
-- Egy lépésben legenerálja, és felveszi <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma')" /> egy elemét
+- Egy lépésben legenerálja, és felveszi <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> egy elemét
 
 - az eddigi klózokkal rezolvenst képez, amíg csak lehet
 
-- ha közben megkapjuk az üres klózt, <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen
+- ha közben megkapjuk az üres klózt, <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen
 
 - különben generáljuk a következő elemet.
 
 ##### Helyesség, és teljesség
 
-- A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> pontosan akkor kielégíthetetlen, ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> az
+- A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát <img src="https://latex.codecogs.com/svg?%5CSigma" /> pontosan akkor kielégíthetetlen, ha <img src="https://latex.codecogs.com/svg?%5CSigma'" /> az
 
-- A Herbrand-tétel következménye szerint <img src="https://render.githubusercontent.com/render/math?math=%5CSigma'" /> pontosan akkor kielégíthetetlen, ha <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma')" /> az
+- A Herbrand-tétel következménye szerint <img src="https://latex.codecogs.com/svg?%5CSigma'" /> pontosan akkor kielégíthetetlen, ha <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> az
 
 > Mert a Herbrand-kiterjesztés s-ekvivalens transzformáció
 
-- Az ítéletkalkulus kompaktsági tétele szerint <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma')" /> pontosan akkor kielégíthetetlen, ha van egy véges <img src="https://render.githubusercontent.com/render/math?math=%5CSigma_0" /> kielégíthetetlen részhalmaza
+- Az ítéletkalkulus kompaktsági tétele szerint <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> pontosan akkor kielégíthetetlen, ha van egy véges <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> kielégíthetetlen részhalmaza
 
 > Azaz elég véges sokat legyártani
 
-- A rezolúciós algoritmus teljessége szerinte ha a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma_0" /> véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
+- A rezolúciós algoritmus teljessége szerinte ha a <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
 
-- Tehát ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen, akko az aalgoritmus leáll ezzel a válasszal akkor, amikor egy ilyen <img src="https://render.githubusercontent.com/render/math?math=%5CSigma_0" /> halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" />-t) 
+- Tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akko az aalgoritmus leáll ezzel a válasszal akkor, amikor egy ilyen <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük <img src="https://latex.codecogs.com/svg?%5Csquare" />-t) 
 
 > Az alap rezolúcióval az lehet a probléma, hogy nagy a keresési tere azáltal, hogy a változókat alaptermekkel helyettesítgetjük
 
@@ -3478,55 +3478,55 @@ Mivel <img src="https://render.githubusercontent.com/render/math?math=E(%5CSigma
 
 ##### Elsőrendű rezolvensképzés
 
-Két elsőrendű logikai klóz, <img src="https://render.githubusercontent.com/render/math?math=C_1" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2" /> elsőrendű rezolvensét így kapjuk:
+Két elsőrendű logikai klóz, <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> elsőrendű rezolvensét így kapjuk:
 
-- Átnevezzük a klózokban a változókat úgy (legyenek a változóátnevezések <img src="https://render.githubusercontent.com/render/math?math=s_1" /> és <img src="https://render.githubusercontent.com/render/math?math=s_2" />), hogy a kapott <img src="https://render.githubusercontent.com/render/math?math=C_1%20%5Ccdot%20s_1" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2%20%5Ccdot%20s_2" /> klózok ne tartalmazzanak közös változót.
+- Átnevezzük a klózokban a változókat úgy (legyenek a változóátnevezések <img src="https://latex.codecogs.com/svg?s_1" /> és <img src="https://latex.codecogs.com/svg?s_2" />), hogy a kapott <img src="https://latex.codecogs.com/svg?C_1%20%5Ccdot%20s_1" /> és <img src="https://latex.codecogs.com/svg?C_2%20%5Ccdot%20s_2" /> klózok ne tartalmazzanak közös változót.
 
-- Kiválasztunk <img src="https://render.githubusercontent.com/render/math?math=C_1%20%5Ccdot%20s_1" />-ből <img src="https://render.githubusercontent.com/render/math?math=l_1%2C%20...%2C%20l_m" />és <img src="https://render.githubusercontent.com/render/math?math=C_2%20%5Ccdot%20s_2" />-ből <img src="https://render.githubusercontent.com/render/math?math=l_1'%2C%20...%2C%20l_n'" /> literálokat, mindkettőből legalább egyet-egyet.
+- Kiválasztunk <img src="https://latex.codecogs.com/svg?C_1%20%5Ccdot%20s_1" />-ből <img src="https://latex.codecogs.com/svg?l_1%2C%20...%2C%20l_m" />és <img src="https://latex.codecogs.com/svg?C_2%20%5Ccdot%20s_2" />-ből <img src="https://latex.codecogs.com/svg?l_1'%2C%20...%2C%20l_n'" /> literálokat, mindkettőből legalább egyet-egyet.
 
-- Futtatjuk az egyesítési algoritmust a <img src="https://render.githubusercontent.com/render/math?math=C%20%3D%20%5C%7B%20~%20l_1%2C%20...%2C%20l_m%2C%20l_1'%2C%20...%2C%20l_n'%20~%20%5C%7D" /> klózon.
+- Futtatjuk az egyesítési algoritmust a <img src="https://latex.codecogs.com/svg?C%20%3D%20%5C%7B%20~%20l_1%2C%20...%2C%20l_m%2C%20l_1'%2C%20...%2C%20l_n'%20~%20%5C%7D" /> klózon.
 
 > Emiatt az egyesítési lépés miatt a korábbi literál kiválasztást érdemes úgy csinálni, hogy csak egy féle predikátumjeleket választunk ki, és az egyik klózból csak pozitív előfordulásokat, a másikból csak negatívakat. Így lesz esély arra, hogy egyesíthető legyen.
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=C" /> egyesíthető az <img src="https://render.githubusercontent.com/render/math?math=s" /> legáltalánosabb egyesítővel, akkor <img src="https://render.githubusercontent.com/render/math?math=s" />-et végrehajtjuk a nem kiválasztott literálok halmazán: <img src="https://render.githubusercontent.com/render/math?math=R%20%3A%3D%20((C%20%5Ccdot%20s_1%20-%20%5C%7B%20~%20l_1%2C%20...%2C%20l_m%20~%20%5C%7D)%20%5Ccup%20(C_2%20%5Ccdot%20s_2%20-%20%5C%7B%20~%20l_1'%2C%20...%2C%20l_n'%20~%20%5C%7D))%20%5Ccdot%20s" />
+- Ha <img src="https://latex.codecogs.com/svg?C" /> egyesíthető az <img src="https://latex.codecogs.com/svg?s" /> legáltalánosabb egyesítővel, akkor <img src="https://latex.codecogs.com/svg?s" />-et végrehajtjuk a nem kiválasztott literálok halmazán: <img src="https://latex.codecogs.com/svg?R%20%3A%3D%20((C%20%5Ccdot%20s_1%20-%20%5C%7B%20~%20l_1%2C%20...%2C%20l_m%20~%20%5C%7D)%20%5Ccup%20(C_2%20%5Ccdot%20s_2%20-%20%5C%7B%20~%20l_1'%2C%20...%2C%20l_n'%20~%20%5C%7D))%20%5Ccdot%20s" />
 
-A kapott <img src="https://render.githubusercontent.com/render/math?math=R" /> klóz a <img src="https://render.githubusercontent.com/render/math?math=C_1" /> és <img src="https://render.githubusercontent.com/render/math?math=C_2" /> egy elsőrendű rezolvense.
+A kapott <img src="https://latex.codecogs.com/svg?R" /> klóz a <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> egy elsőrendű rezolvense.
 
 ##### Algoritmus
 
-**Input**: Elsőrendű klózok egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> halmaza. Úgy tekintjük, mintha a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli klózok változói univerzálisan lennének kvantálva.
+**Input**: Elsőrendű klózok egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmaza. Úgy tekintjük, mintha a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli klózok változói univerzálisan lennének kvantálva.
 
-> Atért tekinthetjük így, mert <img src="https://render.githubusercontent.com/render/math?math=%5Cforall%20x%20(F%20%5Cland%20G)%20%5Cequiv%20%5Cforall%20F%20%5Cland%20%5Cforall%20G" />
+> Atért tekinthetjük így, mert <img src="https://latex.codecogs.com/svg?%5Cforall%20x%20(F%20%5Cland%20G)%20%5Cequiv%20%5Cforall%20F%20%5Cland%20%5Cforall%20G" />
 
 **Output**:
 
-- Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma%20%5CvDash%20%5Cdownarrow" />, akkor "kielégíthetetlen"
+- Ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5Cdownarrow" />, akkor "kielégíthetetlen"
 
 - Különben "kielégíthető", vagy végtelen cikus
 
 Listát vezetünk klózokról, egy klózt felveszünk, ha
 
-- <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli, vagy
+- <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli, vagy
 
 - két, már a listán szereplő klóz rezolvense.
 
-Ha <img src="https://render.githubusercontent.com/render/math?math=%5Csquare" /> rálerül a listára, akkor <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen.
+Ha <img src="https://latex.codecogs.com/svg?%5Csquare" /> rálerül a listára, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen.
 
-Különben, ha már nem tudunk több klózt lebezetni, <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthető.
+Különben, ha már nem tudunk több klózt lebezetni, <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthető.
 
-> <img src="https://render.githubusercontent.com/render/math?math=Res(%5CSigma)" /> jelöli azt a halmazt, amely tartalmazza <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> elemeit, és a belőlök egy rezolvensképzéssel levezethető klózokat.
+> <img src="https://latex.codecogs.com/svg?Res(%5CSigma)" /> jelöli azt a halmazt, amely tartalmazza <img src="https://latex.codecogs.com/svg?%5CSigma" /> elemeit, és a belőlök egy rezolvensképzéssel levezethető klózokat.
 
-> <img src="https://render.githubusercontent.com/render/math?math=Res%5E*(%5CSigma)" /> pedig a <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-ból rezolúcióval levezethető összes klóz halmazát jelöli.
+> <img src="https://latex.codecogs.com/svg?Res%5E*(%5CSigma)" /> pedig a <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból rezolúcióval levezethető összes klóz halmazát jelöli.
 
 ##### Helyesség
 
 - A helyesség a rezolvensképzés helyességéből következik
 
-- Mivel a klózik univerzálisan kvantáltak (a Skolem alakból), így tetszőleges <img src="https://render.githubusercontent.com/render/math?math=C" /> klózra, és <img src="https://render.githubusercontent.com/render/math?math=s" /> helyettesítésre <img src="https://render.githubusercontent.com/render/math?math=C%20%5CvDash%20C%20%5Ccdot%20s" />
+- Mivel a klózik univerzálisan kvantáltak (a Skolem alakból), így tetszőleges <img src="https://latex.codecogs.com/svg?C" /> klózra, és <img src="https://latex.codecogs.com/svg?s" /> helyettesítésre <img src="https://latex.codecogs.com/svg?C%20%5CvDash%20C%20%5Ccdot%20s" />
 
-- Tehát a rezolvensképzésnél felírt <img src="https://render.githubusercontent.com/render/math?math=C_1" />-nek <img src="https://render.githubusercontent.com/render/math?math=C_1%20%5Ccdot%20s_1%20%5Ccdot%20s" />, <img src="https://render.githubusercontent.com/render/math?math=C_2" />-nek pedig <img src="https://render.githubusercontent.com/render/math?math=C_2%20%5Ccdot%20s_2%20%5Ccdot%20s" /> egy-egy logikai következménye
+- Tehát a rezolvensképzésnél felírt <img src="https://latex.codecogs.com/svg?C_1" />-nek <img src="https://latex.codecogs.com/svg?C_1%20%5Ccdot%20s_1%20%5Ccdot%20s" />, <img src="https://latex.codecogs.com/svg?C_2" />-nek pedig <img src="https://latex.codecogs.com/svg?C_2%20%5Ccdot%20s_2%20%5Ccdot%20s" /> egy-egy logikai következménye
 
-- Tehát <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20%5C%7B%20~%20C_1s_1s%2C%20C_2s_2s%20~%20%5C%7D" />
+- Tehát <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20%5C%7B%20~%20C_1s_1s%2C%20C_2s_2s%20~%20%5C%7D" />
 
 - Ennek a két klóznak pedig a rezolvens következménye (az "eredeti" rezolúciós következtetés szerint)
 
@@ -3534,23 +3534,23 @@ Különben, ha már nem tudunk több klózt lebezetni, <img src="https://render.
 
 - A teljességi irányhoz felhasználjuk az alap rezolúció teljességét
 
-- Tehát: Ha <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" /> kielégíthetetlen, akkor az üres klóznak van egy <img src="https://render.githubusercontent.com/render/math?math=C_1'%2C%20C_2'%2C%20...%2C%20C_n'%20%3D%20%5Csquare" /> alaprezolúciós levezetése.
+- Tehát: Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az üres klóznak van egy <img src="https://latex.codecogs.com/svg?C_1'%2C%20C_2'%2C%20...%2C%20C_n'%20%3D%20%5Csquare" /> alaprezolúciós levezetése.
 
-- Ebből az alaprezolúciós levezetésből fogunk készíteni egy <img src="https://render.githubusercontent.com/render/math?math=C_1%2C%20C_2%2C%20...%2C%20C_n" /> elsőrendű rezolúciós levezetést.
+- Ebből az alaprezolúciós levezetésből fogunk készíteni egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_n" /> elsőrendű rezolúciós levezetést.
 
-- A klózokat úgy fogjuk elkészíteni indukcióval <img src="https://render.githubusercontent.com/render/math?math=n" /> szerint, hogy minden <img src="https://render.githubusercontent.com/render/math?math=i" />-re a <img src="https://render.githubusercontent.com/render/math?math=C_i" />-nek a <img src="https://render.githubusercontent.com/render/math?math=C_i'" /> egy (alap) példánya lesz.
+- A klózokat úgy fogjuk elkészíteni indukcióval <img src="https://latex.codecogs.com/svg?n" /> szerint, hogy minden <img src="https://latex.codecogs.com/svg?i" />-re a <img src="https://latex.codecogs.com/svg?C_i" />-nek a <img src="https://latex.codecogs.com/svg?C_i'" /> egy (alap) példánya lesz.
   
-  - Ha <img src="https://render.githubusercontent.com/render/math?math=C_i'%20%5Cin%20E(%5CSigma)" />, azaz <img src="https://render.githubusercontent.com/render/math?math=C_i'" /> egy <img src="https://render.githubusercontent.com/render/math?math=%5CSigma" />-beli <img src="https://render.githubusercontent.com/render/math?math=C" /> klóz (alap) példánya, akkor legyen <img src="https://render.githubusercontent.com/render/math?math=C_i%20%3A%3D%20C" />
+  - Ha <img src="https://latex.codecogs.com/svg?C_i'%20%5Cin%20E(%5CSigma)" />, azaz <img src="https://latex.codecogs.com/svg?C_i'" /> egy <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli <img src="https://latex.codecogs.com/svg?C" /> klóz (alap) példánya, akkor legyen <img src="https://latex.codecogs.com/svg?C_i%20%3A%3D%20C" />
   
-  - A másik lehetőség, hogy <img src="https://render.githubusercontent.com/render/math?math=C_i'" /> a <img src="https://render.githubusercontent.com/render/math?math=C_j'" /> és <img src="https://render.githubusercontent.com/render/math?math=C_k'" /> klózok, <img src="https://render.githubusercontent.com/render/math?math=j%2C%20k%20%3C%20i" />, egy rezolvense.
+  - A másik lehetőség, hogy <img src="https://latex.codecogs.com/svg?C_i'" /> a <img src="https://latex.codecogs.com/svg?C_j'" /> és <img src="https://latex.codecogs.com/svg?C_k'" /> klózok, <img src="https://latex.codecogs.com/svg?j%2C%20k%20%3C%20i" />, egy rezolvense.
     
     - Ennek az esetnek a belátásához felítjuk az ún. lift lemmát:
     
-    - Ha <img src="https://render.githubusercontent.com/render/math?math=C_1" />-nek <img src="https://render.githubusercontent.com/render/math?math=C_1'" />, <img src="https://render.githubusercontent.com/render/math?math=C_2" />-nek pedig <img src="https://render.githubusercontent.com/render/math?math=C_2'" /> alap példányai, melyeknek <img src="https://render.githubusercontent.com/render/math?math=R'" /> rezolvense, akkor van <img src="https://render.githubusercontent.com/render/math?math=C_1" />-nek, és <img src="https://render.githubusercontent.com/render/math?math=C_2" />-nek olyan elsőrendű <img src="https://render.githubusercontent.com/render/math?math=R" /> rezolvense, melynek <img src="https://render.githubusercontent.com/render/math?math=R'" /> alap példánya.
+    - Ha <img src="https://latex.codecogs.com/svg?C_1" />-nek <img src="https://latex.codecogs.com/svg?C_1'" />, <img src="https://latex.codecogs.com/svg?C_2" />-nek pedig <img src="https://latex.codecogs.com/svg?C_2'" /> alap példányai, melyeknek <img src="https://latex.codecogs.com/svg?R'" /> rezolvense, akkor van <img src="https://latex.codecogs.com/svg?C_1" />-nek, és <img src="https://latex.codecogs.com/svg?C_2" />-nek olyan elsőrendű <img src="https://latex.codecogs.com/svg?R" /> rezolvense, melynek <img src="https://latex.codecogs.com/svg?R'" /> alap példánya.
 
 > Lift lemma bizonyítása kell?
 
-- Mivel a <img src="https://render.githubusercontent.com/render/math?math=C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://render.githubusercontent.com/render/math?math=C_n%20%3D%20%5Csquare" /> kell legyen.
+- Mivel a <img src="https://latex.codecogs.com/svg?C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://latex.codecogs.com/svg?C_n%20%3D%20%5Csquare" /> kell legyen.
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
