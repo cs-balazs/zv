@@ -2146,32 +2146,103 @@ Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=X%2
 <img src="https://render.githubusercontent.com/render/math?math=L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
 ## Közelítő és szimbolikus számítások
 
+> Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása meggkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
+
 ### 1. Eliminációs módszerek, mátrixok trianguláris felbontásai. Lineáris egyenletrendszerek megoldása iterációs módszerekkel. Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása.
 
 #### Eliminációs módszerek
 
-**Lineáris egyenletrendszer** mátrixos reprezentációja:
-
 <img src="https://render.githubusercontent.com/render/math?math=" />
 \begin{align}
-    a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n & = a_{1, n+1}\\
-    a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n & = a_{2, n+1}\\
+    a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n & = b_1\\
+    a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n & = b_2\\
                                             & ~  ...\\
-    a_{n1}x_1 + a_{n2}x_2 + ... + a_{nn}x_n & = a_{n, n+1}\\
+    a_{n1}x_1 + a_{n2}x_2 + ... + a_{nn}x_n & = b_n\\
 \end{align}
 <img src="https://render.githubusercontent.com/render/math?math=" />
 
-Komponensek:
+Tegyük fel, hogy <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathbb%7BC%7D%5E%7Bn%20%5Ctimes%20n%7D" />, és <img src="https://render.githubusercontent.com/render/math?math=b%20%5Cin%20%5Cmathbb%7BC%7D%5En" />. Az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> lineáris egyenletrendszernek pontosan akkor van egyetlen megoldása, ha <img src="https://render.githubusercontent.com/render/math?math=A" /> nem szinguláris (azaz <img src="https://render.githubusercontent.com/render/math?math=detA%20%5Cne%200" />). Ekkor a megoldás <img src="https://render.githubusercontent.com/render/math?math=x%20%3D%20A%5E%7B-1%7D%20b" />. A megoldás <img src="https://render.githubusercontent.com/render/math?math=i" />. komponensét megadja a Cramer szabály is:
 
-- <img src="https://render.githubusercontent.com/render/math?math=A%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20n%7D" />  regulárisegyütthatómártix
+<img src="https://render.githubusercontent.com/render/math?math=" />
+x_i = \frac{det A^{(i)}}{detA}
+<img src="https://render.githubusercontent.com/render/math?math=" />
 
-> Reguláris = determinánsa nem 0
+> <img src="https://render.githubusercontent.com/render/math?math=A%5E%7B(i)%7D" /> mátrixot úgy kapjuk, hogy az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix <img src="https://render.githubusercontent.com/render/math?math=i" />. oszlopát kicseréljük a <img src="https://render.githubusercontent.com/render/math?math=b" /> vektorral.
 
-- <img src="https://render.githubusercontent.com/render/math?math=a%20%5Cin%20%5Cmathcal%7BR%7D%5En" /> jobb oldalhoz tartozó mátrix
+> Gyakorlatban ez a tétel nem használatos, mert az inverz számolás nagy műveletigényű lehet, a Cramer szabály pedig numerikusan nem stabilis.
 
-- <img src="https://render.githubusercontent.com/render/math?math=x_1%2C%20...%2C%20x_n" /> ismeretlenek
+##### Lineáris egyenletrendszerek megoldási módjai
 
-> Jelölés: <img src="https://render.githubusercontent.com/render/math?math=%5Chat%7BA%7D%20%3A%3D%20(Aa)%20%5Cin%20%5Cmathcal%7BR%7D%5E%7Bn%20%5Ctimes%20(n%20%2B%201)%7D" />. Ez egy tömörebb írásmódja az együtthatóknak és a jobb oldalnak, ennek egy sora jellemzi az egyenletrendszer egy sorát.
+- Direkt módszerek: Véges sok, meghatározott számú lépésben megtalálják a megoldást.
+
+- Iterációs módszerek: Minden iterációs lépésben jobb és jobb közelítést adják a megoldásnak.
+  
+  - Magát a megoldást általában nem érik el véges lépésben.
+
+##### Egyenletrendszerek ekvivalenciája
+
+Két egyenletrendszert akkor tekintünk ekvivalensnek, ha a megoldásaik halmaza megegyezik.
+
+Megengedett transzformációk:
+
+- Egy egyenletnek egy nem nulla számmal való beszorzássa.
+
+- Egy egyenlet konstansszorosának hozzáadása egy másik egyenlethez.
+
+##### Egyenletrendszerek megoldása
+
+Ilyen átalakításokkal próbálunk háromszögmátrixot vagy diagonális mátrixot létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{bmatrix}
+u_{11} & u_{12} & u_{13} \\
+0 & u_{22} & u_{23} \\
+0 & 0 & u_{33} \\
+\end{bmatrix}
+
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+b_3 \\
+\end{bmatrix}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Ilyen az esetben a megoldás könnyen kifejezhető:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{align}
+x_3 & = \frac{b_3}{u_{33}} \\
+\\
+x_2 & = \frac{b_2 - u_{23}x_3}{u_{22}} \\
+\\
+x_1 & = \frac{b_1 - u_{12}x_2 - u_{13}x_3}{u_{11}}
+\end{align}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+###### Matlab program
+
+A fentebbi példa módszerének altalánosítása felső trianguláris mátrixokra.
+
+```matlab
+function x = UTriSol(U, b)
+n = length(b);
+x = zeros(n, 1);
+for j = n : -1 : 2
+    x(j) = b(j) / U(j, j);
+    b(1:j - 1) = b(1:j - 1) - x(j) * U(1:j - 1, j);
+end
+x(1) = b(1) / U(1, 1);
+```
+
+> Műveletigénye <img src="https://render.githubusercontent.com/render/math?math=O(%5Cfrac%7Bn%5E2%7D%7B2%7D)" />
 
 ##### Eliminációs mátrix
 
@@ -2181,7 +2252,8 @@ Komponensek:
 
 <img src="https://render.githubusercontent.com/render/math?math=" />
 j = 3; G_j =
-\begin{bmatrix}1 & 0 & 2 \\
+\begin{bmatrix}
+1 & 0 & 2 \\
 0 & 1 & 3 \\
 0 & 0 & 1 \\
 \end{bmatrix}
@@ -2243,7 +2315,691 @@ G_jA =
 
 Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix első sorához valóban kétszer a másodikhoz háromszor a harmadikhoz pedig nullaszor lett hozzáadva az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix harmadik sora.
 
+Könnyen megadható olyan eliminációs mátrix, amivel egyadott oszlop (vagy egy önálló vektor) **egy adott koordináta alatti elemei kinullázhatóak**, például a fentebbi <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixhoz (<img src="https://render.githubusercontent.com/render/math?math=a_%7B11%7D-et" /> módosítottam <img src="https://render.githubusercontent.com/render/math?math=2" />-re, hogy szemléletesebb legyen a példa):
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{bmatrix}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+-\frac{9}{2} & 0 & 1 \\
+\end{bmatrix}
+
+\begin{bmatrix}
+2 & 2 & 4 \\
+6 & 8 & 2 \\
+9 & 1 & 0 \\
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+2 & 2 & 4 \\
+0 & 2 & -10 \\
+0 & -8 & -18 \\
+\end{bmatrix}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Az első oszlopban ténylegesen kinullázódott két sor, már csak a második oszlopban kellene az utolsó sort kinullázni, és egy könnyen megoldható egyenletrendszer együtthatómátrixát kapnánk.
+
+#### Mátrixok trianguláris felbontásai
+
+##### LU felbontás
+
+Át akarjuk alakítani az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> egyenletrendszert úgy, hogy a bal oldalon háromszögmátrix szerepeljen.
+
+Ezt valamennyi eliminációs mátrix sorozatával meg tudjuk tenni:
+
+<img src="https://render.githubusercontent.com/render/math?math=MAx%20%3D%20M_%7Bn%20-%201%7D%20...%20M_1A_x%20%3D%20M_%7Bn-1%7D%20...%20M_1%20b%20%3D%20Mb" />
+
+> Hasonló felbontás megkezdése történt az előző példában.
+
+Ekkor <img src="https://render.githubusercontent.com/render/math?math=L%20%3D%20M%5E%7B-1%7D" />, <img src="https://render.githubusercontent.com/render/math?math=U%20%3D%20MA" />
+
+> Könnyű számolni, mert az eliminációs mátrix inverze úgy számolható, hogy a főátlón kívüli elemeket negáljuk.
+
+###### Egyenletrendszer megoldása LU felbontással
+
+<img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> helyett az <img src="https://render.githubusercontent.com/render/math?math=LUx%20%3D%20b" /> egyenletrendszert oldhatjuk meg. Ezt **két lépésben** elvégezve végig háromszögmátrixokkal dolgozhatunk.
+
+Ezzel megkaptuk a **Gauss-elimináció** módszerét:
+
+1. Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix <img src="https://render.githubusercontent.com/render/math?math=LU" /> felbontása
+
+2. <img src="https://render.githubusercontent.com/render/math?math=Ly%20%3D%20b" /> megoldása <img src="https://render.githubusercontent.com/render/math?math=y" />-ra (az <img src="https://render.githubusercontent.com/render/math?math=y" /> egy új, mesterséges változó)
+
+3. <img src="https://render.githubusercontent.com/render/math?math=Ux%20%3D%20y" /> megoldása <img src="https://render.githubusercontent.com/render/math?math=x" />-re
+
+```matlab
+[L, U] = LU(A);
+y = LTriSol(L, b);
+x = UTriSol(U, y);
+```
+
+###### * LU felbontás Matlabban
+
+```matlab
+function [L, U] = LU(A)
+[m, n] = size(A);
+for k = 1:n-1
+    A(k+1:n, k) = A(k+1:n, k) / A(k, k);
+    A(k+1:n, k+1:n) = A(k+1:n, k+1:n) - A(k+1_n, k) * A(k, k+1_n);
+end
+L = eye(n, n) + tril(A, -1);
+U = triu(A);
+```
+
+###### Főelemkiválasztás
+
+Az LU felbontás csak akkor sikeres, ha az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix nem szinguláris, és minden generáló elem (főátló-beli elemek) nullától különböző (mivel azokkal leosztunk). Ha az utóbbi nem teljesül, még lehet, hogy van felbontás, átrendezéssel, ami ekvivalens feladatot eredményez. Ezt az eljárást főelemkiválasztásnak hívjuk.
+
+Ezeket a sorcseréket egy **permutációs mátrixszal** való beszorzással végezzük.
+
+A <img src="https://render.githubusercontent.com/render/math?math=P_%7Bij%7D" /> permutációs mátrix egy egységmátrix, melyben az <img src="https://render.githubusercontent.com/render/math?math=i" />-edik, és <img src="https://render.githubusercontent.com/render/math?math=j" />-edik sor fel van cserélve. Dimenziószáma megegyezik a "permutálandó" mátrixéval.
+
+Az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixot ezzel a <img src="https://render.githubusercontent.com/render/math?math=P_%7Bij%7D" />-vel balról szorozva egy olyan mátrixot kapunk, ami az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix, melyben az <img src="https://render.githubusercontent.com/render/math?math=i" />-edik, és <img src="https://render.githubusercontent.com/render/math?math=j" />-edik sor fel van cserélve.
+
+Jobbról szorozva az oszlopok cserélődnek.
+
+##### Cholesky felbontás
+
+**Rirka mátrixok** esetén hatékonyabb, mint a Gauss-elimináció.
+
+Ha az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix szimmetrikus, és pozitív definit, akkor az LU felbontás <img src="https://render.githubusercontent.com/render/math?math=U%20%3D%20L%5ET" /> alakban létezik, tehát <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20LL%5ET" />, ahol <img src="https://render.githubusercontent.com/render/math?math=L" /> alsó háromszögmátrix, amelynek diagonális elemei pozitív számok. Az ilyen felbontást **Cholesky-felbontásnak** hívjuk.
+
+> Pozitív definit = minden sajátértéke pozitív
+
+###### Matlab implementáció
+
+```matlab
+function [x] = LGPD(A, b);
+R = chol(A);
+y = R' \ b;
+x = R \ y;
+```
+
+> A `'` operátor transzponál, a `\` pedig: `1R \ y := Az Rx = y egyenletrendszer megoldása`
+
+A Cholesky felbontás numerikusan stabilis, műveletigénye <img src="https://render.githubusercontent.com/render/math?math=%20%5Cfrac%7B1%7D%7B3%7D%20n%5E3%20%2B%20O(n%5E2)" />. Feleannyi, mint egy általános mátrix LU felbontásáé.
+
+##### QR ortogonális felbontás
+
+Egy <img src="https://render.githubusercontent.com/render/math?math=Q" /> négyzetes mátrix ortogonális, ha <img src="https://render.githubusercontent.com/render/math?math=QQ%5ET%20%3D%20Q%5ETQ%20%3D%20I" />.
+
+Az ortogonális transzformációk megtartják a kettes normát, így numerikusan stabilisak.
+
+Lineáris egyenletrendszer megoldása az <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20QR" /> felbontással:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+Rx = Q^Tb
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Matlabban
+
+```matlab
+[Q, R] = qr(A, 0);
+x = R \ (Q' * b);
+```
+
+Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=A" /> négyzetes valós reguláris mátrixnak létezik az <img src="https://render.githubusercontent.com/render/math?math=A%20%3D%20QR" /> felbontása ortogonális és felső háromszögmátrixra.
+
+#### Lineáris egyenletrendszerek megoldása iterációs módszerekkel
+
+A korábbi megoldási módok **direkt módszerek voltak**, véges lépésben megtalálták a megoldást. A következőek iterációs módszerek, minden iterációban egyre jobb közelítéseket adnak, de általában véges lépésben nem találják meg a megoldást. Mégis nagyobb méterű, sűrűbb mátrixok esetén előnyös a használatuk.
+
+##### Jacobi iteráció
+
+> Nem minden esetben konvergál a jacobi iteráció! (A megoldás felé)
+
+A módszer:
+
+1. Felírjuk az egyenleteket olyan formában, hogy a bal oldalra rendezünk 1-1 változót.
+
+2. Választunk egy kiindulási <img src="https://render.githubusercontent.com/render/math?math=x_0" /> vektort.
+
+3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett báltozó jobb oldalába (nulladik iterációban <img src="https://render.githubusercontent.com/render/math?math=x_0" />-t).
+
+4. Ezt addig ismételgethetjük, amíg az eltérés két eredmény között megfelelően kicsi.
+
+###### Példa
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{align}
+-2x_1 + x_2 + 5x_3  & = 4 \\
+\\
+4x_1 - x_2 + x_3 & = 4 \\
+\\
+2x_1 - 4x_2 + x_3 & = -1
+\end{align}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Ehhez tartozó **iterációs egyenletek**:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{align}
+x_1 & = \frac{-4 + x_2 + 5x_3}{2} \\
+\\
+x_2 & = -4 + 4x_1 + x_3 \\
+\\
+x_3 & = -1 - 2x_1 + 4x_2
+\end{align}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+> Ez éppenséggel az <img src="https://render.githubusercontent.com/render/math?math=x_1%20%3D%20(1%2C%202%2C%203)%5ET" /> kezdővektorral divergál a megoldástól.
+
+> <img src="https://render.githubusercontent.com/render/math?math=Bx%5E%7B(k)%7D%20%2B%20c" /> az **iterációs egyenleteknek** az általános, tömör felírása.
+
+###### Jacobi iteráció konvergenciája
+
+Az, hogy a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **diagonálisan domináns**, elegendő feltétele a Jacobi iteráció konvergenciájának.
+
+> Egy mátrix akkor diagonálisan domináns, ha minden sorban a diagonális elem abszolútértékben nagyobb, mint az összes többi sor-beli elem abszolútértékben vett összege.
+
+##### Iterációs módszerek konvergenciája
+
+Vizsgáljuk meg az <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció által definiált <img src="https://render.githubusercontent.com/render/math?math=%5C%7B%20~%20x%5E%7B(k)%7D%20~%20%5C%7D" /> sorozat konvergenciáját. Jelöljük az eredeti egyenletrendszerünk megoldásár <img src="https://render.githubusercontent.com/render/math?math=x%5E*" />-al. Az <img src="https://render.githubusercontent.com/render/math?math=e_k%20%3D%20x%5E%7B(k)%7D%20-%20x%5E*" /> eltérésre a következő állítás érvényes:
+
+Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(0)%7D" /> kezdővektor, esetén a <img src="https://render.githubusercontent.com/render/math?math=k" />-adik közelítés eltérése az <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> megoldástól <img src="https://render.githubusercontent.com/render/math?math=e_k%20%3D%20B%5Ek%20e_0" />
+
+Következmény: Ha a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **nilpotens**, akkor <img src="https://render.githubusercontent.com/render/math?math=B%5Ej%20e_0%20%3D%200" />, tehát az iterációs eljárás véges sok lépésben megtalálja  amegoldást.
+
+> A nilpotens azt jelenti, hogy van olyan <img src="https://render.githubusercontent.com/render/math?math=j" /> index, amire <img src="https://render.githubusercontent.com/render/math?math=B%5Ej%20%3D0" />
+
+**Globális konvergencia**: Akkor mondjuk, hogy egy iterációs sorozat globálisan konvergens, ha minden indulóvektorral ugyan azt a megoldást kapjuk.
+
+Az  <img src="https://render.githubusercontent.com/render/math?math=x%5E%7B(k%2B1)%7D%20%3D%20Bx%5E%7B(k)%7D%20%2B%20c" /> iteráció akkor és csak akkor globálisan konvergens, ha <img src="https://render.githubusercontent.com/render/math?math=%5Crho(B)%20%3C%201" />.
+
+> <img src="https://render.githubusercontent.com/render/math?math=%5Crho(B)" /> a <img src="https://render.githubusercontent.com/render/math?math=B" /> mátrix **spektrálrádiusz**-át jelenti, ami a sajátértékeinek abszolút értékben vett maximuma.
+
+##### Gauss-Seidel iteráció
+
+Annyiban tér el a Jacobi-iterációtól, hogy az iterációs egyenletek jobb oldalán felhasználjuk az adott iterációban már megtalált közelítő értékeket.
+
+Például ha <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k%2B1)%7D" /> már ismert, akkot a továbbiakban <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k)%7D" /> helyett <img src="https://render.githubusercontent.com/render/math?math=x_1%5E%7B(k%2B1)%7D" />-et használjunk.
+
+Ez valamivel gyorsítja a konvergenciát.
+
+> Jacobi, Gauss-Seidel matlab kódok kellenek?
+
+#### Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása
+
+Legyen adott egy <img src="https://render.githubusercontent.com/render/math?math=A" /> négyzetes mátrix. Adjuk meg a <img src="https://render.githubusercontent.com/render/math?math=%5Clambda" /> számot, és az <img src="https://render.githubusercontent.com/render/math?math=x%20%5Cne%200" /> vektort úgy, hogy <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20%5Clambda%20x" />.
+
+Ekkor <img src="https://render.githubusercontent.com/render/math?math=%5Clambda" /> az <img src="https://render.githubusercontent.com/render/math?math=A" /> sajátértéke, és <img src="https://render.githubusercontent.com/render/math?math=x" /> az <img src="https://render.githubusercontent.com/render/math?math=A" /> sajátvektora.
+
+> Baloldali sajátérték, sajátvektor: <img src="https://render.githubusercontent.com/render/math?math=y%5ET%20A%20%3D%20%5Clambda%20y%5ET" />
+
+Mátrix **spektruma**: Sajátértékeinek halmaza, jele: <img src="https://render.githubusercontent.com/render/math?math=%5Clambda(A)" />.
+
+Mátrix **spektrálrádiusza**: <img src="https://render.githubusercontent.com/render/math?math=max%5C%7B%20~%20%7C%20%5Clambda%20%7C%20%3A%20%5Clambda%20%5Cin%20%5Clambda(A)%20~%20%5C%7D" />, jele: <img src="https://render.githubusercontent.com/render/math?math=%5Crho(A)" />
+
+##### Sajátvektor, sajátérték jelentősége
+
+A sajátvektorok irányába eső vektorokat az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix megnyújtja az adott sajátvektorhoz tartozó sajátértéknek megfelelően.
+
+##### Sajátértékek, sajátvektorok nem egyértelműek
+
+- Egységmátrixnak az 1 <img src="https://render.githubusercontent.com/render/math?math=n" />-szeres sajátértéke
+
+- Egy sajátvektorral együtt annak minden nem nulla számmal szorzottja is ugyanahhoz a sajátértékhez tartozó sajátvektora
+
+##### Sajátértékek, sajátvektorok meghatározása
+
+Megkaphatjuk a <img src="https://render.githubusercontent.com/render/math?math=(A%20-%20%5Clambda%20I)x%20%3D%200" /> homogén lineáris egyenletrendszerből. Ennek pontosan akkor van nulla vektortól különböző megoldása, ha az <img src="https://render.githubusercontent.com/render/math?math=A%20-%20%5Clambda%20I" /> mátrix szinguláris.
+
+Emiatt a sajátértékeket leírja a <img src="https://render.githubusercontent.com/render/math?math=det%20(A%20-%20%5Clambda%20I)%20%3D%200" /> egyenlet. Ennek baloldalán levő <img src="https://render.githubusercontent.com/render/math?math=n" />-edfokú polinomot az <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrix **karakterisztikus polinomjának** nevezzük.
+
+##### * Sajátértékek korlátai
+
+Tetszőleges <img src="https://render.githubusercontent.com/render/math?math=A" /> mátrixra és bármely mátrixnormára <img src="https://render.githubusercontent.com/render/math?math=%5Crho(A)%20%5Cle%20%7C%7CA%7C%7C" />.
+
+A mátrix összes sajátértéke benne van a 
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+K_i = \left\{ z \in C ~ \Bigg| ~ |z - a_{ii}| \le \sum_{k=1, k \ne i}^n |a_{ik}| \right\}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+
+
+##### Hatványmódszer
+
+> A.K.A. *von Mieses vektoriterációja*
+
+A legnagyobb abszolútértékű sajátérték meghatározására szolgál.
+
+Az algoritmus iterációs képlete:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+y^k = Ax^k, x^{k+1} = \frac{y^k}{||y^k||}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Kiindulási vektor:
+
+- <img src="https://render.githubusercontent.com/render/math?math=x%5E0%20%5Cne%200" />, és
+
+- <img src="https://render.githubusercontent.com/render/math?math=x_0" /> nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
+
+###### Matlabban
+
+```matlab
+function lambda = hatv(A);
+x = [rand(1) rand(1) rand(1)];
+for i = 1:100
+    y = A * x;
+    lambda = y ./ x;
+    r = (x' * y) / (x' * x);
+    x = y / norm(y);
+end
+```
+
+> A `./` komponensenként való osztás.
+
+Az egyes iterációban kapott eredmények:
+
+- `r`: Rayleigh-féle hányadossal kapott eredmény.
+
+- `x`: Komponensenkénti becsléssel kapott eredmény.
+
 ### 2. Érintő, szelő, és húr módszer, a konjugált gradiens eljárás. Lagrange interpoláció. Numberikus integrálás.
+
+#### Érintő módszer
+
+> A.K.A. Newton-módszer
+
+Tegyük fel, hogy az <img src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%200" /> egyenlet <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> egyszeres, izolált zérushelyét akarjuk meghatározni, és hogy ennek a környezetében <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> differenciálható.
+
+Válasszunk ki ebből egy <img src="https://render.githubusercontent.com/render/math?math=x_0" /> kezdőértéket, majd képezzük az
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+x_{k + 1} = x_k - \frac{f(x_k)}{f'(x_k)}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+iterációs sorozatot.
+
+##### A módszer geometriai jelentése
+
+Az aktuális <img src="https://render.githubusercontent.com/render/math?math=x_k" /> pontban meghatározzuk az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény és deriváltja értékét, ezekkel képezzük az adott ponthoz húzott érintőt, és következő iterációs pontnak azt határozzuk meg, amelyben az érintő zérushelye van.
+
+##### Megoldás garantálása
+
+Ha az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény kétszer folytonosan differenciálható az <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> zérushely egy környezetében, akkor van olyan pont, ahonnan indulva a Newton-módszer kvadratikusan konvergens sorozatot ad meg:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+|x^* - x_{k+1} | \le C |x^* - x_k |^2
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+valamely pozitív <img src="https://render.githubusercontent.com/render/math?math=C" /> konstanssal.
+
+#### Szelő módszer
+
+Legyen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%200" /> egyenlet egyszeres gyöke. Válasszunk alkalmas <img src="https://render.githubusercontent.com/render/math?math=x_0" /> és <img src="https://render.githubusercontent.com/render/math?math=x_1" /> kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+x_{k + 1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(k_{k-1})} = \frac{ f(x_k) x_{k-1} - f(x_{k-1}) x_k }{ f(x_k) - f(x_{k - 1}) } ~ ~ ~ ~ k = 1, 2, ...
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Valójában annyiban tér el a Newton-módszertől, hogy <img src="https://render.githubusercontent.com/render/math?math=f'(x_k)" /> helyett annak közelítéseként a **numerikus derivált**,
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\frac
+{ f(x_k) - f(x_{k-1}) }
+{ x_k - k_{k-1} }
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+szerepel.
+
+> Így tehát ez az eljárás csak egy <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvényt kiszámoló szubrutinra (függvényre) támaszkodik.
+
+##### A módszer geometriai jelentése
+
+<img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%20%2B%201%7D" /> nem más, mint az <img src="https://render.githubusercontent.com/render/math?math=(x_k%2C%20f(x_k))" /> és az <img src="https://render.githubusercontent.com/render/math?math=(x_%7Bk-1%7D%2C%20f(x_%7Bk-1%7D))" /> pontokon átmenő egyenes és az <img src="https://render.githubusercontent.com/render/math?math=x" /> tengely metszéspontjának <img src="https://render.githubusercontent.com/render/math?math=x" /> koordinátája.
+
+##### Tulajdonságok
+
+- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> gyököt.
+
+- Ha <img src="https://render.githubusercontent.com/render/math?math=f'(x%5E*)%20%3E%200" />, és <img src="https://render.githubusercontent.com/render/math?math=f''(x%5E*)%20%3E%200" />, akkor <img src="https://render.githubusercontent.com/render/math?math=x%5E*" />-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
+
+#### Húr módszer
+
+A szelő módszer a következő módosításokkal:
+
+- A kezdeti <img src="https://render.githubusercontent.com/render/math?math=x_0%2C%20x_1" /> pontokban az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény **ellentétes előjelű**.
+
+- <img src="https://render.githubusercontent.com/render/math?math=f(x_%7Bk%2B1%7D)" /> előjelétől függően a megelőző két pontból **azt választja** a következő iterációs lépéshez, amelyikkel ez a **tulajdonság fennmarad**.
+
+> Például ha <img src="https://render.githubusercontent.com/render/math?math=x_2" /> pozitív, és <img src="https://render.githubusercontent.com/render/math?math=x_0" /> negatív, <img src="https://render.githubusercontent.com/render/math?math=x_1" /> pozitív, akkor a következő iterációban <img src="https://render.githubusercontent.com/render/math?math=x_2" /> mellett <img src="https://render.githubusercontent.com/render/math?math=x_0" />-t használja a módszer az <img src="https://render.githubusercontent.com/render/math?math=x_1" /> helyett.
+
+#### Konjugált gradiens eljárás
+
+Optimalitálás elvein alapuló módszer.
+
+Szimmetrikus pozitív definit mátrixú lineáris egyenletrendszerek megoldására alkalmas.
+
+Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
+
+Legyen <img src="https://render.githubusercontent.com/render/math?math=A" /> egy szimmetrikus, pozitív definit mátrix, akkor a 
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+q(x) = \frac{1}{2} x^T A x - x^T b
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+kvadratikus függvénynek egyetlen <img src="https://render.githubusercontent.com/render/math?math=x%5E*" /> minimumpontja van, és erre <img src="https://render.githubusercontent.com/render/math?math=Ax%5E*%20%3D%20b" /> teljesül.
+
+Azaz az <img src="https://render.githubusercontent.com/render/math?math=Ax%20%3D%20b" /> lineáris egyenletrendszer megoldása ekvivalens a <img src="https://render.githubusercontent.com/render/math?math=q(x)" /> kvadratikus függvény minimumpontjának meghatározásával.
+
+A többdimenziós optimalizálási eljárások rendszerint az <img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha%20s_k" /> alakban keresik az új közelítő megoldást, ahol <img src="https://render.githubusercontent.com/render/math?math=s_k" /> egy keresési irány, és <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> a lépésköz.
+
+##### Kvadratikus függvényekkel kapcsolatos összefüggések
+
+1. A negatív gradiens a rezudiális vektor: <img src="https://render.githubusercontent.com/render/math?math=-%20%5Cnabla%20q(x)%20%3D%20b%20-%20Ax%20%3D%20r" />
+
+2. Adott keresési itány mentén nem kell adaptív módon meghatározni a lépésközt, mert az optimális <img src="https://render.githubusercontent.com/render/math?math=%5Calpha" /> közvetlenül megadható. A keresési irány mentén ott lesz a célfüggvény minimális, ahol a rezudiális vektor merőleges <img src="https://render.githubusercontent.com/render/math?math=s_k" />-ra.
+   <img src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%3D%20%5Cfrac%7Br_k%5ET%20s_k%7D%7Bs_k%5ET%20A%20s_k%7D" />
+
+##### A módszer
+
+Adott <img src="https://render.githubusercontent.com/render/math?math=x_0" /> kezdőpontra legyen <img src="https://render.githubusercontent.com/render/math?math=s_0%20%3D%20r_0%20%3D%20b%20-%20Ax_0" />, és iteráljuk <img src="https://render.githubusercontent.com/render/math?math=k%20%3D%201%2C%202%2C%20..." /> értékekre az alábbi lépéseket, amíg a megállási feltételek nem teljesülnek:
+
+1. <img src="https://render.githubusercontent.com/render/math?math=%5Calpha_k%20%3D%20%5Cfrac%7Br_k%5ET%20r_k%7D%7Bs_k%5ET%20As_k%7D" />: A **lépéshossz** meghatározása
+
+2. <img src="https://render.githubusercontent.com/render/math?math=x_%7Bk%2B1%7D%20%3D%20x_k%20%2B%20%5Calpha_k%20s_k" />: Iterált **közelítő megoldás**
+
+3. <img src="https://render.githubusercontent.com/render/math?math=r_%7Bk%2B1%7D%20%3D%20r_k%20-%20%5Calpha_k%20A%20s_k" />: Új **rezudiális vektor**
+
+4. <img src="https://render.githubusercontent.com/render/math?math=%5Cbeta_%7Bk%2B1%7D%20%3D%20%5Cfrac%7Br_%7Bk%2B1%7D%5ET%20r_%7Bk%2B1%7D%7D%7Br_k%5ET%20r_k%7D" />: Segédváltozó
+
+5. <img src="https://render.githubusercontent.com/render/math?math=s_%7Bk%2B1%7D%20%3D%20r_%7Bk%2B1%7D%20%2B%20%5Cbeta_%7Bk%2B1%7D%20s_k" />: Új **keresési irány**
+
+> Korábbi gradiensmódszerek esetén egyszerűen a negatív gradienst követik minden iterációs lépésben, de felismerték hogy ez a meredek falú, enyhén lejtő völgyszerű függvények esetén szükségtelenül sok iterációs lépést eredményez a völgy két oldalán való oda-vissza ugrálás miatt. A kisebb meredekséggel rendelkező irányban viszont lényegesen gyorsabban lehetett volna haladni.
+> A konjugált gradiens módszer a lépésenkénti megfelelő irányváltoztatással kiküszöböli ezt a hibát.
+
+A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékek alatt maradjanak.
+
+##### Matlabban
+
+```matlab
+function x = kg(A, b, x);
+s = b - A * x;
+r = s;
+for k = 1:20
+    a = (r' * r) = (s' * A * s);
+    x = x + a * s;
+    rr = r - a * A * s;
+    s = rr + s * ((rr' * rr) / (r' * r));
+    r = rr
+end
+```
+
+> Az `rr` valójában <img src="https://render.githubusercontent.com/render/math?math=r_%7Bk%2B1%7D" />, csak mivel `s` kiszámolásához <img src="https://render.githubusercontent.com/render/math?math=r_k" />-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
+
+#### Lagrange interpoláció
+
+**Interpoláció**: Az a feladat, amikor adott <img src="https://render.githubusercontent.com/render/math?math=(x_i%2C%20y_i)%2C%20i%20%3D1%2C%202%2C%20...%2C%20m" /> pontsorozaton állítunk elő egy függvényt, amely egy adott függvényosztályba tartozik, és minden ponton átmegy.
+
+> Azaz <img src="https://render.githubusercontent.com/render/math?math=x_i" /> helyeken a megfelelő <img src="https://render.githubusercontent.com/render/math?math=y_i" /> értékeket vegye fel a függvény.
+
+> Ha a keresett <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény polinom, akkor **polinominterpolációról** beszélünk.
+
+**Interpoláció másik jelentése**: A közelítő függvény segítségével az eredeti <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> függvény értékét egy olyan <img src="https://render.githubusercontent.com/render/math?math=%5Chat%7Bx%7D" /> pontban becsüljük az interpoláló <img src="https://render.githubusercontent.com/render/math?math=p(x)" /> polinom <img src="https://render.githubusercontent.com/render/math?math=p(%5Chat%7Bx%7D)" /> helyettesítési értékével, amelyre:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\hat{x} \in [ ~ min(x_1, x_2, ..., x_m), max(x_1, x_2, ..., x_m) ~ ]
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Ezzel szemben ha
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\hat{x} \notin [ ~ min(x_1, x_2, ..., x_m), max(x_1, x_2, ..., x_m) ~ ]
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+teljesül, akkor **extrapolációról** van szó.
+
+**Spline interpoláció**: Több alacsony fokszámú polinomból összerakott függvényt keres úgy, hogy az adott pontokon való áthaladás megkövetelése mellett az is elvárás, hogy a szomszédos polinomok a csatlakozási pontokban **előírt derivált értékeket** vegyenek föl.
+
+##### Polinomok fokszáma
+
+Polinom interpoláció esetén a polinom fokszáma, <img src="https://render.githubusercontent.com/render/math?math=n" /> egyenlő <img src="https://render.githubusercontent.com/render/math?math=m%20-%201" />-el.
+
+Spline alkalmazásakor a fokszám lényegesen kisebb, mint az alappontok száma.
+
+Amennyiben egy olyan polinomot illesztünk, amelynek fokszáma kisebb, mint <img src="https://render.githubusercontent.com/render/math?math=m%20-%201" />, akkor **görbeillesztésről** beszélünk.
+
+> Görbeillesztéskor a polinom persze nem feltétlen megy át minden alapponton.
+
+##### Lagrange interpoláció
+
+> Lagrange interpolációkor feltesszük, hogy az alappontok különbözőek, de ez nem egy túl erős feltétel, hiszen nem is lehet azonos <img src="https://render.githubusercontent.com/render/math?math=x" /> koordinátán két különböző <img src="https://render.githubusercontent.com/render/math?math=y" /> értéket érinteni egy függvénnyel.
+
+A Lagrange interpoláció az interpoláló polinomokat
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+p_n(x) = \sum_{i=0}^n f(x_i)L_i(x)
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+alakban adja meg, ahol
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+L_i(x) = \prod_{j=0, j\ne i}^n \frac{x-x_j}{x_i-x_j} = 
+\frac
+{(x - x_0)(x - x_1) ... (x - x_{i-1})(x - x_{i+1}) ... (x - x_n)}
+{(x_i - x_0)(x_i - x_1) ... (x_i - x_{i-1})(x_i - x_{i+1}) ... (x_i - x_n)}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Legyenek adottak az <img src="https://render.githubusercontent.com/render/math?math=x_0%2C%20...%2C%20x_n" /> páronként különböző alappontok. Ekkor az <img src="https://render.githubusercontent.com/render/math?math=f(x_i)%2C%20i%20%3D%200%2C%201%2C%20...%2C%20n" /> függvényértékekhez egyértelműen létezik olyan legfeljebb <img src="https://render.githubusercontent.com/render/math?math=n" />-edfokú interpoláló polinom, amely megegyezik a Lagrange interpolációs polinommal.
+
+##### Matlabban
+
+```matlab
+function [C, L] = lagran(X, Y)
+w = length(X);
+n = w - 1;
+L = zeros(w, w);
+for k = 1:n+1
+    V = 1;
+    for j = 1:n+1
+        if k ~= j
+            V = conv(V, poly(X(j))) / (X(k) - X(j));
+        end
+    end
+end
+C = Y * L;
+```
+
+> `conv(u, v)`: Konvolúció, `u` a maszk, amit keresztül tol `v`-n.
+> 
+> `poly(A)`: Karakterisztikus polinom-ot számol ki mátrixból, vagy sajátértékekből.
+> 
+> `~=`: Nem-egyenlő operátor.
+
+#### Numerikus integrálás
+
+A kvadratúra a numerikus integrálás szinonimája, amikor a
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\int_a^b f(x) ~ dx = F(b) - F(a)
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+határozott integrál közelítése a feladat. Itt <img src="https://render.githubusercontent.com/render/math?math=F(x)" /> az <img src="https://render.githubusercontent.com/render/math?math=f(x)" /> integrálandó függvény primitív függvénye. Ez utóbbi nem minden esetben áll rendelkezésre, sőt sokszor nem is elemi függvény, nem adható meg zárt alakban.
+
+##### Kvadratúra-formula
+
+A határozott integrálokat szokás
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\int_a^b = f(x) ~ dx \approx Q_n(f) = \sum_{i = 1}^n w_i f(x_i)
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+alakban közelíteni, ahol <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)" />-et **kvadratúra-formulának** nevezzük.
+
+Általában feltesszük, hogy <img src="https://render.githubusercontent.com/render/math?math=x_i%20%5Cin%20%5Ba%2C%20b%5D" /> teljesül az <img src="https://render.githubusercontent.com/render/math?math=x_i" /> **alappontokra**, és ezek **páronként különbözőek**.
+
+A <img src="https://render.githubusercontent.com/render/math?math=w_i" /> számokat **súlyoknak** hívjuk.
+
+##### Integrál, és kvadratúra-formula tulajdonságai
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\int_a^b f(x) + g(x) ~ dx  = \int_a^b f(x) ~ dx + \int_a^b g(x) ~ dx
+
+\\
+
+Q_n (f + g) = 
+\sum_{i = 1}^n w_i (f(x_i) + g(x_i))  = 
+\sum_{i = 1}^n w_i f(x_i) + \sum_{i = 1}^n w_i g(x_i) = 
+Q_n(f) + Q_n(g)
+
+\\
+
+\int_a^b \alpha f(x) ~ dx  = \alpha \int_a^b f(x) ~ dx
+
+\\
+
+
+Q_n(\alpha f) = 
+\sum_{i=1}^n w_i \alpha f(x_i) = 
+\alpha \sum_{i=1}^n w_i f(x_i) = 
+\alpha Q_n(f)
+
+\\
+
+
+\int_a^b f(x) ~ dx = 
+\int_a^{z_1} f(x) ~ dx + ... + \int_{z_{m-1}}^{z_m} f(x) ~ dx + \int_{z_m}^b f(x) ~ dx
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+##### Kvadratúra-formula képlethibája
+
+<img src="https://render.githubusercontent.com/render/math?math=R_n(f)%20%3D%20%5Cint_a%5Eb%20f(x)%20~%20dx%20-%20Q_n(f)" />
+
+Ha <img src="https://render.githubusercontent.com/render/math?math=R_n(f)%20%3D%200" />, akkor a **kvadratúra-formula pontos** <img src="https://render.githubusercontent.com/render/math?math=f(x)" />-re.
+
+Kvadratúra-formula pontossági rendje az <img src="https://render.githubusercontent.com/render/math?math=r" /> természetes szám, ha az pontos az <img src="https://render.githubusercontent.com/render/math?math=1%2C%20x%2C%20x%5E2%2C%20...%2C%20x%5Er" /> hatványfüggvényekre, azaz <img src="https://render.githubusercontent.com/render/math?math=R_n(x%5Ek)%20%3D%200" /> minden <img src="https://render.githubusercontent.com/render/math?math=q%20%5Cle%20k%20%5Cle%20r" />-re, de nem pontos <img src="https://render.githubusercontent.com/render/math?math=x%5E%7Br%2B1%7D" />-re.
+
+A <img src="https://render.githubusercontent.com/render/math?math=Q_n" />, <img src="https://render.githubusercontent.com/render/math?math=n" /> alappontos kvadratúra-formula rendje legfejlebb <img src="https://render.githubusercontent.com/render/math?math=2n%20-%201" /> lehet.
+
+##### Interpolációs kvadratúra-formulák
+
+Azt mondjuk, hogy <img src="https://render.githubusercontent.com/render/math?math=Q_n(f)%20%3D%20%5Csum_%7Bi%3D1%7D%5En%20w_i%20f(x_i)" /> egy interpolációs kvadratúra-formula, ha az előáll az alappontokra felírt Lagrange polinom integrálásával:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\int_a^b f(x) ~ dx \approx 
+\int_a^b p_{n-1} (x) ~ dx = 
+\int_a^b \sum_{i = 1}^n f(x_i) L_i(x) ~ dx = 
+\sum_{i=1}^n f(x_i) \int_a^b L_i(x) ~ dx
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+ahonnan <img src="https://render.githubusercontent.com/render/math?math=w_i%20%3D%20%5Cint_a%5Eb%20L_i(x)%20~%20dx" />.
+
+> Az alappont az interpolációra, és a kvadratúrára is vonatkozik.
+
+Minden <img src="https://render.githubusercontent.com/render/math?math=n" /> alappontra épülő <img src="https://render.githubusercontent.com/render/math?math=Q_n" /> interpolációs kvadratúra-formula rendje legalább <img src="https://render.githubusercontent.com/render/math?math=n%20-%201" />.
+
+Ha egy <img src="https://render.githubusercontent.com/render/math?math=Q_n" /> kvadratúra-formula rendje legalább <img src="https://render.githubusercontent.com/render/math?math=n%20-%201" />, akkor az interpolációs kvadratúra-formula.
+
+##### Véges differenciák
+
+Ekvidisztáns alappontokat adunk meg.
+
+Szomszédos alappontok **távolsága állandó**: <img src="https://render.githubusercontent.com/render/math?math=h%20%3D%20x_%7Bi%20%2B%201%7D%20-%20x_i" />.
+
+Az interpolációs alappontok: <img src="https://render.githubusercontent.com/render/math?math=x_i%20%3D%20x_0%20%2B%20ih%2C%20i%20%3D%200%2C%20...%2C%20n-1" />
+
+Az adott <img src="https://render.githubusercontent.com/render/math?math=x_k" /> alappontokhoz és <img src="https://render.githubusercontent.com/render/math?math=f_k%20%3D%20f(x_k)" /> függvény értékekhez tartozó <img src="https://render.githubusercontent.com/render/math?math=%5CDelta%5Ei%20f_k" /> *i-edrendű véges differenciákat* a következő kettős rekurzióval definiáljuk:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\begin{align}
+\Delta^0 f_k & = f_k \\
+\Delta^i f_k & = \Delta^{i - 1} f_{k + 1} - \Delta^{i - 1} f_k
+\end{align}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Természetes számokra értelmezett binomiális együtthatók általánostásaként vezessük be a:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\binom{t}{j} = \frac{t(t - 1) ... (t-j + 1)}{j!}
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+jelölést a <img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> transzformációhoz.
+
+A véges differenciákkal felírt Lagrange interpolációs polinom:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+p_{n-1}(x_0 + th) = f_0 + \binom{t}{1} \Delta f_0 + \binom{t}{2} \Delta^2 f_0 + ... + \binom{t}{n - 1} \Delta^{n-1} f_0 = \sum_{i = 0}^{n - 1} \binom{t}{i} \Delta^i f_0
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+##### Newton-Cotes formulák
+
+Az interpolációs kvadratúra-formulák egy régi osztálya.
+
+Ekvidisztáns alappontokat használnak.
+
+> Azaz a szomszédosak közt ugyan annyi a távolság.
+
+Ha az integrál határai szerepelnek az alappontok közt, akkor *zárt-,* ha a határok nem alappontok, akkor *nyitott formuláról* beszélünk.
+
+###### Zárt formulákra összefüggések
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+h = \frac{b - a}{n - 1}, a = x_0, b = x_{n-1}, x_i = x_0 + ih ~ ~ ~ ~ 0 \le i \le n - 1
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+###### Nyitott formulákra összefüggések
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+h = \frac{b - a}{n + 1}, a = x_0 - h, b = x_{n-1} + h, x_i = x_0 + ih ~ ~ ~ ~ 0 \le i \le n - 1
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+###### <img src="https://render.githubusercontent.com/render/math?math=n" />-edik Newton-Cotes formula
+
+<img src="https://render.githubusercontent.com/render/math?math=t%20%3D%20%5Cfrac%7Bx%20-%20x_0%7D%7Bh%7D" /> új változó mellett az <img src="https://render.githubusercontent.com/render/math?math=n" />-edig Newton-Cotes formula:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\int_a^b p_{n-1} (x_0 + th) ~ dx = 
+\int_a^b \sum_{i=0}^{n-1} \binom{t}{i} \Delta^i f_0 ~ dx = 
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+> A <img src="https://render.githubusercontent.com/render/math?math=t" /> lényegében az adott változó eltolását fejezi ki az <img src="https://render.githubusercontent.com/render/math?math=x_0" />-tól.
+
+> A <img src="https://render.githubusercontent.com/render/math?math=%5CDelta%5Ei" /> véges differenciál.
+
+Ha a formula zárt:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx = 
+h \sum_{i=0}^{n - 1} \Delta^i f_0 \int_0^{n - 1} \binom{t}{i} ~ dt
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+Ha a formula nyitott:
+
+<img src="https://render.githubusercontent.com/render/math?math=" />
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx = 
+h \sum_{i=0}^{n - 1} \Delta^i f_0 \int_{-1}^{n} \binom{t}{i} ~ dt
+<img src="https://render.githubusercontent.com/render/math?math=" />
+
+###### Első négy zárt Newton-Cotes formula
+
+1. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_1%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B2%7D(f_0%20%2B%20f_1)" />: **Trapéz szabály**
+
+2. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_2%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7Bh%7D%7B3%7D(f_0%20%2B%204%20f_1%20%2B%20f_2)" />: **Simpson-szabály**
+
+3. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_3%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B3h%7D%7B8%7D(f_0%20%2B%203%20f_1%20%2B%203%20f_2%20%2B%20f_3)" />: **Simpson <img src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7B3%7D%7B8%7D" />-os szabálya**
+
+4. <img src="https://render.githubusercontent.com/render/math?math=%5Cint_%7Bx_0%7D%5E%7Bx_4%7D%20f(x)%20~%20dx%20%5Capprox%20%5Cfrac%7B2h%7D%7B45%7D(7%20f_0%20%2B%2032%20f_1%20%2B%2012%20f_2%20%2B%2032%20f_3%20%2B%207%20f_4)" />: **Bool-szabály**
+
+##### Matlabban
+
+```matlab
+function f = fxlog(x)
+f = x .* log(x);
+```
+
+A fentebbi függvény az <img src="https://render.githubusercontent.com/render/math?math=xlog(x)" /> függvényértéket kiszámoló eljárás, ennek numerikus integrálása a <img src="https://render.githubusercontent.com/render/math?math=%5B2%2C%204%5D" /> intervallumon:
+
+```matlab
+quad(@fxlog, 2, 4);
+```
+
+> Eredményül 6.7041-et logol az interpreter.
 ## Logika és informatikai alkalmazásai
 
 ### 1. Normálformák az ítéletkalkulusban, Boole-függvények teljes rendszerei. Következtető módszerek: Hilbert-kalkulus és rezolúció, ezek helyessége és teljessége.
@@ -2550,7 +3306,7 @@ Ennek a legutolsó lépésnek a belátása kicsit nehezebb:
   
   - > Modus ponens alkalmazása
 
-- Másik irány: <img src="https://render.githubusercontent.com/render/math?math=(%5CSigma%20%5Cvdash%20F)%20%5Cto%20(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)" />
+- Másik irány: $(\Sigma \vdash F) \to (\Sigma \vdash (F \to \downarrow ) \to \downarrow)$
   
   - <img src="https://render.githubusercontent.com/render/math?math=((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow%20))%20%5Cto%20(((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow%20))" />
   
@@ -2965,3 +3721,2179 @@ Különben, ha már nem tudunk több klózt lebezetni, <img src="https://render.
 > Lift lemma bizonyítása kell?
 
 - Mivel a <img src="https://render.githubusercontent.com/render/math?math=C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://render.githubusercontent.com/render/math?math=C_n%20%3D%20%5Csquare" /> kell legyen.
+# Programozási nyelvek
+
+## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
+
+### Nyelvcsoportok (paradigmák)
+
+- Imperatív, procedurális (pl.: C, C++, Pascal)
+
+- Objektum orientált (pl.: C++, Java, Smalltalk)
+
+- Applikatív, funkcionális (pl.: Haskell, ML)
+
+- Szabály alapú, logikai (pl.: Prolog, HASL)
+
+- Párhuzamos (pl.: Occam, PVM, MPI)
+
+### Imperatív programozás
+
+- Az imperatív programozás olyan programozási paradigma, amely utasításokat használ, hogy egy program állapotát megváltoztassa.
+
+- A kifejezést gyakran használják a deklaratív programozással ellentétben, amely arra összpontosít, hogy a program *mit* érjen el, anélkül, hogy meghatározná, hogy a program *hogyan* érje el az eredményt.
+
+- Azok a nyelvek, melyek az imperatív paradigmákba esnek két fő jellemzőjük van: meghatározzák a műveletek sorrendjét olyan konstrukciókkal, amelyek kifejezetten ellenőrzik ezt a sorrendet, és lehetővé tesznek olyan mellékhatásokat, amelyben az állapot módosítható egy időben, egy kód egységben, majd később egy másik időpontban olvasható egy másik kód egységén belül.
+
+- A legkorábbi imperatív nyelvek az eredeti számítógépek gépnyelvei voltak (assembly)
+  
+  - egyszerű utasítások -> könnyebb hardwares megvalósítás, de az összetett programok létrehozása nehezebb
+
+**Procedurális programozás**
+
+- A megoldandó programozási feladatot kisebb egységekből, avagy eljárásokból (angolul: procedure) építi fel
+
+- Ezek az eljárások a programnyelv kódjában általában jól körülhatárolt egységek (függvény, rutin, szubrutin, metódus – az elnevezés az adott programozási nyelvtől függ), amelyeknek van elnevezésük és jellemezhetik őket paraméterek és a visszatérési értékük.
+
+- A programok futtatása során gyakorlatilag a főprogramból ezek az eljárások kerülnek sorozatosan meghívásra. Meghíváskor meghatározott paraméterek átadására kerül sor, az eljárás pedig a benne meghatározott logika eredményeként általában valamilyen visszatérési értéket ad vissza, aminek függvényében a főprogram további eljáráshívásokat végezhet.
+
+- Az objektum orientált paradigmával szemben itt háttérbe szorulnak a komplex adatszerkezetek
+
+- Moduláris tervezés
+  
+  - Dekompozíció: adott feladat több egyszerűbb részfeladatra bontása
+  
+  - Kompozíció: meglévő programegységek újrafelhasználása
+  
+  - Érthetőség: a modulok önmagukba is egy értelmes egységet alkossanak
+  
+  - Folytonosság: a specifikáció kis változása esetén is csak kis változás legyen szükséges a programban
+  
+  - Védelem: egy hiba csak egy (vagy maximum egy pár), modul működésére legyen hatással, ezzel védve a program egészét
+
+- Modularitás alapelvei:
+  
+  - Nyelvi támogatás: a modulok külön-kölün legyenek lefordíthatók
+  
+  - Kevés kapcsolat: a modulok keveset kommunikáljanak egymással
+  
+  - Gyenge kapcsolat: ha két modulnak kommunikálnia kell egymással, akkor csak annyi információt cseréljenek, amennyi szükséges
+  
+  - Explicit interfészek: ha két modul kommunikál, akkor legalább az egyikük szövegéből ki kell hogy derüljön
+  
+  - Információ-elrejtés: egy modulnak csak az explicit módon nyilvánossá tett információit használhatjuk fel
+  
+  - Nyitott és zárt modulok
+    
+    - Zárt modul: csak változatlan formában kerülhet felhasználásra
+    
+    - Nyitott modul: kiterjeszthető, más szóval bővíthető az általa nyújtott szolgáltatások száma
+  
+  - Újrafelhasználhatóság: ugyanazokat a programeleket ne kelljen többször elkészíteni, ügyeljünk viszonylag általánosítható modulok készítésére
+  
+  - Típus változatossága: modulok működjenek többféle típusra
+  
+  - Adatszerkezetek és algoritmusok változatossága: például egy lineáris kereső eljárás működjön több féle adatszerkezetre (ezeken belül persze más-más algoritmusokkal)
+  
+  - Egy típus - egy modul: egy típus műveletei kerüljenek egy modulba
+  
+  - Reprezentáció függetlenség: egy adattípus reprezentációjának a megváltozása ne okozzon modulon kívüli változást
+
+- Procedurális programozási nyelvek pédául a *C*, *Pascal*, *FORTRAN*
+
+**Objektum orientált programozás**
+
+- Az objektum orientált programozás az objektumok fogalmán alapuló programozási paradigma
+
+- Az objektumok egységbe foglalják az adatokat és a hozzájuk tartozó műveleteket (egységbe zárás).
+
+- A program egymással kommunikáló objektumok összességéből áll.
+
+- A legtöbb objektumorientált nyelv osztály alapú, azaz az objektumok osztályok példányai, és típusuk az osztály.
+
+- Objektumok és osztályok
+  
+  - Osztályok: 
+    
+    - Az adatformátum és az elérhető metódusok definíciója az adott típus vagy a típushoz tartozó objektumok számára.
+    - Tartalmazhatnak adattagokat és metódusokat, amelyek műveleteket végeznek az osztály adattagjain. 
+    - Összetartozó adatok és függvények, eljárások egysége.
+  
+  - Objektumok: 
+    
+    - Az osztály példányai.
+    
+    - Gyakran megfeleltethetők a való élet objektumainak vagy egyedeinek.
+
+- Pár fontos fogalom:
+  
+  - Osztályváltozók: az osztályhoz tartoznak, elérhetők az osztályon, de példányokon keresztül is. Minden példány számára ugyanaz.
+  
+  -  Attribútumok: az egyedi objektumok jellemzői, minden objektumnak sajátja van.
+  
+  - Tagváltozók: az osztály- és a példányváltozók együttese
+  
+  - Osztálymetódusok: osztály szintű metódusok, csak az osztályváltozókhoz és paramétereikhez férhetnek hozzá, példányváltozókhoz nem.
+  
+  - Példánymetódusok: példány szintű metódusok, hozzáférnek az adott példány összes adatához és metódusához, és paramétereik is lehetnek.
+
+- Kompozíció, öröklődés, interfészek
+  
+  - Kompozíció: az objektumok lehetnek más objektumok mezői
+  
+  - Öröklődés:
+    
+    - Osztályok közötti alárendeltségi  viszony, majdnem minden osztály alapú nyelv támogatja
+    
+    - Ha az A osztályból örökldődik a B osztály, akkor B egyben az A osztály példánya is lesz, ezért megakpja az A osztály összes adattagját és metódusát
+    
+    - Több programozási nyelv megengedi a többszörös öröklődést
+    
+    - Egyes nyelvekben, mint a Java és a C# megtiltható a leszármazás egyes osztályokból (Javában final, C#-ban sealed a kulcsszó)
+  
+  - Interfészek:
+    
+    - Nem tartalmazhatnak megvalósítási részleteket, csak előírhatják bizonyos metódusok jelenlétét, illetve konstansokat definiálhatnak.
+    
+    - Olyan nyelvekben, ahol nincs a megvalósítások többszörös öröklődése, interfészekkel érhető el a többszörös öröklés korlátozott formája
+
+- Objektum orientált nyelvek például a *Java*, *C#*, *Python*, *Smalltalk*
+
+### Dekleratív programozás
+
+- A specifikáción van a hangsúly, funkcionális esetben a program egy függvény kiszámítása, logikai esetben a megoldás megkeresését a futtató környezetre  bízzuk
+
+- Azok a nyelvek, amely ezt a programozást használják, megpróbálják minimalizálni vagy kiküszöbölni a mellékhatásokat, úgy, hogy leírják, hogy a programnak mit kell elérnie a probléma tartományában, ahelyett, hogy a programozási nyelv primitívjeinek sorozataként írná le, hogyan kell azt megvalósítani
+
+- Deklaratív nyelvek közé tartoznak az adatbázis-lekérdezési nyelvek (pl. SQL, XQuery), a reguláris kifejezések, a logikai programozás, a funkcionális programozás és a konfigurációkezelő rendszerek
+
+**Funkcionális (applikatív)  programozás**
+
+- A funkcionális programnyelvek a programozási feladatot egy függvény kiértékelésének tekintik
+
+- Ugyanannak a feladatnak a megoldására funkcionális nyelven írt programkód általában lényegesen rövidebb, olvashatóbb és könnyebben módosítható, mint az imperatív nyelven kódolt programszöveg, mivel nem léteznek benne változók
+
+- A *rekurzió* a funkcionális programozás egyik fontos eszköze, az ismétlések és ciklusok helyett rekurziót alkalmazhatjuk.
+
+- Rekurziós függvény:
+  
+  - Rekurzív hívás mindig feltételvizsgálat  mögött
+  
+  - Rekuzív függvényt két esetre kell felkészíteni
+    
+    - Bázis eset: nem kell újra meghívnia magát
+    
+    - Rekurzív eset: Meghívja magát újra
+  
+  - Biztosítani kell, hogy mindig elérjük a bázis esetet
+  
+  - Rekurzió speciális esete: iteráció
+
+- Alapjául a Church által kidolgozott lambda-kalkulus szolgál, a tisztán funkcionális nyelvek a matematikában megszokott függvényfogalmat valósítják meg.
+  
+  - Az ilyen programozás során a megoldandó feladatnál az eredményhez vezető út nem is biztosan ismert, a program végrehajtásához csupán az eredmény pontos definíciója szükséges.
+  
+  - Tisztán funkcionális programozás esetén tehát nincs állapot és nincs értékadás.
+
+- Funkcionális nyelvek például a *Haskell* és *Scala*
+
+**Logikai programozás**
+
+- A logikai program egy modellre vonatkozó állítások (*axiómák*) egy sorozata
+
+- Az állítások a modell objektumainak tulajdonságait és kapcsolatait, szaknyelven *relációit* írják le
+
+- Az állítások egy adott relációt meghatározó részhalmazát predikátumnak nevezzük
+  
+  - A program futása minden esetben egy az állításokból következő tétel konstruktív bizonyítása, azaz a programnak feltett *kérdés* vagy más néven *cél* megválaszolása
+
+- Az első logikai programozási nyelv a Prolog volt
+  
+  - Egy Prolog program csak az adatokat és az összefüggéseket tartalmazza. 
+    Kérdések hatására a  “programvégrehajtást” beépített  következtető-rendszer végzi
+  
+  - Programozás Prologban:
+    
+    - Objektumok és azokon értelmezett relációk megadása
+    
+    - Kérdések megfogalmazása a relációkkal kapcsolatban
+  
+  - A programnak meg kell adnunk egy célformulát (célklózt), ezután a program ellenőrzi, hogy a célklóz a logikai (forrás)program logikai következményei közt van-e
+  
+  - Gyakran használják mesterségesintelligencia-alkalmazások megvalósítására, illetve a számítógépes nyelvészet eszközeként
+
+### Párhuzamos programozás
+
+- Egyszerre több szálon történik a  végrehajtás
+
+- Végrehajtási szál: folyamat (process)
+
+- Előnyei:
+  
+  - Természetes kifejezésmód
+  
+  - Sebességnövekedés megfelelő hardver  esetén
+
+- Hátrányai
+  
+  - Bonyolultabb a szekvenciálisnál
+
+- A párhuzamos programok alapvetően nem determinisztikusak
+
+- Sokféle párhuzamos programozási  modell van
+
+- Közös problémák:
+  
+  - Adathozzáférés folyamatokból
+    
+    - Közös memória (shared memory)
+    
+    - Osztott memória (distributed memory) +  kommunikáció
+  
+  - Folyamatok létrehozása, megszüntetése,  kezelése
+  
+  - Folyamatok együttműködése (interakciója)
+    
+    - Független
+    
+    - Erőforrásokért versengő
+
+- A párhuzamos program:
+  
+  - Sebességfüggő: a folyamatok relatív  sebessége minden futáskor más lehet
+  
+  - Nemdeterminisztikus: ugyanarra az  inputra különböző output
+  
+  - Holtpont (deadlock): kölcsönös  egymásra várakozás
+  
+  - Éhezés (starvation): Nincs holtpont,  egy folyamat mégsem jut hozzá az  erőforrásokhoz
+
+- Occam
+  
+  - Imperatív, folyamatok saját  memóriával rendelkeznek,  üzenetküldéssel kommunikálnak
+  
+  - Occam program részei:
+    
+    - Változók
+    
+    - Folyamatok
+      
+      - Elindul -> csinál valamit -> befejeződik (terminál)
+      
+      - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell 
+        fordítani
+      
+      - Elemi és összetett folyamato
+    
+    - Csatornák: két folyamat közötti adatátvitelre szolgál
+# Rendszerfejlesztés 1.
+
+## 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
+
+### A szoftverfejlesztés folyamata
+
+- **_A szofverfolyamat_**: tevékenységek és kapcsolódó eredmények, amely során elkészítjük a szoftvert
+
+- A folyamat összetett, kreatív munka kell hozzá
+
+- Csak korlátozott automatizálás
+
+- Nincs ideális folyamat, viszont modellek léteznek
+
+- Minden folyamat egyedi, sokszor kombinációkat használnak
+
+**Folyamat szerepe**:
+
+- Szoftverfejlesztés = folyamat +menedzsment + technikai módszerek + eszközök használata
+
+- Minőségi szoftver biztosítéka
+
+- Folyamat meggátolja hogy elveszítsük az uralmat a projekt felet
+
+- Adaptálás adott projekthez és környezethez
+
+**Folyamat elemek:**
+
+- Fő elemek
+  
+  - Feladatok, termékek
+  
+  - Határidők, átadandók
+
+- Kiegészítő elemek
+  
+  - Projektmenedzsment
+  
+  - Konfigurációmenedzsment
+  
+  - Dokumentáció
+  
+  - Minőségbiztosítás, kockázatmenedzsment
+  
+  - Mérés
+
+**Folyamat fejlettsége**
+
+- Egy szervezetnél alkalmazott folyamat minősítése meghatározhatja a megrendelők bizalmát
+
+- SEI CMM(I) (Capability Maturity Model Integration)
+
+- _Szintjei:_
+  
+  - Kezdeti
+  
+  - Reprodukálható
+  
+  - Definiált
+  
+  - Ellenőrzöt
+  
+  - Optimalizált
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Characteristics_of_Capability_Maturity_Model.svg/1280px-Characteristics_of_Capability_Maturity_Model.svg.png" title="" alt="" width="438">
+
+**A szoftverfolyamat fázisai**
+
+- Minden folyamatnak elemei:
+  
+  - **Specifikáció**: szoftver funkcionalitása, megszorítások („mit”)
+  
+  - **Fejlesztés**: tervezés és implementáció specifikáció alapján („hogyan”)
+  
+  - **Verifikáció és Validáció**: fejlesztés megfelel-e a specifikációnak és a követelményeknek
+  
+  - **Evolúció**: változás kezelése, szoftver „utóélete”
+
+- **Specifikáció**
+  
+  - Szoftver definiálása
+    
+    - Milyen funkciókat, szolgáltatásokat követelünk meg a rendszertől
+    
+    - Követelménytervezés
+  
+  - Kritikus szakasz: itt a legkisebb a változtatások költsége
+  
+  - Eredmény: követelményspecifikáció dokumentum, esetleg prototípusok
+    
+    - Végfelhasználónak: magas szintű
+    
+    - Fejlesztőknek: részletes, technikai
+
+- **Követelménytervezés fázisai**
+  
+  - Megvalósíthatósági tanulmány (feasibility study)
+  
+  - Költséghatékonyság ellenőrzése
+  
+  - Követelmények feltárása és elemzése:
+    
+    - Rendszermodellek, prototípusok
+  
+  - Követelményspecifikáció: Egységes dokumentum
+  
+  - Követelmény validáció
+
+- **Tervezés**
+  
+  - Szoftver struktúrája, adatok, interfészek
+  - Rendszermodellek különböző absztrakciós szinteken
+  - _Tevékenységei:_
+    - Architektúra tervezés: alrendszerek meghatározása
+    - Absztrakt specifikáció: alrendszerek szolgáltatásai
+    - Interfész tervezés: alrendszerek között
+  - Komponens tervezése
+  - Részletek: adatszerkezetek, algoritmusok
+  - Gyakorlati folyamatok speciálisan definiálják ezeket
+
+- **Tervezési módszerek**
+  
+  - Ad hoc (átfogó rendezés nélkül)
+  
+  - Strukturált
+    
+    - Structured Design (SD)
+    
+    - SSADM
+    
+    - Jackson
+  
+  - Objektumorientált
+    
+    - pl.: UML (Unified Modeling Language, szabványos, általános célú modellező nyelv, üzleti elemzők, rendszertervezők, szoftvermérnökök számára)
+  
+  - Közös: grafikus rendszermodellek, szabványos jelölésrendszer, CASE (Computer Aided Software Engineering) támogatás
+
+- **Implementáció**
+  
+  - Programozás és nyomkövetés
+  
+  - kritikus rendszereknél részletes tervezés alapján
+  
+  - Programozás (kódolás): adottság kell hozzá, személyes technikák, stílusok
+  
+  - Minőségbiztosítás érdekében kódolási stílust lehet megkövetelni
+  
+  - Nyomkövetés (debugging): hiba lokalizálás, eltávolítás, újratesztelés, programszöveg manuális vizsgálata, eszköztámogatás
+
+- **Szoftver validáció**
+  
+  - Verifikáció és validáció (V & V): Rendszer megfelel-e a specifikációnak, és a megrendelő elvárásainak
+  
+  - Tesztelés különböző szinteken történik, inkrementálisan
+    
+    - Egység tesztelése (unit test): komponensek független tesztelése, programozó feladata
+    
+    - Modul tesztelése: függő és kapcsolódó komponenseket együtt, szintén a programozó feladata
+    
+    - Alrendszer tesztelése: például interfészek illeszkedése, független tesztelő csapat feladata
+    
+    - Rendszer tesztelése: előre nem várt kölcsönhatások felfedezése, validáció
+      specifikációhoz tesztadatokon, független tesztelő csapat
+    
+    - Átvételi tesztelés: megrendelő adataival, valós környezetben, alfa tesztelés (fejlesztő vagy teszt csapat végzi)
+    
+    - Béta tesztelés: potenciális vásárlók által tesztelt, előre nem látható hibák keresése
+
+- **Evolúció**
+  
+  - Szoftver flexibilitás miatt nagy, összetett rendszerek születnek
+  
+  - Változás bár költséges, de
+    
+    - Eredményesebb meglévő rendszerekből kialakítani az újat
+    
+    - Kevés a teljesen új szoftver
+    
+    - Egy szoftver sosincs kész
+  
+  - Követelményspecifikáció után a meglévő rendszereket kiértékeljük
+    
+    - Manuális vizsgálat
+    
+    - Automatikus elemzés (reverse engineering)
+    
+    - Kimenet: dokumentáció, magasabb szintű rendszermodell
+  
+  - Rendszermódosítások után jön létre az „új” rendszer
+    
+    - Újratervezés (re-engineering)
+    
+    - Folyamatos evolúció (roundtrip engineering)
+
+### A folyamat modelljei
+
+#### Kategóriák
+
+- Triviális: lineáris, vízesés
+  
+  - Tevékenységek különálló fázisok
+  
+  - Iteratív modellek: prototípus, vízesés, RAD
+
+- Evolúciós: prototípusok gyors gyártása, finomítása
+
+- Formális módszerek: matematikai rendszer, transzformációk
+
+- Újrafelhasználható, komponens alapú
+
+#### **Vízesés modell**
+
+- Első publikált, „klasszikus” modell (életciklus modell)
+
+- Lényegében egy szekvenciális modell
+  
+  - Fázisok lépcsősen kapcsolódnak
+  
+  - Visszacsatolás is van
+
+- Fázisok kimenetei teljesen el kell, hogy készüljenek, mielőtt továbbmegyünk
+  
+  - A hibákat összegyűjtik a fázisok végén
+  
+  - Javításra a folyamat végén van lehetőség
+  
+  - Iteráció közvetve van jelen
+
+- Ha jó a specifikáció, akkor működőképes
+
+![](../img/2022-05-03-20-42-12-image.png)
+
+- Problémái
+  
+  - Ritkán van egyszerű lineáris fejlesztés
+  
+  - Követelményeket nehéz pontosan specifikálni a legelején
+  
+  - A megrendelő csak a legvégén látja meg először a terméket
+    
+    - Sok hiba ekkor derül ki, melyek javítási költsége nagy
+
+- Előnye: megrendelő könnyebben tud megállapodni, mert a specifikáció pontos (Viszont nehezen módosítható szoftver alakul ki)
+
+#### **_Iteráció, inkrementalitás_**
+
+- Folyamat iterációja elkerülhetetlen
+  
+  - Ha a követelmények változnak, akkor a folyamat bizonyos részeit is változtatni kell
+
+- Iteráció szélsőséges esetei:
+  
+  - Vízesés modellnél minimális lehetőség
+  
+  - Prototípus (vagy evolúciós) modellnél minimális a specifikáció, fejlesztésben sok iteráció van, és menet közben alakul ki a végleges specifikáció
+
+#### _Evolúciós fejlesztés_
+
+- Prototípus modell: az evolúciós fejlesztés egy szélsőséges iteratív+inkrementális példája
+  
+  - Durva specifikáció megrendelő részéről
+  
+  - Ezután gyors fejlesztés, eredménye prototípus
+  
+  - Prototípus kiértékelése után követelményspecifikáció újraíródik
+  
+  - Sok-sok iteráció a végtermékig
+
+- Nagy dilemma: a prototípusból lesz-e a végtermék, vagy az csak eldobható
+
+- Intenzív kapcsolat kell a megrendelővel
+
+- Kész komponensek alkalmazása előnyös
+
+- Prototípus modell problémái:
+  
+  - A megrendelő azt gondolja, hogy a prototípus kész rendszer, nehéz ellenállni, hogy ne használja
+  
+  - Gyors fejlesztés miatt minőség romolhat, kevésbé hatékony megoldások alkalmazása miatt, amik beépülhetnek a végső rendszerbe
+  
+  - Megrendelő sokszor vállalja a rizikókat, mert:ű
+    
+    - Szeret „belelátni” a fejlesztésbe
+    
+    - Kezdetben pontosan tudja, hogy mit szeretne, de a részletekről fogalma sincs
+  
+  - Hibrid megoldások kellenek, vízesés modellel
+
+#### Inkrementális modell
+
+- Vízesés és evolúciós fejlesztés kombinációja (robosztusság és felxibilitás)
+
+- Nagy körvonalakban specifikáljuk a rendszert
+  
+  - „Inkremensek” meghatározása
+  
+  - Funkcionalitásokhoz prioritásokat rendelünk
+  
+  - Magasabbakat előbb kell biztosítani
+
+- Architektúrát meg kell határozni
+
+- További inkremensek pontos specifikálása menet közben történik
+
+- Egyes inkremensek kifejlesztése történhet akár különböző folyamatokkal is (vízesés vagy evolúciós, amelyik jobb)
+
+- Az elkészült inkremenseket akár szolgálatba is lehet állítani
+  
+  - Tapasztalatok alapján lehet meghatározni a következő inkremenseket
+
+- Az új inkremenseket integrálni kell a már meglévőkkel
+
+- Előnyei:
+  
+  - A szoftver már menet közben használható
+  
+  - Korábbi inkremensek prototípusként használhatók, a későbbi követelmények pontosítása érdekében
+  
+  - Ha határidő csúszás van kilátásban, inkrementális modell bevethető
+    
+    - Teljes projekt nem lesz kudarcra ítélve, esetleg csak egyes inkremensek
+  
+  - A legfontosabb inkremensek lesznek többször tesztelve (mivel azokkal kezdtük a megvalósítást)
+
+- Hátrányai:
+  
+  - Megfelelő méretű inkremensek meghatározása nem triviális feladat
+    
+    - Ha túl kicsi: nem működőképes
+    
+    - Ha túl nagy: elveszítjük a modell lényegét
+  
+  - Bizonyos esetekben számos alapvető funkcionalitást kell megvalósítani
+    
+    - Egész addig nincs működő inkremens
+    
+    - Csak akkor pörög be a rendszer, ha minden összeállt
+
+#### eXtreme Programming (XP)
+
+- Szélsőséges inkrementális modell
+  
+  - Nagyon kis funkcionalitású inkremensek
+  
+  - Megrendelő intenzív részvétele
+
+- Programozás csoportos tevékenység (többen ülnek egy képernyő előtt)
+
+- Az utóbbi időben sok kiegészítés készül, sajnos kezdi kinőni az eredeti elképzelést
+
+- Sok támadója van
+
+#### RAD
+
+- Rapid Application Development
+
+- Extrém rövid életciklus (Működő rendszer 60-90 nap alatt)
+
+- Vízesés modell „nagysebességű” adaptálása
+  
+  - Párhuzamos fejlesztés
+  
+  - Komponens alapú fejlesztés
+
+- Fázisok:
+  
+  - Üzleti modellezés: milyen információk áramlanak funkciók között
+  
+  - Adatmodellezés: finomítás adatszerkezetekre
+  
+  - Adatfolyam processzus: adatmodell megvalósítása
+  
+  - Alkalmazás generálás: 4GT (negyedik generációs technikák) alkalmazása, automatikus generálás, komponensek
+  
+  - Tesztelés: csak komponens tesztelés
+
+- Problémái:
+  
+  - Nagy emberi erőforrásigény
+  
+  - Fejlesztők és megrendelők intenzív együttműködése
+  
+  - Nem minden típusú fejlesztésnél alkalmazható
+    
+    - Modularizálhatóság hiánya problémát jelenthet
+
+#### Spirális modell
+
+- Olyan evolúciós modell, amely kombinálja a prototípus modellt a vízesés modellel
+
+- Inkrementális modellhez hasonló, csak általánosabb megfogalmazásban
+
+- Nincsenek rögzített fázisok, mindig egyedi modellek
+
+- Más modelleket ölelhet fel, pl.:
+  
+  - Prototípuskészítés pontatlan követelmények esetén
+  
+  - Vízesés modell egy későbbi körben
+  
+  - Kritikus részek esetén formális módszerek
+
+- A spirál körei a folyamat egy-egy fázisát reprezentálják
+
+- Minden körben a kimenet egy „release” (modell vagy szoftver)
+
+- Körök céljai pl.:
+  
+  - Megvalósíthatóság (elvi prototípusok)
+  
+  - Követelmények meghatározása (prototípusok)
+  
+  - Tervezés (modellek és inkremensek)
+  
+  - (javítás, karbantartás, stb.)
+
+- A körök szektorokra oszthatók (3-6 db)
+  
+  - 4 szektorral:
+    
+    - Célok kijelölése
+    
+    - Kockázat becslése és csökkentése
+    
+    - Fejlesztés és validálás
+    
+    - Következő spirálkör megtervezése
+  
+  - 6 szektorral:
+    
+    - Kommunikáció megrendelővel
+    
+    - Tervezés
+    
+    - Kockázatelemzés
+    
+    - Fejlesztés
+    
+    - Megvalósítás és telepítés
+    
+    - Kiértékelés megrendelő részéről
+
+#### Újrafelhasználás-orientált
+
+- Komponens alapú fejlesztés
+  
+  - Elérhető, újrafelhasználható komponensek
+  
+  - Ezek integrációja
+
+- Hagyományos modellekkel megegyezik
+  
+  - Követelményspecifikáció és validáció
+
+- Közte levő fázisok eltérnek
+  
+  - Komponens elemzés
+  
+  - Követelménymódosítás
+  
+  - Rendszertervezés újrafelhasználással
+  
+  - Fejlesztés és integráció
+
+- Előnyök:
+  
+  - Kevesebb fejlesztendő komponens, csökken a költség
+  
+  - Gyorsabb leszállítás
+
+- Hátrányok
+  
+  - Kompromisszumok követelményekkel szemben
+  
+  - Evolúció során a felhasznált komponensek új verziói már nem integrálhatók
+
+- Objektumorientált paradigma jó alap
+  
+  - UML használata
+  
+  - Rational Unified Process (RUP) egy iteratív, inkrementális és komponens
+    alapú folyamat
+
+#### **_Formális módszerek_**
+
+- Vízesés modellre hasonlít
+  
+  - Specifikáció: formális, matematikai apparátus
+  
+  - Kidolgozás: ekvivalens transzformációk
+  
+  - Verifikáció: hagyományos értelemben nem szükséges
+
+- Kisebb lépésekből áll, amelyek finomítják az egyes formális modelleket, így könnyebb a formális bizonyítás
+
+- Speciális területeken alkalmazható (Pl. kritikus (al)rendszereknél, ahol elvárt a bizonyítottság)
+
+- Kölcsönhatások nem mindig formalizálhatók
+
+#### Cleanroom módszer
+
+- Fejlesszünk (bizonyítottan) hibátlanul és akkor nem kell tesztelni
+
+- Csak rendszertesztelés kell, modulhelyesség bizonyított
+
+- Az egyik legismertebb formális módszer
+
+- Inkrementális fejlesztésen alapul
+
+- Fejlesztőeszközök egyszerűbbek, szigorúbbak (Pl. csak strukturált programnyelvek)
+
+- Dobozokkal reprezentálják a rendszert
+
+- Képzett, elkötelezett tervezők
+
+#### 4GT
+
+- Negyedik generációs technikák
+
+- Magas szintű reprezentáció (absztrakció)
+  
+  - 4G (vizuális) nyelvek, grafikus jelölés
+  
+  - Automatikus kódgenerálás
+
+- Vizuális eszközök: adatbázis lekérés, riportgyártás, adatmanipuláció, GUI, táblázatkezelés, HTML-oldalak, web, stb.
+
+- Előnyei:
+  
+  - Rövidebb fejlesztési idő
+  
+  - Jobb produktivitás
+  
+  - Kis és közepes alkalmazásoknál jó
+
+- Hátrányai:
+  
+  - Vizuális nyelvet nem könnyebb használni
+  
+  - Generált kód nem hatékony
+  
+  - Karbantarthatóság rosszabb
+  
+  - Nagy alkalmazásoknál nem előnyös
+
+- Komponens alapú technikával alkalmazva még jobb
+
+#### **_Egyéb (aktuális) modellek_**
+
+- Kliens/szerver modell
+  
+  - Kliens adatokat/szolgáltatást kér, szerver szolgáltatja
+
+- Web fejlesztés
+  
+  - Hagyományos módszerek + kliens/szerver + 4GT + OO + komponensek
+  
+  - Web tartalom és design tervezés is ide tartozik
+
+- Nyílt forráskódú fejlesztés
+  
+  - Ad hoc fejlesztés
+  
+  - Fejlesztési ütemezés, költségvetés nem definiált
+  
+  - Nem strukturált folyamat
+  
+  - Közösségi ellenőrzés
+  
+  - Bizalmatlanság megbízhatóság terén
+    
+    - Nyílt forráskód, bárki mérheti a minőséget és javíthat
+    
+    - Nem feltétlenül jobb a kereskedelmi termék
+  
+  - Sokszor ingyenes licensz
+
+## 2. Projektmenedzsment. Költségbecslés, szoftvermérés
+
+### Projektmenedzsment
+
+#### **Tényezők (4P)**
+
+- **Munkatársak (people)** – a sikeres projekt legfontosabb tényezői
+
+- **Termék (product)** – a létrehozandó termék
+
+- **Folyamat (process)** – a feladatok, tevékenységek halmaza a munka elvégzése során
+
+- **Projekt** – minden olyan tevékenység, ami kell ahhoz, hogy a termék létrejöjjön
+
+#### Projekt sikertelenségének okai
+
+- Nem reális a határidők megválasztása
+
+- A felhasználói követelmények változnak
+
+- A szükséges ráfordítások alulbecslése
+
+- Kockázati tényezők
+
+- Technikai nehézségek
+
+- A projekt csapatban nem megfelelő a kommunikáció
+
+- A projekt menedzsment hibái
+
+#### Emberek menedzselése
+
+- Szoftverfejlesztő szervezet legnagyobb vagyona az emberek
+  
+  - Szellemi tőke
+  
+  - Lehető legjobban kamatozzon!
+
+- Sok projekt bukásának legfőbb oka a rossz humánmenedzsment
+
+- Egyik legfontosabb feladat az emberek motivációja
+  
+  - Szociális szükségletek, megbecsülés, önmegvalósítás igénye
+
+**Csoportmunka**
+
+- Valódi szoftvereket 2-1000 fős csapatok készítik (team)
+
+- Hatékony együttműködés fontos
+  
+  - Csapatszellemet kell kialakítani (csoport sikere fontosabb mint az egyéné)
+  
+  - Csoportépítés (pl.: szociális tevékenységek)
+
+- Munkakörnyezet fontos (közös és privát területek fontosak)
+
+- Befolyásoló tényezők:
+  
+  - Csoport összetétele
+    
+    - egymást kiegészítő személyiségek
+    
+    - nemkívánatos vezető végzetes lehet
+  
+  - Csoportösszetartás (pl.: csoportos programozás)
+  
+  - Csoportkommunikáció
+  
+  - Csoport szerkezete
+    
+    - informális szervezés
+    
+    - vezető programozó-csoport: kell tartalék programozó és adminisztrátor is
+
+**Csapatfelépítés szempontjai**
+
+- A megoldandó probléma nehézsége
+
+- A programok mérete (LOC vagy funkciópont)
+
+- A team működésének időtartama
+
+- A feladat modularizálhatósága
+
+- A létrehozandó rendszer minőségi és megbízhatósági követelményei
+
+- Az átadási határidők szigorúsága
+
+- A projekt kommunikációs igénye
+
+- Csapatfelépítés lehet,
+  
+  - **Zárt forma** – hagyományos strukturális felépítés
+  
+  - **Véletlenszerű forma** – laza szerkezet,egyedi kezdeményezések a döntőek
+  
+  - **Nyitott forma** – a zárt és a véletlenszerű paradigma előnyeinek kombinálás
+  
+  - **Szinkronizált forma** – az adott probléma felosztása szerint történik a team szervezése, egyes csoportok között kevés kommunikáció van
+
+**Emberek kiválasztása**
+
+- Különböző tesztekkel történhet
+  
+  - Programozási képesség
+  
+  - Pszichometrikus tesztek
+
+- Sok tényező: alkalmazási terület, platform, programozási nyelv, kommunikációs készség, személyiség, stb.
+
+- Szakmai karrier megállhat egy szinten, ha vezetői szerepkört kap
+  
+  - Azonos értékű kell hogy legyen a szakember és a vezető!
+
+#### Termék (product)
+
+- Szoftver hatásköre
+  
+  - Környezet
+  
+  - Input-output objektumok
+
+- Probléma dekompozíció
+
+#### Folyamat (process)
+
+- A megfelelő folyamat kiválasztása
+
+- Előzetes projekt terv
+
+- 4CPF (common process framework)
+  
+  - Felhasználói kommunikáció
+  
+  - Tervezés
+  
+  - Kockázat analízis
+  
+  - Fejlesztés
+  
+  - Release
+  
+  - Felhasználói kiértékelés
+
+### **Szoftverköltség becslése**
+
+- Projekt tevékenységeinek kapcsolódása a munka-, idő- és pénzköltségekhez
+
+- Becsléseket lehet és kell adni
+  
+  - Folyamatosan frissíteni
+
+- Projekt összköltsége:
+  
+  - Hardver és szoftver költség karbantartással
+  
+  - Utazási és képzési költség
+  
+  - Munkaköltség
+
+**Projekt**
+
+- W5HH módszer
+  
+  - Miért fejlesztjük a rendszert? (why?)
+  
+  - Mit fog csinálni? (what?)
+  
+  - Mikorra? (when?)
+  
+  - Ki a felelős egy funkcióért? (who?)
+  
+  - Hol helyezkednek el a felelősök? (where?)
+  
+  - Hogyan megy a technikai és menedzsment munka? (how?)
+  
+  - Mennyi erőforrás szükséges? (how much?)
+
+- Szoftver projekt tervezésénél meg kell becsülni:
+  
+  - Mennyi pénz?
+  
+  - Mennyi ráfordítás?
+  
+  - Mennyi idő?
+
+**Munkaköltség**
+
+- Legjelentősebb
+
+- Fejlesztők fizetése, kisegító személyzet fizetése, bérleti díj, rezsi, infrastruktúra, szórakozás, adó, stb.
+
+**Termelékenység**
+
+- Ipari rendszerben a legyártott egységek száma / emberórák
+
+- Szoftvernél nehézkes
+  
+  - Egyik kód hatékony, a másik karbantartható, stb.
+
+- Ezért mérik a szoftver valamely jellemzőjét (metrika)
+
+- Két típus:
+  
+  - Méret-alapú (pl. programsorok száma)
+  
+  - Funkció-alapú (funkciópont, objektumpont)
+
+**Méret alapú mérés**
+
+- LOC = Lines Of Code
+
+- Több technika
+  
+  - Csak nem üres sorok
+  
+  - Csak végrehajtható sorok
+  
+  - Dokumentáció mérete
+
+- Félrevezető lehet (különböző nyelveken ugyanaz a funkcionalítás mint)
+
+**Funkciópont számítás**
+
+- Jobb, de nehezebben határozható meg
+
+- Nyelv független
+
+- Rendszer funkcionalitásának „mennyisége”
+
+- Több programjellemző súlyozott kombinációja
+  
+  - Külső bemenetek és kimenetek
+  
+  - Felhasználói interaktivitás
+  
+  - Külső interfészek
+  
+  - Használt állományok
+
+- Vannak további módosító tényezők
+  
+  - Projekt összetettsége
+  
+  - Teljesítmény
+  
+  - Ezek nagyon szubjektívek
+
+- Sorok átlagos száma
+  
+  - Assembly: 200-300 LOC/FP
+  
+  - 4GL(negyedik generációs prog nyelv): 22-40 LOC/FP
+
+**Objektumpontok**
+
+- Nem az osztályok vagy objektumok száma!
+
+- 4GL nyelvekhez
+
+- Súlyozott becslés:
+  
+  - Megjelenítendő képernyők száma (1-3 pont)
+  
+  - Elkészített jelentések száma (2-8 pont)
+  
+  - 3GL modulok száma (modulonként 10 pont)
+
+**Dekompozíciós technikák**
+
+- Szoftver méret (ennek meghatározása a legfontosabb)
+  
+  - Fuzzy-logic: approximációs döntési lépések
+  
+  - FP méret
+  
+  - Szabványos komponens méretek használata
+  
+  - Változás alapú méret (létező komponenseket módosítunk)
+
+- Probléma alapú becslés
+  
+  - Funkciókra való bontás a lényeges
+  
+  - „Baseline” metrikák (alkalmazás specifikus)
+  
+  - LOC becslés - dekompozíció a funkciókra
+  
+  - FP becslés - dekompozíció az alkalmazás jellemzőire koncentrál
+
+- 4Folyamat alapú becslés
+  
+  - Meghatározzuk a funkciókat
+  
+  - Minden funkcióhoz megadjuk a végrehajtandó feladatokat
+  
+  - A feladatokra becsüljük a feladatok költségeit
+
+**Tapasztalati becslés modellek**
+
+- Erősen alkalmazás-függő
+
+- Több féle számítási modell, pl:
+  
+  <img src="../img/2022-05-04-21-39-59-image.png" title="" alt="" width="224">
+
+- COCOMO modell (Constructive Cost Model)
+  
+  - Iparban a COCOMO 2 használt
+  
+  - Regressziós modell, LOC-on alapul
+  
+  - Feladatok nehézsége be van sorolva, feladathoz szükséges idő megbecsülve
+
+- Dinamikus modell
+
+<img title="" src="../img/2022-05-04-21-48-00-image.png" alt="" width="217">
+
+**A szoftverminőség**
+
+- Mindenki célja: termék vagy szolgáltatás minőségének magas szinten tartása
+
+- Nem egyszerű definiálni itt, a felhasználó igényeinek (a specifikációnak) és a fejlesztők igényeinek (pl.: karbantarthatóság) is eleget kell tennie
+
+**CMM(I): a szoftver folyamat mérése**
+
+- Capability Maturity Model (Integration)
+
+- Cél: a szoftverfejlesztési folyamat hatékonyságának mérése
+
+- Egy szervezet megkaphatja valamely szintű minősítését
+
+- 5 besorolási szint (a fölsőbb szintek magába foglalják az alsókat)
+  
+  - Kezdeti: csak néhány folyamat definiált, a többségük esetleges (Alapszint)
+  
+  - Reprodukálható: az alapvető projekt menedzsment folyamatok definiáltak. Költség, ütemezés, funkcionalitás kezelése megoldott és megismételhető. (Bevésési szint)
+  
+  - Definiált: a menedzsment és a fejlesztés folyamatai is dokumentáltak és szabványosítottak az egész szervezetre. (Véglegesítési szint)
+  
+  - Ellenőrzött: a szoftver folyamat és termék minőségének részletes mérése, ellenőrzése. (Bevezetési szint)
+  
+  - Optimalizált:  a folyamatok folytonos javítása az új
+    technológiák ellenőrzött bevezetésével (Optimalizálási szint)
+
+- A nagyobb szinteknél teljesülni kell a korábbi szintek követelményeinek is
+
+**Konfigurációkezelés**
+
+- A rendszer változásainak kezelése
+  
+  - Változások felügyelt módon történjenek
+  
+  - Eljárások és szabványok fejlesztése és alkalmazása
+
+- Fejlesztés, evolúció, karbantartás miatt van rá szükség
+
+- Sokszor hiba-követéssel egybekötött
+
+- Verziók kezelése
+
+**Változások forrásai**
+
+- Új piaci feltételek
+
+- Vásárló, megrendelő új követelménye
+
+- Szervezet újraszervezése (pl. felvásárlás)
+
+- Új platform támogatása
+
+**Hibamenedzsment**
+
+- Hiba-követés
+  
+  - Fontos, mert sok hiba van/lesz: kategorizálás, prioritások
+    felállítása, követés elengedhetetlen
+  
+  - Hibaadatbázis, minden hibának egyedi aonosító
+  
+  - Számon van tartva a hiba felvevője, a hiba súlyossága, meg van-e javítva stb.
+  
+  - Fontos a hiba életútjának rögzítése
+
+- Általánosabb: változtatás-menedzsment
+  
+  - CR (change request) adatbázis nyilvántartása
+
+### Szoftvermérés, metrikák
+
+- **Szoftvermérés**: termék vagy folyamat valamely jellemzőjét numerikusan kifejezni (metrika)
+  
+  - Ezen értékekből következtetések vonhatók le a minőségre vonatkozóan
+
+- Szisztematikus szoftvermérés még nem elterjedt
+  
+  - Mérési eredmény használata még nem kiforrott
+  
+  - Mérés szabványosításának (metrikák, eszközök) hiánya
+
+- Metrikák két csoportja:
+  
+  - **Vezérlési metrikák**: Folyamattal kapcsolatosak, pl. egy hiba javításához szükséges átlagos idő
+  
+  - **Prediktor metrikák**: Termékkel kapcsolatosak, pl. LOC, ciklomatikus komplexitás, osztály metódusainak száma
+
+- Mindkettő befolyásolja a vezetői döntéshozatalt
+
+**Minőségi jellemzők mérése**
+
+- Jellemzőket lehetetlen közvetlenül mérni
+  
+  - Magasabb szintű absztrakciók, sok mindentől függnek
+  
+  - Hierarchikus összetétel (jellemzők származtatása)
+  
+  - Sokszor szervezet- vagy termékfüggő
+  
+  - Több metrika együttes vizsgálata
+  
+  - Metrikák változása az idő függvényében
+  
+  - Statisztikai technikák alkalmazása
+
+- Metrikák (belső jellemző) és (külső) jellemzők közötti kapcsolatokra fel kell állítani egy modellt (Sok projekt esettanulmányának vizsgálata)
+
+- Példa jellemző származtatásra:
+  
+  <img src="../img/2022-05-06-18-25-06-image.png" title="" alt="" width="399">
+
+**Mérési folyamat**
+
+1. Alkalmazandó mérések kiválasztása
+
+2. Mérni kívánt komponensek kiválasztása
+
+3. Mérés (metrika számítás)
+
+4. Magasabb szintű jellemző meghatározása modell alapján
+
+5. Rendellenes értékek összehasonlítása (korábbi mérésekkel szemben)
+
+6. Rendellenes komponensek részletes vizsgálata
+
+**Termékmetrikák**
+
+- Dinamikus
+  
+  - Szorosabb kapcsolat egyes minőségi jellemzőkkel
+
+- Statikus
+  
+  - Közvetett kapcsolat
+
+- Fajták:
+  
+  - Méret
+  
+  - Komplexitás, csatolás, kohézió
+  
+  - Objektumorientáltsággal kapcsolatos metrikák
+  
+  - Rossz előjelek, tervezési, kódolási problémák száma
+
+**Tesztelés „mérése” és fejlesztése**
+
+- Tesztelési környezet is minőségvizsgálatra szorul
+
+- Metrikák, amiket definiálhatunk:
+  
+  - Lefedettség: adott változtatás hány %-át érintik a tesztek
+  
+  - Regressziós teszt hatékonysága
+  
+  - Tesztesetek redundanciája
+
+- Tesztelési/fejlesztési költségek becsülhetővé válnak
+
+- Súlyos összegek takaríthatók meg
+
+**Folyamat és projekt metrikák**
+
+- Folyamat mutatók: az aktuálsi folyamat hatékonysága
+
+- Projekt mutatók: a jelenlegi projekt státusza
+
+- A mérések alapján becsléseket készíthetünk (költség, ütemezés, minőség)
+
+- A metrika olyan mutató, ami bepillantást nyújt a szoftver folyamatba (projektbe)
+
+**Szoftverfolyamat javítása**
+
+- Az alapvető cél a minőség és a hatékonyság növelése
+
+- A technológia és a termékek bonyolultsága is befolyásoló tényező
+
+- A minőség és hatékonyság szempontjából a legfontosabb tényező a munkatársak képzettsége és motiváltsága
+
+- Személyes metrikák
+  
+  - Hiba riportok
+  
+  - Sorok száma modulonként
+  
+  - PSP (Personal Software Process) – személyre szabott folyamat
+
+- Publikus metrikák: projekt szinten összegzett metrikák
+
+- Hiba analízis
+  
+  - hibák forrása, javítási költségeik, kategórizálásuk stb.
+
+**Projekt metrikák**
+
+- Régi projektek mérési adatait használjuk új projektek költség- és időbecslésére
+
+- Hatékonyság (funkció pontok, dokumentációs oldalak, LOC)
+
+- Minőség (hibák szoftverfejlesztési feladatonként)
+
+- Egy másik modell
+  
+  - Input(az erőforrások mérése)
+  
+  - funcOutput(a létrejött termék mérése)
+  
+  - Eredmény(a létrejött termék ‘átadandó’ használhatósága)
+
+- Projekt menedzser használja ezeket a metrikákat
+
+**Méret alapú metrikák**
+
+- Széleskörűen használják ezeket a metrikákat, de nagyon sok vita van alkalmazásokról (könnyű szűmolni, de prog nyelveknél eltérő)
+
+- PL.: Költség / LOC, Hibák / KLOC, Költség / dokumentációs oldal
+
+**Funkció alapú metrikák**
+
+- Felhasználói inputok száma - alkalmazáshoz szükséges adatok
+
+- Felhasználói outputok száma-riportok,képernyők,hibaüzenetek
+
+- Felhasználói kérdések száma - on-line input és output
+
+- Fájlok száma- adatok logikai csoportja
+
+- Külső interfészek száma -  az összes gépi interfész (pl.adatfájlok), ami adatokat továbbít
+
+- Az aktuális szoftver bonyolultsági kategorizálása szubjektív
+
+- Funkció pont számítása: FP=Count total x [0.65+0.01 x Σ (Fj)]
+
+- Az Fj (j=1 … 13) a bonyolultságot befolyásoló tényezők
+
+- A tényezők számításához kérdések (minden kérdést 0-5 skálán pontozunk):
+  
+  - A rendszer megköveteli-e a biztonsági mentéseket és helyreállításokat?
+  
+  - Adatkommunikáció szükséges-e?
+  
+  - Kritikus-e a hatékonyság?
+  
+  - A rendszer intenzíven használt környezetben működik?
+  
+  - Van on-line adatbevitel?
+  
+  - Az on-line adatbevitelhez szükség van összetett képernyő kezelésre?
+  
+  - A fájlok aktualizálása on-line módon történik?
+  
+  - Bonyolultak az inputok,outputok,fájlok vagy lekérdezések?
+  
+  - Bonyolult a belső feldolgozás?
+  
+  - A forráskód újrafelhasználhatóra lett tervezve?
+  
+  - A konverzió és az installáció a tervezés része?
+  
+  - A rendszer többszöri installációra lett tervezve különböző szervezeteknél?
+  
+  - Változások támogatása lett tervezve?
+
+- FP programozási nyelv független
+
+- Hátránya, hogy sok szubjektív elemet tartalmaz, nincs konkrét fizikai jelentése
+
+**Kiterjesztett FP metrikák**
+
+- Az eredeti FP mérték információs rendszerekre lett tervezve, egyéb rendszereknél kiegészítésekre van szükség
+
+- 3D Funkció pont mérték
+  
+  - Adat dimenzió
+  
+  - Funkcionális dimenzió – a belső műveletek (transzformációk) száma
+  
+  - Vezérlési dimenzió – átmenetek állapotok között. Pl telefonnál automatikus hívás állapotba pihenő állapotból
+  
+  - Számítás: Index=input+output+lekérdezés+fájlok+külső interfész +transzformáció+átmenetek
+    
+    ![](../img/2022-05-07-16-18-15-image.png)
+
+**Metrikák alkalmazása szoftver-minőség mérésére**
+
+- Elsődleges a hibák és hiányosságok mérése
+
+- A minőség mérése:
+  
+  - Helyesség (hiányosság/KLOC)
+  
+  - Karbantarthatóság (nincs mérőszám)
+  
+  - Integritás: külső támadások elleni védelem
+    
+    - Fenyegetettség: annak valószínűsége, hogy egy adott típusú támadás bekövetkezik egy adott időszakban
+    
+    - Biztonság: annak valószínűsége, hogy egy adott típusú támadást visszaver a rendszer
+    
+    - Integritás = Σ [1-(fenyegetettség x (1-biztonság))] (Összegzés a különböző támadás típusokra történik)
+  
+  - Használhatóság – a felhasználó barátság mérése (milyen könnyű használni stb.)
+  
+  - DRE (defect removal efficiency)
+    
+    - DRE = E/(E+D), ahol E olyan hibák száma, amelyeket még az átadás előtt felfedezünk, D pedig az átadás után a felhasználó által észlelt hiányosságok száma
+    
+    - Cél a DRE növelése(minél több hiba megtalálása az átadás előtt)
+    
+    - Fontos, hogy a hibákat a fejlesztés minél korábbi fázisában találjuk meg (analízis, tervezés)
+
+- Néhány tipikus kérdés, amikre metrikákkal tudunk válaszolni:
+  
+  - Milyen felhasználói igények változnak a leggyakrabban?
+  
+  - A rendszer melyik komponensében várható a legtöbb hiba?
+  
+  - Mennyi tesztelést tervezzünk a komponensekre?
+  
+  - Mennyi és milyen típusú hibát várhatunk el a tesztelés kezdetekor?
+
+**Metrikus baseline**
+
+- Kell egy hosszabb idejű, több projekten alapuló összehasonlítási alap (baseline)
+
+- Korábbi projektek adatai alapján
+
+- Metrikák gyűjtésének folyamata:
+
+<img title="" src="../img/2022-05-07-17-03-12-image.png" alt="" width="437">
+
+**Statisztikai folyamat vezérlés**
+
+- Statisztikailag érvényes trendek megállapítása
+
+- Vezérlési diagramm(metrikák stabilitásának mérése)
+  
+  - ER=hibák száma/ellenőrzésre fordított idő
+
+- A változási tartomány mérése
+  
+  - mR bar – középvonal,UCL – felső vezérlési korlát
+  
+  <img title="" src="../img/2022-05-07-17-11-35-image.png" alt="" width="385">
+
+**Összegzés**
+
+- A metrika alapú mutatók fontosak a menedzsment és a technikai vezetők számára
+
+- Folyamat metrikákat stratégia szempontok alapján kell kiértékelni
+
+- Méret-és funkció pont alapú metrikákat széleskörűen használnak az iparban.
+
+- A szoftver minőség javításának alapja a metrika alapú „baseline”
+# **Számítógép architektúra**
+
+## **1. Neumann-elvű gép egységei. CPU, adatút, utasítás-végrehajtás, utasítás- és processzorszintű párhuzamosság. Korszerű számítógépek tervezési elvei. Példák RISC (UltraSPARC) és CISC (Pentium 4) architektúrákra, jellemzőik.**
+
+### Neumann-elvű gép sematikus váza
+
+![](../img/2022-04-24-17-05-57-image.png)
+
+**Központi memória:** a program kódját és adatait tárolja, számokként
+
+**Központi feldolgozóegység (CPU):** A központi memóriában tárolt program utasításainak beolvasása és végrehajtása
+
+- **_Vezérlőegység:_** utasítások beolvasása a memóriából és típusának megállapítása
+
+- **_Aritmetikai és logikai egység (ALU):_** Utasítások végrehajtásához szükséges aritmetikai és logikai műveletek elvégzése
+
+- **_Regiszterek:_** kisméretű, gyors elérésű memóriarekeszek, részeredmények tárolása, vezérlőinformációk
+
+**Külső sín:** részegységek összekötése (kábel, huzalozás), adatok, címek, vezérlőjelek továbbítása különböző buszokkal
+
+**Belső sín:** CPU részegységei közötti kommunikáció (vezérlőegység, ALU, regiszterek)
+
+**Beviteli és kiviteli eszközök:** felhasználóval való kapcsolat, adattárolás háttértárakon, nyomtatás stb.
+
+(Működést biztosító járulékos eszközök: gépház, tápellátás, stb.)
+
+### Adatút
+
+![](../img/2022-04-24-22-20-21-image.png)
+
+### Utasítás végrehajtás
+
+**Betöltő-dekódoló-végrehajtó ciklus**
+
+1. Soron következő utasítás beolvasása a memóriából az utasításregiszterbe az utasításszámláló regiszter mutatta helyről
+
+2. Utasításszámláló beállítása a következő címre
+
+3. Utasításszámláló beállítása a következő címre
+
+4. A beolvasott utasítás típusának meghatározása
+
+5. Ha az utasítás memóriára hivatkozik, annak lokalizálása
+
+6. Ha szükséges, adat beolvasása a CPU egy regiszterébe
+
+7. Az utasítás végrehajtása
+
+**Probléma:** A memória olvasása lassú, az utasítás és az adatok beolvasása közben a CPU többi része kihasználatlan
+
+**Gyorsítási lehetőségek:**
+
+- Órajel frekvenciájának emelése (korlátozott)
+
+- Utasításszintű párhuzamosság
+  
+  - Csővezeték
+  
+  - Szuperskaláris architektúrák
+
+- Processzorszintű párhuzamosság
+  
+  - Tömbszámítógépek
+  
+  - Multiprocesszorok
+  
+  - Multiszámítógépek
+
+**Késleltetés:** utasítás végrehajtásának időigénye
+
+**Áteresztőképesség:** MIPS (millió utasítás mp-enként)
+
+### Utasításszintű párhuzamosság
+
+#### Párhuzamos csővezetékek
+
+- Közös utasítás-beolvasó egységgel
+
+- A csővezetékek saját ALU-val rendelkeznek (párhuzamos végrehajtás, ha nincs erőforrás-használat ütközés)
+
+- Általában 2 vagy 4 csővezeték
+
+<img title="" src="../img/2022-04-24-23-58-23-image.png" alt="" width="730">
+
+- Pentium hasonlót alkalmaz
+  
+  - Fő csővezeték: tetszőleges Pentium utasítás
+  
+  - Második csővezeték: csak egész műveletek
+
+**Szuperskaláris architektúrák**
+
+- Egy csővezeték, de több funkcionális egységgel
+
+- Feltételezzük hogy S1-S3 fázis sokkal gyorsabb, mint S4
+
+- Funkcionális egységek ismétlődhetnek, pl. több ALU is lehet
+
+![](../img/2022-04-25-00-07-52-image.png)
+
+- Hasonló a Pentium 4 architektúrája
+
+### Processzorszintű párhuzamosság
+
+- **Tömbszámítógépek**
+  
+  - Ugyanazon műveletek elvégzése különböző adatokon → párhuzamosítás
+
+- **Multiprocesszorok (szorosan kapcsolt CPU-k)**
+  
+  - Több CPU, közös memória → együttműködés vezérlése szükséges
+  
+  - Sínrendszer
+    
+    - 1 közösen használt (lassíthat)
+    
+    - Emellett a CPU-k akár saját lokális memóriával is rendelkezhetnek
+  
+  - Jellemzően max. pár száz CPU-t építenek össze
+
+- **Multiszámítógépek (lazán kapcsolt CPU-k)**
+  
+  - Nincs közös sín, processzor-kommunikáció üzenetküldéssel
+  
+  - Általában nincs minden gép összekötve egymással (pl. fa-struktúra)
+  
+  - Több ezer gép is összeköthető
+
+### RISC és CISC
+
+- **RISC (Reduced Instruction Set Computer)**
+  
+  - Csökkentett utasításkészletű számítógép
+  
+  - Csak olyan utasítások legyenek, amelyek az adatút egyszeri bejárásával végrehajthatók
+  
+  - Tipikusan kb. 50 utasítás
+
+- **CISC (Complex Instruction Set Computer)**
+  
+  - Összetett utasításkészletű számítógép
+  
+  - Sok utasítás (akár több száz), mikroprogram interpretálással
+  
+  - Lassabb végrehajtás
+
+Intel: A kezdeti CISC felépítésbe integráltak egy RISC magot (80486-tól)
+a leggyakoribb utasításoknak
+
+### Korszerű számítógépek tervezési elvei
+
+- **Minden utasítást közvetlenül a hardver hajtson végre**
+  
+  - A gyakran használtakat mindenképpen
+  
+  - Interpretált mikroutasítások elkerülése
+
+- **Maximalizálni az utasítások kiadási ütemét**
+  
+  - Párhuzamos utasításkiadásra törekedni
+
+- **Az utasítások könnyen dekódolhatók legyenek**
+  
+  - Kevés mezőből álljanak, szabályosak, egyforma hosszúak
+    legyenek, …
+
+- **Csak a betöltő és a tároló utasítások hivatkozzanak a
+  memóriára**
+  
+  - Egyszerűbb utasításforma, párhuzamosítást segíti
+
+- **Sok regiszter legyen**
+  
+  - Számítások során ne kelljen a lassú memóriába írni
+
+## 2. Számítógép perifériák: Mágneses és optikai adattárolás alapelvei, működésük (merevlemez, Audio CD, CD-ROM, CD-R, CD-RW, DVD, Bluray). SCSI, RAID. Nyomtatók, egér, billentyűzet. Telekommunikációs berendezések (modem, ADSL, KábelTV-s internet).
+
+### Mágneslemezek
+
+**Részei:**
+
+- Mágnesezhető felületű, forgó alumínium**korong**
+  
+  - Átmérő kezdetben 50 cm, jelenleg 3-12 cm
+
+- Indukciós tekercset tartalmazó **fej**
+  
+  - Lebeg vagy érinti a felszínt
+
+- **Kar**
+  
+  - Sugárirány mentén a fej egyvonalú mozgatása
+
+![](../img/2022-04-25-22-50-43-image.png)**Írás:** Pozitív vagy negatív áram azindukciós tekercsben, alemez adott helyen mágneseződik
+
+**Olvasás:** Mágnesezett terület felettelhaladva pozitív vagynegatív áram indukálódik a mágneses polarizációnak megfelelően
+
+**Adattárolás:**
+
+- **Sáv**
+  
+  - Koncentrikus körök mentén
+  
+  - Egy teljes körülfordulás alatt felírt bitsorozat
+  
+  - Centiméterenként 5-10 ezer sáv (szélesség)
+
+- **Szektor**
+  
+  - 1 sávon több szektor
+    
+    - Fejléc: fej szinkronizálásához
+    
+    - Adat (pl. 512 bájt)
+    
+    - Ellenőrző kód
+    
+    - Hamming vagy Reed-Solomon
+    
+    - Szektorrés
+
+- **Lineáris adatsűrűség**
+  
+  - Kerület mentén, 50-100 ezer bit/cm
+
+- **Merőleges rögzítés**
+  
+  - Tárolás hosszirány helyett „befelé” történik
+
+- **Kapacitás**
+  
+  - Formázott és formázatlan
+
+![](../img/2022-04-25-23-02-11-image.png)
+
+**Felépítés:**
+
+- Fontos a tisztaság és a pormentesség → zárt merevlemezek
+
+- **Lemezegység**
+  
+  - Közös tengelyen több lemez (6-12), azonos fej pozíció!
+  
+  - Cilinder: adott sugárpozíción lévő sávok összessége
+
+- **Teljesítmény**
+  
+  - Keresés (seek): fej megfelelő sugárirányba állítása (kar)
+    
+    - 1 ms: egymás utáni sávok
+    
+    - 5-10 ms: átlagos (véletlenszerű)
+  
+  - Forgási késleltetés
+    
+    - A kerület mentén a fej alá fordul a kívánt terület
+    
+    - Fél fordulat ideje, 3-6 ezredmásodperc (5400, 7200, 10880 fordulat / perc mellett)
+
+![](../img/2022-04-26-18-13-22-image.png)
+
+**Jellemzők:**
+
+- Mechanikai sérülés előfordulhat (Fizikai behatásra a fej megsértheti a lemezt)
+
+- Lemezvezérlő lapka
+  
+  - Sokszor saját CPU-t is tartalmaz
+  
+  - Szoftverből érkező parancsok fogadása
+    
+    - READ, WRITE, FORMAT
+  
+  - Kar mozgatása
+  
+  - Hibák felismerése és javítása
+    
+    - Javíthatatlan hiba esetén fizikai áthelyezés
+  
+  - Bájtok oda- és visszaalakítása bitek sorozatává
+  
+  - Pufferelés (gyorsítás)
+
+**Típusok:**
+
+**_<mark>SCSI</mark>_**
+
+- Small Computer System Interface
+  
+  - „kis számítógép-rendszerek interfésze”, kiejtése „szkazi”
+
+- Olyan szabványegyüttes, melyet számítógépek és perifériák közötti adatátvitelre terveztek
+
+- A SCSI szabványok definiálják a parancsokat, protokollokat, az elektromos és optikai csatolófelületek definícióit
+
+- A SCSI merevlemezek fizikai mérete ugyanakkora, mint az ATA és SATA winchestereké – lemezeinek átmérője 3,5 inch –, viszont percenkénti fordulatszáma azokénál nagyobb, haladóbb eszközök
+
+**<mark>RAID</mark>**
+
+- Redundant Array of Inexpensive Disks - Olcsó lemezek redundáns tömbje
+
+- Ellentéte: SLED (Single Large Expensive Disk), egyetlen nagy drága lemez
+
+- Több merevlemez egységbe foglalása (SCSI alkalmazása a párhuzamossága miatt)
+
+- A rendszer felé egy nagy lemezként jelenik meg
+
+- Az adatok a lemezeken szétosztásra kerülnek
+
+- redundancia javítja a megbízhatóságot
+
+- Többféle szervezési mód (RAID 0 - RAID 6), megvalósítása lehet hardveres vagy szoftveres
+
+- **RAID 0**
+  
+  - Adatok párhuzamos tárolása a lemezeken
+    
+    - k darab szektorból álló csíkok (stripes)
+    
+    - Csíkok egy-egy lemezen tárolódnak
+  
+  - Nincs hibajavítási képessége, nem „igazi” RAID (így gyorsabb)
+  
+  - Nagyméretű blokkokkal működik legjobban
+  
+  - <img src="../img/2022-04-27-00-11-52-image.png" title="" alt="" width="510">
+
+- **RAID 1**
+  
+  - Adatok írása két példányban (két különböző lemezre) csíkozással (4 elsődleges és 4 tartalék lemez)
+  
+  - Olvasás párhuzamosítható, egyes szektorok az elsődleges, mások a tartalék lemezekről
+  
+  - Hibás lemezegység cserélhető, csak rá kell másolni a „párja” tartalmát
+  
+  - <img src="../img/2022-04-27-00-13-59-image.png" title="" alt="" width="529">
+
+- **RAID 2**
+  
+  - Bájt- vagy szó-alapú tárolás (szektorcsoportok helyett)
+  
+  - A lemezeknek és a karoknak szinkronban kell mozogniuk
+  
+  - Adat + Hamming kód bitjeinek egyidejű tárolása külön
+    lemezeken (4 adatbit + 3 paritásbit = 7 tárolandó bit; 7 szinkron lemez kell)
+    
+    - Hamming távolság: két azonos hosszúságú bináris jelsorozat eltérő bitjeinek a száma
+    
+    - minimális hamming távolság segítségével detektálja és javítja a hibákat (ha d a minimális Hamming távolság, akkor d-1 hibát tud detektálni és ⌊(_d_-1)/2⌋ hibát tud javítani)
+  
+  - Sok merevlemez esetén használható jól
+  
+  - Vezérlőnek plusz munka a Hamming kód kezelése!
+  
+  - Hamming kóddal pótolható a kieső lemez tartalma -> hibatűrő
+  
+  - <img src="../img/2022-04-27-19-33-29-image.png" title="" alt="" width="521">
+
+- **RAID 3**
+  
+  - A RAID 2 egyszerűsített változata
+  
+  - Minden adatszóhoz egyetlen paritásbit
+  
+  - Paritásbit tárolása dedikált lemezegységen
+  
+  - Itt is szükséges a lemezek szinkron kezelése
+  
+  - Javításra is alkalmas, ha tudjuk, hogy melyik lemezegység romlott
+    el, de egyszerre maximum 1, tehát cseréljük gyorsan!
+
+<img title="" src="../img/2022-04-27-20-11-36-image.png" alt="" width="399" data-align="inline">
+
+- **RAID 4**
+  
+  - Csíkozással dolgozik -> nem szükséges a lemezegységek szinkron kezelése, Csíkonkénti paritást felírja egy dedikált paritás lemezegységre
+  
+  - Kieső meghajtó tartalma előállítható a paritásmeghajtó segítségével
+  
+  - Probléma: Íráshoz olvasni is kell minden lemezről, nagyon leterheli a paritásmeghajtót
+
+<img src="../img/2022-04-27-20-17-56-image.png" title="" alt="" width="368">
+
+- **RAID 5**
+  
+  - RAID 4-hez hasonló elv, de nincs dedikált paritásmeghajtó
+  
+  - A paritásbiteket körbejárásos módszerrel szétosztja a lemezegységek között
+  
+  - Legalább 3 lemezegység kell, legalább 4 ajánlott
+
+### Optikai lemezek
+
+**CD írás folyamata:**
+
+- Üveg mesterlemez: írás nagy energiájú lézerrel
+
+- A mesterlemezről negatív öntőforma készül
+
+- A negatív öntőformába olvadt polikarbonát gyantát öntenek
+
+- Megszilárdulás után tükröző alumínium réteget visznek rá
+
+- Védő lakk réteggel vonják be és rányomtatják a címkét
+
+**CD olvasás folyamata**
+
+- Olvasás kis energiájú infravörös lézerrel
+
+- Az üregből visszavert fény fél hullámhossznyival rövidebb utat tesz
+  meg, mint az üreg pereméről visszavert, ezért gyengíteni fogják
+  egymást
+
+**Audio CD adattárolása**
+
+- Spirál alakban, belülről kifelé haladva, kb. 5,6 km hosszú
+
+- A jel sűrűsége állandó a spirál mentén
+
+- Állandó kerületi sebesség biztosítása, változó forgási sebesség
+
+- nincs hibajavítás, de mivel audio ezért nem gond
+
+**CD-ROM**
+
+- Digitális adattárolásra
+
+- Többszintű hibajavítás bevezetése (a hanggal ellentétben itt nem lehet adatvesztés!)
+
+- nehezebb az olvasó fejet pozícionálni mint a merevlemezeknél (koncentrikus körök helyett spirál)
+
+- Meghajtó szoftvere nagyjából a célterület fölé viszi az olvasófejet, Fejlécet keres, abban ellenőrzi a szektor sorszámot
+
+**CD-R**
+
+- CD-ROM-okhoz hasonló polikarbonát felépítés
+
+- Saját író berendezéssel rögzíthető az adat
+
+- _Újdonság_
+  
+  - Író lézernyaláb
+  
+  - Alumínium helyett arany felület
+  
+  - Üregek és szintek helyett festékréteg alkalmazása
+    
+    - Írás: a nagy energiájú lézer roncsol → sötét folt marad véglegesen
+    
+    - Olvasás: az ép és a roncsolt területek detektálása
+
+**CD-RW**
+
+- Újraírható optikai lemez
+
+- _Újdonság_
+  
+  - Más adattároló réteg
+    
+    - Ezüst, indium, antimon és tellúr ötvözet
+    
+    - Kétféle stabil állapot: kristályos és amorf (más fényvisszaverő képesség)
+  
+  - 3 eltérő energiájú lézer
+    
+    - Legmagasabb energia: megolvad az ötvözet → amorf
+    
+    - Közepes energia: megolvad → kristályos állapot
+    
+    - Alacsony energia: anyag állapotnak érzékelése, de meg nem változik
+
+**DVD**
+
+- CD koronggal egyező méret
+
+- Nagyobb jelsűrűség (kisebb üreg, szorosabb spirál)
+
+- Vörös lézer
+
+- Több adat (egy/két oldalas, egy/két rétegű (4,7 GB – 17 GB))
+
+- Új filmipari funkciók:Szülői felügyelet, hatcsatornás hang, képarány dinamikus választása (4:3 vagy 16:9), régiókódok
+
+**Blu-Ray**
+
+- Kék lézer használata a vörös helyett
+  
+  - Rövidebb hullámhossz, jobban fókuszálható, kisebb mélyedések
+  
+  - 25 GB (egyoldalas) és 50 GB (kétoldalas) adattárolási képesség
+  
+  - 4,5 MB/mp átviteli sebesség
+
+### Kimenet/bemenet
+
+**Nyomtatók**
+
+- Mátrixnyomtatók
+  
+  - Monokróm nyomat
+  
+  - Tintaszalag + elektromágnesesen irányítható tűk
+  
+  - Olcsó technika, elsősorban cégeknél (volt) jellemző
+  
+  - Pontmátrix karakterek
+
+- Tintasugaras nyomtatók
+  
+  - Elsősorban otthoni használatra
+  
+  - Lassú, de relatíve olcsó
+  
+  - Tintapatront tartalmazó, mozgatható fej, lapra tintát permetez
+  
+  - Fajtái
+    
+    - Piezoelektromos: Tintapatron mellett kristály, amely feszültség hatására deformálódik → tintacseppet présel ki
+    
+    - Hővezérlésű vagy festékbuborékos:Fúvókákban kis ellenállás, amely feszültség hatására felhevül, a festék felforr és elpárolog, túlnyomás keletkezik, papírra kerül, fúvókát lehűtik, a keletkező vákuum újabb tintacseppet szív be a tartályból
+
+- Lézernyomtatók
+  
+  - Kiváló minőségű kép, gyors működés
+  
+  - Saját CPU, memória
+  
+  - Elsősorban monokróm, de van színes változata is
+
+- 3D nyomtatás
+  
+  - Digitális tervrajzokból → 3D tárgy
+  
+  - Porréteg + ragasztó komponens
+  
+  - jelenleg még drága
+  
+  - Prototípusok gyors készítése, egyedi tárgyak, objektumok készítése
+  
+  - Tárgyak helyett tervek küldése nagy távolságokra
+
+**Egér**
+
+- Grafikus felületen egy mutató mozgatása
+
+- Egy, kettő vagy akár több nyomógomb vagy görgő
+
+- Típusai
+  
+  - Mechanikus: Kerekek vagy gumi golyó, potenciométerek
+  
+  - Optikai: LED fény, visszaverődés elemzése
+  
+  - Optomechanikus: Golyó, két tengelyt forgat (merőlegesek), résekkel ellátott tárcsák, LED fény, mozgás hatására fényimpulzusok
+
+- Működése: Bizonyos időnként (pl. 0,1 sec) vagy esemény hatására 3 adatos (általában 3 bájtos) üzenetet küld a soros vonalon (PS-2 vagy USB) a számítógépnek
+
+**Billentyűzet**
+
+- Egy-egy billentyű leütése áramkört zár
+
+- Megszakítás generálódik
+  
+  - Az operációs rendszer kezeli és továbbítja a programoknak
+
+### Telekommunikációs berendezések
+
+**Modem**
+
+- Adatkommunikáció analóg telefonvonalon
+  
+  - Az analóg vonalat hangátvitelre találták ki
+  
+  - Adatátvitelhez: vivőhullám (1000-2000 Hz-es szinusz hullám)
+  
+  - A bitek csak sorosan, egymás után vihetők át
+    
+    - 1 bájt átvitele: start bit + 8 adatbit + stop bit = 10 bit
+
+<img src="../img/2022-04-27-21-56-40-image.png" title="" alt="" width="497">
+
+- Modulációk
+  
+  - amplitúdó, frekvencia módosítása
+  
+  - Fázis: dibit kódolás
+    
+    - 45, 135, 225 és 315 fokos fáziseltolódások az időintervallumok elején
+    
+    - 2 bit átvitele egységnyi idő alatt (45 fok: 00, 135 fok: 01, …)
+  
+  - Kombinálva is használhatók
+
+- Definíciók
+  
+  - Baud: Jelváltás / másodperc
+    
+    - 1 jelváltás több bitnyi információt is hordozhat (lásd dibit kódolás)
+  
+  - Adatátviteli sebesség: bit / másodperc
+    
+    - Jellemzően 28800 vagy 57600 bit / mp, jóval alacsonyabb baud értékkel!
+  
+  - Kommunikációs vonal típusa
+    
+    - Full-duplex (kétirányú kommunikáció egyidőben)
+    
+    - fél-duplex (egyszerre csak 1 irányban)
+    
+    - szimplex (egyirányú kommunikáció lehetséges csak)
+
+**ADSL (Asymmetric Digital Subscriber Line)**
+
+- Szélessávú adatforgalom analóg telefonvonalon
+
+- Hangátvitel: 3000 Hz-es szűrő alkalmazása a vonalon
+
+- DSL technika: 1,1 MHz méretű tartomány használata
+  
+  - 256 darab 4 kHz-es csatorna
+  
+  - Szétválasztó (splitter)
+    
+    - Az alsó tartomány leválasztása hangátvitelre: 0. csatorna
+    
+    - A felső tartomány az adatátvitelé: 4-8 Mbps sebesség
+    
+    - 1-5. csatornák nem használtak (ne zavarja a hangátvitelt)
+    
+    - Két vezérlő csatorna a le- és feltöltés vezérlésére, a többi az adatátvitelre
+
+<img src="../img/2022-04-27-22-31-59-image.png" title="" alt="" width="543">
+
+**Kábeltévés internet**
+
+- Kábeltévé társaságok
+  
+  - Fő telephely + fejállomások
+  
+  - Fejállomások üvegkábelen a fő telephelyhez kapcsolódnak
+  
+  - A felhasználók felé induló vonalakon sok eszköz osztozik
+    
+    - Kábelek sávszélessége 750 MHz körüli
+    
+    - A sávszélesség függ a felhasználók pillanatnyi számától!
+    
+    - Bonyolultabb kommunikáció a fejállomás és az előfizetői eszközök között
+  
+  - Sávkiosztás
+    
+    - 54 – 550 MHz: TV, rádió (lejövő frekvenciák)
+    
+    - 5 – 42 MHz: felmenő frekvenciák adatfeltöltésre és vezérlésre
+    
+    - 550 – 750 MHz: lejövő frekvenciák adatletöltésre
+    
+    - Aszimmetrikus adatkommunikáció
+  
+  - Szükséges eszköz: kábelmodem
