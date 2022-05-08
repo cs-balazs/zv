@@ -454,3 +454,403 @@ Az egyes iterációban kapott eredmények:
 - `x`: Komponensenkénti becsléssel kapott eredmény.
 
 ### 2. Érintő, szelő, és húr módszer, a konjugált gradiens eljárás. Lagrange interpoláció. Numberikus integrálás.
+
+#### Érintő módszer
+
+> A.K.A. Newton-módszer
+
+Tegyük fel, hogy az $f(x) = 0$ egyenlet $x^*$ egyszeres, izolált zérushelyét akarjuk meghatározni, és hogy ennek a környezetében $f(x)$ differenciálható.
+
+Válasszunk ki ebből egy $x_0$ kezdőértéket, majd képezzük az
+
+$$
+x_{k + 1} = x_k - \frac{f(x_k)}{f'(x_k)}
+$$
+
+iterációs sorozatot.
+
+##### A módszer geometriai jelentése
+
+Az aktuális $x_k$ pontban meghatározzuk az $f(x)$ függvény és deriváltja értékét, ezekkel képezzük az adott ponthoz húzott érintőt, és következő iterációs pontnak azt határozzuk meg, amelyben az érintő zérushelye van.
+
+##### Megoldás garantálása
+
+Ha az $f(x)$ függvény kétszer folytonosan differenciálható az $x^*$ zérushely egy környezetében, akkor van olyan pont, ahonnan indulva a Newton-módszer kvadratikusan konvergens sorozatot ad meg:
+
+$$
+|x^* - x_{k+1} | \le C |x^* - x_k |^2
+$$
+
+valamely pozitív $C$ konstanssal.
+
+#### Szelő módszer
+
+Legyen $x^*$ az $f(x) = 0$ egyenlet egyszeres gyöke. Válasszunk alkalmas $x_0$ és $x_1$ kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
+
+$$
+x_{k + 1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(k_{k-1})} = \frac{ f(x_k) x_{k-1} - f(x_{k-1}) x_k }{ f(x_k) - f(x_{k - 1}) } ~ ~ ~ ~ k = 1, 2, ...
+$$
+
+Valójában annyiban tér el a Newton-módszertől, hogy $f'(x_k)$ helyett annak közelítéseként a **numerikus derivált**,
+
+$$
+\frac
+{ f(x_k) - f(x_{k-1}) }
+{ x_k - k_{k-1} }
+$$
+
+szerepel.
+
+> Így tehát ez az eljárás csak egy $f(x)$ függvényt kiszámoló szubrutinra (függvényre) támaszkodik.
+
+##### A módszer geometriai jelentése
+
+$x_{k + 1}$ nem más, mint az $(x_k, f(x_k))$ és az $(x_{k-1}, f(x_{k-1}))$ pontokon átmenő egyenes és az $x$ tengely metszéspontjának $x$ koordinátája.
+
+##### Tulajdonságok
+
+- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a $x^*$ gyököt.
+
+- Ha $f'(x^*) > 0$, és $f''(x^*) > 0$, akkor $x^*$-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
+
+#### Húr módszer
+
+A szelő módszer a következő módosításokkal:
+
+- A kezdeti $x_0, x_1$ pontokban az $f(x)$ függvény **ellentétes előjelű**.
+
+- $f(x_{k+1})$ előjelétől függően a megelőző két pontból **azt választja** a következő iterációs lépéshez, amelyikkel ez a **tulajdonság fennmarad**.
+
+> Például ha $x_2$ pozitív, és $x_0$ negatív, $x_1$ pozitív, akkor a következő iterációban $x_2$ mellett $x_0$-t használja a módszer az $x_1$ helyett.
+
+#### Konjugált gradiens eljárás
+
+Optimalitálás elvein alapuló módszer.
+
+Szimmetrikus pozitív definit mátrixú lineáris egyenletrendszerek megoldására alkalmas.
+
+Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
+
+Legyen $A$ egy szimmetrikus, pozitív definit mátrix, akkor a 
+
+$$
+q(x) = \frac{1}{2} x^T A x - x^T b
+$$
+
+kvadratikus függvénynek egyetlen $x^*$ minimumpontja van, és erre $Ax^* = b$ teljesül.
+
+Azaz az $Ax = b$ lineáris egyenletrendszer megoldása ekvivalens a $q(x)$ kvadratikus függvény minimumpontjának meghatározásával.
+
+A többdimenziós optimalizálási eljárások rendszerint az $x_{k+1} = x_k + \alpha s_k$ alakban keresik az új közelítő megoldást, ahol $s_k$ egy keresési irány, és $\alpha$ a lépésköz.
+
+##### Kvadratikus függvényekkel kapcsolatos összefüggések
+
+1. A negatív gradiens a rezudiális vektor: $- \nabla q(x) = b - Ax = r$
+
+2. Adott keresési itány mentén nem kell adaptív módon meghatározni a lépésközt, mert az optimális $\alpha$ közvetlenül megadható. A keresési irány mentén ott lesz a célfüggvény minimális, ahol a rezudiális vektor merőleges $s_k$-ra.
+   $\alpha = \frac{r_k^T s_k}{s_k^T A s_k}$
+
+##### A módszer
+
+Adott $x_0$ kezdőpontra legyen $s_0 = r_0 = b - Ax_0$, és iteráljuk $k = 1, 2, ...$ értékekre az alábbi lépéseket, amíg a megállási feltételek nem teljesülnek:
+
+1. $\alpha_k = \frac{r_k^T r_k}{s_k^T As_k}$: A **lépéshossz** meghatározása
+
+2. $x_{k+1} = x_k + \alpha_k s_k$: Iterált **közelítő megoldás**
+
+3. $r_{k+1} = r_k - \alpha_k A s_k$: Új **rezudiális vektor**
+
+4. $\beta_{k+1} = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k}$: Segédváltozó
+
+5. $s_{k+1} = r_{k+1} + \beta_{k+1} s_k$: Új **keresési irány**
+
+> Korábbi gradiensmódszerek esetén egyszerűen a negatív gradienst követik minden iterációs lépésben, de felismerték hogy ez a meredek falú, enyhén lejtő völgyszerű függvények esetén szükségtelenül sok iterációs lépést eredményez a völgy két oldalán való oda-vissza ugrálás miatt. A kisebb meredekséggel rendelkező irányban viszont lényegesen gyorsabban lehetett volna haladni.
+> A konjugált gradiens módszer a lépésenkénti megfelelő irányváltoztatással kiküszöböli ezt a hibát.
+
+A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékek alatt maradjanak.
+
+##### Matlabban
+
+```matlab
+function x = kg(A, b, x);
+s = b - A * x;
+r = s;
+for k = 1:20
+    a = (r' * r) = (s' * A * s);
+    x = x + a * s;
+    rr = r - a * A * s;
+    s = rr + s * ((rr' * rr) / (r' * r));
+    r = rr
+end
+```
+
+> Az `rr` valójában $r_{k+1}$, csak mivel `s` kiszámolásához $r_k$-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
+
+#### Lagrange interpoláció
+
+**Interpoláció**: Az a feladat, amikor adott $(x_i, y_i), i =1, 2, ..., m$ pontsorozaton állítunk elő egy függvényt, amely egy adott függvényosztályba tartozik, és minden ponton átmegy.
+
+> Azaz $x_i$ helyeken a megfelelő $y_i$ értékeket vegye fel a függvény.
+
+> Ha a keresett $f(x)$ függvény polinom, akkor **polinominterpolációról** beszélünk.
+
+**Interpoláció másik jelentése**: A közelítő függvény segítségével az eredeti $f(x)$ függvény értékét egy olyan $\hat{x}$ pontban becsüljük az interpoláló $p(x)$ polinom $p(\hat{x})$ helyettesítési értékével, amelyre:
+
+$$
+\hat{x} \in [ ~ min(x_1, x_2, ..., x_m), max(x_1, x_2, ..., x_m) ~ ]
+$$
+
+Ezzel szemben ha
+
+$$
+\hat{x} \notin [ ~ min(x_1, x_2, ..., x_m), max(x_1, x_2, ..., x_m) ~ ]
+$$
+
+teljesül, akkor **extrapolációról** van szó.
+
+**Spline interpoláció**: Több alacsony fokszámú polinomból összerakott függvényt keres úgy, hogy az adott pontokon való áthaladás megkövetelése mellett az is elvárás, hogy a szomszédos polinomok a csatlakozási pontokban **előírt derivált értékeket** vegyenek föl.
+
+##### Polinomok fokszáma
+
+Polinom interpoláció esetén a polinom fokszáma, $n$ egyenlő $m - 1$-el.
+
+Spline alkalmazásakor a fokszám lényegesen kisebb, mint az alappontok száma.
+
+Amennyiben egy olyan polinomot illesztünk, amelynek fokszáma kisebb, mint $m - 1$, akkor **görbeillesztésről** beszélünk.
+
+> Görbeillesztéskor a polinom persze nem feltétlen megy át minden alapponton.
+
+##### Lagrange interpoláció
+
+> Lagrange interpolációkor feltesszük, hogy az alappontok különbözőek, de ez nem egy túl erős feltétel, hiszen nem is lehet azonos $x$ koordinátán két különböző $y$ értéket érinteni egy függvénnyel.
+
+A Lagrange interpoláció az interpoláló polinomokat
+
+$$
+p_n(x) = \sum_{i=0}^n f(x_i)L_i(x)
+$$
+
+alakban adja meg, ahol
+
+$$
+L_i(x) = \prod_{j=0, j\ne i}^n \frac{x-x_j}{x_i-x_j} = 
+\frac
+{(x - x_0)(x - x_1) ... (x - x_{i-1})(x - x_{i+1}) ... (x - x_n)}
+{(x_i - x_0)(x_i - x_1) ... (x_i - x_{i-1})(x_i - x_{i+1}) ... (x_i - x_n)}
+$$
+
+Legyenek adottak az $x_0, ..., x_n$ páronként különböző alappontok. Ekkor az $f(x_i), i = 0, 1, ..., n$ függvényértékekhez egyértelműen létezik olyan legfeljebb $n$-edfokú interpoláló polinom, amely megegyezik a Lagrange interpolációs polinommal.
+
+##### Matlabban
+
+```matlab
+function [C, L] = lagran(X, Y)
+w = length(X);
+n = w - 1;
+L = zeros(w, w);
+for k = 1:n+1
+    V = 1;
+    for j = 1:n+1
+        if k ~= j
+            V = conv(V, poly(X(j))) / (X(k) - X(j));
+        end
+    end
+end
+C = Y * L;
+```
+
+> `conv(u, v)`: Konvolúció, `u` a maszk, amit keresztül tol `v`-n.
+> 
+> `poly(A)`: Karakterisztikus polinom-ot számol ki mátrixból, vagy sajátértékekből.
+> 
+> `~=`: Nem-egyenlő operátor.
+
+#### Numerikus integrálás
+
+A kvadratúra a numerikus integrálás szinonimája, amikor a
+
+$$
+\int_a^b f(x) ~ dx = F(b) - F(a)
+$$
+
+határozott integrál közelítése a feladat. Itt $F(x)$ az $f(x)$ integrálandó függvény primitív függvénye. Ez utóbbi nem minden esetben áll rendelkezésre, sőt sokszor nem is elemi függvény, nem adható meg zárt alakban.
+
+##### Kvadratúra-formula
+
+A határozott integrálokat szokás
+
+$$
+\int_a^b = f(x) ~ dx \approx Q_n(f) = \sum_{i = 1}^n w_i f(x_i)
+$$
+
+alakban közelíteni, ahol $Q_n(f)$-et **kvadratúra-formulának** nevezzük.
+
+Általában feltesszük, hogy $x_i \in [a, b]$ teljesül az $x_i$ **alappontokra**, és ezek **páronként különbözőek**.
+
+A $w_i$ számokat **súlyoknak** hívjuk.
+
+##### Integrál, és kvadratúra-formula tulajdonságai
+
+$$
+\int_a^b f(x) + g(x) ~ dx  = \int_a^b f(x) ~ dx + \int_a^b g(x) ~ dx
+
+\\
+
+Q_n (f + g) = 
+\sum_{i = 1}^n w_i (f(x_i) + g(x_i))  = 
+\sum_{i = 1}^n w_i f(x_i) + \sum_{i = 1}^n w_i g(x_i) = 
+Q_n(f) + Q_n(g)
+
+\\
+
+\int_a^b \alpha f(x) ~ dx  = \alpha \int_a^b f(x) ~ dx
+
+\\
+
+
+Q_n(\alpha f) = 
+\sum_{i=1}^n w_i \alpha f(x_i) = 
+\alpha \sum_{i=1}^n w_i f(x_i) = 
+\alpha Q_n(f)
+
+\\
+
+
+\int_a^b f(x) ~ dx = 
+\int_a^{z_1} f(x) ~ dx + ... + \int_{z_{m-1}}^{z_m} f(x) ~ dx + \int_{z_m}^b f(x) ~ dx
+$$
+
+##### Kvadratúra-formula képlethibája
+
+$R_n(f) = \int_a^b f(x) ~ dx - Q_n(f)$
+
+Ha $R_n(f) = 0$, akkor a **kvadratúra-formula pontos** $f(x)$-re.
+
+Kvadratúra-formula pontossági rendje az $r$ természetes szám, ha az pontos az $1, x, x^2, ..., x^r$ hatványfüggvényekre, azaz $R_n(x^k) = 0$ minden $q \le k \le r$-re, de nem pontos $x^{r+1}$-re.
+
+A $Q_n$, $n$ alappontos kvadratúra-formula rendje legfejlebb $2n - 1$ lehet.
+
+##### Interpolációs kvadratúra-formulák
+
+Azt mondjuk, hogy $Q_n(f) = \sum_{i=1}^n w_i f(x_i)$ egy interpolációs kvadratúra-formula, ha az előáll az alappontokra felírt Lagrange polinom integrálásával:
+
+$$
+\int_a^b f(x) ~ dx \approx 
+\int_a^b p_{n-1} (x) ~ dx = 
+\int_a^b \sum_{i = 1}^n f(x_i) L_i(x) ~ dx = 
+\sum_{i=1}^n f(x_i) \int_a^b L_i(x) ~ dx
+$$
+
+ahonnan $w_i = \int_a^b L_i(x) ~ dx$.
+
+> Az alappont az interpolációra, és a kvadratúrára is vonatkozik.
+
+Minden $n$ alappontra épülő $Q_n$ interpolációs kvadratúra-formula rendje legalább $n - 1$.
+
+Ha egy $Q_n$ kvadratúra-formula rendje legalább $n - 1$, akkor az interpolációs kvadratúra-formula.
+
+##### Véges differenciák
+
+Ekvidisztáns alappontokat adunk meg.
+
+Szomszédos alappontok **távolsága állandó**: $h = x_{i + 1} - x_i$.
+
+Az interpolációs alappontok: $x_i = x_0 + ih, i = 0, ..., n-1$
+
+Az adott $x_k$ alappontokhoz és $f_k = f(x_k)$ függvény értékekhez tartozó $\Delta^i f_k$ *i-edrendű véges differenciákat* a következő kettős rekurzióval definiáljuk:
+
+$$
+\begin{align}
+\Delta^0 f_k & = f_k \\
+\Delta^i f_k & = \Delta^{i - 1} f_{k + 1} - \Delta^{i - 1} f_k
+\end{align}
+$$
+
+Természetes számokra értelmezett binomiális együtthatók általánostásaként vezessük be a:
+
+$$
+\binom{t}{j} = \frac{t(t - 1) ... (t-j + 1)}{j!}
+$$
+
+jelölést a $t = \frac{x - x_0}{h}$ transzformációhoz.
+
+A véges differenciákkal felírt Lagrange interpolációs polinom:
+
+$$
+p_{n-1}(x_0 + th) = f_0 + \binom{t}{1} \Delta f_0 + \binom{t}{2} \Delta^2 f_0 + ... + \binom{t}{n - 1} \Delta^{n-1} f_0 = \sum_{i = 0}^{n - 1} \binom{t}{i} \Delta^i f_0
+$$
+
+##### Newton-Cotes formulák
+
+Az interpolációs kvadratúra-formulák egy régi osztálya.
+
+Ekvidisztáns alappontokat használnak.
+
+> Azaz a szomszédosak közt ugyan annyi a távolság.
+
+Ha az integrál határai szerepelnek az alappontok közt, akkor *zárt-,* ha a határok nem alappontok, akkor *nyitott formuláról* beszélünk.
+
+###### Zárt formulákra összefüggések
+
+$$
+h = \frac{b - a}{n - 1}, a = x_0, b = x_{n-1}, x_i = x_0 + ih ~ ~ ~ ~ 0 \le i \le n - 1
+$$
+
+###### Nyitott formulákra összefüggések
+
+$$
+h = \frac{b - a}{n + 1}, a = x_0 - h, b = x_{n-1} + h, x_i = x_0 + ih ~ ~ ~ ~ 0 \le i \le n - 1
+$$
+
+###### $n$-edik Newton-Cotes formula
+
+$t = \frac{x - x_0}{h}$ új változó mellett az $n$-edig Newton-Cotes formula:
+
+$$
+\int_a^b p_{n-1} (x_0 + th) ~ dx = 
+\int_a^b \sum_{i=0}^{n-1} \binom{t}{i} \Delta^i f_0 ~ dx = 
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx
+$$
+
+> A $t$ lényegében az adott változó eltolását fejezi ki az $x_0$-tól.
+
+> A $\Delta^i$ véges differenciál.
+
+Ha a formula zárt:
+
+$$
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx = 
+h \sum_{i=0}^{n - 1} \Delta^i f_0 \int_0^{n - 1} \binom{t}{i} ~ dt
+$$
+
+Ha a formula nyitott:
+
+$$
+\sum_{i=0}^{n - 1} \Delta^i f_0 \int_a^b \binom{t}{i} ~ dx = 
+h \sum_{i=0}^{n - 1} \Delta^i f_0 \int_{-1}^{n} \binom{t}{i} ~ dt
+$$
+
+###### Első négy zárt Newton-Cotes formula
+
+1. $\int_{x_0}^{x_1} f(x) ~ dx \approx \frac{h}{2}(f_0 + f_1)$: **Trapéz szabály**
+
+2. $\int_{x_0}^{x_2} f(x) ~ dx \approx \frac{h}{3}(f_0 + 4 f_1 + f_2)$: **Simpson-szabály**
+
+3. $\int_{x_0}^{x_3} f(x) ~ dx \approx \frac{3h}{8}(f_0 + 3 f_1 + 3 f_2 + f_3)$: **Simpson $\frac{3}{8}$-os szabálya**
+
+4. $\int_{x_0}^{x_4} f(x) ~ dx \approx \frac{2h}{45}(7 f_0 + 32 f_1 + 12 f_2 + 32 f_3 + 7 f_4)$: **Bool-szabály**
+
+##### Matlabban
+
+```matlab
+function f = fxlog(x)
+f = x .* log(x);
+```
+
+A fentebbi függvény az $xlog(x)$ függvényértéket kiszámoló eljárás, ennek numerikus integrálása a $[2, 4]$ intervallumon:
+
+```matlab
+quad(@fxlog, 2, 4);
+```
+
+> Eredményül 6.7041-et logol az interpreter.
