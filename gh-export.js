@@ -14,7 +14,7 @@ process.stdin.on("close", () => {
       .replace(
         /\$\$([^]+?)\$\$/g,
         (_, captured) =>
-          `<img src="https://render.githubusercontent.com/render/math?math=${encodeURIComponent(
+          `<img src="https://latex.codecogs.com/gif.latex?${encodeURIComponent(
             captured
           )}" />`
       )
