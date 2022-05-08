@@ -4,13 +4,21 @@ process.stdin.on("readable", () => {
 
   if (input && !input.includes("inlineMath")) {
     process.stdout.write(
-      input?.replace(
-        /\$(.*?)\$/g,
-        (_, captured) =>
-          `<img src="https://render.githubusercontent.com/render/math?math=${encodeURIComponent(
-            captured
-          )}" />`
-      )
+      input
+        ?.replace(
+          /\$\$(.*?)\$\$/g,
+          (_, captured) =>
+            `<img src="https://render.githubusercontent.com/render/math?math=${encodeURIComponent(
+              captured
+            )}" />`
+        )
+        ?.replace(
+          /\$(.*?)\$/g,
+          (_, captured) =>
+            `<img src="https://render.githubusercontent.com/render/math?math=${encodeURIComponent(
+              captured
+            )}" />`
+        )
     );
   } else if (!!input) {
     process.stdout.write(input);
