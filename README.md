@@ -21,3 +21,5 @@ Virágh János - Numerikus matematika, 2003.
 Gyimóthy Tibor, Kertész Attila, Vidács László - Rendszerfejlesztés I. 2020.
 
 Nyékyné Gaizler Judit - Programozási nyelvek 2003.
+
+[Jelasity Márk - Mesterséges Intelligencia előadásjegyzet (1.3MB PDF)](https://www.inf.u-szeged.hu/~jelasity/mi1/2021/jegyzet.pdf)
