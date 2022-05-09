@@ -1,35 +1,3 @@
----
-script:
-  - content: "MathJax = { tex: { inlineMath: [ ['<img src="https://latex.codecogs.com/svg?'%2C%20'" />'] ] } };"
-  - url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
----
-
-# Záróvizsga Tételek 2022
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-# Záróvizsga Kidolgozások
-
-## Források
-
-[Farkas Richárd - Algoritmusok és adatszerkezetek I.](https://inf.u-szeged.hu/~rfarkas/Alga20/index.html)
-
-[Iván Szabolcs - Bonyolultságelmélet előadásvázlat, 2020 (1.4MB PDF)](https://www.inf.u-szeged.hu/~szabivan/download/bonyelm/jegyzet.pdf)
-
-[Fülöp Zoltán - Formális nyelvek előadások 2020. tavasz](https://www.youtube.com/playlist?list=PL-9rwKdRSoL32_5BS2N84XbvmtnHJ9YA4)
-
-[Iván Szabolcs - Logika és informatikai alkalmazásai előadás, 2020](https://www.youtube.com/playlist?list=PLn83WpoA-HnbLEEu5RVz25gveJTMfs1D0)
-
-[Iván Szabolcs - Logika és informatikai alkalmazásai előadás diák, 2022 (1.4MB PDF)](https://www.inf.u-szeged.hu/~szabivan/download/logika/slides2022.pdf)
-
-Virágh János - Numerikus matematika, 2003.
-
-[Csendes Tibor - Közelítő és szimbolikus számítások I. (514KB PDF)](https://www.inf.u-szeged.hu/~csendes/koszikicsi.pdf)
-
-[Nagy Antal, Tanács Attila - Számítógépes Architektúrák 2019.](https://www.inf.u-szeged.hu/~tanacs/oktatas/okt_2019_osz_a.html#)
-
-Gyimóthy Tibor, Kertész Attila, Vidács László - Rendszerfejlesztés I. 2020.
-
-Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 ## Algoritmusok és Adatszerkezetek I
 
 ### 1. Részproblémára bontható algoritmusok (mohó, oszd-meg-és-uralkodj, dinamikus programozás), rendező algoritmusok, gráfalgoritmusok (szélességi- és mélységi keresés, minimális feszítőfák, legrövidebb utak)
@@ -3551,6 +3519,177 @@ Különben, ha már nem tudunk több klózt lebezetni, <img src="https://latex.c
 > Lift lemma bizonyítása kell?
 
 - Mivel a <img src="https://latex.codecogs.com/svg?C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://latex.codecogs.com/svg?C_n%20%3D%20%5Csquare" /> kell legyen.
+## Mesterséges Intelligencia 1.
+
+### 1. Keresési feladat: feladatreprezentáció, vak keresés, informált keresés, heurisztikák. Kétszemályes zéró összegű játékok: minimax, alfa-béta eljárás. Korlátozás kielégítési feladat.
+
+#### Keresési feladat
+
+A feladatkörnyezetről feltételezzük, hogy *diszkrét*, *statikus*, *determinisztikus*, és *teljesen megfigyelhető*.
+
+##### Feladatreprezentáció
+
+Következőekkel modellezzük a feladatot:
+
+- **Lehetséges állapotok*** halmaza
+
+- Egy **kezdőállapot**
+
+- **Lehetséges cselekvések*** halmaza
+
+- Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusó, rendezett párokból álló halmazt.
+
+- Állapotátmenet **költségvüggvénye**, amely minden lehetséges állapot-cselekvés-állapot hármashoz egy <img src="https://latex.codecogs.com/svg?c(x%2C%20a%2C%20y)" /> valós nemnegatív költségértéket rendel
+
+- **Célállapotok** halmaza
+
+Ez egy gúlyozott gráfot definiál, amiben a **csúcsok az állapotok**, **élek a cselekvések**, **súlyok a költségek**.
+
+Ez a gráf az **állapottér**
+
+**Út**: Állapotok cselekvésekkel összekötött sorozata.
+
+##### Vak (informálatlan) keresés
+
+**Cél**: Adott kezdőállapotból megtalálni egy minimális költségű utat egy célállapotba.
+
+> Ez azért nem egy triviális, legrövidebb út keresési feladat, mert az állapottér nem mindig adott teljes egészében, mert nem mindig véges.
+
+**Megvalósítás**: **Keresőfával**, azaz a kezdőállapotból növesztünk egy fát a szomszédos állapotok hozzávételével amíg célállapotot nem találunk.
+
+> Keresőfe nem azonos az állapottérrel! Hiszen az állapottér nem is feltétle fa.
+
+Keresőfa egy csúcsában tárolt információ:
+
+- Szülő
+
+- Állapot
+
+- Cselekvés, ami a szülőből ide vezetett
+
+- Útköltség a kezdőállapottól eddig
+
+- Mélység (kezdőállapoté nulla)
+
+###### Általános, absztrakt eljárás
+
+```
+fakereses() {
+    perem = { újcsúcs(kezdőállapot) }
+    while perem.nemüres() {
+        csúcs = perem.elsőkivesz()
+        if csúcs.célállapot() {
+            return csúcs
+        }
+        perem.beszúr(csúcs.kiterjeszt())
+    }
+    throw Error
+}
+```
+
+> Ha olyan csúcsot szúrunk be, aminek állapota már szerepel a `perem`-ben, akkor a nagyobb költségűt felesleges benne hagyni.
+
+- `csúcs.kiterjeszt()`: Létrehozza a csúcsból elérhető összes állapothoz tartozó keresőfa csúcsot, a mezőket megfelelően inicializálja.
+
+- `perem`: Egy prioritási sor.
+
+- `perem.elsökivesz()`: Ez definiálja a bejárás stratégiáját. (Lényegében a prioritási sorban a kulcsok rendezésének módja.)
+
+###### Szélességi keresés
+
+**FIFO** perem.
+
+- Teljes, minden véges számú állapot érintésével elérhető állapotot véges időben elér.
+
+- Általában nem optimális, de akkor pl. igen, ha a költség a mélység nem csökkenő függvénye.
+
+- Időigény = Tárigény = <img src="https://latex.codecogs.com/svg?O(b%20%5E%7Bd%20%2B%201%7D%20)" />
+  
+  > Exponenciális komplexitás miatt nem skálázódik nagy <img src="https://latex.codecogs.com/svg?d" />-kre.
+
+> <img src="https://latex.codecogs.com/svg?b" />: szomszédok maximális száma.
+> 
+> <img src="https://latex.codecogs.com/svg?d" />: legkisebb mélységű célállapot mélysége a keresőfában.
+
+###### Mélységi keresés
+
+**LIFO** perem.
+
+- Teljes, ha a keresési fa véges mérezű. Egyébként nem.
+
+- Nem optimális.
+
+- Időigény: <img src="https://latex.codecogs.com/svg?O(b%5Em)" />, Tárigény: <img src="https://latex.codecogs.com/svg?O(bm)" />
+  
+  > Az időigény nagyon rossz, tárigény jó, mert nem exponenciális.
+
+> <img src="https://latex.codecogs.com/svg?m" />: keresőfa maximális mélysége.
+
+###### Iteratívan mélyülő keresés
+
+**Mélységi keresések** sorozata 1, 2, 3 srb. **mélységekre korlátozva**, amíg célállapotot nem találunk.
+
+- Teljesség és optimalitás a szélességi kereséssel egyezik meg.
+
+- Időigény: <img src="https://latex.codecogs.com/svg?O(b%5Ed)" />
+  
+  > Általában jobb, mint a szélességi
+
+- Tárigény: <img src="https://latex.codecogs.com/svg?O(bd)" />
+  
+  > Jobb, mint a mélységi
+
+Meglepő, de igaz, hogy annak ellenére, hogy az első szinteket újra, meg újra bejárjuk, javítunk.
+
+Ez a **legjobb informálatlan kereső**.
+
+###### Egyenletes költségű keresés
+
+Költség alapján rendezi a permet, először a legkisebb útiköltségű csúcsot fejtjük ki.
+
+###### Gráflekeresés
+
+Ha nem fa az állapottér.
+
+Ha a kezdőállapotból több út is vezet egy állapotba, akkor a fakeresés végtelen ciklusba eshet, de legalábbis a hatékonysága drasztikusan csökken.
+
+**Cél**: Ugyan azon állapotba vezető útak redundáns tárolásának elkerülése.
+
+**Zárt halmaz**: Ebbe **tároljuk** a peremből **már egyszer kivett** csúcsokat.
+
+```
+gráfkereses() {
+    perem = { újcsúcs(kezdőállapot) }
+    zárt = { }
+    while perem.nemüres() {
+        csúcs = perem.elsőkivesz()
+        if csúcs.célállapot() {
+            return csúcs
+        }
+        zárt.hozzáad(csúcs)
+        perem.beszúr(csúcs.kiterjeszt() - zárt)
+    }
+    throw Error
+}
+```
+
+Mi van, ha egy zárt halmazban levő csúcshoz **találnánk jobb megoldást**?
+
+- Egyenletes költségű kereséskor nincs ilyen eset, mert az úgy pont Djikstra algoritmusa az állapottérre.
+
+- Mélységi keresésnél előfordulhat ilyen, ekkor át kell linkelni a zárt halmazban tárolt csúcsot a jobb út felé. 
+  
+  > Ez csak annyi, hogy frissítjük a szülőt, mélységet, költséget, és cselekvést?
+
+##### Informált keresés
+
+TODO
+
+##### Heurisztikák
+
+TODO
+
+### 2. Teljes együttes eloszlás tömör reprezentációja, Bayes hálók. Gépi tanulás: felügyelt tanulás problémája, döntési fák, naiv Bayes módszer, modellillesztés, mesterséges neuronhálók, k-legközelebbi szomszéd módszere.
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
