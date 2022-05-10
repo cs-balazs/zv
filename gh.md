@@ -3521,7 +3521,7 @@ Különben, ha már nem tudunk több klózt lebezetni, <img src="https://latex.c
 - Mivel a <img src="https://latex.codecogs.com/svg?C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://latex.codecogs.com/svg?C_n%20%3D%20%5Csquare" /> kell legyen.
 ## Mesterséges Intelligencia 1.
 
-### 1. Keresési feladat: feladatreprezentáció, vak keresés, informált keresés, heurisztikák. Kétszemályes zéró összegű játékok: minimax, alfa-béta eljárás. Korlátozás kielégítési feladat.
+### 1. Keresési feladat: feladatreprezentáció, vak keresés, informált keresés, heurisztikák. Kétszemélyes zéró összegű játékok: minimax, alfa-béta eljárás. Korlátozás kielégítési feladat.
 
 #### Keresési feladat
 
@@ -3683,11 +3683,266 @@ Mi van, ha egy zárt halmazban levő csúcshoz **találnánk jobb megoldást**?
 
 ##### Informált keresés
 
-TODO
+Az eddigi algoritmusok nem fogtak semmit arról, hogy merre haladnak tovább.
 
-##### Heurisztikák
+Heurisztika: Minden állapotból megbeszülni, hogy mekkora az optimális út költsége az adott állapotból egy célállapotba. Ez alapján tudjuk kiválasztani, merre érdemes haladni.
 
-TODO
+> Például útvonal-tervezési probléma esetén jó heurisztika lehet a légvonal-beli távolság.
+
+<img src="https://latex.codecogs.com/svg?h(n)" />: **Optimális** költség **közelítése** <img src="https://latex.codecogs.com/svg?n" /> **állapotból** a legközelebbi **célállapotba**.
+
+<img src="https://latex.codecogs.com/svg?g(n)" />: **Tényleges** költség a **kezdőállapozból** <img src="https://latex.codecogs.com/svg?n" />-be.
+
+###### Mohó legjobb-először
+
+A peremben rendezést <img src="https://latex.codecogs.com/svg?h" /> alapján végezzük, a legkisebb értékű csúcsot vesszük ki.
+
+<img src="https://latex.codecogs.com/svg?h(n)%20%3D%200" />, ha <img src="https://latex.codecogs.com/svg?n" /> célállapot feltételezése mellett:
+
+- Teljes, ha a keresési fa véges mélységű
+
+- Nem optimális
+
+- Időigény = Tárigény = <img src="https://latex.codecogs.com/svg?O(b%5Em)" />
+
+> Jó <img src="https://latex.codecogs.com/svg?h" />-val javítható ez a komplexitás
+
+###### <img src="https://latex.codecogs.com/svg?A%5E*" />
+
+A peremben a rendezést <img src="https://latex.codecogs.com/svg?f()%20%3D%20h()%20%2B%20g()" /> alapján végezzük, a legkisebb értékűt vesszük ki.
+
+> A teljes út költségét becsüli.
+
+**Teljesség és optimalitás**
+
+<img src="https://latex.codecogs.com/svg?h" /> **elfogadható** (megengedhető): Ha nem ad nagyobb értéket, mint a tényleges optimális érték, azaz **nem becsül túl**.
+
+Fakeresés esetén ha <img src="https://latex.codecogs.com/svg?h" /> elfogadható, és a keresési fa véges, akkor az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimális.
+
+<img src="https://latex.codecogs.com/svg?h" /> **konzisztens** (monoton): Ha <img src="https://latex.codecogs.com/svg?h(n)%20%5Cle%20c(n%2C%20a%2C%20n')%20%2B%20h(n~)" /> minden <img src="https://latex.codecogs.com/svg?n" />-re, és <img src="https://latex.codecogs.com/svg?n" /> minden <img src="https://latex.codecogs.com/svg?n'" /> szomszédjára.
+
+Gráfkeresés esetén ha <img src="https://latex.codecogs.com/svg?h" /> konzisztens, és az állapottér véges, akkot az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimális.
+
+**Hatákonyság**
+
+Az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimálisan hatékony, hiszen csak azokat a csúcsokat terjeszti ki, amelyekre <img src="https://latex.codecogs.com/svg?f()%20%3C%20C%5E*" /> (<img src="https://latex.codecogs.com/svg?C%5E*" /> az optimális költség).
+
+> Bár ezeket minden optimális algoritmusnak ki kell terjeszteni.
+
+A tárigény általában exponenciális, de nagyon függ <img src="https://latex.codecogs.com/svg?h" />-tól (ha <img src="https://latex.codecogs.com/svg?h%20%3D%20h%5E*" />, akkor konstans).
+
+Időigény szintén erősen függ <img src="https://latex.codecogs.com/svg?h" />-tól.
+
+###### Egyszerűsített memóriakorlátozott <img src="https://latex.codecogs.com/svg?A%5E*" />
+
+Próbáljuk meg az összes rendelkezésre álló memóriát használni, és kezeljük le, ha elfogy.
+
+Futtassuk az <img src="https://latex.codecogs.com/svg?A%5E*" />-ot amíg van memória, ha elfogyott:
+
+- Töröljük a legrosszabb levelet a keresőfában, egyezés esetén a régebbit.
+
+- A törölt csúcs szülőjében jegyezzük meg az innen elérhető ismert legjobb költséget (így később vissza lehet ide térni, ha minden többi útról kiderülne, hogy rosszabb)
+
+Teljes, ha a legkisebb mélységű célállapot mélységényi csúcs belefér a memóriába egyszerre. (Tehát az oda vezető egész út.)
+
+Hasonló költségű utak esetén előfordulhat, hogy ugrál a két út közt, így lassan talál megoldást.
+
+###### Relaxáció
+
+Feltételek elhagyása.
+
+Például a 8-kirakós játék esetén
+![ ](../img/kirakos.png)
+
+- <img src="https://latex.codecogs.com/svg?h_1" />: Rossz helyen lévő számok, ábrán 8
+  
+  - Relaxáció: Minden szám egyből a helyére rakható
+
+- <img src="https://latex.codecogs.com/svg?h_2" />: Manhattan távolság számonként, ábrán 18
+  
+  - Relaxáció: Minden szám tolható a szomszédba, akkor is ha van ott másik szám
+
+- <img src="https://latex.codecogs.com/svg?h_%7Bopt%7D" />: Optimális költségek, ábrán 26
+
+Észervétel: <img src="https://latex.codecogs.com/svg?%5Cforall%20n%20%3A%20h_1(n)%20%5Cle%20h_2(n)" />, azaz <img src="https://latex.codecogs.com/svg?h_2" /> **dominálja** <img src="https://latex.codecogs.com/svg?h_1" />-et.
+
+A relaxált probléma optimális költsége <img src="https://latex.codecogs.com/svg?%5Cle" /> az eredeti probléma optimális költségénél, mivel az eredeti probléma állapottere része a relaxáltnak (mivel pl az hogy akkor is léphetünk szomszédba, ha foglalt, növeli az állapotteret). Tehát **elfogadható heurisztikát kapunk**.
+
+> Konzisztens is
+
+###### Relaxálás automatizálása
+
+Ha formális kifejezés adja meg a lehetséges lépéseket a probléma lehetséges állapotairól, akkor automatikusan elhagyhatunk feltételeket, pl. 8-kirakó esetében formálisan:
+
+1. Egy számot csak szomszédos pozícióra lehet mozgatni, és
+
+2. Egy számot csak üres pozícióba lehet mozgatni
+
+Ha elhagyjuk mindkét szabályt, akkor <img src="https://latex.codecogs.com/svg?h_1" />-et kapjuk.
+
+Ha csak a 2-es szabályt hagyjuk el, kkor pedig <img src="https://latex.codecogs.com/svg?h_2" />-t.
+
+###### Több heurisztika kombinálása
+
+<img src="https://latex.codecogs.com/svg?h(n)%20%3D%20max(h_1(n)%2C%20...%2C%20h_k(n))" />
+
+Ha igaz, hogy minden <img src="https://latex.codecogs.com/svg?i" />-re <img src="https://latex.codecogs.com/svg?h_i" /> konzisztens, akkor <img src="https://latex.codecogs.com/svg?h" /> is konzisztens.
+
+#### Kétszemélyes zéró összegű játékok
+
+##### Kétszemélyes, lépésváltásos, determinisztikus, zéró-összegű játék
+
+- Lehetséges állapotok halmaza
+  
+  - Legális játékállások
+
+- Egy kezdőállapot
+
+- Lehetséges cselekvések halmaza
+
+- Állapotátmenet függvény
+
+- Célállapotok
+
+- Hasznosségfüggvény: Célállapozhoz hasznosságot rendel
+
+Ez a **játékgráf** (jellemzően nem fa)
+
+Két **ágens** van, felváltva lépnek.
+
+- **MAX játékos**: Maximalizálni akarja a hasznosság függvényt.
+
+- **MIN játékos**: Minimalizálni akarja a hasznosság függvényt.
+
+> Konvenció: MAX kezd
+
+Első célállapot elérésekor a játéknak vége.
+
+Zéró összegű játék: Modellünkben MIN minimalizálja a hasznosságot, lényegében maximalizálja a negatív hasznosságot. Így lényegében a MIN játékis hasznosságfüggvénye a MAX játékosénak -1-szerese, innen az elnevezés, mert a kettő összege nulla.
+
+Példa az amőba játék játékgráfjára
+
+![ ](../img/tictactoe.png)
+
+##### Minimax algoritmus
+
+Tökéletesen racionális hipotézis: Tfh. mindkét játékos a teljes játékgráfot ismeri, tetszőlegesen komplex számításokat tud elvégezni, és nem hibázik.
+
+Stratégia: Minden állapotra meghatározza, hogy melyik lépést kell választani.
+
+Minmax a következőeket számolja minden <img src="https://latex.codecogs.com/svg?n" /> csúcsra:
+
+![ ](../img/minimax.png)
+
+```c
+maxErtek(n) {
+    if végállapot(n) return hasznosság(n)
+    max = -végtelen
+    for a in n szomszédai {
+        max = max(max, minÉrték(a)) // Itt a MIN játékos lép!
+    }
+    return max
+}
+```
+
+```c
+minErtek(n) {
+    if végállapot(n) return hasznosság(n)
+    min = végtelen
+    for a in n szomszédai {
+        min = min(min, maxÉrték(a)) // Itt a MAX játékos lép!
+    }
+    return min
+}
+```
+
+ Az eljárás `maxErtek(kezdőállapot)` hívással indul, hiszen a MAX játékos kezd.
+
+Ha van a játékgráfban köt, akkor nem terminál. Ez a gyakorlatban azért nem probléma, mert csak adott mélységig futtatjuk.
+
+> Sok játék esetén a szabályok kizárják a végtelenségig futó köröket.
+
+A minmax érték az optimális hasznosság, amit az adott állapotból el lehet érni, ha az ellenfél tökéletesen racionális.
+
+##### Alfa-béta vágás
+
+Ha tudjuk, hogy MAX egy adott csúcs rekurzív kiértékelése közben talált olyan stratégiát, amellyel ki tud kényszeríteni pl. 10 értékű hasznosságot az adott csúcsban, akkot a csúcs további kiértékelése közben nem kell vizsgálni olyan állapotokat, amelyekben MIN ki tud kényszerítani <img src="https://latex.codecogs.com/svg?%5Cle" /> 10 hasznosságot, hiszen tudjuk, hogy MAX sosem fogja ide engedni a játékot.
+
+Új paraméterek:
+
+- **Alfa**: **MAX-nak** már felfedeztünk egy olyan stratégiát, amely **alfa** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az <img src="https://latex.codecogs.com/svg?n" /> állapotból a gyökér felé vezetű úton van.
+
+- **Béta**: **MIN-nek** már felfedeztünk egy olyan stratégiát, amely **béta** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az n állapotból a gyökér felé vezetű úton van.
+
+Számítás a `maxÉrték(kezdőállapot, -végtelen, végtelen)` hívással indul.
+
+```
+maxErtek(n, alfa, beta) {
+    if végállapot(n) return hasznosság(n)
+    max = -végtelen
+    for a in n szomszédai {
+        max = max(max, minÉrték(a, alfa, beta)) // Itt a MIN játékos lép!
+        if max >= beta return max // Vágás!
+        alfa = max(max, alfa)
+    }
+    return max
+}
+```
+
+```
+mixErtek(n, alfa, beta) {
+    if végállapot(n) return hasznosság(n)
+    min = végtelen
+    for a in n szomszédai {
+        min = min(min, maxÉrték(a, alfa, beta)) // Itt a MIN játékos lép!
+        if alfa >= min return min // Vágás!
+        beta = min(min, beta)
+    }
+    return min
+}
+```
+
+Ha mindig a legjobb lépést vesszük, akkor <img src="https://latex.codecogs.com/svg?O(b%5E%7Bm%20%2F%202%7D)" />, amúgy <img src="https://latex.codecogs.com/svg?O(b%5Em)" />.
+
+> Gyakorlatban használhatunk rendezési heurisztikákat, amik sokszor közel kerülnek az optimális esethez. 
+
+#### Korlátozás kielégítési feladat
+
+**Lehetséges állapotok halmaza**: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BD%7D%20%3D%20%5Cmathcal%7BD%7D_1%20%5Ctimes%20...%20%5Ctimes%20%5Cmathcal%7BD%7D_n" />, ahol <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BD%7D_i" /> az <img src="https://latex.codecogs.com/svg?i" />. változó lehetséges értékei, azaz a feladat állapotai az <img src="https://latex.codecogs.com/svg?n" /> db változó lehetséges értékkombinációi.
+
+**Célállapotok**: A megengedett állapotok, amelyek definíciója a következő: Adottak <img src="https://latex.codecogs.com/svg?C_1%2C%20...%2C%20C_m" /> korlátozások, <img src="https://latex.codecogs.com/svg?C_i%20%5Csubseteq%20%5Cmathcal%7BD%7D" />. A megengedett vagy konzisztens állapotok halmaza a <img src="https://latex.codecogs.com/svg?C_1%20%5Ccap%20...%20%5Ccap%20C_m" />. (Ezek minden korlátozást kielégítenek)
+
+> Gyakran egy <img src="https://latex.codecogs.com/svg?C_i" /> korlátozás egy változóra vagy változópárra fejez ki megszorítást
+
+**Kényszergráf**: A feladatban szereplő változók és a korlátozások által definiált gráf. Ugye ez változó párokra értendő, de ha esetleg több változót érintenek a korlátozások, az is felírható olyan korlátokkal, amik kettőt érintenek.
+
+##### Inkrementális kereső algoritmusok
+
+A probléma éllapottárbeli keresésként értelmezve:
+
+- Minden változóhoz felveszünk egy új "ismeretlen" értéket. Jelölje ezt "?". a kezdeti állapot: <img src="https://latex.codecogs.com/svg?(%3F%2C%20...%2C%20%3F)" />.
+
+- Az állapotátmenet függvény rendeljen hozzá minden állapothoz olyan állapotokat, amelyekben egyel kevesebb ? van, és amelyek megengedettek.
+
+- A költség minden állapotátmenetre legyen konstans.
+
+> Mélységi keresés jó választás lehet, mert a keresőfa mélysége kicsi.
+
+Informált kereséssel: próbáljunk nehezen kielégíthatő változókat kifejteni előbb:
+
+- Amelyikhez a legkevesebb megengedett lépés maradt
+
+- Amelyre a legtöbb korlátozás vonatkozik
+
+A választott változó megengedett lépéseiből kezdjük azzal, amelyik a legkevésbé korlátozza a következő lehetséges lépések számát.
+
+##### Optimalizáló algoritmusok, lokális keresők
+
+Egy másik lehetséges megközelítés **optimalizálási problémát definiálni**:
+
+- A **célfüggvényt** definiáljuk pl. úgy, hogy legyen a megsértett korlátozások száma. Ha eleve tartozott célfüggvény a feladathoz, össze kell kombonálni vele.
+
+- Az **operátorokat** definiálhatjuk sokféleképpen, pl. valamely változó értékének megváltoztatásaként.
 
 ### 2. Teljes együttes eloszlás tömör reprezentációja, Bayes hálók. Gépi tanulás: felügyelt tanulás problémája, döntési fák, naiv Bayes módszer, modellillesztés, mesterséges neuronhálók, k-legközelebbi szomszéd módszere.
 # Programozási nyelvek
