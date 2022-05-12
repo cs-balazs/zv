@@ -3945,6 +3945,180 @@ Egy másik lehetséges megközelítés **optimalizálási problémát definiáln
 - Az **operátorokat** definiálhatjuk sokféleképpen, pl. valamely változó értékének megváltoztatásaként.
 
 ### 2. Teljes együttes eloszlás tömör reprezentációja, Bayes hálók. Gépi tanulás: felügyelt tanulás problémája, döntési fák, naiv Bayes módszer, modellillesztés, mesterséges neuronhálók, k-legközelebbi szomszéd módszere.
+
+#### * Alapfogalmak
+
+##### Véletlen változók
+
+Van **neve**, és **lehetséges értékei**, azaz **domainje**.
+
+**Elemi kijelentés**: <img src="https://latex.codecogs.com/svg?A" /> értékének egy korlátozását fejezik ki (pl. <img src="https://latex.codecogs.com/svg?A%20%3D%20d" />, ahol <img src="https://latex.codecogs.com/svg?d%20%5Cin%20D_A" />)
+
+> Itt <img src="https://latex.codecogs.com/svg?A" /> egy véletlen változó, <img src="https://latex.codecogs.com/svg?D_A" /> domainnel.
+
+**Véletlen változók típusai**:
+
+- **Logikai**: A domain ekkor <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20igaz%2C%20hamis%20~%20%5C%7D" />.
+  
+  - Pl. "Fogfájás=igaz", vagy csak simán "fogfájás" (és negáltja <img src="https://latex.codecogs.com/svg?%5Cneg" />fogfájás) egy elemi kijelentés.
+
+- **Diszkrét**: Megszámlálható domain, pl. idő, ahol a domain <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20nap%2C%20es%C3%B6%2C%20felh%C3%B6%2C%20h%C3%B3%20~%20%5C%7D" />.
+  
+  - Pl. "Idő=nap", vagy csak simán "nap".
+
+- **Folytonos**: Pl.: <img src="https://latex.codecogs.com/svg?X" /> véletlen változó, <img src="https://latex.codecogs.com/svg?D%20%5Csubseteq%20%5Cmathbb%7BR%7D" />
+  
+  - Pl. <img src="https://latex.codecogs.com/svg?X%20%5Cle%203.2" /> Egy elemi kijelentés
+
+**Komplex kijelentések**: Elemi kijelentésekből képezzük a szokásos logikai operátorokkal.
+
+**Elemi esemény**: Minden véletlen változóhoz értéket rendel: Ha <img src="https://latex.codecogs.com/svg?A_1%2C%20...%2C%20A_n" /> véletlen változókat definiálunk a <img src="https://latex.codecogs.com/svg?D_1%2C%20...%2C%20D_n" /> domainekkel, akkor az elemi események halmaza a <img src="https://latex.codecogs.com/svg?D_1%20%5Ctimes%20...%20%5Ctimes%20D_n" /> halmaz.
+
+**Valószínűség**: Egy függvény, amely egy kijelentéshez egy valós számot rendel.
+
+> Véletlen változók: nagy betűk
+> Kijelentések, és a változók értékei: kis betűk
+
+<img src="https://latex.codecogs.com/svg?P(a)" /> az <img src="https://latex.codecogs.com/svg?a" /> kijelentés valószínűsége.
+
+<img src="https://latex.codecogs.com/svg?P(A)" />: <img src="https://latex.codecogs.com/svg?A" /> tetszőleges értékére érvényes az adott állítás / képlet.
+
+A <img src="https://latex.codecogs.com/svg?P" /> függvény a **valószínűségi eloszlás**, amely minden lehetséges kijelentéshez valószínűséget rendel.
+
+<img src="https://latex.codecogs.com/svg?P(A%2C%20B)%20%3D%20P(A%20%5Cland%20B)" />
+
+###### Feltételes valószínűség
+
+<img src="https://latex.codecogs.com/svg?P(a%20%7C%20b)%20%3D%20P(a%20%5Cland%20b)%20%2F%20P(b)" /> (feltéve, hogy <img src="https://latex.codecogs.com/svg?P(b)%20%3E%200" />)
+
+> **Jelentése**: *Az <img src="https://latex.codecogs.com/svg?a" /> kijelentés **feltételes valószívűsége**, feltéve, hogy az összes tudásunk <img src="https://latex.codecogs.com/svg?b" /> (<img src="https://latex.codecogs.com/svg?b" /> is egy kijelentés)*
+
+**Szorzatszabály**: <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b)%20%3D%20P(a%20%7C%20b)P(b)%20%3D%20P(b%20%7C%20a)P(a)" />
+
+##### Teljes együttes eloszlás
+
+Az **összes elemi esemény valószínűségét** megadja.
+
+Ebből kiszámolható **bármely kijelentés valószínűsége**.
+
+Továbbiakhoz feltesszük, hogy az **összes változó diszkrét**.
+
+###### Példa
+
+Legyenek a véletlen változók `Luk`, `Fogfájás`, `Beakad`, mind logikai típusú. Ekkor a teljes együttes eloszlást egy táblázat tartalmazza:
+
+| `Luk` | `Fogfájás` | `Beakad` | <img src="https://latex.codecogs.com/svg?P()" /> |
+|:-----:|:----------:|:--------:|:-----:|
+| nem   | nem        | nem      | 0.576 |
+| nem   | nem        | igen     | 0.144 |
+| nem   | igen       | nem      | 0.064 |
+| nem   | igen       | igen     | 0.016 |
+| igen  | nem        | nem      | 0.008 |
+| igen  | nem        | igen     | 0.072 |
+| igen  | igen       | nem      | 0.012 |
+| igen  | igen       | igen     | 0.108 |
+
+#### * Függetlenség
+
+Az <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> kijelentések függetlenek akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b)%20%3D%20P(a)%20P(b)" />.
+
+Az <img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> véletlen változók függetlenek akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(A%2C%20B)%20%3D%20P(A)P(B)" />, vagy ekvivalensen <img src="https://latex.codecogs.com/svg?P(A%7CB)%20%3D%20P(A)" />, illetve <img src="https://latex.codecogs.com/svg?P(B%7CA)%20%3D%20P(B)" />
+
+Azaz két változó független, ha az egyik sem tartalmaz információt a másikról.
+
+#### * Feltételes függetlenség
+
+Az <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> **kijelentések** feltételesen függetlenek <img src="https://latex.codecogs.com/svg?c" /> feltételével akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b%20%7C%20c)%20%3D%20P(a%20%7C%20b)P(b%7Cc)" />. Ekkor <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> nem feltétlenül független abszolút értelemben.
+
+Tipikus eset, ha <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> közös **oka** <img src="https://latex.codecogs.com/svg?c" />.
+
+<img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> **véletlen változók** feltételesen függetlenek <img src="https://latex.codecogs.com/svg?C" /> feltevésével akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(A%2C%20B%20%7C%20C)%20%3D%20P(A%20%7C%20C)%20P(B%7CC)" />, vagy ekvivalensen <img src="https://latex.codecogs.com/svg?P(A%20%7C%20B%2C%20C)%20%3D%20P(A%20%7C%20C)" />, illetve <img src="https://latex.codecogs.com/svg?P(B%20%7C%20A%2C%20C)%20%3D%20P(B%7CC)" />.
+
+Egy lehetséges elérhető tömörítés:
+
+<img src="https://latex.codecogs.com/svg?P(A%2C%20B%2C%20C)%20%3D%20P(A%2C%20B%20%7CC)P(C)%20%3D%20P(A%7CC)P(B%7CC)P(C)" />
+
+> Első egyenlőség: **Szorzatszabály**
+> 
+> Második egyenlőség: Feltételes függetlenség **feltevése**
+
+> <img src="https://latex.codecogs.com/svg?P(A%7CC)%2C%20P(B%7CC)%2C%20P(C)" /> táblázatok méreteinek összege sokkal kisebb lehet, mint az eredeti <img src="https://latex.codecogs.com/svg?P(A%2C%20B%2C%20C)" />
+
+Ha <img src="https://latex.codecogs.com/svg?A" /> feltevése mellett <img src="https://latex.codecogs.com/svg?B_1%2C%20...%2C%20B_n" /> kölcsönösen függetlenek, azaz
+
+<img src="https://latex.codecogs.com/svg?%0AP(B_1%2C%20...%2C%20B_n%20%7C%20A)%20%3D%20%5Cprod_%7Bi%3D1%7D%5En%20P(B_i%20%7C%20A)%0A" />
+
+Ez a naiv Bayes modell alakja. Itt <img src="https://latex.codecogs.com/svg?O(n)" /> tömörítés érhető el, hiszen
+
+<img src="https://latex.codecogs.com/svg?%0AP(B_1%2C%20...%2C%20B_n%20%7C%20A)%20%3D%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(B_i%20%7C%20A)%0A" />
+
+
+
+#### Teljes együttes eloszlás tömör reprezentációja
+
+> Feltételes függetlenséggel tudjuk tömöríteni a teljes együttes eloszlás reprezentációját
+
+##### Láncszabály
+
+Legyen <img src="https://latex.codecogs.com/svg?X_1%2C%20...%2C%20X_n" /> a féletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
+
+<img src="https://latex.codecogs.com/svg?%0AP(X_1%2C%20...%2C%20X_n)%20%3D%20P(X_1%20%7C%20X_2%2C%20...%2C%20X_n)%20P(X_2%2C%20...%2C%20X_n)%20%3D%20%5C%5C%0AP(X_1%20%7C%20X_2%2C%20...%2C%20X_n)%20P(X_2%20%7C%20X_3%2C%20...%2C%20X_n)%20P(X_3%20%7C%20X_4%2C%20...%2C%20X_n)%20...%20P(X_n)%20%3D%20%5C%5C%0A%5Cprod_%7Bi%20%3D%201%7D%5En%20P(X_i%20%7C%20X_%7Bi%20%2B%20)%7D%2C%20...%2C%20X_n)%0A" />
+
+Minden <img src="https://latex.codecogs.com/svg?P(X_i%20%7C%20X_%7Bi%20%2B%20%7D%2C%20...%2C%20X_n)" /> tényezőre az <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20X_%7Bi%20%2B%201%7D%2C%20...%2C%20X_n%20~%20%5C%7D" /> változókból vegyünk egy <img src="https://latex.codecogs.com/svg?Sz%C3%BCl%C3%B6k(X_i)" /> részhalmazt, melyre igaz, hogy <img src="https://latex.codecogs.com/svg?P(X_i%20%7C%20X_%7Bi%20%2B%201%7D%2C%20...X_n)%20%3D%20P(X_i%20%7C%20Sz%C3%BCl%C3%B6k(X_i))" />, és a <img src="https://latex.codecogs.com/svg?Sz%C3%BCl%C3%B6k(X_i)" /> halmaz minimális, azaz belőle több elem nem hagyható el, különben a fenti tulajdonság sérül.
+
+Ez a tömörítési lépés, és annál jobb, minél kisebb a <img src="https://latex.codecogs.com/svg?Sz%C3%BCl%C3%B6k(X_i)" /> halmaz.
+
+Ekkor persze:
+
+<img src="https://latex.codecogs.com/svg?%0AP(X_1%2C%20...%2C%20X_n)%20%3D%20%5Cprod_%7Bi%20%3D%201%7D%5En%20P(X_i%20%7C%20Sz%C3%BCl%C3%B6k(X_i))%0A" />
+
+Ez a teljes együttes eloszlás tömörített reprezentációja.
+
+#### Bayes-hálók
+
+**Teljes együttes eloszlás tömörítése** alapján egy **gráfot definiál**, ami egy tömör, és intuitív reprezentációt tesz lehetővé.
+
+A teljes együttes eloszlás tömörítésekor bevezetett <img src="https://latex.codecogs.com/svg?Sz%C3%BCl%C3%B6k(X_i)" /> jelölés már a gráf struktúrára utal, amelyben a csúcsok az <img src="https://latex.codecogs.com/svg?X_i" /> véletlen változók, és az <img src="https://latex.codecogs.com/svg?(Y%2C%20X_i)" /> irányított él akkor és csak akkor van behúzva, ha <img src="https://latex.codecogs.com/svg?Y%20%5Cin%20Sz%C3%BCl%C3%B6k(X_i)" />. A gráfban minden <img src="https://latex.codecogs.com/svg?X_i" /> változóhoz tartozik egy <img src="https://latex.codecogs.com/svg?P(X_i%20%7C%20Sz%C3%BCl%C3%B6k(X_i))" /> eloszlás.
+
+Ez egy irányított, körmentes gráfot alkot.
+
+##### Példa
+
+![ ](../img/bayes_halo_pelda.png)
+
+Egy konkrét lehetséges világ valószínűsége pl.:
+
+<img src="https://latex.codecogs.com/svg?%0AP(B%20%5Cland%20%5Cneg%20E%20%5Cland%20A%20%5Cland%20J%20%5Cland%20%5Cneg%20M)%20%3D%20%5C%5C%0A%3D%20P(B)P(%5Cneg%20E)P(A%20%7C%20B%2C%20%5Cneg%20E)P(J%7CA)P(%5Cneg%20M%20%7C%20A)%20%3D%20%5C%5C%0A%3D%200.001%20*%20(1%20-%200.002)%20*%200.94%20*%200.9%20*%20(1%20-%200.7)%0A" />
+
+Ha egy Bayes-hálóban <img src="https://latex.codecogs.com/svg?X" />-ből <img src="https://latex.codecogs.com/svg?Y" /> csúcsba vezet él, akkor <img src="https://latex.codecogs.com/svg?Y" /> és <img src="https://latex.codecogs.com/svg?X" /> nem független.
+
+DE nem igaz, hogy ha <img src="https://latex.codecogs.com/svg?X" /> és <img src="https://latex.codecogs.com/svg?Y" /> nem független, akkor van köztük él.
+
+Egy eloszláshoz **sok különböző Bayes háló** adható.
+
+##### Bayes-háló konstruálása
+
+**Gyakorlatban** sokszor egy szakértő definiálja a változókat, és a hatásokat a változók között, és ennek a tudásnak a segítségével kitöltjük a változóhoz tartozó feltételes eloszlásokat. Ekkor adott az intuitív reprezentáció, ami definiál egy teljes együttes eloszlást, és ezt felhasználjuk valószínűségi következtetésekre.
+
+**Elméleti** szempontból bármely adott együttes elosztásra konstruálható Bayes háló a láncszabállyal.
+
+FONTOS! A láncszabály alkalmazásakor használt, rögzített változósorrendtől függ a Bayes háló.
+
+##### Függetlenség, és Bayes hálók
+
+Függetlenséggel kapcsolatos információk kiolvasása a hálóból.
+
+Ha <img src="https://latex.codecogs.com/svg?Y" /> nem leszármazottja <img src="https://latex.codecogs.com/svg?X" />-nek, akkor: <img src="https://latex.codecogs.com/svg?P(X%20%7C%20Sz%C3%BCl%C3%B6k(X)%2C%20Y)%20%3D%20P(X%20%7C%20Sz%C3%BCl%C3%B6k(X))" />
+
+Bármely <img src="https://latex.codecogs.com/svg?Y" /> váltzóra igaz: <img src="https://latex.codecogs.com/svg?P(X%20%7C%20%5Ctext%7BMarkov-takar%C3%B3%7D(X)%2C%20Y)%20%3D%20P(X%20%7C%20%5Ctext%7BMarkov-takar%C3%B3%7D(X))" />
+
+> **Markov-takaró(X)**: Az a halmaz, amely <img src="https://latex.codecogs.com/svg?X" /> szülőinek, <img src="https://latex.codecogs.com/svg?X" /> gyerekeinek, és <img src="https://latex.codecogs.com/svg?X" /> gyerekei szülőinek az uniója.
+
+##### Folytonos változók
+
+##### Valószínűségi következtetés
+
+> Többi alfejezet nem hiszem, hogy kell?
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
