@@ -424,3 +424,191 @@ Egy másik lehetséges megközelítés **optimalizálási problémát definiáln
 - Az **operátorokat** definiálhatjuk sokféleképpen, pl. valamely változó értékének megváltoztatásaként.
 
 ### 2. Teljes együttes eloszlás tömör reprezentációja, Bayes hálók. Gépi tanulás: felügyelt tanulás problémája, döntési fák, naiv Bayes módszer, modellillesztés, mesterséges neuronhálók, k-legközelebbi szomszéd módszere.
+
+#### * Alapfogalmak
+
+##### Véletlen változók
+
+Van **neve**, és **lehetséges értékei**, azaz **domainje**.
+
+**Elemi kijelentés**: $A$ értékének egy korlátozását fejezik ki (pl. $A = d$, ahol $d \in D_A$)
+
+> Itt $A$ egy véletlen változó, $D_A$ domainnel.
+
+**Véletlen változók típusai**:
+
+- **Logikai**: A domain ekkor $\{ ~ igaz, hamis ~ \}$.
+  
+  - Pl. "Fogfájás=igaz", vagy csak simán "fogfájás" (és negáltja $\neg$fogfájás) egy elemi kijelentés.
+
+- **Diszkrét**: Megszámlálható domain, pl. idő, ahol a domain $\{ ~ nap, esö, felhö, hó ~ \}$.
+  
+  - Pl. "Idő=nap", vagy csak simán "nap".
+
+- **Folytonos**: Pl.: $X$ véletlen változó, $D \subseteq \mathbb{R}$
+  
+  - Pl. $X \le 3.2$ Egy elemi kijelentés
+
+**Komplex kijelentések**: Elemi kijelentésekből képezzük a szokásos logikai operátorokkal.
+
+**Elemi esemény**: Minden véletlen változóhoz értéket rendel: Ha $A_1, ..., A_n$ véletlen változókat definiálunk a $D_1, ..., D_n$ domainekkel, akkor az elemi események halmaza a $D_1 \times ... \times D_n$ halmaz.
+
+**Valószínűség**: Egy függvény, amely egy kijelentéshez egy valós számot rendel.
+
+> Véletlen változók: nagy betűk
+> Kijelentések, és a változók értékei: kis betűk
+
+$P(a)$ az $a$ kijelentés valószínűsége.
+
+$P(A)$: $A$ tetszőleges értékére érvényes az adott állítás / képlet.
+
+A $P$ függvény a **valószínűségi eloszlás**, amely minden lehetséges kijelentéshez valószínűséget rendel.
+
+$P(A, B) = P(A \land B)$
+
+###### Feltételes valószínűség
+
+$P(a | b) = P(a \land b) / P(b)$ (feltéve, hogy $P(b) > 0$)
+
+> **Jelentése**: *Az $a$ kijelentés **feltételes valószívűsége**, feltéve, hogy az összes tudásunk $b$ ($b$ is egy kijelentés)*
+
+**Szorzatszabály**: $P(a \land b) = P(a | b)P(b) = P(b | a)P(a)$
+
+##### Teljes együttes eloszlás
+
+Az **összes elemi esemény valószínűségét** megadja.
+
+Ebből kiszámolható **bármely kijelentés valószínűsége**.
+
+Továbbiakhoz feltesszük, hogy az **összes változó diszkrét**.
+
+###### Példa
+
+Legyenek a véletlen változók `Luk`, `Fogfájás`, `Beakad`, mind logikai típusú. Ekkor a teljes együttes eloszlást egy táblázat tartalmazza:
+
+| `Luk` | `Fogfájás` | `Beakad` | $P()$ |
+|:-----:|:----------:|:--------:|:-----:|
+| nem   | nem        | nem      | 0.576 |
+| nem   | nem        | igen     | 0.144 |
+| nem   | igen       | nem      | 0.064 |
+| nem   | igen       | igen     | 0.016 |
+| igen  | nem        | nem      | 0.008 |
+| igen  | nem        | igen     | 0.072 |
+| igen  | igen       | nem      | 0.012 |
+| igen  | igen       | igen     | 0.108 |
+
+#### * Függetlenség
+
+Az $a$ és $b$ kijelentések függetlenek akkor, és csak akkor, ha $P(a \land b) = P(a) P(b)$.
+
+Az $A$ és $B$ véletlen változók függetlenek akkor, és csak akkor, ha $P(A, B) = P(A)P(B)$, vagy ekvivalensen $P(A|B) = P(A)$, illetve $P(B|A) = P(B)$
+
+Azaz két változó független, ha az egyik sem tartalmaz információt a másikról.
+
+#### * Feltételes függetlenség
+
+Az $a$ és $b$ **kijelentések** feltételesen függetlenek $c$ feltételével akkor, és csak akkor, ha $P(a \land b | c) = P(a | b)P(b|c)$. Ekkor $a$ és $b$ nem feltétlenül független abszolút értelemben.
+
+Tipikus eset, ha $a$ és $b$ közös **oka** $c$.
+
+$A$ és $B$ **véletlen változók** feltételesen függetlenek $C$ feltevésével akkor, és csak akkor, ha $P(A, B | C) = P(A | C) P(B|C)$, vagy ekvivalensen $P(A | B, C) = P(A | C)$, illetve $P(B | A, C) = P(B|C)$.
+
+Egy lehetséges elérhető tömörítés:
+
+$P(A, B, C) = P(A, B |C)P(C) = P(A|C)P(B|C)P(C)$
+
+> Első egyenlőség: **Szorzatszabály**
+> 
+> Második egyenlőség: Feltételes függetlenség **feltevése**
+
+> $P(A|C), P(B|C), P(C)$ táblázatok méreteinek összege sokkal kisebb lehet, mint az eredeti $P(A, B, C)$
+
+Ha $A$ feltevése mellett $B_1, ..., B_n$ kölcsönösen függetlenek, azaz
+
+$$
+P(B_1, ..., B_n | A) = \prod_{i=1}^n P(B_i | A)
+$$
+
+Ez a naiv Bayes modell alakja. Itt $O(n)$ tömörítés érhető el, hiszen
+
+$$
+P(B_1, ..., B_n | A) = P(A) \prod_{i=1}^n P(B_i | A)
+$$
+
+
+
+#### Teljes együttes eloszlás tömör reprezentációja
+
+> Feltételes függetlenséggel tudjuk tömöríteni a teljes együttes eloszlás reprezentációját
+
+##### Láncszabály
+
+Legyen $X_1, ..., X_n$ a féletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
+
+$$
+P(X_1, ..., X_n) = P(X_1 | X_2, ..., X_n) P(X_2, ..., X_n) = \\
+P(X_1 | X_2, ..., X_n) P(X_2 | X_3, ..., X_n) P(X_3 | X_4, ..., X_n) ... P(X_n) = \\
+\prod_{i = 1}^n P(X_i | X_{i + )}, ..., X_n)
+$$
+
+Minden $P(X_i | X_{i + }, ..., X_n)$ tényezőre az $\{ ~ X_{i + 1}, ..., X_n ~ \}$ változókból vegyünk egy $Szülök(X_i)$ részhalmazt, melyre igaz, hogy $P(X_i | X_{i + 1}, ...X_n) = P(X_i | Szülök(X_i))$, és a $Szülök(X_i)$ halmaz minimális, azaz belőle több elem nem hagyható el, különben a fenti tulajdonság sérül.
+
+Ez a tömörítési lépés, és annál jobb, minél kisebb a $Szülök(X_i)$ halmaz.
+
+Ekkor persze:
+
+$$
+P(X_1, ..., X_n) = \prod_{i = 1}^n P(X_i | Szülök(X_i))
+$$
+
+Ez a teljes együttes eloszlás tömörített reprezentációja.
+
+#### Bayes-hálók
+
+**Teljes együttes eloszlás tömörítése** alapján egy **gráfot definiál**, ami egy tömör, és intuitív reprezentációt tesz lehetővé.
+
+A teljes együttes eloszlás tömörítésekor bevezetett $Szülök(X_i)$ jelölés már a gráf struktúrára utal, amelyben a csúcsok az $X_i$ véletlen változók, és az $(Y, X_i)$ irányított él akkor és csak akkor van behúzva, ha $Y \in Szülök(X_i)$. A gráfban minden $X_i$ változóhoz tartozik egy $P(X_i | Szülök(X_i))$ eloszlás.
+
+Ez egy irányított, körmentes gráfot alkot.
+
+##### Példa
+
+![ ](../img/bayes_halo_pelda.png)
+
+Egy konkrét lehetséges világ valószínűsége pl.:
+
+$$
+P(B \land \neg E \land A \land J \land \neg M) = \\
+= P(B)P(\neg E)P(A | B, \neg E)P(J|A)P(\neg M | A) = \\
+= 0.001 * (1 - 0.002) * 0.94 * 0.9 * (1 - 0.7)
+$$
+
+Ha egy Bayes-hálóban $X$-ből $Y$ csúcsba vezet él, akkor $Y$ és $X$ nem független.
+
+DE nem igaz, hogy ha $X$ és $Y$ nem független, akkor van köztük él.
+
+Egy eloszláshoz **sok különböző Bayes háló** adható.
+
+##### Bayes-háló konstruálása
+
+**Gyakorlatban** sokszor egy szakértő definiálja a változókat, és a hatásokat a változók között, és ennek a tudásnak a segítségével kitöltjük a változóhoz tartozó feltételes eloszlásokat. Ekkor adott az intuitív reprezentáció, ami definiál egy teljes együttes eloszlást, és ezt felhasználjuk valószínűségi következtetésekre.
+
+**Elméleti** szempontból bármely adott együttes elosztásra konstruálható Bayes háló a láncszabállyal.
+
+FONTOS! A láncszabály alkalmazásakor használt, rögzített változósorrendtől függ a Bayes háló.
+
+##### Függetlenség, és Bayes hálók
+
+Függetlenséggel kapcsolatos információk kiolvasása a hálóból.
+
+Ha $Y$ nem leszármazottja $X$-nek, akkor: $P(X | Szülök(X), Y) = P(X | Szülök(X))$
+
+Bármely $Y$ váltzóra igaz: $P(X | \text{Markov-takaró}(X), Y) = P(X | \text{Markov-takaró}(X))$
+
+> **Markov-takaró(X)**: Az a halmaz, amely $X$ szülőinek, $X$ gyerekeinek, és $X$ gyerekei szülőinek az uniója.
+
+##### Folytonos változók
+
+##### Valószínűségi következtetés
+
+> Többi alfejezet nem hiszem, hogy kell?
