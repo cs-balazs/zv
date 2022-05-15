@@ -4052,8 +4052,6 @@ Ez a naiv Bayes modell alakja. Itt <img src="https://latex.codecogs.com/svg?O(n)
 
 <img src="https://latex.codecogs.com/svg?%0AP(B_1%2C%20...%2C%20B_n%20%7C%20A)%20%3D%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(B_i%20%7C%20A)%0A" />
 
-
-
 #### Teljes együttes eloszlás tömör reprezentációja
 
 > Feltételes függetlenséggel tudjuk tömöríteni a teljes együttes eloszlás reprezentációját
@@ -4114,11 +4112,453 @@ Bármely <img src="https://latex.codecogs.com/svg?Y" /> váltzóra igaz: <img sr
 
 > **Markov-takaró(X)**: Az a halmaz, amely <img src="https://latex.codecogs.com/svg?X" /> szülőinek, <img src="https://latex.codecogs.com/svg?X" /> gyerekeinek, és <img src="https://latex.codecogs.com/svg?X" /> gyerekei szülőinek az uniója.
 
-##### Folytonos változók
+#### Gépi tanulás
 
-##### Valószínűségi következtetés
+##### Felügyelt gépi tanulás
 
-> Többi alfejezet nem hiszem, hogy kell?
+Egy <img src="https://latex.codecogs.com/svg?f%3A%20X%20%5Cto%20Y" /> függvényt keresünk, amely illeszkedik adott példákra.
+
+A példák <img src="https://latex.codecogs.com/svg?(x_1%2C%20f(x_1))%2C%20...%2C%20(x_n%2C%20f(x_n))%20" /> alakban adottak. <img src="https://latex.codecogs.com/svg?x_i%20%5Cin%20X" />
+
+Pl.: <img src="https://latex.codecogs.com/svg?X" /> az emailek halmaza, <img src="https://latex.codecogs.com/svg?Y%20%3D%20%5C%7B%20~%20spam%2C%20%5Cneg%20spam%20~%20%5C%7D" />
+
+Példák kézzel osztályozott emailek.
+
+Egy <img src="https://latex.codecogs.com/svg?h%20%3A%20X%20%5Cto%20Y" />-t keresünk, ami <img src="https://latex.codecogs.com/svg?f" />-et **közelíti**.
+
+A <img src="https://latex.codecogs.com/svg?h" /> függvény **konzisztens** az adatokkal, ha <img src="https://latex.codecogs.com/svg?h(x_i)%20%3D%20f(x_i)" /> minden példára.
+
+A <img src="https://latex.codecogs.com/svg?h" /> függvényt mindig egy <img src="https://latex.codecogs.com/svg?H" /> **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alapkabn keressüg, pl. adott fokszámú polinom.
+
+A tanulás **realizálható**, ha létezik <img src="https://latex.codecogs.com/svg?h%20%5Cin%20H" />, amelyre <img src="https://latex.codecogs.com/svg?H" /> konzisztens.
+
+Gyakorlatban elég, ha <img src="https://latex.codecogs.com/svg?h" /> "közel" van a példákhoz, nem kell pontosan illeszkednie. Ez azért van, mert sokszor a tanuló példák zajt tartalmaznak, és káros ha ezeket megtanuljuk. (**túltanulás**)
+
+**Indukció problémája**: <img src="https://latex.codecogs.com/svg?f" /> jó közelítése olyan, amely a példákon kívül is jól közelíti <img src="https://latex.codecogs.com/svg?f" />-et, azaz jól **általánosít**.
+
+Jó tanulás alapja:
+
+- <img src="https://latex.codecogs.com/svg?H" /> hipotézistér gondos megválasztása
+  
+  - Tartalmazza <img src="https://latex.codecogs.com/svg?f" />-et
+  
+  - Éppen annyira általános, amennyire kell (Occam borotvájának elve)
+
+- Tanuló algoritmus megválasztása
+  
+  - <img src="https://latex.codecogs.com/svg?H" />-ból kiválasztja <img src="https://latex.codecogs.com/svg?h" />-t
+  
+  - Törekedhet tömören leírható <img src="https://latex.codecogs.com/svg?h" />-t választani egy nagyon általános <img src="https://latex.codecogs.com/svg?H" />-ból is.
+
+- Számítási szempontból egyszerű reprezentáció, és hipozézistér
+  
+  - Hatékonyság miatt
+  
+  - Túl egyszerű reprezentáció sokszor komplex hipotézistereket eredményez
+
+##### Reprezentáció
+
+Az <img src="https://latex.codecogs.com/svg?X" /> és <img src="https://latex.codecogs.com/svg?Y" /> halmazok tetszőleges objektumokat írhatnak le, fontos ezek jó reprezentációja.
+
+Pl.: Szövegek esetén szemantikus beágyazások.
+
+<img src="https://latex.codecogs.com/svg?Y" /> halmaz tartalmazhat diszkrét osztálycímkéket, vagy lehet folytonos halmaz is (regresszió).
+
+##### Döntési fák
+
+<img src="https://latex.codecogs.com/svg?x%20%5Cin%20X" /> diszkrét változók értékeinek vektora.
+
+<img src="https://latex.codecogs.com/svg?f(x)%20%5Cin%20Y" /> egy diszkrét változó egy értéke. pl. <img src="https://latex.codecogs.com/svg?Y%20%3D%20%5C%7B%20~%20igen%2C%20nem%20~%20%5C%7D" />
+
+Mivel <img src="https://latex.codecogs.com/svg?Y" /> véges halmaz, osztályozási feladatról beszélünk, ahol <img src="https://latex.codecogs.com/svg?X" /> elemeit kell osztályokba sorolni, és az osztályok <img src="https://latex.codecogs.com/svg?Y" /> értékeinek felelnek meg.
+
+![ ](../img/dontesi_fa.png)
+
+Ez a döntési fa pl. azt határozza meg, hogy az adott jellemzők mellett (<img src="https://latex.codecogs.com/svg?X" />) érdemes-e asztalra várni az étteremben (<img src="https://latex.codecogs.com/svg?Y" />).
+
+Ennek az előnye, hogy a döntések megmagyarázhatóak, emberikel értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
+
+###### Kifejezőerő
+
+A kifejezőerő az **ítéletkalkulus**.
+
+T.f.h. a címke logikai érték.
+
+- **Ítéletek**: Változó értékadások.
+
+- **Modell**: Egy <img src="https://latex.codecogs.com/svg?x%20%5Cin%20X" /> változóvektor egy modell, mert minden ítélet igazságértékét megadja.
+
+- **Formula**: A döntési fából logikai formula gyártható, és fordítva,
+  
+  - Fából formula: Az "igen" címkékhez vezető utakban összeéseljük az éleket, majd összevagyoljuk az utakat.
+  
+  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy <img src="https://latex.codecogs.com/svg?A_1%2C%20...%2C%20A_n" /> felsorolását, az <img src="https://latex.codecogs.com/svg?A_1" /> a gyökérm <img src="https://latex.codecogs.com/svg?A_1" /> értékei az élek, és az <img src="https://latex.codecogs.com/svg?i" />. szinten a fában minden pontban <img src="https://latex.codecogs.com/svg?A_i" /> van, amely pontokból az élek <img src="https://latex.codecogs.com/svg?A_i" /> értékei. Az <img src="https://latex.codecogs.com/svg?A_n" /> változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
+  
+  > Ez a faépítés nagy fákat eredményez, a gyakorlatban éltalában alkalmaznak tömörítési technikákat.
+
+###### Döntési fa építése
+
+Adottak ilyen felépítésű példák:
+
+```
+(
+    (
+        Vendégek=tele,
+        Várakozás=10-30,
+        Éhes=igen,
+        VanMásHely=nem,
+        Esik=igen,
+        Foglalás=nincs,
+        Péntek/Szombat=igen,
+        VanBár=ige
+    ),
+    igaz
+)
+```
+
+És ilyenekből minél több, legalább már száz.
+
+Példákat bemagolni könnyő, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
+
+De a magolás nem általánosít!
+
+Ötlet: A gyökérbe tesszük azt a változót, ami a legtöbb információt hordozza, ezáltal a legjobban szeparálja a példákat.
+
+Majd rekurzívan a még nem rögzített változók közül megint választunk.
+
+Speciális esetek, amikor megállítják a rekurziót:
+
+- Ha csak pozitív, vagy negatív példa van, akkor levélhez értünk, megcímkézzük.
+
+- Ha üres halmazról van szó, akkor egy alapértelmezett értéket definiálunk, pl. a szülőben levő többségi döntést.
+
+- Ha pozitív, és negatív példa is van, de nincs több változó: A többségi szavazattal címkézzük. (Ez akkor fordul elő, ha zajos az adat)
+
+###### A legjobban szeparáló attribútum
+
+Egy <img src="https://latex.codecogs.com/svg?p_1%2C%20...%2C%20p_n" /> valószínűségi eloszlás várható (átlagos) információtartalma, más néven **entrópiája**:
+
+<img src="https://latex.codecogs.com/svg?%0AH(p_1%2C%20...%2C%20p_n)%20%3D%20-%20%5Csum_i%20p_i%20log(p_i)%0A" />
+
+ahol <img src="https://latex.codecogs.com/svg?%5Csum_i%20p_i%20%3D%201" />
+
+Ennek minimuma <img src="https://latex.codecogs.com/svg?0" />, ami a **maximális rendezettségi állapotot jelöli**. Amikor pontosan egy <img src="https://latex.codecogs.com/svg?i" />-re <img src="https://latex.codecogs.com/svg?p_i%20%3D%201" />, és <img src="https://latex.codecogs.com/svg?p_j%20%3D%200%2C%20i%20%5Cne%20j" />.
+
+A maximuma pedig <img src="https://latex.codecogs.com/svg?-log(1%2Fn)%20%3D%20logn" />, ez a maximális rendeze**tlenség** állapota.
+
+Legyen egy példahalmazban <img src="https://latex.codecogs.com/svg?n%5E%2B" /> pozitív, és <img src="https://latex.codecogs.com/svg?n%5E-" /> negatív példa. Ekkor a példahalmaz entrópiája
+
+<img src="https://latex.codecogs.com/svg?%0AH%20%5Cleft(%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%2C%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%5Cright)%20%3D%20%5C%5C%0A-%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20log%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20-%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20log%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%0A" />
+
+Információnyereség egy <img src="https://latex.codecogs.com/svg?A" /> változóra nézve:
+
+<img src="https://latex.codecogs.com/svg?%0AH%20%5Cleft(%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%2C%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%5Cright)%20-%20%5Csum_i%20%5Cfrac%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20H%20%5Cleft(%20%5Cfrac%7Bn_i%5E%2B%7D%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%2C%20%5Cfrac%7Bn_i%5E-%7D%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%20%5Cright)%0A" />
+
+> Példahalmaz entrópiájának, és a az <img src="https://latex.codecogs.com/svg?A" /> változó lehetséges értékei szerinti felosztás után keletkező részhalmazok átlagos entrópiájának a különbsége.
+
+> <img src="https://latex.codecogs.com/svg?n_i%5E%2B" /> és <img src="https://latex.codecogs.com/svg?n_i%5E-" /> az <img src="https://latex.codecogs.com/svg?A" /> változó <img src="https://latex.codecogs.com/svg?i" />. lehetséges értékét tartalmazópozitív illetve negatív példák száma.
+
+Ez alapján választható egy maximális nyereségű változó.
+
+###### Zajszűrés az attribútumválasztásban
+
+**Problémák**:
+
+- **Magolás**
+
+- **Túlillesztés**: Túl pontosan illesztjük az adatokra a modellt. Akkor, ha túl általános a modellünk, pl. egy lineáris közelítés helyett magas fokszámú polinom.
+
+**Zajszűrés**: Megnézzük, hogy az **információnyereség statisztikailag szignifikáns-e**.
+
+Pl.: <img src="https://latex.codecogs.com/svg?%5Cchi%20%5E2" /> (**khí-négyzet**) próbával a <img src="https://latex.codecogs.com/svg?%5Cchi%5E2" /> **metszés** algoritmusával.
+
+##### naiv Bayes módszer
+
+###### Bayes szabály
+
+<img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> kijelentésekre:
+
+<img src="https://latex.codecogs.com/svg?%0AP(a%7Cb)%20%3D%20%5Cfrac%7BP(b%7Ca)P(a)%7D%7BP(b)%7D%0A" />
+
+> Ebből következik: <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b)%20%3D%20P(a%20%7C%20b)%20P(b)%20%3D%20P(b%7Ca)P(a)" />
+
+Általában is <img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> változókra vagy változóhalmazokra:
+
+<img src="https://latex.codecogs.com/svg?%0AP(A%7CB)%20%3D%20%5Cfrac%7BP(B%7CA)P(A)%7D%7BP(B)%7D%0A" />
+
+###### Naiv Bayes algoritmus
+
+Statisztikai következtetű módszer.
+
+Adatbázis-beli példák alapján példákat osztályoz
+
+Legyen <img src="https://latex.codecogs.com/svg?A" /> célváltozó, és <img src="https://latex.codecogs.com/svg?B_1%2C%20...%2C%20B_n" /> a nyelvünk szavai.
+
+Pl. <img src="https://latex.codecogs.com/svg?A" /> lehet igaz, ha az adott email spam, hamis, ha nem spam.
+
+<img src="https://latex.codecogs.com/svg?B_i" /> pedig logikai változó, az <img src="https://latex.codecogs.com/svg?i" />. szó előfordulását jelzi. Igaz, ha az emailben szerepel az adott szó.
+
+A feladat egy adott <img src="https://latex.codecogs.com/svg?b_1%2C%20...%2C%20b_n" /> email esetében meghatározni, hogy <img src="https://latex.codecogs.com/svg?A" /> mely értékére lesz <img src="https://latex.codecogs.com/svg?P(A%20%7C%20b_1%2C%20...%2C%20b_n)" /> feltételes valószínűség maximális.
+
+Ehhez a következő átalakításokat, illetve függetlenségi feltevéseket tesszük:
+
+<img src="https://latex.codecogs.com/svg?%0AP(A%7Cb_1%2C%20...%2C%20b_n)%20%3D%20%5Calpha%20P(A)%20P(b_1%2C%20...%2C%20b_n%20%7CA)%20%5Capprox%20%5Calpha%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(b_i%7CA)%0A" />
+
+Első egyenlőség: a Bayes tétel alkalmazása. <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%201%20%2F%20P(n_1%2C%20...%2C%20b_n)" />. 
+
+Második közelítő egyenlőség: naiv Bayes feltevés. A pontatlanságért cserébe (ezért csak közelítő egyenlőség) <img src="https://latex.codecogs.com/svg?P(A)" /> és <img src="https://latex.codecogs.com/svg?P(b_i%20%7CA)" /> könnyen közelíthető az adatbázisban található példák segítségével.
+
+Így gyakorlatban kiszámolható <img src="https://latex.codecogs.com/svg?A" /> minden lehetséges értékére, nagysági sorrend meghatározható. A legvalószínűbb értéket választjuk.
+
+##### Modellillesztés
+
+Adottak a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20(x_1%2C%20y_1)%2C%20...%2C%20(x_n%2C%20y_n)%20~%20%5C%7D%20%5Csubseteq%20X%20%5Ctimes%20Y" /> példák.
+
+Egy <img src="https://latex.codecogs.com/svg?h%5E*%3A%20X%20%5Cto%20Y" /> függvényt keresünk, amely a példákra jól illeszkedik, és jól általánosít.
+
+Optimalizációs megközelítés: Definiáljuk az <img src="https://latex.codecogs.com/svg?l%20%3A%20X%20%5Ctimes%20Y%20%5Ctimes%20H%20%5Cto%20%5Cmathbb%7BR%7D" /> veszteségfüggvényt, amely egy <img src="https://latex.codecogs.com/svg?(x%2C%20y)%20%5Cin%20X%20%5Ctimes%20Y" /> példára megadja, hogy az adott <img src="https://latex.codecogs.com/svg?h%20%5Cin%20H" /> hipotézis "bennyi bajt okoz" az adott példán.
+
+> Példa veszteségfüggvényre: Nényzetes hiba: <img src="https://latex.codecogs.com/svg?l(x%2C%20y%2C%20g)%20%3D%20(h(x)-y)%5E2" />
+
+Rögzített hibafüggvény esetén az optimalizálási feladat a következő:
+
+<img src="https://latex.codecogs.com/svg?%0Ah%5E*%20%3D%20%5Carg%20%5Cmin_%7Bh%20%5Cin%20H%7D%20%5Csum_%7Bi%20%3D%201%7D%5En%20l(x_i%2C%20y_i%2C%20h)%0A" />
+
+###### Lineáris regresszió
+
+Három fő komponens:
+
+- <img src="https://latex.codecogs.com/svg?H%20%3D%20%5C%7B%20~%20h_%7Ba%2Cb%7D(x)%20%3D%20ax%20%2B%20b%20%3A%20a%2C%20b%20%5Cin%20%5Cmathbb%7BR%7D%20~%20%5C%7D" />, azaz lineáris, eltolást (<img src="https://latex.codecogs.com/svg?b" />) is tartalmazó függvények halmaza.
+
+- <img src="https://latex.codecogs.com/svg?l(x%2C%20y%2C%20h_%7Ba%2C%20b%7D)%20%3D%20(h_%7Ba%2C%20b%7D(x)%20-%20y%20)%5E2%20%3D%20(ax%2Bb-y)%5E2" />, azaz a négyzetes hiba.
+
+- Az optimalizáló algoritmus legyen a **gradiens módszer**.
+
+![ ](../img/linearis_regresszio.png)
+
+###### Gradiens módszerek
+
+Tegyük fel, hogy az <img src="https://latex.codecogs.com/svg?f%3A%20%5Cmathbb%7BR%7D%20%5Cto%20%5Cmathbb%7BR%7D" /> differenciálható.
+
+Az <img src="https://latex.codecogs.com/svg?f'(x)" /> derivált:
+
+- <img src="https://latex.codecogs.com/svg?0" />, ha <img src="https://latex.codecogs.com/svg?x" /> lokális szélsőérték
+
+- pozitív, ha <img src="https://latex.codecogs.com/svg?f" /> növekszik <img src="https://latex.codecogs.com/svg?x" />-nél
+
+- negatív, ha <img src="https://latex.codecogs.com/svg?f" /> csökken <img src="https://latex.codecogs.com/svg?x" />-nél
+
+A gradiens módszer alapja, hogy valameny tetszőleges <img src="https://latex.codecogs.com/svg?x_0" />-ból kiindulunk, majd kiszámoljuk az
+
+<img src="https://latex.codecogs.com/svg?%0Ax_%7Bt%2B1%7D%20%3D%20x_t%20-%20%5Cgamma_t%20f'(x_t)%0A" />
+
+képlettel az <img src="https://latex.codecogs.com/svg?x_t" /> sorozat elemeit, amelyre azt szeretnénk, hogy közelítse <img src="https://latex.codecogs.com/svg?f" /> egy lokális minimumát.
+
+Megfelelő <img src="https://latex.codecogs.com/svg?%5Cgamma_t" /> választása esetén ez garantált, azonban a pontos <img src="https://latex.codecogs.com/svg?%5Cgamma_t" /> nem mindig ismert.
+
+> A gyakorlatban sokszor <img src="https://latex.codecogs.com/svg?%5Cgamma_t%20%3D%20%5Cgamma" /> konstans értéket használjuk, ami elég kicsi ahhoz, hogy a rendszer konvergálni tudjon, vagy idővel csökkentjük <img src="https://latex.codecogs.com/svg?%5Cgamma_t" />-t
+
+> <img src="https://latex.codecogs.com/svg?%5Cgamma_t" />-t a gépi tanulásban **learning rate**-nek nevezzük.
+
+Ha <img src="https://latex.codecogs.com/svg?f%3A%20%5Cmathbb%7BR%7D%5Ed%20%5Cto%20%5Cmathbb%7BR%7D" /> egy <img src="https://latex.codecogs.com/svg?d" /> dimenziód differenciálható függvény, a fenti módszer változtatása nélkül alkalmazható, hiszen a <img src="https://latex.codecogs.com/svg?%5Cnabla%20f(x)%20%5Cin%20%5Cmathbb%7BR%7D%5Ed" /> gradiens vektor a legnagyobb növekedés irányába mutat, így
+
+<img src="https://latex.codecogs.com/svg?%0Ax_%7Bt%20%2B%201%7D%20%3D%20x_t%20-%20%5Cgamma_t%20%5Cnabla%20f(x_t)%0A" />
+
+hasonlóan viselkedik.
+
+#### Mesterséges neuronhálók
+
+##### Különálló neuron
+
+![  ](../img/neuron.png)
+
+Az <img src="https://latex.codecogs.com/svg?x_j" /> a <img src="https://latex.codecogs.com/svg?j" />. bemeneti érték, a <img src="https://latex.codecogs.com/svg?w_i" /> a <img src="https://latex.codecogs.com/svg?j" />. bemenet súlya.
+
+A <img src="https://latex.codecogs.com/svg?w_0" /> az eltolássúly (bias weight), <img src="https://latex.codecogs.com/svg?x_0" /> fix bemenet mindig -1.
+
+A neuron először a bemenetekből, és súlyokból kiszámolja a következő összeget:
+
+<img src="https://latex.codecogs.com/svg?%0A%5Csum_%7Bj%20%3D%200%7D%5Ed%20x_jw_j%0A" />
+
+Majd az összeg végeredményén alkalmazza az **aktivációs függvényt**.
+
+##### Aktivációs függvény
+
+![ ](../img/aktivacios_fuggveny.png)
+
+Eredeti célja: Ha "jó" input jön, akkor adjon 1-hez közeli értéket, ha "rossz" input jön, akkor 0-hoz közelit.
+
+Manapság már nem követelmény, hogy <img src="https://latex.codecogs.com/svg?%5B0%2C%201%5D" />-ből adjon értéket.
+
+De fontos, hogy nemlineáris, ugyanis akkor magukkal a súlyokkal is kifejezhető lenne.
+
+Pár példa:
+
+- **Küszöbfüggvény**
+  
+  - <img src="https://latex.codecogs.com/svg?g(x)%20%3D%200" /> ha <img src="https://latex.codecogs.com/svg?x%20%3C%200" />
+  
+  - <img src="https://latex.codecogs.com/svg?g(x)%20%3D%201" /> ha <img src="https://latex.codecogs.com/svg?x%20%3E%200" />
+  
+  - Ezzel az aktivációs függvénnyel a neuron a klasszikus "**perceptron**"
+
+- **Szigmoid függvény**
+  
+  - <img src="https://latex.codecogs.com/svg?g(x)%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20e%5E%7B-x%7D%7D" />
+
+- **Rectifier aktiváció**
+  
+  - <img src="https://latex.codecogs.com/svg?g(x)%20%3D%20max(0%2C%20x)" />
+  
+  - Ezt használó neuront **ReLU**-nak hívjuk
+
+##### Neuron kimenete
+
+A neuron a teret két részre osztja egy hipersíkkal.
+
+- <img src="https://latex.codecogs.com/svg?w%20%5Ccdot%20x%20%3E%200" /> esetén elfogadja az inputot
+
+- különben nem
+
+> <img src="https://latex.codecogs.com/svg?w%20%5Ccdot%20x" /> a <img src="https://latex.codecogs.com/svg?w" /> és <img src="https://latex.codecogs.com/svg?x" /> vektorok belső szorzata, ugyan az  mint a fentebb leírt szummma, ami az aktivációs függvény inputja. 
+
+Emiatt csak lineárisan szeparálható függvények reprezentálhatóak hiba nélkül.
+
+Példa logikai műveletek lineáris szeparálására:
+
+![ ](../img/linearisan_szeparalhatosag.png)
+
+> Látszik, hogy a XOR nem lineárisan szeparálható, mert nem lehet olyan egyenest behúzni ami szeparálja az igaz, és hamis értékeket.
+
+##### Többrétegű hálók
+
+Neuronokból épített hálózat.
+
+![ ](../img/neuron_halo_pelda.png)
+
+<img src="https://latex.codecogs.com/svg?x_1" /> és <img src="https://latex.codecogs.com/svg?x_2" /> a bemenet.
+
+Itt most nincsenek eltolássúlyok, de amúgy kellenének.
+
+Réteg csoportok:
+
+- **Bemeneti réteg**: Szögletes csúcsok alkotják, ez maga a bemenetek halmaza
+
+- **Kimeneti réteg**: 5-ös számú neuron alkotjha most egyedül, de lehetne több is, pl. 1-1 minden lehetséges osztálycímkének
+
+- **Rejtett rétegek**: Minden másik köztes réteg
+
+> Egy egy előrecsatolt hálózat (a kapcsolatok az input irányától az output irányába mutatnak), de lehet olyat is építeni, amiben van kör, ezek a rekurrens hálózatok.
+
+##### Többrétegű hálók algoritmusa
+
+Optimalizáció alapú megközelítést alkalmazunk, ennek komponensei lehetnek pl.:
+
+- <img src="https://latex.codecogs.com/svg?H%20%3D%20%5C%7B%20~%20h_w%20%3A%20w%20%5Cin%20%5Cmathbb%7BR%7D%5Em%20~%20%5C%7D" />
+  
+  - Ahol <img src="https://latex.codecogs.com/svg?h_w%20%3A%20%5Cmathbb%7BR%7D%5Ed%20%5Cto%20%5B0%2C%201%5D" /> egy rögzített struktúrájú, <img src="https://latex.codecogs.com/svg?w" /> súlyokkal rendelkező neuronháló
+
+- <img src="https://latex.codecogs.com/svg?l(x%2C%20y%2C%20h_w)%20%3D%20-%20%5Clog%20P(y%20%7C%20x%2C%20h_w)" />
+  
+  - Ez a <img src="https://latex.codecogs.com/svg?h_w" /> hipotézis **negatív log likelihood**ja
+
+- Optimalizáló algoritmus legyen gradiens módszer
+
+Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimenetenjelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
+
+Több osztály esetén több kimeneti neuron, veszteségfüggvény: **kereszt entrópia**
+
+> De ennek van bináris változata is (2 osztály)
+
+##### Modern neuronháló-architektúrák
+
+###### Teljesen összefüggő réteg
+
+<img src="https://latex.codecogs.com/svg?d" /> dimenziós input <img src="https://latex.codecogs.com/svg?k" /> dimenziós inputra leképezése:
+
+![ ](../img/teljesen_osszefuggo_reteg.png)
+
+Összes input össze van kötve az összes kimenettel, összesen <img src="https://latex.codecogs.com/svg?d%20%5Ccdot%20k" /> kapcsolat, mind külön súllyal.
+
+Tehár összesen eltolási súlyokkal együtt <img src="https://latex.codecogs.com/svg?d%20%5Ccdot%20k%20%2B%20k" /> súly van.
+
+###### Konvolúciós réteg
+
+Ha az inputban fontos a szomszédsági / sorrendiségi reláció.
+
+Például képek, hangok esetén.
+
+Egy 1D struktúrájú inputtal (A.K.A egy vektorral) működő konvolúciós réteg:
+
+![ ](../img/konvolucios_reteg.png)
+
+- Réteg azonos neuronokból áll, a súlyaik megegyeznek
+
+- Minden neuron csak egy rögzített összefüggő sávot lát az inputból
+
+Az ábrán látható réteg például leírható 3db súllyal. Ami a teljesen összefüggő réteghet képest nagyon kevés.
+
+3 szépességű szűrővel végigpásztázzuk az inputot. 
+
+**Paraméterek**: lépésköz (**stride**), iletve a szűrőméret (<img src="https://latex.codecogs.com/svg?F" />)
+
+Ezek a paraméterek meghatározzák az output dimenzióját, ami <img src="https://latex.codecogs.com/svg?%5Clceil%20(d%20-%20F%20%2B%201)%20%2F%20S%20%5Crceil" />. Ha <img src="https://latex.codecogs.com/svg?F%20%3E%201" />, akkor ez mindig kevesebb, mint az input dimenzió. 
+
+> Ha nem akarjuk, hogy csökkenjen az input, lehet **zero padding**-et használni
+
+Példa 2D-s inputtal, zero padding-el:
+
+![ ](../img/2d_konvolucios_reteg.png)
+
+Neuronok is 2D elrendezésben.
+
+Ez a réteg 9 súllyal leírható (<img src="https://latex.codecogs.com/svg?3%20%5Ctimes%203" />-as szűrő)
+
+3D input, a 3. dimenzió, a mélység lehet pl. színes képek esetén 3, az RGB színeknek:
+
+![ ](../img/3d_konvolucios_reteg.png)
+
+###### Max pooling réteg
+
+Input méretének csökkentésére szolgál.
+
+Például 2D-ben egy <img src="https://latex.codecogs.com/svg?2%20%5Ctimes%202" />-es max szűrő 2-es lépésközzel:
+
+![ ](../img/max_pooling.png)
+
+#### k-legközelebbi szomszéd módszere
+
+Példányalapú tanuló algoritmus.
+
+Adottak <img src="https://latex.codecogs.com/svg?(x_1%2C%20y_1)%2C%20...%2C%20(x_n%2C%20y_n)" /> példák.
+
+Adott <img src="https://latex.codecogs.com/svg?x" />-re az <img src="https://latex.codecogs.com/svg?y" />-r az <img src="https://latex.codecogs.com/svg?x" />-hez közeli példák alapján határozzuk meg.
+
+1. Keressük meg <img src="https://latex.codecogs.com/svg?x" /> <img src="https://latex.codecogs.com/svg?k" />db legközelebbi szomszédját (<img src="https://latex.codecogs.com/svg?k" /> pl. 5 és 10 között, lehetőleg páratlan, hogy ne legyen holtverseny)
+
+2. A <img src="https://latex.codecogs.com/svg?h(x)" /> értéke ezen szomszédok <img src="https://latex.codecogs.com/svg?y" />-jainak átlaga (esetleg távolsággal súlyozva) ha <img src="https://latex.codecogs.com/svg?y" /> folytonos, ha diszkrét akkor pedig pl. többségi szavazat.
+
+**Sűrűség közelítése**: Ha <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_n" /> példák adottak (<img src="https://latex.codecogs.com/svg?y" /> nélkül), akkor a <img src="https://latex.codecogs.com/svg?P(X)" /> sűrűség közelítésére is jó: adott <img src="https://latex.codecogs.com/svg?x" />-re nézzük meg, hogy a <img src="https://latex.codecogs.com/svg?k" /> legközelebbi szomszéd mekkora területen oszlik el. <img src="https://latex.codecogs.com/svg?P(x)" /> ekkor fordítottan arányos a területtel.
+
+Távolság függvény: <img src="https://latex.codecogs.com/svg?D(x_1%2C%20x_2)" />.
+
+- Diszkrét esetben, pl. Hamming-távolság: a különböző jellemzők száma
+  
+  > Hamming(001, 011) = 1
+
+- Folytonos esetben pl. euklideszi távolság, manhattan távolság, stb.
+  
+  - Folytonos jellemzőket normalizálni kell, mert egyes jellemző értékek más skálán mozoghatnak (pl. hőmérséklet, magasság).
+  
+  - Standardizálás: Jellemzőkből kivonjuk az átlagot, és elosztjuk a szórással.
+
+Az algoritmus hibái:
+
+- Érzékeny a távolságfüggvény definíciójára
+
+- Sok példa esetén költséges a <img src="https://latex.codecogs.com/svg?k" /> legközelebbi szomszédot megtalálni
+
+- Sok jellemző esetén (sok dimenziós térben) a távolságfüggvény nagyon nem intuitív
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
