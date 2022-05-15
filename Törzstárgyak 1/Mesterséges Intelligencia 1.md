@@ -535,8 +535,6 @@ $$
 P(B_1, ..., B_n | A) = P(A) \prod_{i=1}^n P(B_i | A)
 $$
 
-
-
 #### Teljes együttes eloszlás tömör reprezentációja
 
 > Feltételes függetlenséggel tudjuk tömöríteni a teljes együttes eloszlás reprezentációját
@@ -607,8 +605,471 @@ Bármely $Y$ váltzóra igaz: $P(X | \text{Markov-takaró}(X), Y) = P(X | \text{
 
 > **Markov-takaró(X)**: Az a halmaz, amely $X$ szülőinek, $X$ gyerekeinek, és $X$ gyerekei szülőinek az uniója.
 
-##### Folytonos változók
+#### Gépi tanulás
 
-##### Valószínűségi következtetés
+##### Felügyelt gépi tanulás
 
-> Többi alfejezet nem hiszem, hogy kell?
+Egy $f: X \to Y$ függvényt keresünk, amely illeszkedik adott példákra.
+
+A példák $(x_1, f(x_1)), ..., (x_n, f(x_n)) $ alakban adottak. $x_i \in X$
+
+Pl.: $X$ az emailek halmaza, $Y = \{ ~ spam, \neg spam ~ \}$
+
+Példák kézzel osztályozott emailek.
+
+Egy $h : X \to Y$-t keresünk, ami $f$-et **közelíti**.
+
+A $h$ függvény **konzisztens** az adatokkal, ha $h(x_i) = f(x_i)$ minden példára.
+
+A $h$ függvényt mindig egy $H$ **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alapkabn keressüg, pl. adott fokszámú polinom.
+
+A tanulás **realizálható**, ha létezik $h \in H$, amelyre $H$ konzisztens.
+
+Gyakorlatban elég, ha $h$ "közel" van a példákhoz, nem kell pontosan illeszkednie. Ez azért van, mert sokszor a tanuló példák zajt tartalmaznak, és káros ha ezeket megtanuljuk. (**túltanulás**)
+
+**Indukció problémája**: $f$ jó közelítése olyan, amely a példákon kívül is jól közelíti $f$-et, azaz jól **általánosít**.
+
+Jó tanulás alapja:
+
+- $H$ hipotézistér gondos megválasztása
+  
+  - Tartalmazza $f$-et
+  
+  - Éppen annyira általános, amennyire kell (Occam borotvájának elve)
+
+- Tanuló algoritmus megválasztása
+  
+  - $H$-ból kiválasztja $h$-t
+  
+  - Törekedhet tömören leírható $h$-t választani egy nagyon általános $H$-ból is.
+
+- Számítási szempontból egyszerű reprezentáció, és hipozézistér
+  
+  - Hatékonyság miatt
+  
+  - Túl egyszerű reprezentáció sokszor komplex hipotézistereket eredményez
+
+##### Reprezentáció
+
+Az $X$ és $Y$ halmazok tetszőleges objektumokat írhatnak le, fontos ezek jó reprezentációja.
+
+Pl.: Szövegek esetén szemantikus beágyazások.
+
+$Y$ halmaz tartalmazhat diszkrét osztálycímkéket, vagy lehet folytonos halmaz is (regresszió).
+
+##### Döntési fák
+
+$x \in X$ diszkrét változók értékeinek vektora.
+
+$f(x) \in Y$ egy diszkrét változó egy értéke. pl. $Y = \{ ~ igen, nem ~ \}$
+
+Mivel $Y$ véges halmaz, osztályozási feladatról beszélünk, ahol $X$ elemeit kell osztályokba sorolni, és az osztályok $Y$ értékeinek felelnek meg.
+
+![ ](../img/dontesi_fa.png)
+
+Ez a döntési fa pl. azt határozza meg, hogy az adott jellemzők mellett ($X$) érdemes-e asztalra várni az étteremben ($Y$).
+
+Ennek az előnye, hogy a döntések megmagyarázhatóak, emberikel értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
+
+###### Kifejezőerő
+
+A kifejezőerő az **ítéletkalkulus**.
+
+T.f.h. a címke logikai érték.
+
+- **Ítéletek**: Változó értékadások.
+
+- **Modell**: Egy $x \in X$ változóvektor egy modell, mert minden ítélet igazságértékét megadja.
+
+- **Formula**: A döntési fából logikai formula gyártható, és fordítva,
+  
+  - Fából formula: Az "igen" címkékhez vezető utakban összeéseljük az éleket, majd összevagyoljuk az utakat.
+  
+  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy $A_1, ..., A_n$ felsorolását, az $A_1$ a gyökérm $A_1$ értékei az élek, és az $i$. szinten a fában minden pontban $A_i$ van, amely pontokból az élek $A_i$ értékei. Az $A_n$ változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
+  
+  > Ez a faépítés nagy fákat eredményez, a gyakorlatban éltalában alkalmaznak tömörítési technikákat.
+
+###### Döntési fa építése
+
+Adottak ilyen felépítésű példák:
+
+```
+(
+    (
+        Vendégek=tele,
+        Várakozás=10-30,
+        Éhes=igen,
+        VanMásHely=nem,
+        Esik=igen,
+        Foglalás=nincs,
+        Péntek/Szombat=igen,
+        VanBár=ige
+    ),
+    igaz
+)
+```
+
+És ilyenekből minél több, legalább már száz.
+
+Példákat bemagolni könnyő, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
+
+De a magolás nem általánosít!
+
+Ötlet: A gyökérbe tesszük azt a változót, ami a legtöbb információt hordozza, ezáltal a legjobban szeparálja a példákat.
+
+Majd rekurzívan a még nem rögzített változók közül megint választunk.
+
+Speciális esetek, amikor megállítják a rekurziót:
+
+- Ha csak pozitív, vagy negatív példa van, akkor levélhez értünk, megcímkézzük.
+
+- Ha üres halmazról van szó, akkor egy alapértelmezett értéket definiálunk, pl. a szülőben levő többségi döntést.
+
+- Ha pozitív, és negatív példa is van, de nincs több változó: A többségi szavazattal címkézzük. (Ez akkor fordul elő, ha zajos az adat)
+
+###### A legjobban szeparáló attribútum
+
+Egy $p_1, ..., p_n$ valószínűségi eloszlás várható (átlagos) információtartalma, más néven **entrópiája**:
+
+$$
+H(p_1, ..., p_n) = - \sum_i p_i log(p_i)
+$$
+
+ahol $\sum_i p_i = 1$
+
+Ennek minimuma $0$, ami a **maximális rendezettségi állapotot jelöli**. Amikor pontosan egy $i$-re $p_i = 1$, és $p_j = 0, i \ne j$.
+
+A maximuma pedig $-log(1/n) = logn$, ez a maximális rendeze**tlenség** állapota.
+
+Legyen egy példahalmazban $n^+$ pozitív, és $n^-$ negatív példa. Ekkor a példahalmaz entrópiája
+
+$$
+H \left( \frac{n^+}{n^+ + n^-} , \frac{n^-}{n^+ + n^-} \right) = \\
+- \frac{n^+}{n^+ + n^-} log \frac{n^+}{n^+ + n^-} - \frac{n^-}{n^+ + n^-} log \frac{n^-}{n^+ + n^-}
+$$
+
+Információnyereség egy $A$ változóra nézve:
+
+$$
+H \left( \frac{n^+}{n^+ + n^-}, \frac{n^-}{n^+ + n^-} \right) - \sum_i \frac{n_i^+ + n_i^-}{n^+ + n^-} H \left( \frac{n_i^+}{n_i^+ + n_i^-}, \frac{n_i^-}{n_i^+ + n_i^-} \right)
+$$
+
+> Példahalmaz entrópiájának, és a az $A$ változó lehetséges értékei szerinti felosztás után keletkező részhalmazok átlagos entrópiájának a különbsége.
+
+> $n_i^+$ és $n_i^-$ az $A$ változó $i$. lehetséges értékét tartalmazópozitív illetve negatív példák száma.
+
+Ez alapján választható egy maximális nyereségű változó.
+
+###### Zajszűrés az attribútumválasztásban
+
+**Problémák**:
+
+- **Magolás**
+
+- **Túlillesztés**: Túl pontosan illesztjük az adatokra a modellt. Akkor, ha túl általános a modellünk, pl. egy lineáris közelítés helyett magas fokszámú polinom.
+
+**Zajszűrés**: Megnézzük, hogy az **információnyereség statisztikailag szignifikáns-e**.
+
+Pl.: $\chi ^2$ (**khí-négyzet**) próbával a $\chi^2$ **metszés** algoritmusával.
+
+##### naiv Bayes módszer
+
+###### Bayes szabály
+
+$a$ és $b$ kijelentésekre:
+
+$$
+P(a|b) = \frac{P(b|a)P(a)}{P(b)}
+$$
+
+> Ebből következik: $P(a \land b) = P(a | b) P(b) = P(b|a)P(a)$
+
+Általában is $A$ és $B$ változókra vagy változóhalmazokra:
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+###### Naiv Bayes algoritmus
+
+Statisztikai következtetű módszer.
+
+Adatbázis-beli példák alapján példákat osztályoz
+
+Legyen $A$ célváltozó, és $B_1, ..., B_n$ a nyelvünk szavai.
+
+Pl. $A$ lehet igaz, ha az adott email spam, hamis, ha nem spam.
+
+$B_i$ pedig logikai változó, az $i$. szó előfordulását jelzi. Igaz, ha az emailben szerepel az adott szó.
+
+A feladat egy adott $b_1, ..., b_n$ email esetében meghatározni, hogy $A$ mely értékére lesz $P(A | b_1, ..., b_n)$ feltételes valószínűség maximális.
+
+Ehhez a következő átalakításokat, illetve függetlenségi feltevéseket tesszük:
+
+$$
+P(A|b_1, ..., b_n) = \alpha P(A) P(b_1, ..., b_n |A) \approx \alpha P(A) \prod_{i=1}^n P(b_i|A)
+$$
+
+Első egyenlőség: a Bayes tétel alkalmazása. $\alpha = 1 / P(n_1, ..., b_n)$. 
+
+Második közelítő egyenlőség: naiv Bayes feltevés. A pontatlanságért cserébe (ezért csak közelítő egyenlőség) $P(A)$ és $P(b_i |A)$ könnyen közelíthető az adatbázisban található példák segítségével.
+
+Így gyakorlatban kiszámolható $A$ minden lehetséges értékére, nagysági sorrend meghatározható. A legvalószínűbb értéket választjuk.
+
+##### Modellillesztés
+
+Adottak a $\{ ~ (x_1, y_1), ..., (x_n, y_n) ~ \} \subseteq X \times Y$ példák.
+
+Egy $h^*: X \to Y$ függvényt keresünk, amely a példákra jól illeszkedik, és jól általánosít.
+
+Optimalizációs megközelítés: Definiáljuk az $l : X \times Y \times H \to \mathbb{R}$ veszteségfüggvényt, amely egy $(x, y) \in X \times Y$ példára megadja, hogy az adott $h \in H$ hipotézis "bennyi bajt okoz" az adott példán.
+
+> Példa veszteségfüggvényre: Nényzetes hiba: $l(x, y, g) = (h(x)-y)^2$
+
+Rögzített hibafüggvény esetén az optimalizálási feladat a következő:
+
+$$
+h^* = \arg \min_{h \in H} \sum_{i = 1}^n l(x_i, y_i, h)
+$$
+
+###### Lineáris regresszió
+
+Három fő komponens:
+
+- $H = \{ ~ h_{a,b}(x) = ax + b : a, b \in \mathbb{R} ~ \}$, azaz lineáris, eltolást ($b$) is tartalmazó függvények halmaza.
+
+- $l(x, y, h_{a, b}) = (h_{a, b}(x) - y )^2 = (ax+b-y)^2$, azaz a négyzetes hiba.
+
+- Az optimalizáló algoritmus legyen a **gradiens módszer**.
+
+![ ](../img/linearis_regresszio.png)
+
+###### Gradiens módszerek
+
+Tegyük fel, hogy az $f: \mathbb{R} \to \mathbb{R}$ differenciálható.
+
+Az $f'(x)$ derivált:
+
+- $0$, ha $x$ lokális szélsőérték
+
+- pozitív, ha $f$ növekszik $x$-nél
+
+- negatív, ha $f$ csökken $x$-nél
+
+A gradiens módszer alapja, hogy valameny tetszőleges $x_0$-ból kiindulunk, majd kiszámoljuk az
+
+$$
+x_{t+1} = x_t - \gamma_t f'(x_t)
+$$
+
+képlettel az $x_t$ sorozat elemeit, amelyre azt szeretnénk, hogy közelítse $f$ egy lokális minimumát.
+
+Megfelelő $\gamma_t$ választása esetén ez garantált, azonban a pontos $\gamma_t$ nem mindig ismert.
+
+> A gyakorlatban sokszor $\gamma_t = \gamma$ konstans értéket használjuk, ami elég kicsi ahhoz, hogy a rendszer konvergálni tudjon, vagy idővel csökkentjük $\gamma_t$-t
+
+> $\gamma_t$-t a gépi tanulásban **learning rate**-nek nevezzük.
+
+Ha $f: \mathbb{R}^d \to \mathbb{R}$ egy $d$ dimenziód differenciálható függvény, a fenti módszer változtatása nélkül alkalmazható, hiszen a $\nabla f(x) \in \mathbb{R}^d$ gradiens vektor a legnagyobb növekedés irányába mutat, így
+
+$$
+x_{t + 1} = x_t - \gamma_t \nabla f(x_t)
+$$
+
+hasonlóan viselkedik.
+
+#### Mesterséges neuronhálók
+
+##### Különálló neuron
+
+![  ](../img/neuron.png)
+
+Az $x_j$ a $j$. bemeneti érték, a $w_i$ a $j$. bemenet súlya.
+
+A $w_0$ az eltolássúly (bias weight), $x_0$ fix bemenet mindig -1.
+
+A neuron először a bemenetekből, és súlyokból kiszámolja a következő összeget:
+
+$$
+\sum_{j = 0}^d x_jw_j
+$$
+
+Majd az összeg végeredményén alkalmazza az **aktivációs függvényt**.
+
+##### Aktivációs függvény
+
+![ ](../img/aktivacios_fuggveny.png)
+
+Eredeti célja: Ha "jó" input jön, akkor adjon 1-hez közeli értéket, ha "rossz" input jön, akkor 0-hoz közelit.
+
+Manapság már nem követelmény, hogy $[0, 1]$-ből adjon értéket.
+
+De fontos, hogy nemlineáris, ugyanis akkor magukkal a súlyokkal is kifejezhető lenne.
+
+Pár példa:
+
+- **Küszöbfüggvény**
+  
+  - $g(x) = 0$ ha $x < 0$
+  
+  - $g(x) = 1$ ha $x > 0$
+  
+  - Ezzel az aktivációs függvénnyel a neuron a klasszikus "**perceptron**"
+
+- **Szigmoid függvény**
+  
+  - $g(x) = \frac{1}{1 + e^{-x}}$
+
+- **Rectifier aktiváció**
+  
+  - $g(x) = max(0, x)$
+  
+  - Ezt használó neuront **ReLU**-nak hívjuk
+
+##### Neuron kimenete
+
+A neuron a teret két részre osztja egy hipersíkkal.
+
+- $w \cdot x > 0$ esetén elfogadja az inputot
+
+- különben nem
+
+> $w \cdot x$ a $w$ és $x$ vektorok belső szorzata, ugyan az  mint a fentebb leírt szummma, ami az aktivációs függvény inputja. 
+
+Emiatt csak lineárisan szeparálható függvények reprezentálhatóak hiba nélkül.
+
+Példa logikai műveletek lineáris szeparálására:
+
+![ ](../img/linearisan_szeparalhatosag.png)
+
+> Látszik, hogy a XOR nem lineárisan szeparálható, mert nem lehet olyan egyenest behúzni ami szeparálja az igaz, és hamis értékeket.
+
+##### Többrétegű hálók
+
+Neuronokból épített hálózat.
+
+![ ](../img/neuron_halo_pelda.png)
+
+$x_1$ és $x_2$ a bemenet.
+
+Itt most nincsenek eltolássúlyok, de amúgy kellenének.
+
+Réteg csoportok:
+
+- **Bemeneti réteg**: Szögletes csúcsok alkotják, ez maga a bemenetek halmaza
+
+- **Kimeneti réteg**: 5-ös számú neuron alkotjha most egyedül, de lehetne több is, pl. 1-1 minden lehetséges osztálycímkének
+
+- **Rejtett rétegek**: Minden másik köztes réteg
+
+> Egy egy előrecsatolt hálózat (a kapcsolatok az input irányától az output irányába mutatnak), de lehet olyat is építeni, amiben van kör, ezek a rekurrens hálózatok.
+
+##### Többrétegű hálók algoritmusa
+
+Optimalizáció alapú megközelítést alkalmazunk, ennek komponensei lehetnek pl.:
+
+- $H = \{ ~ h_w : w \in \mathbb{R}^m ~ \}$
+  
+  - Ahol $h_w : \mathbb{R}^d \to [0, 1]$ egy rögzített struktúrájú, $w$ súlyokkal rendelkező neuronháló
+
+- $l(x, y, h_w) = - \log P(y | x, h_w)$
+  
+  - Ez a $h_w$ hipotézis **negatív log likelihood**ja
+
+- Optimalizáló algoritmus legyen gradiens módszer
+
+Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimenetenjelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
+
+Több osztály esetén több kimeneti neuron, veszteségfüggvény: **kereszt entrópia**
+
+> De ennek van bináris változata is (2 osztály)
+
+##### Modern neuronháló-architektúrák
+
+###### Teljesen összefüggő réteg
+
+$d$ dimenziós input $k$ dimenziós inputra leképezése:
+
+![ ](../img/teljesen_osszefuggo_reteg.png)
+
+Összes input össze van kötve az összes kimenettel, összesen $d \cdot k$ kapcsolat, mind külön súllyal.
+
+Tehár összesen eltolási súlyokkal együtt $d \cdot k + k$ súly van.
+
+###### Konvolúciós réteg
+
+Ha az inputban fontos a szomszédsági / sorrendiségi reláció.
+
+Például képek, hangok esetén.
+
+Egy 1D struktúrájú inputtal (A.K.A egy vektorral) működő konvolúciós réteg:
+
+![ ](../img/konvolucios_reteg.png)
+
+- Réteg azonos neuronokból áll, a súlyaik megegyeznek
+
+- Minden neuron csak egy rögzített összefüggő sávot lát az inputból
+
+Az ábrán látható réteg például leírható 3db súllyal. Ami a teljesen összefüggő réteghet képest nagyon kevés.
+
+3 szépességű szűrővel végigpásztázzuk az inputot. 
+
+**Paraméterek**: lépésköz (**stride**), iletve a szűrőméret ($F$)
+
+Ezek a paraméterek meghatározzák az output dimenzióját, ami $\lceil (d - F + 1) / S \rceil$. Ha $F > 1$, akkor ez mindig kevesebb, mint az input dimenzió. 
+
+> Ha nem akarjuk, hogy csökkenjen az input, lehet **zero padding**-et használni
+
+Példa 2D-s inputtal, zero padding-el:
+
+![ ](../img/2d_konvolucios_reteg.png)
+
+Neuronok is 2D elrendezésben.
+
+Ez a réteg 9 súllyal leírható ($3 \times 3$-as szűrő)
+
+3D input, a 3. dimenzió, a mélység lehet pl. színes képek esetén 3, az RGB színeknek:
+
+![ ](../img/3d_konvolucios_reteg.png)
+
+###### Max pooling réteg
+
+Input méretének csökkentésére szolgál.
+
+Például 2D-ben egy $2 \times 2$-es max szűrő 2-es lépésközzel:
+
+![ ](../img/max_pooling.png)
+
+#### k-legközelebbi szomszéd módszere
+
+Példányalapú tanuló algoritmus.
+
+Adottak $(x_1, y_1), ..., (x_n, y_n)$ példák.
+
+Adott $x$-re az $y$-r az $x$-hez közeli példák alapján határozzuk meg.
+
+1. Keressük meg $x$ $k$db legközelebbi szomszédját ($k$ pl. 5 és 10 között, lehetőleg páratlan, hogy ne legyen holtverseny)
+
+2. A $h(x)$ értéke ezen szomszédok $y$-jainak átlaga (esetleg távolsággal súlyozva) ha $y$ folytonos, ha diszkrét akkor pedig pl. többségi szavazat.
+
+**Sűrűség közelítése**: Ha $x_1, ..., x_n$ példák adottak ($y$ nélkül), akkor a $P(X)$ sűrűség közelítésére is jó: adott $x$-re nézzük meg, hogy a $k$ legközelebbi szomszéd mekkora területen oszlik el. $P(x)$ ekkor fordítottan arányos a területtel.
+
+Távolság függvény: $D(x_1, x_2)$.
+
+- Diszkrét esetben, pl. Hamming-távolság: a különböző jellemzők száma
+  
+  > Hamming(001, 011) = 1
+
+- Folytonos esetben pl. euklideszi távolság, manhattan távolság, stb.
+  
+  - Folytonos jellemzőket normalizálni kell, mert egyes jellemző értékek más skálán mozoghatnak (pl. hőmérséklet, magasság).
+  
+  - Standardizálás: Jellemzőkből kivonjuk az átlagot, és elosztjuk a szórással.
+
+Az algoritmus hibái:
+
+- Érzékeny a távolságfüggvény definíciójára
+
+- Sok példa esetén költséges a $k$ legközelebbi szomszédot megtalálni
+
+- Sok jellemző esetén (sok dimenziós térben) a távolságfüggvény nagyon nem intuitív
