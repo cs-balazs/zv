@@ -25,3 +25,5 @@ Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 [Jelasity Márk - Mesterséges Intelligencia előadásjegyzet (1.3MB PDF)](https://www.inf.u-szeged.hu/~jelasity/mi1/2021/jegyzet.pdf)
 
 [London András - Operációkutatás I.](https://www.inf.u-szeged.hu/~london/opkutEA.html)
+
+Andrew S. Tanenbaum & Albert S. Woodhull. (2007). *Operációs rendszerek*. Budapest: Panem Könyvkiado Kft.
