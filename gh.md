@@ -4894,6 +4894,239 @@ Bázismegoldások = poliéder csúcsok.
 > Oka, hogy a csúcspont leírására használt síkokat cserélgetjük.
 
 ### 2. Primál-duál feladatpár, dualitási komplementaritási tételek, egész értékű feladatok és jellemzőik, a branch and bound módszer, a hátizsák feladat
+
+#### Primál-duál feladatpár
+
+Játékgyáras példához:
+
+Legyen egy egység fa piaci ára <img src="https://latex.codecogs.com/svg?y_1" />, egy egység festég ára <img src="https://latex.codecogs.com/svg?y_2" />
+
+A gyártó opciói:
+
+- Eladhatja az erőforrásokat piaci áron
+
+- Vehet további fát, festéket
+
+- Gyárt a rendelkezésre álló erőforrásokból, és eladja a játékokat
+
+A készletet <img src="https://latex.codecogs.com/svg?80y_1%20%2B%20100y_2" />-ért lehetne eladni
+
+Két eset:
+
+- Ha egy katona alapanyagára kisebb, mint az eladási, azaz <img src="https://latex.codecogs.com/svg?y_1%20%2B%202y_2%20%3C%203" />
+  
+  - Ekkor a gyártó nem adja el az erőforrásokat
+
+- Ha az alapanyagára nagyobb, azaz <img src="https://latex.codecogs.com/svg?y_1%20%2B%202y_2%20%5Cge%203" />
+  
+  - Ekkor a gyártó eladhatja az erőforrásait
+
+##### Duális feladat a játékgyár példára
+
+Ezen példa esetén az alapanyag-felvásárló szemszögéből megoldott felatat:
+
+![ ](../img/opkut_dualis_feladat.png)
+
+Ez az eredeti feladat **duálisa.**
+
+Maga az eredeti feladat a **primál** feladat.
+
+##### Duális feladat általánosan
+
+![ ](../img/opkut_primal_dual_altalanosan.png)
+
+**Állítás**: Duál feladat duálisa az eredeti primál feladat.
+
+A duális feladat megoldásában <img src="https://latex.codecogs.com/svg?y_i%5E*" /> az eredeti (primál) feladat <img src="https://latex.codecogs.com/svg?i" />. erőforrásáfoz tartozó piaci ár, amit marginális árnak vagy árnyék árnak nevezünk
+
+- Ez az erőforrás éeréke az LP megoldójának szemszögéből
+
+- Az <img src="https://latex.codecogs.com/svg?i" /> erőforrás mennyiségének egy egységnyi növelésével éppen <img src="https://latex.codecogs.com/svg?y_i%5E*" />-gal nő a nyereség (azaz a célfüggvény értéke)
+
+- <img src="https://latex.codecogs.com/svg?y_i%5E*" />-nál többet már nem érdemes fizetni az <img src="https://latex.codecogs.com/svg?i" /> erőforrásért, de kevesebbet persze igen
+
+##### Dualitási tételek
+
+###### Gyenge dualitás tétele
+
+Ha <img src="https://latex.codecogs.com/svg?x%20%3D%20%5Bx_1%2C%20...%2C%20x_n%5D%5ET" /> lehetséges megoldása a primál feldatnak és <img src="https://latex.codecogs.com/svg?y%20%3D%20%5By_1%2C%20...%2C%20y_m%5D%5ET" /> lehetséges megoldása a duál feladatnak, akkor:
+
+<img src="https://latex.codecogs.com/svg?%0Ac%5ET%20x%20%5Cle%20b%5ET%20y%0A" />
+
+> Azaz a duális feladat bármely lehetséges megoldása feéső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
+
+###### Erős dualitás tétele
+
+Ha van a primál feladathak optimális megoldása, <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20(x_1%5E*%2C%20...%2C%20x_n%5E*)" />, akkor a duál feladatnak is létezik optimális megoldása, <img src="https://latex.codecogs.com/svg?y%5E*%20%3D%20(y_1%5E*%2C%20...%2C%20y_m%5E*)" />, és a célfüggvényértékük megegyezik, azaz <img src="https://latex.codecogs.com/svg?c%5ET%20x%5E*%20%3D%20b%5ET%20y%5E*" />
+
+###### Lemma
+
+Legyen <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20%5Bx_1%5E*%2C%20...%2C%20x_n%5E*%5D%5ET" /> lehetséges megoldása a primál feladatnak, és <img src="https://latex.codecogs.com/svg?y%5E*%20%3D%20%5By_1%5E*%2C%20...%2C%20y_m%5E*%5D%5ET" /> lehetséges megoldása a duál feladatnak.
+
+Ha <img src="https://latex.codecogs.com/svg?c%5ET%20x%5E*%20%3D%20b%5ET%20y%5E*" />, akkor <img src="https://latex.codecogs.com/svg?x%5E*" /> a primál feladat optimális megoldása, <img src="https://latex.codecogs.com/svg?y%5E*" /> pedig a duál feladat optimális megoldása.
+
+> Ez a gyende dualitási tételből ered
+
+###### Segédtételek
+
+1. Ha a primál feladat célfüggvénye nem korlátos, akkor a duál feladatnak nincs lehetséges megoldása
+
+2. Ha a duál feladat célfüggvénye nem korlátos, akkor a primál feladatnak nincs lehetséges megoldása
+
+##### Összefüggések primál és duál között
+
+![ ](../img/opkut_primal_vs_dual.png)
+
+##### Dualitásból adódó lehetőségek
+
+- Szimplex iterációszáma közelítőleg a sorok számával arányos, így sok feltétel, kevés változó esetén érdemes áttérni a duálisra
+
+- Ha primál esetben 2 fázisra van szükség, míg duális esetén csak egyre, akkor is érdemes áttérni
+
+- Ha menet közben kell új feltételeket hozzávenni az LP-hez, akkot a duál feladattal dolgozva az új feltétel csak egy új, nembázis változóként jelenik meg, hozzávesszük az aktuális szótárhoz, és folytatjuk a feladatmegoldást
+
+#### Komplementaritás
+
+![ ](../img/opkut_komplementaritas.png)
+
+Azt mondjuk, hogy <img src="https://latex.codecogs.com/svg?x%20%3D%20(x_1%2C%20...%2C%20x_n)" /> és <img src="https://latex.codecogs.com/svg?y%20%3D%20(y_1%2C%20...%2C%20y_n)" /> komplementárisak, ha 
+
+<img src="https://latex.codecogs.com/svg?%0Ay%5ET%20(b%20-%20Ax)%20%3D%200%20~%20~%20%5Ctext%7B%C3%A9s%7D%20~%20~%20x%5ET%20(A%5ET%20y%20-%20c)%20%3D%200%0A" />
+
+vagy a kiegészített feladatra nézve:
+
+<img src="https://latex.codecogs.com/svg?%0Ay%5ET%20xs%20%3D%200%20~%20~%20%5Ctext%7B%C3%A9s%7D%20~%20~%20x%5ET%20ye%20%3D%200%0A" />
+
+Vagyis
+
+- Ha <img src="https://latex.codecogs.com/svg?y_i%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?i" />-edik egyenletbe helyettesítve <img src="https://latex.codecogs.com/svg?%3D" />-et kapunk, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%20%2B%20i%7D%20%3D%200%20" />
+  
+  - "a feltétel éles"
+
+- Ha az <img src="https://latex.codecogs.com/svg?i" />-edik feltétel nem éles, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%2B%7D%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?y_i%20%3D%200" />
+
+> Hiszen a <img src="https://latex.codecogs.com/svg?y%5ET%20xs%20%3D%200" /> és a <img src="https://latex.codecogs.com/svg?x%5ET%20ye%20%3D%200" /> egyenletek esetén ez a két lehetőség van, hogy egyenlőség legyen
+
+##### Komplementaritási tétel
+
+Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?x" /> a primál, <img src="https://latex.codecogs.com/svg?y" /> a duál feladat lehetséges megoldása. Az <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> akkor, éd csak akkor optimálisak, ha komplementárisak is.
+
+Ezért ha <img src="https://latex.codecogs.com/svg?x" /> a primál optimális megoldása, akkor igazak:
+
+- Ha <img src="https://latex.codecogs.com/svg?y" /> a duál optimális megoldása, akkor <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> komplementárisak
+
+- Lézetik olyan lehetséges <img src="https://latex.codecogs.com/svg?y" /> megoldása a duálisnak, hogy <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> komplementáris. Ekkoz <img src="https://latex.codecogs.com/svg?y" /> optimális is.
+
+##### Komplementáris lazaság
+
+- Adott <img src="https://latex.codecogs.com/svg?x" />, egy javasolt primál megoldás, ellenőrizzük, hogy lehetséges-e
+
+- Nézzük meg, mely <img src="https://latex.codecogs.com/svg?y_i" /> változóknak kell <img src="https://latex.codecogs.com/svg?0" />-nka lennie
+
+- Nézzük meg, mely duál feltételnek kell élesnek lennie, így egy egyenletrendszert kapunk
+
+- Oldjuk meg ezt a rendszert
+
+- Ellenőrizzük, hogy a kapott megoldás lehetséges megoldása-e a duálisnak
+
+> Ha minden lépés sikeres volt, akkoz az adott <img src="https://latex.codecogs.com/svg?x" /> optimális különben nem
+
+#### Egész értékű programozás
+
+Olyan LP feladat, amiben valamennyi változó egész értékű
+
+- **IP**: Tiszta egészértékű programozási feladat, ekkor minden változó egész értékű
+
+- **MIP**: Vegyes egészértékű programozási feladat, ekkor csak néhány változóra követelünk egészértékűséget
+
+- **0-1 IP**: Minden változó bináris, értéke csak 0 vagy 1 lehet
+
+##### Lehetséges megoldások halmaza
+
+![ ](../img/opkut_ip_lehetseges_megoldasok.png)
+
+- LP: Szürke háromszög
+
+- MIP: Sárga szakaszok
+
+- IP: Fehete pontok
+
+##### LP-lazítás
+
+Egy egészértékű programozási feladat LP-lazítása az az LP, amelyet úgy kapunk az IP-ből, hogy a változókra tett minden egészértékűségi vagy bináris megkötést eltőrlünk
+
+Állítások az LP-lazításról:
+
+- Bármelyik IP lehetséges megoldáshalmaza része az LP-lazítása lehetséges megoldástartományának
+
+- Maximalizálásnál az LP-lazítás optimum értéke <img src="https://latex.codecogs.com/svg?%5Cge" /> az IP optimum értékénél
+
+- Ha az LP-lazítás lehetséges megoldáshalmazának minden **csúcspontja** egész, akkor van egész optimális megoldása, ami az IP megoldása is egyben
+
+- Az LP-lazítás optimális megoldása bármilyen messze lehet az IP megoldásától
+
+#### Korátozás és szétválasztás (branch and bound)
+
+Akkor alkalmazzuk, ha egy IP feladat megoldásakor LP-lazításon dolgozunk, és az optimum nem egész
+
+Ehhor egy <img src="https://latex.codecogs.com/svg?x_i" /> nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha <img src="https://latex.codecogs.com/svg?x_i" /> értéke <img src="https://latex.codecogs.com/svg?x_i%5E*" /> akkor <img src="https://latex.codecogs.com/svg?x_i%20%5Cle%20%5Clfloor%20x_i%5E*%20%5Crfloor" />, illetve <img src="https://latex.codecogs.com/svg?x_i%20%5Cge%20%5Clceil%20x_i%5E*%20%5Crceil" /> feltételeket vesszük hozzá egy-egy új feladatunkhoz.
+
+Ezeket a részproblémákat egy fába rendezzük.
+
+- Gyökér az LP-lazítás
+
+- Leszármazottai a részproblémák
+
+- A hozzávett feltételt az élen adjuk meg
+
+- A csúcsokban az LP-k optimális megoldásait jegyezzük
+
+![ ](../img/opkut_branch_and_bound.png)
+
+> A 3. részprobléma fáját ki sem kell fejteni, mert már találtunk jobb megoldást a 39-nél, a 6. részproblémában a 40-et (az is az optimum).
+
+Egy csúcs **felderített** (lezárt), ha:
+
+- Nincs lehetséges megoldása
+
+- Megoldása egészértékű
+
+- Felderítettünk már olyan egész megoldást, mai jobb a részfeladat megoldásánál
+
+Egy részfeladatot **kizárunk**, ha:
+
+- Nincs lehetséges megoldása
+
+- Felderítettünk már olyan egész megoldást, ami jobb a részfeladat megoldásánál
+
+#### Hátizsák feladat
+
+Egy olyan **IP**-t, amiven **csak egy feltétel** van, hátizsák feladatnak nevezünk.
+
+##### Példa
+
+| Tárgy     | Súly | Haszon | Relatív hasznosság | Sorrend |
+|:--------- |:----:|:------:|:------------------:|:-------:|
+| Tablet    | 5    | 16     | 3.2                | 1.      |
+| Laptop    | 7    | 22     | 3.1                | 2.      |
+| Okosteló  | 4    | 12     | 3                  | 3.      |
+| Elemlámpa | 3    | 8      | 2.7                | 4.      |
+
+Matematikai modell:
+
+Legyen <img src="https://latex.codecogs.com/svg?x_i%20%3D%201" />, ha az <img src="https://latex.codecogs.com/svg?i" />. tárgyat viszi, <img src="https://latex.codecogs.com/svg?x_i%20%3D%200" />, ha marad. Ekkor a feladat:
+
+<img src="https://latex.codecogs.com/svg?%0Amax%20~%20~%20z%20%3D%2016x_1%20%2B%2022%20x_2%20%2B%2012%20x_3%20%2B%208x_4%20%5C%5C%0Af.h.%20~%20~%205x_1%20%2B%207x_2%20%2B%204x_3%20%2B%203x_4%20%5Cle%2014%20%5C%5C%0Ax_i%20%5Cin%20%5C%7B%20~%200%2C%201%20~%20%5C%7D%0A" />
+
+LP-lazítás könnyen kiszámolható: Relatív hasznosság szerint sorrendbe rakjuk a tárgyakat, ami belefér azt egészében bele rakjuk, ami nem, annak csak tört részét.
+
+![ ](../img/opkut_hatizsak_branch_and_bound.png)
+
+> Például itt a lazításban az <img src="https://latex.codecogs.com/svg?x_1" /> és <img src="https://latex.codecogs.com/svg?x_2" /> tárgyak (tablet, laptop) teljesen befértek, míg a telefonnak csak a fele, így amentén ágazunk el, hogy mi lenne, ha <img src="https://latex.codecogs.com/svg?x_3%20%3D%200" /> és ha <img src="https://latex.codecogs.com/svg?x_3%20%3D%201" />
+
+Legrosszabb esetben <img src="https://latex.codecogs.com/svg?2%5En" /> részfeladatot kell megoldani, vagyis a hátizsák probléma NP-nehéz.
+
+Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com/svg?2%5E%7BMn%7D" />, ahol <img src="https://latex.codecogs.com/svg?M" /> a lehetséges egészek száma egy változóra.
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
