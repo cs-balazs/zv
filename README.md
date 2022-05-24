@@ -25,3 +25,7 @@ Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 [Jelasity Márk - Mesterséges Intelligencia előadásjegyzet (1.3MB PDF)](https://www.inf.u-szeged.hu/~jelasity/mi1/2021/jegyzet.pdf)
 
 [London András - Operációkutatás I.](https://www.inf.u-szeged.hu/~london/opkutEA.html)
+
+Gergely Tamás - Programozás alapjai, 2020
+
+[Jász Judit, Gergely Tamás, Dévényi Károly - Programozás alapjai okt.sed.hu anyag](https://okt.sed.hu/progalap/)
