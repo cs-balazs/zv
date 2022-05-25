@@ -198,7 +198,7 @@ Két állapota lehet: `zárolt` és `nem zárolt`.
 Például ha egy processzus hozzá szeretne jutni a kritikus szekciójához akkormeghívja a `mutex_lock` eljárást. Ha a mutex nem zárolt akkor az eljárás sikeres és beléphet a kritikus szekcióba. Másik esetben pedig a hívó blokkolódik amíg a kritikus szekcióban lévő processzus nem hívja a `mutex_unlock` eljárást.
 
 #### Monitorok /nem érthető/
-HMagasabb szintű szinkronizációs primitívek használatának javaslata amelyeket monitoroknak nevezték el.
+Magasabb szintű szinkronizációs primitívek használatának javaslata amelyeket monitoroknak nevezték el.
 - Eljárások, változók és adatszerkezetek együttese
 - Speciális modulba/csomagba vannak összegyűjtve
 - A processzusok bármikor hívhatják a monitorban lévő eljárásokat, nem érhetik el a belső adatszerkezeteit
