@@ -344,3 +344,246 @@ Bázismegoldások = poliéder csúcsok.
 > Oka, hogy a csúcspont leírására használt síkokat cserélgetjük.
 
 ### 2. Primál-duál feladatpár, dualitási komplementaritási tételek, egész értékű feladatok és jellemzőik, a branch and bound módszer, a hátizsák feladat
+
+#### Primál-duál feladatpár
+
+Játékgyáras példához:
+
+Legyen egy egység fa piaci ára $y_1$, egy egység festég ára $y_2$
+
+A gyártó opciói:
+
+- Eladhatja az erőforrásokat piaci áron
+
+- Vehet további fát, festéket
+
+- Gyárt a rendelkezésre álló erőforrásokból, és eladja a játékokat
+
+A készletet $80y_1 + 100y_2$-ért lehetne eladni
+
+Két eset:
+
+- Ha egy katona alapanyagára kisebb, mint az eladási, azaz $y_1 + 2y_2 < 3$
+  
+  - Ekkor a gyártó nem adja el az erőforrásokat
+
+- Ha az alapanyagára nagyobb, azaz $y_1 + 2y_2 \ge 3$
+  
+  - Ekkor a gyártó eladhatja az erőforrásait
+
+##### Duális feladat a játékgyár példára
+
+Ezen példa esetén az alapanyag-felvásárló szemszögéből megoldott felatat:
+
+![ ](../img/opkut_dualis_feladat.png)
+
+Ez az eredeti feladat **duálisa.**
+
+Maga az eredeti feladat a **primál** feladat.
+
+##### Duális feladat általánosan
+
+![ ](../img/opkut_primal_dual_altalanosan.png)
+
+**Állítás**: Duál feladat duálisa az eredeti primál feladat.
+
+A duális feladat megoldásában $y_i^*$ az eredeti (primál) feladat $i$. erőforrásáfoz tartozó piaci ár, amit marginális árnak vagy árnyék árnak nevezünk
+
+- Ez az erőforrás éeréke az LP megoldójának szemszögéből
+
+- Az $i$ erőforrás mennyiségének egy egységnyi növelésével éppen $y_i^*$-gal nő a nyereség (azaz a célfüggvény értéke)
+
+- $y_i^*$-nál többet már nem érdemes fizetni az $i$ erőforrásért, de kevesebbet persze igen
+
+##### Dualitási tételek
+
+###### Gyenge dualitás tétele
+
+Ha $x = [x_1, ..., x_n]^T$ lehetséges megoldása a primál feldatnak és $y = [y_1, ..., y_m]^T$ lehetséges megoldása a duál feladatnak, akkor:
+
+$$
+c^T x \le b^T y
+$$
+
+> Azaz a duális feladat bármely lehetséges megoldása feéső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
+
+###### Erős dualitás tétele
+
+Ha van a primál feladathak optimális megoldása, $x^* = (x_1^*, ..., x_n^*)$, akkor a duál feladatnak is létezik optimális megoldása, $y^* = (y_1^*, ..., y_m^*)$, és a célfüggvényértékük megegyezik, azaz $c^T x^* = b^T y^*$
+
+###### Lemma
+
+Legyen $x^* = [x_1^*, ..., x_n^*]^T$ lehetséges megoldása a primál feladatnak, és $y^* = [y_1^*, ..., y_m^*]^T$ lehetséges megoldása a duál feladatnak.
+
+Ha $c^T x^* = b^T y^*$, akkor $x^*$ a primál feladat optimális megoldása, $y^*$ pedig a duál feladat optimális megoldása.
+
+> Ez a gyende dualitási tételből ered
+
+###### Segédtételek
+
+1. Ha a primál feladat célfüggvénye nem korlátos, akkor a duál feladatnak nincs lehetséges megoldása
+
+2. Ha a duál feladat célfüggvénye nem korlátos, akkor a primál feladatnak nincs lehetséges megoldása
+
+##### Összefüggések primál és duál között
+
+![ ](../img/opkut_primal_vs_dual.png)
+
+##### Dualitásból adódó lehetőségek
+
+- Szimplex iterációszáma közelítőleg a sorok számával arányos, így sok feltétel, kevés változó esetén érdemes áttérni a duálisra
+
+- Ha primál esetben 2 fázisra van szükség, míg duális esetén csak egyre, akkor is érdemes áttérni
+
+- Ha menet közben kell új feltételeket hozzávenni az LP-hez, akkot a duál feladattal dolgozva az új feltétel csak egy új, nembázis változóként jelenik meg, hozzávesszük az aktuális szótárhoz, és folytatjuk a feladatmegoldást
+
+#### Komplementaritás
+
+![ ](../img/opkut_komplementaritas.png)
+
+Azt mondjuk, hogy $x = (x_1, ..., x_n)$ és $y = (y_1, ..., y_n)$ komplementárisak, ha 
+
+$$
+y^T (b - Ax) = 0 ~ ~ \text{és} ~ ~ x^T (A^T y - c) = 0
+$$
+
+vagy a kiegészített feladatra nézve:
+
+$$
+y^T xs = 0 ~ ~ \text{és} ~ ~ x^T ye = 0
+$$
+
+Vagyis
+
+- Ha $y_i > 0$, akkor $i$-edik egyenletbe helyettesítve $=$-et kapunk, azaz $x_{n + i} = 0 $
+  
+  - "a feltétel éles"
+
+- Ha az $i$-edik feltétel nem éles, azaz $x_{n+} > 0$, akkor $y_i = 0$
+
+> Hiszen a $y^T xs = 0$ és a $x^T ye = 0$ egyenletek esetén ez a két lehetőség van, hogy egyenlőség legyen
+
+##### Komplementaritási tétel
+
+Tegyük fel, hogy $x$ a primál, $y$ a duál feladat lehetséges megoldása. Az $x$ és $y$ akkor, éd csak akkor optimálisak, ha komplementárisak is.
+
+Ezért ha $x$ a primál optimális megoldása, akkor igazak:
+
+- Ha $y$ a duál optimális megoldása, akkor $x$ és $y$ komplementárisak
+
+- Lézetik olyan lehetséges $y$ megoldása a duálisnak, hogy $x$ és $y$ komplementáris. Ekkoz $y$ optimális is.
+
+##### Komplementáris lazaság
+
+- Adott $x$, egy javasolt primál megoldás, ellenőrizzük, hogy lehetséges-e
+
+- Nézzük meg, mely $y_i$ változóknak kell $0$-nka lennie
+
+- Nézzük meg, mely duál feltételnek kell élesnek lennie, így egy egyenletrendszert kapunk
+
+- Oldjuk meg ezt a rendszert
+
+- Ellenőrizzük, hogy a kapott megoldás lehetséges megoldása-e a duálisnak
+
+> Ha minden lépés sikeres volt, akkoz az adott $x$ optimális különben nem
+
+#### Egész értékű programozás
+
+Olyan LP feladat, amiben valamennyi változó egész értékű
+
+- **IP**: Tiszta egészértékű programozási feladat, ekkor minden változó egész értékű
+
+- **MIP**: Vegyes egészértékű programozási feladat, ekkor csak néhány változóra követelünk egészértékűséget
+
+- **0-1 IP**: Minden változó bináris, értéke csak 0 vagy 1 lehet
+
+##### Lehetséges megoldások halmaza
+
+![ ](../img/opkut_ip_lehetseges_megoldasok.png)
+
+- LP: Szürke háromszög
+
+- MIP: Sárga szakaszok
+
+- IP: Fehete pontok
+
+##### LP-lazítás
+
+Egy egészértékű programozási feladat LP-lazítása az az LP, amelyet úgy kapunk az IP-ből, hogy a változókra tett minden egészértékűségi vagy bináris megkötést eltőrlünk
+
+Állítások az LP-lazításról:
+
+- Bármelyik IP lehetséges megoldáshalmaza része az LP-lazítása lehetséges megoldástartományának
+
+- Maximalizálásnál az LP-lazítás optimum értéke $\ge$ az IP optimum értékénél
+
+- Ha az LP-lazítás lehetséges megoldáshalmazának minden **csúcspontja** egész, akkor van egész optimális megoldása, ami az IP megoldása is egyben
+
+- Az LP-lazítás optimális megoldása bármilyen messze lehet az IP megoldásától
+
+#### Korátozás és szétválasztás (branch and bound)
+
+Akkor alkalmazzuk, ha egy IP feladat megoldásakor LP-lazításon dolgozunk, és az optimum nem egész
+
+Ehhor egy $x_i$ nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha $x_i$ értéke $x_i^*$ akkor $x_i \le \lfloor x_i^* \rfloor$, illetve $x_i \ge \lceil x_i^* \rceil$ feltételeket vesszük hozzá egy-egy új feladatunkhoz.
+
+Ezeket a részproblémákat egy fába rendezzük.
+
+- Gyökér az LP-lazítás
+
+- Leszármazottai a részproblémák
+
+- A hozzávett feltételt az élen adjuk meg
+
+- A csúcsokban az LP-k optimális megoldásait jegyezzük
+
+![ ](../img/opkut_branch_and_bound.png)
+
+> A 3. részprobléma fáját ki sem kell fejteni, mert már találtunk jobb megoldást a 39-nél, a 6. részproblémában a 40-et (az is az optimum).
+
+Egy csúcs **felderített** (lezárt), ha:
+
+- Nincs lehetséges megoldása
+
+- Megoldása egészértékű
+
+- Felderítettünk már olyan egész megoldást, mai jobb a részfeladat megoldásánál
+
+Egy részfeladatot **kizárunk**, ha:
+
+- Nincs lehetséges megoldása
+
+- Felderítettünk már olyan egész megoldást, ami jobb a részfeladat megoldásánál
+
+#### Hátizsák feladat
+
+Egy olyan **IP**-t, amiven **csak egy feltétel** van, hátizsák feladatnak nevezünk.
+
+##### Példa
+
+| Tárgy     | Súly | Haszon | Relatív hasznosság | Sorrend |
+|:--------- |:----:|:------:|:------------------:|:-------:|
+| Tablet    | 5    | 16     | 3.2                | 1.      |
+| Laptop    | 7    | 22     | 3.1                | 2.      |
+| Okosteló  | 4    | 12     | 3                  | 3.      |
+| Elemlámpa | 3    | 8      | 2.7                | 4.      |
+
+Matematikai modell:
+
+Legyen $x_i = 1$, ha az $i$. tárgyat viszi, $x_i = 0$, ha marad. Ekkor a feladat:
+
+$$
+max ~ ~ z = 16x_1 + 22 x_2 + 12 x_3 + 8x_4 \\
+f.h. ~ ~ 5x_1 + 7x_2 + 4x_3 + 3x_4 \le 14 \\
+x_i \in \{ ~ 0, 1 ~ \}
+$$
+
+LP-lazítás könnyen kiszámolható: Relatív hasznosság szerint sorrendbe rakjuk a tárgyakat, ami belefér azt egészében bele rakjuk, ami nem, annak csak tört részét.
+
+![ ](../img/opkut_hatizsak_branch_and_bound.png)
+
+> Például itt a lazításban az $x_1$ és $x_2$ tárgyak (tablet, laptop) teljesen befértek, míg a telefonnak csak a fele, így amentén ágazunk el, hogy mi lenne, ha $x_3 = 0$ és ha $x_3 = 1$
+
+Legrosszabb esetben $2^n$ részfeladatot kell megoldani, vagyis a hátizsák probléma NP-nehéz.
+
+Egészérékű feladatoknál még rosszabb, $2^{Mn}$, ahol $M$ a lehetséges egészek száma egy változóra.

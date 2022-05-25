@@ -27,3 +27,7 @@ Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 [London András - Operációkutatás I.](https://www.inf.u-szeged.hu/~london/opkutEA.html)
 
 Andrew S. Tanenbaum & Albert S. Woodhull. (2007). *Operációs rendszerek*. Budapest: Panem Könyvkiado Kft.
+
+Gergely Tamás - Programozás alapjai, 2020
+
+[Jász Judit, Gergely Tamás, Dévényi Károly - Programozás alapjai okt.sed.hu anyag](https://okt.sed.hu/progalap/)

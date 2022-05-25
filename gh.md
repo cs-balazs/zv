@@ -4894,6 +4894,239 @@ Bázismegoldások = poliéder csúcsok.
 > Oka, hogy a csúcspont leírására használt síkokat cserélgetjük.
 
 ### 2. Primál-duál feladatpár, dualitási komplementaritási tételek, egész értékű feladatok és jellemzőik, a branch and bound módszer, a hátizsák feladat
+
+#### Primál-duál feladatpár
+
+Játékgyáras példához:
+
+Legyen egy egység fa piaci ára <img src="https://latex.codecogs.com/svg?y_1" />, egy egység festég ára <img src="https://latex.codecogs.com/svg?y_2" />
+
+A gyártó opciói:
+
+- Eladhatja az erőforrásokat piaci áron
+
+- Vehet további fát, festéket
+
+- Gyárt a rendelkezésre álló erőforrásokból, és eladja a játékokat
+
+A készletet <img src="https://latex.codecogs.com/svg?80y_1%20%2B%20100y_2" />-ért lehetne eladni
+
+Két eset:
+
+- Ha egy katona alapanyagára kisebb, mint az eladási, azaz <img src="https://latex.codecogs.com/svg?y_1%20%2B%202y_2%20%3C%203" />
+  
+  - Ekkor a gyártó nem adja el az erőforrásokat
+
+- Ha az alapanyagára nagyobb, azaz <img src="https://latex.codecogs.com/svg?y_1%20%2B%202y_2%20%5Cge%203" />
+  
+  - Ekkor a gyártó eladhatja az erőforrásait
+
+##### Duális feladat a játékgyár példára
+
+Ezen példa esetén az alapanyag-felvásárló szemszögéből megoldott felatat:
+
+![ ](../img/opkut_dualis_feladat.png)
+
+Ez az eredeti feladat **duálisa.**
+
+Maga az eredeti feladat a **primál** feladat.
+
+##### Duális feladat általánosan
+
+![ ](../img/opkut_primal_dual_altalanosan.png)
+
+**Állítás**: Duál feladat duálisa az eredeti primál feladat.
+
+A duális feladat megoldásában <img src="https://latex.codecogs.com/svg?y_i%5E*" /> az eredeti (primál) feladat <img src="https://latex.codecogs.com/svg?i" />. erőforrásáfoz tartozó piaci ár, amit marginális árnak vagy árnyék árnak nevezünk
+
+- Ez az erőforrás éeréke az LP megoldójának szemszögéből
+
+- Az <img src="https://latex.codecogs.com/svg?i" /> erőforrás mennyiségének egy egységnyi növelésével éppen <img src="https://latex.codecogs.com/svg?y_i%5E*" />-gal nő a nyereség (azaz a célfüggvény értéke)
+
+- <img src="https://latex.codecogs.com/svg?y_i%5E*" />-nál többet már nem érdemes fizetni az <img src="https://latex.codecogs.com/svg?i" /> erőforrásért, de kevesebbet persze igen
+
+##### Dualitási tételek
+
+###### Gyenge dualitás tétele
+
+Ha <img src="https://latex.codecogs.com/svg?x%20%3D%20%5Bx_1%2C%20...%2C%20x_n%5D%5ET" /> lehetséges megoldása a primál feldatnak és <img src="https://latex.codecogs.com/svg?y%20%3D%20%5By_1%2C%20...%2C%20y_m%5D%5ET" /> lehetséges megoldása a duál feladatnak, akkor:
+
+<img src="https://latex.codecogs.com/svg?%0Ac%5ET%20x%20%5Cle%20b%5ET%20y%0A" />
+
+> Azaz a duális feladat bármely lehetséges megoldása feéső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
+
+###### Erős dualitás tétele
+
+Ha van a primál feladathak optimális megoldása, <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20(x_1%5E*%2C%20...%2C%20x_n%5E*)" />, akkor a duál feladatnak is létezik optimális megoldása, <img src="https://latex.codecogs.com/svg?y%5E*%20%3D%20(y_1%5E*%2C%20...%2C%20y_m%5E*)" />, és a célfüggvényértékük megegyezik, azaz <img src="https://latex.codecogs.com/svg?c%5ET%20x%5E*%20%3D%20b%5ET%20y%5E*" />
+
+###### Lemma
+
+Legyen <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20%5Bx_1%5E*%2C%20...%2C%20x_n%5E*%5D%5ET" /> lehetséges megoldása a primál feladatnak, és <img src="https://latex.codecogs.com/svg?y%5E*%20%3D%20%5By_1%5E*%2C%20...%2C%20y_m%5E*%5D%5ET" /> lehetséges megoldása a duál feladatnak.
+
+Ha <img src="https://latex.codecogs.com/svg?c%5ET%20x%5E*%20%3D%20b%5ET%20y%5E*" />, akkor <img src="https://latex.codecogs.com/svg?x%5E*" /> a primál feladat optimális megoldása, <img src="https://latex.codecogs.com/svg?y%5E*" /> pedig a duál feladat optimális megoldása.
+
+> Ez a gyende dualitási tételből ered
+
+###### Segédtételek
+
+1. Ha a primál feladat célfüggvénye nem korlátos, akkor a duál feladatnak nincs lehetséges megoldása
+
+2. Ha a duál feladat célfüggvénye nem korlátos, akkor a primál feladatnak nincs lehetséges megoldása
+
+##### Összefüggések primál és duál között
+
+![ ](../img/opkut_primal_vs_dual.png)
+
+##### Dualitásból adódó lehetőségek
+
+- Szimplex iterációszáma közelítőleg a sorok számával arányos, így sok feltétel, kevés változó esetén érdemes áttérni a duálisra
+
+- Ha primál esetben 2 fázisra van szükség, míg duális esetén csak egyre, akkor is érdemes áttérni
+
+- Ha menet közben kell új feltételeket hozzávenni az LP-hez, akkot a duál feladattal dolgozva az új feltétel csak egy új, nembázis változóként jelenik meg, hozzávesszük az aktuális szótárhoz, és folytatjuk a feladatmegoldást
+
+#### Komplementaritás
+
+![ ](../img/opkut_komplementaritas.png)
+
+Azt mondjuk, hogy <img src="https://latex.codecogs.com/svg?x%20%3D%20(x_1%2C%20...%2C%20x_n)" /> és <img src="https://latex.codecogs.com/svg?y%20%3D%20(y_1%2C%20...%2C%20y_n)" /> komplementárisak, ha 
+
+<img src="https://latex.codecogs.com/svg?%0Ay%5ET%20(b%20-%20Ax)%20%3D%200%20~%20~%20%5Ctext%7B%C3%A9s%7D%20~%20~%20x%5ET%20(A%5ET%20y%20-%20c)%20%3D%200%0A" />
+
+vagy a kiegészített feladatra nézve:
+
+<img src="https://latex.codecogs.com/svg?%0Ay%5ET%20xs%20%3D%200%20~%20~%20%5Ctext%7B%C3%A9s%7D%20~%20~%20x%5ET%20ye%20%3D%200%0A" />
+
+Vagyis
+
+- Ha <img src="https://latex.codecogs.com/svg?y_i%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?i" />-edik egyenletbe helyettesítve <img src="https://latex.codecogs.com/svg?%3D" />-et kapunk, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%20%2B%20i%7D%20%3D%200%20" />
+  
+  - "a feltétel éles"
+
+- Ha az <img src="https://latex.codecogs.com/svg?i" />-edik feltétel nem éles, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%2B%7D%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?y_i%20%3D%200" />
+
+> Hiszen a <img src="https://latex.codecogs.com/svg?y%5ET%20xs%20%3D%200" /> és a <img src="https://latex.codecogs.com/svg?x%5ET%20ye%20%3D%200" /> egyenletek esetén ez a két lehetőség van, hogy egyenlőség legyen
+
+##### Komplementaritási tétel
+
+Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?x" /> a primál, <img src="https://latex.codecogs.com/svg?y" /> a duál feladat lehetséges megoldása. Az <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> akkor, éd csak akkor optimálisak, ha komplementárisak is.
+
+Ezért ha <img src="https://latex.codecogs.com/svg?x" /> a primál optimális megoldása, akkor igazak:
+
+- Ha <img src="https://latex.codecogs.com/svg?y" /> a duál optimális megoldása, akkor <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> komplementárisak
+
+- Lézetik olyan lehetséges <img src="https://latex.codecogs.com/svg?y" /> megoldása a duálisnak, hogy <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> komplementáris. Ekkoz <img src="https://latex.codecogs.com/svg?y" /> optimális is.
+
+##### Komplementáris lazaság
+
+- Adott <img src="https://latex.codecogs.com/svg?x" />, egy javasolt primál megoldás, ellenőrizzük, hogy lehetséges-e
+
+- Nézzük meg, mely <img src="https://latex.codecogs.com/svg?y_i" /> változóknak kell <img src="https://latex.codecogs.com/svg?0" />-nka lennie
+
+- Nézzük meg, mely duál feltételnek kell élesnek lennie, így egy egyenletrendszert kapunk
+
+- Oldjuk meg ezt a rendszert
+
+- Ellenőrizzük, hogy a kapott megoldás lehetséges megoldása-e a duálisnak
+
+> Ha minden lépés sikeres volt, akkoz az adott <img src="https://latex.codecogs.com/svg?x" /> optimális különben nem
+
+#### Egész értékű programozás
+
+Olyan LP feladat, amiben valamennyi változó egész értékű
+
+- **IP**: Tiszta egészértékű programozási feladat, ekkor minden változó egész értékű
+
+- **MIP**: Vegyes egészértékű programozási feladat, ekkor csak néhány változóra követelünk egészértékűséget
+
+- **0-1 IP**: Minden változó bináris, értéke csak 0 vagy 1 lehet
+
+##### Lehetséges megoldások halmaza
+
+![ ](../img/opkut_ip_lehetseges_megoldasok.png)
+
+- LP: Szürke háromszög
+
+- MIP: Sárga szakaszok
+
+- IP: Fehete pontok
+
+##### LP-lazítás
+
+Egy egészértékű programozási feladat LP-lazítása az az LP, amelyet úgy kapunk az IP-ből, hogy a változókra tett minden egészértékűségi vagy bináris megkötést eltőrlünk
+
+Állítások az LP-lazításról:
+
+- Bármelyik IP lehetséges megoldáshalmaza része az LP-lazítása lehetséges megoldástartományának
+
+- Maximalizálásnál az LP-lazítás optimum értéke <img src="https://latex.codecogs.com/svg?%5Cge" /> az IP optimum értékénél
+
+- Ha az LP-lazítás lehetséges megoldáshalmazának minden **csúcspontja** egész, akkor van egész optimális megoldása, ami az IP megoldása is egyben
+
+- Az LP-lazítás optimális megoldása bármilyen messze lehet az IP megoldásától
+
+#### Korátozás és szétválasztás (branch and bound)
+
+Akkor alkalmazzuk, ha egy IP feladat megoldásakor LP-lazításon dolgozunk, és az optimum nem egész
+
+Ehhor egy <img src="https://latex.codecogs.com/svg?x_i" /> nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha <img src="https://latex.codecogs.com/svg?x_i" /> értéke <img src="https://latex.codecogs.com/svg?x_i%5E*" /> akkor <img src="https://latex.codecogs.com/svg?x_i%20%5Cle%20%5Clfloor%20x_i%5E*%20%5Crfloor" />, illetve <img src="https://latex.codecogs.com/svg?x_i%20%5Cge%20%5Clceil%20x_i%5E*%20%5Crceil" /> feltételeket vesszük hozzá egy-egy új feladatunkhoz.
+
+Ezeket a részproblémákat egy fába rendezzük.
+
+- Gyökér az LP-lazítás
+
+- Leszármazottai a részproblémák
+
+- A hozzávett feltételt az élen adjuk meg
+
+- A csúcsokban az LP-k optimális megoldásait jegyezzük
+
+![ ](../img/opkut_branch_and_bound.png)
+
+> A 3. részprobléma fáját ki sem kell fejteni, mert már találtunk jobb megoldást a 39-nél, a 6. részproblémában a 40-et (az is az optimum).
+
+Egy csúcs **felderített** (lezárt), ha:
+
+- Nincs lehetséges megoldása
+
+- Megoldása egészértékű
+
+- Felderítettünk már olyan egész megoldást, mai jobb a részfeladat megoldásánál
+
+Egy részfeladatot **kizárunk**, ha:
+
+- Nincs lehetséges megoldása
+
+- Felderítettünk már olyan egész megoldást, ami jobb a részfeladat megoldásánál
+
+#### Hátizsák feladat
+
+Egy olyan **IP**-t, amiven **csak egy feltétel** van, hátizsák feladatnak nevezünk.
+
+##### Példa
+
+| Tárgy     | Súly | Haszon | Relatív hasznosság | Sorrend |
+|:--------- |:----:|:------:|:------------------:|:-------:|
+| Tablet    | 5    | 16     | 3.2                | 1.      |
+| Laptop    | 7    | 22     | 3.1                | 2.      |
+| Okosteló  | 4    | 12     | 3                  | 3.      |
+| Elemlámpa | 3    | 8      | 2.7                | 4.      |
+
+Matematikai modell:
+
+Legyen <img src="https://latex.codecogs.com/svg?x_i%20%3D%201" />, ha az <img src="https://latex.codecogs.com/svg?i" />. tárgyat viszi, <img src="https://latex.codecogs.com/svg?x_i%20%3D%200" />, ha marad. Ekkor a feladat:
+
+<img src="https://latex.codecogs.com/svg?%0Amax%20~%20~%20z%20%3D%2016x_1%20%2B%2022%20x_2%20%2B%2012%20x_3%20%2B%208x_4%20%5C%5C%0Af.h.%20~%20~%205x_1%20%2B%207x_2%20%2B%204x_3%20%2B%203x_4%20%5Cle%2014%20%5C%5C%0Ax_i%20%5Cin%20%5C%7B%20~%200%2C%201%20~%20%5C%7D%0A" />
+
+LP-lazítás könnyen kiszámolható: Relatív hasznosság szerint sorrendbe rakjuk a tárgyakat, ami belefér azt egészében bele rakjuk, ami nem, annak csak tört részét.
+
+![ ](../img/opkut_hatizsak_branch_and_bound.png)
+
+> Például itt a lazításban az <img src="https://latex.codecogs.com/svg?x_1" /> és <img src="https://latex.codecogs.com/svg?x_2" /> tárgyak (tablet, laptop) teljesen befértek, míg a telefonnak csak a fele, így amentén ágazunk el, hogy mi lenne, ha <img src="https://latex.codecogs.com/svg?x_3%20%3D%200" /> és ha <img src="https://latex.codecogs.com/svg?x_3%20%3D%201" />
+
+Legrosszabb esetben <img src="https://latex.codecogs.com/svg?2%5En" /> részfeladatot kell megoldani, vagyis a hátizsák probléma NP-nehéz.
+
+Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com/svg?2%5E%7BMn%7D" />, ahol <img src="https://latex.codecogs.com/svg?M" /> a lehetséges egészek száma egy változóra.
 # Programozási nyelvek
 
 ## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
@@ -5159,6 +5392,214 @@ Bázismegoldások = poliéder csúcsok.
       - Elemi és összetett folyamato
     
     - Csatornák: két folyamat közötti adatátvitelre szolgál
+## Programozás alapjai
+
+### 1. Algoritmusok vezérlési szerkezetei és megvalósításuk C programozási nyelven. A szekvenciális, iterációs, elágazásos, és az eljárás vezérlés.
+
+#### Vezérlési módok
+
+Segítségükkel azt fejezzük ki, hogy egyszerűbb műveletekből hogyan építhetünk fel összetettebb műveleteket és ennek milyen lesz a vezérlése, azaz milyen sorrendben kell végrehajtani az őt felépítő utasításokat.
+
+Négy fő vezérlési módot különböztetünk meg:
+
+- **Szekvenciális**: Véges sok művelet rögzített sorrendben egymás után történő végrehajtása
+
+- **Szelekciós**: Véges sok művelet közül adott feltétel alapján valamelyik végrehajtása
+
+- **Ismétléses**: Adott műveletet adott feltétel szerinti ismételt végrehajtása
+
+- **Eljárás**: Adott művelet alkalmazása adott argumentumokra, ami az argumentumok értékének meghatározott változását eredményezi
+
+> Ezek nyelv független fogalmak, amikor egy imperatív programozási nyelvet el akarunk sajátítani, a legfontosabb annak megismerése, hogy ezeket a vezérlési módokat milyen utasításokkal tudjuk (ha tudjuk) megvalósítani.
+
+#### Algoritmusok leírása
+
+Több féle képpen meg tudjuk adni egy algoritmus vezérlését, azaz azt az előírást, amely az algoritmus minden lépéséra kijelöli, hogy a lépés végrehajtása után melyik lépés végrehajtása következik.
+
+- **Természetes nyelvi leírás**: Legegyszerűbb megközelítés, szövegesen, mindatokba foglalva írja le az algoritmust. Nagyon távol áll egy gépi megvalósítástól.
+
+- **Pszeudo kód**: Egy programozási nyelv szerű struktúrált nyelv, de sokkal szabadabb, mint egy valódi programozási nyelv, nem kell minden részletet definiálni.
+
+- **Folyamatábra**: Grafikus, kevésbé struktúrált gráf reprezentációja a végrehajtásnak, amely a működési folyamatra koncentrál
+
+- **Szerkezeti ábra**: Szintén grafikus, strukturált leítása az algoritmus felépítésének leírására, amely leírja a működési folyamatot is
+
+#### Folyamatábra
+
+Akkor használjuk, ha csak a kész algoritmus működését szeretnénk leírni, és a szerkezete kevésbé fontos.
+
+Az algoritmus egyes lépéseit egy gráf csúcspontjaiban definiáljuk, amely pontokat irányított nyilakkal kötjük össze, ezzel kijelölve a végrehajtás irányát.
+
+Közel áll az assembly nyelvhez.
+
+##### Szintaxis
+
+Legyenek <img src="https://latex.codecogs.com/svg?M%20%3D%20%5C%7B%20~%20M_1%2C%20...%2C%20M_k%20~%20%5C%7D" /> műveletek, és <img src="https://latex.codecogs.com/svg?F%20%3D%20%5C%7B%20~%20F_1%2C%20...%2C%20F_l%20~%20%5C%7D" /> feltételek.
+
+Az <img src="https://latex.codecogs.com/svg?(M%2C%20F)" /> feletti folyamatábra olyan irányított gráf, amelyre teljesül a következő 5 feltétel:
+
+- Van egy olyan pontja, ami a **Start** művelettel van címkézve, és ebbe a pontba nem vezet él.
+
+- Van egy olyan pontja, ami a **Stop** művelettel van címkézve, és ebből nem indul ki él.
+
+- Minden pontja vagy egy <img src="https://latex.codecogs.com/svg?M" />-beli művelet, vagy egy <img src="https://latex.codecogs.com/svg?F" />-beli feltétel a **Start** és **Stop** pontokon kívül.
+
+- Ha egy pont
+  
+  - <img src="https://latex.codecogs.com/svg?M" />-beli művelettel van címkézve, akkor belőle egy él indul ki
+  
+  - <img src="https://latex.codecogs.com/svg?F" />-beli feltétellel van címkézve, akkor belőle két él indul ki, és ezek az **i** (igen), illetve **n** (nem) címkéket viselik.
+
+- A gráf minden pontja elérhető a **Start** címkéjű pontból.
+
+##### Szemantika
+
+Egy folyamatábrát a következőképpen kell értelmezni:
+
+- A végrehajtást a **Start** pontból kell kezdeni.
+
+- Az összetett utasítás akkor ér véget, ha elértük a **Stop** pontot, azaz a vezérlést megkapja a **Stop** pont.
+
+- A gráf egy pontjának a végrehajtását attól függően definiáljuk, hogy az <img src="https://latex.codecogs.com/svg?M" />-beli utasítással, vagy <img src="https://latex.codecogs.com/svg?F" />-beli címkével van címkézve.
+  
+  - Ha a pontban <img src="https://latex.codecogs.com/svg?M" />-beli művelet van, akkor a művelet végrehajtódik és a 
+    vezérlés a gráf azon pontjára kerül, amelybe a pontból kiinduló él 
+    vezet.
+  
+  - Ha a pont <img src="https://latex.codecogs.com/svg?F" />-beli feltétellel van címkézve, akkor kiértékelődik a 
+    feltétel. Ha az értéke igaz, akkor az a pont kap vezérlést. amelybe az **i** (igen) 
+    címkéjű él vezet, egyébként az a pont kapja meg a vezérlést, amelybe az **n** (nem) címkéjű él vezet.
+
+##### Példa
+
+```mermaid
+graph LR;
+    ST(Start):::className --> M1;
+    M1 --> F{F1};
+    F{F1} --i--> M2;
+    M2 --> SP(Stop);
+    F{F1} --n--> SP(Stop);
+
+    classDef className stroke-radius:10px;
+```
+
+1. **Start** pontból a vezérlés rákerül az <img src="https://latex.codecogs.com/svg?M_1" /> utasítást tartalmazó blokkra.
+
+2. <img src="https://latex.codecogs.com/svg?M_1" /> végrehajtása után az <img src="https://latex.codecogs.com/svg?F_1" /> feltétel kiártákelése történik.
+   
+   - Ha a feltétel igaz volt, akkor végrehajtjuk az <img src="https://latex.codecogs.com/svg?M_2" /> utasítást
+
+3. Akár végre hajtottuk az <img src="https://latex.codecogs.com/svg?M_2" /> utasítást, akár nem, ezen a ponton eljutunk a **Stop** csúcsig
+
+#### Szekvenciális vezérlés
+
+Szekvenciális vezérlésről akkor beszélünk, amikor a <img src="https://latex.codecogs.com/svg?P" /> probléma 
+megoldását úgy kapjuk, hogy a problémát <img src="https://latex.codecogs.com/svg?P_1%2C%20...%2C%20P_n" /> részproblémákra 
+bontjuk, majd az ezekre adott megoldásokat (részalgoritmusokat) sorban, 
+egymás után végrehajtjuk.
+
+<img src="https://latex.codecogs.com/svg?P_1%2C%20...%20%2C%20P_n" /> lehetnek elemi műveletek, de lehetnek összetettek is, 
+amiket utána tovább kell bontani.
+
+##### Folyamatábra
+
+```mermaid
+graph LR;
+    Start(Start) --> P1;
+    P1 --> P2;
+    P2 --> ...
+    ... --> Pn
+    Pn --> Stop(Stop)
+```
+
+##### Szerkezeti ábra
+
+Itt az látszódik, hogy a <img src="https://latex.codecogs.com/svg?P" /> problémának a megoldását a <img src="https://latex.codecogs.com/svg?P_1%2C%20...%2C%20P_n" /> problémák megoldásával kapjuk. A sorrendiséget csak a felsorolás sorrendje jelzi.
+
+```mermaid
+graph TD;
+    P --- P1;
+    P --- P2;
+    P --- ...;
+    P --- Pn;
+```
+
+##### C-ben
+
+```c
+{
+    P1;
+    ...
+    P2;
+}
+```
+
+#### Szelekciós vezérlés
+
+A kiválasztás módjától függően megkülönböztetünk pár altípust:
+
+- Egyszerű szelekciós vezérlés
+
+- Többszörös szelekciós vezérlés
+
+- Esetkiválasztásos szelekció
+
+- A fentiek kiegészítve **egyébként** ágakkal
+
+##### Egyszerű szelekciós vezérlés
+
+Egyetlen művelet, és egyetlen feltétel van.
+
+> Maga a művelet persze lehet összetett.
+
+Legyen <img src="https://latex.codecogs.com/svg?F" /> egy logikai kifejezés, <img src="https://latex.codecogs.com/svg?A" /> pedig tetszőleges művelet. 
+Az <img src="https://latex.codecogs.com/svg?F" /> feltételből és az <img src="https://latex.codecogs.com/svg?A" /> műveletből képzett **egyszerű szelekciós vezérlés** a következő vezérlési előírást jelenti:
+
+1. Értékeljük ki az <img src="https://latex.codecogs.com/svg?F" /> feltételt és folytassuk a 2. lépéssel
+
+2. Ha <img src="https://latex.codecogs.com/svg?F" /> értéke igaz, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?A" /> műveletet, és fejezzük be az összetett művelet végrehajtását
+
+3. Egyébként ha <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor fejezzük be az összetett művelet végrehajtását
+
+A vezérlés bővíthető úgy, hogy a 3. pontban üres művelet helyett egy B műveletet hajtunk végre. Ekkor az alábbiak szerint módosíthatjuk a vezérlés megadását:
+
+Legyen <img src="https://latex.codecogs.com/svg?F" /> egy logikai kifejezés, <img src="https://latex.codecogs.com/svg?A" /> **és** <img src="https://latex.codecogs.com/svg?B" /> pedig tetszőleges művelet. 
+Az <img src="https://latex.codecogs.com/svg?F" /> feltételből és az <img src="https://latex.codecogs.com/svg?A" /> **és** <img src="https://latex.codecogs.com/svg?B" /> műveletből képzett egyszerű szelekciós vezérlés a következő vezérlési előírást jelenti:
+
+1. Értékeljük ki az <img src="https://latex.codecogs.com/svg?F" /> feltételt és folytassuk a 2. lépéssel
+
+2. Ha <img src="https://latex.codecogs.com/svg?F" /> értéke igaz, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?A" /> műveletet, és fejezzük be az összetett művelet végrehajtását
+
+3. Egyébként ha <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor **hajtsuk végre a <img src="https://latex.codecogs.com/svg?B" /> műveletet**, majd fejezzük be az összetett művelet végrehajtását
+
+```mermaid
+graph TB
+    subgraph B művelettel
+    Start1(Start) --> F1{F}
+    F1{F} --i--> A1[A]
+    F1{F} --n--> B1[B]
+    A1[A] --> Stop1(Stop)
+    B1[B] --> Stop1(Stop)
+    end
+
+    subgraph B művelet nélkül
+    Start2(Start) --> F2{F}
+    F2{F} --n--> Stop2(Stop)
+    F2{F} --i--> A2[A]
+    A2[A] --> Stop2(Stop)
+    end
+    
+```
+
+
+
+
+
+
+
+
+
+### 2. Egyszerű adattípusok: egész, valós, logikai és karakter típusok és kifejezések. Az egyszerű típusok reprezentációja, számábrázolási tartományuk, pontosságuk, memória igényük, és műveleteik. Az összetett adattípusok és a típusképzések, valamint megvalósításuk C nyelven. A pointer, a tömb, a rekord, és az unió típus. Az egyes típusok szerepe, használata.
 # Rendszerfejlesztés 1.
 
 ## 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
