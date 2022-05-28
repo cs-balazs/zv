@@ -5561,16 +5561,9 @@ Az <img src="https://latex.codecogs.com/svg?F" /> feltételből és az <img src=
 
 3. Egyébként ha <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor fejezzük be az összetett művelet végrehajtását
 
-A vezérlés bővíthető úgy, hogy a 3. pontban üres művelet helyett egy B műveletet hajtunk végre. Ekkor az alábbiak szerint módosíthatjuk a vezérlés megadását:
+A vezérlés bővíthető úgy, hogy a 3. pontban üres művelet helyett egy B műveletet hajtunk végre. (`else` ág, minimélis módosításokkal felírható hasonló definíció)
 
-Legyen <img src="https://latex.codecogs.com/svg?F" /> egy logikai kifejezés, <img src="https://latex.codecogs.com/svg?A" /> **és** <img src="https://latex.codecogs.com/svg?B" /> pedig tetszőleges művelet. 
-Az <img src="https://latex.codecogs.com/svg?F" /> feltételből és az <img src="https://latex.codecogs.com/svg?A" /> **és** <img src="https://latex.codecogs.com/svg?B" /> műveletből képzett egyszerű szelekciós vezérlés a következő vezérlési előírást jelenti:
-
-1. Értékeljük ki az <img src="https://latex.codecogs.com/svg?F" /> feltételt és folytassuk a 2. lépéssel
-
-2. Ha <img src="https://latex.codecogs.com/svg?F" /> értéke igaz, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?A" /> műveletet, és fejezzük be az összetett művelet végrehajtását
-
-3. Egyébként ha <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor **hajtsuk végre a <img src="https://latex.codecogs.com/svg?B" /> műveletet**, majd fejezzük be az összetett művelet végrehajtását
+###### Folyamatábra
 
 ```mermaid
 graph TB
@@ -5588,14 +5581,484 @@ graph TB
     F2{F} --i--> A2[A]
     A2[A] --> Stop2(Stop)
     end
-    
 ```
 
+###### Szerkezeti ábra
 
+![ ](../img/progalap_egyszeru_szelekcio_szerkezeti.png)
 
+###### C-ben
 
+```c
+if(F) {
+    A;
+}
+```
 
+```c
+if(F) {
+    A;
+} else {
+    B;
+}
+```
 
+> Feltételes kifejezés (ternary): `a ? b : c`
+> 
+> A C nyelv egyetlen 3 operandusú művelete.
+
+##### Többszörös szelekciós vezérlés
+
+Több feltétel, több művelettel.
+
+Legyenek <img src="https://latex.codecogs.com/svg?F_i" /> logikai kifejezések, <img src="https://latex.codecogs.com/svg?A_i" /> pedig tetszőleges műveletek <img src="https://latex.codecogs.com/svg?1%20%5Cle%20i%20%5Cle%20n" />-re (azaz mind feltételből, mint <img src="https://latex.codecogs.com/svg?A" /> műveletből van <img src="https://latex.codecogs.com/svg?n" /> darab). Az <img src="https://latex.codecogs.com/svg?F_i" /> feltételekből és <img src="https://latex.codecogs.com/svg?A_i" /> műveletekből képzett többszörös szelekciós vezérlés a következő vezérlési előírást jelenti:
+
+1. Az <img src="https://latex.codecogs.com/svg?F_i" /> feltételek sorban történő kiértékelésével adjunk választ a következő kérdésre: van-e olyan <img src="https://latex.codecogs.com/svg?i" /> <img src="https://latex.codecogs.com/svg?(1%20%5Cle%20i%20%5Cle%20n)" />, amelyre teljesül, hogy az <img src="https://latex.codecogs.com/svg?F_i" /> feltétel igaz és az összes <img src="https://latex.codecogs.com/svg?F_j" /> <img src="https://latex.codecogs.com/svg?(1%20%5Cle%20j%20%3C%20i)" /> feltétel hamis? (Azaz keressük az első <img src="https://latex.codecogs.com/svg?F_i" /> feltételt, ami **igaz**.)
+
+2. Ha van ilyen <img src="https://latex.codecogs.com/svg?i" />, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?A_i" /> műveletet és fejezzük be az összetett művelet végrehajtását.
+
+3. Egyébként, vagyis ha minden <img src="https://latex.codecogs.com/svg?F_i" /> feltétel hamis, akkor fejezzük be az összetett művelet végrehajtását.
+
+###### Folyamatábra
+
+![ ](../img/progalap_tobbszoros_szelekcio_folyamat_1.png)
+
+![ ](../img/progalap_tobbszoros_szelekcio_folyamat_2.png)
+
+> Az utóbbi rendelkezik egyébként ággal
+
+###### Szerkezeti ábra
+
+Mivel a fenti dobozba nem lehetne beírni minden feltételt, és nem is lenne egyértelmű, hogy melyikhez melyik tartozik, csak egy **?**-et írunk.
+
+![ ](../img/progalap_tobbszoros_szelekcio_szerkezeti.png)
+
+> Valójában összeépíthető az egyszerű szelekciós vezérlés szerkezeti ábrájával, a hamis ágegy újabb egyszerű szelekcióba vezet, és így tovább ahány feltétel van (és a végén egy esetleges `else` ág).
+
+###### C-ben
+
+```c
+if(F1) {
+    A1;
+} else if(F2) {
+    A2;
+    ...
+} else if(Fn) {
+    An;
+} else {
+    B;
+}
+```
+
+Fontos, hogy a zárójelezésre figyeljünk, az alábbi két blokk ekvivalens, hiába tűnhet úgy, mintha a másodikban az `else` ág az első `if`-hez tartozna:
+
+```c
+if(F1) {
+    if(F2)
+        A1;
+    else
+        A2;
+}
+```
+
+```c
+if(F1)
+    if(F2)
+        A1;
+else
+  A2;
+```
+
+> A C nyelv nem whitespace érzékeny.
+
+##### Esetkiválasztásos szelekciós vezérlés
+
+Akkor alkalmazhatjuk, ha a többszörös szelekció feltételeit átírhatjuk úgy, hogy **elemek valamilyen halmazba tartozását** vizsgálják.
+
+> `switch`
+
+Legyen <img src="https://latex.codecogs.com/svg?K" /> egy adott típusú kifejezés, és legyenek <img src="https://latex.codecogs.com/svg?H_i" />-k olyan halmazok, melynek elemeinek típusa megegyezik <img src="https://latex.codecogs.com/svg?K" /> típusával. Legyenek továbbá <img src="https://latex.codecogs.com/svg?A_i" /> tetszőleges műveletek, ahol <img src="https://latex.codecogs.com/svg?1%20%5Cle%20i%20%5Cle%20n" /> teljesül. A <img src="https://latex.codecogs.com/svg?K" /> szelektor kifejezésből, <img src="https://latex.codecogs.com/svg?H_i" /> kiválasztó halmazokból és <img src="https://latex.codecogs.com/svg?A_i" /> műveletekből képzett esetkiválasztásos szelekciós vezérlés a következő vezérlési előírást jelenti:
+
+1. Értékeljük ki a <img src="https://latex.codecogs.com/svg?K" /> kifejezést és folytassuk a 2. lépéssel.
+
+2. Adjunk választ a következő kérdésre: Van-e olyan <img src="https://latex.codecogs.com/svg?i" /> (<img src="https://latex.codecogs.com/svg?1%20%5Cle%20i%20%5Cle%20n" />), amelyre teljesül, hogy a <img src="https://latex.codecogs.com/svg?K%20%5Cin%20H_i" />, és <img src="https://latex.codecogs.com/svg?K%20%5Cnotin%20H_j" />, ahol (<img src="https://latex.codecogs.com/svg?1%20%5Cle%20j%3Ci" />)?
+
+3. Ha van ilyen <img src="https://latex.codecogs.com/svg?i" />, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?A_i" /> műveletet és fejezzük be az összetett művelet végrehajtását.
+
+4. Egyébként, vagyis ha <img src="https://latex.codecogs.com/svg?K" /> nem eleme egyetlen <img src="https://latex.codecogs.com/svg?H_i" /> halmaznak sem, akkor fejezzük be az összetett művelet végrehajtását.
+
+> Itt is lehet egyébként ág (`default`), minimálisan módosul a definíció ha jelen van.
+
+###### Folyamatábra
+
+![ ](../img/switch_folyamat_1.png)
+
+![  ](../img/switch_folyamat_2.png)
+
+> Utóbbi a `default` ágas
+
+###### Szerkezeti ábra
+
+![ ](../img/switch_szerkezet_1.png)
+
+![ ](../img/switch_szerkezet_2.png)
+
+> <img src="https://latex.codecogs.com/svg?K" /> az adott kifejezés, aminek a <img src="https://latex.codecogs.com/svg?H_i" />-k be tartozását vizsgáljuk.
+
+###### C-ben
+
+```c
+switch(K) {
+    case H1:
+        A1;
+        break;
+    ...
+    case Hn:
+        An;
+        break;
+    default:
+        B;
+        break;
+}
+```
+
+> Alapból azt fejezzük ki, hogy melyik `case`-től kezdődően hajtsuk végre az <img src="https://latex.codecogs.com/svg?A_i" /> utasításokat (mindhatni, hogy a `case`-ek belépési pontot határoznak meg). Így ha `break`-el, vagy `return`-el zárunk minden utasítást (esetleg kivéve az utolsót), akkor esetkiválasztásos szelekciót valósít meg a struktúra.
+
+Itt a `case`-ek után egy elem állhat, nem egy halmaz, ezt a `case` működéséből adódóan (azaz abból, hogy egy belépési pontot határoz meg) viszont a következőképpen meg tudjuk oldani:
+
+```c
+case x_i1:
+case x_i2:
+...
+case x_ini:
+   Ai;
+   break;
+```
+
+Ekkor az <img src="https://latex.codecogs.com/svg?A_i" /> utasítás akkor fog kiválasztódni, ha <img src="https://latex.codecogs.com/svg?K%20%5Cin%20H_i%20%3D%20%5C%7B%20~%20x_%7Bi%2C%201%7D%2C%20x_%7Bi%2C%202%7D%2C%20...%2C%20x_%7Bi%2C%20n_i%7D%20~%20%5C%7D" />
+
+#### Eljárásvezérlés
+
+Egy műveletet adott argumentumokra alkalmazunk, aminek hatására az argumentumok értékei pontosan meghatározott módon változnak meg.
+
+Két fajta: eljárásművelet, függvényművelet.
+
+##### Függvényművelet
+
+Matematikai függvények álralánosítása
+
+Függvényművelet specifikációja:
+
+- Művelet elnevezése
+
+- Paraméterek felsorolása
+
+- Paraméterek típusa
+
+- A műveletek hatásának leírása
+
+- Eredménytípus
+
+Jelölés: <img src="https://latex.codecogs.com/svg?T%20~%20~%20F(T_1%20~%20X_1%2C%20...%2C%20T_n%20~%20X_n)" />
+
+- <img src="https://latex.codecogs.com/svg?T" />: a függvényművelet eredménytípusa
+
+- <img src="https://latex.codecogs.com/svg?F" />: a függvényművelet neve
+
+- <img src="https://latex.codecogs.com/svg?T_i" />: <img src="https://latex.codecogs.com/svg?i" />. paraméter típusa
+
+- <img src="https://latex.codecogs.com/svg?X_i" />: <img src="https://latex.codecogs.com/svg?i" />. paraméter azonosítója
+
+> Zárójeleket akkor is kirakjuk, ha a paraméterlista üres
+
+###### Szerkezeti ábra
+
+![ ](../img/fuggveny_szerkezeti.png)
+
+> Formális paraméter: Függvényművelet leírásában használt paraméterek
+> 
+> Argumentum: Amire konkrét esetben végre szeretnénk hajrani a műveletet
+
+###### C-ben
+
+```c
+T F(T1 X1, ... , Tn Xn)
+{
+   M;
+}
+```
+
+##### Eljárásművelet
+
+Alkalmazása adott argumentumokra az argumentumok értékének pontosan meghatározott megváltozását eredményezi.
+
+Minden eljárásműveletnek rögzített számú paramétere van, és minden paraméter rögzített adattípusú.
+
+Három mód:
+
+- **Bemenő mód**: Ha a művelet végrehajtása nem változtathatja meg az adott argumentum értékét.
+
+- **Kimenő mód**: Ha a művelet eredménye nem függ az adott argumentum 
+  végrehajtás előtti értékétől, de az adott argumentum értéke a művelet 
+  hatására megváltozhat.
+
+- **Be- és kimenő (vegyes) mód**: Ha a művelet felhasználhatja az adott 
+  argumentum végrehajtás előtti értékét és az argumentum értéke a művelet 
+  hatására meg is változhat.
+
+> Ezek a módok C-ben éppenséggel ugyan úgy működnek függvényműveletek esetén is, de nem feltétlen van ez így minden nyelv esetén
+
+> C-ben a kimenő mód pointerekkel valósítható meg. Deklarációban: `T_i *X_i`, függvénytörzsben: `*X_i`-vel dereferáljuk. Híváskor: `&A_i`-vel pointert adunk át.
+
+Eljárásművelet specifikációja:
+
+- Művelet elnevezése
+
+- Paraméterek felsorolása
+
+- Paraméterek adattípusai
+
+- Művelet hatásának leírása
+
+Eljárásművelet általános jelölése: <img src="https://latex.codecogs.com/svg?P%20(m_1%20~%20X_1%20%3A%20T_1%3B%20...%3B%20m_n%20~%20X_n%20%3A%20T_n)" />
+
+- <img src="https://latex.codecogs.com/svg?P" />: az eljárás neve
+
+- <img src="https://latex.codecogs.com/svg?m_i" />: az <img src="https://latex.codecogs.com/svg?i" />. paraméter kezelési módja
+
+- <img src="https://latex.codecogs.com/svg?X_i" />: az <img src="https://latex.codecogs.com/svg?i" />. paraméter azonosítója
+
+- <img src="https://latex.codecogs.com/svg?T_i" />: az <img src="https://latex.codecogs.com/svg?i" />. paraméter adattípusa
+
+###### C-ben
+
+`void` visszatérési érték típus.
+
+A függvényműveletekkel ellentétben nem lehet egy összetett művelet részkifejezése (pont azért, mert nem vesz fel értéket, mivel nincs visszatérési értéke).
+
+#### Ismétléses vezérlés
+
+Ötféle ismétléses vezérlés:
+
+- Kezdőfeltételes
+
+- Végfeltételes
+
+- Számlálásos
+
+- Hurok
+
+- Diszkrét
+
+##### Kezdőfeltételes ismétléses vezérlés
+
+A ciklusmag ismételt végrehajtását egy belépési feltételhez kötjük.
+
+Legyen <img src="https://latex.codecogs.com/svg?F" /> logikai kifejezés, <img src="https://latex.codecogs.com/svg?M" /> pedig tetszőleges művelet. Az <img src="https://latex.codecogs.com/svg?F" /> ismétlési feltételből és az <img src="https://latex.codecogs.com/svg?M" /> műveletből (a ciklusmagból) képzett kezdőfeltételes ismétléses vezérlés a következő vezérlési előírást jelenti:
+
+1. Értékeljük ki az <img src="https://latex.codecogs.com/svg?F" /> feltételt és folytassuk a 2. lépéssel.
+
+2. Ha <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor az ismétlés és ezzel együtt az összetett művelet végrehajtása befejeződött.
+
+3. Egyébként, vagyis ha az <img src="https://latex.codecogs.com/svg?F" /> értéke igaz, akkor hajtsuk végre az <img src="https://latex.codecogs.com/svg?M" /> műveletet, majd folytassuk az 1. lépéssel.
+
+###### Folyamatábra
+
+![ ](../img/kezdofeltetel_folyamatabra.png)
+
+###### Szerkezeti ábra
+
+![ ](../img/kezdofeltetel_szerkezeti.png)
+
+###### C-ben
+
+```c
+while (F) {
+    M;
+}
+```
+
+##### Végfeltételes ismétléses vezérlés
+
+A ciklusmag **elhagyását** kötjük egy kilépési feltételhez.
+
+Legyen <img src="https://latex.codecogs.com/svg?F" /> egy logikai kifejezés, <img src="https://latex.codecogs.com/svg?M" /> pedig tetszőleges művelet. Az <img src="https://latex.codecogs.com/svg?F" /> kilépési feltételből és az <img src="https://latex.codecogs.com/svg?M" /> műveletből (ciklusmagból) képzett **végfeltételes ismétléses vezérlés** a következő vezérlési előírást jelenti:
+
+1. Hajtsuk végre az <img src="https://latex.codecogs.com/svg?M" /> műveletet majd folytassuk a 2. lépéssel.
+
+2. Értékeljük ki az <img src="https://latex.codecogs.com/svg?F" /> feltételt és folytassuk a 3. lépéssel.
+
+3. Ha <img src="https://latex.codecogs.com/svg?F" /> értéke igaz, akkor az ismétléses vezérlés és ezzel együtt az összetett művelet végrehajtása befejeződött.
+
+4. Egyébként, vagyis ha az <img src="https://latex.codecogs.com/svg?F" /> értéke hamis, akkor folytassuk az 1. lépéssel.
+
+> Azaz a ciklusmag legalább egyszer lefut
+
+###### Folyamatábra
+
+![ ](../img/vegfeltetel_folyamat.png)
+
+###### Szerkezeti ábra
+
+![ ](../img/vegfeltetel_szerkezeti.png)
+
+###### C-ben
+
+```c
+do {
+    M;
+} while (!F);
+```
+
+##### Számlálásos ismétléses vezérlések
+
+Legyen `a` és `b` egész érték, `i` egész típusú változó, `M` pedig tetszőleges művelet, amelynek nincs hatása `a`,`b` és `i` értékére.
+
+Az `a` és `b` határértékekből, `i` ciklusváltozóból és `M` műveletből (ciklusmagból) képzett **növekvő (csökkenő) számlálásos ismétléses vezérlés** az alábbi vezérlési előírást jelenti:
+
+1. Legyen `i = a` (`i = b`) és folytassuk a 2. lépéssel.
+
+2. Ha `b < i` (`i < a`), akkor az ismétlés és ezzel együtt az összetett művelet végrehajtása befejeződött.
+
+3. Egyébként, vagyis ha `i <= b` (`a <= i`), akkor hajtsuk végre az `M` műveletet, majd folytassuk a 4. lépéssel.
+
+4. Növeljük (csökkentsük) `i` értékét 1-gyel, és folytassuk a 2. lépéssel.
+
+###### Folyamatábra
+
+Növekvő:
+
+![ ](../img/szamlalasos_folyamat.png)
+
+Csökkenő:
+
+![  ](../img/szamlalasos_csokkeno_folyamat.png)
+
+###### Szerkezeti ábra
+
+Növekvő:
+
+![ ](../img/szamlalasos_szerkezeti.png)
+
+Csökkenő:
+
+![ ](../img/szamlalasos_csokkeno_szerkezeti.png)
+
+###### C-ben
+
+```c
+for (kif_11, kif_12, kif_13;
+     kif_2;
+     kif_31,kif_32) {
+    utasítás;     
+}
+```
+
+Ez szemantikailag egyenértékü a következővel:
+
+```c
+kif_11; kif_12; kif_13;
+while (kif_2) {
+   utasítás;
+   kif_31;kif_32;
+}
+```
+
+##### Hurok ismétléses vezérlés
+
+Amikor a ciklusmag ismétlését a ciklusmagon belül vezéreljük úgy, hogy a ciklus különböző pontjain adott feltételek teljesülése esetén a ciklus végrehajtását befejezzük, hurok ismétléses vezérlésről beszélünk.
+
+Legyenek <img src="https://latex.codecogs.com/svg?F_i" /> logikai kifejezések, <img src="https://latex.codecogs.com/svg?K_i" /> és <img src="https://latex.codecogs.com/svg?M_j" /> pedig tetszőleges (akár üres) műveletek <img src="https://latex.codecogs.com/svg?1%20%5Cle%20i%20%5Cle%20n" /> és <img src="https://latex.codecogs.com/svg?0%20%5Cle%20j%20%5Cle%20m" /> értékekre. Az <img src="https://latex.codecogs.com/svg?F_i" /> kijárati feltételekből, <img src="https://latex.codecogs.com/svg?K_i" /> kijárati műveletekből és az <img src="https://latex.codecogs.com/svg?M_i" /> műveletekből képzett hurok ismétléses vezérlés a következő előírást jelenti:
+
+1. Az ismétléses vezérlés következő végrehajtandó egysége az <img src="https://latex.codecogs.com/svg?M_0" /> művelet.
+
+2. Ha a végrehajtandó egység az <img src="https://latex.codecogs.com/svg?M_j" /> művelet, akkor ez végrehajtódik. <img src="https://latex.codecogs.com/svg?j%20%3D%20n" /> 
+   esetén folytassuk az 1. lépéssel, különben pedig az <img src="https://latex.codecogs.com/svg?F_%7Bj%20%2B%201%7D" /> feltétel végrehajtásával a 3. lépésben.
+
+3. A végrehajtandó egység az <img src="https://latex.codecogs.com/svg?F_i" /> feltétel <img src="https://latex.codecogs.com/svg?1%20%5Cle%20i%20%5Cle%20n" />, akkor értékeljük ki. Ha <img src="https://latex.codecogs.com/svg?F_i" /> igaz volt, akkor hajtsuk végre a <img src="https://latex.codecogs.com/svg?K_i" /> műveletet, és fejezzük be a vezérlést. Különben a végrehajtás az <img src="https://latex.codecogs.com/svg?M_i" /> művelettel folytatódik a 2. lépésben.
+
+###### Folymatábra
+
+![ ](../img/hurok_folyamat.png)
+
+###### Szerkezeti ábra
+
+![ ](../img/hurok_szerkezeti.png)
+
+###### C-ben
+
+Nincs rá olyan vezérlési forma, amivel körvezlenül megvalósítható.
+
+Kezdőfeltételes ismétléses vezérlés és egyszerű szelekció segítségével kifejezhetjük.
+
+> Nyelvfüggetlen megközelítés
+
+```c
+tovabb = 1;
+while (tovabb) {
+    M0;
+    if (F1) {
+        tovabb = 0;
+        K1;
+    } else {
+        M1;
+        ....
+            if (Fn) {
+                tovabb = 0;
+                Kn;
+            } else {
+                Mn;
+            }
+    }
+}
+```
+
+A C nyelvben a ciklusmag folyamatos végrehajtásának megszakítására két utasítás használható:
+
+- `break`: megszakítja a ciklust, a program végrehajtása a ciklusmag utáni első utasítással folytatódik.
+
+- `continue`: megszakítja a ciklusmag aktuális lefutását, a vezérlés a ciklus feltételének kiértékelésével (`while`, `do while`) illetve az inkrementáló kifejezés kiértékelésével (`for`) folytatódik.
+
+C-ben `break` használatával:
+
+```c
+while(1) {
+    M0;
+    if (F1) {
+        K1; break;
+    }
+    M1;
+    ...
+    if (Fn) {
+        Kn; break;
+    }
+    Mn;
+}
+```
+
+##### Diszkrét ismétléses vezérlés
+
+Diszkrét ismétléses vezérlésről akkor beszélünk, ha a ciklusmagot végre kell hajtani egy halmaz minden elemére tetszőleges sorrendben. Legyen `x` egy `T` típusú változó, `H` a `T` értékkészletének részhalmaza, `M` pedig tetszőleges művelet, amelynek nincs hatása `x` és `H` értékére. A `H` halmazból, `x` ciklusváltozóból és `M` műveletből (ciklusmagból) képzett diszkrét ismétléses vezérlés az alábbi vezérlési előírást jelenti:
+
+1. Ha a `H` halmaz minden elemére végrehajtottuk az `M` műveletet, akkor vége a vezérlésnek.
+
+2. Egyébként vegyük a `H` halmaz egy olyan tetszőleges `e` elemét, amelyre még nem hajtottuk végre az `M` műveletet, és folytassuk a 3. lépéssel.
+
+3. Legyen `x = e` és hajtsuk végre az `M` műveletet, majd folytassuk az 1. lépéssel.
+
+###### Folyamatábra
+
+![ ](../img/diszkret_folyamatabra.png)
+
+###### Szerkezeti ábra
+
+![ ](../img/diszkret_szerkezeti.png)
+
+###### C-ben
+
+A diszkrét ismétléses vezérlésnek nincs közvetlen megvalósítása a C nyelvben.
+
+A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben megadott halmazt hogyan reprezentáljuk.
 
 
 
