@@ -1,6 +1,6 @@
-# Adatbázisok
+## Adatbázisok
 
-## 1. Adatbázis-tervezés: A relációs adatmodell fogalma. Az egyed-kapcsolat diagram és leképezése relációs modellre, kulcsok fajtái. Funkcionális függőség, a normalizálás célja, normálformák.
+### 1. Adatbázis-tervezés: A relációs adatmodell fogalma. Az egyed-kapcsolat diagram és leképezése relációs modellre, kulcsok fajtái. Funkcionális függőség, a normalizálás célja, normálformák.
 
 > **_<mark>Emlékeztető</mark>_**
 >
@@ -62,7 +62,7 @@
 >
 > **Kulcs:** olyan (minimális) attribútumhalmaz, amely már egyértelműen meghatározza az egyedet
 
-### A relációs adatmodell fogalma
+#### A relációs adatmodell fogalma
 
 - az adatokat és a köztük lévő kapcsolatokat is kétdimenziós táblákban tárolja; az azonos sorban álló egyedek alkotnak egy relációt
 - az erre a modellre épülő adatbáziskezelőket RDBMS-nek (Relational DBMS) nevezzük
@@ -266,7 +266,7 @@ _A sémák között a közös attribútumok biztosítják a kapcsolatot._
 
   <img src="../img/adatb/2022-05-19-23-44-49-image.png" title="" alt="" width="495">
 
-### E-K modellből relációs modell
+#### E-K modellből relációs modell
 
 **Egyedek leképezése**
 
@@ -380,14 +380,14 @@ Hátrány: kereséskor több táblát is vizsgálni kell
 
 Hátrány: NULL értékek (tárpazarló)
 
-### Adatbázis normalizálása
+#### Adatbázis normalizálása
 
 **Cél:** Redundancia kiszűrése az adatbázisból, aktualizálási anomáliák elkerülése érdekében.
 
 1. Redundancia felderítése a relációsémák vizsgálatával.
 2. Redundancia megszüntetése a sémák felbontásával (normalizálás).
 
-### **Funkcionális függés**
+#### **Funkcionális függés**
 
 - Adott $R(A_1,...,A_n)$ relációséma, $P$, $Q \subseteq \{A_1,...,A_n\}$
 
@@ -519,7 +519,7 @@ Hátrány: NULL értékek (tárpazarló)
   2. Minden X részhalmazhoz állítsuk elő $X^+$-t.
   3. Valamennyi $Y \subseteq X^+$-ra az $X\subseteq Y$ függőséget felvesszük $F^+$-ba.
 
-### Felbontás (dekompozíció)
+#### Felbontás (dekompozíció)
 
 - Ha egy reláció nem megfelelő normálformában van, akkor a reláció dekompozíciójára van szükség
 
@@ -543,9 +543,9 @@ Hátrány: NULL értékek (tárpazarló)
 
   - Ha $C \rarr D$, akkor az $R_1(B, C)$, $R_2(C, D)$ felbontás hűséges.
 
-### Normalizálás
+#### Normalizálás
 
-#### 1. normálforma (1NF)
+##### 1. normálforma (1NF)
 
 - Egy relációséma 1NF-ben van, ha az attribútumok értéktartománya csak egyszerű (atomi) adatokból áll (nem tartalmaz például listát vagy struktúrát)
 
@@ -561,7 +561,7 @@ Hátrány: NULL értékek (tárpazarló)
 
     - Egy attribútum elsődleges attribútum ha szerepel a relációséma valamely kulcsában, ellenkező esetben másodlagos attribútum
 
-#### 2. normálforma (2NF)
+##### 2. normálforma (2NF)
 
 - Egy $R = (A, F)$ relációséma 2NF-ben van, ha minden másodlagos attribútum teljesen függ bármely kulcstól.
 
@@ -591,7 +591,7 @@ Hátrány: NULL értékek (tárpazarló)
 
   <img title="" src="../img/adatb/2022-05-22-15-34-56-image.png" alt="" width="451">
 
-#### 3. normálforma (3NF)
+##### 3. normálforma (3NF)
 
 - $X,Z \subseteq A$ és $X \rarr Z$
 
@@ -639,7 +639,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - **Állítás:** Ha egy relációséma 3NF-ben van, akkor 2NF-ben is van.
 
-#### Boyce-Codd normálforma (BCNF)
+##### Boyce-Codd normálforma (BCNF)
 
 - Egy relációséma BCNF-ben van, ha bármely nemtriviális $L \rarr Z$ függés esetén L szuperkulcs.
 
@@ -677,7 +677,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - **Állítás:** Ha egy relációséma BCNF-ben van, akkor 3NF-ben is van.
 
-#### 4. normálforma (4NF)
+##### 4. normálforma (4NF)
 
 - Példa: Rendelhet (<u>nagyker</u>, <u>kisker</u>, <u>áru</u>), BCNF-ben van.
 
@@ -710,9 +710,9 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - **Állítás:** Ha egy relációséma 4NF-ben van, akkor hűséges
   felbontással nem lehet redundanciát megszüntetni.
 
-## 2. Az SQL adatbázisnyelv: Az adatdefiníciós nyelv (DDL) és az adatmanipulációs nyelv (DML). Relációsémák definiálása, megszorítások típusai és létrehozásuk. Adatmanipulációs lehetőségek és lekérdezések.
+### 2. Az SQL adatbázisnyelv: Az adatdefiníciós nyelv (DDL) és az adatmanipulációs nyelv (DML). Relációsémák definiálása, megszorítások típusai és létrehozásuk. Adatmanipulációs lehetőségek és lekérdezések.
 
-### Az SQL nyelv
+#### Az SQL nyelv
 
 **SQL** = Structured Query Language (= strukturált lekérdező nyelv). A relációs adatbáziskezelés szabványos nyelve. Nem algoritmikus nyelv, de algoritmikus nyelvekbe beépíthető (beágyazott SQL).
 
@@ -752,7 +752,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - Az utasítások szintaxisának leírásánál az elhagyható részleteket szögletes zárójellel
   jelöljük.
 
-### Relációsémák definiálása (DDL)
+#### Relációsémák definiálása (DDL)
 
 - Relációséma létrehozására a CREATE TABLE utasítás szolgál, amely egyben egy üres
   táblát is létrehoz a sémához. Az attribútumok definiálása mellett a kulcsok és külső kulcsok megadására is lehetőséget nyújt:
@@ -876,7 +876,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 >   - Az első példa egyszerű indexkulcsot tartalmaz, amely a dolgozók név szerinti keresését, illetve rendezését támogatja. A második példában szereplő összetett indexkulcs az osztálykód szerinti, osztályon belül pedig név szerinti keresést/rendezést segíti, mivel a rendszerek
 >     általában az osztálykód és név attribútumok konkatenációjával képezik az indexkulcsot. Ez a megoldás viszont a pusztán név szerinti keresést nem támogatja.
 
-### Adattábla aktualizálása (DML)
+#### Adattábla aktualizálása (DML)
 
 - A táblába új sor felvétele:
 
@@ -920,7 +920,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
     - DELETE FROM Dolgozó
       WHERE név = 'Kovács József';
 
-### Lekérdezés (DML)
+#### Lekérdezés (DML)
 
 - Lekérdezésre a SELECT utasítás szolgál, amely egy vagy több adattáblából egy eredménytáblát állít elő.
 
@@ -1188,7 +1188,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Ha a nézettábla tartalmát módosítjuk, akkor a módosítás a megfelelő tárolt táblákon hajtódik végre – és természetesen megjelenik a nézettáblában is
 
-### Aktív elemek (megszorítások, triggerek)
+#### Aktív elemek (megszorítások, triggerek)
 
 - Aktív elem: olyan programrész, amely bizonyos szituációban automatikusan
   végrehajtódik. Ennek speciális esete a megszorítás, ami bizonyos feltételek ellenőrzését jelenti bizonyos helyzetekben.
