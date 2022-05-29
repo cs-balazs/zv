@@ -5127,11 +5127,1969 @@ LP-lazítás könnyen kiszámolható: Relatív hasznosság szerint sorrendbe rak
 Legrosszabb esetben <img src="https://latex.codecogs.com/svg?2%5En" /> részfeladatot kell megoldani, vagyis a hátizsák probléma NP-nehéz.
 
 Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com/svg?2%5E%7BMn%7D" />, ahol <img src="https://latex.codecogs.com/svg?M" /> a lehetséges egészek száma egy változóra.
-# Programozási nyelvek
+## Adatbázisok
 
-## A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
+### 1. Adatbázis-tervezés: A relációs adatmodell fogalma. Az egyed-kapcsolat diagram és leképezése relációs modellre, kulcsok fajtái. Funkcionális függőség, a normalizálás célja, normálformák.
 
-### Nyelvcsoportok (paradigmák)
+> **_<mark>Emlékeztető</mark>_**
+>
+> **_Alapfogalmak_**
+>
+> **Adatbázis** (DB = database): adott formátum és rendszer szerint tárolt adatok együttese
+>
+> **Adatbázisséma:** az adatbázis struktúrájának leírása
+>
+> **Adatbázis-kezelő rendszer** (DBMS = Database Management System): az adatbázist kezelő szoftver
+>
+> - Főbb feladatai:
+>
+>   - adatstruktúrák definiálása (adatbázisséma)
+>
+>   - adatok aktualizálása (adatfelvitel, törlés, módosítás) és
+>     lekérdezése
+>
+>   - nagy mennyiségű adat hosszú idejű, biztonságos tárolása
+>
+>   - több felhasználó egyidejű kiszolgálása, jogosultságok
+>     szabályozása
+>
+>   - több feladat egyidejű végrehajtása, tranzakciók kezelése
+>
+> **Rekord** (= feljegyzés): az adatbázis alapvető
+> adategysége
+>
+> **Egyed-kapcsolat modell fogalmai**
+>
+> **Egyed (entitás):** a valós világ egy objektuma, melyről az
+> adatbázisban információt szeretnénk tárolni
+>
+> **Tulajdonság (attribútum):** az egyed egy jellemzője
+>
+> **Összetett attribútum:** maga is attribútumokkal rendelkezik (általában egy struktúra, aminek adattagjai külön-külön elemi típusú értékekre
+> képződnek le)
+>
+> - Jelölés: a struktúrát alkotó adattagokat újabb
+>   ellipszisekkel kötjük az összetett attribútumhoz
+>
+> **Többértékű attribútum:** halmaz vagy lista adattípusra képződik le (előbbinél nem számít a sorrend, utóbbinál viszont igen)
+>
+> - Jelölés: kettős ellipszis
+>
+> **Gyenge entitás:** az attribútumai nem határozzák meg egyértelműen
+>
+> - Jele: kettős téglalap
+>
+> **Meghatározó kapcsolat:** gyenge entitást határoz meg
+>
+> - Jele: kettős rombusz
+>
+> <img src="../img/adatb/2022-05-20-21-23-09-image.png" title="" alt="" width="465">
+>
+> **Specializáló kapcsolat**: olyan kapcsolat, amely hierarchiát jelöl az egyedek között. Például egy helyiség lehet számítógépes terem vagy mosdó is.
+>
+> <img src="../img/adatb/2022-05-20-21-47-21-image.png" title="" alt="" width="369">
+>
+> **Kulcs:** olyan (minimális) attribútumhalmaz, amely már egyértelműen meghatározza az egyedet
+
+#### A relációs adatmodell fogalma
+
+- az adatokat és a köztük lévő kapcsolatokat is kétdimenziós táblákban tárolja; az azonos sorban álló egyedek alkotnak egy relációt
+- az erre a modellre épülő adatbáziskezelőket RDBMS-nek (Relational DBMS) nevezzük
+- lekérdező nyelvük az SQL (Structured Query Language)
+- napjainkban is széles körben használt modell
+
+**Adattábla:** sorokból (rekordokból) és oszlopokból áll. Egy sor annyi mezőből áll, ahány oszlopa van a táblának.
+
+**Attribútum:** egy tulajdonság, névvel és értéktartománnyal (a Z attribútum értéktartománya dom(Z))
+
+**Értéktartomány megadása:** típus, hossz, (korlátozó feltételek)
+
+- A relációs modellben az értéktartomány csak atomi értékekből állhat!
+
+<img src="../img/adatb/2022-05-19-00-20-14-image.png" title="" alt="" width="604">
+
+**Relációséma:** egy névvel ellátott attribútumhalmaz
+
+- Jelölések:
+
+  - <img src="https://latex.codecogs.com/svg?R(A_1%2C...%2CA_n)" />
+
+  - <img src="https://latex.codecogs.com/svg?R(A)" />, ahol <img src="https://latex.codecogs.com/svg?A%20%3D%20%7BA_1%2C...%2CA_n%7D" />
+
+  - <img src="https://latex.codecogs.com/svg?R.A_1" /> az <img src="https://latex.codecogs.com/svg?R" /> séma <img src="https://latex.codecogs.com/svg?A_1" /> attribútuma
+
+- Példa:
+
+  - Ügyfél (ügyfélkód, ügyfél neve)
+
+  - dom(ügyfélkód): 10 jegyű egész számok halmaza
+
+  - dom(ügyfél neve): legfeljebb 200 karakter hosszú sztringek halmaza
+
+**Reláció (adattábla)** az <img src="https://latex.codecogs.com/svg?R(A_1%2C...%2CA_n)" /> relációs séma felett: <img src="https://latex.codecogs.com/svg?T%20%5Csubseteq%20dom(A_1)%20%C3%97%20...%20%C3%97%20dom(A_n)" />.
+
+<img src="https://latex.codecogs.com/svg?T" /> elemei <img src="https://latex.codecogs.com/svg?(a_1%2C...%2Ca_n)" /> alakúak, ahol <img src="https://latex.codecogs.com/svg?a_i%20%5Cin%20dom(A_i)(i%3D1%2C...%2Cn)." />
+
+Az _Ügyfél(ügyfélkód, ügyfél neve)_ relációs séma feletti relációs séma feletti
+adattábla: <img src="https://latex.codecogs.com/svg?T%20%5Csubseteq%20dom(%C3%BCgyf%C3%A9lk%C3%B3d)%20%C3%97%20dom(%C3%BCgyf%C3%A9l%20neve)%3A" />
+
+<img title="" src="../img/adatb/2022-05-19-22-38-35-image.png" alt="" width="220" data-align="center">
+
+**Miért hívják relációnak az adattáblát?**
+Magyarázat: a matematikai relációfogalom
+
+- <img src="https://latex.codecogs.com/svg?%5CZ" />: természetes számok halmaza
+
+- <img src="https://latex.codecogs.com/svg?%5CZ%20%C3%97%20%5CZ" />: az összes _(a, b)_ párok halmaza
+
+**Relációjel:** pl. <img src="https://latex.codecogs.com/svg?%5Clt" />
+
+- A "kisebb" reláció definíciója:
+
+  - <img src="https://latex.codecogs.com/svg?K%20%20%5Csubseteq%20%5CZ%20%C3%97%20%5CZ" />, ahol <img src="https://latex.codecogs.com/svg?K" /> azon _(a, b)_ párok halmaza, amelyekre <img src="https://latex.codecogs.com/svg?a%20%5Clt%20b" />
+
+    - Példa: _(2, 3)_ <img src="https://latex.codecogs.com/svg?%20%5Cin%20K%20" />, de *(5,2)* <img src="https://latex.codecogs.com/svg?%20%5Cnotin%20K" />
+
+- Általánosítás: <img src="https://latex.codecogs.com/svg?K%20%5Cin%20A%C3%97B%C3%97C" />, ahol <img src="https://latex.codecogs.com/svg?K" /> azon _(a, b, c)_ hármasok halmaza, amelyekre valamilyen feltétel teljesül
+
+**Megjegyzések**
+
+- Az adattábla sorok halmaza, ezért a relációs modellben a tábla minden sora különböző, és a soroknak nincs kitüntetett sorrendje.
+
+- Elvileg a tábla oszlopainak sincs kitüntetett sorrendje
+
+- Az RDBMS-ek (Relational Database Management System) általában megengednek azonos sorokat is, és a soroknak ill. oszlopoknak szükségképpen van egy tárolási sorrendje.
+
+**Elnevezések**
+
+- Relációséma: a tábla felépítési sémája.
+
+- Reláció vagy adattábla vagy tábla: az adatokat tartalmazza.
+
+- Sor, oszlop.
+
+- Rekord: a tábla egy sora.
+
+- Mező: a séma egy attribútuma, vagy egy bejegyzés a táblában.
+
+- NULL: definiálatlan mezőérték.
+
+- Relációs adatbázis: táblák együttese.
+
+**Relációsémák és táblák**
+
+- Ügyfél (ügyfélkód, ügyfélnév)
+
+- Számla (számlaszám, számla neve)
+
+- Rendelkezik (ügyfélkód, számlaszám)
+
+_A sémák között a közös attribútumok biztosítják a kapcsolatot._
+
+**<mark>Kulcsok</mark>**
+
+- **Szuperkulcs (superkey):** olyan attribútumhalmaz, amely egyértelműen azonosítja a tábla sorait.
+
+- Pontosabban: Egy <img src="https://latex.codecogs.com/svg?R(A)" /> relációsémában <img src="https://latex.codecogs.com/svg?K%20%5C%20(%20%5Csubseteq%20A)" /> szuperkulcs, ha bármely <img src="https://latex.codecogs.com/svg?R" /> feletti <img src="https://latex.codecogs.com/svg?T" /> tábla bármely két sora <img src="https://latex.codecogs.com/svg?K" />-n különbözik.
+
+- **Kulcs (key):** <img src="https://latex.codecogs.com/svg?K%20(%5Csubseteq%20A)" /> kulcs, ha minimális szuperkulcs, vagyis egyetlen valódi részhalmaza sem szuperkulcs.
+
+  - Például az Ügyfél (ügyfélkód, ügyfél neve) sémában
+
+    - {ügyfélkód} szuperkulcs és kulcs is
+
+    - {ügyfélkód, ügyfél neve} szuperkulcs de nem kulcs
+
+    - {ügyfél neve} nem szuperkulcs (és nem kulcs)
+
+- **Egyszerű kulcs:** ha egyetlen attribútumból áll.
+
+- **Összetett kulcs:** ha több attribútumból áll.
+
+  - Példák:
+
+    - Ügyfél (ügyfélkód, ügyfél neve) -> Egyszerű kulcs: {ügyfélkód}
+
+    - Rendelkezik (ügyfélkód, számlaszám) -> Összetett kulcs: {ügyfélkód, számlaszám}
+
+- Megjegyzések
+
+  - A teljes <img src="https://latex.codecogs.com/svg?A" /> attribútumhalmaz mindig szuperkulcs.
+
+  - A kulcs valójában egy feltétel előírása a relációsémára.
+
+  - A kulcs a séma tulajdonsága, nem a tábláé.
+
+  - Egy sémában több kulcs lehet.
+
+- **Elsődleges kulcs (primary key):** Ha csak egy kulcs van, az lesz az elsődleges kulcs.
+  Ha több kulcs van, egyet önkényesen kiválasztunk.
+  Jele: aláhúzás.
+
+  - Például:
+
+    - Felhasználó (<u>felhasználónév</u>, név, e-mail, jelszó, belépés)
+      Kulcsok: {felhasználónév}, {e-mail}
+      Elsődleges kulcs: {felhasználónév}
+
+- Fontos különbség:
+
+  - Relációs modell: a tábla minden sora különböző,
+    ezért mindig van kulcs.
+
+  - Konkrét RDBMS: ha azonos sorokat is megengedünk, akkor nincs kulcs!
+
+    - Példa (itt megengedhető hogy ne legyen kulcs):
+
+      - Vásárlás (dátum, terméknév, mennyiség)
+        2011.09.04. |banán| 4.0
+        2011.09.05. |alma | 3.0
+        2011.09.05. |szilva | 1.5
+        2011.09.05. |alma | 3.0
+
+- **Külső kulcs (idegen kulcs, foreign key):**
+
+  - Egy relációséma attribútumainak valamely részhalmaza külső kulcs, ha egy másik séma elsődleges kulcsára hivatkozik.
+
+  - Jelölés: dőlt betű, vagy a hivatkozott kulcsra mutató nyíl
+
+  - A külső kulcs valójában egy feltétel előírása a relációsémákra.
+
+  - Hivatkozási integritás: A külső kulcs értéke a hivatkozott táblában előforduló kulcsérték vagy NULL lehet
+
+  - Példa:
+
+    - Ügyfél (ügyfélkód, ügyfélnév)
+      Számla (számlaszám, számla neve)
+      Rendelkezik (ügyfélkód, számlaszám)
+
+      <img title="" src="../img/adatb/2022-05-19-00-20-14-image.png" alt="" width="522">
+
+**<mark>Relációs adatbázis séma:</mark>** relációsémák + kulcs feltételek (elsődleges kulcsok, külső kulcsok)
+
+- Példa: egészségügyi adatbázis
+
+  - Beteg (<u>betegId</u>, betegnév, lakcím)
+
+  - Orvos (<u>orvosId</u>, orvosnév, osztály, kórház)
+
+  - Kezelés (<u>kezelésId</u>, megnevezés, kategória)
+
+  - Ellátás (<u>_betegId_</u>, <u>_orvosId_</u>, <u>_kezelésId_</u>, <u>dátum</u>, költség)
+
+**<mark>Indexelés</mark>**
+
+- Index: kiegészítő adatstruktúra. Célja:
+
+  - rendezés,
+
+  - keresések gyorsítása (pl. külső kulcs).
+
+- Indexkulcs: valamely <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20A" /> attribútumhalmaz.
+
+  - Megegyezhet a tényleges kulccsal, de más is lehet.
+
+- „Indextábla”: Index (indexkulcs, rekordsorszám)
+
+- Egy táblához több index is létrehozható, de a sok index lassabb műköséshez vezet
+
+  <img src="../img/adatb/2022-05-19-23-44-49-image.png" title="" alt="" width="495">
+
+#### E-K modellből relációs modell
+
+**Egyedek leképezése**
+
+- Szabály: a relációséma neve az egyed neve, attribútumai az egyed
+  attribútumai, elsődleges kulcsa az egyed kulcs-attribútuma(i).
+
+- Megfeleltetés: egyedtípus -> relációséma,
+  egyedpéldány -> tábla egy sora, egyedhalmaz -> teljes tábla
+
+- Attribútumok értéktartománya meghatározandó
+
+- Kulcs-feltétel ellenőrzendő! Van-e több kulcs?
+
+<img src="../img/adatb/2022-05-20-21-31-10-image.png" title="" alt="" width="564">
+
+FELHASZNÁLÓ(<u>felhasználónév</u>, jelszó, email, név, utolsó
+belépés időpontja)
+ÜZENET(<u>sorszám</u>, tartalom)
+HÍRFOLYAM(<u>azonosító</u>, megnevezés, kulcsszavak)
+
+**Gyenge egyedek leképezése**
+
+- Szabály: a gyenge egyed relációsémáját bővíteni kell a
+  meghatározó kapcsolat(ok)ban szereplő egyed(ek) kulcsával.
+
+<img src="../img/adatb/2022-05-20-21-34-51-image.png" title="" alt="" width="546">
+
+- Tfh. egy dolgozónak nincs két ugyanolyan konfigurációjú laptopja!
+
+  - LAPTOP<u>_(személyi szám_</u>, CPU, RAM, HDD, SSD)
+
+**Összetett attribútumok leképezése**
+
+- Szabály: az összetett attribútumot a komponenseivel helyettesítjük
+  (egy lépésben megtehető).
+
+<img src="../img/adatb/2022-05-20-21-37-06-image.png" title="" alt="" width="547">
+
+**Többértékű attribútumok leképezése**
+
+1. <u>megoldás:</u> hosszú string
+
+   <img title="" src="../img/adatb/2022-05-20-21-38-30-image.png" alt="" width="599" data-align="center">
+
+   Hátrány: Lassú keresés
+
+2. <u>megoldás:</u> sorok többszörözése
+
+   <img title="" src="../img/adatb/2022-05-20-21-39-48-image.png" alt="" width="405" data-align="center">
+
+   Hátrány: egyedi azonosítás elvesztése + redundancia
+
+3. <u>megoldás:</u> új tábla felvétele
+
+   <img title="" src="../img/adatb/2022-05-20-21-41-20-image.png" alt="" width="553" data-align="center">
+
+   Ha a kulcsszavak sorrendje is számít, akkor az új tábla ezzel bővíthető!
+
+4. <u>megoldás:</u> Az ismétlődő kulcsszavak elkerülése (kapcsoló tábla felvétele)
+
+   <img title="" src="../img/adatb/2022-05-20-21-43-22-image.png" alt="" width="540" data-align="center">
+
+   <img title="" src="../img/adatb/2022-05-20-21-44-12-image.png" alt="" width="525" data-align="center">
+
+**Kapcsolatok leképezése**
+
+<img title="" src="../img/adatb/2022-05-20-21-53-28-image.png" alt="" width="458">
+
+1. Új séma felvétele: <img src="https://latex.codecogs.com/svg?Kapcsolat(K_1%2C%E2%80%A6%2C%20K_n%2C%20A_1%2C%E2%80%A6%2C%20A_m)" />
+2. Konszolidáció: Ha az új séma kulcsa megegyezik valamelyik <img src="https://latex.codecogs.com/svg?E_i" /> kulcsával, akkor azzal összevonható
+
+<img title="" src="../img/adatb/2022-05-20-21-57-30-image.png" alt="" width="394">
+
+**Kapcsolatok leképezési szabálya, összefoglalás**
+
+- 1:1 kapcsolat esetén a kapcsolat sémája bármelyik egyed sémájába beolvasztható.
+
+- 1:N kapcsolat esetén a kapcsolat sémája az N oldali egyed sémájába beolvasztható.
+
+- Végezhető egy lépésben.
+
+- N:M vagy többágú kapcsolat esetén a kapcsolat sémája egyik egyed sémájába sem olvasztható be.
+
+**Önmagával kapcsolódó entitás**
+
+<img title="" src="../img/adatb/2022-05-20-22-04-38-image.png" alt="" width="564" data-align="center">
+
+**Specializáló kapcsolatok leképezése**
+
+1. <u>megoldás:</u> főtípus és minden altípus külön sémában (minden egyedpéldány csak egy táblában szerepel)
+
+<img title="" src="../img/adatb/2022-05-20-22-25-12-image.png" alt="" width="551" data-align="center">
+
+Hátrány: kereséskor több táblát is vizsgálni kell, kombinált altípusokhoz új tábla kell
+
+2. <u>megoldás:</u> minden altípus külön sémában a fő típus kulcsattribútumaival (egy egyedpéldány több táblában szerepelhet)
+
+<img title="" src="../img/adatb/2022-05-20-22-31-34-image.png" alt="" width="549" data-align="center">
+
+Hátrány: kereséskor több táblát is vizsgálni kell
+
+3. <u>megoldás:</u> egy közös tábla
+
+   <img title="" src="../img/adatb/2022-05-20-22-32-47-image.png" alt="" width="549" data-align="center">
+
+   Hátrány: NULL értékek (tárpazarló + tényleges jelentésük elvész)
+
+4. <u>megoldás:</u> egy közös tábla típusjelzéssel
+
+<img title="" src="../img/adatb/2022-05-20-22-34-27-image.png" alt="" width="517" data-align="center">
+
+Hátrány: NULL értékek (tárpazarló)
+
+#### Adatbázis normalizálása
+
+**Cél:** Redundancia kiszűrése az adatbázisból, aktualizálási anomáliák elkerülése érdekében.
+
+1. Redundancia felderítése a relációsémák vizsgálatával.
+2. Redundancia megszüntetése a sémák felbontásával (normalizálás).
+
+#### **Funkcionális függés**
+
+- Adott <img src="https://latex.codecogs.com/svg?R(A_1%2C...%2CA_n)" /> relációséma, <img src="https://latex.codecogs.com/svg?P" />, <img src="https://latex.codecogs.com/svg?Q%20%5Csubseteq%20%5C%7BA_1%2C...%2CA_n%5C%7D" />
+
+- <img src="https://latex.codecogs.com/svg?P" />-től funkcionálisan függ <img src="https://latex.codecogs.com/svg?Q" />, ha bármely <img src="https://latex.codecogs.com/svg?R" /> feletti <img src="https://latex.codecogs.com/svg?T" />
+  tábla esetén valahányszor két sor megegyezik <img src="https://latex.codecogs.com/svg?P" />-n,
+  akkor megegyezik <img src="https://latex.codecogs.com/svg?Q" />-n is
+
+- Jelölés: <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" />
+
+- Példa:
+
+  - Adott a következő tábla:
+
+    <img src="../img/adatb/2022-05-21-00-16-05-image.png" title="" alt="" width="572">
+
+  - Ha tudjuk az Employee number oszlop értéket, akkor megtudhatjuk a hozzá tartozó Employee Name, Salary és City értékeket is. Ez alapján mondhatjuk hogy Employee Name, Salary és City funkcionálisan függenek az Employee number oszloptól. Jelölése:
+
+    {Employee number} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {Employee Name, Salary, City}
+
+**Elnevezések:**
+
+- <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" /> **triviális**, ha <img src="https://latex.codecogs.com/svg?Q%20%5Csubseteq%20P" /> (vagyis ha <img src="https://latex.codecogs.com/svg?Q" /> elemei egyben <img src="https://latex.codecogs.com/svg?P" /> elemei is)
+
+- Ellenkező esetben <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" /> **nemtriviális**.
+
+- <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" /> **teljesen nemtriviális**, ha <img src="https://latex.codecogs.com/svg?Q%20%5Ccap%20P%20%3D%20%5Cempty%20" /> (vagyis ha nincsenek közös elemeik)
+
+<img title="" src="../img/adatb/2022-05-21-14-37-19-image.png" alt="" width="546" data-align="center"><img title="" src="../img/adatb/2022-05-21-14-38-33-image.png" alt="" width="384" data-align="left">
+
+**Példa:**
+
+- SZÁMLA (<u>cikkszám</u>, megnevezés, egységár, mennyiség, összeg)
+
+  - összeg = egységár \* mennyiség
+
+  - Függőségek:
+
+    - {cikkszám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {megnevezés, egységár, mennyiség}
+
+    - {egységár, mennyiség} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {összeg}
+
+- DOLGOZÓ (<u>adószám</u>, név, beosztás, fizetés)
+
+  - Itt {beosztás} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {fizetés} függés **nem áll fenn!**
+
+**Megjegyzések:**
+
+- A funkcionális függés a séma tulajdonsága (nem a tábláé).
+
+  > _séma:_ az adat struktúráját írja le (gyakorlatilag egy tervrajz)
+  >
+  > _tábla:_ az adatok, oszlopok és sorok szerint rendezetten, a séma szerint meghatározva
+
+- „Funkcionális” jelentése: ha <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" />, akkor létezik egy <img src="https://latex.codecogs.com/svg?dom(P)%20%5Crarr%20dom(Q)" /> függvény. Például: {egységár, mennyiség} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {összeg} kiszámítható, de
+  {felhasználónév} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {email} nem számítható.
+
+- **Állítás:** <img src="https://latex.codecogs.com/svg?K%20(%5Csubseteq%20A)" /> akkor és csak akkor szuperkulcs, ha <img src="https://latex.codecogs.com/svg?K%20%5Crarr%20A" />
+
+- **Relációséma új definíciója:** <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2C%20F)" />, ahol <img src="https://latex.codecogs.com/svg?A%20%3D%20%5C%7BA_1%20%2C...%2CA_n%5C%7D" /> attribútumhalmaz, és <img src="https://latex.codecogs.com/svg?F%20%3D%5C%7Bf_1%2C...%2Cf_m%5C%7D" /> az <img src="https://latex.codecogs.com/svg?A" />-n definiált funkcionális függőségek halmaza <img src="https://latex.codecogs.com/svg?(f_i%20%3A%20Pi%20%5Crarr%20Q_i%20%2C%20i%20%3D%201%2C...%2Cm)" />.
+
+- **Adattábla (reláció) R felett**: <img src="https://latex.codecogs.com/svg?T%20%5Csubseteq%20dom(A_1)%20%C3%97%20...%20%C3%97%20dom(A_n)" />,amely eleget tesz az <img src="https://latex.codecogs.com/svg?F" />-beli függőségeknek.
+
+**Példa:**
+
+<img src="../img/adatb/2022-05-21-15-09-29-image.png" title="" alt="" width="569">
+
+**Egyszerű szabályok**
+
+- **Szétvágási szabály:**
+
+  <img title="" src="../img/adatb/2022-05-21-15-15-55-image.png" alt="" width="528" data-align="center">
+
+  - Példa: {felhasználónév} \rarr {email, név} ezért {felhasználónév} \rarr {email} és {felhasználónév} \rarr {név}
+
+- **Egyesítési szabály:**
+
+  <img title="" src="../img/adatb/2022-05-21-15-16-54-image.png" alt="" width="520" data-align="center">
+
+- **Vigyázat!** Ha <img src="https://latex.codecogs.com/svg?%5C%7BB_1%2C...%2CB_k%5C%7D%20%5Crarr%20X" />, ebből nem következik, hogy <img src="https://latex.codecogs.com/svg?B_1%20%5Crarr%20X%2C%20...%2C%20B_k%20%5Crarr%20X" /> !
+
+  - Példa: Fuvar (gkvez, rendszám, indul, érkezik)
+
+    - {rendszám, indul} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {gkvez}, de ebből nem következik, hogy
+      <img src="https://latex.codecogs.com/svg?%5C%7Brendsz%C3%A1m%5C%7D%20%5Crarr%20%5C%7Bgkvez%5C%7D" /> és <img src="https://latex.codecogs.com/svg?%5C%7Bindul%5C%7D%20%5Crarr%20%5C%7Bgkvez%5C%7D" />
+
+**Armstrong-axiómák**
+
+1. Reflexivitás: Ha <img src="https://latex.codecogs.com/svg?Y%20%5Csubseteq%20X%2C%20akkor%20X%20%5Crarr%20Y" />
+
+2. Bővítés: Ha <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Y" />, akkor <img src="https://latex.codecogs.com/svg?X%20%5Ccup%20Z%20%5Crarr%20Y%20%5Ccup%20Z" />
+
+3. Tranzitivitás: Ha <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Y" /> és <img src="https://latex.codecogs.com/svg?Y%20%5Crarr%20Z" />, akkor <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Z" />
+
+Állítás: Az Armstrong-axiómák segítségével egy adott függőségi halmazból következő bármely függőség formálisan levezethető. (Levezetésen az axiómák véges sokszori alkalmazását értjük a formális logika szabályai szerint.)
+
+**Kulcsok meghatározása**
+
+- K (<img src="https://latex.codecogs.com/svg?%5Csubseteq" /> A) akkor és csak akkor szuperkulcs, ha K <img src="https://latex.codecogs.com/svg?%5Crarr" /> A
+
+  - A függésekalapján meg lehet-e határozni?
+
+**Attribútumhalmaz lezártja**
+
+- Legyen <img src="https://latex.codecogs.com/svg?R(A%2CF)" /> relációséma, és <img src="https://latex.codecogs.com/svg?X%20%5Csubset%20A" />
+
+- Az <img src="https://latex.codecogs.com/svg?X" /> attribútumhalmaz lezártja (<img src="https://latex.codecogs.com/svg?X%5E%2B" />) az összes <img src="https://latex.codecogs.com/svg?X" />-től függő attribútum
+
+**Példa <img src="https://latex.codecogs.com/svg?X%5E%2B" /> meghatározására**
+
+<img title="" src="../img/adatb/2022-05-21-16-42-27-image.png" alt="" width="573" data-align="center">
+
+**Állítás:** Legyen <img src="https://latex.codecogs.com/svg?R(A%2C%20F)" /> relációséma. Egy <img src="https://latex.codecogs.com/svg?K%20(%5Csubseteq%20A)" /> attribútumhalmaz akkor és csak akkor szuperkulcs, ha <img src="https://latex.codecogs.com/svg?K%5E%2B%20%3D%20A" />.
+
+- Kulcs meghatározása: Először legyen <img src="https://latex.codecogs.com/svg?K%20%3D%20A" />, ez mindig
+  szuperkulcs. <img src="https://latex.codecogs.com/svg?K" />-ból sorra elhagyunk attribútumokat, és
+  mindig ellenőrizzük, hogy <img src="https://latex.codecogs.com/svg?K%5E%2B%20%3D%20A" /> teljesül-e.
+
+- Példa kulcs meghatározására:
+
+  <img title="" src="../img/adatb/2022-05-21-17-01-21-image.png" alt="" width="439" data-align="center">
+
+**Függéshalmaz lezártjának meghatározása**
+
+- Függéshalmaz lezártja: az összes F-ből levezethető függés halmaza. Jelölése <img src="https://latex.codecogs.com/svg?F%5E%2B" />.
+
+- Algoritmus F+ meghatározására:
+
+  1. Vegyük az A attribútumhalmaz összes részhalmazát.
+  2. Minden X részhalmazhoz állítsuk elő <img src="https://latex.codecogs.com/svg?X%5E%2B" />-t.
+  3. Valamennyi <img src="https://latex.codecogs.com/svg?Y%20%5Csubseteq%20X%5E%2B" />-ra az <img src="https://latex.codecogs.com/svg?X%5Csubseteq%20Y" /> függőséget felvesszük <img src="https://latex.codecogs.com/svg?F%5E%2B" />-ba.
+
+#### Felbontás (dekompozíció)
+
+- Ha egy reláció nem megfelelő normálformában van, akkor a reláció dekompozíciójára van szükség
+
+  - Veszteségmentes felbontás (másnéven hűséges felbontás)
+
+    - ha reláció dekompozíciójánál nem vesztettünk információt
+
+    - garantálja hogy dekompozíció után a relációk természetes összecsatolása ugyanazt a relációt fogja eredményezni (másképp: <img src="https://latex.codecogs.com/svg?T%20%3DT_1%20%5CJoin%20T_2" />, ahol <img src="https://latex.codecogs.com/svg?T" /> az eredeti tábla, <img src="https://latex.codecogs.com/svg?T_1" /> és <img src="https://latex.codecogs.com/svg?T_2" /> a dekompozíció ererdményei)
+
+      <img src="../img/adatb/2022-05-21-20-12-55-image.png" title="" alt="" width="543">
+
+      <img src="../img/adatb/2022-05-21-20-09-44-image.png" title="" alt="" width="539">
+
+  - Függőségőrző felbontás
+
+    <img src="../img/adatb/2022-05-22-14-17-08-image.png" title="" alt="" width="479">
+
+- Heath tétele:
+
+  - <img src="https://latex.codecogs.com/svg?R(B%2C%20C%2C%20D)" />, ahol <img src="https://latex.codecogs.com/svg?B" />, <img src="https://latex.codecogs.com/svg?C" /> és <img src="https://latex.codecogs.com/svg?D" /> diszjunkt attribútumhalmazok
+
+  - Ha <img src="https://latex.codecogs.com/svg?C%20%5Crarr%20D" />, akkor az <img src="https://latex.codecogs.com/svg?R_1(B%2C%20C)" />, <img src="https://latex.codecogs.com/svg?R_2(C%2C%20D)" /> felbontás hűséges.
+
+#### Normalizálás
+
+##### 1. normálforma (1NF)
+
+- Egy relációséma 1NF-ben van, ha az attribútumok értéktartománya csak egyszerű (atomi) adatokból áll (nem tartalmaz például listát vagy struktúrát)
+
+  - Ennek teljesülését már a relációséma definíciójánál feltételeztük.
+
+  - Az 1NF-re hozást az E-K modell <img src="https://latex.codecogs.com/svg?%5Crarr" /> relációs modell leképezésnél megvalósítottuk.
+
+- Definíciók
+
+  - Adott <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2CF)" />, <img src="https://latex.codecogs.com/svg?X%2CY%20%5Csubseteq%20A" />, és <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Y" />
+
+    - <img src="https://latex.codecogs.com/svg?X" />-től teljesen függ <img src="https://latex.codecogs.com/svg?Y" />, ha bármely attribútumot elhagyva a függőség már nem teljesül
+
+    - Egy attribútum elsődleges attribútum ha szerepel a relációséma valamely kulcsában, ellenkező esetben másodlagos attribútum
+
+##### 2. normálforma (2NF)
+
+- Egy <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2C%20F)" /> relációséma 2NF-ben van, ha minden másodlagos attribútum teljesen függ bármely kulcstól.
+
+- Következmények:
+
+  - Ha minden kulcs egy attribútumból áll, akkor a séma 2NF-ben van, Például:
+
+    - FELHASZNÁLÓ(<u>felhasználónév</u>, jelszó, email, vezetéknév, keresztnév, utolsó belépés időpontja)
+
+    - Kulcsok: {felhasználónév} {email}
+
+    - egyelemű kulcsok, ebből következik hogy ha elemet hagynánk el belőlük, akkor üreshalmazt kapnánk, ami már nem azonosítja be egyértelműen a másodlagos (vagyis nem kulcs) attribútumokat
+
+  - Ha a sémában nincs másodlagos attribútum, akkor 2NF-ben van. Például:
+
+    - FUVAR(gkvez, <u>rendszám</u>, <u>indul</u>, érkezik)
+
+    - Kulcsok: {gkvez, indul}, {gkvez, érkezik}, {rendszám, indul}, {rendszám, érkezik}
+
+- A séma nincs 2NF-ben, ha egy kulcs részhalmazától függ (egy vagy több másodlagos attribútum)
+
+- 2NF-re hozás: a sémát felbontjuk Heath tétele szerint, a normálformát sértő függőség mentén
+
+  <img title="" src="../img/adatb/2022-05-22-14-43-53-image.png" alt="" width="566" data-align="inline">
+
+  <img title="" src="../img/adatb/2022-05-22-15-33-33-image.png" alt="" width="585">
+
+  <img title="" src="../img/adatb/2022-05-22-15-34-56-image.png" alt="" width="451">
+
+##### 3. normálforma (3NF)
+
+- <img src="https://latex.codecogs.com/svg?X%2CZ%20%5Csubseteq%20A" /> és <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Z" />
+
+  - <img src="https://latex.codecogs.com/svg?X" />-től tranzitívan függ <img src="https://latex.codecogs.com/svg?Z" />,ha van olyan <img src="https://latex.codecogs.com/svg?Y%20(%5Csubseteq%20A)" />, amelyre <img src="https://latex.codecogs.com/svg?X%5Crarr%20Y" /> és <img src="https://latex.codecogs.com/svg?Y%5Crarr%20Z" />,
+    de <img src="https://latex.codecogs.com/svg?X" /> nem függ <img src="https://latex.codecogs.com/svg?Y" />-tól, és az <img src="https://latex.codecogs.com/svg?Y%5Crarr%20Z" /> függés teljesen nemtriviális (vagyis <img src="https://latex.codecogs.com/svg?Y%20%5Ccap%20Z" /> üres). Ellenkező esetben <img src="https://latex.codecogs.com/svg?X" />-től közvetlenül függ <img src="https://latex.codecogs.com/svg?Z" />.
+
+- Egy <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2C%20F)" /> relációséma 3NF-ben van, ha minden másodlagos attribútuma közvetlenül függ bármely kulcstól.
+
+  - Következmény: Ha a sémában nincs másodlagos attribútum,
+    akkor 3NF-ben van.
+
+<img src="../img/adatb/2022-05-22-15-51-41-image.png" title="" alt="" width="602">
+
+Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
+
+- A séma nincs 3NF-ben, ha egy vagy több másodlagos attribútum tranzitívan függ valamely kulcstól
+
+- 3NF-re hozás: ha a <img src="https://latex.codecogs.com/svg?K%20%5Crarr%20Y%20%5Crarr%20Z" /> tranzitív függés fennáll, akkor a sémát felbonthatjuk Heath tétele szerint az <img src="https://latex.codecogs.com/svg?Y%20%5Crarr%20Z" /> függés mentén.
+
+- Példa:
+
+  - DOLGOZÓ(<u>adószám</u>, TAJ szám, dolgozó neve, projektkód, projekt neve)
+
+  - Egy dolgozó csak egy projekten dolgozhat. Ha többen dolgoznak ugyanazon a projekten, akkor a projekt neve ismétlődik.
+
+  - Kulcsok: {adószám}, {TAJ szám}
+
+  - A séma 2NF-ben van (csak egyszerű kulcs van benne).
+
+  - Tranzitív függés: {adószám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {projektkód} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {projekt neve}
+
+  - Felbontás Heath-tétele alapján:
+
+    - C = {projektkód}
+
+    - D = {projekt neve}
+
+    - B = {adószám, TAJ szám, dolgozó neve}
+
+  - Felbontás után:
+
+    - DOLGOZÓ(<u>adószám</u>, TAJ szám, dolgozó neve, projektkód)
+
+    - PROJEKT(<u>projektkód</u>, projekt neve)
+
+- **Állítás:** Ha egy relációséma 3NF-ben van, akkor 2NF-ben is van.
+
+##### Boyce-Codd normálforma (BCNF)
+
+- Egy relációséma BCNF-ben van, ha bármely nemtriviális <img src="https://latex.codecogs.com/svg?L%20%5Crarr%20Z" /> függés esetén L szuperkulcs.
+
+  - Vagyis: A sémában csak kulcstól való függés van, ezen kívül nincs „kóbor függés”.
+
+- A séma nincs BCNF-ben, ha van benne olyan nemtriviális függés, amelynek bal oldalán nem szuperkulcs áll.
+
+- BCNF-re hozás: a sémát felbontjuk Heath tétele szerint, a normálformát sértő függőség mentén.
+
+- Példa:
+
+  - DOLGOZÓ(<u>adószám</u>, TAJ szám, <u>projektkód</u>)
+
+  - Egy dolgozó több projekten dolgozhat. Ha valaki több projekten dolgozik, akkor a TAJ szám ismétlődik.
+
+  - Kulcsok: {adószám, projektkód}, {TAJ szám, projektkód}
+
+  - A séma 3NF-ben van (nincs másodlagos attribútum).
+
+  - BCNF-et sértő függés:{adószám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {TAJ szám} (adószám nem szuperkulcs)
+
+  - Felbontás Heath-tétele alapján:
+
+    - C = {adószám}
+
+    - D = {TAJ szám}
+
+    - B = {projektkód}
+
+  - Felbontás után:
+
+    - DOLGOZÓ(<u>adószám</u>, TAJ szám)
+
+    - PROJEKT(<u>adószám</u>, <u>projektkód</u>)
+
+- **Állítás:** Ha egy relációséma BCNF-ben van, akkor 3NF-ben is van.
+
+##### 4. normálforma (4NF)
+
+- Példa: Rendelhet (<u>nagyker</u>, <u>kisker</u>, <u>áru</u>), BCNF-ben van.
+
+<img src="../img/adatb/2022-05-22-18-34-38-image.png" title="" alt="" width="437">
+
+- <img src="https://latex.codecogs.com/svg?K%2CL%20%5Csubseteq%20A" />, és legyen <img src="https://latex.codecogs.com/svg?M%3DA%20%5Csetminus(K%20%5Ccup%20L)" />
+
+  - <img src="https://latex.codecogs.com/svg?K" />-tól többértékűen függ <img src="https://latex.codecogs.com/svg?L" /> (<img src="https://latex.codecogs.com/svg?K%20%5Crarr%20%5Crarr%20L" />), ha bármely <img src="https://latex.codecogs.com/svg?R" /> feletti <img src="https://latex.codecogs.com/svg?T" /> tábla esetén ha két sor megegyezik <img src="https://latex.codecogs.com/svg?K" />-n, akkor a kombinációjuk is szerepel a táblában
+
+  - Példa:
+
+    - nagyker <img src="https://latex.codecogs.com/svg?%5Crarr%20%5Crarr%20kisker" />
+
+    - viszont kisker <img src="https://latex.codecogs.com/svg?%5Crarr%20%5Crarr%20nagyker" /> már nem igaz, mert például (N2, K2) és (K2, A2), de (N2, K2, A2) már nem teljesül!
+
+<img src="../img/adatb/2022-05-22-20-14-18-image.png" title="" alt="" width="505">
+
+**Fagin tétele**
+
+<img src="../img/adatb/2022-05-22-20-15-07-image.png" title="" alt="" width="469">
+
+<img src="../img/adatb/2022-05-22-20-15-44-image.png" title="" alt="" width="459">
+
+<img src="../img/adatb/2022-05-22-20-17-03-image.png" title="" alt="" width="501">
+
+- A Rendelhet tábla 4NF felbontása:
+
+  <img src="../img/adatb/2022-05-22-20-18-15-image.png" title="" alt="" width="459">
+
+- **Állítás:** Ha egy relációséma 4NF-ben van, akkor hűséges
+  felbontással nem lehet redundanciát megszüntetni.
+
+### 2. Az SQL adatbázisnyelv: Az adatdefiníciós nyelv (DDL) és az adatmanipulációs nyelv (DML). Relációsémák definiálása, megszorítások típusai és létrehozásuk. Adatmanipulációs lehetőségek és lekérdezések.
+
+#### Az SQL nyelv
+
+**SQL** = Structured Query Language (= strukturált lekérdező nyelv). A relációs adatbáziskezelés szabványos nyelve. Nem algoritmikus nyelv, de algoritmikus nyelvekbe beépíthető (beágyazott SQL).
+
+**Általános jellemzők**
+
+- Az SQL utasításait két fő csoportba szokták sorolni:
+
+  - DDL (= Data Definition Language): adatstruktúra definiáló utasítások.
+
+  - DML (= Data Manipulation Language): adatokon műveletet végző utasítások
+
+**Szintaxis**
+
+- Kisbetű és nagybetű a nyelv alapszavaiban egyenértékű
+
+- Utasítások sorfolytonosan írhatók, lezárás pontosvesszővel
+
+- Változó nincs, csak tábla- és oszlopnevekre lehet hivatkozni. Kifejezésben hivatkozás egy tábla adott oszlopára: tábla.oszlop (ha a tábla egyértelmű, akkor elhagyható)
+
+- Alias név: név AS másodnév (egyes implementációkban AS elhagyható).
+
+- Szövegkonstans: 'szöveg'
+
+- Dátum: DATE '1968-05-12'. Egyes rendszerek az SQL szabványtól eltérő konvenciót alkalmaznak, például 13-NOV-94 (Oracle)
+
+- Idő: TIME '15:31:02.5' (óra, perc, másodperc)
+
+- Stringek konkatenációja: + vagy ||
+
+- Relációjelek: =, <=, >=, !=, <>
+
+- Logikai műveletek: AND, OR, NOT. Az SQL rendszerek "háromértékű logikát"
+  használnak, vagyis a TRUE és FALSE mellett a NULL (definiálatlan) érték is felléphet. Ha egy kifejezés valamelyik eleme NULL, akkor a kifejezés értéke is NULL lesz.
+
+  - Az SQL-szabvány szerint egy logikai kifejezés értéke ISMERETLEN (UNKNOWN), ha benne NULL érték szerepel.
+
+- Az utasítások szintaxisának leírásánál az elhagyható részleteket szögletes zárójellel
+  jelöljük.
+
+#### Relációsémák definiálása (DDL)
+
+- Relációséma létrehozására a CREATE TABLE utasítás szolgál, amely egyben egy üres
+  táblát is létrehoz a sémához. Az attribútumok definiálása mellett a kulcsok és külső kulcsok megadására is lehetőséget nyújt:
+
+  - CREATE TABLE táblanév
+    ( oszlopnév adattípus [feltétel],
+    ... ...,
+    oszlopnév adattípus [feltétel]
+    [, táblaFeltételek]
+    );
+
+- Az adattípusok (rendszerenként eltérők lehetnek):
+
+  - _CHAR(n):_ n hosszúságú karaktersorozat
+
+  - _VARCHAR(n):_ legfeljebb n hosszúságú karaktersorozat
+
+  - _INTEGER:_ egész szám (röviden INT)
+
+  - _REAL:_ valós (lebegőpontos) szám, másnéven FLOAT
+
+  - _DECIMAL(n[,d]):_ n jegyű decimális szám, ebből d tizedesjegy
+
+  - _DATE:_ dátum (év, hó, nap)
+
+  - _TIME:_ idő (óra, perc, másodperc)
+
+- Az adattípushoz "DEFAULT érték" megadásával alapértelmezett érték definiálható. Ha ilyet nem adunk meg, az alapértelmezett érték NULL
+
+- Feltételek (egy adott oszlopra vonatkoznak):
+
+  - PRIMARY KEY: elsődleges kulcs (csak egy lehet)
+
+  - UNIQUE: kulcs (több is lehet)
+
+  - REFERENCES tábla(oszlop) [ON-feltételek]: külső kulcs
+
+- Táblafeltételek (az egész táblára vonatkoznak):
+
+  - PRIMARY KEY (oszloplista): elsődleges kulcs
+
+  - UNIQUE (oszloplista): kulcs
+
+  - FOREIGN KEY (oszloplista) REFERENCES tábla(oszloplista) [ON-feltételek]: külső kulcs
+
+- Ha a (külső) kulcs több oszlopból áll, akkor csak táblafeltétel formájában adható meg.
+
+- A PRIMARY KEY (elsődleges kulcs) és UNIQUE (kulcs) közötti különbségek:
+
+  - Egy sémában csak egy elsődleges kulcs, de tetszőleges számú további kulcs lehet
+
+  - Külső kulcs általában a másik tábla elsődleges kulcsára hivatkozik.
+
+  - Egyes DBMS-ek az elsődleges kulcshoz automatikusan indexet hoznak létre.
+
+- A CREATE TABLE utasítással tulajdonképpen egy R = (A, F) relációsémát adunk meg,
+  ahol F megadására szolgálnak a kulcsfeltételek. Ha a relációséma BCNF-ben van, akkor ezzel az összes függés megadható, hiszen ekkor csak szuperkulcstól lehet nemtriviális függés
+
+- Példa (az alábbi relációséma SQL-ben va létrehozása):
+
+  - Osztály (<u>osztálykód</u>, osztálynév, vezAdószám)
+
+  - Dolgozó (<u>adószám</u>, név, lakcím, _osztálykód_)
+
+    <img src="../img/adatb/2022-05-22-23-34-15-image.png" title="" alt="" width="509">
+
+- A tábla módosításakor a definiált kulcsfeltételek automatikusan ellenőrzésre kerülnek. PRIMARY KEY és UNIQUE esetén ez azt jelenti, hogy a rendszer nem enged olyan módosítást illetve új sor felvételét, amely egy már meglévő kulccsal ütközne.
+
+- REFERENCES (külső kulcs hivatkozás) esetén ON-feltételek megadásával
+  szabályozhatjuk a rendszer viselkedését (jelölje T1 a hivatkozó és T2 a hivatkozott táblát):
+
+  - _Alapértelmezés_ (ha nincs ON-feltétel): T1-ben nem megengedett olyan beszúrás és módosítás, amely T2-ben nem létező kulcs értékre hivatkozna, továbbá T2-ben nem megengedett olyan kulcs módosítása vagy sor törlése, amelyre T1 hivatkozik.
+
+  - **ON UPDATE CASCADE:** ha T2 egy sorában változik a kulcs értéke, akkor a rá való T1-beli hivatkozások is megfelelően módosulnak (módosítás továbbgyűrűzése).
+
+  - **ON DELETE CASCADE:** Ha T2-ben törlünk egy sort, akkor T1-ben is törlődnek a rá hivatkozó sorok (törlés továbbgyűrűzése).
+
+  - **ON UPDATE SET NULL:** ha T2 egy sorában változik a kulcs értéke, akkor T1-ben a rá való külső kulcs hivatkozások értéke NULL lesz.
+
+  - **ON DELETE SET NULL:** ha T2-ben törlünk egy sort, akkor T1-ben a rá való külső
+    kulcs hivatkozások értéke NULL lesz.
+
+- A kulcsfeltételek ellenőrzése csak indexekkel oldható meg hatékonyan.
+
+- Relációséma törlése:
+
+  - **DROP TABLE táblanév;**
+
+  - Hatására a séma és a hozzá tartozó adattábla törlődik.
+
+- Relációséma módosítása:
+
+  - **ALTER TABLE táblanév
+    [ADD (újelem, ..., újelem)]
+    [MODIFY (módosítás, ..., módosítás)]
+    [DROP (oszlop, ..., oszlop)];**
+
+  - Az ALTER TABLE utasítás szintaxisa és szemantikája rendszerenként eltérő, például oszlopok törlését nem minden rendszer engedi meg.
+
+> **Indexek létrehozása**
+>
+> - Az indexek kezelése nem része az SQL2 szabványnak, de valamilyen formában minden RDBMS támogatja
+>
+> - Index létrehozása:
+>
+>   - **CREATE [UNIQUE] INDEX indexnév ON tábla(oszloplista);**
+>
+>   - A megadott tábla felsorolt oszlopaira, mint indexkulcsra generál indexet.
+>
+>   - Ha UNIQUE szerepel, akkor a tábla nem tartalmazhat két azonos indexkulcsú rekordot
+>
+> - Index törlése:
+>
+>   - **DROP INDEX indexnév;**
+>
+> - Példák:
+>
+>   - CREATE INDEX DolgInd1 ON Dolgozó(név);
+>     CREATE INDEX DolgInd2 ON Dolgozó(osztálykód,név);
+>
+>   - Az első példa egyszerű indexkulcsot tartalmaz, amely a dolgozók név szerinti keresését, illetve rendezését támogatja. A második példában szereplő összetett indexkulcs az osztálykód szerinti, osztályon belül pedig név szerinti keresést/rendezést segíti, mivel a rendszerek
+>     általában az osztálykód és név attribútumok konkatenációjával képezik az indexkulcsot. Ez a megoldás viszont a pusztán név szerinti keresést nem támogatja.
+
+#### Adattábla aktualizálása (DML)
+
+- A táblába új sor felvétele:
+
+  - **INSERT INTO táblanév [(oszloplista)] VALUES (értéklista);**
+
+  - Ha oszloplista nem szerepel, akkor valamennyi oszlop értéket kap a
+    CREATE TABLE-ben megadott sorrendben. Egyébként csak az oszloplistában megadott mezők kapnak értéket, a többi mező értéke NULL lesz.
+
+  - Példa:
+
+    - INSERT INTO Dolgozó (név, adószám)
+      VALUES ('Tóth Aladár', 1111);
+
+  - A táblába adatokat tölthetünk át másik táblából is, ha a VALUES(értéklista) helyére egy lekérdezést írunk
+
+- Sor(ok) módosítása:
+
+  - **UPDATE táblanév
+    SET oszlop = kifejezés, ..., oszlop = kifejezés
+    [ WHERE feltétel ];**
+
+  - Az értékadás minden olyan soron végrehajtódik, amely eleget tesz a
+    WHERE feltételnek. Ha WHERE feltétel nem szerepel, akkor az értékadás az összes sorra megtörténik.
+
+  - Példa:
+
+    - UPDATE Dolgozó
+      SET lakcím = 'Szeged, Rózsa u. 5.'
+      WHERE név = 'Kovács József';
+
+- Sor(ok) törlése:
+
+  - **DELETE FROM táblanév
+    [ WHERE feltétel ];**
+
+  - Hatására azok a sorok törlődnek, amelyek eleget tesznek a WHERE
+    feltételnek. Ha a WHERE feltételt elhagyjuk, akkor az összes sor törlődik (de a séma megmarad).
+
+  - Példa:
+
+    - DELETE FROM Dolgozó
+      WHERE név = 'Kovács József';
+
+#### Lekérdezés (DML)
+
+- Lekérdezésre a SELECT utasítás szolgál, amely egy vagy több adattáblából egy eredménytáblát állít elő.
+
+- Az eredménytábla a képernyőn listázásra kerül, vagy más módon
+  használható fel. (Egyetlen SELECT akár egy komplex felhasználói programot helyettesíthet!)
+
+- A "SELECT DISTINCT <img src="https://latex.codecogs.com/svg?A_1" />,...,<img src="https://latex.codecogs.com/svg?A_n" /> FROM <img src="https://latex.codecogs.com/svg?T_1" />,...,<img src="https://latex.codecogs.com/svg?T_m" /> WHERE feltétel" utasítás egyenértékű a következő relációs algebrai kifejezéssel:
+
+  - <img src="https://latex.codecogs.com/svg?E%3D%5Cpi_%7BA1%2C...An%7D(%5Csigma_%7Bfelt%C3%A9tel%7D(T_1%20%C3%97%20...%20%C3%97%20T_m))" />
+
+  - Vagyis, a felsorolt táblák Descartes-szorzatából szelektáljuk a feltételnek eleget tévő sorokat, majd ezekből projekcióval választjuk ki az E eredménytábla oszlopait.
+
+  - A DISTINCT opciót akkor kell kiírni, ha az eredménytáblában az azonos sorokból csak egyet kívánunk megtartani.
+
+- Ha oszloplista helyére \* karaktert írunk, ez valamennyi oszlop felsorolásával
+  egyenértékű. A SELECT legegyszerűbb változatával adattábla listázását érhetjük el:
+
+  - SELECT \* FROM T;
+
+  **A relációs algebra műveleteinek megvalósítása:**
+
+- Projekció
+
+  - SELECT [DISTINCT] <img src="https://latex.codecogs.com/svg?A_1" />,...,<img src="https://latex.codecogs.com/svg?A_n" /> FROM T;
+
+  - Pl.: SELECT DISTINCT szerző, cím FROM Könyv;
+
+- Szelekció
+
+  - SELECT \* FROM T WHERE feltétel;
+
+  - Pl.: SELECT \* FROM Könyv WHERE kivétel < 2013.01.01;
+
+- Descartes-szorzat: <img src="https://latex.codecogs.com/svg?T_1" /> x <img src="https://latex.codecogs.com/svg?T_2" />
+
+  - SELECT \* FROM T1,T2;
+
+- Természetes összekapcsolás
+
+  - Állítsuk elő például az Áru (cikkszám, megnevezés) és Vásárlás (cikkszám, mennyiség) táblák természetes összekapcsolását:
+
+    - SELECT Áru.cikkszám, megnevezés, mennyiség
+      FROM Áru, Vásárlás
+      WHERE Áru.cikkszám = Vásárlás.cikkszám;
+
+    - A fentivel egyenértékű, szintén gyakran használt szintaxis:
+
+      - SELECT Áru.cikkszám, megnevezés, mennyiség
+        FROM Áru INNER JOIN Vásárlás ON Áru.cikkszám = Vásárlás.cikkszám;
+
+  - Megjegyzés: A fenti példákban a SELECT után nem elegendő csak „cikkszám”-ot írni, annak ellenére, hogy esetünkben „Áru.cikkszám = Vásárlás.cikkszám”, tehát mindegy, melyik cikkszámot választja a rendszer. Általában, ha egy lekérdezésben több azonos oszlopnév szerepel, az SQL rendszerek megkövetelik a táblanév megadását
+
+- Külső összekapcsolás
+
+  - Az SQL szabvány szerint a LEFT, RIGHT vagy FULL OUTER JOIN kulcsszavakkal
+    adható meg külső összekapcsolás
+
+  - Például:
+
+    - SELECT Áru.cikkszám, megnevezés, mennyiség
+      FROM Áru LEFT OUTER JOIN Vásárlás
+      ON Áru.cikkszám = Vásárlás.cikkszám;
+
+- Théta join
+
+  - SELECT \* FROM T1,T2 WHERE feltétel;
+
+- Unió
+
+  - (SELECT _ FROM T1)
+    UNION
+    (SELECT _ FROM T2);
+
+  - A két SELECT eredménytáblája kompatibilis kell hogy legyen
+
+- Metszet
+
+  - (SELECT _ FROM T1)
+    INTERSECT
+    (SELECT _ FROM T2);
+
+  - A két SELECT eredménytáblája kompatibilis kell hogy legyen
+
+- Különbség
+
+  - (SELECT _ FROM T1)
+    EXCEPT
+    (SELECT _ FROM T2);
+
+  - A két SELECT eredménytáblája kompatibilis kell, hogy legyen. Egyes rendszereknél EXCEPT helyett MINUS használatos.
+
+**Alias nevek**
+
+- A SELECT után megadott oszloplista valójában nem csak oszlopneveket, hanem
+  tetszőleges kifejezéseket is tartalmazhat, és az eredménytábla oszlopainak elnevezésére alias neveket adhatunk meg
+
+- Például:
+
+  - SELECT név AS áru, egységár\*mennyiség AS érték FROM Raktár;
+
+**Függvények**
+
+- Például:
+
+  - Abszolút érték
+
+    - ABS(n)
+
+  - Konverzió kisbetűsre
+
+    - LOWER(char)
+
+  - stb...
+
+**Összesítő függvények**
+
+- Egy oszlop értékeiből egyetlen értéket hoznak létre (például átlag). Általános alakjuk:
+
+  - függvénynév ( [DISTINCT] oszlopnév )
+
+- Ha DISTINCT szerepel, akkor az oszlopban szereplő azonos értékeket csak egyszer kell figyelembe venni. A számításnál a NULL értékek figyelmen kívül maradnak. Az egyes függvények:
+
+  - AVG: átlagérték.
+
+  - SUM: összeg.
+
+  - MAX: maximális érték.
+
+  - MIN: minimális érték.
+
+  - COUNT: elemek száma. Ennél a függvénynél oszlopnév helyére \* is írható, amely valamennyi oszlopot együtt jelenti.
+
+- Példa:
+
+  - SELECT AVG(fizetés) FROM Dolgozó;
+
+  - Az eredménytábla egyetlen elemből áll, amely az átlagfizetést adja.
+
+**Csoportosítás (GROUP BY, HAVING)**
+
+- Ha a tábla sorait csoportonként szeretnénk összesíteni, akkor a SELECT utasítás a
+  **GROUP BY oszloplista**
+  alparanccsal bővítendő.
+
+  - Egy csoportba azok a sorok tartoznak, melyeknél oszloplista értéke
+    azonos.
+
+  - Az eredménytáblában egy csoportból egy rekord lesz
+
+  - Példa:
+
+    - SELECT osztkód, AVG(fizetés) FROM Dolgozó
+      GROUP BY osztkód;
+
+    - A Dolgozó táblából osztályonként az átlagfizetést számoljuk
+
+- **Csoportosítási szabály**: A SELECT után összesítő függvényen kívül csak olyan
+  oszlopnév tüntethető fel, amely a GROUP BY-ban is szerepel.
+
+  - Hibás például az alábbi lekérdezés, amely azt szeretné megtudni, hogy az egyes osztályokon kinek a legnagyobb a fizetése:
+
+    - SELECT osztkód, név, MAX(fizetés) AS maxfiz FROM Dolgozó GROUP BY osztkód;
+
+    - A hiba oka: név nem szerepelhet a SELECT után, mert a GROUP BY után sem szerepel.
+
+- A GROUP BY által képezett csoportok közül válogathatunk a
+  **HAVING feltétel**
+  alparancs segítségével: csak a feltételnek eleget tevő csoportok kerülnek összesítésre az eredménytáblába.
+
+  - Példa. Azon osztályok listája, ahol az átlagfizetés > 180 000 Ft:
+
+    - SELECT osztkód, AVG(fizetés) FROM Dolgozó
+      GROUP BY osztkód
+      HAVING AVG(fizetés) > 180000;
+
+- Az eredménytábla rendezése:
+
+  - Bár a relációs modell nem definiálja a rekordok sorrendjét, a gyakorlatban rendszerint valamilyen rendezettségben kívánjuk látni az eredményt
+
+  - Erre szolgál az
+    **ORDER BY oszlopnév [DESC], ..., oszlopnév [DESC]**
+    alparancs, amely a SELECT utasítás végére helyezhető, és az eredménytáblának a megadott oszlopok szerinti rendezését írja elő
+
+  - Az oszlopnév után írt ASC (ascending) növekvő, DESC (descending) csökkenő sorrendben való rendezést jelent. (Alapértelmezés szerint a rendezés
+    növekvő sorrendben történik, ezért ASC kiírása fölösleges)
+
+  - Példa:
+
+    - SELECT osztkód, név, fizetés FROM Dolgozó
+      ORDER BY osztkód, fizetés DESC;
+
+**A SELECT utasítás általános alakja**
+
+- A SELECT utasítás az alábbi alparancsokból állhat az alábbi sorrendben (a szögletes
+  zárójelben szereplő részek elhagyhatók):
+
+  - SELECT [DISTINCT] oszloplista projekció
+    FROM táblanévlista Descartes-szorzat
+    [WHERE feltétel] szelekció
+    [GROUP BY oszloplista csoportonként összevonás
+    [HAVING feltétel] ] csoport-szelekció
+    [ORDER BY oszloplista]; rendezés
+
+**Alkérdések**
+
+- Ha egy SELECT utasítás WHERE vagy HAVING feltételében olyan logikai kifejezés
+  szerepel, amely SELECT utasítást tartalmaz, ezt alkérdésnek vagy belső SELECT-nek is nevezik. Általában, valamely SQL utasítás belsejében szereplő SELECT utasítást alkérdésnek nevezzük.
+
+- Példa. Az alábbi utasítás azon dolgozók listáját adja, amelyek fizetése kisebb, mint
+  az átlagfizetés:
+
+  - SELECT név, fizetés FROM Dolgozó
+    WHERE fizetés < ( SELECT AVG(fizetés) FROM dolgozó );
+
+- Nem csak a logikai kifejezés tartalmazhat alkérdést, hanem az INSERT utasítás is:
+
+  - **INSERT INTO táblanév [(oszloplista)] SELECT ... ;**
+
+  - A SELECT annyi oszlopot kell hogy kiválasszon, amennyit oszloplista tartalmaz. A többi oszlop NULL értéket vesz fel.
+
+  - Példa. Tegyük fel, hogy a Raktár (cikkszám, név, egységár, mennyiség) táblából
+    egy Készlet (áru, érték) táblát szeretnénk létrehozni, amely az áruféleség megnevezését és az aktuálisan tárolt mennyiség értékét tartalmazza. Ez a következőképp lehetséges:
+
+    - CREATE TABLE Készlet
+      ( áru CHAR(20),
+      érték INTEGER
+      );
+      INSERT INTO Készlet
+      SELECT név, egységár\*mennyiség FROM Raktár;
+
+**Nézettáblák (virtuális táblák)**
+
+- Egy adatbázisban általában kétféle adatra van szükségünk:
+
+  - alapadatok: tartalmukat aktualizáló műveletekkel módosítjuk
+
+  - származtatott adatok: az alapadatokból generálhatók.
+
+- Származtatott adattáblát például INSERT ... SELECT segítségével is létrehozhatunk
+  (lásd az előző pontot), ekkor viszont az nem követi automatikusan az alapadatok módosulását, ha pedig minden aktualizáló műveletnél újragenerálnánk, az rendkívül lassú lenne. A problémát a nézettábla oldja meg.
+
+- A nézettábla (virtuális tábla, view) nem tárol adatokat. Tulajdonképpen egy
+  transzformációs formula, amelyet úgy képzelhetünk el, mint ha ennek segítségével a tárolt táblák adatait látnánk egy speciális szűrőn, „optikán” keresztül.
+
+- Nézettáblák alkalmazási lehetőségei:
+
+  - Származtatott adattáblák létrehozása, amelyek a törzsadatok módosításakor
+    automatikusan módosulnak (pl. összegzőtáblák).
+
+  - Bizonyos adatok elrejtése egyes felhasználók elől (adatbiztonság vagy egyszerűsítés céljából)
+
+- Nézettábla létrehozása:
+
+  - CREATE VIEW táblanév [(oszloplista)] AS alkérdés;
+
+- A SELECT utasítás eredménytáblája alkotja a nézettáblát. "Oszloplista" megadásával a nézettábla oszlopainak új nevet adhatunk. A CREATE VIEW végrehajtásakor a rendszer csak letárolja a nézettábla definícióját, és majd csak a rá való hivatkozáskor generálja a szükséges adatokat. Ebből adódóan a nézettábla tartalma mindig aktuális.
+
+- A nézettáblák általában ugyanúgy használhatók, mint a tárolt adattáblák, vagyis ahol egy SQL parancsban táblanév adható meg, ott rendszerint nézettábla neve is szerepelhet.
+
+- Példa. Származtatott adatok kezelése. A Raktár (cikkszám, név, egységár,
+  mennyiség) táblából létrehozott nézettábla:
+
+  - CREATE VIEW Készlet (áru, érték) AS
+    SELECT név, egységár\*mennyiség FROM Raktár;
+
+- Ha a nézettábla tartalmát módosítjuk, akkor a módosítás a megfelelő tárolt táblákon hajtódik végre – és természetesen megjelenik a nézettáblában is
+
+#### Aktív elemek (megszorítások, triggerek)
+
+- Aktív elem: olyan programrész, amely bizonyos szituációban automatikusan
+  végrehajtódik. Ennek speciális esete a megszorítás, ami bizonyos feltételek ellenőrzését jelenti bizonyos helyzetekben.
+
+**Attribútumok megszorításai**
+
+- A CREATE TABLE-ben valamely attribútum deklarációja után adhatók meg.
+
+- Kulcs feltételek: a CREATE TABLE utasításban adhatók meg a PRIMARY KEY,
+  UNIQUE, REFERENCES kulcsszavakkal. Aktualizálási műveleteknél a megfelelő feltétel automatikus ellenőrzését váltják ki.
+
+- További megszorítások:
+
+  - NOT NULL
+
+    - Adott attribútum értéke nem lehet NULL. Hatására a rendszer megakadályoz minden olyan műveletet, amely az adott attribútum NULL értékét eredményezné. Adatbevitelnél például ez azt jelenti, hogy az attribútum értékét kötelező megadni
+
+  - CHECK (feltétel)
+
+    - Az adott attribútum módosítását a rendszer csak akkor engedi meg, ha a feltétel teljesül.
+
+    - Példa: A dolgozók nemét is nyilvántartjuk (F=férfi, N=nő):
+
+      - CREATE TABLE Dolgozó
+        ( adószám DECIMAL(10) PRIMARY KEY,
+        név CHAR(30) NOT NULL,
+        nem CHAR(1) CHECK (nem IN ('F', 'N')),
+        lakcím CHAR(40),
+        osztkód CHAR(3) REFERENCES Osztály(osztkód)
+        );
+
+- Értéktartomány definiálása:
+
+  - **CREATE DOMAIN név típus [DEFAULT érték] [CHECK (feltétel)];**
+
+  - Értéktartomány módosítása ALTER DOMAIN, törlése DROP DOMAIN utasítással
+    történik.
+
+  - Példa. A nemekhez tartozó konstansértékek definiálása:
+
+    - CREATE DOMAIN NemÉrték CHAR(1) CHECK (VALUE IN ('F', 'N'));
+      CREATE TABLE Dolgozó
+      ( adószám DECIMAL(10) PRIMARY KEY,
+      név CHAR(30),
+      nem NemÉrték,
+      lakcím CHAR(40)
+      );
+
+**Táblára vonatkozó megszorítások**
+
+- A CREATE TABLE végére, a táblaFeltételeknél helyezendők el.
+
+- Kulcs feltételek:
+  PRIMARY KEY, UNIQUE, FOREIGN KEY kulcsszavakkal. Ha a CHECK feltétel egyszerre
+  több attribútumot érint, akkor szintén a táblaFeltételeknél helyezendő el.
+
+- Példa. Biztonsági ellenőrzésként megköveteljük, hogy a könyvek kölcsönzésénél a
+  kivétel dátuma előzze meg a visszahozási határidőt:
+
+  - CREATE TABLE Könyv
+    ( könyvszám DECIMAL(6) PRIMARY KEY,
+    szerző CHAR(30),
+    cím CHAR(30),
+    kivétel DATE,
+    vissza DATE,
+    CHECK (kivétel < vissza)
+    );
+
+**Általános megszorítások**
+
+- Több táblára (általában, a teljes adatbázissémára) vonatkozhatnak. Megadásuk:
+
+  - **CREATE ASSERTION név CHECK (feltétel);**
+
+  - A feltételben szereplő táblák bármelyikének módosításakor a feltétel ellenőrzésre kerül.
+
+- Példa. A Dolgozó(adószám, név, fizetés, osztálykód) és Osztály(osztálykód,
+  osztálynév, vezAdószám) táblák esetén megköveteljük, hogy a vezetők fizetése legalább 100 000 Ft legyen:
+
+  - CREATE ASSERTION VezetőFizetés
+    CHECK (NOT EXISTS
+    (SELECT \* FROM Dolgozó, Osztály
+    WHERE Dolgozó.adószám = Osztály.vezAdószám
+    AND fizetés < 100000));
+
+- Az önálló megszorítás törlése:
+
+  - **DROP ASSERTION név;**
+
+**Triggerek**
+
+- A trigger egy aktualizálási művelet esetén végrehajtandó programrészletet definiál.
+
+- Megadása:
+
+  - **CREATE TRIGGER név
+    { BEFORE | AFTER | INSTEAD OF }
+    { DELETE | INSERT | UPDATE [OF oszlopok] }
+    ON tábla
+    [ REFERENCING [OLD AS régi] [NEW AS új]
+    [ FOR EACH ROW ]
+    [WHEN (feltétel)] programblokk;**
+
+    - Jelölés: a fenti szintaxis leírásban { x | y } azt jelenti, hogy x és y egyike választható.
+
+    - **név**: a trigger neve.
+      **BEFORE, AFTER, INSTEAD OF**: az aktualizálási művelet előtt, után, vagy helyette lép működésbe a trigger.
+      **DELETE, INSERT, UPDATE OF**: az aktualizálási művelet neve.
+      ON tábla: ezen tábla aktualizálásakor lép működésbe a trigger.
+      **REFERENCING**: lehetővé teszi, hogy a tábla aktuális sorának aktualizálás előtti és utáni állapotára névvel hivatkozzunk.
+      **FOR EACH ROW**: ha megadjuk, akkor a trigger a tábla minden egyes sorára lefut, amelyet az aktualizálási művelet érint (sor szintű trigger). Ha nem adjuk meg, akkor egy aktualizálási művelet esetén csak egyszer fut le a trigger (utasítás szintű trigger).
+      **WHEN feltétel**: a megadott feltétel teljesülése esetén hajtódik végre a trigger.
+      **programblokk**: egy vagy több SQL utasításból álló, vagy valamely programozási nyelven írt blokk.
+## Digitális képfeldolgozás
+
+### 1. Simítás/szűrés képtérben (átlagoló szűrők, Gauss simítás és mediánszűrés); élek detektálása (gradiens-operátorokkal és Marr-Hildreth módszerrel).
+
+> **Konvolúció**
+>
+> <img src="../img/digikep_kepek/2022-05-14-16-09-00-image.png" title="" alt="" width="544">
+>
+> Lényege, hogy van egy kernel (a képen "Convolution filter", egy mátrix), amit végigléptetünk egy nála nagyobb mátrixon. Minden egyes pozícióban a kernelben lévő számokat összeszorozzuk az "alattuk" lévő számokkal, a szorzatokat szummázzuk, utána ezt az eredményt egy harmadik (vagy a forrás mátrixal egyenlő méretű, vagy nem, attól függ mekkora méretű képet akarunk visszakapni) célmátrixba írjuk. Így a forrsáképen való végighaladás után kitöltődik az egész célmátrix.
+>
+> (maszk=kernel)
+
+#### Átlagoló szűrés
+
+- **Zaj:** a képpont-intenzitások nemkívánatos változása
+
+- Az átlagoló szűrés egy olyan technika, amit képek simítására, másszóval zajtalanítására használnak
+
+<img title="" src="../img/digikep_kepek/2022-05-14-12-18-42-image.png" alt="" width="572" data-align="center">
+
+- Lényege, hogy minden egyes pixelt a környezete (ebbe beleszámít a helyettesíteni kívánt pixel is) átlagával helyettesítünk
+
+- Ezt egy olyan konvolúciós szűréssel éri el, ahol a kernel (vagy konvolúciós maszk) egy olyan mátrix, ahol az elemek összege mindig 1
+
+  - Példák konvolúciós maszkokra:
+
+    <img title="" src="../img/digikep_kepek/2022-05-14-16-40-04-image.png" alt="" width="608">
+
+- Pálda átlag szűrésre:
+
+  <img src="../img/digikep_kepek/2022-05-14-16-45-17-image.png" title="" alt="" width="476">
+
+- Az átlag-szűrő hatása és tulajdonságai
+
+  - a képpontok felveszik a környezetük átlagát
+
+  - a szűrt kép intenzitásértékei a kiindulási kép intenzitástartományában maradnak
+
+  - lineáris operátor (mivel a is konvolúció az)
+
+  - haszna: csökkenti a zajt
+
+  - kára: gyengíti az éleket, homályossá teszi a képet
+
+- Szűrés a környezet súlyozott átlagával
+
+  - Átlagolás: a környezetbe eső valamennyi pont intenzitása egyforma súllyal esik a latba.
+
+    <img src="../img/digikep_kepek/2022-05-14-16-52-12-image.png" title="" alt="" width="98">
+
+  - Súlyozott átlag: a környezet intenzitásaihoz (általában a távolsággal arányosan csökkenő) súlyokat rendelünk
+
+  - <img src="../img/digikep_kepek/2022-05-14-16-54-34-image.png" title="" alt="" width="108">
+
+#### Medián szűrés
+
+- Az [ a_1, a_2, …, a_2n+1 ] (páratlan elemszámú) szám-tömb mediánja a nagyság szerint rendezett tömb középső, (n+1)-dik eleme
+
+- Az átlagoló szűréshez hasonlóan zajszűrésre használatos, viszont jobban megőrzi a fontosabb részleteket
+
+- Ennél a szűrésnél is egy meghatározott méretű környezet van figyelembe véve, de itt nem a szomszédos pixelek átlagával, hanem a mediánjával helyettesíti az egyes pixeleket
+
+- Illusztrálva:
+
+  <img title="" src="../img/digikep_kepek/2022-05-14-19-35-35-image.png" alt="" width="479">
+
+- Alkalmazása:
+
+  <img src="../img/digikep_kepek/2022-05-14-19-41-45-image.png" title="" alt="" width="465">
+
+- A medián-szűrés hatása
+
+  - Megszünteti az egyedi (és a „kis” kiterjedésű) kiugrásokat
+
+  - „Jobban” megőrzi az éleket, mint az átlagolás
+
+  - „Nagy” kiterjedésű zajfoltoknál jel-elnyomó.
+
+#### Gauss simítás
+
+> **Pascal háromszög**
+>
+> <img src="../img/digikep_kepek/2022-05-15-15-38-03-image.png" title="" alt="" width="549">
+
+- Szintén zajszűrésre használatos
+
+- A Gauss simítás alkalmazása egy képre nem más, mint konvolválni a képet a Gauss függvénnyel
+
+  - A maszk egy ("harang alakú") Gauss görbét fog reprezentálni
+
+- 1 dimenziós Gauss függvény
+
+  - σ a szórást jelöli
+
+    <img src="../img/digikep_kepek/2022-05-15-14-22-37-image.png" title="" alt="" width="553">
+
+- 2 dimenziós Gauss függvény
+
+  <img src="https://homepages.inf.ed.ac.uk/rbf/HIPR2/eqns/eqngaus2.gif" title="" alt="Eqn:eqngaus2" width="274">
+
+<img title="" src="../img/digikep_kepek/2022-05-15-14-49-19-image.png" alt="" width="571">
+
+- Diszkrét közelítése a Pascal háromszög segítségével (attól függ hogy melyik szintjéből kell kiindulnunk, hogy mekkora maszkot akarunk)
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-15-42-51-image.png" alt="" width="452">
+
+  <img src="../img/digikep_kepek/2022-05-15-15-44-21-image.png" title="" alt="" width="441">
+
+- Példa Gauss szűrésre 3x3-as maszkkal:
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-15-51-56-image.png" alt="" width="324">
+
+#### Éldetektálás
+
+> **Tangens függvény**
+>
+> <img title="" src="../img/digikep_kepek/2022-05-15-16-12-51-image.png" alt="" width="324">
+>
+> **Első rendű derivált**
+>
+> Geometriai jelentése: az érintő iránytangense.
+>
+> Elárulja, hogy a függvény hol nő és hol csökken és hogy milyen mértékben.
+>
+> A derivált (meredekség):
+>
+> - pozitív, ha a függvény nő,
+> - negatív, ha csökken
+
+**Éldetektálás Gradiens operátorokkal**
+
+- A képen ott található él, ahol a kép-függvény valamely irány mentén hirtelen változik.
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-16-03-32-image.png" alt="" width="482">
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-16-05-12-image.png" alt="" width="415">
+
+- Tipikus élprofilok
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-16-06-03-image.png" alt="" width="360">
+
+- Az első deriváltat felhasználhatjuk éldetektálásra: ahol kiemelkedőbb lokális maximuma (vagy minimuma) van az első deriváltnak, ott jó esélyel él található. A lokális minimumok miatt abszolútértéket szokás venni, így csak a maximumokra kell odafigyelni
+
+  <img title="" src="../img/digikep_kepek/2022-05-15-17-25-33-image.png" alt="" width="433">
+
+- 2 dimenziós képnél parciális derivált használata: változások detektálása az _x_ és _y_ koordináta mentén
+
+  - a két érték alapján tudjuk hogy hol vannak élek
+
+    <img title="" src="../img/digikep_kepek/2022-05-15-17-51-33-image.png" alt="" width="387">
+
+  - Gradiens nagysága:
+
+    <img title="" src="../img/digikep_kepek/2022-05-15-18-01-26-image.png" alt="" width="238">
+
+  - Gradiens iránya:
+
+    <img title="" src="../img/digikep_kepek/2022-05-15-18-02-27-image.png" alt="" width="232">
+
+- Diszkrét gradiens operátorok:
+
+  - Roberts operátor
+
+    - a maszkelemek összege 0
+
+    - könnyen számítható, de zajérzékeny
+
+      <img src="../img/digikep_kepek/2022-05-15-18-08-45-image.png" title="" alt="" width="354">
+
+  - Prewitt operátor
+
+    - a maszkelemek összege 0
+
+      <img src="../img/digikep_kepek/2022-05-15-18-10-52-image.png" title="" alt="" width="331">
+
+  - Sobel operátor
+
+    - a maszkelemek összege 0
+
+    - simító hatással bír
+
+      <img src="../img/digikep_kepek/2022-05-15-18-11-47-image.png" title="" alt="" width="338">
+
+  - Frei-Chen (izotropikus) operátor
+
+    - a maszkelemek összege 0
+
+      <img src="../img/digikep_kepek/2022-05-15-18-13-46-image.png" title="" alt="" width="338">
+
+- Gradiens maszk tervezése (x-irányban)
+
+  <img src="../img/digikep_kepek/2022-05-15-18-40-31-image.png" title="" alt="" width="181">
+
+  - Feltételek:
+
+<img src="https://latex.codecogs.com/svg?%0D%0A%5Ctext%7B1.%20Szimmeteria%3A%20%7D%20a_%7B1j%7D%20%3Da_%7B3j%7D%20%5Ctext%7B%20(j%3D1%2C2%2C3)%7D%20%5C%5C%0D%0A%5Ctext%7B2.%20Antiszimmetria%3A%20%7D%20a_%7Bi1%7D%3D-a_%7Bi3%7D%2C%5C%20a_%7Bi1%7D%3E0%5C%20%5Ctext%7B%C3%A9s%20%7D%0D%0Aa_%7Bi2%7D%3D0%5C%20%5Ctext%7B(i%3D1%2C2%2C3)%7D%5C%5C%0D%0A%5Ctext%7B3.%20Nem%20reag%C3%A1l%20konstans%20r%C3%A9gi%C3%B3ra%3A%20%7D%20%5Csum_%7Bi%3D1%7D%5E%7B3%7D%5Csum_%7Bj%3D1%7D%5E%7B3%7D%0D%0Aa_%7Bij%7D%3D0%5C%20%5Ctext%7B(Az%20elemek%20%C3%B6sszege%200)%7D%0D%0A" />
+
+- 8-irányban élt kereső gradiens operátorok
+
+  - Prewitt compass operátor
+
+    <img src="../img/digikep_kepek/2022-05-15-19-39-27-image.png" title="" alt="" width="538">
+
+  - Robinson-3 compass operátor
+
+    <img src="../img/digikep_kepek/2022-05-15-19-40-14-image.png" title="" alt="" width="533">
+
+  - Robinson-5 compass operátor
+
+    <img src="../img/digikep_kepek/2022-05-15-19-41-15-image.png" title="" alt="" width="520">
+
+  - Kirsch compass operátor
+
+    <img src="../img/digikep_kepek/2022-05-15-19-42-12-image.png" title="" alt="" width="519">
+
+**Laplace éldetektálás**
+
+- Másodrendű derivált: az első rendű deriváltal szemben a nullán való áthaladás helyén lesz az él, nem a lokális maximumnál vagy minimumnál
+
+  <img src="../img/digikep_kepek/2022-05-15-22-45-19-image.png" title="" alt="" width="452">
+
+- Kétváltozós függvény Laplace operátora: az _x_ szerinti és _y_ szerinti másdorendű deriváltak összege (a képen látható ahogy az összegből tényleg megkapjuk az összes élt)
+
+  <img src="../img/digikep_kepek/2022-05-15-22-59-38-image.png" title="" alt="" width="405">
+
+  <img src="../img/digikep_kepek/2022-05-15-23-04-05-image.png" title="" alt="" width="418">
+
+- A Laplace operátor egy lineáris differenciál-operátor a másodrendű derivált közelítésére (a gradiens operátor önmagával vett belső szorzata)
+
+  - Tulajdonságai:
+
+    - forgásinvariáns
+
+    - egyetlen maszkkal számítható
+
+    - csak a magnitúdó számítható
+
+    - duplán érzékelhet éleket
+
+    - zajérzékeny
+
+    <img src="../img/digikep_kepek/2022-05-15-23-55-06-image.png" title="" alt="" width="464">
+
+- Egy diszkrét Laplace operátor (A maszkelemek összege 0):
+
+  <img src="../img/digikep_kepek/2022-05-15-23-22-14-image.png" title="" alt="" width="490">
+
+- A másodrendű derivált érzékeny a zajra -> hajtunk végre először Gauss simítást a képen
+
+- Az Laplace operátor és a Gauss operátor is lineáris -> megspórolhatunk egy konvolúciót azzal, ha a Gauss operátoron alkalmazzuk a Laplace transzformációt, amiből egy új konvolúciós maszkot kapunk
+
+  <img src="../img/digikep_kepek/2022-05-16-00-02-13-image.png" title="" alt="" width="390">
+
+  - A Gauss függvény Laplace transzformáltja (LoG – Laplacian of Gaussian)
+
+  - "fordított sombrero"
+
+    <img title="" src="../img/digikep_kepek/2022-05-16-00-00-17-image.png" alt="" width="470">
+
+- A LoG egy diszkrét közelítése:
+
+  <img src="../img/digikep_kepek/2022-05-16-00-01-30-image.png" title="" alt="" width="391">
+
+**Marr-Hildreth éldetektor**
+
+Lényege:
+
+1. Konvolváljuk a képet egy (vagy több) alkalmas LoG függvénnyel.
+
+2. Keressünk (közös) nulla-átmeneteket.
+
+   (Nulla-átmenet ott van, ahol az adott pont egy „kis” (pl. 2x2-es vagy 3x3-as)
+   környezetében pozitív és negatív értékek is előfordulnak.)
+
+- Példa:
+
+  - σ a szórást jelöli
+
+    <img src="../img/digikep_kepek/2022-05-16-00-08-45-image.png" title="" alt="" width="451">
+
+- Nagyon lapos nulla átmeneteknél "fantom" élt is detektálhat
+
+  <img title="" src="../img/digikep_kepek/2022-05-16-00-13-42-image.png" alt="" width="513">
+
+### 2. Alakreprezentáció, határ- és régió-alapú alakleíró jellemzők, Fourier leírás.
+
+<img src="../img/digikep_kepek/2022-05-17-22-54-29-image.png" title="" alt="" width="549">
+
+**Alakzat:** pontok összefüggő rendszere
+
+A moduláris gépi látás általános modellje:
+
+![](../img/digikep_kepek/2022-05-16-23-17-39-image.png)
+
+- Az alakreprezentáció módszerei:
+
+  - az objektumot körülvevő **határ** leírása
+
+  - az objektum által elfoglalt **régió** leírása
+
+  - **transzformációs** megközelítés
+
+#### Határvonal alapú tulajdonságok
+
+- lánckód, alakleíró szám
+
+- kerület, terület, kompaktság, cirkularitás,
+
+- közelítés poligonnal,
+
+- parametrikus kontúr, határvonal leíró
+  függvény,
+
+- meredekségi hisztogram,
+
+- görbület, energia
+
+- strukturális leírás
+
+##### **Lánckód (chain code)**
+
+- Az alakzat határpontjait követi, láncolja az óramutató járásával ellentétes irányban.
+
+- **Határpont:** az alakzatnak olyan pontja, melynek van az alakzathoz nem tartozó 8-, ill. 4-szomszédja (4, ill. 8 irány esetén).
+
+- Az elemi elmozdulások kódjai:
+
+  <img src="../img/digikep_kepek/2022-05-17-20-17-23-image.png" title="" alt="" width="422">
+
+- Példa 8-as lánckódra:
+
+  <img title="" src="../img/digikep_kepek/2022-05-17-20-18-36-image.png" alt="" width="425">
+
+**_<u>Normalizált lánckód</u>_**
+
+Különböző kezdőpontok választása a lánckód ciklikusan permutált változatait eredményezi.
+
+**Különbségkód:** a lánckód első deriváltja, a szomszédos elemek közötti elmozdulások száma.
+
+**Normalizálás:** addig permutáljuk ciklikusan a különbségkódot, amíg a legkisebb értékű kódot (a legkisebb 4-es, ill. 8-as számrendszerbeli számot) kapjuk.
+
+**Alakleíró szám:** a normalizált különbségkód (nem függ a kezdőpont választásától).
+
+Normalizálás:
+
+<img title="" src="../img/digikep_kepek/2022-05-17-21-58-32-image.png" alt="" width="477">
+
+- Az első ábránál (lánckód: 1002335657):
+
+  - Különbségkód:
+
+    - ha a 8-irányos iránytűn az óramutató járásával ellentétesen haladunk, akkor 1-től 0-ig 7 lépésben tudunk eljutni (a lánckód első két elembéből számoljuk a különbségkód első elemét)
+
+    - második számjegye a 0 és 0 közti távolság, vagyis 0
+
+    - harmadik számjegye 0 és 2 távolsága, ami 2 (még mindig az iránytűn, óramutató járásának ellentétesen)
+
+    - ez így megy végig, utolsó szám az elsőhöz lesz hasonlítva
+
+  - Alakleíró szám: úgy kell rendezni a különbségkódot hogy a lehető legkisebb számot adják
+
+    - mivel a 2 alakzat megegyezik, ezért mindkettő esetben ugyanaz lesz az alakleíró szám
+    - invariáns a forgatásra is, ha a forgatási szög k·π/2
+
+**A lánckód tulajdonságai**
+
+- Előnyök (a mátrixos reprezentációval szemben):
+
+  - kompakt (tömör),
+
+  - eltolás-invariáns,
+
+  - gyors algoritmus,
+
+  - gyorsan rekonstruálható belőle az alakzat
+
+- Hátrányok:
+
+  - nem forgás-invariáns,
+
+  - nem skála-invariáns
+
+  - a pontosság legfeljebb pixelnyi lehet,
+
+  - érzékeny a zajra
+
+**Kerület számítása 8-as lánckódból**
+
+<img title="" src="../img/digikep_kepek/2022-05-17-22-49-34-image.png" alt="" width="486">
+
+##### Poligonok
+
+<img title="" src="../img/digikep_kepek/2022-05-17-22-58-00-image.png" alt="" width="453">
+
+**Egyszerű poligon területe:**
+
+<img src="../img/digikep_kepek/2022-05-17-23-02-49-image.png" title="" alt="" width="445">
+
+- trapéz területek számítása (negatívak és pozitívak)
+
+<img src="../img/digikep_kepek/2022-05-18-20-51-32-image.png" title="" alt="" width="448">
+
+**Kompaktság:** kompaktság = (kerület)^2 / terület
+
+- Pl:
+
+  <img title="" src="../img/digikep_kepek/2022-05-17-23-07-36-image.png" alt="" width="360">
+
+**Cirkularitás (körszerűség):** cirkularitás = 1 / kompaktság = terület / (kerület)^2
+
+- maximális a körre: 1/(4π) ≈ 0.08
+
+**Közelítés poligonnal**
+
+<img src="../img/digikep_kepek/2022-05-17-23-11-49-image.png" title="" alt="" width="391">
+
+**Leírás egyváltozós függvényekkel (signatures)**
+
+- Pl. a súlypontnak a határtól vett távolságát a szög függvényében fejezi ki.
+
+- Függ az alakzat méretétől és a határon vett kezdőpont megválasztásától, ezért a jellemző normalizálásra szorul.
+
+**Csillag-szerű objektum**
+
+- Van olyan pontja, amelyből induló tetszőleges irányú sugár a határt
+  egyetlen pontban metszi.
+
+- Az ilyen pont a csillag-szerű objektum magjához tartozik.
+
+- <img src="../img/digikep_kepek/2022-05-17-23-21-59-image.png" title="" alt="" width="203">
+
+**Strukturális leírás**
+
+<img title="" src="../img/digikep_kepek/2022-05-17-23-25-52-image.png" alt="" width="335">
+
+**Leírás generatív nyelvtanokkal**
+
+Pl:
+
+<img title="" src="../img/digikep_kepek/2022-05-17-23-26-38-image.png" alt="" width="369">
+
+**Leírás összefűzött primitívekkel**
+
+<img title="" src="../img/digikep_kepek/2022-05-17-23-27-26-image.png" alt="" width="461">
+
+#### Régió alapú alakleírás
+
+- befoglaló téglalap, rektangularitás
+
+- főtengely, melléktengely, átmérő,
+  excentricitás, főtengely szöge
+
+- konvex burok, konvex kiegészítés,
+  konkávitási fa, partícionált határ,
+
+- vetületek, törés-költség
+
+- topológiai leírások, Euler-szám,
+  szomszédsági fa,
+
+- váz,
+
+- momentumok, invariáns momentumok
+
+**Befoglalóló téglalap**
+
+<img title="" src="../img/digikep_kepek/2022-05-17-23-31-59-image.png" alt="" width="360">
+
+**Rektangularitás (téglalap-szerűség)**
+
+- az alakzat területének és a minimális befoglaló téglalap területének a hányadosa
+
+**Fő- és melléktengely**
+
+- főtengely: az alakzaton belül haladó leghosszabb egyenes szakasz
+
+- melléktengely: az alakzaton belüli, a főtengelyre merőleges leghosszabb egyenes szakasz
+
+  <img src="../img/digikep_kepek/2022-05-17-23-36-12-image.png" title="" alt="" width="335">
+
+**Átmérő**
+
+<img src="../img/digikep_kepek/2022-05-17-23-35-10-image.png" title="" alt="" width="261">
+
+**Excentricitás:** a fő- és a melléktengely hosszaránya (főtengely/melléktengely)
+
+**Főtengely szöge (az alakzat iránya):** a főtengely és az x-tengely által bezárt szög
+
+<img src="../img/digikep_kepek/2022-05-17-23-37-52-image.png" title="" alt="" width="244">
+
+**Konvex burok:** az alakzatot tartalmazó minimális konvex alakzat
+
+**Konvex kiegészítés:** a konvex burok és az alakzat különbsége
+
+**Konkávitási fa:**
+
+- A fa gyökere a kiindulási alakzat, az első szinten a konvex különbség alakzatai helyezkednek el, melyekre a faépítést rekurzív módon folytatjuk.
+
+- A fa elágazási pontjaiban lévő alakzatok nem konvexek, míg minden levélalakzat
+  konvex.
+
+  <img src="../img/digikep_kepek/2022-05-18-00-01-29-image.png" title="" alt="" width="529">
+
+**Partícionált határ**
+
+- a határ partícionálható aszerint, hogy hol kezdődik, ill. fejeződik be a konvex kiegészítés valamely komponense
+
+  <img title="" src="../img/digikep_kepek/2022-05-18-00-02-36-image.png" alt="" width="208">
+
+**Vetületek**
+
+<img src="../img/digikep_kepek/2022-05-18-00-04-24-image.png" title="" alt="" width="408">
+
+**Törés költség (break cost):** A törés költség meghatározásánál az egyik vetületet (pl. a függőlegeset) vesszük figyelembe. Ekkor egy oszlop költsége a benne található olyan egyesek száma, melyekhez az előző oszlop ugyanazon sorában is egyes található.
+
+Pl.:
+
+<img src="../img/digikep_kepek/2022-05-18-00-06-34-image.png" title="" alt="" width="423">
+
+**Topológiai leírás**
+
+- **Bináris kép:** kétféle érték (1: fekete, alakzat, komponens; 0: fehér, lyuk, háttér)
+
+- **Komponens:** maximálisan összefüggő fekete halmaz (bármely két pontja összeköthető a halmazon belüli 4-, ill. 8 úttal) régió
+
+- **Üreg:** a komplemens/negált kép egy véges komponense
+
+**Euler-féle szám:** (komponensek száma) - (üregek száma)
+
+<img src="../img/digikep_kepek/2022-05-18-00-09-41-image.png" title="" alt="" width="456">
+
+**Euler szám poligonhálózatokra**
+
+- lapok (face) száma: #F
+
+- élek (edge) száma: #E
+
+- csúcsok (vertex) száma: #V
+
+- régiók, objektumok száma: #O
+
+- üregek (cavity) száma: #C
+
+- Euler szám: #F - #E + #V = #O - #C
+
+  <img title="" src="../img/digikep_kepek/2022-05-18-00-13-42-image.png" alt="" width="403">
+
+**Összefüggőségi fa**
+
+- A bináris képekhez rendelt irányított gráf, ahol:
+
+  - minden egyes szögpont megfelel a kép egy (fehér vagy fekete) komponensének
+
+  - a gráf tartalmazza az (X,Y) élet, ha az Xkomponens „körülveszi” a vele szomszédos Y komponenst.
+
+  <img src="../img/digikep_kepek/2022-05-18-00-15-29-image.png" title="" alt="" width="386">
+
+**Az Euler-szám és az összefüggőségi fa**
+
+- Nem kódolják a képeket, mivel számos képnek megegyezik az Euler száma és/vagy az összefüggőségi fája.
+
+**Váz (skeleton):** A váz egy gyakran alkalmazott régió-alapú alakleíró jellemző, mely leírja az objektumok általános formáját.
+
+- A váz meghatározásai:
+
+  1. A váz a középtengely transzformáció (Medial Axis Transform, MAT) eredménye: a vázat az objektum azon pontjai alkotják, melyekre kettő vagy több legközelebbi határpont található.
+
+     <img src="../img/digikep_kepek/2022-05-18-00-24-12-image.png" title="" alt="" width="285">
+
+  2. Préritűz-hasonlat: Az objektum határát (minden pontjában) egyidejűleg felgyújtjuk. A váz azokból a pontokból áll, ahol a tűzfrontok találkoznak és kioltják egymást. (Feltételezzük, hogy a tűzfrontok minden irányban egyenletes sebességgel, vagyis izotropikusan terjednek.)
+
+     <img src="../img/digikep_kepek/2022-05-18-00-25-17-image.png" title="" alt="" width="468">
+
+  3. A vázat az objektumba beírható maximális (nyílt) hipergömbök középpontjai alkotják. Egy beírható hipergömb maximális, ha őt nem tartalmazza egyetlen másik beírható hipergömb sem. A beírható maximális (nyílt) hipergömbök egyesítése a kiindulási objektum egy lefedőrendszerét adja.
+
+     <img src="../img/digikep_kepek/2022-05-18-00-26-24-image.png" title="" alt="" width="403">
+
+- Belső- és külső váz
+
+  <img src="../img/digikep_kepek/2022-05-18-00-27-35-image.png" title="" alt="" width="389">
+
+- A váz:
+
+  - Reprezentálja az objektum
+
+    - általános formáját
+
+    - topológiai szerkezetét és a
+
+    - lokális objektum szimmetriákat
+
+  - Invariáns
+
+    - az eltolásra,
+
+    - az elforgatásra és az
+
+    - uniform skálázásra
+
+  - Egyszerűbb szerkezet („vékony”, csökkenti a dimenziót).
+
+- Váz gráf:
+
+  <img src="../img/digikep_kepek/2022-05-18-00-30-34-image.png" title="" alt="" width="186">
+
+**Momentumok**
+
+- Az alakjellemzésben a momentumok előnye:
+
+  - számok,
+
+  - többszintű képekre is értelmezettek,
+
+  - invariánsak (a fontosabb geometriai transzformációkra).
+
+  <img src="../img/digikep_kepek/2022-05-18-00-36-15-image.png" title="" alt="" width="414">
+
+**Súlypont**
+
+<img title="" src="../img/digikep_kepek/2022-05-18-00-36-59-image.png" alt="" width="377">
+
+**Centrális momentumok**
+
+<img title="" src="../img/digikep_kepek/2022-05-18-00-58-23-image.png" alt="" width="395">
+
+**Excentricitás**
+
+<img title="" src="../img/digikep_kepek/2022-05-18-19-24-46-image.png" alt="" width="300">
+
+**Főtengely szöge**
+
+<img title="" src="../img/digikep_kepek/2022-05-18-19-26-05-image.png" alt="" width="307">
+
+**Normalizált centrális momentumok**
+
+<img src="../img/digikep_kepek/2022-05-18-19-26-46-image.png" title="" alt="" width="238">
+
+**Invariáns momentumok és a geometriai transzformációk**
+
+<img src="../img/digikep_kepek/2022-05-18-19-30-04-image.png" title="" alt="" width="469">
+
+##### Transzformáción alapuló alakleírás
+
+Transzformáljuk a határ K darab mintavételezett pontjából (mint komplex s(k) számokból) képzett s vektort. Az eredményül kapott a vektor (komplex a(k) együtthatók) adják a Fourier leírást. Az alakzat rekonstrukciójához az inverz Fourier-transzformációt kell végrehajtani.
+
+A határpontok Fourier-transzformáltja:
+
+<img src="../img/digikep_kepek/2022-05-18-20-13-27-image.png" title="" alt="" width="473">
+
+Példa a Fourier leírásra:
+
+- minél kevesebb Fourier deszkriptort használunk, annál kevésbé lesz pontos az inverz Fourier transzformációból előállított rekonstrukció
+
+<img src="../img/digikep_kepek/2022-05-18-20-27-52-image.png" title="" alt="" width="476">
+## Programozási nyelvek
+
+### A programozási nyelvek csoportosítása (paradigmák), az egyes csoportokba tartozó nyelvek legfontosabb tulajdonságai.
+
+#### Nyelvcsoportok (paradigmák)
 
 - Imperatív, procedurális (pl.: C, C++, Pascal)
 
@@ -5143,7 +7101,7 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 
 - Párhuzamos (pl.: Occam, PVM, MPI)
 
-### Imperatív programozás
+#### Imperatív programozás
 
 - Az imperatív programozás olyan programozási paradigma, amely utasításokat használ, hogy egy program állapotát megváltoztassa.
 
@@ -5152,7 +7110,7 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 - Azok a nyelvek, melyek az imperatív paradigmákba esnek két fő jellemzőjük van: meghatározzák a műveletek sorrendjét olyan konstrukciókkal, amelyek kifejezetten ellenőrzik ezt a sorrendet, és lehetővé tesznek olyan mellékhatásokat, amelyben az állapot módosítható egy időben, egy kód egységben, majd később egy másik időpontban olvasható egy másik kód egységén belül.
 
 - A legkorábbi imperatív nyelvek az eredeti számítógépek gépnyelvei voltak (assembly)
-  
+
   - egyszerű utasítások -> könnyebb hardwares megvalósítás, de az összetett programok létrehozása nehezebb
 
 **Procedurális programozás**
@@ -5166,46 +7124,46 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 - Az objektum orientált paradigmával szemben itt háttérbe szorulnak a komplex adatszerkezetek
 
 - Moduláris tervezés
-  
+
   - Dekompozíció: adott feladat több egyszerűbb részfeladatra bontása
-  
+
   - Kompozíció: meglévő programegységek újrafelhasználása
-  
+
   - Érthetőség: a modulok önmagukba is egy értelmes egységet alkossanak
-  
+
   - Folytonosság: a specifikáció kis változása esetén is csak kis változás legyen szükséges a programban
-  
+
   - Védelem: egy hiba csak egy (vagy maximum egy pár), modul működésére legyen hatással, ezzel védve a program egészét
 
 - Modularitás alapelvei:
-  
+
   - Nyelvi támogatás: a modulok külön-kölün legyenek lefordíthatók
-  
+
   - Kevés kapcsolat: a modulok keveset kommunikáljanak egymással
-  
+
   - Gyenge kapcsolat: ha két modulnak kommunikálnia kell egymással, akkor csak annyi információt cseréljenek, amennyi szükséges
-  
+
   - Explicit interfészek: ha két modul kommunikál, akkor legalább az egyikük szövegéből ki kell hogy derüljön
-  
+
   - Információ-elrejtés: egy modulnak csak az explicit módon nyilvánossá tett információit használhatjuk fel
-  
+
   - Nyitott és zárt modulok
-    
+
     - Zárt modul: csak változatlan formában kerülhet felhasználásra
-    
+
     - Nyitott modul: kiterjeszthető, más szóval bővíthető az általa nyújtott szolgáltatások száma
-  
+
   - Újrafelhasználhatóság: ugyanazokat a programeleket ne kelljen többször elkészíteni, ügyeljünk viszonylag általánosítható modulok készítésére
-  
+
   - Típus változatossága: modulok működjenek többféle típusra
-  
+
   - Adatszerkezetek és algoritmusok változatossága: például egy lineáris kereső eljárás működjön több féle adatszerkezetre (ezeken belül persze más-más algoritmusokkal)
-  
+
   - Egy típus - egy modul: egy típus műveletei kerüljenek egy modulba
-  
+
   - Reprezentáció függetlenség: egy adattípus reprezentációjának a megváltozása ne okozzon modulon kívüli változást
 
-- Procedurális programozási nyelvek pédául a *C*, *Pascal*, *FORTRAN*
+- Procedurális programozási nyelvek pédául a _C_, _Pascal_, _FORTRAN_
 
 **Objektum orientált programozás**
 
@@ -5218,62 +7176,62 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 - A legtöbb objektumorientált nyelv osztály alapú, azaz az objektumok osztályok példányai, és típusuk az osztály.
 
 - Objektumok és osztályok
-  
-  - Osztályok: 
-    
+
+  - Osztályok:
+
     - Az adatformátum és az elérhető metódusok definíciója az adott típus vagy a típushoz tartozó objektumok számára.
-    - Tartalmazhatnak adattagokat és metódusokat, amelyek műveleteket végeznek az osztály adattagjain. 
+    - Tartalmazhatnak adattagokat és metódusokat, amelyek műveleteket végeznek az osztály adattagjain.
     - Összetartozó adatok és függvények, eljárások egysége.
-  
-  - Objektumok: 
-    
+
+  - Objektumok:
+
     - Az osztály példányai.
-    
+
     - Gyakran megfeleltethetők a való élet objektumainak vagy egyedeinek.
 
 - Pár fontos fogalom:
-  
+
   - Osztályváltozók: az osztályhoz tartoznak, elérhetők az osztályon, de példányokon keresztül is. Minden példány számára ugyanaz.
-  
-  -  Attribútumok: az egyedi objektumok jellemzői, minden objektumnak sajátja van.
-  
+
+  - Attribútumok: az egyedi objektumok jellemzői, minden objektumnak sajátja van.
+
   - Tagváltozók: az osztály- és a példányváltozók együttese
-  
+
   - Osztálymetódusok: osztály szintű metódusok, csak az osztályváltozókhoz és paramétereikhez férhetnek hozzá, példányváltozókhoz nem.
-  
+
   - Példánymetódusok: példány szintű metódusok, hozzáférnek az adott példány összes adatához és metódusához, és paramétereik is lehetnek.
 
 - Kompozíció, öröklődés, interfészek
-  
+
   - Kompozíció: az objektumok lehetnek más objektumok mezői
-  
+
   - Öröklődés:
-    
-    - Osztályok közötti alárendeltségi  viszony, majdnem minden osztály alapú nyelv támogatja
-    
+
+    - Osztályok közötti alárendeltségi viszony, majdnem minden osztály alapú nyelv támogatja
+
     - Ha az A osztályból örökldődik a B osztály, akkor B egyben az A osztály példánya is lesz, ezért megakpja az A osztály összes adattagját és metódusát
-    
+
     - Több programozási nyelv megengedi a többszörös öröklődést
-    
-    - Egyes nyelvekben, mint a Java és a C# megtiltható a leszármazás egyes osztályokból (Javában final, C#-ban sealed a kulcsszó)
-  
+
+    - Egyes nyelvekben, mint a Java és a C## megtiltható a leszármazás egyes osztályokból (Javában final, C#-ban sealed a kulcsszó)
+
   - Interfészek:
-    
+
     - Nem tartalmazhatnak megvalósítási részleteket, csak előírhatják bizonyos metódusok jelenlétét, illetve konstansokat definiálhatnak.
-    
+
     - Olyan nyelvekben, ahol nincs a megvalósítások többszörös öröklődése, interfészekkel érhető el a többszörös öröklés korlátozott formája
 
-- Objektum orientált nyelvek például a *Java*, *C#*, *Python*, *Smalltalk*
+- Objektum orientált nyelvek például a _Java_, _C#_, _Python_, _Smalltalk_
 
-### Dekleratív programozás
+#### Dekleratív programozás
 
-- A specifikáción van a hangsúly, funkcionális esetben a program egy függvény kiszámítása, logikai esetben a megoldás megkeresését a futtató környezetre  bízzuk
+- A specifikáción van a hangsúly, funkcionális esetben a program egy függvény kiszámítása, logikai esetben a megoldás megkeresését a futtató környezetre bízzuk
 
 - Azok a nyelvek, amely ezt a programozást használják, megpróbálják minimalizálni vagy kiküszöbölni a mellékhatásokat, úgy, hogy leírják, hogy a programnak mit kell elérnie a probléma tartományában, ahelyett, hogy a programozási nyelv primitívjeinek sorozataként írná le, hogyan kell azt megvalósítani
 
 - Deklaratív nyelvek közé tartoznak az adatbázis-lekérdezési nyelvek (pl. SQL, XQuery), a reguláris kifejezések, a logikai programozás, a funkcionális programozás és a konfigurációkezelő rendszerek
 
-**Funkcionális (applikatív)  programozás**
+**Funkcionális (applikatív) programozás**
 
 - A funkcionális programnyelvek a programozási feladatot egy függvény kiértékelésének tekintik
 
@@ -5282,115 +7240,115 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 - A *rekurzió* a funkcionális programozás egyik fontos eszköze, az ismétlések és ciklusok helyett rekurziót alkalmazhatjuk.
 
 - Rekurziós függvény:
-  
-  - Rekurzív hívás mindig feltételvizsgálat  mögött
-  
+
+  - Rekurzív hívás mindig feltételvizsgálat mögött
+
   - Rekuzív függvényt két esetre kell felkészíteni
-    
+
     - Bázis eset: nem kell újra meghívnia magát
-    
+
     - Rekurzív eset: Meghívja magát újra
-  
+
   - Biztosítani kell, hogy mindig elérjük a bázis esetet
-  
+
   - Rekurzió speciális esete: iteráció
 
 - Alapjául a Church által kidolgozott lambda-kalkulus szolgál, a tisztán funkcionális nyelvek a matematikában megszokott függvényfogalmat valósítják meg.
-  
+
   - Az ilyen programozás során a megoldandó feladatnál az eredményhez vezető út nem is biztosan ismert, a program végrehajtásához csupán az eredmény pontos definíciója szükséges.
-  
+
   - Tisztán funkcionális programozás esetén tehát nincs állapot és nincs értékadás.
 
-- Funkcionális nyelvek például a *Haskell* és *Scala*
+- Funkcionális nyelvek például a _Haskell_ és _Scala_
 
 **Logikai programozás**
 
-- A logikai program egy modellre vonatkozó állítások (*axiómák*) egy sorozata
+- A logikai program egy modellre vonatkozó állítások (_axiómák_) egy sorozata
 
-- Az állítások a modell objektumainak tulajdonságait és kapcsolatait, szaknyelven *relációit* írják le
+- Az állítások a modell objektumainak tulajdonságait és kapcsolatait, szaknyelven _relációit_ írják le
 
 - Az állítások egy adott relációt meghatározó részhalmazát predikátumnak nevezzük
-  
-  - A program futása minden esetben egy az állításokból következő tétel konstruktív bizonyítása, azaz a programnak feltett *kérdés* vagy más néven *cél* megválaszolása
+
+  - A program futása minden esetben egy az állításokból következő tétel konstruktív bizonyítása, azaz a programnak feltett _kérdés_ vagy más néven _cél_ megválaszolása
 
 - Az első logikai programozási nyelv a Prolog volt
-  
-  - Egy Prolog program csak az adatokat és az összefüggéseket tartalmazza. 
-    Kérdések hatására a  “programvégrehajtást” beépített  következtető-rendszer végzi
-  
+
+  - Egy Prolog program csak az adatokat és az összefüggéseket tartalmazza.
+    Kérdések hatására a “programvégrehajtást” beépített következtető-rendszer végzi
+
   - Programozás Prologban:
-    
+
     - Objektumok és azokon értelmezett relációk megadása
-    
+
     - Kérdések megfogalmazása a relációkkal kapcsolatban
-  
+
   - A programnak meg kell adnunk egy célformulát (célklózt), ezután a program ellenőrzi, hogy a célklóz a logikai (forrás)program logikai következményei közt van-e
-  
+
   - Gyakran használják mesterségesintelligencia-alkalmazások megvalósítására, illetve a számítógépes nyelvészet eszközeként
 
-### Párhuzamos programozás
+#### Párhuzamos programozás
 
-- Egyszerre több szálon történik a  végrehajtás
+- Egyszerre több szálon történik a végrehajtás
 
 - Végrehajtási szál: folyamat (process)
 
 - Előnyei:
-  
+
   - Természetes kifejezésmód
-  
-  - Sebességnövekedés megfelelő hardver  esetén
+
+  - Sebességnövekedés megfelelő hardver esetén
 
 - Hátrányai
-  
+
   - Bonyolultabb a szekvenciálisnál
 
 - A párhuzamos programok alapvetően nem determinisztikusak
 
-- Sokféle párhuzamos programozási  modell van
+- Sokféle párhuzamos programozási modell van
 
 - Közös problémák:
-  
+
   - Adathozzáférés folyamatokból
-    
+
     - Közös memória (shared memory)
-    
-    - Osztott memória (distributed memory) +  kommunikáció
-  
-  - Folyamatok létrehozása, megszüntetése,  kezelése
-  
+
+    - Osztott memória (distributed memory) + kommunikáció
+
+  - Folyamatok létrehozása, megszüntetése, kezelése
+
   - Folyamatok együttműködése (interakciója)
-    
+
     - Független
-    
+
     - Erőforrásokért versengő
 
 - A párhuzamos program:
-  
-  - Sebességfüggő: a folyamatok relatív  sebessége minden futáskor más lehet
-  
-  - Nemdeterminisztikus: ugyanarra az  inputra különböző output
-  
-  - Holtpont (deadlock): kölcsönös  egymásra várakozás
-  
-  - Éhezés (starvation): Nincs holtpont,  egy folyamat mégsem jut hozzá az  erőforrásokhoz
+
+  - Sebességfüggő: a folyamatok relatív sebessége minden futáskor más lehet
+
+  - Nemdeterminisztikus: ugyanarra az inputra különböző output
+
+  - Holtpont (deadlock): kölcsönös egymásra várakozás
+
+  - Éhezés (starvation): Nincs holtpont, egy folyamat mégsem jut hozzá az erőforrásokhoz
 
 - Occam
-  
-  - Imperatív, folyamatok saját  memóriával rendelkeznek,  üzenetküldéssel kommunikálnak
-  
+
+  - Imperatív, folyamatok saját memóriával rendelkeznek, üzenetküldéssel kommunikálnak
+
   - Occam program részei:
-    
+
     - Változók
-    
+
     - Folyamatok
-      
+
       - Elindul -> csinál valamit -> befejeződik (terminál)
-      
-      - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell 
+
+      - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell
         fordítani
-      
+
       - Elemi és összetett folyamato
-    
+
     - Csatornák: két folyamat közötti adatátvitelre szolgál
 ## Programozás alapjai
 
@@ -6063,11 +8021,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 
 ### 2. Egyszerű adattípusok: egész, valós, logikai és karakter típusok és kifejezések. Az egyszerű típusok reprezentációja, számábrázolási tartományuk, pontosságuk, memória igényük, és műveleteik. Az összetett adattípusok és a típusképzések, valamint megvalósításuk C nyelven. A pointer, a tömb, a rekord, és az unió típus. Az egyes típusok szerepe, használata.
-# Rendszerfejlesztés 1.
+## Rendszerfejlesztés 1.
 
-## 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
+### 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
 
-### A szoftverfejlesztés folyamata
+#### A szoftverfejlesztés folyamata
 
 - **_A szofverfolyamat_**: tevékenységek és kapcsolódó eredmények, amely során elkészítjük a szoftvert
 
@@ -6092,21 +8050,21 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **Folyamat elemek:**
 
 - Fő elemek
-  
+
   - Feladatok, termékek
-  
+
   - Határidők, átadandók
 
 - Kiegészítő elemek
-  
+
   - Projektmenedzsment
-  
+
   - Konfigurációmenedzsment
-  
+
   - Dokumentáció
-  
+
   - Minőségbiztosítás, kockázatmenedzsment
-  
+
   - Mérés
 
 **Folyamat fejlettsége**
@@ -6116,15 +8074,15 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - SEI CMM(I) (Capability Maturity Model Integration)
 
 - _Szintjei:_
-  
+
   - Kezdeti
-  
+
   - Reprodukálható
-  
+
   - Definiált
-  
+
   - Ellenőrzöt
-  
+
   - Optimalizált
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Characteristics_of_Capability_Maturity_Model.svg/1280px-Characteristics_of_Capability_Maturity_Model.svg.png" title="" alt="" width="438">
@@ -6132,47 +8090,47 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **A szoftverfolyamat fázisai**
 
 - Minden folyamatnak elemei:
-  
+
   - **Specifikáció**: szoftver funkcionalitása, megszorítások („mit”)
-  
+
   - **Fejlesztés**: tervezés és implementáció specifikáció alapján („hogyan”)
-  
+
   - **Verifikáció és Validáció**: fejlesztés megfelel-e a specifikációnak és a követelményeknek
-  
+
   - **Evolúció**: változás kezelése, szoftver „utóélete”
 
 - **Specifikáció**
-  
+
   - Szoftver definiálása
-    
+
     - Milyen funkciókat, szolgáltatásokat követelünk meg a rendszertől
-    
+
     - Követelménytervezés
-  
+
   - Kritikus szakasz: itt a legkisebb a változtatások költsége
-  
+
   - Eredmény: követelményspecifikáció dokumentum, esetleg prototípusok
-    
+
     - Végfelhasználónak: magas szintű
-    
+
     - Fejlesztőknek: részletes, technikai
 
 - **Követelménytervezés fázisai**
-  
+
   - Megvalósíthatósági tanulmány (feasibility study)
-  
+
   - Költséghatékonyság ellenőrzése
-  
+
   - Követelmények feltárása és elemzése:
-    
+
     - Rendszermodellek, prototípusok
-  
+
   - Követelményspecifikáció: Egységes dokumentum
-  
+
   - Követelmény validáció
 
 - **Tervezés**
-  
+
   - Szoftver struktúrája, adatok, interfészek
   - Rendszermodellek különböző absztrakciós szinteken
   - _Tevékenységei:_
@@ -6184,88 +8142,88 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
   - Gyakorlati folyamatok speciálisan definiálják ezeket
 
 - **Tervezési módszerek**
-  
+
   - Ad hoc (átfogó rendezés nélkül)
-  
+
   - Strukturált
-    
+
     - Structured Design (SD)
-    
+
     - SSADM
-    
+
     - Jackson
-  
+
   - Objektumorientált
-    
+
     - pl.: UML (Unified Modeling Language, szabványos, általános célú modellező nyelv, üzleti elemzők, rendszertervezők, szoftvermérnökök számára)
-  
+
   - Közös: grafikus rendszermodellek, szabványos jelölésrendszer, CASE (Computer Aided Software Engineering) támogatás
 
 - **Implementáció**
-  
+
   - Programozás és nyomkövetés
-  
+
   - kritikus rendszereknél részletes tervezés alapján
-  
+
   - Programozás (kódolás): adottság kell hozzá, személyes technikák, stílusok
-  
+
   - Minőségbiztosítás érdekében kódolási stílust lehet megkövetelni
-  
+
   - Nyomkövetés (debugging): hiba lokalizálás, eltávolítás, újratesztelés, programszöveg manuális vizsgálata, eszköztámogatás
 
 - **Szoftver validáció**
-  
+
   - Verifikáció és validáció (V & V): Rendszer megfelel-e a specifikációnak, és a megrendelő elvárásainak
-  
+
   - Tesztelés különböző szinteken történik, inkrementálisan
-    
+
     - Egység tesztelése (unit test): komponensek független tesztelése, programozó feladata
-    
+
     - Modul tesztelése: függő és kapcsolódó komponenseket együtt, szintén a programozó feladata
-    
+
     - Alrendszer tesztelése: például interfészek illeszkedése, független tesztelő csapat feladata
-    
+
     - Rendszer tesztelése: előre nem várt kölcsönhatások felfedezése, validáció
       specifikációhoz tesztadatokon, független tesztelő csapat
-    
+
     - Átvételi tesztelés: megrendelő adataival, valós környezetben, alfa tesztelés (fejlesztő vagy teszt csapat végzi)
-    
+
     - Béta tesztelés: potenciális vásárlók által tesztelt, előre nem látható hibák keresése
 
 - **Evolúció**
-  
+
   - Szoftver flexibilitás miatt nagy, összetett rendszerek születnek
-  
+
   - Változás bár költséges, de
-    
+
     - Eredményesebb meglévő rendszerekből kialakítani az újat
-    
+
     - Kevés a teljesen új szoftver
-    
+
     - Egy szoftver sosincs kész
-  
+
   - Követelményspecifikáció után a meglévő rendszereket kiértékeljük
-    
+
     - Manuális vizsgálat
-    
+
     - Automatikus elemzés (reverse engineering)
-    
+
     - Kimenet: dokumentáció, magasabb szintű rendszermodell
-  
+
   - Rendszermódosítások után jön létre az „új” rendszer
-    
+
     - Újratervezés (re-engineering)
-    
+
     - Folyamatos evolúció (roundtrip engineering)
 
-### A folyamat modelljei
+#### A folyamat modelljei
 
-#### Kategóriák
+##### Kategóriák
 
 - Triviális: lineáris, vízesés
-  
+
   - Tevékenységek különálló fázisok
-  
+
   - Iteratív modellek: prototípus, vízesés, RAD
 
 - Evolúciós: prototípusok gyors gyártása, finomítása
@@ -6274,22 +8232,22 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - Újrafelhasználható, komponens alapú
 
-#### **Vízesés modell**
+##### **Vízesés modell**
 
 - Első publikált, „klasszikus” modell (életciklus modell)
 
 - Lényegében egy szekvenciális modell
-  
+
   - Fázisok lépcsősen kapcsolódnak
-  
+
   - Visszacsatolás is van
 
 - Fázisok kimenetei teljesen el kell, hogy készüljenek, mielőtt továbbmegyünk
-  
+
   - A hibákat összegyűjtik a fázisok végén
-  
+
   - Javításra a folyamat végén van lehetőség
-  
+
   - Iteráció közvetve van jelen
 
 - Ha jó a specifikáció, akkor működőképes
@@ -6297,39 +8255,39 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 ![](../img/2022-05-03-20-42-12-image.png)
 
 - Problémái
-  
+
   - Ritkán van egyszerű lineáris fejlesztés
-  
+
   - Követelményeket nehéz pontosan specifikálni a legelején
-  
+
   - A megrendelő csak a legvégén látja meg először a terméket
-    
+
     - Sok hiba ekkor derül ki, melyek javítási költsége nagy
 
 - Előnye: megrendelő könnyebben tud megállapodni, mert a specifikáció pontos (Viszont nehezen módosítható szoftver alakul ki)
 
-#### **_Iteráció, inkrementalitás_**
+##### **_Iteráció, inkrementalitás_**
 
 - Folyamat iterációja elkerülhetetlen
-  
+
   - Ha a követelmények változnak, akkor a folyamat bizonyos részeit is változtatni kell
 
 - Iteráció szélsőséges esetei:
-  
+
   - Vízesés modellnél minimális lehetőség
-  
+
   - Prototípus (vagy evolúciós) modellnél minimális a specifikáció, fejlesztésben sok iteráció van, és menet közben alakul ki a végleges specifikáció
 
-#### _Evolúciós fejlesztés_
+##### _Evolúciós fejlesztés_
 
 - Prototípus modell: az evolúciós fejlesztés egy szélsőséges iteratív+inkrementális példája
-  
+
   - Durva specifikáció megrendelő részéről
-  
+
   - Ezután gyors fejlesztés, eredménye prototípus
-  
+
   - Prototípus kiértékelése után követelményspecifikáció újraíródik
-  
+
   - Sok-sok iteráció a végtermékig
 
 - Nagy dilemma: a prototípusból lesz-e a végtermék, vagy az csak eldobható
@@ -6339,29 +8297,29 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Kész komponensek alkalmazása előnyös
 
 - Prototípus modell problémái:
-  
+
   - A megrendelő azt gondolja, hogy a prototípus kész rendszer, nehéz ellenállni, hogy ne használja
-  
+
   - Gyors fejlesztés miatt minőség romolhat, kevésbé hatékony megoldások alkalmazása miatt, amik beépülhetnek a végső rendszerbe
-  
+
   - Megrendelő sokszor vállalja a rizikókat, mert:ű
-    
+
     - Szeret „belelátni” a fejlesztésbe
-    
+
     - Kezdetben pontosan tudja, hogy mit szeretne, de a részletekről fogalma sincs
-  
+
   - Hibrid megoldások kellenek, vízesés modellel
 
-#### Inkrementális modell
+##### Inkrementális modell
 
 - Vízesés és evolúciós fejlesztés kombinációja (robosztusság és felxibilitás)
 
 - Nagy körvonalakban specifikáljuk a rendszert
-  
+
   - „Inkremensek” meghatározása
-  
+
   - Funkcionalitásokhoz prioritásokat rendelünk
-  
+
   - Magasabbakat előbb kell biztosítani
 
 - Architektúrát meg kell határozni
@@ -6371,43 +8329,43 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Egyes inkremensek kifejlesztése történhet akár különböző folyamatokkal is (vízesés vagy evolúciós, amelyik jobb)
 
 - Az elkészült inkremenseket akár szolgálatba is lehet állítani
-  
+
   - Tapasztalatok alapján lehet meghatározni a következő inkremenseket
 
 - Az új inkremenseket integrálni kell a már meglévőkkel
 
 - Előnyei:
-  
+
   - A szoftver már menet közben használható
-  
+
   - Korábbi inkremensek prototípusként használhatók, a későbbi követelmények pontosítása érdekében
-  
+
   - Ha határidő csúszás van kilátásban, inkrementális modell bevethető
-    
+
     - Teljes projekt nem lesz kudarcra ítélve, esetleg csak egyes inkremensek
-  
+
   - A legfontosabb inkremensek lesznek többször tesztelve (mivel azokkal kezdtük a megvalósítást)
 
 - Hátrányai:
-  
+
   - Megfelelő méretű inkremensek meghatározása nem triviális feladat
-    
+
     - Ha túl kicsi: nem működőképes
-    
+
     - Ha túl nagy: elveszítjük a modell lényegét
-  
+
   - Bizonyos esetekben számos alapvető funkcionalitást kell megvalósítani
-    
+
     - Egész addig nincs működő inkremens
-    
+
     - Csak akkor pörög be a rendszer, ha minden összeállt
 
-#### eXtreme Programming (XP)
+##### eXtreme Programming (XP)
 
 - Szélsőséges inkrementális modell
-  
+
   - Nagyon kis funkcionalitású inkremensek
-  
+
   - Megrendelő intenzív részvétele
 
 - Programozás csoportos tevékenység (többen ülnek egy képernyő előtt)
@@ -6416,41 +8374,41 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - Sok támadója van
 
-#### RAD
+##### RAD
 
 - Rapid Application Development
 
 - Extrém rövid életciklus (Működő rendszer 60-90 nap alatt)
 
 - Vízesés modell „nagysebességű” adaptálása
-  
+
   - Párhuzamos fejlesztés
-  
+
   - Komponens alapú fejlesztés
 
 - Fázisok:
-  
+
   - Üzleti modellezés: milyen információk áramlanak funkciók között
-  
+
   - Adatmodellezés: finomítás adatszerkezetekre
-  
+
   - Adatfolyam processzus: adatmodell megvalósítása
-  
+
   - Alkalmazás generálás: 4GT (negyedik generációs technikák) alkalmazása, automatikus generálás, komponensek
-  
+
   - Tesztelés: csak komponens tesztelés
 
 - Problémái:
-  
+
   - Nagy emberi erőforrásigény
-  
+
   - Fejlesztők és megrendelők intenzív együttműködése
-  
+
   - Nem minden típusú fejlesztésnél alkalmazható
-    
+
     - Modularizálhatóság hiánya problémát jelenthet
 
-#### Spirális modell
+##### Spirális modell
 
 - Olyan evolúciós modell, amely kombinálja a prototípus modellt a vízesés modellel
 
@@ -6459,11 +8417,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Nincsenek rögzített fázisok, mindig egyedi modellek
 
 - Más modelleket ölelhet fel, pl.:
-  
+
   - Prototípuskészítés pontatlan követelmények esetén
-  
+
   - Vízesés modell egy későbbi körben
-  
+
   - Kritikus részek esetén formális módszerek
 
 - A spirál körei a folyamat egy-egy fázisát reprezentálják
@@ -6471,90 +8429,90 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Minden körben a kimenet egy „release” (modell vagy szoftver)
 
 - Körök céljai pl.:
-  
+
   - Megvalósíthatóság (elvi prototípusok)
-  
+
   - Követelmények meghatározása (prototípusok)
-  
+
   - Tervezés (modellek és inkremensek)
-  
+
   - (javítás, karbantartás, stb.)
 
 - A körök szektorokra oszthatók (3-6 db)
-  
+
   - 4 szektorral:
-    
+
     - Célok kijelölése
-    
+
     - Kockázat becslése és csökkentése
-    
+
     - Fejlesztés és validálás
-    
+
     - Következő spirálkör megtervezése
-  
+
   - 6 szektorral:
-    
+
     - Kommunikáció megrendelővel
-    
+
     - Tervezés
-    
+
     - Kockázatelemzés
-    
+
     - Fejlesztés
-    
+
     - Megvalósítás és telepítés
-    
+
     - Kiértékelés megrendelő részéről
 
-#### Újrafelhasználás-orientált
+##### Újrafelhasználás-orientált
 
 - Komponens alapú fejlesztés
-  
+
   - Elérhető, újrafelhasználható komponensek
-  
+
   - Ezek integrációja
 
 - Hagyományos modellekkel megegyezik
-  
+
   - Követelményspecifikáció és validáció
 
 - Közte levő fázisok eltérnek
-  
+
   - Komponens elemzés
-  
+
   - Követelménymódosítás
-  
+
   - Rendszertervezés újrafelhasználással
-  
+
   - Fejlesztés és integráció
 
 - Előnyök:
-  
+
   - Kevesebb fejlesztendő komponens, csökken a költség
-  
+
   - Gyorsabb leszállítás
 
 - Hátrányok
-  
+
   - Kompromisszumok követelményekkel szemben
-  
+
   - Evolúció során a felhasznált komponensek új verziói már nem integrálhatók
 
 - Objektumorientált paradigma jó alap
-  
+
   - UML használata
-  
+
   - Rational Unified Process (RUP) egy iteratív, inkrementális és komponens
     alapú folyamat
 
-#### **_Formális módszerek_**
+##### **_Formális módszerek_**
 
 - Vízesés modellre hasonlít
-  
+
   - Specifikáció: formális, matematikai apparátus
-  
+
   - Kidolgozás: ekvivalens transzformációk
-  
+
   - Verifikáció: hagyományos értelemben nem szükséges
 
 - Kisebb lépésekből áll, amelyek finomítják az egyes formális modelleket, így könnyebb a formális bizonyítás
@@ -6563,7 +8521,7 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - Kölcsönhatások nem mindig formalizálhatók
 
-#### Cleanroom módszer
+##### Cleanroom módszer
 
 - Fejlesszünk (bizonyítottan) hibátlanul és akkor nem kell tesztelni
 
@@ -6579,73 +8537,73 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - Képzett, elkötelezett tervezők
 
-#### 4GT
+##### 4GT
 
 - Negyedik generációs technikák
 
 - Magas szintű reprezentáció (absztrakció)
-  
+
   - 4G (vizuális) nyelvek, grafikus jelölés
-  
+
   - Automatikus kódgenerálás
 
 - Vizuális eszközök: adatbázis lekérés, riportgyártás, adatmanipuláció, GUI, táblázatkezelés, HTML-oldalak, web, stb.
 
 - Előnyei:
-  
+
   - Rövidebb fejlesztési idő
-  
+
   - Jobb produktivitás
-  
+
   - Kis és közepes alkalmazásoknál jó
 
 - Hátrányai:
-  
+
   - Vizuális nyelvet nem könnyebb használni
-  
+
   - Generált kód nem hatékony
-  
+
   - Karbantarthatóság rosszabb
-  
+
   - Nagy alkalmazásoknál nem előnyös
 
 - Komponens alapú technikával alkalmazva még jobb
 
-#### **_Egyéb (aktuális) modellek_**
+##### **_Egyéb (aktuális) modellek_**
 
 - Kliens/szerver modell
-  
+
   - Kliens adatokat/szolgáltatást kér, szerver szolgáltatja
 
 - Web fejlesztés
-  
+
   - Hagyományos módszerek + kliens/szerver + 4GT + OO + komponensek
-  
+
   - Web tartalom és design tervezés is ide tartozik
 
 - Nyílt forráskódú fejlesztés
-  
+
   - Ad hoc fejlesztés
-  
+
   - Fejlesztési ütemezés, költségvetés nem definiált
-  
+
   - Nem strukturált folyamat
-  
+
   - Közösségi ellenőrzés
-  
+
   - Bizalmatlanság megbízhatóság terén
-    
+
     - Nyílt forráskód, bárki mérheti a minőséget és javíthat
-    
+
     - Nem feltétlenül jobb a kereskedelmi termék
-  
+
   - Sokszor ingyenes licensz
 
-## 2. Projektmenedzsment. Költségbecslés, szoftvermérés
+### 2. Projektmenedzsment. Költségbecslés, szoftvermérés
 
-### Projektmenedzsment
+#### Projektmenedzsment
 
-#### **Tényezők (4P)**
+##### **Tényezők (4P)**
 
 - **Munkatársak (people)** – a sikeres projekt legfontosabb tényezői
 
@@ -6655,7 +8613,7 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - **Projekt** – minden olyan tevékenység, ami kell ahhoz, hogy a termék létrejöjjön
 
-#### Projekt sikertelenségének okai
+##### Projekt sikertelenségének okai
 
 - Nem reális a határidők megválasztása
 
@@ -6671,18 +8629,18 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - A projekt menedzsment hibái
 
-#### Emberek menedzselése
+##### Emberek menedzselése
 
 - Szoftverfejlesztő szervezet legnagyobb vagyona az emberek
-  
+
   - Szellemi tőke
-  
+
   - Lehető legjobban kamatozzon!
 
 - Sok projekt bukásának legfőbb oka a rossz humánmenedzsment
 
 - Egyik legfontosabb feladat az emberek motivációja
-  
+
   - Szociális szükségletek, megbecsülés, önmegvalósítás igénye
 
 **Csoportmunka**
@@ -6690,29 +8648,29 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Valódi szoftvereket 2-1000 fős csapatok készítik (team)
 
 - Hatékony együttműködés fontos
-  
+
   - Csapatszellemet kell kialakítani (csoport sikere fontosabb mint az egyéné)
-  
+
   - Csoportépítés (pl.: szociális tevékenységek)
 
 - Munkakörnyezet fontos (közös és privát területek fontosak)
 
 - Befolyásoló tényezők:
-  
+
   - Csoport összetétele
-    
+
     - egymást kiegészítő személyiségek
-    
+
     - nemkívánatos vezető végzetes lehet
-  
+
   - Csoportösszetartás (pl.: csoportos programozás)
-  
+
   - Csoportkommunikáció
-  
+
   - Csoport szerkezete
-    
+
     - informális szervezés
-    
+
     - vezető programozó-csoport: kell tartalék programozó és adminisztrátor is
 
 **Csapatfelépítés szempontjai**
@@ -6732,99 +8690,99 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - A projekt kommunikációs igénye
 
 - Csapatfelépítés lehet,
-  
+
   - **Zárt forma** – hagyományos strukturális felépítés
-  
+
   - **Véletlenszerű forma** – laza szerkezet,egyedi kezdeményezések a döntőek
-  
+
   - **Nyitott forma** – a zárt és a véletlenszerű paradigma előnyeinek kombinálás
-  
+
   - **Szinkronizált forma** – az adott probléma felosztása szerint történik a team szervezése, egyes csoportok között kevés kommunikáció van
 
 **Emberek kiválasztása**
 
 - Különböző tesztekkel történhet
-  
+
   - Programozási képesség
-  
+
   - Pszichometrikus tesztek
 
 - Sok tényező: alkalmazási terület, platform, programozási nyelv, kommunikációs készség, személyiség, stb.
 
 - Szakmai karrier megállhat egy szinten, ha vezetői szerepkört kap
-  
+
   - Azonos értékű kell hogy legyen a szakember és a vezető!
 
-#### Termék (product)
+##### Termék (product)
 
 - Szoftver hatásköre
-  
+
   - Környezet
-  
+
   - Input-output objektumok
 
 - Probléma dekompozíció
 
-#### Folyamat (process)
+##### Folyamat (process)
 
 - A megfelelő folyamat kiválasztása
 
 - Előzetes projekt terv
 
 - 4CPF (common process framework)
-  
+
   - Felhasználói kommunikáció
-  
+
   - Tervezés
-  
+
   - Kockázat analízis
-  
+
   - Fejlesztés
-  
+
   - Release
-  
+
   - Felhasználói kiértékelés
 
-### **Szoftverköltség becslése**
+#### **Szoftverköltség becslése**
 
 - Projekt tevékenységeinek kapcsolódása a munka-, idő- és pénzköltségekhez
 
 - Becsléseket lehet és kell adni
-  
+
   - Folyamatosan frissíteni
 
 - Projekt összköltsége:
-  
+
   - Hardver és szoftver költség karbantartással
-  
+
   - Utazási és képzési költség
-  
+
   - Munkaköltség
 
 **Projekt**
 
 - W5HH módszer
-  
+
   - Miért fejlesztjük a rendszert? (why?)
-  
+
   - Mit fog csinálni? (what?)
-  
+
   - Mikorra? (when?)
-  
+
   - Ki a felelős egy funkcióért? (who?)
-  
+
   - Hol helyezkednek el a felelősök? (where?)
-  
+
   - Hogyan megy a technikai és menedzsment munka? (how?)
-  
+
   - Mennyi erőforrás szükséges? (how much?)
 
 - Szoftver projekt tervezésénél meg kell becsülni:
-  
+
   - Mennyi pénz?
-  
+
   - Mennyi ráfordítás?
-  
+
   - Mennyi idő?
 
 **Munkaköltség**
@@ -6838,15 +8796,15 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Ipari rendszerben a legyártott egységek száma / emberórák
 
 - Szoftvernél nehézkes
-  
+
   - Egyik kód hatékony, a másik karbantartható, stb.
 
 - Ezért mérik a szoftver valamely jellemzőjét (metrika)
 
 - Két típus:
-  
+
   - Méret-alapú (pl. programsorok száma)
-  
+
   - Funkció-alapú (funkciópont, objektumpont)
 
 **Méret alapú mérés**
@@ -6854,11 +8812,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - LOC = Lines Of Code
 
 - Több technika
-  
+
   - Csak nem üres sorok
-  
+
   - Csak végrehajtható sorok
-  
+
   - Dokumentáció mérete
 
 - Félrevezető lehet (különböző nyelveken ugyanaz a funkcionalítás mint)
@@ -6872,27 +8830,27 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Rendszer funkcionalitásának „mennyisége”
 
 - Több programjellemző súlyozott kombinációja
-  
+
   - Külső bemenetek és kimenetek
-  
+
   - Felhasználói interaktivitás
-  
+
   - Külső interfészek
-  
+
   - Használt állományok
 
 - Vannak további módosító tényezők
-  
+
   - Projekt összetettsége
-  
+
   - Teljesítmény
-  
+
   - Ezek nagyon szubjektívek
 
 - Sorok átlagos száma
-  
+
   - Assembly: 200-300 LOC/FP
-  
+
   - 4GL(negyedik generációs prog nyelv): 22-40 LOC/FP
 
 **Objektumpontok**
@@ -6902,41 +8860,41 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - 4GL nyelvekhez
 
 - Súlyozott becslés:
-  
+
   - Megjelenítendő képernyők száma (1-3 pont)
-  
+
   - Elkészített jelentések száma (2-8 pont)
-  
+
   - 3GL modulok száma (modulonként 10 pont)
 
 **Dekompozíciós technikák**
 
 - Szoftver méret (ennek meghatározása a legfontosabb)
-  
+
   - Fuzzy-logic: approximációs döntési lépések
-  
+
   - FP méret
-  
+
   - Szabványos komponens méretek használata
-  
+
   - Változás alapú méret (létező komponenseket módosítunk)
 
 - Probléma alapú becslés
-  
+
   - Funkciókra való bontás a lényeges
-  
+
   - „Baseline” metrikák (alkalmazás specifikus)
-  
+
   - LOC becslés - dekompozíció a funkciókra
-  
+
   - FP becslés - dekompozíció az alkalmazás jellemzőire koncentrál
 
 - 4Folyamat alapú becslés
-  
+
   - Meghatározzuk a funkciókat
-  
+
   - Minden funkcióhoz megadjuk a végrehajtandó feladatokat
-  
+
   - A feladatokra becsüljük a feladatok költségeit
 
 **Tapasztalati becslés modellek**
@@ -6944,15 +8902,15 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Erősen alkalmazás-függő
 
 - Több féle számítási modell, pl:
-  
+
   <img src="../img/2022-05-04-21-39-59-image.png" title="" alt="" width="224">
 
 - COCOMO modell (Constructive Cost Model)
-  
+
   - Iparban a COCOMO 2 használt
-  
+
   - Regressziós modell, LOC-on alapul
-  
+
   - Feladatok nehézsége be van sorolva, feladathoz szükséges idő megbecsülve
 
 - Dinamikus modell
@@ -6974,15 +8932,15 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Egy szervezet megkaphatja valamely szintű minősítését
 
 - 5 besorolási szint (a fölsőbb szintek magába foglalják az alsókat)
-  
+
   - Kezdeti: csak néhány folyamat definiált, a többségük esetleges (Alapszint)
-  
+
   - Reprodukálható: az alapvető projekt menedzsment folyamatok definiáltak. Költség, ütemezés, funkcionalitás kezelése megoldott és megismételhető. (Bevésési szint)
-  
+
   - Definiált: a menedzsment és a fejlesztés folyamatai is dokumentáltak és szabványosítottak az egész szervezetre. (Véglegesítési szint)
-  
+
   - Ellenőrzött: a szoftver folyamat és termék minőségének részletes mérése, ellenőrzése. (Bevezetési szint)
-  
+
   - Optimalizált:  a folyamatok folytonos javítása az új
     technológiák ellenőrzött bevezetésével (Optimalizálási szint)
 
@@ -6991,9 +8949,9 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **Konfigurációkezelés**
 
 - A rendszer változásainak kezelése
-  
+
   - Változások felügyelt módon történjenek
-  
+
   - Eljárások és szabványok fejlesztése és alkalmazása
 
 - Fejlesztés, evolúció, karbantartás miatt van rá szükség
@@ -7015,36 +8973,36 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **Hibamenedzsment**
 
 - Hiba-követés
-  
+
   - Fontos, mert sok hiba van/lesz: kategorizálás, prioritások
     felállítása, követés elengedhetetlen
-  
+
   - Hibaadatbázis, minden hibának egyedi aonosító
-  
+
   - Számon van tartva a hiba felvevője, a hiba súlyossága, meg van-e javítva stb.
-  
+
   - Fontos a hiba életútjának rögzítése
 
 - Általánosabb: változtatás-menedzsment
-  
+
   - CR (change request) adatbázis nyilvántartása
 
-### Szoftvermérés, metrikák
+#### Szoftvermérés, metrikák
 
 - **Szoftvermérés**: termék vagy folyamat valamely jellemzőjét numerikusan kifejezni (metrika)
-  
+
   - Ezen értékekből következtetések vonhatók le a minőségre vonatkozóan
 
 - Szisztematikus szoftvermérés még nem elterjedt
-  
+
   - Mérési eredmény használata még nem kiforrott
-  
+
   - Mérés szabványosításának (metrikák, eszközök) hiánya
 
 - Metrikák két csoportja:
-  
+
   - **Vezérlési metrikák**: Folyamattal kapcsolatosak, pl. egy hiba javításához szükséges átlagos idő
-  
+
   - **Prediktor metrikák**: Termékkel kapcsolatosak, pl. LOC, ciklomatikus komplexitás, osztály metódusainak száma
 
 - Mindkettő befolyásolja a vezetői döntéshozatalt
@@ -7052,23 +9010,23 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **Minőségi jellemzők mérése**
 
 - Jellemzőket lehetetlen közvetlenül mérni
-  
+
   - Magasabb szintű absztrakciók, sok mindentől függnek
-  
+
   - Hierarchikus összetétel (jellemzők származtatása)
-  
+
   - Sokszor szervezet- vagy termékfüggő
-  
+
   - Több metrika együttes vizsgálata
-  
+
   - Metrikák változása az idő függvényében
-  
+
   - Statisztikai technikák alkalmazása
 
 - Metrikák (belső jellemző) és (külső) jellemzők közötti kapcsolatokra fel kell állítani egy modellt (Sok projekt esettanulmányának vizsgálata)
 
 - Példa jellemző származtatásra:
-  
+
   <img src="../img/2022-05-06-18-25-06-image.png" title="" alt="" width="399">
 
 **Mérési folyamat**
@@ -7088,21 +9046,21 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 **Termékmetrikák**
 
 - Dinamikus
-  
+
   - Szorosabb kapcsolat egyes minőségi jellemzőkkel
 
 - Statikus
-  
+
   - Közvetett kapcsolat
 
 - Fajták:
-  
+
   - Méret
-  
+
   - Komplexitás, csatolás, kohézió
-  
+
   - Objektumorientáltsággal kapcsolatos metrikák
-  
+
   - Rossz előjelek, tervezési, kódolási problémák száma
 
 **Tesztelés „mérése” és fejlesztése**
@@ -7110,11 +9068,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Tesztelési környezet is minőségvizsgálatra szorul
 
 - Metrikák, amiket definiálhatunk:
-  
+
   - Lefedettség: adott változtatás hány %-át érintik a tesztek
-  
+
   - Regressziós teszt hatékonysága
-  
+
   - Tesztesetek redundanciája
 
 - Tesztelési/fejlesztési költségek becsülhetővé válnak
@@ -7140,17 +9098,17 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - A minőség és hatékonyság szempontjából a legfontosabb tényező a munkatársak képzettsége és motiváltsága
 
 - Személyes metrikák
-  
+
   - Hiba riportok
-  
+
   - Sorok száma modulonként
-  
+
   - PSP (Personal Software Process) – személyre szabott folyamat
 
 - Publikus metrikák: projekt szinten összegzett metrikák
 
 - Hiba analízis
-  
+
   - hibák forrása, javítási költségeik, kategórizálásuk stb.
 
 **Projekt metrikák**
@@ -7162,11 +9120,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Minőség (hibák szoftverfejlesztési feladatonként)
 
 - Egy másik modell
-  
+
   - Input(az erőforrások mérése)
-  
+
   - funcOutput(a létrejött termék mérése)
-  
+
   - Eredmény(a létrejött termék ‘átadandó’ használhatósága)
 
 - Projekt menedzser használja ezeket a metrikákat
@@ -7196,31 +9154,31 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Az Fj (j=1 … 13) a bonyolultságot befolyásoló tényezők
 
 - A tényezők számításához kérdések (minden kérdést 0-5 skálán pontozunk):
-  
+
   - A rendszer megköveteli-e a biztonsági mentéseket és helyreállításokat?
-  
+
   - Adatkommunikáció szükséges-e?
-  
+
   - Kritikus-e a hatékonyság?
-  
+
   - A rendszer intenzíven használt környezetben működik?
-  
+
   - Van on-line adatbevitel?
-  
+
   - Az on-line adatbevitelhez szükség van összetett képernyő kezelésre?
-  
+
   - A fájlok aktualizálása on-line módon történik?
-  
+
   - Bonyolultak az inputok,outputok,fájlok vagy lekérdezések?
-  
+
   - Bonyolult a belső feldolgozás?
-  
+
   - A forráskód újrafelhasználhatóra lett tervezve?
-  
+
   - A konverzió és az installáció a tervezés része?
-  
+
   - A rendszer többszöri installációra lett tervezve különböző szervezeteknél?
-  
+
   - Változások támogatása lett tervezve?
 
 - FP programozási nyelv független
@@ -7232,15 +9190,15 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Az eredeti FP mérték információs rendszerekre lett tervezve, egyéb rendszereknél kiegészítésekre van szükség
 
 - 3D Funkció pont mérték
-  
+
   - Adat dimenzió
-  
+
   - Funkcionális dimenzió – a belső műveletek (transzformációk) száma
-  
+
   - Vezérlési dimenzió – átmenetek állapotok között. Pl telefonnál automatikus hívás állapotba pihenő állapotból
-  
+
   - Számítás: Index=input+output+lekérdezés+fájlok+külső interfész +transzformáció+átmenetek
-    
+
     ![](../img/2022-05-07-16-18-15-image.png)
 
 **Metrikák alkalmazása szoftver-minőség mérésére**
@@ -7248,37 +9206,37 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Elsődleges a hibák és hiányosságok mérése
 
 - A minőség mérése:
-  
+
   - Helyesség (hiányosság/KLOC)
-  
+
   - Karbantarthatóság (nincs mérőszám)
-  
+
   - Integritás: külső támadások elleni védelem
-    
+
     - Fenyegetettség: annak valószínűsége, hogy egy adott típusú támadás bekövetkezik egy adott időszakban
-    
+
     - Biztonság: annak valószínűsége, hogy egy adott típusú támadást visszaver a rendszer
-    
+
     - Integritás = Σ [1-(fenyegetettség x (1-biztonság))] (Összegzés a különböző támadás típusokra történik)
-  
+
   - Használhatóság – a felhasználó barátság mérése (milyen könnyű használni stb.)
-  
+
   - DRE (defect removal efficiency)
-    
+
     - DRE = E/(E+D), ahol E olyan hibák száma, amelyeket még az átadás előtt felfedezünk, D pedig az átadás után a felhasználó által észlelt hiányosságok száma
-    
+
     - Cél a DRE növelése(minél több hiba megtalálása az átadás előtt)
-    
+
     - Fontos, hogy a hibákat a fejlesztés minél korábbi fázisában találjuk meg (analízis, tervezés)
 
 - Néhány tipikus kérdés, amikre metrikákkal tudunk válaszolni:
-  
+
   - Milyen felhasználói igények változnak a leggyakrabban?
-  
+
   - A rendszer melyik komponensében várható a legtöbb hiba?
-  
+
   - Mennyi tesztelést tervezzünk a komponensekre?
-  
+
   - Mennyi és milyen típusú hibát várhatunk el a tesztelés kezdetekor?
 
 **Metrikus baseline**
@@ -7296,13 +9254,13 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Statisztikailag érvényes trendek megállapítása
 
 - Vezérlési diagramm(metrikák stabilitásának mérése)
-  
+
   - ER=hibák száma/ellenőrzésre fordított idő
 
 - A változási tartomány mérése
-  
+
   - mR bar – középvonal,UCL – felső vezérlési korlát
-  
+
   <img title="" src="../img/2022-05-07-17-11-35-image.png" alt="" width="385">
 
 **Összegzés**
@@ -7314,11 +9272,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Méret-és funkció pont alapú metrikákat széleskörűen használnak az iparban.
 
 - A szoftver minőség javításának alapja a metrika alapú „baseline”
-# **Számítógép architektúra**
+## **Számítógép architektúra**
 
-## **1. Neumann-elvű gép egységei. CPU, adatút, utasítás-végrehajtás, utasítás- és processzorszintű párhuzamosság. Korszerű számítógépek tervezési elvei. Példák RISC (UltraSPARC) és CISC (Pentium 4) architektúrákra, jellemzőik.**
+### **1. Neumann-elvű gép egységei. CPU, adatút, utasítás-végrehajtás, utasítás- és processzorszintű párhuzamosság. Korszerű számítógépek tervezési elvei. Példák RISC (UltraSPARC) és CISC (Pentium 4) architektúrákra, jellemzőik.**
 
-### Neumann-elvű gép sematikus váza
+#### Neumann-elvű gép sematikus váza
 
 ![](../img/2022-04-24-17-05-57-image.png)
 
@@ -7340,11 +9298,11 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 (Működést biztosító járulékos eszközök: gépház, tápellátás, stb.)
 
-### Adatút
+#### Adatút
 
 ![](../img/2022-04-24-22-20-21-image.png)
 
-### Utasítás végrehajtás
+#### Utasítás végrehajtás
 
 **Betöltő-dekódoló-végrehajtó ciklus**
 
@@ -7369,26 +9327,26 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 - Órajel frekvenciájának emelése (korlátozott)
 
 - Utasításszintű párhuzamosság
-  
+
   - Csővezeték
-  
+
   - Szuperskaláris architektúrák
 
 - Processzorszintű párhuzamosság
-  
+
   - Tömbszámítógépek
-  
+
   - Multiprocesszorok
-  
+
   - Multiszámítógépek
 
 **Késleltetés:** utasítás végrehajtásának időigénye
 
 **Áteresztőképesség:** MIPS (millió utasítás mp-enként)
 
-### Utasításszintű párhuzamosság
+#### Utasításszintű párhuzamosság
 
-#### Párhuzamos csővezetékek
+##### Párhuzamos csővezetékek
 
 - Közös utasítás-beolvasó egységgel
 
@@ -7399,9 +9357,9 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 <img title="" src="../img/2022-04-24-23-58-23-image.png" alt="" width="730">
 
 - Pentium hasonlót alkalmaz
-  
+
   - Fő csővezeték: tetszőleges Pentium utasítás
-  
+
   - Második csővezeték: csak egész műveletek
 
 **Szuperskaláris architektúrák**
@@ -7416,95 +9374,95 @@ A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben meg
 
 - Hasonló a Pentium 4 architektúrája
 
-### Processzorszintű párhuzamosság
+#### Processzorszintű párhuzamosság
 
 - **Tömbszámítógépek**
-  
+
   - Ugyanazon műveletek elvégzése különböző adatokon → párhuzamosítás
 
 - **Multiprocesszorok (szorosan kapcsolt CPU-k)**
-  
+
   - Több CPU, közös memória → együttműködés vezérlése szükséges
-  
+
   - Sínrendszer
-    
+
     - 1 közösen használt (lassíthat)
-    
+
     - Emellett a CPU-k akár saját lokális memóriával is rendelkezhetnek
-  
+
   - Jellemzően max. pár száz CPU-t építenek össze
 
 - **Multiszámítógépek (lazán kapcsolt CPU-k)**
-  
+
   - Nincs közös sín, processzor-kommunikáció üzenetküldéssel
-  
+
   - Általában nincs minden gép összekötve egymással (pl. fa-struktúra)
-  
+
   - Több ezer gép is összeköthető
 
-### RISC és CISC
+#### RISC és CISC
 
 - **RISC (Reduced Instruction Set Computer)**
-  
+
   - Csökkentett utasításkészletű számítógép
-  
+
   - Csak olyan utasítások legyenek, amelyek az adatút egyszeri bejárásával végrehajthatók
-  
+
   - Tipikusan kb. 50 utasítás
 
 - **CISC (Complex Instruction Set Computer)**
-  
+
   - Összetett utasításkészletű számítógép
-  
+
   - Sok utasítás (akár több száz), mikroprogram interpretálással
-  
+
   - Lassabb végrehajtás
 
 Intel: A kezdeti CISC felépítésbe integráltak egy RISC magot (80486-tól)
 a leggyakoribb utasításoknak
 
-### Korszerű számítógépek tervezési elvei
+#### Korszerű számítógépek tervezési elvei
 
 - **Minden utasítást közvetlenül a hardver hajtson végre**
-  
+
   - A gyakran használtakat mindenképpen
-  
+
   - Interpretált mikroutasítások elkerülése
 
 - **Maximalizálni az utasítások kiadási ütemét**
-  
+
   - Párhuzamos utasításkiadásra törekedni
 
 - **Az utasítások könnyen dekódolhatók legyenek**
-  
+
   - Kevés mezőből álljanak, szabályosak, egyforma hosszúak
     legyenek, …
 
 - **Csak a betöltő és a tároló utasítások hivatkozzanak a
   memóriára**
-  
+
   - Egyszerűbb utasításforma, párhuzamosítást segíti
 
 - **Sok regiszter legyen**
-  
+
   - Számítások során ne kelljen a lassú memóriába írni
 
-## 2. Számítógép perifériák: Mágneses és optikai adattárolás alapelvei, működésük (merevlemez, Audio CD, CD-ROM, CD-R, CD-RW, DVD, Bluray). SCSI, RAID. Nyomtatók, egér, billentyűzet. Telekommunikációs berendezések (modem, ADSL, KábelTV-s internet).
+### 2. Számítógép perifériák: Mágneses és optikai adattárolás alapelvei, működésük (merevlemez, Audio CD, CD-ROM, CD-R, CD-RW, DVD, Bluray). SCSI, RAID. Nyomtatók, egér, billentyűzet. Telekommunikációs berendezések (modem, ADSL, KábelTV-s internet).
 
-### Mágneslemezek
+#### Mágneslemezek
 
 **Részei:**
 
 - Mágnesezhető felületű, forgó alumínium**korong**
-  
+
   - Átmérő kezdetben 50 cm, jelenleg 3-12 cm
 
 - Indukciós tekercset tartalmazó **fej**
-  
+
   - Lebeg vagy érinti a felszínt
 
 - **Kar**
-  
+
   - Sugárirány mentén a fej egyvonalú mozgatása
 
 ![](../img/2022-04-25-22-50-43-image.png)**Írás:** Pozitív vagy negatív áram azindukciós tekercsben, alemez adott helyen mágneseződik
@@ -7514,37 +9472,37 @@ a leggyakoribb utasításoknak
 **Adattárolás:**
 
 - **Sáv**
-  
+
   - Koncentrikus körök mentén
-  
+
   - Egy teljes körülfordulás alatt felírt bitsorozat
-  
+
   - Centiméterenként 5-10 ezer sáv (szélesség)
 
 - **Szektor**
-  
+
   - 1 sávon több szektor
-    
+
     - Fejléc: fej szinkronizálásához
-    
+
     - Adat (pl. 512 bájt)
-    
+
     - Ellenőrző kód
-    
+
     - Hamming vagy Reed-Solomon
-    
+
     - Szektorrés
 
 - **Lineáris adatsűrűség**
-  
+
   - Kerület mentén, 50-100 ezer bit/cm
 
 - **Merőleges rögzítés**
-  
+
   - Tárolás hosszirány helyett „befelé” történik
 
 - **Kapacitás**
-  
+
   - Formázott és formázatlan
 
 ![](../img/2022-04-25-23-02-11-image.png)
@@ -7554,23 +9512,23 @@ a leggyakoribb utasításoknak
 - Fontos a tisztaság és a pormentesség → zárt merevlemezek
 
 - **Lemezegység**
-  
+
   - Közös tengelyen több lemez (6-12), azonos fej pozíció!
-  
+
   - Cilinder: adott sugárpozíción lévő sávok összessége
 
 - **Teljesítmény**
-  
+
   - Keresés (seek): fej megfelelő sugárirányba állítása (kar)
-    
+
     - 1 ms: egymás utáni sávok
-    
+
     - 5-10 ms: átlagos (véletlenszerű)
-  
+
   - Forgási késleltetés
-    
+
     - A kerület mentén a fej alá fordul a kívánt terület
-    
+
     - Fél fordulat ideje, 3-6 ezredmásodperc (5400, 7200, 10880 fordulat / perc mellett)
 
 ![](../img/2022-04-26-18-13-22-image.png)
@@ -7580,21 +9538,21 @@ a leggyakoribb utasításoknak
 - Mechanikai sérülés előfordulhat (Fizikai behatásra a fej megsértheti a lemezt)
 
 - Lemezvezérlő lapka
-  
+
   - Sokszor saját CPU-t is tartalmaz
-  
+
   - Szoftverből érkező parancsok fogadása
-    
+
     - READ, WRITE, FORMAT
-  
+
   - Kar mozgatása
-  
+
   - Hibák felismerése és javítása
-    
+
     - Javíthatatlan hiba esetén fizikai áthelyezés
-  
+
   - Bájtok oda- és visszaalakítása bitek sorozatává
-  
+
   - Pufferelés (gyorsítás)
 
 **Típusok:**
@@ -7602,7 +9560,7 @@ a leggyakoribb utasításoknak
 **_<mark>SCSI</mark>_**
 
 - Small Computer System Interface
-  
+
   - „kis számítógép-rendszerek interfésze”, kiejtése „szkazi”
 
 - Olyan szabványegyüttes, melyet számítógépek és perifériák közötti adatátvitelre terveztek
@@ -7628,84 +9586,84 @@ a leggyakoribb utasításoknak
 - Többféle szervezési mód (RAID 0 - RAID 6), megvalósítása lehet hardveres vagy szoftveres
 
 - **RAID 0**
-  
+
   - Adatok párhuzamos tárolása a lemezeken
-    
+
     - k darab szektorból álló csíkok (stripes)
-    
+
     - Csíkok egy-egy lemezen tárolódnak
-  
+
   - Nincs hibajavítási képessége, nem „igazi” RAID (így gyorsabb)
-  
+
   - Nagyméretű blokkokkal működik legjobban
-  
+
   - <img src="../img/2022-04-27-00-11-52-image.png" title="" alt="" width="510">
 
 - **RAID 1**
-  
+
   - Adatok írása két példányban (két különböző lemezre) csíkozással (4 elsődleges és 4 tartalék lemez)
-  
+
   - Olvasás párhuzamosítható, egyes szektorok az elsődleges, mások a tartalék lemezekről
-  
+
   - Hibás lemezegység cserélhető, csak rá kell másolni a „párja” tartalmát
-  
+
   - <img src="../img/2022-04-27-00-13-59-image.png" title="" alt="" width="529">
 
 - **RAID 2**
-  
+
   - Bájt- vagy szó-alapú tárolás (szektorcsoportok helyett)
-  
+
   - A lemezeknek és a karoknak szinkronban kell mozogniuk
-  
+
   - Adat + Hamming kód bitjeinek egyidejű tárolása külön
     lemezeken (4 adatbit + 3 paritásbit = 7 tárolandó bit; 7 szinkron lemez kell)
-    
+
     - Hamming távolság: két azonos hosszúságú bináris jelsorozat eltérő bitjeinek a száma
-    
+
     - minimális hamming távolság segítségével detektálja és javítja a hibákat (ha d a minimális Hamming távolság, akkor d-1 hibát tud detektálni és ⌊(_d_-1)/2⌋ hibát tud javítani)
-  
+
   - Sok merevlemez esetén használható jól
-  
+
   - Vezérlőnek plusz munka a Hamming kód kezelése!
-  
+
   - Hamming kóddal pótolható a kieső lemez tartalma -> hibatűrő
-  
+
   - <img src="../img/2022-04-27-19-33-29-image.png" title="" alt="" width="521">
 
 - **RAID 3**
-  
+
   - A RAID 2 egyszerűsített változata
-  
+
   - Minden adatszóhoz egyetlen paritásbit
-  
+
   - Paritásbit tárolása dedikált lemezegységen
-  
+
   - Itt is szükséges a lemezek szinkron kezelése
-  
+
   - Javításra is alkalmas, ha tudjuk, hogy melyik lemezegység romlott
     el, de egyszerre maximum 1, tehát cseréljük gyorsan!
 
 <img title="" src="../img/2022-04-27-20-11-36-image.png" alt="" width="399" data-align="inline">
 
 - **RAID 4**
-  
+
   - Csíkozással dolgozik -> nem szükséges a lemezegységek szinkron kezelése, Csíkonkénti paritást felírja egy dedikált paritás lemezegységre
-  
+
   - Kieső meghajtó tartalma előállítható a paritásmeghajtó segítségével
-  
+
   - Probléma: Íráshoz olvasni is kell minden lemezről, nagyon leterheli a paritásmeghajtót
 
 <img src="../img/2022-04-27-20-17-56-image.png" title="" alt="" width="368">
 
 - **RAID 5**
-  
+
   - RAID 4-hez hasonló elv, de nincs dedikált paritásmeghajtó
-  
+
   - A paritásbiteket körbejárásos módszerrel szétosztja a lemezegységek között
-  
+
   - Legalább 3 lemezegység kell, legalább 4 ajánlott
 
-### Optikai lemezek
+#### Optikai lemezek
 
 **CD írás folyamata:**
 
@@ -7754,15 +9712,15 @@ a leggyakoribb utasításoknak
 - Saját író berendezéssel rögzíthető az adat
 
 - _Újdonság_
-  
+
   - Író lézernyaláb
-  
+
   - Alumínium helyett arany felület
-  
+
   - Üregek és szintek helyett festékréteg alkalmazása
-    
+
     - Írás: a nagy energiájú lézer roncsol → sötét folt marad véglegesen
-    
+
     - Olvasás: az ép és a roncsolt területek detektálása
 
 **CD-RW**
@@ -7770,19 +9728,19 @@ a leggyakoribb utasításoknak
 - Újraírható optikai lemez
 
 - _Újdonság_
-  
+
   - Más adattároló réteg
-    
+
     - Ezüst, indium, antimon és tellúr ötvözet
-    
+
     - Kétféle stabil állapot: kristályos és amorf (más fényvisszaverő képesség)
-  
+
   - 3 eltérő energiájú lézer
-    
+
     - Legmagasabb energia: megolvad az ötvözet → amorf
-    
+
     - Közepes energia: megolvad → kristályos állapot
-    
+
     - Alacsony energia: anyag állapotnak érzékelése, de meg nem változik
 
 **DVD**
@@ -7800,59 +9758,59 @@ a leggyakoribb utasításoknak
 **Blu-Ray**
 
 - Kék lézer használata a vörös helyett
-  
+
   - Rövidebb hullámhossz, jobban fókuszálható, kisebb mélyedések
-  
+
   - 25 GB (egyoldalas) és 50 GB (kétoldalas) adattárolási képesség
-  
+
   - 4,5 MB/mp átviteli sebesség
 
-### Kimenet/bemenet
+#### Kimenet/bemenet
 
 **Nyomtatók**
 
 - Mátrixnyomtatók
-  
+
   - Monokróm nyomat
-  
+
   - Tintaszalag + elektromágnesesen irányítható tűk
-  
+
   - Olcsó technika, elsősorban cégeknél (volt) jellemző
-  
+
   - Pontmátrix karakterek
 
 - Tintasugaras nyomtatók
-  
+
   - Elsősorban otthoni használatra
-  
+
   - Lassú, de relatíve olcsó
-  
+
   - Tintapatront tartalmazó, mozgatható fej, lapra tintát permetez
-  
+
   - Fajtái
-    
+
     - Piezoelektromos: Tintapatron mellett kristály, amely feszültség hatására deformálódik → tintacseppet présel ki
-    
+
     - Hővezérlésű vagy festékbuborékos:Fúvókákban kis ellenállás, amely feszültség hatására felhevül, a festék felforr és elpárolog, túlnyomás keletkezik, papírra kerül, fúvókát lehűtik, a keletkező vákuum újabb tintacseppet szív be a tartályból
 
 - Lézernyomtatók
-  
+
   - Kiváló minőségű kép, gyors működés
-  
+
   - Saját CPU, memória
-  
+
   - Elsősorban monokróm, de van színes változata is
 
 - 3D nyomtatás
-  
+
   - Digitális tervrajzokból → 3D tárgy
-  
+
   - Porréteg + ragasztó komponens
-  
+
   - jelenleg még drága
-  
+
   - Prototípusok gyors készítése, egyedi tárgyak, objektumok készítése
-  
+
   - Tárgyak helyett tervek küldése nagy távolságokra
 
 **Egér**
@@ -7862,11 +9820,11 @@ a leggyakoribb utasításoknak
 - Egy, kettő vagy akár több nyomógomb vagy görgő
 
 - Típusai
-  
+
   - Mechanikus: Kerekek vagy gumi golyó, potenciométerek
-  
+
   - Optikai: LED fény, visszaverődés elemzése
-  
+
   - Optomechanikus: Golyó, két tengelyt forgat (merőlegesek), résekkel ellátott tárcsák, LED fény, mozgás hatására fényimpulzusok
 
 - Működése: Bizonyos időnként (pl. 0,1 sec) vagy esemény hatására 3 adatos (általában 3 bájtos) üzenetet küld a soros vonalon (PS-2 vagy USB) a számítógépnek
@@ -7876,53 +9834,53 @@ a leggyakoribb utasításoknak
 - Egy-egy billentyű leütése áramkört zár
 
 - Megszakítás generálódik
-  
+
   - Az operációs rendszer kezeli és továbbítja a programoknak
 
-### Telekommunikációs berendezések
+#### Telekommunikációs berendezések
 
 **Modem**
 
 - Adatkommunikáció analóg telefonvonalon
-  
+
   - Az analóg vonalat hangátvitelre találták ki
-  
+
   - Adatátvitelhez: vivőhullám (1000-2000 Hz-es szinusz hullám)
-  
+
   - A bitek csak sorosan, egymás után vihetők át
-    
+
     - 1 bájt átvitele: start bit + 8 adatbit + stop bit = 10 bit
 
 <img src="../img/2022-04-27-21-56-40-image.png" title="" alt="" width="497">
 
 - Modulációk
-  
+
   - amplitúdó, frekvencia módosítása
-  
+
   - Fázis: dibit kódolás
-    
+
     - 45, 135, 225 és 315 fokos fáziseltolódások az időintervallumok elején
-    
+
     - 2 bit átvitele egységnyi idő alatt (45 fok: 00, 135 fok: 01, …)
-  
+
   - Kombinálva is használhatók
 
 - Definíciók
-  
+
   - Baud: Jelváltás / másodperc
-    
+
     - 1 jelváltás több bitnyi információt is hordozhat (lásd dibit kódolás)
-  
+
   - Adatátviteli sebesség: bit / másodperc
-    
+
     - Jellemzően 28800 vagy 57600 bit / mp, jóval alacsonyabb baud értékkel!
-  
+
   - Kommunikációs vonal típusa
-    
+
     - Full-duplex (kétirányú kommunikáció egyidőben)
-    
+
     - fél-duplex (egyszerre csak 1 irányban)
-    
+
     - szimplex (egyirányú kommunikáció lehetséges csak)
 
 **ADSL (Asymmetric Digital Subscriber Line)**
@@ -7932,17 +9890,17 @@ a leggyakoribb utasításoknak
 - Hangátvitel: 3000 Hz-es szűrő alkalmazása a vonalon
 
 - DSL technika: 1,1 MHz méretű tartomány használata
-  
+
   - 256 darab 4 kHz-es csatorna
-  
+
   - Szétválasztó (splitter)
-    
+
     - Az alsó tartomány leválasztása hangátvitelre: 0. csatorna
-    
+
     - A felső tartomány az adatátvitelé: 4-8 Mbps sebesség
-    
+
     - 1-5. csatornák nem használtak (ne zavarja a hangátvitelt)
-    
+
     - Két vezérlő csatorna a le- és feltöltés vezérlésére, a többi az adatátvitelre
 
 <img src="../img/2022-04-27-22-31-59-image.png" title="" alt="" width="543">
@@ -7950,28 +9908,28 @@ a leggyakoribb utasításoknak
 **Kábeltévés internet**
 
 - Kábeltévé társaságok
-  
+
   - Fő telephely + fejállomások
-  
+
   - Fejállomások üvegkábelen a fő telephelyhez kapcsolódnak
-  
+
   - A felhasználók felé induló vonalakon sok eszköz osztozik
-    
+
     - Kábelek sávszélessége 750 MHz körüli
-    
+
     - A sávszélesség függ a felhasználók pillanatnyi számától!
-    
+
     - Bonyolultabb kommunikáció a fejállomás és az előfizetői eszközök között
-  
+
   - Sávkiosztás
-    
+
     - 54 – 550 MHz: TV, rádió (lejövő frekvenciák)
-    
+
     - 5 – 42 MHz: felmenő frekvenciák adatfeltöltésre és vezérlésre
-    
+
     - 550 – 750 MHz: lejövő frekvenciák adatletöltésre
-    
+
     - Aszimmetrikus adatkommunikáció
-  
+
   - Szükséges eszköz: kábelmodem
 null
