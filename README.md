@@ -47,3 +47,9 @@ Gergely Tamás - Programozás alapjai, 2020
 [https://www.youtube.com/watch?v=yLdFNxl7D5Q](https://www.youtube.com/watch?v=yLdFNxl7D5Q)
 
 Palágyi Kálmán - Digitális képfeldolgozás
+
+dr. Katona Endre - Adatbázisok
+
+[https://www.guru99.com/dbms-functional-dependency.html](https://www.guru99.com/dbms-functional-dependency.html)
+
+[https://www.javatpoint.com/dbms-relational-decomposition](https://www.guru99.com/dbms-functional-dependency.html)
