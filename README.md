@@ -29,3 +29,21 @@ Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 Gergely Tamás - Programozás alapjai, 2020
 
 [Jász Judit, Gergely Tamás, Dévényi Károly - Programozás alapjai okt.sed.hu anyag](https://okt.sed.hu/progalap/)
+
+[https://homepages.inf.ed.ac.uk/rbf/HIPR2/median.htm](https://homepages.inf.ed.ac.uk/rbf/HIPR2/median.htm)
+
+[https://homepages.inf.ed.ac.uk/rbf/HIPR2/mean.htm](https://homepages.inf.ed.ac.uk/rbf/HIPR2/mean.htm)
+
+[https://homepages.inf.ed.ac.uk/rbf/HIPR2/convolve.htm](https://homepages.inf.ed.ac.uk/rbf/HIPR2/convolve.htm)
+
+[https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm](https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm)
+
+[https://www.youtube.com/watch?v=lOEBsQodtEQ](https://www.youtube.com/watch?v=lOEBsQodtEQ)
+
+[https://www.youtube.com/watch?v=uNP6ZwQ3r6A](https://www.youtube.com/watch?v=uNP6ZwQ3r6A)
+
+[https://www.youtube.com/watch?v=t1OCX1j_zJE](https://www.youtube.com/watch?v=t1OCX1j_zJE)
+
+[https://www.youtube.com/watch?v=yLdFNxl7D5Q](https://www.youtube.com/watch?v=yLdFNxl7D5Q)
+
+Palágyi Kálmán - Digitális képfeldolgozás
