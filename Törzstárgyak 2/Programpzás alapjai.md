@@ -666,6 +666,219 @@ A diszkrét ismétléses vezérlésnek nincs közvetlen megvalósítása a C nye
 
 A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben megadott halmazt hogyan reprezentáljuk.
 
-
-
 ### 2. Egyszerű adattípusok: egész, valós, logikai és karakter típusok és kifejezések. Az egyszerű típusok reprezentációja, számábrázolási tartományuk, pontosságuk, memória igényük, és műveleteik. Az összetett adattípusok és a típusképzések, valamint megvalósításuk C nyelven. A pointer, a tömb, a rekord, és az unió típus. Az egyes típusok szerepe, használata.
+
+Az **adattípus** a programnak egy olyan komponense, amely két összetevője, az *értékhalmaz* és az értékhalmaz elemein végezhető *műveletek* által meghatározott.
+
+#### Egyszerű adattípusok
+
+Az elemi adattípusok közé tartoznak azok az adattípusok, amelyek értékhalmaza elemi értékekből áll, azaz nem összetett adatok alkotják.
+
+Ezeket az elemi adattípussal rendelkező értékeket már nem lehet további, önmagukban is értelmes részekre bontani.
+
+| C típus                  | méret (bit) | alsó határ                 | felső határ                |
+| ------------------------ | ----------- | -------------------------- | -------------------------- |
+| `char`                   | $8$         | fordító függő              | fordító függő              |
+| `signed char`            | $8$         | $-128 (-2^7)$              | $127 (2^7-1)$              |
+| `unsigned char`          | $8$         | $0$                        | $255 (2^8-1)$              |
+| `short int`              | $16$        | $-32 768 (-2^{15})$        | $32 767 (2^{15}-1)$        |
+| `signed short int`       | $16$        | $-32 768 (-2^{15})$        | $32 767 (2^{15}-1)$        |
+| `unsigned short int`     | $16$        | $0$                        | $65 535 (2^{16}-1)$        |
+| `int`                    | $32$        | $-2 147 483 648 (-2^{31})$ | $2 147 483 647 (2^{31}-1)$ |
+| `signed int`             | $32$        | $-2 147 483 648 (-2^{31})$ | $2 147 483 647 (2^{31}-1)$ |
+| `unsigned int`           | $32$        | $0$                        | $4 294 967 295 (2^{32}-1)$ |
+| `long int`               | $32$        | $-2 147 483 648 (-2^{31})$ | $2 147 483 647 (2^{31}-1)$ |
+| `signed long int`        | $32$        | $-2 147 483 648 (-2^{31})$ | $2 147 483 647 (2^{31}-1)$ |
+| `unsigned long int`      | $32$        | $0$                        | $4 294 967 295 (2^{32}-1)$ |
+| `long long int`          | $64$        | $-2^{63}$                  | $2^{63}-1$                 |
+| `signed long long int`   | $64$        | $-2^{63}$                  | $2^{63}-1$                 |
+| `unsigned long long int` | $64$        | $0$                        | $2^{64}-1$                 |
+| `float`                  | $32$        | $-3.4028234663852886E+38$  | $3.4028234663852886E+38$   |
+| `double`                 | $64$        | $-1.7976931348623157E+308$ | $1.7976931348623157E+308$  |
+| `long double`            | $64$        | $-1.7976931348623157E+308$ | $1.7976931348623157E+308$  |
+
+##### Egész
+
+C-ben `int` és `char` típusok használhatóak egészek tárolására
+
+Értelmezési tartomány az alábbiak szerint módosítható:
+
+- `signed`: A típus előjeles értéket fog tartalmazni. Egy bit az előjelhez lesz felhasználva, nem az érték nagyságához.
+
+- `unsigned`: A típus előjeltelen, nemnegatív értéket fog tartalmazni, minden bit felhasználható az érték nagyságához.
+
+- `short`: kevesebb biten tárolódik, így kisebb az értelmezési tartománya. Ez a módosító már nem tehető ki a `char` elé.
+
+- `long`: Ábrázolására több bit áll a rendelkezésre, azaz több érték ábrázolható vele. Akár duplán is alkalmazható (`long long`), és a `char` elé szintén nem kerülhet oda.
+
+###### Pontosság
+
+Az értelmezési tartomány határain belül valamennyi számot pontosan ábrázolnak.
+
+> Különböző architektúrákon az egyes típusok mérete lehet más, de minden C megvalósításra igaz, hogy a `short` legfeljebb akkora, mint az `int`, ami legfeljebb akkora, mint a `long`, ami legfeljebb akkora, mint a `long long`
+> 
+> Pontos határok elérhetőek a `limits.h` headerben, ami preprocesszor definíciókkal közli velünk, mik a határok az adott architektúrán, pl.: `#define UCHAR_MAX 255`
+
+###### Műveletek
+
+- Aritmetikai műveletek: `+`, `-`, `*`, `/`, és `%`.
+  
+  - `/` ekkor a maradékos osztás egész része
+  
+  - `%` ekkor a maradékos osztás maradéka
+
+- Relációs műveletek: `<`, `<=`, `>`, `>=`, `==`, `!=`.
+
+- Bitenkénti logikai műveletek: `&`, `|`, `^`, `<<`, `>>`, `~`
+
+**Egész kifejezések típusa**: Az eredmény típusa a két operandus típusa közül a nagyobbik lesz.
+
+###### Számábrázolás
+
+$n$ bit esetén $2^n$ állapotot tudunk megkülönböztetni, ez ennyi különböző szám ábrázolását jelenti.
+
+- `unsigned` esetben: $[0, ..., 2^n - 1]$ zárt intervallumból vesz fel értéket. Az n db egymás utáni bitet bináris számként értelmezve kapjuk meg a reprezenzált értéket.
+
+- `signed` esetben: $[-2^{n-1}, ..., 2^{n-1} - 1]$ zárt intervallumból vesz fel értéket.
+  
+  - Nemnegatív értékek: $0$ értékű bittel kezdődő $n$ bites bitsorozat a szám kettes számrendszerbeli alakját ábrázolja (bevezető $0$ bitekkel kiegészítve).
+  
+  - Negatív értékek: Eltároláskor adjunk hozzá a negatív értékhez $2^n$-t, és az eredményt tároljuk el. $1$-essel kezdődő bitsorozat pozitív számként értelmezett értékéből levonva a $2^n$ értéket kapjuk a reprezentált negatív értéket.
+  
+  > Ez a jellegű negatív szám tárolás a **kettes komplemens**
+  > 
+  > Úgy is megadható, hogy a reprezentálandó értéket negáljuk ($0$-ák, éy $1$-esek felcserélése), és hozzáadunk $1$-et.
+
+##### Karakter
+
+`char`-ban tárolt értéket lehet számként, és karakterként is értelmezni.
+
+A char-ban tárot számok egy meghatározott kódtáblából hivatkoznak egy karakterre. Mivel ez az alkalmazott táblától függ, érdemes a kódban karakterrel hivatkozni, ha például egy feltételben ellenőrzünk, nem számmal (`'a'` ahelyett, hogy `97`).
+
+A C alapvetően az ASCII táblát használja. Így a nem ascii karakterekkel vigyázni kell, mert pl. az UTF8 kódolás esetén egyes karakterek több byteon tárolódnak, ezt a C nem tudja kezelni.
+
+###### Escape szekvenciák
+
+Nem megjeleníthető karakterek, valami más hatásuk van. `\` karakterrel kezdődően adjuk meg.
+
+Pár példa:
+
+| Megnevezés     | Escape szekvencia |
+| -------------- | ----------------- |
+| újsor          | `\n`              |
+| vízszintes tab | `\t`              |
+| backslash      | `\\`              |
+
+> Pontosság, műveletek, számábrázolás az egészekről szóló részben
+
+##### Logikai
+
+Eredetileg nem volt része a nyelvnek, a $C^{99}$ szabvány vezette be.
+
+`_Bool` típus $\{ ~ 0, 1 ~\}$ értékkészlettel.
+
+A logikai, és az egész típusok konvertibilisek C-ben.
+
+> Ez onnan ered, hogy C-ben a $0$ a hamis, minden más igaz.
+
+`stdbool.h` header: Definiál egy elegánsabb `bool` típust, plusz a `false` és `true` literálokat.
+
+> Pontosság, műveletek, ábrázolás megintcsak megegyezik az egészekkel, mivel az egészek is viselkedhetnek logikai értékként.
+
+##### Valós
+
+`float` és `double`
+
+Méretük lehet architektúrafüggő, de `float` legfeljebb akkora, mint `double`, ami legfeljebb akkora, mint `long double`.
+
+###### Pontosság
+
+Nem tudunk, csak diszkrét értékeket pontosan ábrázolni.
+
+Valósok esetén annyit tudunk garantálni, hogy az értékkészlet határain belül minden értéket képesek vagyunk egy `e` relatív pontossággal ábrázolni, azaz minden `a` valós számhoz megadható az az `a`-hoz legközelebbi az adott valós típuson ábrázolható `x` érték, amelyre $(|(x - a) / a| \le e)$ teljesül.
+
+A pontossági problémák miatt a `==` és `!=` operátorokkal vigyázni kell. Előfordulhat, különösen nagyon kicsi számok esetén, hogy az elvileg egyező értékek különböznek egymástól az ábrázolás miatt.
+
+> Megoldás lehet egy megadott toleranciával dolgozó, összehasonlítást végző makró használata: `#define EQUALS(X,Y) ( ( ((X) > (Y)) ? ((X) - (Y)) : ((Y) - (X)) ) <= 1e-10 )`
+
+> A nagyon kicsi számokkal az aprobléma, hogy a *tört* részben sok vezető $0$ lesz (pl. $0.0000000000035$), így kevés számjegy marad a valódi érték ábrázolására.
+
+###### Számábrázolás
+
+Egy valós értéket tároló memóriaterület három részre osztható lebegőpontos számábrázolás esetén:
+
+- Előjelbit
+  
+  - $0$: Pozitív szám
+  
+  - $1$: Negatív szám
+  
+  > Mivel mindig jelen van, ezért nincs `signed` és `unsigned` módosítója a valós típusoknak.
+
+- Tört
+
+- Kitevő
+
+> Mindegyik fix hosszúságú biten van tárolva
+
+Valós szám ábrázolása:
+
+1. A számot kettes számrendszerbeli $1.m * 2^k$ normál alakra hozzuk.
+
+2. $m$ bináris számjegyeit tároljuk a *tört* részen
+   
+   1. Meghatározza az ábrázolás pontosságát
+
+3. $k$ egy típusfüggő, $b$ korrekciós konstanssal megnövelt értéket tároljuk a *kitevőnek* fenntartott helyen egész számként
+   
+   1. Kitevő meghatározza az értéktartományt
+
+[Binary 4 – Floating Point Binary Fractions 1 - YouTube](https://www.youtube.com/watch?v=L8OYx1I8qNg)
+
+- `float`: 32 biten tárolja a valós számokat
+  
+  - 1 *előjel* bit
+  
+  - 8 *kitevő* bit ($b = 2^7 - 1 = 127$ korrekciós értékkel)
+  
+  - 23 *tört* bit
+
+- `double`: 64 biten tárolja a vaéósz számokat
+  
+  - 1 *előjel* bit
+  
+  - 11 *kitevő* bit ($b = 2^{10} - 1 = 1023$ korrekciós értékkel)
+  
+  - 52 *tört* bit (azaz lb dupla olyan pontos)
+
+#### Típusképzés
+
+`typedef` kulcsszóval lehet típusokat elnevezni, saját típusokat definiálni.
+
+```c
+typedef tipus uj_tipusnev;
+```
+
+Például az igen hosszú `unsigned long long int` típust a `typedef unsigned long long int ulli;` utasítással `ulli`-nek keresztelhetjük.
+
+Ha utólag jövünk rá, hogy bizonyos helyeken elég mondjuk egy kisebb méretű típus használata, akkor hasznos, ha ezt az adott műveletet eleve egy általunk megadott type alias-al használtuk, mert akkor egy helyen elég átírni.
+
+#### Összetett adattípusok
+
+TODO
+
+##### Pointer
+
+TODO
+
+##### Tömb
+
+TODO
+
+##### Rekord
+
+TODO
+
+##### Unió
+
+TODO
