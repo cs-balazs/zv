@@ -7110,7 +7110,7 @@ Példa a Fourier leírásra:
 - Azok a nyelvek, melyek az imperatív paradigmákba esnek két fő jellemzőjük van: meghatározzák a műveletek sorrendjét olyan konstrukciókkal, amelyek kifejezetten ellenőrzik ezt a sorrendet, és lehetővé tesznek olyan mellékhatásokat, amelyben az állapot módosítható egy időben, egy kód egységben, majd később egy másik időpontban olvasható egy másik kód egységén belül.
 
 - A legkorábbi imperatív nyelvek az eredeti számítógépek gépnyelvei voltak (assembly)
-
+  
   - egyszerű utasítások -> könnyebb hardwares megvalósítás, de az összetett programok létrehozása nehezebb
 
 **Procedurális programozás**
@@ -7124,43 +7124,43 @@ Példa a Fourier leírásra:
 - Az objektum orientált paradigmával szemben itt háttérbe szorulnak a komplex adatszerkezetek
 
 - Moduláris tervezés
-
+  
   - Dekompozíció: adott feladat több egyszerűbb részfeladatra bontása
-
+  
   - Kompozíció: meglévő programegységek újrafelhasználása
-
+  
   - Érthetőség: a modulok önmagukba is egy értelmes egységet alkossanak
-
+  
   - Folytonosság: a specifikáció kis változása esetén is csak kis változás legyen szükséges a programban
-
+  
   - Védelem: egy hiba csak egy (vagy maximum egy pár), modul működésére legyen hatással, ezzel védve a program egészét
 
 - Modularitás alapelvei:
-
+  
   - Nyelvi támogatás: a modulok külön-kölün legyenek lefordíthatók
-
+  
   - Kevés kapcsolat: a modulok keveset kommunikáljanak egymással
-
+  
   - Gyenge kapcsolat: ha két modulnak kommunikálnia kell egymással, akkor csak annyi információt cseréljenek, amennyi szükséges
-
+  
   - Explicit interfészek: ha két modul kommunikál, akkor legalább az egyikük szövegéből ki kell hogy derüljön
-
+  
   - Információ-elrejtés: egy modulnak csak az explicit módon nyilvánossá tett információit használhatjuk fel
-
+  
   - Nyitott és zárt modulok
-
+    
     - Zárt modul: csak változatlan formában kerülhet felhasználásra
-
+    
     - Nyitott modul: kiterjeszthető, más szóval bővíthető az általa nyújtott szolgáltatások száma
-
+  
   - Újrafelhasználhatóság: ugyanazokat a programeleket ne kelljen többször elkészíteni, ügyeljünk viszonylag általánosítható modulok készítésére
-
+  
   - Típus változatossága: modulok működjenek többféle típusra
-
+  
   - Adatszerkezetek és algoritmusok változatossága: például egy lineáris kereső eljárás működjön több féle adatszerkezetre (ezeken belül persze más-más algoritmusokkal)
-
+  
   - Egy típus - egy modul: egy típus műveletei kerüljenek egy modulba
-
+  
   - Reprezentáció függetlenség: egy adattípus reprezentációjának a megváltozása ne okozzon modulon kívüli változást
 
 - Procedurális programozási nyelvek pédául a _C_, _Pascal_, _FORTRAN_
@@ -7176,49 +7176,49 @@ Példa a Fourier leírásra:
 - A legtöbb objektumorientált nyelv osztály alapú, azaz az objektumok osztályok példányai, és típusuk az osztály.
 
 - Objektumok és osztályok
-
+  
   - Osztályok:
-
+    
     - Az adatformátum és az elérhető metódusok definíciója az adott típus vagy a típushoz tartozó objektumok számára.
     - Tartalmazhatnak adattagokat és metódusokat, amelyek műveleteket végeznek az osztály adattagjain.
     - Összetartozó adatok és függvények, eljárások egysége.
-
+  
   - Objektumok:
-
+    
     - Az osztály példányai.
-
+    
     - Gyakran megfeleltethetők a való élet objektumainak vagy egyedeinek.
 
 - Pár fontos fogalom:
-
+  
   - Osztályváltozók: az osztályhoz tartoznak, elérhetők az osztályon, de példányokon keresztül is. Minden példány számára ugyanaz.
-
+  
   - Attribútumok: az egyedi objektumok jellemzői, minden objektumnak sajátja van.
-
+  
   - Tagváltozók: az osztály- és a példányváltozók együttese
-
+  
   - Osztálymetódusok: osztály szintű metódusok, csak az osztályváltozókhoz és paramétereikhez férhetnek hozzá, példányváltozókhoz nem.
-
+  
   - Példánymetódusok: példány szintű metódusok, hozzáférnek az adott példány összes adatához és metódusához, és paramétereik is lehetnek.
 
 - Kompozíció, öröklődés, interfészek
-
+  
   - Kompozíció: az objektumok lehetnek más objektumok mezői
-
+  
   - Öröklődés:
-
+    
     - Osztályok közötti alárendeltségi viszony, majdnem minden osztály alapú nyelv támogatja
-
+    
     - Ha az A osztályból örökldődik a B osztály, akkor B egyben az A osztály példánya is lesz, ezért megakpja az A osztály összes adattagját és metódusát
-
+    
     - Több programozási nyelv megengedi a többszörös öröklődést
-
+    
     - Egyes nyelvekben, mint a Java és a C## megtiltható a leszármazás egyes osztályokból (Javában final, C#-ban sealed a kulcsszó)
-
+  
   - Interfészek:
-
+    
     - Nem tartalmazhatnak megvalósítási részleteket, csak előírhatják bizonyos metódusok jelenlétét, illetve konstansokat definiálhatnak.
-
+    
     - Olyan nyelvekben, ahol nincs a megvalósítások többszörös öröklődése, interfészekkel érhető el a többszörös öröklés korlátozott formája
 
 - Objektum orientált nyelvek például a _Java_, _C#_, _Python_, _Smalltalk_
@@ -7240,23 +7240,23 @@ Példa a Fourier leírásra:
 - A *rekurzió* a funkcionális programozás egyik fontos eszköze, az ismétlések és ciklusok helyett rekurziót alkalmazhatjuk.
 
 - Rekurziós függvény:
-
+  
   - Rekurzív hívás mindig feltételvizsgálat mögött
-
+  
   - Rekuzív függvényt két esetre kell felkészíteni
-
+    
     - Bázis eset: nem kell újra meghívnia magát
-
+    
     - Rekurzív eset: Meghívja magát újra
-
+  
   - Biztosítani kell, hogy mindig elérjük a bázis esetet
-
+  
   - Rekurzió speciális esete: iteráció
 
 - Alapjául a Church által kidolgozott lambda-kalkulus szolgál, a tisztán funkcionális nyelvek a matematikában megszokott függvényfogalmat valósítják meg.
-
+  
   - Az ilyen programozás során a megoldandó feladatnál az eredményhez vezető út nem is biztosan ismert, a program végrehajtásához csupán az eredmény pontos definíciója szükséges.
-
+  
   - Tisztán funkcionális programozás esetén tehát nincs állapot és nincs értékadás.
 
 - Funkcionális nyelvek például a _Haskell_ és _Scala_
@@ -7268,22 +7268,22 @@ Példa a Fourier leírásra:
 - Az állítások a modell objektumainak tulajdonságait és kapcsolatait, szaknyelven _relációit_ írják le
 
 - Az állítások egy adott relációt meghatározó részhalmazát predikátumnak nevezzük
-
+  
   - A program futása minden esetben egy az állításokból következő tétel konstruktív bizonyítása, azaz a programnak feltett _kérdés_ vagy más néven _cél_ megválaszolása
 
 - Az első logikai programozási nyelv a Prolog volt
-
+  
   - Egy Prolog program csak az adatokat és az összefüggéseket tartalmazza.
     Kérdések hatására a “programvégrehajtást” beépített következtető-rendszer végzi
-
+  
   - Programozás Prologban:
-
+    
     - Objektumok és azokon értelmezett relációk megadása
-
+    
     - Kérdések megfogalmazása a relációkkal kapcsolatban
-
+  
   - A programnak meg kell adnunk egy célformulát (célklózt), ezután a program ellenőrzi, hogy a célklóz a logikai (forrás)program logikai következményei közt van-e
-
+  
   - Gyakran használják mesterségesintelligencia-alkalmazások megvalósítására, illetve a számítógépes nyelvészet eszközeként
 
 #### Párhuzamos programozás
@@ -7293,13 +7293,13 @@ Példa a Fourier leírásra:
 - Végrehajtási szál: folyamat (process)
 
 - Előnyei:
-
+  
   - Természetes kifejezésmód
-
+  
   - Sebességnövekedés megfelelő hardver esetén
 
 - Hátrányai
-
+  
   - Bonyolultabb a szekvenciálisnál
 
 - A párhuzamos programok alapvetően nem determinisztikusak
@@ -7307,48 +7307,48 @@ Példa a Fourier leírásra:
 - Sokféle párhuzamos programozási modell van
 
 - Közös problémák:
-
+  
   - Adathozzáférés folyamatokból
-
+    
     - Közös memória (shared memory)
-
+    
     - Osztott memória (distributed memory) + kommunikáció
-
+  
   - Folyamatok létrehozása, megszüntetése, kezelése
-
+  
   - Folyamatok együttműködése (interakciója)
-
+    
     - Független
-
+    
     - Erőforrásokért versengő
 
 - A párhuzamos program:
-
+  
   - Sebességfüggő: a folyamatok relatív sebessége minden futáskor más lehet
-
+  
   - Nemdeterminisztikus: ugyanarra az inputra különböző output
-
+  
   - Holtpont (deadlock): kölcsönös egymásra várakozás
-
+  
   - Éhezés (starvation): Nincs holtpont, egy folyamat mégsem jut hozzá az erőforrásokhoz
 
 - Occam
-
+  
   - Imperatív, folyamatok saját memóriával rendelkeznek, üzenetküldéssel kommunikálnak
-
+  
   - Occam program részei:
-
+    
     - Változók
-
+    
     - Folyamatok
-
+      
       - Elindul -> csinál valamit -> befejeződik (terminál)
-
+      
       - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell
         fordítani
-
+      
       - Elemi és összetett folyamato
-
+    
     - Csatornák: két folyamat közötti adatátvitelre szolgál
 ## Programozás alapjai
 
@@ -8018,9 +8018,222 @@ A diszkrét ismétléses vezérlésnek nincs közvetlen megvalósítása a C nye
 
 A megvalósítás elsősorban attól függ, hogy az ismétlési feltételben megadott halmazt hogyan reprezentáljuk.
 
-
-
 ### 2. Egyszerű adattípusok: egész, valós, logikai és karakter típusok és kifejezések. Az egyszerű típusok reprezentációja, számábrázolási tartományuk, pontosságuk, memória igényük, és műveleteik. Az összetett adattípusok és a típusképzések, valamint megvalósításuk C nyelven. A pointer, a tömb, a rekord, és az unió típus. Az egyes típusok szerepe, használata.
+
+Az **adattípus** a programnak egy olyan komponense, amely két összetevője, az *értékhalmaz* és az értékhalmaz elemein végezhető *műveletek* által meghatározott.
+
+#### Egyszerű adattípusok
+
+Az elemi adattípusok közé tartoznak azok az adattípusok, amelyek értékhalmaza elemi értékekből áll, azaz nem összetett adatok alkotják.
+
+Ezeket az elemi adattípussal rendelkező értékeket már nem lehet további, önmagukban is értelmes részekre bontani.
+
+| C típus                  | méret (bit) | alsó határ                 | felső határ                |
+| ------------------------ | ----------- | -------------------------- | -------------------------- |
+| `char`                   | <img src="https://latex.codecogs.com/svg?8" />         | fordító függő              | fordító függő              |
+| `signed char`            | <img src="https://latex.codecogs.com/svg?8" />         | <img src="https://latex.codecogs.com/svg?-128%20(-2%5E7)" />              | <img src="https://latex.codecogs.com/svg?127%20(2%5E7-1)" />              |
+| `unsigned char`          | <img src="https://latex.codecogs.com/svg?8" />         | <img src="https://latex.codecogs.com/svg?0" />                        | <img src="https://latex.codecogs.com/svg?255%20(2%5E8-1)" />              |
+| `short int`              | <img src="https://latex.codecogs.com/svg?16" />        | <img src="https://latex.codecogs.com/svg?-32%20768%20(-2%5E%7B15%7D)" />        | <img src="https://latex.codecogs.com/svg?32%20767%20(2%5E%7B15%7D-1)" />        |
+| `signed short int`       | <img src="https://latex.codecogs.com/svg?16" />        | <img src="https://latex.codecogs.com/svg?-32%20768%20(-2%5E%7B15%7D)" />        | <img src="https://latex.codecogs.com/svg?32%20767%20(2%5E%7B15%7D-1)" />        |
+| `unsigned short int`     | <img src="https://latex.codecogs.com/svg?16" />        | <img src="https://latex.codecogs.com/svg?0" />                        | <img src="https://latex.codecogs.com/svg?65%20535%20(2%5E%7B16%7D-1)" />        |
+| `int`                    | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?-2%20147%20483%20648%20(-2%5E%7B31%7D)" /> | <img src="https://latex.codecogs.com/svg?2%20147%20483%20647%20(2%5E%7B31%7D-1)" /> |
+| `signed int`             | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?-2%20147%20483%20648%20(-2%5E%7B31%7D)" /> | <img src="https://latex.codecogs.com/svg?2%20147%20483%20647%20(2%5E%7B31%7D-1)" /> |
+| `unsigned int`           | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?0" />                        | <img src="https://latex.codecogs.com/svg?4%20294%20967%20295%20(2%5E%7B32%7D-1)" /> |
+| `long int`               | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?-2%20147%20483%20648%20(-2%5E%7B31%7D)" /> | <img src="https://latex.codecogs.com/svg?2%20147%20483%20647%20(2%5E%7B31%7D-1)" /> |
+| `signed long int`        | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?-2%20147%20483%20648%20(-2%5E%7B31%7D)" /> | <img src="https://latex.codecogs.com/svg?2%20147%20483%20647%20(2%5E%7B31%7D-1)" /> |
+| `unsigned long int`      | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?0" />                        | <img src="https://latex.codecogs.com/svg?4%20294%20967%20295%20(2%5E%7B32%7D-1)" /> |
+| `long long int`          | <img src="https://latex.codecogs.com/svg?64" />        | <img src="https://latex.codecogs.com/svg?-2%5E%7B63%7D" />                  | <img src="https://latex.codecogs.com/svg?2%5E%7B63%7D-1" />                 |
+| `signed long long int`   | <img src="https://latex.codecogs.com/svg?64" />        | <img src="https://latex.codecogs.com/svg?-2%5E%7B63%7D" />                  | <img src="https://latex.codecogs.com/svg?2%5E%7B63%7D-1" />                 |
+| `unsigned long long int` | <img src="https://latex.codecogs.com/svg?64" />        | <img src="https://latex.codecogs.com/svg?0" />                        | <img src="https://latex.codecogs.com/svg?2%5E%7B64%7D-1" />                 |
+| `float`                  | <img src="https://latex.codecogs.com/svg?32" />        | <img src="https://latex.codecogs.com/svg?-3.4028234663852886E%2B38" />  | <img src="https://latex.codecogs.com/svg?3.4028234663852886E%2B38" />   |
+| `double`                 | <img src="https://latex.codecogs.com/svg?64" />        | <img src="https://latex.codecogs.com/svg?-1.7976931348623157E%2B308" /> | <img src="https://latex.codecogs.com/svg?1.7976931348623157E%2B308" />  |
+| `long double`            | <img src="https://latex.codecogs.com/svg?64" />        | <img src="https://latex.codecogs.com/svg?-1.7976931348623157E%2B308" /> | <img src="https://latex.codecogs.com/svg?1.7976931348623157E%2B308" />  |
+
+##### Egész
+
+C-ben `int` és `char` típusok használhatóak egészek tárolására
+
+Értelmezési tartomány az alábbiak szerint módosítható:
+
+- `signed`: A típus előjeles értéket fog tartalmazni. Egy bit az előjelhez lesz felhasználva, nem az érték nagyságához.
+
+- `unsigned`: A típus előjeltelen, nemnegatív értéket fog tartalmazni, minden bit felhasználható az érték nagyságához.
+
+- `short`: kevesebb biten tárolódik, így kisebb az értelmezési tartománya. Ez a módosító már nem tehető ki a `char` elé.
+
+- `long`: Ábrázolására több bit áll a rendelkezésre, azaz több érték ábrázolható vele. Akár duplán is alkalmazható (`long long`), és a `char` elé szintén nem kerülhet oda.
+
+###### Pontosság
+
+Az értelmezési tartomány határain belül valamennyi számot pontosan ábrázolnak.
+
+> Különböző architektúrákon az egyes típusok mérete lehet más, de minden C megvalósításra igaz, hogy a `short` legfeljebb akkora, mint az `int`, ami legfeljebb akkora, mint a `long`, ami legfeljebb akkora, mint a `long long`
+> 
+> Pontos határok elérhetőek a `limits.h` headerben, ami preprocesszor definíciókkal közli velünk, mik a határok az adott architektúrán, pl.: `#define UCHAR_MAX 255`
+
+###### Műveletek
+
+- Aritmetikai műveletek: `+`, `-`, `*`, `/`, és `%`.
+  
+  - `/` ekkor a maradékos osztás egész része
+  
+  - `%` ekkor a maradékos osztás maradéka
+
+- Relációs műveletek: `<`, `<=`, `>`, `>=`, `==`, `!=`.
+
+- Bitenkénti logikai műveletek: `&`, `|`, `^`, `<<`, `>>`, `~`
+
+**Egész kifejezések típusa**: Az eredmény típusa a két operandus típusa közül a nagyobbik lesz.
+
+###### Számábrázolás
+
+<img src="https://latex.codecogs.com/svg?n" /> bit esetén <img src="https://latex.codecogs.com/svg?2%5En" /> állapotot tudunk megkülönböztetni, ez ennyi különböző szám ábrázolását jelenti.
+
+- `unsigned` esetben: <img src="https://latex.codecogs.com/svg?%5B0%2C%20...%2C%202%5En%20-%201%5D" /> zárt intervallumból vesz fel értéket. Az n db egymás utáni bitet bináris számként értelmezve kapjuk meg a reprezenzált értéket.
+
+- `signed` esetben: <img src="https://latex.codecogs.com/svg?%5B-2%5E%7Bn-1%7D%2C%20...%2C%202%5E%7Bn-1%7D%20-%201%5D" /> zárt intervallumból vesz fel értéket.
+  
+  - Nemnegatív értékek: <img src="https://latex.codecogs.com/svg?0" /> értékű bittel kezdődő <img src="https://latex.codecogs.com/svg?n" /> bites bitsorozat a szám kettes számrendszerbeli alakját ábrázolja (bevezető <img src="https://latex.codecogs.com/svg?0" /> bitekkel kiegészítve).
+  
+  - Negatív értékek: Eltároláskor adjunk hozzá a negatív értékhez <img src="https://latex.codecogs.com/svg?2%5En" />-t, és az eredményt tároljuk el. <img src="https://latex.codecogs.com/svg?1" />-essel kezdődő bitsorozat pozitív számként értelmezett értékéből levonva a <img src="https://latex.codecogs.com/svg?2%5En" /> értéket kapjuk a reprezentált negatív értéket.
+  
+  > Ez a jellegű negatív szám tárolás a **kettes komplemens**
+  > 
+  > Úgy is megadható, hogy a reprezentálandó értéket negáljuk (<img src="https://latex.codecogs.com/svg?0" />-ák, éy <img src="https://latex.codecogs.com/svg?1" />-esek felcserélése), és hozzáadunk <img src="https://latex.codecogs.com/svg?1" />-et.
+
+##### Karakter
+
+`char`-ban tárolt értéket lehet számként, és karakterként is értelmezni.
+
+A char-ban tárot számok egy meghatározott kódtáblából hivatkoznak egy karakterre. Mivel ez az alkalmazott táblától függ, érdemes a kódban karakterrel hivatkozni, ha például egy feltételben ellenőrzünk, nem számmal (`'a'` ahelyett, hogy `97`).
+
+A C alapvetően az ASCII táblát használja. Így a nem ascii karakterekkel vigyázni kell, mert pl. az UTF8 kódolás esetén egyes karakterek több byteon tárolódnak, ezt a C nem tudja kezelni.
+
+###### Escape szekvenciák
+
+Nem megjeleníthető karakterek, valami más hatásuk van. `\` karakterrel kezdődően adjuk meg.
+
+Pár példa:
+
+| Megnevezés     | Escape szekvencia |
+| -------------- | ----------------- |
+| újsor          | `\n`              |
+| vízszintes tab | `\t`              |
+| backslash      | `\\`              |
+
+> Pontosság, műveletek, számábrázolás az egészekről szóló részben
+
+##### Logikai
+
+Eredetileg nem volt része a nyelvnek, a <img src="https://latex.codecogs.com/svg?C%5E%7B99%7D" /> szabvány vezette be.
+
+`_Bool` típus <img src="https://latex.codecogs.com/svg?%5C%7B%20~%200%2C%201%20~%5C%7D" /> értékkészlettel.
+
+A logikai, és az egész típusok konvertibilisek C-ben.
+
+> Ez onnan ered, hogy C-ben a <img src="https://latex.codecogs.com/svg?0" /> a hamis, minden más igaz.
+
+`stdbool.h` header: Definiál egy elegánsabb `bool` típust, plusz a `false` és `true` literálokat.
+
+> Pontosság, műveletek, ábrázolás megintcsak megegyezik az egészekkel, mivel az egészek is viselkedhetnek logikai értékként.
+
+##### Valós
+
+`float` és `double`
+
+Méretük lehet architektúrafüggő, de `float` legfeljebb akkora, mint `double`, ami legfeljebb akkora, mint `long double`.
+
+###### Pontosság
+
+Nem tudunk, csak diszkrét értékeket pontosan ábrázolni.
+
+Valósok esetén annyit tudunk garantálni, hogy az értékkészlet határain belül minden értéket képesek vagyunk egy `e` relatív pontossággal ábrázolni, azaz minden `a` valós számhoz megadható az az `a`-hoz legközelebbi az adott valós típuson ábrázolható `x` érték, amelyre <img src="https://latex.codecogs.com/svg?(%7C(x%20-%20a)%20%2F%20a%7C%20%5Cle%20e)" /> teljesül.
+
+A pontossági problémák miatt a `==` és `!=` operátorokkal vigyázni kell. Előfordulhat, különösen nagyon kicsi számok esetén, hogy az elvileg egyező értékek különböznek egymástól az ábrázolás miatt.
+
+> Megoldás lehet egy megadott toleranciával dolgozó, összehasonlítást végző makró használata: `#define EQUALS(X,Y) ( ( ((X) > (Y)) ? ((X) - (Y)) : ((Y) - (X)) ) <= 1e-10 )`
+
+> A nagyon kicsi számokkal az aprobléma, hogy a *tört* részben sok vezető <img src="https://latex.codecogs.com/svg?0" /> lesz (pl. <img src="https://latex.codecogs.com/svg?0.0000000000035" />), így kevés számjegy marad a valódi érték ábrázolására.
+
+###### Számábrázolás
+
+Egy valós értéket tároló memóriaterület három részre osztható lebegőpontos számábrázolás esetén:
+
+- Előjelbit
+  
+  - <img src="https://latex.codecogs.com/svg?0" />: Pozitív szám
+  
+  - <img src="https://latex.codecogs.com/svg?1" />: Negatív szám
+  
+  > Mivel mindig jelen van, ezért nincs `signed` és `unsigned` módosítója a valós típusoknak.
+
+- Tört
+
+- Kitevő
+
+> Mindegyik fix hosszúságú biten van tárolva
+
+Valós szám ábrázolása:
+
+1. A számot kettes számrendszerbeli <img src="https://latex.codecogs.com/svg?1.m%20*%202%5Ek" /> normál alakra hozzuk.
+
+2. <img src="https://latex.codecogs.com/svg?m" /> bináris számjegyeit tároljuk a *tört* részen
+   
+   1. Meghatározza az ábrázolás pontosságát
+
+3. <img src="https://latex.codecogs.com/svg?k" /> egy típusfüggő, <img src="https://latex.codecogs.com/svg?b" /> korrekciós konstanssal megnövelt értéket tároljuk a *kitevőnek* fenntartott helyen egész számként
+   
+   1. Kitevő meghatározza az értéktartományt
+
+[Binary 4 – Floating Point Binary Fractions 1 - YouTube](https://www.youtube.com/watch?v=L8OYx1I8qNg)
+
+- `float`: 32 biten tárolja a valós számokat
+  
+  - 1 *előjel* bit
+  
+  - 8 *kitevő* bit (<img src="https://latex.codecogs.com/svg?b%20%3D%202%5E7%20-%201%20%3D%20127" /> korrekciós értékkel)
+  
+  - 23 *tört* bit
+
+- `double`: 64 biten tárolja a vaéósz számokat
+  
+  - 1 *előjel* bit
+  
+  - 11 *kitevő* bit (<img src="https://latex.codecogs.com/svg?b%20%3D%202%5E%7B10%7D%20-%201%20%3D%201023" /> korrekciós értékkel)
+  
+  - 52 *tört* bit (azaz lb dupla olyan pontos)
+
+#### Típusképzés
+
+`typedef` kulcsszóval lehet típusokat elnevezni, saját típusokat definiálni.
+
+```c
+typedef tipus uj_tipusnev;
+```
+
+Például az igen hosszú `unsigned long long int` típust a `typedef unsigned long long int ulli;` utasítással `ulli`-nek keresztelhetjük.
+
+Ha utólag jövünk rá, hogy bizonyos helyeken elég mondjuk egy kisebb méretű típus használata, akkor hasznos, ha ezt az adott műveletet eleve egy általunk megadott type alias-al használtuk, mert akkor egy helyen elég átírni.
+
+#### Összetett adattípusok
+
+TODO
+
+##### Pointer
+
+TODO
+
+##### Tömb
+
+TODO
+
+##### Rekord
+
+TODO
+
+##### Unió
+
+TODO
 ## Rendszerfejlesztés 1.
 
 ### 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
