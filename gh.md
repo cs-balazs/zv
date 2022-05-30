@@ -8217,23 +8217,332 @@ Ha utólag jövünk rá, hogy bizonyos helyeken elég mondjuk egy kisebb méret�
 
 #### Összetett adattípusok
 
-TODO
+Azokat a típusokat, amelyek értékei tovább bonthatóak, illetve további értelmezésük lehetséges, **összetett adattípusok**nak nevezzük.
 
 ##### Pointer
 
-TODO
+Dinamikus változónak nevezzük azt a változót, amely bármely blokk aktivizálásától (végrehajtásától) független hozhatunk létre, illetve szüntethetünk meg. Az ilyen dinamikus változók megvalósításának eszköze lesz a pointer típus.
+
+`típus * változónév;`
+
+Pointer deklaráció két értelmezése (`int * p;`):
+
+- `*p` egy `int` típusú (dinamikus) változó
+
+- `p` egy `int*` típusú (azaz egy `int`-re mutató) változó
+
+Az előbbi szerencsésebb lehet, ugyanis a`*` a változóhoz tartozik, például `int * p, q;` esetén `q` egy szimpla `int` lesz.
+
+Lehet pointer típust is definiálni: `typedef típus *pointertípusnév;`
+
+###### Változóhivatkozás
+
+Szintaktikus egység, meghatározott formai szabályok szerint képzett jelsorozat egy adott programnyelven, tehát egy kódrészlet. Azaz egy `p = 3;` utasítás esetén maga a `p` jel(sorozat) a változóhivatkozás.
+
+###### Változó
+
+A program futása során a program által lefoglalt memóriaterület egy része, amelyen egy adott (elemi vagy összetett) típusú érték tárolódik. Például egy `int p;` deklaráció esetén a memóriában lefoglalódik egy `int` típusú érték tárolására alkalmas hely, és ezen a területen tárolódik majd a változó értéke.
+
+###### Pointer, mint absztrakt adattípus
+
+Dinamikus változóhivatkozáshoz tartozó változók a pointer típus műveleteivel hozhatók létre és szüntethetők meg.
+
+| Művelet megnevezése                                 | Művelet leírása                                                                                                                                            |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NULL`                                              | Konstans, érvénytelen pointer érték, ha egy pointerhez ezt az értéket kapcsoljuk, akkor annak jelentése, hogy a pointerhez nem tartozik dinamikus változó. |
+| Létesít(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `X` : `PE`)                    | Új `E` típusú dinamikus változó létesítése, amely elérhetővé válik az `X` `PE` (azaz `E` típusra mutató) pointer által.                                    |
+| Értékadás(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `X` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `Y`: `PE`) | Az `X` pointer felveszi az `Y` pointer értékét, azaz `X` és `Y` a művelet végrehajtása után ugyanarra a dinamikus változóra mutatnak.                      |
+| Törlés(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `X`: `PE`)                 | Az `X` által hivatkozott dinamikus változó törlésre kerül. Az `X` ezen túl nem hivatkozik semmire.                                                         |
+| Dereferencia(<img src="https://latex.codecogs.com/svg?%5Cto" /> `X`: `PE`) : `E`                 | Visszaad egy `E` típusú változó hivatkozást, amivel a dinamikus változót el tudjuk érni, amivel arra hivatkozhatunk.                                       |
+| Egyenlő(<img src="https://latex.codecogs.com/svg?%5Cto" /> `p` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `q`: `PE`): bool    | Összehasonlítja, hogy `p` és `q` ugyanarra a dinamikus változóra hivatkoznak-e (beleértve, hogy egyik sem hivatkozik változóra)!                           |
+| NemEgyenlő(<img src="https://latex.codecogs.com/svg?%5Cto" /> `p` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `q`: `PE`): bool | Összehasonlítja, hogy `p` és `q` más-más dinamikus változóra hivatkoznak-e (beleértve, hogy legfeljebb az egyik nem hivatkozik változóra)!                 |
+
+> <img src="https://latex.codecogs.com/svg?%5Cleftarrow" />: kimenő paraméter
+> 
+> <img src="https://latex.codecogs.com/svg?%5Cto" />: bemenő paraméter
+> 
+> <img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" />: be- és kimenő módú paraméter
+
+###### Pointer, mint virtuális adattípus
+
+| Művelet absztrakt szinten                           | Művelet virtuális megvalósítása |
+| --------------------------------------------------- | ------------------------------- |
+| `NULL`                                              | `NULL`                          |
+| Létesít(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `X` : `PE`)                    | `X = malloc(sizeof(E));`        |
+| Értékadás(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `X` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `Y`: `PE`) | `X = Y`                         |
+| Törlés(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `X`: `PE`)                 | `free(X); X = NULL;`            |
+| Dereferencia(<img src="https://latex.codecogs.com/svg?%5Cto" /> `X`: `PE`) : `E`                 | `*X`                            |
+| Egyenlő(<img src="https://latex.codecogs.com/svg?%5Cto" /> `p` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `q`: `PE`): bool    | `p == q`                        |
+| NemEgyenlő(<img src="https://latex.codecogs.com/svg?%5Cto" /> `p` : `PE`, <img src="https://latex.codecogs.com/svg?%5Cto" /> `q`: `PE`): bool | `p != q`                        |
+| Cím(<img src="https://latex.codecogs.com/svg?%5Cto" /> `v`:`E`, <img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `p`:`PE`)           | `p = &v;`                       |
+
+> A `&` operátorral (memória cím lekérés) lokális változók esetén vigyázni kell, ugyanis azok az adott scope végén felszabadulnak (stack-en vannak), az oda mutató pointer így már felszabadított területre fog mutatni. 
+
+Létrehozáson és megszűntetésen kívül mind megvalósítható közvetlenül a C nyelvi elemeivel.
+
+Ezt a kettőt pedig a `stdlib.h` headerből elérhető `malloc` és `free` utasításokkal tudjuk megvalósítani.
+
+###### Pointer mérete
+
+32 bites architektúrán 4 byte, 64 bitesen 8 byte-on tartalmazza a hozzá tartozó dinamikus változó kezdőcímét.
+
+###### `void*`
+
+A `void*` egy speciális, úgynevezett típustalan pointer.
+Az ilyen típusú pointerek "csak" memóriacímek tárolására alkalmasak, a dereferencia művelet alkalmazása rájuk értelmetlen.
+
+Viszont minden típusú pointerrel kompatibilisek értékadás és összehasonlítás tekintetében.
+
+Valójában a `malloc` függvény visszatérési értéke is `void*`, és ez kasztolódik impliciten a megfelelő típusú mutatóvá.
+
+###### Függvény argumentumok módjainak kezelése
+
+Alapvetően az érték szerint átadott argumentumok bemeneti argumentumok.
+
+Kimenő, vagy be- és kimenő argumentumos keseén pointereket kell alkalmaznunk.
+
+Például a következő függvény:
+
+```c
+void csere (int x, int y) {
+    int m;
+    m = x;
+    x = y;
+    y = m;
+}
+```
+
+nem végzi el ténylegesen a cserét, ugyanis érték szerint kapja a paramétereket, így csak a stack-re kerülő két lokális változót fogja cserélni, ami csak a saját scope-ján belül történik meg.
+
+Módosítani kell ezt a függvényt, hogy ne érték szerint várja az értékeket:
+
+```c
+void csere (int *x, int *y) {
+    int m;
+     m = *x;
+    *x = *y;
+    *y = m;
+}
+```
 
 ##### Tömb
 
-TODO
+Rögzített számú, ugyan olyan typusú elemek sorozata
+
+###### Tömb, mint absztrakt adattípus
+
+| Művelet megnevezése                                               | Művelet leírása                                                    |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Kiolvas (<img src="https://latex.codecogs.com/svg?%5Cto" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `i`: `I`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`: `E`)     | Az `A` tömb `i`. értékét kiolvassa és eltárolja az `x` változóban. |
+| Módosít(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `i`: `I`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `x`: `E`) | Az `A` tömb `i`. értékét módosítja az `x` értékkel.                |
+| Értékadás (<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `X`: `T`)                  | Az `A` tömb felveszi az `X` tömb típusú kifejezés értékét.         |
+
+> `T`: tömb típus
+> 
+> `E`: tömb-beli érték típusa
+> 
+> `I`: index típus (<img src="https://latex.codecogs.com/svg?0%2C%20...%2C%20n-1" /> intervallumból egy érték)
+
+###### Tömb, mint virtuális adattípus
+
+A változó neve kiegészül egy szögletes zárójel párral, ami között megadjuk a tömb méretét, azaz azt az elemszámot, amennyi elemet el szeretnénk tárolni a tömbben.
+
+`típus változónév[elemszám];`
+
+Természetesen a tömb típussal is definiálhatunk új típust:
+
+`typedef típus újnév[elemszám];`
+
+| Művelet absztrakt szinten                                         | Művelet virtuális megvalósítása                                                                                            |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Kiolvas (<img src="https://latex.codecogs.com/svg?%5Cto" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `i`: `I`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`: `E`)     | `x = A[i];`                                                                                                                |
+| Módosít(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `i`: `I`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `x`: `E`) | `A[i] = x;`                                                                                                                |
+| Értékadás (<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`: `T`,<img src="https://latex.codecogs.com/svg?%5Cto" /> `X`: `T`)                  | Nincs direkt megvalósítás! Használható a `memcpy()`, vagy a <img src="https://latex.codecogs.com/svg?C%5E%7B11%7D" /> szabvány után a biztonságosabb `memcpy_s()` függvény. |
+
+> Fontos, hogy C-ben nincs indexhatár ellenőrzés, azzaz alul- vagy felülindexelhetünk egy tömböt, és ez látszólag nem fog problémát okozni, azonban futási hibákat eredményezhet amiatt, hogy a memória egy olyan területét érjük el, amin más adat van.
+
+###### Több dimenziós tömbök
+
+A műveletek nagyon hasonlóan definiálhatóak, de `I` itt indexek egy <img src="https://latex.codecogs.com/svg?(i_0%2C%20...%2C%20i_k)" /> vektora (<img src="https://latex.codecogs.com/svg?k" /> dimenziós tömb esetén).
+
+Kiolvasás: `x = A[i1]...[ik];`
+
+Módosítás: `A[i1]...[ik] = x;`
+
+Értékadás: `memcpy()` vagy `memcpy_s()`
+
+###### Tömb inicializálása
+
+```c
+int t[][3] = {
+    { 1, 2, 3 },  { 4, 5, 6 },  { 7, 8, 9 }
+};
+
+int t1[4][3] = {
+    { 1, 2, 3 },  { 4, 5, 6 },  { 7, 8, 9 }
+};
+
+int t2[][3] = {
+    { 1 },  { 4 },  { 7 },  { 9 }
+};
+```
+
+> Üresen hagyott méreteket (`[]`)-et az inicializációból kikövetkezteti a nyelv.
+
+> Inicializálatlan cellák értéke <img src="https://latex.codecogs.com/svg?0" />
+
+###### Tömb, mint fizikai adattípus (hogy néz ki a memóriában)
+
+Tömb típusú változó számára történő helyfoglalás azt jelenti, hogy minden tömbelem, mint változó számára memóriát kell foglalni. Feltehetjük, hogy egy adott tömb változóhoz a tömbelemek számára foglalt tárterület összefüggő mezőt alkot.
+
+A tömb azonosítója valójában egy pointer az első elemére.
+
+Az indexelés pedig nem más, mint egy shorthand arra, hogy az első elemre mutató pointerrel, és egy offsettel érünk el egy bizonyos elemet.
+
+Egy dimenziós esetben egyszerűen számolható ez az offset, hiszen csak az index és egy elem méretének szozata adja meg.
 
 ##### Rekord
 
-TODO
+Különböző típusú, de logikailag összefüggő értékek kezelésére alkalmas.
+
+###### Szorzat-rekord absztrakt adattípus
+
+| Művelet megnevezése                                     | Művelet leírása                                                                                                                                              |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <img src="https://latex.codecogs.com/svg?Kiolvas_i" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`:`Ti`)      | Az `A` `T` típusú szorzat rekord `i`. mezőjét kiolvasó művelet, amely az `i`. mező típusának megfelelő `x` változóba teszi a kiolvasott mező értékét.        |
+| <img src="https://latex.codecogs.com/svg?M%C3%B3dos%C3%ADt_i" />(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `x` :`Ti`) | Az `A` `T` típusú szorzat rekord `i`. mezőjét módosító (beállító) művelet, amely az `i`. mező típusának megfelelő `x` változót értékül adja az `i`. mezőnek. |
+| <img src="https://latex.codecogs.com/svg?%C3%89rt%C3%A9kad%C3%A1s" />(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`:`T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `X` : `T`)       | Az `A` `T` típusú szorzat rekord változónak értékül adja az `X` `T` típusú szorzat rekord változót.                                                          |
+
+###### Szorzat-rekord vitruális adattípus
+
+```c
+typedef struct T {
+    T1 M1;
+    ...
+    Tk Mk;
+} T;
+```
+
+Az első `T` a struktúra neve, ami akár el is maradhatna, a második `T` viszont az újonnan, a `typedef` által bevezetett típus neve.
+
+> Ha a struktúrának nem adunk nevet, és nem is definiálunk hozzá egy új 
+> típust, akkor mindannyiszor, amikor adott elemeket tartalmazó struktúra 
+> változót szeretnénk létrehozni, le kell írni a teljes struktúra definícióját. Ez persze már túl hosszú ahhoz, hogy ezt többször megadjuk. Így ha van neve a struktúrának, akkor a következő esetben már `struct T` is elég a megadásához, ha pedig típust is képeztünk belőle, akkor a típusképzés után már a `T` típusazonosító is egyértelműen hivatkozza az adott struktúrát.
+
+A fenti típusképzésben az `M1` ... `Mk` azonosítókat mezőazonosítóknak (tagnak, membernek) hívjuk és lokálisak a típusképzésre nézve.
+
+| Művelet absztrakt szinten                               | Művelet virtuális megvalósítása |
+| ------------------------------------------------------- | ------------------------------- |
+| <img src="https://latex.codecogs.com/svg?Kiolvas_i" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`:`Ti`)      | `x = A.Mi`                      |
+| <img src="https://latex.codecogs.com/svg?M%C3%B3dos%C3%ADt_i" />(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `x` :`Ti`) | `A.Mi = x`                      |
+| <img src="https://latex.codecogs.com/svg?%C3%89rt%C3%A9kad%C3%A1s" />(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`:`T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `X` : `T`)       | `A = X`                         |
+
+###### Szorzat-rekord fizikai adattípus
+
+Mivel a struktúra egy összetett adat, így az, hogy ő konkrétan mekkora részt foglal a memóriában függ attól, hogy a benne levő típusok megkorák, illetve tudnunk kell azt, hogy ezek hogy tárolódnak.
+
+Összefüggő memóriaterületen tárolódik.
+
+`sizeof(E)` = `sizeof(T1) + ...+ sizeof(Tk)` + igazítás.
+
+Valamennyi mező a deklaráció sorrendjében egymást követő, növekvő memóriacímen 
+kezdődik. Az első mező memóriacíme megegyezik a teljes `struct` típusú érték címével.
+
+###### Bitmezők
+
+```c
+struct {
+    unsigned int flag1 : 1;
+    unsigned int flag2 : 1;
+    unsigned int flag3 : 2;
+} jelzok;
+jelzok.flag1 = jelzok.flag2 = 0;
+jelzok.flag3 = 1;
+if (jelzok.flag1 == 0 && jelzok.flag3 == 1) {
+    /* ... */
+}
+
+```
+
+> Meg lehet adni, melyik mező hány bites legyen.
+
+###### A `->` operátor
+
+Legyen `tp` egy struktúra típusú változóra mutató pointer. Ilyenkor ha a struktúra egy mezőjére szeretnénk hivatkozni, azt a `(*tp).mezonev` alakban tudunk.
+
+Mivel ez egy gyakori eset, egy egyenértékű, egyszerűbb megvalósítás: `tp->mezonev`
 
 ##### Unió
 
-TODO
+Elképzelhető, hogy úgy szeretnénk egységesen hivatkozni adatokra, hogy a konkrét megvalósításban még nincs fogalmunk arról, hogy a program adott futásakor milyen típusú adatot kapunk az adott ponton.
+
+###### Egyesített-rekord absztrakt adattípus
+
+| Művelet megnevezése                                     | Művelet leírása                                                                                                                                                                                                              |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://latex.codecogs.com/svg?V%C3%A1ltozat" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`;<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `V`:`T0`)  | Változat kiolvasása. A művelet végrehajtása után <img src="https://latex.codecogs.com/svg?V%20%3D%20c_i" />, ha <img src="https://latex.codecogs.com/svg?A%20%3D%20(c_i%2C%20a)" />.                                                                                                                                               |
+| <img src="https://latex.codecogs.com/svg?Kiolvas_i" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`:`Ti`)      | Adott `i` <img src="https://latex.codecogs.com/svg?%5Cin%20%5C%7B%201%20~%20...%20~%20k%20%5C%7D" />-ra az `A` rekord `i`. komponensének kiolvasása adott `x`, `Ti` típusú változóba. A művelet végrehajtása után `x=a`, ha `A=(c_i,a)`. A művelet hatástalan, ha `A` első komponense nem `ci`. |
+| <img src="https://latex.codecogs.com/svg?M%C3%B3dos%C3%ADt_i" />(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `x` :`Ti`) | Adott `i` <img src="https://latex.codecogs.com/svg?%5Cin%20%5C%7B%201%20~%20...%20~%20k%20%5C%7D" />-ra az `A` rekord `i`. komponensének módosítása adott `x`, `Ti` típusú értékre. A művelet végrehajtása után `A=(c_i,x)`.                                                                    |
+| <img src="https://latex.codecogs.com/svg?%C3%89rt%C3%A9kad%C3%A1s" />(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`:`T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `X` : `T`)       | Az `A` `T` típusú szorzat rekord változónak értékül adja az `X` `T` típusú szorzat rekord változót.                                                                                                                          |
+
+###### Egyesített-rekord vitruális adattípus
+
+```c
+typedef union T {
+    T1 M1;
+    ...
+    Tk Mk;
+} T;
+```
+
+Ebben a típusképzésben is az `M1`, ,`Mk` azonosítókat mezőazonosítóknak (tagnak, member-nek) hívjuk és lokálisak a típusképzésre nézve. Illetve az `union` szó utáni névre és a típus nevére hasonlóak igazak, mint a `struct` esetében.
+
+Megjegyzendő, hogy a C megvalósításában (megfelelő környezetben) mindig hivatkozhatunk bármelyik mezőre, függetlenül attól, hogy az `union` aktuálisan melyik mező értékét tárolja.
+
+Önmagában a C `union` típusképzésében nem adhatunk meg változati mezőazonosítót (<img src="https://latex.codecogs.com/svg?T_0" />), így nincs lehetőségünk az aktuális változatról információ tárolására. Éppen ezért, ha ez a változati mezőazonosítót is el szeretnénk tárolni, akkor kombináljuk a `struct` és `union` lehetőségeit:
+
+```c
+typedef struct T {
+    T0 Milyen;
+    union {
+        T1 M1;
+        ...
+        Tk Mk;
+    };
+} T;
+```
+
+| Művelet megnevezése                                     | Művelet leírása                     |
+| ------------------------------------------------------- | ----------------------------------- |
+| <img src="https://latex.codecogs.com/svg?V%C3%A1ltozat" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`;<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `V`:`T0`)  | `V = A.Milyen`                      |
+| <img src="https://latex.codecogs.com/svg?Kiolvas_i" />(<img src="https://latex.codecogs.com/svg?%5Cto" /> `A` : `T`,<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `x`:`Ti`)      | `if (A.Milyen == ci) { x = A.Mi; }` |
+| <img src="https://latex.codecogs.com/svg?M%C3%B3dos%C3%ADt_i" />(<img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> `A`: `T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `x` :`Ti`) | `{ A.Milyen = ci; A.Mi = x ; }`     |
+| <img src="https://latex.codecogs.com/svg?%C3%89rt%C3%A9kad%C3%A1s" />(<img src="https://latex.codecogs.com/svg?%5Cleftarrow" /> `A`:`T`;<img src="https://latex.codecogs.com/svg?%5Cto" /> `X` : `T`)       | `A = X`                             |
+
+###### Egyesített-rekord fizikai adattípus
+
+Láttuk, hogy az `union`-on belül egy adott időpillanatban egy mező lesz az érvényes, így egyszerre nem szükséges minden mezőt eltárolni. Így ha a legnagyobb mező méretének megfelelő memória foglalódik az `union` számára, abban valamennyi mezőn tárolt érték elfér majd.
+
+Azaz egy `T` `union` típus mérete a következő módon alakul: `sizeof(T) = max{sizeof(T1), ..., sizeof(Tk)}`.
+
+##### A struct és union típusok inicializálása
+
+Mind a `struct`, mind az `union` változók kaphatnak kezdőértéket, az adattagok értékeit a `{}`-ek között kell felsorolni.
+
+Az értékek szimpla felsorolásával `struct`-ban az adattagok sorrendjében kell megadni az egyes tagok értékét, de nem kötelező mindet, az `union` esetében viszont csak az első mező típusának megfelelően inicializálható.
+
+A <img src="https://latex.codecogs.com/svg?C%5E%7B99%7D" /> szabvány lehetővé teszi tetszőleges mezők inicializását a mezők neveit felhasználva. Ekkor a `{}` zárójelek között az egyes értékek elé a `.mezo =`-t írva jelezhetjük, hogy az adott érték mely mező kezdőértéke lesz:
+
+```c
+Idom i = {
+    .UU = {
+        .U1 = {
+            .C = 3, .B = 4, .A = 5
+        }
+    },
+    .Fajta = haromszog
+};
+```
 ## Rendszerfejlesztés 1.
 
 ### 1. Szoftverfejlesztési folyamat és elemei; a folyamat különböző modelljei.
