@@ -39,24 +39,22 @@ Minden tárgyból 1db van, de az darabolható.
 Futás a fenti példán:
 
 - Kiszámoljuk az $\frac{E_i}{S_i}$ értékeket
-  
+
   1. Tárgy: 6
-  
+
   2. Tárgy: 5
-  
+
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az $\frac{E_i}{S_i}$ arányok szerint
-  
+
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-  
+
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-  
+
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy $\frac{2}{3}$-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
-
-> 
 
 #### Oszd-meg-és-uralkodj algoritmusok
 
@@ -148,12 +146,12 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-  
-  - Ha ki kell mindent számolni, érdemesebb az iteratív megköelítést választani a függvényhívások overhead-je miatt.
+
+  - Ha ki kell mindent számolni, érdemesebb az iteratív megközelítést választani a függvényhívások overhead-je miatt.
 
 ##### Példa: _Pénzváltás feladat_
 
-Adott $P_i$ érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni $F$ forint.
+Adott $P_i$ érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni $F$ forintot.
 
 ```c
 // Input:
@@ -186,13 +184,13 @@ F  = 9;
 // penzvalt(9) jelenleg itt tart: min( 3, 4, penzvalt(8) ) + 1
 0  1  2  3  4  -  -  -  ?  ? // penzvalt(8) = min( penzvalt(2) = 2, penzvaltas(3) = 3, penzvaltas(7) ) + 1
 0  1  2  3  4  -  -  ?  ?  ? // penzvalt(7) = min( penzvalt(1) = 1, penzvaltas(2) = 2, penzvaltas(6) ) + 1
-0  1  2  3  4  -  ?  ?  ?  ? // penzvalt(6) -> mivel ilyen érménk van, így ezt nem kell kiszámolni, tujuk, hogy penzvalt(6) = 1
+0  1  2  3  4  -  ?  ?  ?  ? // penzvalt(6) -> mivel ilyen érménk van, így ezt nem kell kiszámolni, tudjuk, hogy penzvalt(6) = 1
 0  1  2  3  4  -  1  2  ?  ? // penzvalt(6) visszatér, kiadja penzvalt(7)-et
 0  1  2  3  4  -  1  2  3  ? // penzvalt(7) visszatér, kiadja penzvalt(8)-at
 0  1  2  3  4  -  1  2  3  4 // penzvalt(8) visszatér, kiadja penzvalt(9)-et
 ```
 
-> Bár elmondható, hogy egy esetre, az 5-re nem kellett kiszámolnunk az értéket, de ez implementáció függő volt, ha `penzvalt(6)`-ot is ugyan úgy számoltuk volna, mint a többi értéket, akkor mindent kiszámoltunk volna, ás a rekurzív függvényhívűsok overhead-je miatt egyértelműen az iteratív megközelítés lenne a jobb.
+> Bár elmondható, hogy egy esetre, az 5-re nem kellett kiszámolnunk az értéket, de ez implementáció függő volt, ha `penzvalt(6)`-ot is ugyan úgy számoltuk volna, mint a többi értéket, akkor mindent kiszámoltunk volna, és a rekurzív függvényhívások overhead-je miatt egyértelműen az iteratív megközelítés lenne a jobb.
 
 ###### Iteratív megvalósítással a futás
 
@@ -221,11 +219,11 @@ F  = 9;
 - **Output**: $n$ hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
-> 
+>
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
-> 
+>
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
-> 
+>
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 ##### Beszúró rendezés
@@ -251,8 +249,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-|:--------:|:---------------------------------:|
-| $O(n^2)$ | $O(n)$ ~ $O(1)$                   |
+| :------: | :-------------------------------: |
+| $O(n^2)$ |          $O(n)$ ~ $O(1)$          |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -271,13 +269,13 @@ const kupacRendezes = (A: number[]) => {
 }
 ```
 
-Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, hogy a legnagyobb elem a gyökérben van, így ezt berakhatjuk az éppenvizsgált pozícióra (`csere(A[1], A[i])`). Ez után már csak csökkentenünk kell a kupac méterét, hiszen nem akarjuk mégegyszer a gyökérben az `A[i]`-t. Végezetül helyre kell állítanunk a kupac-tulajdonságot egy `maximumKupacol(A, 1)` hívással. (A 2. paraméter azt mondja meg, melyik csúcsbtól lefelé szeretnénk helyreállítani, jelen esetben az 1-es, hiszen pont azt a pozíciót rontottuk el, amikor cseréltünk. Tehát az egész kupacot helyreállítjuk.)
+Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, hogy a legnagyobb elem a gyökérben van, így ezt berakhatjuk az éppen vizsgált pozícióra (`csere(A[1], A[i])`). Ez után már csak csökkentenünk kell a kupac méterét, hiszen nem akarjuk mégegyszer a gyökérben az `A[i]`-t. Végezetül helyre kell állítanunk a kupac-tulajdonságot egy `maximumKupacol(A, 1)` hívással. (A 2. paraméter azt mondja meg, melyik csúcsbtól lefelé szeretnénk helyreállítani, jelen esetben az 1-es, hiszen pont azt a pozíciót rontottuk el, amikor cseréltünk. Tehát az egész kupacot helyreállítjuk.)
 
 ![  ](../img/kupac_rendezes.png)
 
-| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
-|:-------------:|:---------------------------------:|
-| $O(n*log(n))$ | $O(n)$ ~ $O(1)$                   |
+|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
+| :-----------: | :-------------------------------: |
+| $O(n*log(n))$ |          $O(n)$ ~ $O(1)$          |
 
 ##### Gyorsrendezés
 
@@ -318,10 +316,10 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- |:--------:|
-| $O(n^2)$ | $O(n)$   |
+| -------- | :------: |
+| $O(n^2)$ |  $O(n)$  |
 
-> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság $O(logn)$, ami mivel egy hívás futásideje $O(n)$, így az átlagos futásidő $O(n * logn)$. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
+> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mélység $O(logn)$, ami mivel egy hívás futásideje $O(n)$, így az átlagos futásidő $O(n * logn)$. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
 > Lehet úgy implementálni, hogy $O(logn)$ tárigénye legyen, ez egy helyben rendező, farok-rekurzív ejlárás.
 
@@ -369,8 +367,8 @@ const leszamoloRendezes = (A: number[], k: number) => {
 };
 ```
 
-| Futásidő        | Tárigény     |
-|:---------------:|:------------:|
+|    Futásidő     |   Tárigény   |
+| :-------------: | :----------: |
 | $\Theta(k + n)$ | $\Theta(2n)$ |
 
 > A gyakorlatban akkor használjuk, ha $k = O(n)$, mert ekkor a futásidő $\Theta(n)$
@@ -389,9 +387,9 @@ A bejárás során kijelöl egy "szélességi fát", ami egy kiindulási csúcsb
 
 Amilyen távol van a kiindulási csúcstól egy csúcs, az olyan mélységen helyezkedik el ebben a fában.
 
-Irányított, irányítatlan gráfog esetén is alkalmazható.
+Irányított, irányítatlan gráfok esetén is alkalmazható.
 
-A csúcsok távolsága alapján kalad a bejárás (a kijelölt kezdeti csúcstól), minden $k$ távolságra levő csúcsot elérünk az előtt, hogy egy $k + 1$ távolságra levőt elérnénk.
+A csúcsok távolsága alapján halad a bejárás (a kijelölt kezdeti csúcstól), minden $k$ távolságra levő csúcsot elérünk az előtt, hogy egy $k + 1$ távolságra levőt elérnénk.
 
 Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 
@@ -406,7 +404,7 @@ Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 ```js
 // A G a gráf, s a kiindulási csúcs
 szelessegiKereses(G, s) {
-    for G grás minden nem s csúcsára {
+    for G gráf minden nem s csúcsára {
         szín[csucs] = "fehér"
     }
     szín[s] = "szürke"
@@ -435,7 +433,7 @@ szelessegiKereses(G, s) {
 
 - Sorba, és sorból $O(1)$, így a sorműveletek összesen $O(V).$
 
-- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza $\theta(E)$, így összesen $O(E)$ időt fordítunk a szomszédsági listák vizsgálására.
+- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza $\Theta(E)$, így összesen $O(E)$ időt fordítunk a szomszédsági listák vizsgálására.
 
 - Az algoritmus elején a kezdeti értékadások ideje $O(V)$.
 
@@ -483,9 +481,9 @@ melysegiBejaras(u) {
 
 ###### Futásidő
 
-A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve $\Theta(V)$. A melysegiBejaras() hívások össz futásideje $\Theta(E)$, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő $O(E + V)$
+A `melysegiKereses()` futásideje a `melysegiBejaras()` hívástól eltekintve $\Theta(V)$. A `melysegiBejaras()` hívások össz futásideje $\Theta(E)$, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő $O(E + V)$
 
-> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy $\Theta(E)$. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a mélységiBejárás().
+> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy $\Theta(E)$. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a `mélységiBejárás()`.
 
 ##### Minimális feszítőfák
 
@@ -497,7 +495,7 @@ Két **mohó** algoritmus: **Prim**, **Kruskal**
 
 ###### Kruskal
 
-A gráf csúcsait diszjunkt halmazokba sorolja. Kezdetben minden csúcs 1-1 egy elemú csúcs.
+A gráf csúcsait diszjunkt halmazokba sorolja. Kezdetben minden csúcs 1-1 egy elemű halmaz.
 
 > Erre van speciális diszjunkt-halmaz adatszerkezet
 
@@ -528,7 +526,7 @@ kruskal(G, w) { // Az élsúlyokat megadó függvény
 
 Az élek rendezése $O(E * logE)$.
 
-A halmaz műveletek a kezdeti értékadásokkal együtt $O((V + E) * \alpha * (V)$. Ahol az $\alpha$ egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet jasátossága. Mivek összefüggő gráf esetén $O(|E| \ge |V| + 1)$, így a diszjunkt-halmaz műveletek $O((E) * \alpha * (V))$ idejűek. $\alpha(|V|) = O(log E)$ miatt $O(E * log E)$.
+A halmaz műveletek a kezdeti értékadásokkal együtt $O((V + E) * \alpha * (V))$. Ahol az $\alpha$ egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet sajátossága. Mivek összefüggő gráf esetén $O(|E| \ge |V| + 1)$, így a diszjunkt-halmaz műveletek $O((E) * \alpha * (V))$ idejűek. $\alpha(|V|) = O(log E)$ miatt $O(E * log E)$.
 
 Így a teljes futásidő $O(E * logE)$.
 
@@ -597,7 +595,7 @@ Két függvény, amit használni fognak az algoritmusok:
 ```js
 egyForrasKezdoertek(G, s) { // Kezdőértékek beállítása, ha egy csúcsból indul
     for minden v csúcsra {
-        f[v] = Végtelen
+        d[v] = Végtelen
         szülő[v] = null
     }
     d[s] = 0
@@ -669,7 +667,7 @@ A Q sorban azok a csúcsok vannak, amik nincsenek S-ben, tehát még nem tudjuk 
 Minden csúcs pontosan egyszer kerül át az $S$ halmazba, emiatt amikor szomszédokat vizsgálunk, azt minden csúcsra egyszer tesszük meg, ezen szomszédok vizsgálata összesen $O(E)$-szer fut le, mert ennyi a szomszédsági listák össz hossza. Így a közelít, és ez által a `kulcsotCsökkent` művelet legfejlebb $O(E)$-szer hívódik meg.
 
 Az összesített futásidő nagyban függ a **prioritási sor implementációtól**, a legegyszerűbb eset, ha egy **tömbbel implementáljuk**. Ekkor a `beszúr` és `kulcsotCsokkent` műveletek $O(1)$-esek, a `kiveszMin` pedig $O(V)$, mivel az egész tömbön végig kell menni. Így a teljes futásidő $O(V^2 + E)$.
-**Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és látalánossagban gyorsítható fibonacchi kupaccal.
+**Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és általánossagban gyorsítható fibonacchi kupaccal.
 
 ###### Floyd-Warshall algoritmus
 
@@ -686,14 +684,14 @@ Ez a következő rekurziós képlettel írható fel:
 ```js
 floydWarshall(W) { // W szomszédsági mártix
     n = sorokSzama(W)
-    D(0) = W
+    d(0) = W
     for k = 1-től n-ig { // Ezt vizsgáljuk mindig majd, mint köztes csúcs
         for i = 1-től n-ig {
             for j = 1-től n-ig {
                 d(k)[i, j] = min(
                     d(k - 1)[i, j],
-                    d(k - 1)[i, k] + d(k - 1)[k, j]
-                )
+                    d(k - 1)[i, k] + d(k - 1)[k, j]
+                )
             }
         }
     }
@@ -746,7 +744,7 @@ Benne az adatok lineárisan követik egymást, egy kulcs többször is előfordu
 
 > Beszúrásnál újra kellhet allokálni egyel nagyobb emmóriaterületet.
 
-> Jellemzően úgy implementáljuk, hogy definiálunk egy **kapacitást**, és amikor kell, akkor eggyivel allokálunk többet az új memóriaterületen. Illetve jellemzően azt is definiáljuk, hogy mikor kell zsugorítani a területet, azaz hány üresen maradó cella esetén (nem lyukak! az nem lehet, csak a terület végén levő üres cellák) allokáljunk kevesebb területet.
+> Jellemzően úgy implementáljuk, hogy definiálunk egy **kapacitást**, és amikor kell, akkor ennyivel allokálunk többet az új memóriaterületen. Illetve jellemzően azt is definiáljuk, hogy mikor kell zsugorítani a területet, azaz hány üresen maradó cella esetén (nem lyukak! az nem lehet, csak a terület végén levő üres cellák) allokáljunk kevesebb területet.
 
 **Előnye**: O(1)-es indexelés.
 
@@ -827,8 +825,8 @@ Lefoglalunk egy valamekkora egybefüggő memória szegmenst, de nem mindig haszn
 ```js
 sorba(S, x) {
     S[vége[S]] = x // A vége egy üres pozícióra mutat alapból, ezért növeljük utólag.
-    if vége[S] = hossz[S] {
-        vége[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+    if vége[S] == hossz[S] {
+        vége[S] = 1 // Ekkor "körbefordult" a sor a lefoglalt memóriaterületen.
     } else {
         vége[S]++
     }
@@ -839,10 +837,11 @@ sorba(S, x) {
 sorból(S) {
     x = S[fej[S]] // A fej mutat a sor "elejére", azaz a legrégebben betett elemre.
     if fej[S] == hossz[S] {
-        fej[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+        fej[S] = 1 // Ekkor "körbefordult" a sor a lefoglalt memóriaterületen.
     } else {
         fej[S]++
     }
+    return x
 }
 ```
 
@@ -936,7 +935,7 @@ maximumKupacol(A, i) {
 }
 ```
 
-Tehát a vizsgált indexű elem et összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
+Tehát a vizsgált indexű elemet összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
 
 `maximumKupacol()` futásideje $O(logn)$, mert ennyi a majdnem teljes bináris fa mélysége, és legrosszabb esetben az egészen végig kell lépkedni.
 
@@ -1110,7 +1109,7 @@ fábanMaximum(x) {
 
 ```js
 fábanKövetkező(x) {
-    if jobb[x] == NULL {
+    if jobb[x] != NULL {
         return fábanMinimum(jobb[x])
     }
     y = szülő[x]
@@ -1123,8 +1122,6 @@ fábanKövetkező(x) {
 ```
 
 Azaz, ha van jobb részfája a fának, amiben keresünk, akkor annak a mimimuma a rákövetkező, ha nincs, akkor pedig addig lépkedünk fel, amíg az aktuális csúcs a szülőjének bal gyereke nem lesz, ugyanis ekkor a szülő a rákövetkező.
-
-TODO: Hasonlóan a megelőzőre.
 
 ##### Beszúr
 
@@ -1195,7 +1192,7 @@ Ha a kitörlendő csúcs egy levél, akkor egyszerűen kitöröljük azt, a szü
 
 ###### Egy gyerekes belső csúcs
 
-Ebben az esetben a törlendő csúcs helyére bekötjük annak a részfáját ()amiből, mivel egy gyereke van, csak egy van).
+Ebben az esetben a törlendő csúcs helyére bekötjük annak a részfáját (amiből, mivel egy gyereke van, csak egy van).
 
 ###### Két gyerekes belső csúcs
 
@@ -1253,7 +1250,7 @@ Pl.: $h(k) = k ~ mod ~ m$
 
 $k$ a hasító táblázat mérete, azaz a **rések száma**.
 
-Mivel az unicerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
+Mivel az univerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
 
 Ezeket az **ütközéseket fel kell oldani**.
 
@@ -1263,7 +1260,7 @@ A résekben láncolt listák vannak.
 
 Ha olyan helyre akarunk beszúrni, ahol már van elem, akkor a lista elejére szúrjuk be az újat (ez konstans idejű).
 
-**Keresés, törlés valamivel romlik**, hiszen egy lsitán is végig kelhet menni.
+**Keresés, törlés valamivel romlik**, hiszen egy listán is végig kellhet menni.
 
 Kitöltési tényező: $\alpha = \frac{n}{m}$ (**láncok átlagos hossza**)
 
@@ -1287,10 +1284,10 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 - Szomszédsági lista
 
-|                        | Létezik (u, v) él?       | Összes él listázása | Egy csúcs szomszédainak listázása |
-| ---------------------- |:------------------------:|:-------------------:|:---------------------------------:|
-| Csúcsok + élek halmaza | $\Theta(\|E\|)$          | $\Theta(\|E\|)$     | $\Theta(\|E\|)$                   |
-| Szomszédsági mátrix    | $\Theta(1)$              | $\Theta(\|V\|^2)$   | $\Theta(\|V\|)$                   |
-| Szomszédsági lista     | $\Theta(\text{fokszám})$ | $\Theta(\|E\|)$     | $\Theta(\text{fokszám})$          |
+|                        |    Létezik (u, v) él?    |  Összes él listázása  | Egy csúcs szomszédainak listázása |
+| ---------------------- | :----------------------: | :-------------------: | :-------------------------------: |
+| Csúcsok + élek halmaza |   $\Theta( \| E \| )$    |  $\Theta( \| E \| )$  |        $\Theta( \| E \| )$        |
+| Szomszédsági mátrix    |       $\Theta(1)$        | $\Theta( \| V \| ^2)$ |        $\Theta( \| V \| )$        |
+| Szomszédsági lista     | $\Theta(\text{fokszám})$ |  $\Theta( \| E \| )$  |     $\Theta(\text{fokszám})$      |
 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.

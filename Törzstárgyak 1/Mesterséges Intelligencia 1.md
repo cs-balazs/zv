@@ -10,11 +10,11 @@ A feladatkörnyezetről feltételezzük, hogy *diszkrét*, *statikus*, *determin
 
 Következőekkel modellezzük a feladatot:
 
-- **Lehetséges állapotok*** halmaza
+- **Lehetséges állapotok** halmaza
 
 - Egy **kezdőállapot**
 
-- **Lehetséges cselekvések*** halmaza
+- **Lehetséges cselekvések** halmaza
 
 - Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusó, rendezett párokból álló halmazt.
 

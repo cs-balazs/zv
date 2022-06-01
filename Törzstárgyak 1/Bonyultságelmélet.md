@@ -28,7 +28,7 @@ Erre van algoritmus:
 
 - Ez által $X \cup Y$-ban lesznek az $1$-ből elérhető csúcsok.
 
-Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerjezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban $O(N^3)$-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így $O(n^3)$-ös a futásideje az algoritmusnak (hiszen $N \le n$, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
+Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerkezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban $O(N^3)$-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így $O(n^3)$-ös a futásideje az algoritmusnak (hiszen $N \le n$, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
 
 #### Hatékony visszavezetés
 
@@ -68,7 +68,7 @@ Ekkor ha $B$ **polinomidőben** eldönthető, akkor $A$ is eldönthető **polino
 
 Egy példa a hatékony visszavezetésre a $PÁROSÍTÁS \le SAT$
 
-###### PÁROSÍTÁS
+###### SAT
 
 **Input**: Egy **CNF** (konjunktív normálformájú formula)
 
@@ -76,7 +76,7 @@ Egy példa a hatékony visszavezetésre a $PÁROSÍTÁS \le SAT$
 
 > Azaz van-e olyan értékadás, ami mellett igaz a formula?
 
-###### SAT
+###### PÁROSÍTÁS
 
 **Input**: Egy $G$ gráf
 
@@ -326,7 +326,7 @@ Immermann-Szelepcsényi tétel szerint: $NL = coNL$
 
 - Olyan **változót létrehozni**, amibe $0$ és $n$ közti számokat írunk, hiszen ezek $logn$ tárat igényelnek.
 
-- Nem csak $n$-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha $n^3$-ig számolunk, az is elfér $log^3 = 3 * logn$ biten, tehát $O(logn)$ a tárkorlátja.
+- Nem csak $n$-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha $n^3$-ig számolunk, az is elfér $log^3 n = 3 * logn$ biten, tehát $O(logn)$ a tárkorlátja.
 
 - Az **input valamelyik elemére rámutatni** egy pointerrel, hiszen lényegében ez is egy $0$-tól $n$-ig értékeket felvevő változó.
 
@@ -432,7 +432,7 @@ Tárigénye $O(n^2)$, mert a rekurziókor lemásoljuk az inputot, ami $O(n)$ mé
 
 **Output**: Az első játékosnak van-e nyerő stratégiája a következő játékban?
 
-- Először az első játékos kezd, lerakja az egyetlej bábuját a gráf kezdőcsúcsára.
+- Először az első játékos kezd, lerakja az egyetlen bábuját a gráf kezdőcsúcsára.
 
 - Ezután a második játékos lép, majd az első, stb., felváltva, mindketten a bábut az aktuális pozíciójából egy olyan csúcsba kell húzzák, ami egy lépésben elérhető, és ahol még nem volt a játék során. Aki először nem tud lépni, vesztett.
 
