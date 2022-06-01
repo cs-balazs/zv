@@ -39,24 +39,22 @@ Minden tárgyból 1db van, de az darabolható.
 Futás a fenti példán:
 
 - Kiszámoljuk az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> értékeket
-  
+
   1. Tárgy: 6
-  
+
   2. Tárgy: 5
-  
+
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányok szerint
-  
+
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-  
+
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-  
+
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy <img src="https://latex.codecogs.com/svg?%5Cfrac%7B2%7D%7B3%7D" />-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
-
-> 
 
 #### Oszd-meg-és-uralkodj algoritmusok
 
@@ -148,12 +146,12 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-  
-  - Ha ki kell mindent számolni, érdemesebb az iteratív megköelítést választani a függvényhívások overhead-je miatt.
+
+  - Ha ki kell mindent számolni, érdemesebb az iteratív megközelítést választani a függvényhívások overhead-je miatt.
 
 ##### Példa: _Pénzváltás feladat_
 
-Adott <img src="https://latex.codecogs.com/svg?P_i" /> érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni <img src="https://latex.codecogs.com/svg?F" /> forint.
+Adott <img src="https://latex.codecogs.com/svg?P_i" /> érmékkel (mindből van végtelen sok) hogyan lehet a legkevesebb érmét felhasználva kifizetni <img src="https://latex.codecogs.com/svg?F" /> forintot.
 
 ```c
 // Input:
@@ -186,13 +184,13 @@ F  = 9;
 // penzvalt(9) jelenleg itt tart: min( 3, 4, penzvalt(8) ) + 1
 0  1  2  3  4  -  -  -  ?  ? // penzvalt(8) = min( penzvalt(2) = 2, penzvaltas(3) = 3, penzvaltas(7) ) + 1
 0  1  2  3  4  -  -  ?  ?  ? // penzvalt(7) = min( penzvalt(1) = 1, penzvaltas(2) = 2, penzvaltas(6) ) + 1
-0  1  2  3  4  -  ?  ?  ?  ? // penzvalt(6) -> mivel ilyen érménk van, így ezt nem kell kiszámolni, tujuk, hogy penzvalt(6) = 1
+0  1  2  3  4  -  ?  ?  ?  ? // penzvalt(6) -> mivel ilyen érménk van, így ezt nem kell kiszámolni, tudjuk, hogy penzvalt(6) = 1
 0  1  2  3  4  -  1  2  ?  ? // penzvalt(6) visszatér, kiadja penzvalt(7)-et
 0  1  2  3  4  -  1  2  3  ? // penzvalt(7) visszatér, kiadja penzvalt(8)-at
 0  1  2  3  4  -  1  2  3  4 // penzvalt(8) visszatér, kiadja penzvalt(9)-et
 ```
 
-> Bár elmondható, hogy egy esetre, az 5-re nem kellett kiszámolnunk az értéket, de ez implementáció függő volt, ha `penzvalt(6)`-ot is ugyan úgy számoltuk volna, mint a többi értéket, akkor mindent kiszámoltunk volna, ás a rekurzív függvényhívűsok overhead-je miatt egyértelműen az iteratív megközelítés lenne a jobb.
+> Bár elmondható, hogy egy esetre, az 5-re nem kellett kiszámolnunk az értéket, de ez implementáció függő volt, ha `penzvalt(6)`-ot is ugyan úgy számoltuk volna, mint a többi értéket, akkor mindent kiszámoltunk volna, és a rekurzív függvényhívások overhead-je miatt egyértelműen az iteratív megközelítés lenne a jobb.
 
 ###### Iteratív megvalósítással a futás
 
@@ -221,11 +219,11 @@ F  = 9;
 - **Output**: <img src="https://latex.codecogs.com/svg?n" /> hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
-> 
+>
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
-> 
+>
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
-> 
+>
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 ##### Beszúró rendezés
@@ -251,8 +249,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-|:--------:|:---------------------------------:|
-| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
+| :------: | :-------------------------------: |
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> |          <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />          |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -271,13 +269,13 @@ const kupacRendezes = (A: number[]) => {
 }
 ```
 
-Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, hogy a legnagyobb elem a gyökérben van, így ezt berakhatjuk az éppenvizsgált pozícióra (`csere(A[1], A[i])`). Ez után már csak csökkentenünk kell a kupac méterét, hiszen nem akarjuk mégegyszer a gyökérben az `A[i]`-t. Végezetül helyre kell állítanunk a kupac-tulajdonságot egy `maximumKupacol(A, 1)` hívással. (A 2. paraméter azt mondja meg, melyik csúcsbtól lefelé szeretnénk helyreállítani, jelen esetben az 1-es, hiszen pont azt a pozíciót rontottuk el, amikor cseréltünk. Tehát az egész kupacot helyreállítjuk.)
+Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, hogy a legnagyobb elem a gyökérben van, így ezt berakhatjuk az éppen vizsgált pozícióra (`csere(A[1], A[i])`). Ez után már csak csökkentenünk kell a kupac méterét, hiszen nem akarjuk mégegyszer a gyökérben az `A[i]`-t. Végezetül helyre kell állítanunk a kupac-tulajdonságot egy `maximumKupacol(A, 1)` hívással. (A 2. paraméter azt mondja meg, melyik csúcsbtól lefelé szeretnénk helyreállítani, jelen esetben az 1-es, hiszen pont azt a pozíciót rontottuk el, amikor cseréltünk. Tehát az egész kupacot helyreállítjuk.)
 
 ![  ](../img/kupac_rendezes.png)
 
-| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
-|:-------------:|:---------------------------------:|
-| <img src="https://latex.codecogs.com/svg?O(n*log(n))" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
+|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
+| :-----------: | :-------------------------------: |
+| <img src="https://latex.codecogs.com/svg?O(n*log(n))" /> |          <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />          |
 
 ##### Gyorsrendezés
 
@@ -318,10 +316,10 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- |:--------:|
-| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" />   |
+| -------- | :------: |
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> |  <img src="https://latex.codecogs.com/svg?O(n)" />  |
 
-> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mályság <img src="https://latex.codecogs.com/svg?O(logn)" />, ami mivel egy hívás futásideje <img src="https://latex.codecogs.com/svg?O(n)" />, így az átlagos futásidő <img src="https://latex.codecogs.com/svg?O(n%20*%20logn)" />. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
+> Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mélység <img src="https://latex.codecogs.com/svg?O(logn)" />, ami mivel egy hívás futásideje <img src="https://latex.codecogs.com/svg?O(n)" />, így az átlagos futásidő <img src="https://latex.codecogs.com/svg?O(n%20*%20logn)" />. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
 > Lehet úgy implementálni, hogy <img src="https://latex.codecogs.com/svg?O(logn)" /> tárigénye legyen, ez egy helyben rendező, farok-rekurzív ejlárás.
 
@@ -369,8 +367,8 @@ const leszamoloRendezes = (A: number[], k: number) => {
 };
 ```
 
-| Futásidő        | Tárigény     |
-|:---------------:|:------------:|
+|    Futásidő     |   Tárigény   |
+| :-------------: | :----------: |
 | <img src="https://latex.codecogs.com/svg?%5CTheta(k%20%2B%20n)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(2n)" /> |
 
 > A gyakorlatban akkor használjuk, ha <img src="https://latex.codecogs.com/svg?k%20%3D%20O(n)" />, mert ekkor a futásidő <img src="https://latex.codecogs.com/svg?%5CTheta(n)" />
@@ -389,9 +387,9 @@ A bejárás során kijelöl egy "szélességi fát", ami egy kiindulási csúcsb
 
 Amilyen távol van a kiindulási csúcstól egy csúcs, az olyan mélységen helyezkedik el ebben a fában.
 
-Irányított, irányítatlan gráfog esetén is alkalmazható.
+Irányított, irányítatlan gráfok esetén is alkalmazható.
 
-A csúcsok távolsága alapján kalad a bejárás (a kijelölt kezdeti csúcstól), minden <img src="https://latex.codecogs.com/svg?k" /> távolságra levő csúcsot elérünk az előtt, hogy egy <img src="https://latex.codecogs.com/svg?k%20%2B%201" /> távolságra levőt elérnénk.
+A csúcsok távolsága alapján halad a bejárás (a kijelölt kezdeti csúcstól), minden <img src="https://latex.codecogs.com/svg?k" /> távolságra levő csúcsot elérünk az előtt, hogy egy <img src="https://latex.codecogs.com/svg?k%20%2B%201" /> távolságra levőt elérnénk.
 
 Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 
@@ -406,7 +404,7 @@ Az algoritmus színezi a csúcsokat, ezek a színek a következőket jelentik:
 ```js
 // A G a gráf, s a kiindulási csúcs
 szelessegiKereses(G, s) {
-    for G grás minden nem s csúcsára {
+    for G gráf minden nem s csúcsára {
         szín[csucs] = "fehér"
     }
     szín[s] = "szürke"
@@ -435,7 +433,7 @@ szelessegiKereses(G, s) {
 
 - Sorba, és sorból <img src="https://latex.codecogs.com/svg?O(1)" />, így a sorműveletek összesen <img src="https://latex.codecogs.com/svg?O(V)." />
 
-- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza <img src="https://latex.codecogs.com/svg?%5Ctheta(E)" />, így összesen <img src="https://latex.codecogs.com/svg?O(E)" /> időt fordítunk a szomszédsági listák vizsgálására.
+- Szomszédsági listákat legfeljebb egyszer vizsgáljuk meg, ezek össz hossza <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />, így összesen <img src="https://latex.codecogs.com/svg?O(E)" /> időt fordítunk a szomszédsági listák vizsgálására.
 
 - Az algoritmus elején a kezdeti értékadások ideje <img src="https://latex.codecogs.com/svg?O(V)" />.
 
@@ -483,9 +481,9 @@ melysegiBejaras(u) {
 
 ###### Futásidő
 
-A melysegiKereses() futásideje a melysegiBejaras() hívástól eltekintve <img src="https://latex.codecogs.com/svg?%5CTheta(V)" />. A melysegiBejaras() hívások össz futásideje <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő <img src="https://latex.codecogs.com/svg?O(E%20%2B%20V)" />
+A `melysegiKereses()` futásideje a `melysegiBejaras()` hívástól eltekintve <img src="https://latex.codecogs.com/svg?%5CTheta(V)" />. A `melysegiBejaras()` hívások össz futásideje <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />, mert ennyi a szomszédsági listák összesített hossza. Így a futásidő <img src="https://latex.codecogs.com/svg?O(E%20%2B%20V)" />
 
-> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a mélységiBejárás().
+> A futásidő azért lesz additív mingkét esetben, mert a szomszédsági listák össz hosszára tudjuk mondani, hogy <img src="https://latex.codecogs.com/svg?%5CTheta(E)" />. Lehet, hogy ezt egyszerre nézzük végig, lehet, hogy eloszlatva, de **összessen** ennyi szomszédot vizsgál meg például a `mélységiBejárás()`.
 
 ##### Minimális feszítőfák
 
@@ -497,7 +495,7 @@ Két **mohó** algoritmus: **Prim**, **Kruskal**
 
 ###### Kruskal
 
-A gráf csúcsait diszjunkt halmazokba sorolja. Kezdetben minden csúcs 1-1 egy elemú csúcs.
+A gráf csúcsait diszjunkt halmazokba sorolja. Kezdetben minden csúcs 1-1 egy elemű halmaz.
 
 > Erre van speciális diszjunkt-halmaz adatszerkezet
 
@@ -528,7 +526,7 @@ kruskal(G, w) { // Az élsúlyokat megadó függvény
 
 Az élek rendezése <img src="https://latex.codecogs.com/svg?O(E%20*%20logE)" />.
 
-A halmaz műveletek a kezdeti értékadásokkal együtt <img src="https://latex.codecogs.com/svg?O((V%20%2B%20E)%20*%20%5Calpha%20*%20(V)" />. Ahol az <img src="https://latex.codecogs.com/svg?%5Calpha" /> egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet jasátossága. Mivek összefüggő gráf esetén <img src="https://latex.codecogs.com/svg?O(%7CE%7C%20%5Cge%20%7CV%7C%20%2B%201)" />, így a diszjunkt-halmaz műveletek <img src="https://latex.codecogs.com/svg?O((E)%20*%20%5Calpha%20*%20(V))" /> idejűek. <img src="https://latex.codecogs.com/svg?%5Calpha(%7CV%7C)%20%3D%20O(log%20E)" /> miatt <img src="https://latex.codecogs.com/svg?O(E%20*%20log%20E)" />.
+A halmaz műveletek a kezdeti értékadásokkal együtt <img src="https://latex.codecogs.com/svg?O((V%20%2B%20E)%20*%20%5Calpha%20*%20(V))" />. Ahol az <img src="https://latex.codecogs.com/svg?%5Calpha" /> egy nagyon lassan növekvő függvény, a diszjunkt-halmaz adatszerkezet sajátossága. Mivek összefüggő gráf esetén <img src="https://latex.codecogs.com/svg?O(%7CE%7C%20%5Cge%20%7CV%7C%20%2B%201)" />, így a diszjunkt-halmaz műveletek <img src="https://latex.codecogs.com/svg?O((E)%20*%20%5Calpha%20*%20(V))" /> idejűek. <img src="https://latex.codecogs.com/svg?%5Calpha(%7CV%7C)%20%3D%20O(log%20E)" /> miatt <img src="https://latex.codecogs.com/svg?O(E%20*%20log%20E)" />.
 
 Így a teljes futásidő <img src="https://latex.codecogs.com/svg?O(E%20*%20logE)" />.
 
@@ -597,7 +595,7 @@ Két függvény, amit használni fognak az algoritmusok:
 ```js
 egyForrasKezdoertek(G, s) { // Kezdőértékek beállítása, ha egy csúcsból indul
     for minden v csúcsra {
-        f[v] = Végtelen
+        d[v] = Végtelen
         szülő[v] = null
     }
     d[s] = 0
@@ -669,7 +667,7 @@ A Q sorban azok a csúcsok vannak, amik nincsenek S-ben, tehát még nem tudjuk 
 Minden csúcs pontosan egyszer kerül át az <img src="https://latex.codecogs.com/svg?S" /> halmazba, emiatt amikor szomszédokat vizsgálunk, azt minden csúcsra egyszer tesszük meg, ezen szomszédok vizsgálata összesen <img src="https://latex.codecogs.com/svg?O(E)" />-szer fut le, mert ennyi a szomszédsági listák össz hossza. Így a közelít, és ez által a `kulcsotCsökkent` művelet legfejlebb <img src="https://latex.codecogs.com/svg?O(E)" />-szer hívódik meg.
 
 Az összesített futásidő nagyban függ a **prioritási sor implementációtól**, a legegyszerűbb eset, ha egy **tömbbel implementáljuk**. Ekkor a `beszúr` és `kulcsotCsokkent` műveletek <img src="https://latex.codecogs.com/svg?O(1)" />-esek, a `kiveszMin` pedig <img src="https://latex.codecogs.com/svg?O(V)" />, mivel az egész tömbön végig kell menni. Így a teljes futásidő <img src="https://latex.codecogs.com/svg?O(V%5E2%20%2B%20E)" />.
-**Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és látalánossagban gyorsítható fibonacchi kupaccal.
+**Ritkább gráfok esetén gyorsítható** az algoritmus **bináris kupac** implementációval, és általánossagban gyorsítható fibonacchi kupaccal.
 
 ###### Floyd-Warshall algoritmus
 
@@ -686,14 +684,14 @@ Ez a következő rekurziós képlettel írható fel:
 ```js
 floydWarshall(W) { // W szomszédsági mártix
     n = sorokSzama(W)
-    D(0) = W
+    d(0) = W
     for k = 1-től n-ig { // Ezt vizsgáljuk mindig majd, mint köztes csúcs
         for i = 1-től n-ig {
             for j = 1-től n-ig {
                 d(k)[i, j] = min(
                     d(k - 1)[i, j],
-                    d(k - 1)[i, k] + d(k - 1)[k, j]
-                )
+                    d(k - 1)[i, k] + d(k - 1)[k, j]
+                )
             }
         }
     }
@@ -746,7 +744,7 @@ Benne az adatok lineárisan követik egymást, egy kulcs többször is előfordu
 
 > Beszúrásnál újra kellhet allokálni egyel nagyobb emmóriaterületet.
 
-> Jellemzően úgy implementáljuk, hogy definiálunk egy **kapacitást**, és amikor kell, akkor eggyivel allokálunk többet az új memóriaterületen. Illetve jellemzően azt is definiáljuk, hogy mikor kell zsugorítani a területet, azaz hány üresen maradó cella esetén (nem lyukak! az nem lehet, csak a terület végén levő üres cellák) allokáljunk kevesebb területet.
+> Jellemzően úgy implementáljuk, hogy definiálunk egy **kapacitást**, és amikor kell, akkor ennyivel allokálunk többet az új memóriaterületen. Illetve jellemzően azt is definiáljuk, hogy mikor kell zsugorítani a területet, azaz hány üresen maradó cella esetén (nem lyukak! az nem lehet, csak a terület végén levő üres cellák) allokáljunk kevesebb területet.
 
 **Előnye**: O(1)-es indexelés.
 
@@ -827,8 +825,8 @@ Lefoglalunk egy valamekkora egybefüggő memória szegmenst, de nem mindig haszn
 ```js
 sorba(S, x) {
     S[vége[S]] = x // A vége egy üres pozícióra mutat alapból, ezért növeljük utólag.
-    if vége[S] = hossz[S] {
-        vége[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+    if vége[S] == hossz[S] {
+        vége[S] = 1 // Ekkor "körbefordult" a sor a lefoglalt memóriaterületen.
     } else {
         vége[S]++
     }
@@ -839,10 +837,11 @@ sorba(S, x) {
 sorból(S) {
     x = S[fej[S]] // A fej mutat a sor "elejére", azaz a legrégebben betett elemre.
     if fej[S] == hossz[S] {
-        fej[S] = 1 // Ekkor "körvefordult" a sor a lefoglalt memóriaterületen.
+        fej[S] = 1 // Ekkor "körbefordult" a sor a lefoglalt memóriaterületen.
     } else {
         fej[S]++
     }
+    return x
 }
 ```
 
@@ -936,7 +935,7 @@ maximumKupacol(A, i) {
 }
 ```
 
-Tehát a vizsgált indexű elem et összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
+Tehát a vizsgált indexű elemet összehasonlítjuk a gyerekeivel, és ha valamelyik nagyobb, akkor azzal kicseréljük, és rekurzívan meghívjuk rá a `maximumKupacol()`-t, mert lehet, az új szülőjénél/gyerekénél is nagyobb.
 
 `maximumKupacol()` futásideje <img src="https://latex.codecogs.com/svg?O(logn)" />, mert ennyi a majdnem teljes bináris fa mélysége, és legrosszabb esetben az egészen végig kell lépkedni.
 
@@ -1110,7 +1109,7 @@ fábanMaximum(x) {
 
 ```js
 fábanKövetkező(x) {
-    if jobb[x] == NULL {
+    if jobb[x] != NULL {
         return fábanMinimum(jobb[x])
     }
     y = szülő[x]
@@ -1123,8 +1122,6 @@ fábanKövetkező(x) {
 ```
 
 Azaz, ha van jobb részfája a fának, amiben keresünk, akkor annak a mimimuma a rákövetkező, ha nincs, akkor pedig addig lépkedünk fel, amíg az aktuális csúcs a szülőjének bal gyereke nem lesz, ugyanis ekkor a szülő a rákövetkező.
-
-TODO: Hasonlóan a megelőzőre.
 
 ##### Beszúr
 
@@ -1195,7 +1192,7 @@ Ha a kitörlendő csúcs egy levél, akkor egyszerűen kitöröljük azt, a szü
 
 ###### Egy gyerekes belső csúcs
 
-Ebben az esetben a törlendő csúcs helyére bekötjük annak a részfáját ()amiből, mivel egy gyereke van, csak egy van).
+Ebben az esetben a törlendő csúcs helyére bekötjük annak a részfáját (amiből, mivel egy gyereke van, csak egy van).
 
 ###### Két gyerekes belső csúcs
 
@@ -1253,7 +1250,7 @@ Pl.: <img src="https://latex.codecogs.com/svg?h(k)%20%3D%20k%20~%20mod%20~%20m" 
 
 <img src="https://latex.codecogs.com/svg?k" /> a hasító táblázat mérete, azaz a **rések száma**.
 
-Mivel az unicerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
+Mivel az univerzum, a lehetséges kulcsok száma nagyobb, mint réseké (különben csinálhatnánk tömbös megvalósítást), így elkerülhetetélen, hogy ürközések legyenek, azaz hogy a hasító függvény két kulcsot ugyan arra a résre képezzen le.
 
 Ezeket az **ütközéseket fel kell oldani**.
 
@@ -1263,7 +1260,7 @@ A résekben láncolt listák vannak.
 
 Ha olyan helyre akarunk beszúrni, ahol már van elem, akkor a lista elejére szúrjuk be az újat (ez konstans idejű).
 
-**Keresés, törlés valamivel romlik**, hiszen egy lsitán is végig kelhet menni.
+**Keresés, törlés valamivel romlik**, hiszen egy listán is végig kellhet menni.
 
 Kitöltési tényező: <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%20%5Cfrac%7Bn%7D%7Bm%7D" /> (**láncok átlagos hossza**)
 
@@ -1287,11 +1284,11 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 - Szomszédsági lista
 
-|                        | Létezik (u, v) él?       | Összes él listázása | Egy csúcs szomszédainak listázása |
-| ---------------------- |:------------------------:|:-------------------:|:---------------------------------:|
-| Csúcsok + élek halmaza | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />          | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />                   |
-| Szomszédsági mátrix    | <img src="https://latex.codecogs.com/svg?%5CTheta(1)" />              | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CV%5C%7C%5E2)" />   | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CV%5C%7C)" />                   |
-| Szomszédsági lista     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(%5C%7CE%5C%7C)" />     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />          |
+|                        |    Létezik (u, v) él?    |  Összes él listázása  | Egy csúcs szomszédainak listázása |
+| ---------------------- | :----------------------: | :-------------------: | :-------------------------------: |
+| Csúcsok + élek halmaza |   <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />    |  <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />  |        <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />        |
+| Szomszédsági mátrix    |       <img src="https://latex.codecogs.com/svg?%5CTheta(1)" />        | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20%5E2)" /> |        <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20)" />        |
+| Szomszédsági lista     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> |  <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />  |     <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />      |
 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.
 ## Bonyolultságelmélet
@@ -1324,7 +1321,7 @@ Erre van algoritmus:
 
 - Ez által <img src="https://latex.codecogs.com/svg?X%20%5Ccup%20Y" />-ban lesznek az <img src="https://latex.codecogs.com/svg?1" />-ből elérhető csúcsok.
 
-Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerjezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban <img src="https://latex.codecogs.com/svg?O(N%5E3)" />-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így <img src="https://latex.codecogs.com/svg?O(n%5E3)" />-ös a futásideje az algoritmusnak (hiszen <img src="https://latex.codecogs.com/svg?N%20%5Cle%20n" />, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
+Erre a konkrét implementációnk futásideje változó lehet, függhet például a gráf repretenzációtól, és a halmaz adatszerkezet megválasztásától. De a lényeg, hogy van-e polinom idejű algoritmus, és mivel általánosságban <img src="https://latex.codecogs.com/svg?O(N%5E3)" />-el számolhatunk legrosszabb esetnek (előnytelen implementáció esetén is bele férünk), így <img src="https://latex.codecogs.com/svg?O(n%5E3)" />-ös a futásideje az algoritmusnak (hiszen <img src="https://latex.codecogs.com/svg?N%20%5Cle%20n" />, mert biztosan kevesebb a csúcsok száma, mint a gráfot ábrázoló biteké).
 
 #### Hatékony visszavezetés
 
@@ -1364,7 +1361,7 @@ Ekkor ha <img src="https://latex.codecogs.com/svg?B" /> **polinomidőben** eldö
 
 Egy példa a hatékony visszavezetésre a <img src="https://latex.codecogs.com/svg?P%C3%81ROS%C3%8DT%C3%81S%20%5Cle%20SAT" />
 
-###### PÁROSÍTÁS
+###### SAT
 
 **Input**: Egy **CNF** (konjunktív normálformájú formula)
 
@@ -1372,7 +1369,7 @@ Egy példa a hatékony visszavezetésre a <img src="https://latex.codecogs.com/s
 
 > Azaz van-e olyan értékadás, ami mellett igaz a formula?
 
-###### SAT
+###### PÁROSÍTÁS
 
 **Input**: Egy <img src="https://latex.codecogs.com/svg?G" /> gráf
 
@@ -1622,7 +1619,7 @@ Immermann-Szelepcsényi tétel szerint: <img src="https://latex.codecogs.com/svg
 
 - Olyan **változót létrehozni**, amibe <img src="https://latex.codecogs.com/svg?0" /> és <img src="https://latex.codecogs.com/svg?n" /> közti számokat írunk, hiszen ezek <img src="https://latex.codecogs.com/svg?logn" /> tárat igényelnek.
 
-- Nem csak <img src="https://latex.codecogs.com/svg?n" />-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha <img src="https://latex.codecogs.com/svg?n%5E3" />-ig számolunk, az is elfér <img src="https://latex.codecogs.com/svg?log%5E3%20%3D%203%20*%20logn" /> biten, tehát <img src="https://latex.codecogs.com/svg?O(logn)" /> a tárkorlátja.
+- Nem csak <img src="https://latex.codecogs.com/svg?n" />-ig ér számolni, hanem bármilyen **fix fokszámú polinomig**. Pl. ha <img src="https://latex.codecogs.com/svg?n%5E3" />-ig számolunk, az is elfér <img src="https://latex.codecogs.com/svg?log%5E3%20n%20%3D%203%20*%20logn" /> biten, tehát <img src="https://latex.codecogs.com/svg?O(logn)" /> a tárkorlátja.
 
 - Az **input valamelyik elemére rámutatni** egy pointerrel, hiszen lényegében ez is egy <img src="https://latex.codecogs.com/svg?0" />-tól <img src="https://latex.codecogs.com/svg?n" />-ig értékeket felvevő változó.
 
@@ -1728,7 +1725,7 @@ Tárigénye <img src="https://latex.codecogs.com/svg?O(n%5E2)" />, mert a rekurz
 
 **Output**: Az első játékosnak van-e nyerő stratégiája a következő játékban?
 
-- Először az első játékos kezd, lerakja az egyetlej bábuját a gráf kezdőcsúcsára.
+- Először az első játékos kezd, lerakja az egyetlen bábuját a gráf kezdőcsúcsára.
 
 - Ezután a második játékos lép, majd az első, stb., felváltva, mindketten a bábut az aktuális pozíciójából egy olyan csúcsba kell húzzák, ami egy lépésben elérhető, és ahol még nem volt a játék során. Aki először nem tud lépni, vesztett.
 
@@ -3531,11 +3528,11 @@ A feladatkörnyezetről feltételezzük, hogy *diszkrét*, *statikus*, *determin
 
 Következőekkel modellezzük a feladatot:
 
-- **Lehetséges állapotok*** halmaza
+- **Lehetséges állapotok** halmaza
 
 - Egy **kezdőállapot**
 
-- **Lehetséges cselekvések*** halmaza
+- **Lehetséges cselekvések** halmaza
 
 - Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusó, rendezett párokból álló halmazt.
 
@@ -5127,68 +5124,399 @@ LP-lazítás könnyen kiszámolható: Relatív hasznosság szerint sorrendbe rak
 Legrosszabb esetben <img src="https://latex.codecogs.com/svg?2%5En" /> részfeladatot kell megoldani, vagyis a hátizsák probléma NP-nehéz.
 
 Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com/svg?2%5E%7BMn%7D" />, ahol <img src="https://latex.codecogs.com/svg?M" /> a lehetséges egészek száma egy változóra.
-## Adatbázisok
+## Operációs rendszerek
+
+### 1. Processzusok, szálak/fonalak, processzus létrehozása/befejezése, processzusok állapotai, processzus leírása. Ütemezési stratégiák és algoritmusok kötegelt, interaktív és valós idejű rendszereknél, ütemezési algoritmusok céljai. Kontextus-csere.
+
+#### Alapfogalmak
+
+- **Processzus**: Egy végrehajtás alatt álló program. Minden processzushoz tarozik egy saját címtartomány. Beleértve az utasításszámláló, a regiszterek és a változók aktuális értékét is.
+
+- **Szálak (thread)**: Processzusok egymással összefüggő erőforrások egy csoportosítása. A processzus címtartománya tartalmazza a program kódját, adatait és más erőforrásait.
+
+#### Processzusok létrehozása
+
+Négy fő esemény, amely okozhatja egy processzus létrehozását:
+
+- **A rendszer inicializálása**
+  
+  > A felhasználóval tartják a kapcsolatot: előtérben futnak.
+  > Nincsenek bizonyos felhasználóhoz rendelve: háttérben futnak, démonok (daemon).
+
+- **A processzus által meghívott processzust létrehozó rendszerhívás végrehajtása**
+  
+  > Kooperatív folyamatok, egymással együttműködő de amúgy független processzusok.
+
+- **A felhasználó egy processzus létrehozását kéri**
+  
+  > Interaktív rendszerekben.
+
+- **Kötegelt feladat kezdeményezése**
+  
+  > Amennyiben rendelkezésra áll erőforrás.
+
+#### Processzusok befejezése
+
+Processzusok befejeződnek, rendszerint a következő körülmények között:
+
+- **Szabályos kilépés** (önkéntes)
+  
+  > A fordítóprogram végzett a feladatával, majd végrehajt egy rendszerhívást, amellyel közli az operációs rendszer felé, hogy elkészült (MINIX 3-ban az *`exit`* hívás), vagy például képernyőorientált programok esetén (pl.: szövegszerkeztő) rendelkezik olyan billentyű kombinációval amellyel a felhasználó közölheti a processzussal, hogy mentse a munkafájlt és fejezze be a futását.
+
+- **Kilépés hiba miatt** (önkéntes)
+  
+  > Esetlegesen egy hibás programsor miatt. Példa egy illegális utasítás végrehajtása, nem létező memória címre hivatkozás, nullával való osztás.
+
+- **Kilépés végzetes hiba miatt** (önkéntelen)
+  
+  > Végzetes hiba lehet, ha a felhasználó a *`cc foo.cc`* parancsot kiadva szeretné fordítani a *`foo.cc`* programot, de nem létezik ilyen nevű fájlt. A fordítóprogram egyszerűen kilép.
+
+- **Egy másik processzus megsemmisíti** (önkéntelen)
+  
+  > Olyan rendszerhívás végrehajtása, amely közli az operációs rendszerrel, hogy semmisítsen meg egy másik processzust (MINIX 3-ban *`kill`* hívás). A megsemmisítőnek természetesen rendelkeznie kell a megfelelő jogosultságokkal.
+
+#### Processzusok állapotai
+
+- **Futó:** Végrehajtás alatt áll, a CPU-t használja.
+- **Blokkolt:** Logikailag nem lehet folytatni. Bizonyos külső esemény bekövetkezéséig nem képes futni.
+- **Futásra kész:** Elivileg készen áll, futásra képes. Ideiglenesen leállították, hogy egy másik processzus futhasson.
+
+![](../img/allapotok.png)
+
+> Minden processzus aktuális állapotáról információt kell tárolni, amelyet az operációs rendszer táblázatban tárol el.
+
+- Utasításszámláló
+- Veremmutató
+- Lefoglalt memória
+- Megnyitott fájlok állapota
+- Egyéb
+
+#### Kontextus-csere
+
+Több egyidejűleg létező processzus és egy CPU esetén a CPU váltakozva hajtja végre a processzusokat. A CPU átvált P1 processzusról a P2 processzusra, P1 állapotát a CPU regisztereiből el kell menteni az erre fenntartott memóriaterületre, P2 korábban elmentett állapotát helyre kell állítani a CPU regisztereiben.
+
+#### Ütemezés
+
+Amikor több processzus képes futni, viszont csak egy processzor áll rendelkezésre, akkor az operációs rendszernek el kell döntenie, hogy mely fusson először. Az operációs rendszer azon részét, amelyik ezt a döntést meghozza, `ütemezőnek` (scheduler) nevezzük, az erre a célra használt algoritmus pedig az `ütemezési algoritmus`.
+
+#### Ütmezés kötegelt rendszerekben
+
+Nincsenek felhasználók, emiatt nem megszakítható ütemezési algoritmusok, vagy minden processzus számára hosszú időintervallumokat engedélyező, megszakítható alkoritmusok használata gyakran elfogadható. Így csökken a processzusváltások száma és nő a teljesítmény.
+
+- **Sorrendi ütemezés**
+  
+  > Nem megszakítható, olyan sorrendben osztja a CPU-t, ahogy a processzusok azt kérik. Addig fut amíg nem blokkolódik. A sor elején lépő processzus kapja a CPU-t, amikor egy blokkolt újra futáskész a sor végére kerül. könnyen megérthető, pártatlan.
+
+- **Legrövidebb feladatot először**
+  
+  > Nem megszakítható, feltételezi, hogy ismerjük a futásidőket. Akkor kell használni, ha több egyformán fontos fealdat van. Csak akkor optimális ha mindegyik feladat egyszerre rendelkezésre áll.
+
+- **Legrövidebb maradék idejű következzen**
+  
+  > Megszakítható, mindig azt a processzust választja az ütemező, amelynek legkevesebb a befejeződésig még a hátralévő ideje, új processzus esetén ha kevesebb időt igényel az új processzus, akkor lecseréljük az új processzusra. Az új, rövid feladatok jó kiszolgálásban részesülnek.
+
+- **Háromszintű ütemezés:**
+    
+  > - **Bebocsátó ütemező:**
+  >   
+  >       Megfelelő keveréket állít elő a CPU és I/O igényes processzusokból, a rövid feladatokat előbb beengedi, de a hosszabbaknak várakozniuk kell.
+  > 
+  > - **Memóriaütemező:**
+  >   
+  >       Sok processzus esetén azok nem férnek el a memóriában, ki kell őket tenni merevlemezre. Körültekintőnek kell lennie.
+  >       Döntési szempontok:
+  >           - *Mennyi idő telt el a processzus lemezre vitele óta?*
+  >           - *Mennyi CPU időt használt fel processzus nemrégiben?*
+  >           - *Melyen nagy a processzus?*
+  >           - *Mennyire fontos?*
+  >
+  > - **CPU-ütemező:**
+  >   
+  >       Valójában kiválasztja, hogy a futásrakész processzusok közül melyik fusson következőnek.
+
+#### Ütmezés interaktív rendszerekben
+
+Az időnkénti megszakítás nélkülözhetetlen, nehogy valamely processzus kisajátítsa a CPU-t, ezzel megakadályozva a többit a futásban. Tehát megszakítások ütemezésre van szükség.
+
+- **Round robin ütemezés**
+  
+  > Processzusoknak időintervallum van osztva amely alatt engedélyezett a futásuk. Az időintervallum végén futó processzusok átadják a CPU-t és az idő előtt befejezett vagy blokkolt processzusok is. Listát vezet a futtatható processzusokról és az időszelet felhasználása után a lista végére kerül a processzus.
+
+- **Prioritás ütemezés**
+  
+  > Minden processzushoz prioritást rendelünk, a legmagasabb prioritású, futáskész kapja meg a CPU-t. Annak megekőzése érdekében, hogy a magas prioritásuak végtelen ideig fussanak, minden óraütemben csökkenti a futó processzus prioritását. Amikor a második legfontosabb lesz akkor kontextus csere. Maximális időszeletet rendelünk a processzusokhoz, és amikor lejár az idő, akkor a második processzus a prioritási sorban kapja a CPU-t.
+  > 
+  > - **Statikus:** Adott rendszerben adott felhasználókra automatikusan adott prioritású processzusok jönnek létre (Unix rendszerben a *`nice`* utasítással csökkenthetjük a prioritást)
+  > - **Dinamikus:** Erősen I/O műveleteket végző processzusok esetén, azonnal meg kelllene kapniuk a CPU-t, lehetővé tenni számára a következő I/O művelet megkezdését, majd másik proszesszus fog futni.
+  
+  > Érdemes a processzusokat prioritási osztályokba sorolni, és osztályokon belül a Round robin ütemezést alkalmazni.
+
+- **Többszörös sorok**
+  
+  > Lassú a kontextus csere végrehajtása. Prioritási osztályok felállítása, úgy hogy a legmagasabb osztályban egy időszeletig futnak, a következőben kettőig, a következő osztályban négy időszeletig és így tovább. Ha elhasználja az időszeletet akkor egy osztállyal lejjebb kerül, így egyre kevesebb gyakorisággal fog futni.
+
+- **Legrövidebb processzus következzen**
+
+Interaktív processzusok általában a következő sémát követik:
+1. Várakozás utasításra
+2. Utasítás végrehajtása
+3. GOTO 1.
+  
+  > Kötegelt rendszerben ez minimális válaszidőt ad, viszont párhuzamos processzusoknál nehéz meghatározni, hogy melyik a legrövidebb. Becslés végrehajtása múltbéli viselkedés alapján. Becslés aktualizálása súlyozott átlag számolásával:
+  > 
+  > <img src="https://latex.codecogs.com/svg?%0A%20%20%3E%20%F0%9D%91%8E%F0%9D%91%87_0%2B(1%E2%88%92%F0%9D%91%8E)%F0%9D%91%87_1%0A%20%20%3E%20" />
+  > Ahol *`T`* a becsült idő és az *`a`* megválasztásával megválaszthatjuk, hogy a processzus gyorsan elfelejtse-e a régi futásokat, vagy sokáig emlékezzen rájuk. Az a = 1/2 választással a következő egymás utáni becsléseket kapjuk:
+  > <img src="https://latex.codecogs.com/svg?%0A%20%20%3E%20%F0%9D%91%87_0%2C%20%5Cspace%20%F0%9D%91%87_0%2F2%2B%F0%9D%91%87_1%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F4%2B%F0%9D%91%87_1%2F4%2BT_2%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F8%2B%F0%9D%91%87_1%2F8%2BT_2%2F8%2BT_3%2F2%2C%0A%20%20%3E%20" />
+  > 
+  > Öregedéssel számolva: vesszük a mért érték és az előző becslés súlyozott átlagát.
+
+- **Garantált ütemezés**
+  
+  > Ígéret tétele a felhasználónak a teljesítménnyel kapcsolatbanés ezt be is tartjuk. ( Példa: *n* felhasználó esetén a CPU *1/n*-ed részét kapod ). A betartáshoz nyomon kell követni hogy a CPU mennyi időt kapott a létrehozása óta, ezután kiszámítja mindegyikhez a neki járó mennyiséget.
+
+- **Sorsjáték ütemezés**
+  
+  > Alapötlet, hogy minden processzusnak sorsjegyet adunk a különböző erőforrásokhoz, mintpédául CPU idő. A fontosabb processzusok többlet sorsjegyet kapnak, hogy növeljék a nyerési esélyeiket. Kooperatív processzusok átadhatják egymásnak a sorsjegyeket. Nagyon jó a válaszidő.
+
+- **Arányos ütemezés**
+  
+  > Ebben a modellben minden felhasználó kap valamekkora hányadot a CPU-ból. Két felhasználó esetén ez 50%-50% attól függetlenül, hogy hány processzust futtatnak.
+
+#### Ütmezés valósidejű rendszerekben
+
+Nem mindig van szükség megszakításos ütemezésre, mivel a processzusok eleve nem futnak sokáig. Csak a szóban forgó alkalmazás érdekeit szem előtt tartó programok futnak.
+
+Jellemzően egy vagy több külső fizikai eszköz ingert küld a számítógép felé, amire annak megfelelően reagálnia kell egy adott időn belül.
+
+- **Szigorú valósidejű rendszerek:** Abszolút határidők vannak, kötelező betartani.
+- **Toleráns valósidejű rendszerek:** Egy-egy határidő elmulasztása nem kívánatos, de azért tolerálható.
+
+> A valós idejű viselkedés eléréséhez a programot több processzusra osztjuk, ezek viselkedése ismert/megjósolható, és rövid életűek. Az ütemező feladata, hogy a processzusokat úgy ütemezze, hogy a határidők be legyenek tartva.
+
+Eseményeket két csoportba sorolhatjuk:
+
+- **Periodikusak:** Rendszeres intervallumként fordulnak elő.
+- **Aperiodikusak:** Megjósolhatatlan az előfordulásuk.
+
+> A valós idejű ütemezési algoritmusok dinamikusak vagy statikusak lehetnek.
+
+### 2. Processzusok kommunikációja, versenyhelyzetek, kölcsönös kizárás. Konkurens és kooperatív processzusok. Kritikus szekciók és megvalósítási módszereik: kölcsönös kizárás tevékeny várakozással (megszakítások tiltása, változók zárolása, szigorú váltogatás, Peterson megoldása, TSL utasítás). Altatás és ébresztés: termelő-fogyasztó probléma, szemaforok, mutex-ek, monitorok, Üzenet, adás, vétel. Írók és olvasók problémája. Sorompók.
+
+#### Processzusok kommunikációja
+
+A processzusoknak szükségük vannak a kommunikációra, és előnyös ha ez nem magszakításokkal történik. (InterProcess Communication [IPC])
+
+#### Versenyhelyzetek
+
+Kooperatív processzusok közös tárolóterületen dolgoznak, ahol mindegyik írhat és olvashat is.
+Általános probléma a `háttérnyomtatás`, ahol egy kliens beteszi a nyomtatandó fájl nevét egy háttérkatalógusba majd a nyomtató démon folyamatosan ellenőrzi, hogy kell-e nyomtatni. Ha kell akkor kinyomtatja majd törli a nevét a katalógusból.
+
+![](../img/nyomtatos.png)
+
+Két megosztott változó van, az *`in`* és az *`out`*. Az *`in`* a katalógus következő szabad helyére mutat és az *`out`* a következő nyomtatandó állományra.
+Legroszabb esetben `A` olvassa az *`in`* értékét és eltárolja egy lokális változóban, majd egy kontextus csere történik. `B` eltárolja az állományt és az *`in`*-t frissíti az új értekkel majd `A` folytatja a futását és felülírja a korábbi rekesz tartalmát (kitörli a `B` által beírt állomány nevét) és frissíti az *`in`* értékét.
+
+> Ez egy versenyhelyzet, mivel megosztott adatok esetén a végeredmény attól függ, hogy ki mikor fut.
+
+#### Kritikus szekciók
+
+Ahol a program versenyhelyzetbe kerül.
+Cél a versenyhelyzet elkerülése, meg kell tiltani, hogy egy időben egynél több processzus hozzáférjen a megosztott adatokhoz.
+Ha két processzus soha nincs egyszerre a kritikus szekciójában a versenyhelyzet elkerülhető.
+
+> Szükséges feltételek a kooperatív processzusok megfelelő együttműködéséhez: 
+> 
+> 1. Ne legyen két processzus egyszerre a saját kritikus szekciójában
+> 2. Semmilyen előfeltétel ne legyen a sebességekről vagy a CPU-k számáról
+> 3. Egyetlen, a kritikus szekcióján kívül futó processzus sem blokkolhat más processzusokat
+> 4. Egyetlen processzusnak se kelljen örökké várni arra, hogy belépjen a kritikus szekciójába
+
+#### Kölcsönös kizárás
+
+Egy módszer amely biztosítja, hogy ha egy processzus használ valamely megosztott változót vagy fájlt, akkor a többi processzus tartózkodjon ettől a tevékenységtől.
+
+#### Kölcsönös kizárás tevékeny várakozással
+
+- **Megszakítások tiltása** 
+  Minden processzus letiltja az összes megszakítást a kritikus szekcióba lépés után, majd újra engedélyezi mielőtt elhagyja azt. Ha nem fordulhat elő óramegszakítás akkor a CPU nem fog másik processzura váltani.
+  
+  > Gyakran hasznos technika az operációs rendszeren belül de nem megfelelő a felhasználói processzusok számára mint általános kölcsönös kizárási mechanizmus.(Mivel mi van akkor, ha nem engedélyezi azokat újból, vagy több processzoros rendszernél csak az adott CPU-ravonatkozik a megszakítás tiltása)
+
+- **Változók zárolása:**
+  Egy szoftvermegoldás, megosztott változó, kezdeti értéke 0. Mielőtt egy processzus belépne a saját kritikus szekciójába először megvizsgálja ezt a változót, ha 0 akkor belép és 1-re állítja. Ha már 1 akkor a processzus addig vár, amíg az 0 nem lesz. Így a 0 azt jelenti, hogy egyetlen processzus sincs a saját kritikus szekciójában, az 1 meg hogy valamely processzus a saját kritikus szekciójában van.
+  
+  > Sajnos ez a módszer ugyan azt a végzetes hibát rejti magában mint a háttérnyomtatás. (Mi van ha az egyik processzus elolvassa a zárolásváltozót és épp akkor történik kontextus csere mielőt betudná állítani azt 1 értékre)
+
+- **Szigorú váltogatás:**
+  Folyamatosan tesztel, hogy lássa mikor léphet be a kritikus szekciójába.
+  Azt amikor folyamatosan tesztelünk egy változót egy bizonyos érték megjelenéséig, `tevékeny várakozás`-nak nevezzük. Ez általában nem megfelelő megoldás mivel pazarolja a CPU-t.
+  
+  > Bár ez az algoritmus elkerül minden versenyt, mégsem tekinthető komoly jelöltnek a probléma megoldására mivel megsérti a 3.feltételt miszerint: A processzus blokkolja másik processzus kritikus szekcióba való lépését a kritikus szekción kívül.
+
+- **Peterson megoldása:**
+  Két C eljárás, kritikus szekcióba lépés előtt **`enter_region`** hívás, kritikus szekció elhagyása után **`leave_region`** hívása.
+  
+  > Ez egy udvarias megoldás mivel maga elé engedi a másik processzust.
+
+- **TSL utasítás:**
+  
+  Hardveres segítséget igényel. Általában többprocesszoros gépeknél alkalmazandó. TSL RX,LOCK utasítás van. (Test and Set Lock)
+  Beolvassa a LOCK memória szót az RX regiszterbe, nem nulla értéket ír a memória címre
+  A memória elérés más CPU-knak tiltva van a művelet befejezéséig
+
+  A TSL utasítás alkalmazásához egy **`LOCK`** megosztottváltozót használunk, ezzel összehangolva a megosztott memória elérést. Amikor a **`LOCK`** 0 akkor bármelyik processzus beállíthatja azt 1-re a TSL utasítás használatával és ezután írhatja, olvashatja a megosztott memóriát. Ha megtette a processzus visszaállítja a **`LOCK`** értékét 0-ra.
+  
+  > Párban kell használni az eljárásokat, mivel ha valaki csal, akkor a kölcsönös kizárás meghiúsul.
+
+#### Altatás és ébresztés
+
+Processzusok közötti kommunikációs primitív amelyek a CPU idő pazarlása helyett blokkolnak, amikor nem megengedett, hogy kritikus szekcióba lépjenek. **`sleep`** és **`wakeup`** pár.
+A **`sleep`** egy rendszerhívás amely a hívót blokkolja (felfüggeszti) mindaddig amíg egy másik processzus fel nem ébreszti.
+A **`wakeup`** hívásnak egy paramétere van, maga a processzus amit felkell ébreszteni.
+
+#### Termelő-fogyasztó probléma
+
+Termelő mely adatokat helyez el a tárolóban és a fogyasztó amely azokat kiveszi, szükség van egy **`count`** változóra amit a termelő megvizsgál, hogy maxmimális-e az értéke, (azaz a tároló tele van-e) ha igen akkor a termelő elalszik, ha nem akkor beletesz egy elemet a tárolóba és növeli a **`count`** értékét. A fogyasztó szintúgy ellenőrzi **`count`** értékét és ha 0 elalszik, ellenkező estben pedig kiveszi az elemet a tárolóból.
+Probléma a még nem alvó processzusnak küldött ébresztőjel elveszik. Megoldás: ébresztőt váró bit hozzáadása.
+
+#### Szemaforok
+
+Egész változókban kell számolni az ébresztéseket a későbbi felhasználás érdekében. A szemafor értéke lehet 0 ha nincs elmentett ébresztésés lehet pozitív ha egy vagy több ébresztés függőben van. Ez a két művelet a **`down`** és az **`up`**.
+A **`down`** művelet megvizsgálja hogy a szemafor értéke nagyobb-e mint 0. Ha igen csökkenti az értékét (azaz elhasznál egy ébresztést) és azonnal folytatja. Ha az értéke 0 akkor a processzust elaltatja mielőtt a **`down`** befejeződne.
+az **`up`** rendszerhívás a megadott szemafor értékét növeli. Ha egy vagy több processzus aludna már ezen a szemaforon akkor egyet kiválasztva  a rendszer megengedi annak hogy befejezze a **`down`** műveletét.
+
+#### Mutex-ek
+
+A szemafor egy egyszerűsített változata. A mutexek csak bizonyos erőforrások vagy kódrészek kölcsönös kizárásának kezelésére alkalmasak.
+Két állapota lehet: `zárolt` és `nem zárolt`.
+Például ha egy processzus hozzá szeretne jutni a kritikus szekciójához akkor meghívja a `mutex_lock` eljárást. Ha a mutex nem zárolt akkor az eljárás sikeres és beléphet a kritikus szekcióba. Másik esetben pedig a hívó blokkolódik amíg a kritikus szekcióban lévő processzus nem hívja a `mutex_unlock` eljárást.
+
+#### Monitorok /nem érthető/
+
+Magasabb szintű szinkronizációs primitívek használatának javaslata amelyeket monitoroknak nevezték el.
+
+- Eljárások, változók és adatszerkezetek együttese
+- Speciális modulba/csomagba vannak összegyűjtve
+- A processzusok bármikor hívhatják a monitorban lévő eljárásokat, nem érhetik el a belső adatszerkezeteit
+- Objektumorientált nyelvekben is használt szabály
+- Minden időpillanatban csak egy processzus lehet aktív egy monitorban
+- Könnyű módszer a kölcsönös kizárás eléréséhez
+- Nem elegendő, szükség van olyan módszerre, amellyel egy processzust blokkolhatunk, ha nem tud tovább haladni
+- Megoldás állapot változók bevezetése (nem számlálók)
+
+Szükség van egy szabályra, hogy mi történjen a **`signal`** után?
+
+> Az újonnan felébresztett processzust hagyjuk futni, de a másikat felfüggesztjük
+
+#### Üzenet
+
+Két primitívet használ, hasonlítanak a szemaforokra, de nem monitorok
+**`send(cél)`** és **`receive(forrás)`** (rendszerhívások)
+
+**Tervezési kérdések az üzenetküldési rendszereknél:**
+
+> Hálózatba kötött gépeken futó processzusok kommunikációja
+> Az üzenet elveszhet a hálózaton
+
+> A küldő és fogadó ugyanazon a gépen található
+> Lassabb, mint a többi eddigi eszköz
+
+Levelesláda adatszerkezet
+
+> Adott számú üzenet tárolására alkalmas
+> Ha tele van a levelesláda küldő felfüggesztődik
+
+Ideiglenes tárolás elhagyása
+
+> Ha **`receive`** előtt **`send`**-et hajtunk végre
+> Küldő blokkolódik, amíg a **`receive`** végrehajtódik
+
+> Ha a **`send`** előtt **`receive`** hajtódik végre
+> Fogadó blokkolódik, amíg a **`send`** blokkolódik
+
+> Randevúnak nevezzük ezt a stratégiát, könnyebb megvalósítani, de kevésbé rugalmas
+
+#### Írók és olvasók problémája
+
+Adatbázis elérést modellező probléma. Pédául egy légitársaság helyfoglaló rendszere. A modellben léteznek olvasó processzusok amelyek olvassák az adatbázist akár egyidejűleg is és író processzusok amelyek ha írják az adatbázist, akkor más processzusoknak nem szabad elérniük azt. A kérdés az, hogy hogyan programozzuk az írókat és olvasókat?
+
+> **Egyik megoldás:** Az első olvasó aki hozzáfér az adatbázishoz végrehajt egy **`down`**-t a **`db`** szemaforon és a következő olvasók csak az **`rc`** számlálót növelik. Ha egy olvasó kilép, akkor csökkenti az **`rc`** számlálót, majd az utolsó kilépő végrehajt egy **`up`**-ot a **`db`** szemaforon lehetővé téve az írónak, (ha van ilyen) hogy belépjen.
+> Ezzel a probléma hogy mivel nem baj, ha több olvasó lép be, ezért ha sorozatosan érkeznek olvasók, azok bebocsájtást nyernek, viszont egy író felfüggesztődik. Abban az esetben, ha mondjuk 2mp-ként érkezik egy olvasó és ezek munkája 5mp-ig tart, akkor az író soha sem lesz beengedve.
+
+> **Masik megoldás:** Ha érkezik egy olvasó, viszont egy író már vár, akkor az olvasó felfüggesztődik. Így az írónak csak azokat az olvasókat kell megvárnia hogy végezzenek amelyek előtte érkeztek.
+> Ennek a megoldásnak a hátránya, hogy kevesebb párhuzamosságot enged meg, ezáltal a hatékonyság csökken.
+
+> Courtois és társai rámutattak egy megoldásra amely az írónak ad elsőbbséget. *( lásd: Courtois et al., 1971 )*
+
+#### Sorompók
+
+Könyvtári eljárás, fázisokra osztjuk az alkalmazást
+**Szabály:** Egyetlen processzus sem mehet tovább a következő fázisra, amíg az összes processzus nem áll készen
+
+> Sorompó elhelyezése mindegyik fázis végére és amikor egy processzus a sorompóhoz ér, akkor addig blokkolódik ameddig az összes processzus el nem éri a sorompót, majd a sorompó az utolsó processzus beérkezése után elengedi a azokat
+
+![](../img/sorompo.png)## Adatbázisok
 
 ### 1. Adatbázis-tervezés: A relációs adatmodell fogalma. Az egyed-kapcsolat diagram és leképezése relációs modellre, kulcsok fajtái. Funkcionális függőség, a normalizálás célja, normálformák.
 
 > **_<mark>Emlékeztető</mark>_**
->
+> 
 > **_Alapfogalmak_**
->
+> 
 > **Adatbázis** (DB = database): adott formátum és rendszer szerint tárolt adatok együttese
->
+> 
 > **Adatbázisséma:** az adatbázis struktúrájának leírása
->
+> 
 > **Adatbázis-kezelő rendszer** (DBMS = Database Management System): az adatbázist kezelő szoftver
->
+> 
 > - Főbb feladatai:
->
+>   
 >   - adatstruktúrák definiálása (adatbázisséma)
->
+>   
 >   - adatok aktualizálása (adatfelvitel, törlés, módosítás) és
 >     lekérdezése
->
+>   
 >   - nagy mennyiségű adat hosszú idejű, biztonságos tárolása
->
+>   
 >   - több felhasználó egyidejű kiszolgálása, jogosultságok
 >     szabályozása
->
+>   
 >   - több feladat egyidejű végrehajtása, tranzakciók kezelése
->
+> 
 > **Rekord** (= feljegyzés): az adatbázis alapvető
 > adategysége
->
+> 
 > **Egyed-kapcsolat modell fogalmai**
->
+> 
 > **Egyed (entitás):** a valós világ egy objektuma, melyről az
 > adatbázisban információt szeretnénk tárolni
->
+> 
 > **Tulajdonság (attribútum):** az egyed egy jellemzője
->
+> 
 > **Összetett attribútum:** maga is attribútumokkal rendelkezik (általában egy struktúra, aminek adattagjai külön-külön elemi típusú értékekre
 > képződnek le)
->
+> 
 > - Jelölés: a struktúrát alkotó adattagokat újabb
 >   ellipszisekkel kötjük az összetett attribútumhoz
->
+> 
 > **Többértékű attribútum:** halmaz vagy lista adattípusra képződik le (előbbinél nem számít a sorrend, utóbbinál viszont igen)
->
+> 
 > - Jelölés: kettős ellipszis
->
+> 
 > **Gyenge entitás:** az attribútumai nem határozzák meg egyértelműen
->
+> 
 > - Jele: kettős téglalap
->
+> 
 > **Meghatározó kapcsolat:** gyenge entitást határoz meg
->
+> 
 > - Jele: kettős rombusz
->
+> 
 > <img src="../img/adatb/2022-05-20-21-23-09-image.png" title="" alt="" width="465">
->
+> 
 > **Specializáló kapcsolat**: olyan kapcsolat, amely hierarchiát jelöl az egyedek között. Például egy helyiség lehet számítógépes terem vagy mosdó is.
->
+> 
 > <img src="../img/adatb/2022-05-20-21-47-21-image.png" title="" alt="" width="369">
->
+> 
 > **Kulcs:** olyan (minimális) attribútumhalmaz, amely már egyértelműen meghatározza az egyedet
 
 #### A relációs adatmodell fogalma
@@ -5211,19 +5539,19 @@ Egészérékű feladatoknál még rosszabb, <img src="https://latex.codecogs.com
 **Relációséma:** egy névvel ellátott attribútumhalmaz
 
 - Jelölések:
-
+  
   - <img src="https://latex.codecogs.com/svg?R(A_1%2C...%2CA_n)" />
-
+  
   - <img src="https://latex.codecogs.com/svg?R(A)" />, ahol <img src="https://latex.codecogs.com/svg?A%20%3D%20%7BA_1%2C...%2CA_n%7D" />
-
+  
   - <img src="https://latex.codecogs.com/svg?R.A_1" /> az <img src="https://latex.codecogs.com/svg?R" /> séma <img src="https://latex.codecogs.com/svg?A_1" /> attribútuma
 
 - Példa:
-
+  
   - Ügyfél (ügyfélkód, ügyfél neve)
-
+  
   - dom(ügyfélkód): 10 jegyű egész számok halmaza
-
+  
   - dom(ügyfél neve): legfeljebb 200 karakter hosszú sztringek halmaza
 
 **Reláció (adattábla)** az <img src="https://latex.codecogs.com/svg?R(A_1%2C...%2CA_n)" /> relációs séma felett: <img src="https://latex.codecogs.com/svg?T%20%5Csubseteq%20dom(A_1)%20%C3%97%20...%20%C3%97%20dom(A_n)" />.
@@ -5245,9 +5573,9 @@ Magyarázat: a matematikai relációfogalom
 **Relációjel:** pl. <img src="https://latex.codecogs.com/svg?%5Clt" />
 
 - A "kisebb" reláció definíciója:
-
+  
   - <img src="https://latex.codecogs.com/svg?K%20%20%5Csubseteq%20%5CZ%20%C3%97%20%5CZ" />, ahol <img src="https://latex.codecogs.com/svg?K" /> azon _(a, b)_ párok halmaza, amelyekre <img src="https://latex.codecogs.com/svg?a%20%5Clt%20b" />
-
+    
     - Példa: _(2, 3)_ <img src="https://latex.codecogs.com/svg?%20%5Cin%20K%20" />, de *(5,2)* <img src="https://latex.codecogs.com/svg?%20%5Cnotin%20K" />
 
 - Általánosítás: <img src="https://latex.codecogs.com/svg?K%20%5Cin%20A%C3%97B%C3%97C" />, ahol <img src="https://latex.codecogs.com/svg?K" /> azon _(a, b, c)_ hármasok halmaza, amelyekre valamilyen feltétel teljesül
@@ -5293,54 +5621,54 @@ _A sémák között a közös attribútumok biztosítják a kapcsolatot._
 - Pontosabban: Egy <img src="https://latex.codecogs.com/svg?R(A)" /> relációsémában <img src="https://latex.codecogs.com/svg?K%20%5C%20(%20%5Csubseteq%20A)" /> szuperkulcs, ha bármely <img src="https://latex.codecogs.com/svg?R" /> feletti <img src="https://latex.codecogs.com/svg?T" /> tábla bármely két sora <img src="https://latex.codecogs.com/svg?K" />-n különbözik.
 
 - **Kulcs (key):** <img src="https://latex.codecogs.com/svg?K%20(%5Csubseteq%20A)" /> kulcs, ha minimális szuperkulcs, vagyis egyetlen valódi részhalmaza sem szuperkulcs.
-
+  
   - Például az Ügyfél (ügyfélkód, ügyfél neve) sémában
-
+    
     - {ügyfélkód} szuperkulcs és kulcs is
-
+    
     - {ügyfélkód, ügyfél neve} szuperkulcs de nem kulcs
-
+    
     - {ügyfél neve} nem szuperkulcs (és nem kulcs)
 
 - **Egyszerű kulcs:** ha egyetlen attribútumból áll.
 
 - **Összetett kulcs:** ha több attribútumból áll.
-
+  
   - Példák:
-
+    
     - Ügyfél (ügyfélkód, ügyfél neve) -> Egyszerű kulcs: {ügyfélkód}
-
+    
     - Rendelkezik (ügyfélkód, számlaszám) -> Összetett kulcs: {ügyfélkód, számlaszám}
 
 - Megjegyzések
-
+  
   - A teljes <img src="https://latex.codecogs.com/svg?A" /> attribútumhalmaz mindig szuperkulcs.
-
+  
   - A kulcs valójában egy feltétel előírása a relációsémára.
-
+  
   - A kulcs a séma tulajdonsága, nem a tábláé.
-
+  
   - Egy sémában több kulcs lehet.
 
 - **Elsődleges kulcs (primary key):** Ha csak egy kulcs van, az lesz az elsődleges kulcs.
   Ha több kulcs van, egyet önkényesen kiválasztunk.
   Jele: aláhúzás.
-
+  
   - Például:
-
+    
     - Felhasználó (<u>felhasználónév</u>, név, e-mail, jelszó, belépés)
       Kulcsok: {felhasználónév}, {e-mail}
       Elsődleges kulcs: {felhasználónév}
 
 - Fontos különbség:
-
+  
   - Relációs modell: a tábla minden sora különböző,
     ezért mindig van kulcs.
-
+  
   - Konkrét RDBMS: ha azonos sorokat is megengedünk, akkor nincs kulcs!
-
+    
     - Példa (itt megengedhető hogy ne legyen kulcs):
-
+      
       - Vásárlás (dátum, terméknév, mennyiség)
         2011.09.04. |banán| 4.0
         2011.09.05. |alma | 3.0
@@ -5348,51 +5676,51 @@ _A sémák között a közös attribútumok biztosítják a kapcsolatot._
         2011.09.05. |alma | 3.0
 
 - **Külső kulcs (idegen kulcs, foreign key):**
-
+  
   - Egy relációséma attribútumainak valamely részhalmaza külső kulcs, ha egy másik séma elsődleges kulcsára hivatkozik.
-
+  
   - Jelölés: dőlt betű, vagy a hivatkozott kulcsra mutató nyíl
-
+  
   - A külső kulcs valójában egy feltétel előírása a relációsémákra.
-
+  
   - Hivatkozási integritás: A külső kulcs értéke a hivatkozott táblában előforduló kulcsérték vagy NULL lehet
-
+  
   - Példa:
-
+    
     - Ügyfél (ügyfélkód, ügyfélnév)
       Számla (számlaszám, számla neve)
       Rendelkezik (ügyfélkód, számlaszám)
-
+      
       <img title="" src="../img/adatb/2022-05-19-00-20-14-image.png" alt="" width="522">
 
 **<mark>Relációs adatbázis séma:</mark>** relációsémák + kulcs feltételek (elsődleges kulcsok, külső kulcsok)
 
 - Példa: egészségügyi adatbázis
-
+  
   - Beteg (<u>betegId</u>, betegnév, lakcím)
-
+  
   - Orvos (<u>orvosId</u>, orvosnév, osztály, kórház)
-
+  
   - Kezelés (<u>kezelésId</u>, megnevezés, kategória)
-
+  
   - Ellátás (<u>_betegId_</u>, <u>_orvosId_</u>, <u>_kezelésId_</u>, <u>dátum</u>, költség)
 
 **<mark>Indexelés</mark>**
 
 - Index: kiegészítő adatstruktúra. Célja:
-
+  
   - rendezés,
-
+  
   - keresések gyorsítása (pl. külső kulcs).
 
 - Indexkulcs: valamely <img src="https://latex.codecogs.com/svg?L%20%5Csubseteq%20A" /> attribútumhalmaz.
-
+  
   - Megegyezhet a tényleges kulccsal, de más is lehet.
 
 - „Indextábla”: Index (indexkulcs, rekordsorszám)
 
 - Egy táblához több index is létrehozható, de a sok index lassabb műköséshez vezet
-
+  
   <img src="../img/adatb/2022-05-19-23-44-49-image.png" title="" alt="" width="495">
 
 #### E-K modellből relációs modell
@@ -5424,7 +5752,7 @@ HÍRFOLYAM(<u>azonosító</u>, megnevezés, kulcsszavak)
 <img src="../img/adatb/2022-05-20-21-34-51-image.png" title="" alt="" width="546">
 
 - Tfh. egy dolgozónak nincs két ugyanolyan konfigurációjú laptopja!
-
+  
   - LAPTOP<u>_(személyi szám_</u>, CPU, RAM, HDD, SSD)
 
 **Összetett attribútumok leképezése**
@@ -5437,27 +5765,27 @@ HÍRFOLYAM(<u>azonosító</u>, megnevezés, kulcsszavak)
 **Többértékű attribútumok leképezése**
 
 1. <u>megoldás:</u> hosszú string
-
+   
    <img title="" src="../img/adatb/2022-05-20-21-38-30-image.png" alt="" width="599" data-align="center">
-
+   
    Hátrány: Lassú keresés
 
 2. <u>megoldás:</u> sorok többszörözése
-
+   
    <img title="" src="../img/adatb/2022-05-20-21-39-48-image.png" alt="" width="405" data-align="center">
-
+   
    Hátrány: egyedi azonosítás elvesztése + redundancia
 
 3. <u>megoldás:</u> új tábla felvétele
-
+   
    <img title="" src="../img/adatb/2022-05-20-21-41-20-image.png" alt="" width="553" data-align="center">
-
+   
    Ha a kulcsszavak sorrendje is számít, akkor az új tábla ezzel bővíthető!
 
 4. <u>megoldás:</u> Az ismétlődő kulcsszavak elkerülése (kapcsoló tábla felvétele)
-
+   
    <img title="" src="../img/adatb/2022-05-20-21-43-22-image.png" alt="" width="540" data-align="center">
-
+   
    <img title="" src="../img/adatb/2022-05-20-21-44-12-image.png" alt="" width="525" data-align="center">
 
 **Kapcsolatok leképezése**
@@ -5498,9 +5826,9 @@ Hátrány: kereséskor több táblát is vizsgálni kell, kombinált altípusokh
 Hátrány: kereséskor több táblát is vizsgálni kell
 
 3. <u>megoldás:</u> egy közös tábla
-
+   
    <img title="" src="../img/adatb/2022-05-20-22-32-47-image.png" alt="" width="549" data-align="center">
-
+   
    Hátrány: NULL értékek (tárpazarló + tényleges jelentésük elvész)
 
 4. <u>megoldás:</u> egy közös tábla típusjelzéssel
@@ -5527,13 +5855,13 @@ Hátrány: NULL értékek (tárpazarló)
 - Jelölés: <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" />
 
 - Példa:
-
+  
   - Adott a következő tábla:
-
+    
     <img src="../img/adatb/2022-05-21-00-16-05-image.png" title="" alt="" width="572">
-
+  
   - Ha tudjuk az Employee number oszlop értéket, akkor megtudhatjuk a hozzá tartozó Employee Name, Salary és City értékeket is. Ez alapján mondhatjuk hogy Employee Name, Salary és City funkcionálisan függenek az Employee number oszloptól. Jelölése:
-
+    
     {Employee number} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {Employee Name, Salary, City}
 
 **Elnevezések:**
@@ -5549,25 +5877,25 @@ Hátrány: NULL értékek (tárpazarló)
 **Példa:**
 
 - SZÁMLA (<u>cikkszám</u>, megnevezés, egységár, mennyiség, összeg)
-
+  
   - összeg = egységár \* mennyiség
-
+  
   - Függőségek:
-
+    
     - {cikkszám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {megnevezés, egységár, mennyiség}
-
+    
     - {egységár, mennyiség} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {összeg}
 
 - DOLGOZÓ (<u>adószám</u>, név, beosztás, fizetés)
-
+  
   - Itt {beosztás} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {fizetés} függés **nem áll fenn!**
 
 **Megjegyzések:**
 
 - A funkcionális függés a séma tulajdonsága (nem a tábláé).
-
+  
   > _séma:_ az adat struktúráját írja le (gyakorlatilag egy tervrajz)
-  >
+  > 
   > _tábla:_ az adatok, oszlopok és sorok szerint rendezetten, a séma szerint meghatározva
 
 - „Funkcionális” jelentése: ha <img src="https://latex.codecogs.com/svg?P%20%5Crarr%20Q" />, akkor létezik egy <img src="https://latex.codecogs.com/svg?dom(P)%20%5Crarr%20dom(Q)" /> függvény. Például: {egységár, mennyiség} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {összeg} kiszámítható, de
@@ -5586,19 +5914,19 @@ Hátrány: NULL értékek (tárpazarló)
 **Egyszerű szabályok**
 
 - **Szétvágási szabály:**
-
+  
   <img title="" src="../img/adatb/2022-05-21-15-15-55-image.png" alt="" width="528" data-align="center">
-
-  - Példa: {felhasználónév} \rarr {email, név} ezért {felhasználónév} \rarr {email} és {felhasználónév} \rarr {név}
+  
+  - Példa: {felhasználónév} <img src="https://latex.codecogs.com/svg?%5Cto" /> {email, név} ezért {felhasználónév} <img src="https://latex.codecogs.com/svg?%5Cto" /> {email} és {felhasználónév} <img src="https://latex.codecogs.com/svg?%5Cto" /> {név}
 
 - **Egyesítési szabály:**
-
+  
   <img title="" src="../img/adatb/2022-05-21-15-16-54-image.png" alt="" width="520" data-align="center">
 
 - **Vigyázat!** Ha <img src="https://latex.codecogs.com/svg?%5C%7BB_1%2C...%2CB_k%5C%7D%20%5Crarr%20X" />, ebből nem következik, hogy <img src="https://latex.codecogs.com/svg?B_1%20%5Crarr%20X%2C%20...%2C%20B_k%20%5Crarr%20X" /> !
-
+  
   - Példa: Fuvar (gkvez, rendszám, indul, érkezik)
-
+    
     - {rendszám, indul} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {gkvez}, de ebből nem következik, hogy
       <img src="https://latex.codecogs.com/svg?%5C%7Brendsz%C3%A1m%5C%7D%20%5Crarr%20%5C%7Bgkvez%5C%7D" /> és <img src="https://latex.codecogs.com/svg?%5C%7Bindul%5C%7D%20%5Crarr%20%5C%7Bgkvez%5C%7D" />
 
@@ -5615,8 +5943,8 @@ Hátrány: NULL értékek (tárpazarló)
 **Kulcsok meghatározása**
 
 - K (<img src="https://latex.codecogs.com/svg?%5Csubseteq" /> A) akkor és csak akkor szuperkulcs, ha K <img src="https://latex.codecogs.com/svg?%5Crarr" /> A
-
-  - A függésekalapján meg lehet-e határozni?
+  
+  - A függések alapján meg lehet-e határozni?
 
 **Attribútumhalmaz lezártja**
 
@@ -5635,7 +5963,7 @@ Hátrány: NULL értékek (tárpazarló)
   mindig ellenőrizzük, hogy <img src="https://latex.codecogs.com/svg?K%5E%2B%20%3D%20A" /> teljesül-e.
 
 - Példa kulcs meghatározására:
-
+  
   <img title="" src="../img/adatb/2022-05-21-17-01-21-image.png" alt="" width="439" data-align="center">
 
 **Függéshalmaz lezártjának meghatározása**
@@ -5643,7 +5971,7 @@ Hátrány: NULL értékek (tárpazarló)
 - Függéshalmaz lezártja: az összes F-ből levezethető függés halmaza. Jelölése <img src="https://latex.codecogs.com/svg?F%5E%2B" />.
 
 - Algoritmus F+ meghatározására:
-
+  
   1. Vegyük az A attribútumhalmaz összes részhalmazát.
   2. Minden X részhalmazhoz állítsuk elő <img src="https://latex.codecogs.com/svg?X%5E%2B" />-t.
   3. Valamennyi <img src="https://latex.codecogs.com/svg?Y%20%5Csubseteq%20X%5E%2B" />-ra az <img src="https://latex.codecogs.com/svg?X%5Csubseteq%20Y" /> függőséget felvesszük <img src="https://latex.codecogs.com/svg?F%5E%2B" />-ba.
@@ -5651,25 +5979,25 @@ Hátrány: NULL értékek (tárpazarló)
 #### Felbontás (dekompozíció)
 
 - Ha egy reláció nem megfelelő normálformában van, akkor a reláció dekompozíciójára van szükség
-
+  
   - Veszteségmentes felbontás (másnéven hűséges felbontás)
-
+    
     - ha reláció dekompozíciójánál nem vesztettünk információt
-
+    
     - garantálja hogy dekompozíció után a relációk természetes összecsatolása ugyanazt a relációt fogja eredményezni (másképp: <img src="https://latex.codecogs.com/svg?T%20%3DT_1%20%5CJoin%20T_2" />, ahol <img src="https://latex.codecogs.com/svg?T" /> az eredeti tábla, <img src="https://latex.codecogs.com/svg?T_1" /> és <img src="https://latex.codecogs.com/svg?T_2" /> a dekompozíció ererdményei)
-
+      
       <img src="../img/adatb/2022-05-21-20-12-55-image.png" title="" alt="" width="543">
-
+      
       <img src="../img/adatb/2022-05-21-20-09-44-image.png" title="" alt="" width="539">
-
+  
   - Függőségőrző felbontás
-
+    
     <img src="../img/adatb/2022-05-22-14-17-08-image.png" title="" alt="" width="479">
 
 - Heath tétele:
-
+  
   - <img src="https://latex.codecogs.com/svg?R(B%2C%20C%2C%20D)" />, ahol <img src="https://latex.codecogs.com/svg?B" />, <img src="https://latex.codecogs.com/svg?C" /> és <img src="https://latex.codecogs.com/svg?D" /> diszjunkt attribútumhalmazok
-
+  
   - Ha <img src="https://latex.codecogs.com/svg?C%20%5Crarr%20D" />, akkor az <img src="https://latex.codecogs.com/svg?R_1(B%2C%20C)" />, <img src="https://latex.codecogs.com/svg?R_2(C%2C%20D)" /> felbontás hűséges.
 
 #### Normalizálás
@@ -5677,17 +6005,17 @@ Hátrány: NULL értékek (tárpazarló)
 ##### 1. normálforma (1NF)
 
 - Egy relációséma 1NF-ben van, ha az attribútumok értéktartománya csak egyszerű (atomi) adatokból áll (nem tartalmaz például listát vagy struktúrát)
-
+  
   - Ennek teljesülését már a relációséma definíciójánál feltételeztük.
-
+  
   - Az 1NF-re hozást az E-K modell <img src="https://latex.codecogs.com/svg?%5Crarr" /> relációs modell leképezésnél megvalósítottuk.
 
 - Definíciók
-
+  
   - Adott <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2CF)" />, <img src="https://latex.codecogs.com/svg?X%2CY%20%5Csubseteq%20A" />, és <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Y" />
-
+    
     - <img src="https://latex.codecogs.com/svg?X" />-től teljesen függ <img src="https://latex.codecogs.com/svg?Y" />, ha bármely attribútumot elhagyva a függőség már nem teljesül
-
+    
     - Egy attribútum elsődleges attribútum ha szerepel a relációséma valamely kulcsában, ellenkező esetben másodlagos attribútum
 
 ##### 2. normálforma (2NF)
@@ -5695,40 +6023,40 @@ Hátrány: NULL értékek (tárpazarló)
 - Egy <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2C%20F)" /> relációséma 2NF-ben van, ha minden másodlagos attribútum teljesen függ bármely kulcstól.
 
 - Következmények:
-
+  
   - Ha minden kulcs egy attribútumból áll, akkor a séma 2NF-ben van, Például:
-
+    
     - FELHASZNÁLÓ(<u>felhasználónév</u>, jelszó, email, vezetéknév, keresztnév, utolsó belépés időpontja)
-
+    
     - Kulcsok: {felhasználónév} {email}
-
+    
     - egyelemű kulcsok, ebből következik hogy ha elemet hagynánk el belőlük, akkor üreshalmazt kapnánk, ami már nem azonosítja be egyértelműen a másodlagos (vagyis nem kulcs) attribútumokat
-
+  
   - Ha a sémában nincs másodlagos attribútum, akkor 2NF-ben van. Például:
-
+    
     - FUVAR(gkvez, <u>rendszám</u>, <u>indul</u>, érkezik)
-
+    
     - Kulcsok: {gkvez, indul}, {gkvez, érkezik}, {rendszám, indul}, {rendszám, érkezik}
 
 - A séma nincs 2NF-ben, ha egy kulcs részhalmazától függ (egy vagy több másodlagos attribútum)
 
 - 2NF-re hozás: a sémát felbontjuk Heath tétele szerint, a normálformát sértő függőség mentén
-
+  
   <img title="" src="../img/adatb/2022-05-22-14-43-53-image.png" alt="" width="566" data-align="inline">
-
+  
   <img title="" src="../img/adatb/2022-05-22-15-33-33-image.png" alt="" width="585">
-
+  
   <img title="" src="../img/adatb/2022-05-22-15-34-56-image.png" alt="" width="451">
 
 ##### 3. normálforma (3NF)
 
 - <img src="https://latex.codecogs.com/svg?X%2CZ%20%5Csubseteq%20A" /> és <img src="https://latex.codecogs.com/svg?X%20%5Crarr%20Z" />
-
+  
   - <img src="https://latex.codecogs.com/svg?X" />-től tranzitívan függ <img src="https://latex.codecogs.com/svg?Z" />,ha van olyan <img src="https://latex.codecogs.com/svg?Y%20(%5Csubseteq%20A)" />, amelyre <img src="https://latex.codecogs.com/svg?X%5Crarr%20Y" /> és <img src="https://latex.codecogs.com/svg?Y%5Crarr%20Z" />,
     de <img src="https://latex.codecogs.com/svg?X" /> nem függ <img src="https://latex.codecogs.com/svg?Y" />-tól, és az <img src="https://latex.codecogs.com/svg?Y%5Crarr%20Z" /> függés teljesen nemtriviális (vagyis <img src="https://latex.codecogs.com/svg?Y%20%5Ccap%20Z" /> üres). Ellenkező esetben <img src="https://latex.codecogs.com/svg?X" />-től közvetlenül függ <img src="https://latex.codecogs.com/svg?Z" />.
 
 - Egy <img src="https://latex.codecogs.com/svg?R%20%3D%20(A%2C%20F)" /> relációséma 3NF-ben van, ha minden másodlagos attribútuma közvetlenül függ bármely kulcstól.
-
+  
   - Következmény: Ha a sémában nincs másodlagos attribútum,
     akkor 3NF-ben van.
 
@@ -5741,29 +6069,29 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - 3NF-re hozás: ha a <img src="https://latex.codecogs.com/svg?K%20%5Crarr%20Y%20%5Crarr%20Z" /> tranzitív függés fennáll, akkor a sémát felbonthatjuk Heath tétele szerint az <img src="https://latex.codecogs.com/svg?Y%20%5Crarr%20Z" /> függés mentén.
 
 - Példa:
-
+  
   - DOLGOZÓ(<u>adószám</u>, TAJ szám, dolgozó neve, projektkód, projekt neve)
-
+  
   - Egy dolgozó csak egy projekten dolgozhat. Ha többen dolgoznak ugyanazon a projekten, akkor a projekt neve ismétlődik.
-
+  
   - Kulcsok: {adószám}, {TAJ szám}
-
+  
   - A séma 2NF-ben van (csak egyszerű kulcs van benne).
-
+  
   - Tranzitív függés: {adószám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {projektkód} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {projekt neve}
-
+  
   - Felbontás Heath-tétele alapján:
-
+    
     - C = {projektkód}
-
+    
     - D = {projekt neve}
-
+    
     - B = {adószám, TAJ szám, dolgozó neve}
-
+  
   - Felbontás után:
-
+    
     - DOLGOZÓ(<u>adószám</u>, TAJ szám, dolgozó neve, projektkód)
-
+    
     - PROJEKT(<u>projektkód</u>, projekt neve)
 
 - **Állítás:** Ha egy relációséma 3NF-ben van, akkor 2NF-ben is van.
@@ -5771,7 +6099,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 ##### Boyce-Codd normálforma (BCNF)
 
 - Egy relációséma BCNF-ben van, ha bármely nemtriviális <img src="https://latex.codecogs.com/svg?L%20%5Crarr%20Z" /> függés esetén L szuperkulcs.
-
+  
   - Vagyis: A sémában csak kulcstól való függés van, ezen kívül nincs „kóbor függés”.
 
 - A séma nincs BCNF-ben, ha van benne olyan nemtriviális függés, amelynek bal oldalán nem szuperkulcs áll.
@@ -5779,29 +6107,29 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - BCNF-re hozás: a sémát felbontjuk Heath tétele szerint, a normálformát sértő függőség mentén.
 
 - Példa:
-
+  
   - DOLGOZÓ(<u>adószám</u>, TAJ szám, <u>projektkód</u>)
-
+  
   - Egy dolgozó több projekten dolgozhat. Ha valaki több projekten dolgozik, akkor a TAJ szám ismétlődik.
-
+  
   - Kulcsok: {adószám, projektkód}, {TAJ szám, projektkód}
-
+  
   - A séma 3NF-ben van (nincs másodlagos attribútum).
-
+  
   - BCNF-et sértő függés:{adószám} <img src="https://latex.codecogs.com/svg?%5Crarr" /> {TAJ szám} (adószám nem szuperkulcs)
-
+  
   - Felbontás Heath-tétele alapján:
-
+    
     - C = {adószám}
-
+    
     - D = {TAJ szám}
-
+    
     - B = {projektkód}
-
+  
   - Felbontás után:
-
+    
     - DOLGOZÓ(<u>adószám</u>, TAJ szám)
-
+    
     - PROJEKT(<u>adószám</u>, <u>projektkód</u>)
 
 - **Állítás:** Ha egy relációséma BCNF-ben van, akkor 3NF-ben is van.
@@ -5813,13 +6141,13 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 <img src="../img/adatb/2022-05-22-18-34-38-image.png" title="" alt="" width="437">
 
 - <img src="https://latex.codecogs.com/svg?K%2CL%20%5Csubseteq%20A" />, és legyen <img src="https://latex.codecogs.com/svg?M%3DA%20%5Csetminus(K%20%5Ccup%20L)" />
-
+  
   - <img src="https://latex.codecogs.com/svg?K" />-tól többértékűen függ <img src="https://latex.codecogs.com/svg?L" /> (<img src="https://latex.codecogs.com/svg?K%20%5Crarr%20%5Crarr%20L" />), ha bármely <img src="https://latex.codecogs.com/svg?R" /> feletti <img src="https://latex.codecogs.com/svg?T" /> tábla esetén ha két sor megegyezik <img src="https://latex.codecogs.com/svg?K" />-n, akkor a kombinációjuk is szerepel a táblában
-
+  
   - Példa:
-
+    
     - nagyker <img src="https://latex.codecogs.com/svg?%5Crarr%20%5Crarr%20kisker" />
-
+    
     - viszont kisker <img src="https://latex.codecogs.com/svg?%5Crarr%20%5Crarr%20nagyker" /> már nem igaz, mert például (N2, K2) és (K2, A2), de (N2, K2, A2) már nem teljesül!
 
 <img src="../img/adatb/2022-05-22-20-14-18-image.png" title="" alt="" width="505">
@@ -5833,7 +6161,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 <img src="../img/adatb/2022-05-22-20-17-03-image.png" title="" alt="" width="501">
 
 - A Rendelhet tábla 4NF felbontása:
-
+  
   <img src="../img/adatb/2022-05-22-20-18-15-image.png" title="" alt="" width="459">
 
 - **Állítás:** Ha egy relációséma 4NF-ben van, akkor hűséges
@@ -5848,9 +6176,9 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 **Általános jellemzők**
 
 - Az SQL utasításait két fő csoportba szokták sorolni:
-
+  
   - DDL (= Data Definition Language): adatstruktúra definiáló utasítások.
-
+  
   - DML (= Data Manipulation Language): adatokon műveletet végző utasítások
 
 **Szintaxis**
@@ -5875,7 +6203,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Logikai műveletek: AND, OR, NOT. Az SQL rendszerek "háromértékű logikát"
   használnak, vagyis a TRUE és FALSE mellett a NULL (definiálatlan) érték is felléphet. Ha egy kifejezés valamelyik eleme NULL, akkor a kifejezés értéke is NULL lesz.
-
+  
   - Az SQL-szabvány szerint egy logikai kifejezés értéke ISMERETLEN (UNKNOWN), ha benne NULL érték szerepel.
 
 - Az utasítások szintaxisának leírásánál az elhagyható részleteket szögletes zárójellel
@@ -5885,7 +6213,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Relációséma létrehozására a CREATE TABLE utasítás szolgál, amely egyben egy üres
   táblát is létrehoz a sémához. Az attribútumok definiálása mellett a kulcsok és külső kulcsok megadására is lehetőséget nyújt:
-
+  
   - CREATE TABLE táblanév
     ( oszlopnév adattípus [feltétel],
     ... ...,
@@ -5894,158 +6222,158 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
     );
 
 - Az adattípusok (rendszerenként eltérők lehetnek):
-
+  
   - _CHAR(n):_ n hosszúságú karaktersorozat
-
+  
   - _VARCHAR(n):_ legfeljebb n hosszúságú karaktersorozat
-
+  
   - _INTEGER:_ egész szám (röviden INT)
-
+  
   - _REAL:_ valós (lebegőpontos) szám, másnéven FLOAT
-
+  
   - _DECIMAL(n[,d]):_ n jegyű decimális szám, ebből d tizedesjegy
-
+  
   - _DATE:_ dátum (év, hó, nap)
-
+  
   - _TIME:_ idő (óra, perc, másodperc)
 
 - Az adattípushoz "DEFAULT érték" megadásával alapértelmezett érték definiálható. Ha ilyet nem adunk meg, az alapértelmezett érték NULL
 
 - Feltételek (egy adott oszlopra vonatkoznak):
-
+  
   - PRIMARY KEY: elsődleges kulcs (csak egy lehet)
-
+  
   - UNIQUE: kulcs (több is lehet)
-
+  
   - REFERENCES tábla(oszlop) [ON-feltételek]: külső kulcs
 
 - Táblafeltételek (az egész táblára vonatkoznak):
-
+  
   - PRIMARY KEY (oszloplista): elsődleges kulcs
-
+  
   - UNIQUE (oszloplista): kulcs
-
+  
   - FOREIGN KEY (oszloplista) REFERENCES tábla(oszloplista) [ON-feltételek]: külső kulcs
 
 - Ha a (külső) kulcs több oszlopból áll, akkor csak táblafeltétel formájában adható meg.
 
 - A PRIMARY KEY (elsődleges kulcs) és UNIQUE (kulcs) közötti különbségek:
-
+  
   - Egy sémában csak egy elsődleges kulcs, de tetszőleges számú további kulcs lehet
-
+  
   - Külső kulcs általában a másik tábla elsődleges kulcsára hivatkozik.
-
+  
   - Egyes DBMS-ek az elsődleges kulcshoz automatikusan indexet hoznak létre.
 
 - A CREATE TABLE utasítással tulajdonképpen egy R = (A, F) relációsémát adunk meg,
   ahol F megadására szolgálnak a kulcsfeltételek. Ha a relációséma BCNF-ben van, akkor ezzel az összes függés megadható, hiszen ekkor csak szuperkulcstól lehet nemtriviális függés
 
-- Példa (az alábbi relációséma SQL-ben va létrehozása):
-
+- Példa (az alábbi relációséma SQL-ben való létrehozása):
+  
   - Osztály (<u>osztálykód</u>, osztálynév, vezAdószám)
-
+  
   - Dolgozó (<u>adószám</u>, név, lakcím, _osztálykód_)
-
+    
     <img src="../img/adatb/2022-05-22-23-34-15-image.png" title="" alt="" width="509">
 
 - A tábla módosításakor a definiált kulcsfeltételek automatikusan ellenőrzésre kerülnek. PRIMARY KEY és UNIQUE esetén ez azt jelenti, hogy a rendszer nem enged olyan módosítást illetve új sor felvételét, amely egy már meglévő kulccsal ütközne.
 
 - REFERENCES (külső kulcs hivatkozás) esetén ON-feltételek megadásával
   szabályozhatjuk a rendszer viselkedését (jelölje T1 a hivatkozó és T2 a hivatkozott táblát):
-
+  
   - _Alapértelmezés_ (ha nincs ON-feltétel): T1-ben nem megengedett olyan beszúrás és módosítás, amely T2-ben nem létező kulcs értékre hivatkozna, továbbá T2-ben nem megengedett olyan kulcs módosítása vagy sor törlése, amelyre T1 hivatkozik.
-
+  
   - **ON UPDATE CASCADE:** ha T2 egy sorában változik a kulcs értéke, akkor a rá való T1-beli hivatkozások is megfelelően módosulnak (módosítás továbbgyűrűzése).
-
+  
   - **ON DELETE CASCADE:** Ha T2-ben törlünk egy sort, akkor T1-ben is törlődnek a rá hivatkozó sorok (törlés továbbgyűrűzése).
-
+  
   - **ON UPDATE SET NULL:** ha T2 egy sorában változik a kulcs értéke, akkor T1-ben a rá való külső kulcs hivatkozások értéke NULL lesz.
-
+  
   - **ON DELETE SET NULL:** ha T2-ben törlünk egy sort, akkor T1-ben a rá való külső
     kulcs hivatkozások értéke NULL lesz.
 
 - A kulcsfeltételek ellenőrzése csak indexekkel oldható meg hatékonyan.
 
 - Relációséma törlése:
-
+  
   - **DROP TABLE táblanév;**
-
+  
   - Hatására a séma és a hozzá tartozó adattábla törlődik.
 
 - Relációséma módosítása:
-
+  
   - **ALTER TABLE táblanév
     [ADD (újelem, ..., újelem)]
     [MODIFY (módosítás, ..., módosítás)]
     [DROP (oszlop, ..., oszlop)];**
-
+  
   - Az ALTER TABLE utasítás szintaxisa és szemantikája rendszerenként eltérő, például oszlopok törlését nem minden rendszer engedi meg.
 
 > **Indexek létrehozása**
->
+> 
 > - Az indexek kezelése nem része az SQL2 szabványnak, de valamilyen formában minden RDBMS támogatja
->
+> 
 > - Index létrehozása:
->
+>   
 >   - **CREATE [UNIQUE] INDEX indexnév ON tábla(oszloplista);**
->
+>   
 >   - A megadott tábla felsorolt oszlopaira, mint indexkulcsra generál indexet.
->
+>   
 >   - Ha UNIQUE szerepel, akkor a tábla nem tartalmazhat két azonos indexkulcsú rekordot
->
+> 
 > - Index törlése:
->
+>   
 >   - **DROP INDEX indexnév;**
->
+> 
 > - Példák:
->
+>   
 >   - CREATE INDEX DolgInd1 ON Dolgozó(név);
 >     CREATE INDEX DolgInd2 ON Dolgozó(osztálykód,név);
->
+>   
 >   - Az első példa egyszerű indexkulcsot tartalmaz, amely a dolgozók név szerinti keresését, illetve rendezését támogatja. A második példában szereplő összetett indexkulcs az osztálykód szerinti, osztályon belül pedig név szerinti keresést/rendezést segíti, mivel a rendszerek
 >     általában az osztálykód és név attribútumok konkatenációjával képezik az indexkulcsot. Ez a megoldás viszont a pusztán név szerinti keresést nem támogatja.
 
 #### Adattábla aktualizálása (DML)
 
 - A táblába új sor felvétele:
-
+  
   - **INSERT INTO táblanév [(oszloplista)] VALUES (értéklista);**
-
+  
   - Ha oszloplista nem szerepel, akkor valamennyi oszlop értéket kap a
     CREATE TABLE-ben megadott sorrendben. Egyébként csak az oszloplistában megadott mezők kapnak értéket, a többi mező értéke NULL lesz.
-
+  
   - Példa:
-
+    
     - INSERT INTO Dolgozó (név, adószám)
       VALUES ('Tóth Aladár', 1111);
-
+  
   - A táblába adatokat tölthetünk át másik táblából is, ha a VALUES(értéklista) helyére egy lekérdezést írunk
 
 - Sor(ok) módosítása:
-
+  
   - **UPDATE táblanév
     SET oszlop = kifejezés, ..., oszlop = kifejezés
     [ WHERE feltétel ];**
-
+  
   - Az értékadás minden olyan soron végrehajtódik, amely eleget tesz a
     WHERE feltételnek. Ha WHERE feltétel nem szerepel, akkor az értékadás az összes sorra megtörténik.
-
+  
   - Példa:
-
+    
     - UPDATE Dolgozó
       SET lakcím = 'Szeged, Rózsa u. 5.'
       WHERE név = 'Kovács József';
 
 - Sor(ok) törlése:
-
+  
   - **DELETE FROM táblanév
     [ WHERE feltétel ];**
-
+  
   - Hatására azok a sorok törlődnek, amelyek eleget tesznek a WHERE
     feltételnek. Ha a WHERE feltételt elhagyjuk, akkor az összes sor törlődik (de a séma megmarad).
-
+  
   - Példa:
-
+    
     - DELETE FROM Dolgozó
       WHERE név = 'Kovács József';
 
@@ -6057,88 +6385,88 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
   használható fel. (Egyetlen SELECT akár egy komplex felhasználói programot helyettesíthet!)
 
 - A "SELECT DISTINCT <img src="https://latex.codecogs.com/svg?A_1" />,...,<img src="https://latex.codecogs.com/svg?A_n" /> FROM <img src="https://latex.codecogs.com/svg?T_1" />,...,<img src="https://latex.codecogs.com/svg?T_m" /> WHERE feltétel" utasítás egyenértékű a következő relációs algebrai kifejezéssel:
-
+  
   - <img src="https://latex.codecogs.com/svg?E%3D%5Cpi_%7BA1%2C...An%7D(%5Csigma_%7Bfelt%C3%A9tel%7D(T_1%20%C3%97%20...%20%C3%97%20T_m))" />
-
+  
   - Vagyis, a felsorolt táblák Descartes-szorzatából szelektáljuk a feltételnek eleget tévő sorokat, majd ezekből projekcióval választjuk ki az E eredménytábla oszlopait.
-
+  
   - A DISTINCT opciót akkor kell kiírni, ha az eredménytáblában az azonos sorokból csak egyet kívánunk megtartani.
 
 - Ha oszloplista helyére \* karaktert írunk, ez valamennyi oszlop felsorolásával
   egyenértékű. A SELECT legegyszerűbb változatával adattábla listázását érhetjük el:
-
+  
   - SELECT \* FROM T;
-
+  
   **A relációs algebra műveleteinek megvalósítása:**
 
 - Projekció
-
+  
   - SELECT [DISTINCT] <img src="https://latex.codecogs.com/svg?A_1" />,...,<img src="https://latex.codecogs.com/svg?A_n" /> FROM T;
-
+  
   - Pl.: SELECT DISTINCT szerző, cím FROM Könyv;
 
 - Szelekció
-
+  
   - SELECT \* FROM T WHERE feltétel;
-
+  
   - Pl.: SELECT \* FROM Könyv WHERE kivétel < 2013.01.01;
 
 - Descartes-szorzat: <img src="https://latex.codecogs.com/svg?T_1" /> x <img src="https://latex.codecogs.com/svg?T_2" />
-
+  
   - SELECT \* FROM T1,T2;
 
 - Természetes összekapcsolás
-
+  
   - Állítsuk elő például az Áru (cikkszám, megnevezés) és Vásárlás (cikkszám, mennyiség) táblák természetes összekapcsolását:
-
+    
     - SELECT Áru.cikkszám, megnevezés, mennyiség
       FROM Áru, Vásárlás
       WHERE Áru.cikkszám = Vásárlás.cikkszám;
-
+    
     - A fentivel egyenértékű, szintén gyakran használt szintaxis:
-
+      
       - SELECT Áru.cikkszám, megnevezés, mennyiség
         FROM Áru INNER JOIN Vásárlás ON Áru.cikkszám = Vásárlás.cikkszám;
-
+  
   - Megjegyzés: A fenti példákban a SELECT után nem elegendő csak „cikkszám”-ot írni, annak ellenére, hogy esetünkben „Áru.cikkszám = Vásárlás.cikkszám”, tehát mindegy, melyik cikkszámot választja a rendszer. Általában, ha egy lekérdezésben több azonos oszlopnév szerepel, az SQL rendszerek megkövetelik a táblanév megadását
 
 - Külső összekapcsolás
-
+  
   - Az SQL szabvány szerint a LEFT, RIGHT vagy FULL OUTER JOIN kulcsszavakkal
     adható meg külső összekapcsolás
-
+  
   - Például:
-
+    
     - SELECT Áru.cikkszám, megnevezés, mennyiség
       FROM Áru LEFT OUTER JOIN Vásárlás
       ON Áru.cikkszám = Vásárlás.cikkszám;
 
 - Théta join
-
+  
   - SELECT \* FROM T1,T2 WHERE feltétel;
 
 - Unió
-
+  
   - (SELECT _ FROM T1)
     UNION
     (SELECT _ FROM T2);
-
+  
   - A két SELECT eredménytáblája kompatibilis kell hogy legyen
 
 - Metszet
-
+  
   - (SELECT _ FROM T1)
     INTERSECT
     (SELECT _ FROM T2);
-
+  
   - A két SELECT eredménytáblája kompatibilis kell hogy legyen
 
 - Különbség
-
+  
   - (SELECT _ FROM T1)
     EXCEPT
     (SELECT _ FROM T2);
-
+  
   - A két SELECT eredménytáblája kompatibilis kell, hogy legyen. Egyes rendszereknél EXCEPT helyett MINUS használatos.
 
 **Alias nevek**
@@ -6147,45 +6475,45 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
   tetszőleges kifejezéseket is tartalmazhat, és az eredménytábla oszlopainak elnevezésére alias neveket adhatunk meg
 
 - Például:
-
+  
   - SELECT név AS áru, egységár\*mennyiség AS érték FROM Raktár;
 
 **Függvények**
 
 - Például:
-
+  
   - Abszolút érték
-
+    
     - ABS(n)
-
+  
   - Konverzió kisbetűsre
-
+    
     - LOWER(char)
-
+  
   - stb...
 
 **Összesítő függvények**
 
 - Egy oszlop értékeiből egyetlen értéket hoznak létre (például átlag). Általános alakjuk:
-
+  
   - függvénynév ( [DISTINCT] oszlopnév )
 
 - Ha DISTINCT szerepel, akkor az oszlopban szereplő azonos értékeket csak egyszer kell figyelembe venni. A számításnál a NULL értékek figyelmen kívül maradnak. Az egyes függvények:
-
+  
   - AVG: átlagérték.
-
+  
   - SUM: összeg.
-
+  
   - MAX: maximális érték.
-
+  
   - MIN: minimális érték.
-
+  
   - COUNT: elemek száma. Ennél a függvénynél oszlopnév helyére \* is írható, amely valamennyi oszlopot együtt jelenti.
 
 - Példa:
-
+  
   - SELECT AVG(fizetés) FROM Dolgozó;
-
+  
   - Az eredménytábla egyetlen elemből áll, amely az átlagfizetést adja.
 
 **Csoportosítás (GROUP BY, HAVING)**
@@ -6193,51 +6521,51 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - Ha a tábla sorait csoportonként szeretnénk összesíteni, akkor a SELECT utasítás a
   **GROUP BY oszloplista**
   alparanccsal bővítendő.
-
+  
   - Egy csoportba azok a sorok tartoznak, melyeknél oszloplista értéke
     azonos.
-
+  
   - Az eredménytáblában egy csoportból egy rekord lesz
-
+  
   - Példa:
-
+    
     - SELECT osztkód, AVG(fizetés) FROM Dolgozó
       GROUP BY osztkód;
-
+    
     - A Dolgozó táblából osztályonként az átlagfizetést számoljuk
 
 - **Csoportosítási szabály**: A SELECT után összesítő függvényen kívül csak olyan
   oszlopnév tüntethető fel, amely a GROUP BY-ban is szerepel.
-
+  
   - Hibás például az alábbi lekérdezés, amely azt szeretné megtudni, hogy az egyes osztályokon kinek a legnagyobb a fizetése:
-
+    
     - SELECT osztkód, név, MAX(fizetés) AS maxfiz FROM Dolgozó GROUP BY osztkód;
-
+    
     - A hiba oka: név nem szerepelhet a SELECT után, mert a GROUP BY után sem szerepel.
 
 - A GROUP BY által képezett csoportok közül válogathatunk a
   **HAVING feltétel**
   alparancs segítségével: csak a feltételnek eleget tevő csoportok kerülnek összesítésre az eredménytáblába.
-
+  
   - Példa. Azon osztályok listája, ahol az átlagfizetés > 180 000 Ft:
-
+    
     - SELECT osztkód, AVG(fizetés) FROM Dolgozó
       GROUP BY osztkód
       HAVING AVG(fizetés) > 180000;
 
 - Az eredménytábla rendezése:
-
+  
   - Bár a relációs modell nem definiálja a rekordok sorrendjét, a gyakorlatban rendszerint valamilyen rendezettségben kívánjuk látni az eredményt
-
+  
   - Erre szolgál az
     **ORDER BY oszlopnév [DESC], ..., oszlopnév [DESC]**
     alparancs, amely a SELECT utasítás végére helyezhető, és az eredménytáblának a megadott oszlopok szerinti rendezését írja elő
-
+  
   - Az oszlopnév után írt ASC (ascending) növekvő, DESC (descending) csökkenő sorrendben való rendezést jelent. (Alapértelmezés szerint a rendezés
     növekvő sorrendben történik, ezért ASC kiírása fölösleges)
-
+  
   - Példa:
-
+    
     - SELECT osztkód, név, fizetés FROM Dolgozó
       ORDER BY osztkód, fizetés DESC;
 
@@ -6245,12 +6573,12 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - A SELECT utasítás az alábbi alparancsokból állhat az alábbi sorrendben (a szögletes
   zárójelben szereplő részek elhagyhatók):
-
+  
   - SELECT [DISTINCT] oszloplista projekció
     FROM táblanévlista Descartes-szorzat
     [WHERE feltétel] szelekció
-    [GROUP BY oszloplista csoportonként összevonás
-    [HAVING feltétel] ] csoport-szelekció
+    [GROUP BY oszloplista] csoportonként összevonás
+    [HAVING feltétel] csoport-szelekció
     [ORDER BY oszloplista]; rendezés
 
 **Alkérdések**
@@ -6260,19 +6588,19 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Példa. Az alábbi utasítás azon dolgozók listáját adja, amelyek fizetése kisebb, mint
   az átlagfizetés:
-
+  
   - SELECT név, fizetés FROM Dolgozó
     WHERE fizetés < ( SELECT AVG(fizetés) FROM dolgozó );
 
 - Nem csak a logikai kifejezés tartalmazhat alkérdést, hanem az INSERT utasítás is:
-
+  
   - **INSERT INTO táblanév [(oszloplista)] SELECT ... ;**
-
+  
   - A SELECT annyi oszlopot kell hogy kiválasszon, amennyit oszloplista tartalmaz. A többi oszlop NULL értéket vesz fel.
-
+  
   - Példa. Tegyük fel, hogy a Raktár (cikkszám, név, egységár, mennyiség) táblából
     egy Készlet (áru, érték) táblát szeretnénk létrehozni, amely az áruféleség megnevezését és az aktuálisan tárolt mennyiség értékét tartalmazza. Ez a következőképp lehetséges:
-
+    
     - CREATE TABLE Készlet
       ( áru CHAR(20),
       érték INTEGER
@@ -6283,9 +6611,9 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 **Nézettáblák (virtuális táblák)**
 
 - Egy adatbázisban általában kétféle adatra van szükségünk:
-
+  
   - alapadatok: tartalmukat aktualizáló műveletekkel módosítjuk
-
+  
   - származtatott adatok: az alapadatokból generálhatók.
 
 - Származtatott adattáblát például INSERT ... SELECT segítségével is létrehozhatunk
@@ -6295,14 +6623,14 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
   transzformációs formula, amelyet úgy képzelhetünk el, mint ha ennek segítségével a tárolt táblák adatait látnánk egy speciális szűrőn, „optikán” keresztül.
 
 - Nézettáblák alkalmazási lehetőségei:
-
+  
   - Származtatott adattáblák létrehozása, amelyek a törzsadatok módosításakor
     automatikusan módosulnak (pl. összegzőtáblák).
-
+  
   - Bizonyos adatok elrejtése egyes felhasználók elől (adatbiztonság vagy egyszerűsítés céljából)
 
 - Nézettábla létrehozása:
-
+  
   - CREATE VIEW táblanév [(oszloplista)] AS alkérdés;
 
 - A SELECT utasítás eredménytáblája alkotja a nézettáblát. "Oszloplista" megadásával a nézettábla oszlopainak új nevet adhatunk. A CREATE VIEW végrehajtásakor a rendszer csak letárolja a nézettábla definícióját, és majd csak a rá való hivatkozáskor generálja a szükséges adatokat. Ebből adódóan a nézettábla tartalma mindig aktuális.
@@ -6311,7 +6639,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Példa. Származtatott adatok kezelése. A Raktár (cikkszám, név, egységár,
   mennyiség) táblából létrehozott nézettábla:
-
+  
   - CREATE VIEW Készlet (áru, érték) AS
     SELECT név, egységár\*mennyiség FROM Raktár;
 
@@ -6330,17 +6658,17 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
   UNIQUE, REFERENCES kulcsszavakkal. Aktualizálási műveleteknél a megfelelő feltétel automatikus ellenőrzését váltják ki.
 
 - További megszorítások:
-
+  
   - NOT NULL
-
+    
     - Adott attribútum értéke nem lehet NULL. Hatására a rendszer megakadályoz minden olyan műveletet, amely az adott attribútum NULL értékét eredményezné. Adatbevitelnél például ez azt jelenti, hogy az attribútum értékét kötelező megadni
-
+  
   - CHECK (feltétel)
-
+    
     - Az adott attribútum módosítását a rendszer csak akkor engedi meg, ha a feltétel teljesül.
-
+    
     - Példa: A dolgozók nemét is nyilvántartjuk (F=férfi, N=nő):
-
+      
       - CREATE TABLE Dolgozó
         ( adószám DECIMAL(10) PRIMARY KEY,
         név CHAR(30) NOT NULL,
@@ -6350,14 +6678,14 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
         );
 
 - Értéktartomány definiálása:
-
+  
   - **CREATE DOMAIN név típus [DEFAULT érték] [CHECK (feltétel)];**
-
+  
   - Értéktartomány módosítása ALTER DOMAIN, törlése DROP DOMAIN utasítással
     történik.
-
+  
   - Példa. A nemekhez tartozó konstansértékek definiálása:
-
+    
     - CREATE DOMAIN NemÉrték CHAR(1) CHECK (VALUE IN ('F', 'N'));
       CREATE TABLE Dolgozó
       ( adószám DECIMAL(10) PRIMARY KEY,
@@ -6376,7 +6704,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 
 - Példa. Biztonsági ellenőrzésként megköveteljük, hogy a könyvek kölcsönzésénél a
   kivétel dátuma előzze meg a visszahozási határidőt:
-
+  
   - CREATE TABLE Könyv
     ( könyvszám DECIMAL(6) PRIMARY KEY,
     szerző CHAR(30),
@@ -6389,14 +6717,14 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 **Általános megszorítások**
 
 - Több táblára (általában, a teljes adatbázissémára) vonatkozhatnak. Megadásuk:
-
+  
   - **CREATE ASSERTION név CHECK (feltétel);**
-
+  
   - A feltételben szereplő táblák bármelyikének módosításakor a feltétel ellenőrzésre kerül.
 
 - Példa. A Dolgozó(adószám, név, fizetés, osztálykód) és Osztály(osztálykód,
   osztálynév, vezAdószám) táblák esetén megköveteljük, hogy a vezetők fizetése legalább 100 000 Ft legyen:
-
+  
   - CREATE ASSERTION VezetőFizetés
     CHECK (NOT EXISTS
     (SELECT \* FROM Dolgozó, Osztály
@@ -6404,7 +6732,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
     AND fizetés < 100000));
 
 - Az önálló megszorítás törlése:
-
+  
   - **DROP ASSERTION név;**
 
 **Triggerek**
@@ -6412,7 +6740,7 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - A trigger egy aktualizálási művelet esetén végrehajtandó programrészletet definiál.
 
 - Megadása:
-
+  
   - **CREATE TRIGGER név
     { BEFORE | AFTER | INSTEAD OF }
     { DELETE | INSERT | UPDATE [OF oszlopok] }
@@ -6420,9 +6748,9 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
     [ REFERENCING [OLD AS régi] [NEW AS új]
     [ FOR EACH ROW ]
     [WHEN (feltétel)] programblokk;**
-
+    
     - Jelölés: a fenti szintaxis leírásban { x | y } azt jelenti, hogy x és y egyike választható.
-
+    
     - **név**: a trigger neve.
       **BEFORE, AFTER, INSTEAD OF**: az aktualizálási művelet előtt, után, vagy helyette lép működésbe a trigger.
       **DELETE, INSERT, UPDATE OF**: az aktualizálási művelet neve.
