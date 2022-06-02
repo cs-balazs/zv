@@ -39,19 +39,19 @@ Minden tárgyból 1db van, de az darabolható.
 Futás a fenti példán:
 
 - Kiszámoljuk az $\frac{E_i}{S_i}$ értékeket
-
+  
   1. Tárgy: 6
-
+  
   2. Tárgy: 5
-
+  
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az $\frac{E_i}{S_i}$ arányok szerint
-
+  
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-
+  
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-
+  
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy $\frac{2}{3}$-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
@@ -146,7 +146,7 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-
+  
   - Ha ki kell mindent számolni, érdemesebb az iteratív megközelítést választani a függvényhívások overhead-je miatt.
 
 ##### Példa: _Pénzváltás feladat_
@@ -219,11 +219,11 @@ F  = 9;
 - **Output**: $n$ hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
->
+> 
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
->
+> 
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
->
+> 
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 ##### Beszúró rendezés
@@ -249,8 +249,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-| :------: | :-------------------------------: |
-| $O(n^2)$ |          $O(n)$ ~ $O(1)$          |
+|:--------:|:---------------------------------:|
+| $O(n^2)$ | $O(n)$ ~ $O(1)$                   |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -273,9 +273,9 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 ![  ](../img/kupac_rendezes.png)
 
-|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
-| :-----------: | :-------------------------------: |
-| $O(n*log(n))$ |          $O(n)$ ~ $O(1)$          |
+| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
+|:-------------:|:---------------------------------:|
+| $O(n*log(n))$ | $O(n)$ ~ $O(1)$                   |
 
 ##### Gyorsrendezés
 
@@ -316,8 +316,8 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- | :------: |
-| $O(n^2)$ |  $O(n)$  |
+| -------- |:--------:|
+| $O(n^2)$ | $O(n)$   |
 
 > Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mélység $O(logn)$, ami mivel egy hívás futásideje $O(n)$, így az átlagos futásidő $O(n * logn)$. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
@@ -367,8 +367,8 @@ const leszamoloRendezes = (A: number[], k: number) => {
 };
 ```
 
-|    Futásidő     |   Tárigény   |
-| :-------------: | :----------: |
+| Futásidő        | Tárigény     |
+|:---------------:|:------------:|
 | $\Theta(k + n)$ | $\Theta(2n)$ |
 
 > A gyakorlatban akkor használjuk, ha $k = O(n)$, mert ekkor a futásidő $\Theta(n)$
@@ -1284,10 +1284,10 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 - Szomszédsági lista
 
-|                        |    Létezik (u, v) él?    |  Összes él listázása  | Egy csúcs szomszédainak listázása |
-| ---------------------- | :----------------------: | :-------------------: | :-------------------------------: |
-| Csúcsok + élek halmaza |   $\Theta( \| E \| )$    |  $\Theta( \| E \| )$  |        $\Theta( \| E \| )$        |
-| Szomszédsági mátrix    |       $\Theta(1)$        | $\Theta( \| V \| ^2)$ |        $\Theta( \| V \| )$        |
-| Szomszédsági lista     | $\Theta(\text{fokszám})$ |  $\Theta( \| E \| )$  |     $\Theta(\text{fokszám})$      |
+|                        | Létezik (u, v) él?       | Összes él listázása   | Egy csúcs szomszédainak listázása |
+| ---------------------- |:------------------------:|:---------------------:|:---------------------------------:|
+| Csúcsok + élek halmaza | $\Theta( \| E \| )$      | $\Theta( \| E \| )$   | $\Theta( \| E \| )$               |
+| Szomszédsági mátrix    | $\Theta(1)$              | $\Theta( \| V \| ^2)$ | $\Theta( \| V \| )$               |
+| Szomszédsági lista     | $\Theta(\text{fokszám})$ | $\Theta( \| E \| )$   | $\Theta(\text{fokszám})$          |
 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.

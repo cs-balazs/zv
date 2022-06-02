@@ -44,7 +44,7 @@
 
 ###### Minden formula ekvivalens CNF alakra hozható.
 
-1. $\to$ és $\leftrightarrow$ konnektívák eliminálása.
+1. $\to$ és $\leftrightarrow$ konnektívák eliminálása. ($A \to B \equiv \neg A \lor B$-vel)
 
 2. $\neg$-k bevitele változók mellé deMorgan azonosságokkal.
 
@@ -136,7 +136,7 @@ Ha $f/n$ és $g_1/k, ..., g_n/k$ Boole-függvények, akkor az $f \circ \lang g_1
 
 $f(x_1, ..., x_n) = (x_n \land f |_{x_n = 1}(x_1, ..., x_{n-1})) \lor ( \neg x_n \land f |_{x_n = 0}(x_1, ..., x_{n-1}))$
 
-> Lényegében ezzel azt írtuk le, hogy az $x_n$ értéke vagy úgy igaz a formula, hogy $x_n = 1$, vagy úgy, hogy $x_n = 0$.
+> Lényegében ezzel azt írtuk le, hogy az $x_n$ értéke mellett vagy úgy igaz a formula, hogy $x_n = 1$, vagy úgy, hogy $x_n = 0$.
 
 Ennek a következménye: Minden Boole függvény előáll a projekciók, és a $\{ ~ \neg, \land, \lor ~ \}$ alkalmas kompozíciójaként. (Hiszen az előző összefüggésben csak ezeket használjuk fel, és ez ismételhető amíg nem kötöttünk le minden változót.)
 
@@ -172,7 +172,7 @@ Az ítéletváltozókon kívül ebben a rendszerben csak a $\to$ konnektívát, 
 
 - $((F \to \downarrow )\to \downarrow) \to F$
 
-> EZen a formulák **tautológiák**. Azaz minden értékadás mellett igazak.
+> Ezen a formulák **tautológiák**. Azaz minden értékadás mellett igazak.
 
 ##### Az axiómák példányai
 
@@ -262,7 +262,7 @@ Ekvikalens állítások tetszőleges $\Sigma$ formulahalmazra:
 
 - minden $F \notin \Sigma$-ra $\Sigma \cup \{ ~ F ~ \}$ már nem H-konzisztens.
 
-> Minden $\Sigma$ H-konzisztens halmazhoz van $\Sigma' \supseteq \Sigma$ maximális H-konzisztens halmaz. "A halmmazt fel lehet fújni."
+> Minden $\Sigma$ H-konzisztens halmazhoz van $\Sigma' \supseteq \Sigma$ maximális H-konzisztens halmaz. "A halmazt fel lehet fújni."
 
 Ha $\Sigma$ maximális H-konzisztens halmaz, akkor tetszőleges $F$ formulára vagy $F \in \Sigma$, vagy $(F \to \downarrow ) \in \Sigma$, de nem mindkettő.
 
@@ -276,7 +276,7 @@ Ezt kell belátni: $\Sigma \vDash F \Leftrightarrow \Sigma \vdash F$
 
 > Most itt egyszerre van belátva mindkettő, de a helyesség fentebbi alapján külön is belátható.
 
-Sorban minden ekvivalenciát tovább feltünk ekvivalencia mentén:
+Sorban minden ekvivalenciát tovább fejtünk ekvivalencia mentén:
 
 $\Sigma \vDash F ~ ~ \Leftrightarrow ~ ~ \Sigma \cup \{ ~ F \to \downarrow ~ \} \vDash \downarrow$
 
@@ -284,7 +284,7 @@ $\Sigma \vDash F ~ ~ \Leftrightarrow ~ ~ \Sigma \cup \{ ~ F \to \downarrow ~ \} 
 
 $\Leftrightarrow ~ ~ \Sigma \cup \{ ~ F \to \downarrow ~ \} \vdash \downarrow$
 
-> Itt a bal oldal azt jelenti, hogy az a halmaz kielágíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
+> Itt a bal oldal azt jelenti, hogy az a halmaz kielégíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
 
 $\Leftrightarrow ~ ~ \Sigma \vdash (F \to \downarrow ) \to \downarrow$
 
@@ -426,7 +426,7 @@ Az állítást a $\Sigma$-beli változók $n$ száma szerinti indukcióval látj
   
   - Különben legyen $l \in C$ egy $C$-beli literál.
   
-  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha $l$ pure literál lenne, akkor $\Sigma$-nak egy valódi részhalmaza $\Sigma'|_{l = 1}$ is kielágíthetetlen lenne. Tehát $\Sigma'$-ben $\overline{l}$ is szerepel valahol.
+  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha $l$ pure literál lenne, akkor $\Sigma$-nak egy valódi részhalmaza $\Sigma'|_{l = 1}$ is kielégíthetetlen lenne. Tehát $\Sigma'$-ben $\overline{l}$ is szerepel valahol.
 
 - Vegyük a $\Sigma'|_{l = 0}$ és $\Sigma'|_{l = 1}$ klózhalmazokat.
 
@@ -436,7 +436,7 @@ Az állítást a $\Sigma$-beli változók $n$ száma szerinti indukcióval látj
 
 - A $\Sigma'|_{l=0}$ klózhalmaznak $C - \{ ~ l ~ \}$ is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben $\Sigma' - \{ ~ C ~ \}$ is kielégíthetetlen lenne).
 
-- Tehát $\Sigma'|_{l = 0}$-ból az indukciós feltevés szerinte van $\square$-nak egy $C_1, C_2, ..., C_m$ lineáris rezolúciós levezetése, melynek $C_1 = C - \{ ~ l ~ \}$ a bázisa.
+- Tehát $\Sigma'|_{l = 0}$-ból az indukciós feltevés szerint van $\square$-nak egy $C_1, C_2, ..., C_m$ lineáris rezolúciós levezetése, melynek $C_1 = C - \{ ~ l ~ \}$ a bázisa.
 
 - "Visszaemelve" a $\Sigma|_{l = 0}$ cáfolatot $\Sigma'$ fölötti levezetéssé, az új levezetésben minden klózba bekerül az $l$ literál.
 
