@@ -39,19 +39,19 @@ Minden tárgyból 1db van, de az darabolható.
 Futás a fenti példán:
 
 - Kiszámoljuk az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> értékeket
-
+  
   1. Tárgy: 6
-
+  
   2. Tárgy: 5
-
+  
   3. Tárgy: 4
 
 - Végighaladunk a tárgyakon az <img src="https://latex.codecogs.com/svg?%5Cfrac%7BE_i%7D%7BS_i%7D" /> arányok szerint
-
+  
   - Az első tárgy teljes egészében belefér, azt beválasztjuk.
-
+  
   - A 2. tárgy is teljes egészében belefér, azt is beválasztjuk.
-
+  
   - A 3. tárgy már nem fér be, beválasztunk annyit, amennyi kitölti a szabad helyet. Jelen esetben a tárgy <img src="https://latex.codecogs.com/svg?%5Cfrac%7B2%7D%7B3%7D" />-át.
 
 > A probléma nem-törtedékes verziójára ez a mohó algoritmus nem mindig talál optimális megoldást.
@@ -146,7 +146,7 @@ A megoldott **részproblémák eredményét memorizáljuk** (mondjuk egy táblá
 - Felülről lefele építkező megközelítés.
 
 - **Csak akkor használjuk, ha nem kell minden megoldást kiszámolni!**
-
+  
   - Ha ki kell mindent számolni, érdemesebb az iteratív megközelítést választani a függvényhívások overhead-je miatt.
 
 ##### Példa: _Pénzváltás feladat_
@@ -219,11 +219,11 @@ F  = 9;
 - **Output**: <img src="https://latex.codecogs.com/svg?n" /> hosszú, rendezett tömb (az input sorozat egy olyan `<a'1, a'2, ..., a'n>` permutációja, ahol `a'1 <= a'2 <= ... <= a'n`)
 
 > Ez egy egyszerű eset, a gyakorlatban:
->
+> 
 > - Van valamilyen iterálható kollekciónk: `Iterálható<Objektum>`)
->
+> 
 > - Van egy függvényünk, ami megondja képt kollekció-elemről, hogy melyik a _nagyobb_: `(a: Objektum, b: Objektum) => -1 | 0 | 1`
->
+> 
 > Ezek együttesével már megfelelően absztrakt módon tudjuk használni az összehasonlító rendező algoritmusokat bármilyen esetben.
 
 ##### Beszúró rendezés
@@ -249,8 +249,8 @@ const beszuroRendezes = (A: number[]) => {
 Végig haladunk a tömbön, és minden elemtől visszafelé elindulva megkeressük annak a helyét, és beszúrjuk oda. Amin áthaladtunk, az a részsorozat már rendezett lesz mindig.
 
 | Futásidő | Tárigény ( össz ~ inputon kívül ) |
-| :------: | :-------------------------------: |
-| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> |          <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />          |
+|:--------:|:---------------------------------:|
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
 
 Legrosszabb eset: Teljesen fordítva rendezett tömb az input: `[5, 4, 3, 2, 1]`. Ekkor minden `beillesztendo` elemre vissza kell lépkedni a tömb elejéig.
 
@@ -273,9 +273,9 @@ Az input tömböt először **maximum-kupaccá** kell alakítani. Ekkor tudjuk, 
 
 ![  ](../img/kupac_rendezes.png)
 
-|   Futásidő    | Tárigény ( össz ~ inputon kívül ) |
-| :-----------: | :-------------------------------: |
-| <img src="https://latex.codecogs.com/svg?O(n*log(n))" /> |          <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />          |
+| Futásidő      | Tárigény ( össz ~ inputon kívül ) |
+|:-------------:|:---------------------------------:|
+| <img src="https://latex.codecogs.com/svg?O(n*log(n))" /> | <img src="https://latex.codecogs.com/svg?O(n)" /> ~ <img src="https://latex.codecogs.com/svg?O(1)" />                   |
 
 ##### Gyorsrendezés
 
@@ -316,8 +316,8 @@ const gyorsRendezes = (A: number[]) => _gyorsRendezes(A, 0, A.length - 1);
 ```
 
 | Futásidő | Tárigény |
-| -------- | :------: |
-| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> |  <img src="https://latex.codecogs.com/svg?O(n)" />  |
+| -------- |:--------:|
+| <img src="https://latex.codecogs.com/svg?O(n%5E2)" /> | <img src="https://latex.codecogs.com/svg?O(n)" />   |
 
 > Fontos, hogy az eljárás teljesítménye függ attól, hogy a felosztások mennyire ideálisak. Valószívűségi alapon a vátható rekurziós mélység <img src="https://latex.codecogs.com/svg?O(logn)" />, ami mivel egy hívás futásideje <img src="https://latex.codecogs.com/svg?O(n)" />, így az átlagos futásidő <img src="https://latex.codecogs.com/svg?O(n%20*%20logn)" />. A gyakorlat azt mutatja, hogy ez az algoritmus jól teljesít.
 
@@ -367,8 +367,8 @@ const leszamoloRendezes = (A: number[], k: number) => {
 };
 ```
 
-|    Futásidő     |   Tárigény   |
-| :-------------: | :----------: |
+| Futásidő        | Tárigény     |
+|:---------------:|:------------:|
 | <img src="https://latex.codecogs.com/svg?%5CTheta(k%20%2B%20n)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(2n)" /> |
 
 > A gyakorlatban akkor használjuk, ha <img src="https://latex.codecogs.com/svg?k%20%3D%20O(n)" />, mert ekkor a futásidő <img src="https://latex.codecogs.com/svg?%5CTheta(n)" />
@@ -1284,11 +1284,11 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 - Szomszédsági lista
 
-|                        |    Létezik (u, v) él?    |  Összes él listázása  | Egy csúcs szomszédainak listázása |
-| ---------------------- | :----------------------: | :-------------------: | :-------------------------------: |
-| Csúcsok + élek halmaza |   <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />    |  <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />  |        <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />        |
-| Szomszédsági mátrix    |       <img src="https://latex.codecogs.com/svg?%5CTheta(1)" />        | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20%5E2)" /> |        <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20)" />        |
-| Szomszédsági lista     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> |  <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />  |     <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />      |
+|                        | Létezik (u, v) él?       | Összes él listázása   | Egy csúcs szomszédainak listázása |
+| ---------------------- |:------------------------:|:---------------------:|:---------------------------------:|
+| Csúcsok + élek halmaza | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />      | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />   | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />               |
+| Szomszédsági mátrix    | <img src="https://latex.codecogs.com/svg?%5CTheta(1)" />              | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20%5E2)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20V%20%5C%7C%20)" />               |
+| Szomszédsági lista     | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" /> | <img src="https://latex.codecogs.com/svg?%5CTheta(%20%5C%7C%20E%20%5C%7C%20)" />   | <img src="https://latex.codecogs.com/svg?%5CTheta(%5Ctext%7Bfoksz%C3%A1m%7D)" />          |
 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.
 ## Bonyolultságelmélet
@@ -2841,7 +2841,7 @@ quad(@fxlog, 2, 4);
 
 ###### Minden formula ekvivalens CNF alakra hozható.
 
-1. <img src="https://latex.codecogs.com/svg?%5Cto" /> és <img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> konnektívák eliminálása.
+1. <img src="https://latex.codecogs.com/svg?%5Cto" /> és <img src="https://latex.codecogs.com/svg?%5Cleftrightarrow" /> konnektívák eliminálása. (<img src="https://latex.codecogs.com/svg?A%20%5Cto%20B%20%5Cequiv%20%5Cneg%20A%20%5Clor%20B" />-vel)
 
 2. <img src="https://latex.codecogs.com/svg?%5Cneg" />-k bevitele változók mellé deMorgan azonosságokkal.
 
@@ -2933,7 +2933,7 @@ Ha <img src="https://latex.codecogs.com/svg?f%2Fn" /> és <img src="https://late
 
 <img src="https://latex.codecogs.com/svg?f(x_1%2C%20...%2C%20x_n)%20%3D%20(x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%201%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))%20%5Clor%20(%20%5Cneg%20x_n%20%5Cland%20f%20%7C_%7Bx_n%20%3D%200%7D(x_1%2C%20...%2C%20x_%7Bn-1%7D))" />
 
-> Lényegében ezzel azt írtuk le, hogy az <img src="https://latex.codecogs.com/svg?x_n" /> értéke vagy úgy igaz a formula, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%201" />, vagy úgy, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%200" />.
+> Lényegében ezzel azt írtuk le, hogy az <img src="https://latex.codecogs.com/svg?x_n" /> értéke mellett vagy úgy igaz a formula, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%201" />, vagy úgy, hogy <img src="https://latex.codecogs.com/svg?x_n%20%3D%200" />.
 
 Ennek a következménye: Minden Boole függvény előáll a projekciók, és a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Cneg%2C%20%5Cland%2C%20%5Clor%20~%20%5C%7D" /> alkalmas kompozíciójaként. (Hiszen az előző összefüggésben csak ezeket használjuk fel, és ez ismételhető amíg nem kötöttünk le minden változót.)
 
@@ -2969,7 +2969,7 @@ Az ítéletváltozókon kívül ebben a rendszerben csak a <img src="https://lat
 
 - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
 
-> EZen a formulák **tautológiák**. Azaz minden értékadás mellett igazak.
+> Ezen a formulák **tautológiák**. Azaz minden értékadás mellett igazak.
 
 ##### Az axiómák példányai
 
@@ -3059,7 +3059,7 @@ Ekvikalens állítások tetszőleges <img src="https://latex.codecogs.com/svg?%5
 
 - minden <img src="https://latex.codecogs.com/svg?F%20%5Cnotin%20%5CSigma" />-ra <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20~%20%5C%7D" /> már nem H-konzisztens.
 
-> Minden <img src="https://latex.codecogs.com/svg?%5CSigma" /> H-konzisztens halmazhoz van <img src="https://latex.codecogs.com/svg?%5CSigma'%20%5Csupseteq%20%5CSigma" /> maximális H-konzisztens halmaz. "A halmmazt fel lehet fújni."
+> Minden <img src="https://latex.codecogs.com/svg?%5CSigma" /> H-konzisztens halmazhoz van <img src="https://latex.codecogs.com/svg?%5CSigma'%20%5Csupseteq%20%5CSigma" /> maximális H-konzisztens halmaz. "A halmazt fel lehet fújni."
 
 Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> maximális H-konzisztens halmaz, akkor tetszőleges <img src="https://latex.codecogs.com/svg?F" /> formulára vagy <img src="https://latex.codecogs.com/svg?F%20%5Cin%20%5CSigma" />, vagy <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow%20)%20%5Cin%20%5CSigma" />, de nem mindkettő.
 
@@ -3073,7 +3073,7 @@ Ezt kell belátni: <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%
 
 > Most itt egyszerre van belátva mindkettő, de a helyesség fentebbi alapján külön is belátható.
 
-Sorban minden ekvivalenciát tovább feltünk ekvivalencia mentén:
+Sorban minden ekvivalenciát tovább fejtünk ekvivalencia mentén:
 
 <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F%20~%20~%20%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5CvDash%20%5Cdownarrow" />
 
@@ -3081,7 +3081,7 @@ Sorban minden ekvivalenciát tovább feltünk ekvivalencia mentén:
 
 <img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5Cvdash%20%5Cdownarrow" />
 
-> Itt a bal oldal azt jelenti, hogy az a halmaz kielágíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
+> Itt a bal oldal azt jelenti, hogy az a halmaz kielégíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
 
 <img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow" />
 
@@ -3223,7 +3223,7 @@ Az állítást a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli vál
   
   - Különben legyen <img src="https://latex.codecogs.com/svg?l%20%5Cin%20C" /> egy <img src="https://latex.codecogs.com/svg?C" />-beli literál.
   
-  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha <img src="https://latex.codecogs.com/svg?l" /> pure literál lenne, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak egy valódi részhalmaza <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> is kielágíthetetlen lenne. Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'" />-ben <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" /> is szerepel valahol.
+  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha <img src="https://latex.codecogs.com/svg?l" /> pure literál lenne, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak egy valódi részhalmaza <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> is kielégíthetetlen lenne. Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'" />-ben <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" /> is szerepel valahol.
 
 - Vegyük a <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" /> és <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> klózhalmazokat.
 
@@ -3233,7 +3233,7 @@ Az állítást a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli vál
 
 - A <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%3D0%7D" /> klózhalmaznak <img src="https://latex.codecogs.com/svg?C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben <img src="https://latex.codecogs.com/svg?%5CSigma'%20-%20%5C%7B%20~%20C%20~%20%5C%7D" /> is kielégíthetetlen lenne).
 
-- Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" />-ból az indukciós feltevés szerinte van <img src="https://latex.codecogs.com/svg?%5Csquare" />-nak egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_m" /> lineáris rezolúciós levezetése, melynek <img src="https://latex.codecogs.com/svg?C_1%20%3D%20C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> a bázisa.
+- Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" />-ból az indukciós feltevés szerint van <img src="https://latex.codecogs.com/svg?%5Csquare" />-nak egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_m" /> lineáris rezolúciós levezetése, melynek <img src="https://latex.codecogs.com/svg?C_1%20%3D%20C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> a bázisa.
 
 - "Visszaemelve" a <img src="https://latex.codecogs.com/svg?%5CSigma%7C_%7Bl%20%3D%200%7D" /> cáfolatot <img src="https://latex.codecogs.com/svg?%5CSigma'" /> fölötti levezetéssé, az új levezetésben minden klózba bekerül az <img src="https://latex.codecogs.com/svg?l" /> literál.
 
@@ -8900,21 +8900,21 @@ Idom i = {
 **Folyamat elemek:**
 
 - Fő elemek
-
+  
   - Feladatok, termékek
-
+  
   - Határidők, átadandók
 
 - Kiegészítő elemek
-
+  
   - Projektmenedzsment
-
+  
   - Konfigurációmenedzsment
-
+  
   - Dokumentáció
-
+  
   - Minőségbiztosítás, kockázatmenedzsment
-
+  
   - Mérés
 
 **Folyamat fejlettsége**
@@ -8924,15 +8924,15 @@ Idom i = {
 - SEI CMM(I) (Capability Maturity Model Integration)
 
 - _Szintjei:_
-
+  
   - Kezdeti
-
+  
   - Reprodukálható
-
+  
   - Definiált
-
+  
   - Ellenőrzöt
-
+  
   - Optimalizált
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Characteristics_of_Capability_Maturity_Model.svg/1280px-Characteristics_of_Capability_Maturity_Model.svg.png" title="" alt="" width="438">
@@ -8940,47 +8940,47 @@ Idom i = {
 **A szoftverfolyamat fázisai**
 
 - Minden folyamatnak elemei:
-
+  
   - **Specifikáció**: szoftver funkcionalitása, megszorítások („mit”)
-
+  
   - **Fejlesztés**: tervezés és implementáció specifikáció alapján („hogyan”)
-
+  
   - **Verifikáció és Validáció**: fejlesztés megfelel-e a specifikációnak és a követelményeknek
-
+  
   - **Evolúció**: változás kezelése, szoftver „utóélete”
 
 - **Specifikáció**
-
+  
   - Szoftver definiálása
-
+    
     - Milyen funkciókat, szolgáltatásokat követelünk meg a rendszertől
-
+    
     - Követelménytervezés
-
+  
   - Kritikus szakasz: itt a legkisebb a változtatások költsége
-
+  
   - Eredmény: követelményspecifikáció dokumentum, esetleg prototípusok
-
+    
     - Végfelhasználónak: magas szintű
-
+    
     - Fejlesztőknek: részletes, technikai
 
 - **Követelménytervezés fázisai**
-
+  
   - Megvalósíthatósági tanulmány (feasibility study)
-
+  
   - Költséghatékonyság ellenőrzése
-
+  
   - Követelmények feltárása és elemzése:
-
+    
     - Rendszermodellek, prototípusok
-
+  
   - Követelményspecifikáció: Egységes dokumentum
-
+  
   - Követelmény validáció
 
 - **Tervezés**
-
+  
   - Szoftver struktúrája, adatok, interfészek
   - Rendszermodellek különböző absztrakciós szinteken
   - _Tevékenységei:_
@@ -8992,78 +8992,78 @@ Idom i = {
   - Gyakorlati folyamatok speciálisan definiálják ezeket
 
 - **Tervezési módszerek**
-
+  
   - Ad hoc (átfogó rendezés nélkül)
-
+  
   - Strukturált
-
+    
     - Structured Design (SD)
-
+    
     - SSADM
-
+    
     - Jackson
-
+  
   - Objektumorientált
-
+    
     - pl.: UML (Unified Modeling Language, szabványos, általános célú modellező nyelv, üzleti elemzők, rendszertervezők, szoftvermérnökök számára)
-
+  
   - Közös: grafikus rendszermodellek, szabványos jelölésrendszer, CASE (Computer Aided Software Engineering) támogatás
 
 - **Implementáció**
-
+  
   - Programozás és nyomkövetés
-
+  
   - kritikus rendszereknél részletes tervezés alapján
-
+  
   - Programozás (kódolás): adottság kell hozzá, személyes technikák, stílusok
-
+  
   - Minőségbiztosítás érdekében kódolási stílust lehet megkövetelni
-
+  
   - Nyomkövetés (debugging): hiba lokalizálás, eltávolítás, újratesztelés, programszöveg manuális vizsgálata, eszköztámogatás
 
 - **Szoftver validáció**
-
+  
   - Verifikáció és validáció (V & V): Rendszer megfelel-e a specifikációnak, és a megrendelő elvárásainak
-
+  
   - Tesztelés különböző szinteken történik, inkrementálisan
-
+    
     - Egység tesztelése (unit test): komponensek független tesztelése, programozó feladata
-
+    
     - Modul tesztelése: függő és kapcsolódó komponenseket együtt, szintén a programozó feladata
-
+    
     - Alrendszer tesztelése: például interfészek illeszkedése, független tesztelő csapat feladata
-
+    
     - Rendszer tesztelése: előre nem várt kölcsönhatások felfedezése, validáció
       specifikációhoz tesztadatokon, független tesztelő csapat
-
+    
     - Átvételi tesztelés: megrendelő adataival, valós környezetben, alfa tesztelés (fejlesztő vagy teszt csapat végzi)
-
+    
     - Béta tesztelés: potenciális vásárlók által tesztelt, előre nem látható hibák keresése
 
 - **Evolúció**
-
+  
   - Szoftver flexibilitás miatt nagy, összetett rendszerek születnek
-
+  
   - Változás bár költséges, de
-
+    
     - Eredményesebb meglévő rendszerekből kialakítani az újat
-
+    
     - Kevés a teljesen új szoftver
-
+    
     - Egy szoftver sosincs kész
-
+  
   - Követelményspecifikáció után a meglévő rendszereket kiértékeljük
-
+    
     - Manuális vizsgálat
-
+    
     - Automatikus elemzés (reverse engineering)
-
+    
     - Kimenet: dokumentáció, magasabb szintű rendszermodell
-
+  
   - Rendszermódosítások után jön létre az „új” rendszer
-
+    
     - Újratervezés (re-engineering)
-
+    
     - Folyamatos evolúció (roundtrip engineering)
 
 #### A folyamat modelljei
@@ -9071,9 +9071,9 @@ Idom i = {
 ##### Kategóriák
 
 - Triviális: lineáris, vízesés
-
+  
   - Tevékenységek különálló fázisok
-
+  
   - Iteratív modellek: prototípus, vízesés, RAD
 
 - Evolúciós: prototípusok gyors gyártása, finomítása
@@ -9087,17 +9087,17 @@ Idom i = {
 - Első publikált, „klasszikus” modell (életciklus modell)
 
 - Lényegében egy szekvenciális modell
-
+  
   - Fázisok lépcsősen kapcsolódnak
-
+  
   - Visszacsatolás is van
 
 - Fázisok kimenetei teljesen el kell, hogy készüljenek, mielőtt továbbmegyünk
-
+  
   - A hibákat összegyűjtik a fázisok végén
-
+  
   - Javításra a folyamat végén van lehetőség
-
+  
   - Iteráció közvetve van jelen
 
 - Ha jó a specifikáció, akkor működőképes
@@ -9105,13 +9105,13 @@ Idom i = {
 ![](../img/2022-05-03-20-42-12-image.png)
 
 - Problémái
-
+  
   - Ritkán van egyszerű lineáris fejlesztés
-
+  
   - Követelményeket nehéz pontosan specifikálni a legelején
-
+  
   - A megrendelő csak a legvégén látja meg először a terméket
-
+    
     - Sok hiba ekkor derül ki, melyek javítási költsége nagy
 
 - Előnye: megrendelő könnyebben tud megállapodni, mert a specifikáció pontos (Viszont nehezen módosítható szoftver alakul ki)
@@ -9119,25 +9119,25 @@ Idom i = {
 ##### **_Iteráció, inkrementalitás_**
 
 - Folyamat iterációja elkerülhetetlen
-
+  
   - Ha a követelmények változnak, akkor a folyamat bizonyos részeit is változtatni kell
 
 - Iteráció szélsőséges esetei:
-
+  
   - Vízesés modellnél minimális lehetőség
-
+  
   - Prototípus (vagy evolúciós) modellnél minimális a specifikáció, fejlesztésben sok iteráció van, és menet közben alakul ki a végleges specifikáció
 
 ##### _Evolúciós fejlesztés_
 
 - Prototípus modell: az evolúciós fejlesztés egy szélsőséges iteratív+inkrementális példája
-
+  
   - Durva specifikáció megrendelő részéről
-
+  
   - Ezután gyors fejlesztés, eredménye prototípus
-
+  
   - Prototípus kiértékelése után követelményspecifikáció újraíródik
-
+  
   - Sok-sok iteráció a végtermékig
 
 - Nagy dilemma: a prototípusból lesz-e a végtermék, vagy az csak eldobható
@@ -9147,17 +9147,17 @@ Idom i = {
 - Kész komponensek alkalmazása előnyös
 
 - Prototípus modell problémái:
-
+  
   - A megrendelő azt gondolja, hogy a prototípus kész rendszer, nehéz ellenállni, hogy ne használja
-
+  
   - Gyors fejlesztés miatt minőség romolhat, kevésbé hatékony megoldások alkalmazása miatt, amik beépülhetnek a végső rendszerbe
-
-  - Megrendelő sokszor vállalja a rizikókat, mert:ű
-
+  
+  - Megrendelő sokszor vállalja a rizikókat, mert:
+    
     - Szeret „belelátni” a fejlesztésbe
-
+    
     - Kezdetben pontosan tudja, hogy mit szeretne, de a részletekről fogalma sincs
-
+  
   - Hibrid megoldások kellenek, vízesés modellel
 
 ##### Inkrementális modell
@@ -9165,11 +9165,11 @@ Idom i = {
 - Vízesés és evolúciós fejlesztés kombinációja (robosztusság és felxibilitás)
 
 - Nagy körvonalakban specifikáljuk a rendszert
-
+  
   - „Inkremensek” meghatározása
-
+  
   - Funkcionalitásokhoz prioritásokat rendelünk
-
+  
   - Magasabbakat előbb kell biztosítani
 
 - Architektúrát meg kell határozni
@@ -9179,43 +9179,43 @@ Idom i = {
 - Egyes inkremensek kifejlesztése történhet akár különböző folyamatokkal is (vízesés vagy evolúciós, amelyik jobb)
 
 - Az elkészült inkremenseket akár szolgálatba is lehet állítani
-
+  
   - Tapasztalatok alapján lehet meghatározni a következő inkremenseket
 
 - Az új inkremenseket integrálni kell a már meglévőkkel
 
 - Előnyei:
-
+  
   - A szoftver már menet közben használható
-
+  
   - Korábbi inkremensek prototípusként használhatók, a későbbi követelmények pontosítása érdekében
-
+  
   - Ha határidő csúszás van kilátásban, inkrementális modell bevethető
-
+    
     - Teljes projekt nem lesz kudarcra ítélve, esetleg csak egyes inkremensek
-
+  
   - A legfontosabb inkremensek lesznek többször tesztelve (mivel azokkal kezdtük a megvalósítást)
 
 - Hátrányai:
-
+  
   - Megfelelő méretű inkremensek meghatározása nem triviális feladat
-
+    
     - Ha túl kicsi: nem működőképes
-
+    
     - Ha túl nagy: elveszítjük a modell lényegét
-
+  
   - Bizonyos esetekben számos alapvető funkcionalitást kell megvalósítani
-
+    
     - Egész addig nincs működő inkremens
-
+    
     - Csak akkor pörög be a rendszer, ha minden összeállt
 
 ##### eXtreme Programming (XP)
 
 - Szélsőséges inkrementális modell
-
+  
   - Nagyon kis funkcionalitású inkremensek
-
+  
   - Megrendelő intenzív részvétele
 
 - Programozás csoportos tevékenység (többen ülnek egy képernyő előtt)
@@ -9231,31 +9231,31 @@ Idom i = {
 - Extrém rövid életciklus (Működő rendszer 60-90 nap alatt)
 
 - Vízesés modell „nagysebességű” adaptálása
-
+  
   - Párhuzamos fejlesztés
-
+  
   - Komponens alapú fejlesztés
 
 - Fázisok:
-
+  
   - Üzleti modellezés: milyen információk áramlanak funkciók között
-
+  
   - Adatmodellezés: finomítás adatszerkezetekre
-
+  
   - Adatfolyam processzus: adatmodell megvalósítása
-
+  
   - Alkalmazás generálás: 4GT (negyedik generációs technikák) alkalmazása, automatikus generálás, komponensek
-
+  
   - Tesztelés: csak komponens tesztelés
 
 - Problémái:
-
+  
   - Nagy emberi erőforrásigény
-
+  
   - Fejlesztők és megrendelők intenzív együttműködése
-
+  
   - Nem minden típusú fejlesztésnél alkalmazható
-
+    
     - Modularizálhatóság hiánya problémát jelenthet
 
 ##### Spirális modell
@@ -9267,11 +9267,11 @@ Idom i = {
 - Nincsenek rögzített fázisok, mindig egyedi modellek
 
 - Más modelleket ölelhet fel, pl.:
-
+  
   - Prototípuskészítés pontatlan követelmények esetén
-
+  
   - Vízesés modell egy későbbi körben
-
+  
   - Kritikus részek esetén formális módszerek
 
 - A spirál körei a folyamat egy-egy fázisát reprezentálják
@@ -9279,90 +9279,90 @@ Idom i = {
 - Minden körben a kimenet egy „release” (modell vagy szoftver)
 
 - Körök céljai pl.:
-
+  
   - Megvalósíthatóság (elvi prototípusok)
-
+  
   - Követelmények meghatározása (prototípusok)
-
+  
   - Tervezés (modellek és inkremensek)
-
+  
   - (javítás, karbantartás, stb.)
 
 - A körök szektorokra oszthatók (3-6 db)
-
+  
   - 4 szektorral:
-
+    
     - Célok kijelölése
-
+    
     - Kockázat becslése és csökkentése
-
+    
     - Fejlesztés és validálás
-
+    
     - Következő spirálkör megtervezése
-
+  
   - 6 szektorral:
-
+    
     - Kommunikáció megrendelővel
-
+    
     - Tervezés
-
+    
     - Kockázatelemzés
-
+    
     - Fejlesztés
-
+    
     - Megvalósítás és telepítés
-
+    
     - Kiértékelés megrendelő részéről
 
 ##### Újrafelhasználás-orientált
 
 - Komponens alapú fejlesztés
-
+  
   - Elérhető, újrafelhasználható komponensek
-
+  
   - Ezek integrációja
 
 - Hagyományos modellekkel megegyezik
-
+  
   - Követelményspecifikáció és validáció
 
 - Közte levő fázisok eltérnek
-
+  
   - Komponens elemzés
-
+  
   - Követelménymódosítás
-
+  
   - Rendszertervezés újrafelhasználással
-
+  
   - Fejlesztés és integráció
 
 - Előnyök:
-
+  
   - Kevesebb fejlesztendő komponens, csökken a költség
-
+  
   - Gyorsabb leszállítás
 
 - Hátrányok
-
+  
   - Kompromisszumok követelményekkel szemben
-
+  
   - Evolúció során a felhasznált komponensek új verziói már nem integrálhatók
 
 - Objektumorientált paradigma jó alap
-
+  
   - UML használata
-
+  
   - Rational Unified Process (RUP) egy iteratív, inkrementális és komponens
     alapú folyamat
 
 ##### **_Formális módszerek_**
 
 - Vízesés modellre hasonlít
-
+  
   - Specifikáció: formális, matematikai apparátus
-
+  
   - Kidolgozás: ekvivalens transzformációk
-
+  
   - Verifikáció: hagyományos értelemben nem szükséges
 
 - Kisebb lépésekből áll, amelyek finomítják az egyes formális modelleket, így könnyebb a formális bizonyítás
@@ -9392,29 +9392,29 @@ Idom i = {
 - Negyedik generációs technikák
 
 - Magas szintű reprezentáció (absztrakció)
-
+  
   - 4G (vizuális) nyelvek, grafikus jelölés
-
+  
   - Automatikus kódgenerálás
 
 - Vizuális eszközök: adatbázis lekérés, riportgyártás, adatmanipuláció, GUI, táblázatkezelés, HTML-oldalak, web, stb.
 
 - Előnyei:
-
+  
   - Rövidebb fejlesztési idő
-
+  
   - Jobb produktivitás
-
+  
   - Kis és közepes alkalmazásoknál jó
 
 - Hátrányai:
-
+  
   - Vizuális nyelvet nem könnyebb használni
-
+  
   - Generált kód nem hatékony
-
+  
   - Karbantarthatóság rosszabb
-
+  
   - Nagy alkalmazásoknál nem előnyös
 
 - Komponens alapú technikával alkalmazva még jobb
@@ -9422,31 +9422,31 @@ Idom i = {
 ##### **_Egyéb (aktuális) modellek_**
 
 - Kliens/szerver modell
-
+  
   - Kliens adatokat/szolgáltatást kér, szerver szolgáltatja
 
 - Web fejlesztés
-
+  
   - Hagyományos módszerek + kliens/szerver + 4GT + OO + komponensek
-
+  
   - Web tartalom és design tervezés is ide tartozik
 
 - Nyílt forráskódú fejlesztés
-
+  
   - Ad hoc fejlesztés
-
+  
   - Fejlesztési ütemezés, költségvetés nem definiált
-
+  
   - Nem strukturált folyamat
-
+  
   - Közösségi ellenőrzés
-
+  
   - Bizalmatlanság megbízhatóság terén
-
+    
     - Nyílt forráskód, bárki mérheti a minőséget és javíthat
-
+    
     - Nem feltétlenül jobb a kereskedelmi termék
-
+  
   - Sokszor ingyenes licensz
 
 ### 2. Projektmenedzsment. Költségbecslés, szoftvermérés
@@ -9482,15 +9482,15 @@ Idom i = {
 ##### Emberek menedzselése
 
 - Szoftverfejlesztő szervezet legnagyobb vagyona az emberek
-
+  
   - Szellemi tőke
-
+  
   - Lehető legjobban kamatozzon!
 
 - Sok projekt bukásának legfőbb oka a rossz humánmenedzsment
 
 - Egyik legfontosabb feladat az emberek motivációja
-
+  
   - Szociális szükségletek, megbecsülés, önmegvalósítás igénye
 
 **Csoportmunka**
@@ -9498,29 +9498,29 @@ Idom i = {
 - Valódi szoftvereket 2-1000 fős csapatok készítik (team)
 
 - Hatékony együttműködés fontos
-
+  
   - Csapatszellemet kell kialakítani (csoport sikere fontosabb mint az egyéné)
-
+  
   - Csoportépítés (pl.: szociális tevékenységek)
 
 - Munkakörnyezet fontos (közös és privát területek fontosak)
 
 - Befolyásoló tényezők:
-
+  
   - Csoport összetétele
-
+    
     - egymást kiegészítő személyiségek
-
+    
     - nemkívánatos vezető végzetes lehet
-
+  
   - Csoportösszetartás (pl.: csoportos programozás)
-
+  
   - Csoportkommunikáció
-
+  
   - Csoport szerkezete
-
+    
     - informális szervezés
-
+    
     - vezető programozó-csoport: kell tartalék programozó és adminisztrátor is
 
 **Csapatfelépítés szempontjai**
@@ -9540,35 +9540,35 @@ Idom i = {
 - A projekt kommunikációs igénye
 
 - Csapatfelépítés lehet,
-
+  
   - **Zárt forma** – hagyományos strukturális felépítés
-
+  
   - **Véletlenszerű forma** – laza szerkezet,egyedi kezdeményezések a döntőek
-
+  
   - **Nyitott forma** – a zárt és a véletlenszerű paradigma előnyeinek kombinálás
-
+  
   - **Szinkronizált forma** – az adott probléma felosztása szerint történik a team szervezése, egyes csoportok között kevés kommunikáció van
 
 **Emberek kiválasztása**
 
 - Különböző tesztekkel történhet
-
+  
   - Programozási képesség
-
+  
   - Pszichometrikus tesztek
 
 - Sok tényező: alkalmazási terület, platform, programozási nyelv, kommunikációs készség, személyiség, stb.
 
 - Szakmai karrier megállhat egy szinten, ha vezetői szerepkört kap
-
+  
   - Azonos értékű kell hogy legyen a szakember és a vezető!
 
 ##### Termék (product)
 
 - Szoftver hatásköre
-
+  
   - Környezet
-
+  
   - Input-output objektumok
 
 - Probléma dekompozíció
@@ -9580,17 +9580,17 @@ Idom i = {
 - Előzetes projekt terv
 
 - 4CPF (common process framework)
-
+  
   - Felhasználói kommunikáció
-
+  
   - Tervezés
-
+  
   - Kockázat analízis
-
+  
   - Fejlesztés
-
+  
   - Release
-
+  
   - Felhasználói kiértékelés
 
 #### **Szoftverköltség becslése**
@@ -9598,41 +9598,41 @@ Idom i = {
 - Projekt tevékenységeinek kapcsolódása a munka-, idő- és pénzköltségekhez
 
 - Becsléseket lehet és kell adni
-
+  
   - Folyamatosan frissíteni
 
 - Projekt összköltsége:
-
+  
   - Hardver és szoftver költség karbantartással
-
+  
   - Utazási és képzési költség
-
+  
   - Munkaköltség
 
 **Projekt**
 
 - W5HH módszer
-
+  
   - Miért fejlesztjük a rendszert? (why?)
-
+  
   - Mit fog csinálni? (what?)
-
+  
   - Mikorra? (when?)
-
+  
   - Ki a felelős egy funkcióért? (who?)
-
+  
   - Hol helyezkednek el a felelősök? (where?)
-
+  
   - Hogyan megy a technikai és menedzsment munka? (how?)
-
+  
   - Mennyi erőforrás szükséges? (how much?)
 
 - Szoftver projekt tervezésénél meg kell becsülni:
-
+  
   - Mennyi pénz?
-
+  
   - Mennyi ráfordítás?
-
+  
   - Mennyi idő?
 
 **Munkaköltség**
@@ -9646,15 +9646,15 @@ Idom i = {
 - Ipari rendszerben a legyártott egységek száma / emberórák
 
 - Szoftvernél nehézkes
-
+  
   - Egyik kód hatékony, a másik karbantartható, stb.
 
 - Ezért mérik a szoftver valamely jellemzőjét (metrika)
 
 - Két típus:
-
+  
   - Méret-alapú (pl. programsorok száma)
-
+  
   - Funkció-alapú (funkciópont, objektumpont)
 
 **Méret alapú mérés**
@@ -9662,11 +9662,11 @@ Idom i = {
 - LOC = Lines Of Code
 
 - Több technika
-
+  
   - Csak nem üres sorok
-
+  
   - Csak végrehajtható sorok
-
+  
   - Dokumentáció mérete
 
 - Félrevezető lehet (különböző nyelveken ugyanaz a funkcionalítás mint)
@@ -9680,27 +9680,27 @@ Idom i = {
 - Rendszer funkcionalitásának „mennyisége”
 
 - Több programjellemző súlyozott kombinációja
-
+  
   - Külső bemenetek és kimenetek
-
+  
   - Felhasználói interaktivitás
-
+  
   - Külső interfészek
-
+  
   - Használt állományok
 
 - Vannak további módosító tényezők
-
+  
   - Projekt összetettsége
-
+  
   - Teljesítmény
-
+  
   - Ezek nagyon szubjektívek
 
 - Sorok átlagos száma
-
+  
   - Assembly: 200-300 LOC/FP
-
+  
   - 4GL(negyedik generációs prog nyelv): 22-40 LOC/FP
 
 **Objektumpontok**
@@ -9710,41 +9710,41 @@ Idom i = {
 - 4GL nyelvekhez
 
 - Súlyozott becslés:
-
+  
   - Megjelenítendő képernyők száma (1-3 pont)
-
+  
   - Elkészített jelentések száma (2-8 pont)
-
+  
   - 3GL modulok száma (modulonként 10 pont)
 
 **Dekompozíciós technikák**
 
 - Szoftver méret (ennek meghatározása a legfontosabb)
-
+  
   - Fuzzy-logic: approximációs döntési lépések
-
+  
   - FP méret
-
+  
   - Szabványos komponens méretek használata
-
+  
   - Változás alapú méret (létező komponenseket módosítunk)
 
 - Probléma alapú becslés
-
+  
   - Funkciókra való bontás a lényeges
-
+  
   - „Baseline” metrikák (alkalmazás specifikus)
-
+  
   - LOC becslés - dekompozíció a funkciókra
-
+  
   - FP becslés - dekompozíció az alkalmazás jellemzőire koncentrál
 
 - 4Folyamat alapú becslés
-
+  
   - Meghatározzuk a funkciókat
-
+  
   - Minden funkcióhoz megadjuk a végrehajtandó feladatokat
-
+  
   - A feladatokra becsüljük a feladatok költségeit
 
 **Tapasztalati becslés modellek**
@@ -9752,15 +9752,15 @@ Idom i = {
 - Erősen alkalmazás-függő
 
 - Több féle számítási modell, pl:
-
+  
   <img src="../img/2022-05-04-21-39-59-image.png" title="" alt="" width="224">
 
 - COCOMO modell (Constructive Cost Model)
-
+  
   - Iparban a COCOMO 2 használt
-
+  
   - Regressziós modell, LOC-on alapul
-
+  
   - Feladatok nehézsége be van sorolva, feladathoz szükséges idő megbecsülve
 
 - Dinamikus modell
@@ -9782,15 +9782,15 @@ Idom i = {
 - Egy szervezet megkaphatja valamely szintű minősítését
 
 - 5 besorolási szint (a fölsőbb szintek magába foglalják az alsókat)
-
+  
   - Kezdeti: csak néhány folyamat definiált, a többségük esetleges (Alapszint)
-
+  
   - Reprodukálható: az alapvető projekt menedzsment folyamatok definiáltak. Költség, ütemezés, funkcionalitás kezelése megoldott és megismételhető. (Bevésési szint)
-
+  
   - Definiált: a menedzsment és a fejlesztés folyamatai is dokumentáltak és szabványosítottak az egész szervezetre. (Véglegesítési szint)
-
+  
   - Ellenőrzött: a szoftver folyamat és termék minőségének részletes mérése, ellenőrzése. (Bevezetési szint)
-
+  
   - Optimalizált:  a folyamatok folytonos javítása az új
     technológiák ellenőrzött bevezetésével (Optimalizálási szint)
 
@@ -9799,9 +9799,9 @@ Idom i = {
 **Konfigurációkezelés**
 
 - A rendszer változásainak kezelése
-
+  
   - Változások felügyelt módon történjenek
-
+  
   - Eljárások és szabványok fejlesztése és alkalmazása
 
 - Fejlesztés, evolúció, karbantartás miatt van rá szükség
@@ -9809,50 +9809,50 @@ Idom i = {
 - Sokszor hiba-követéssel egybekötött
 
 - Verziók kezelése
-
-**Változások forrásai**
-
-- Új piaci feltételek
-
-- Vásárló, megrendelő új követelménye
-
-- Szervezet újraszervezése (pl. felvásárlás)
-
-- Új platform támogatása
+  
+  Változások forrásai
+  
+  Új piaci feltételek
+  
+  Vásárló, megrendelő új követelménye
+  
+  Szervezet újraszervezése (pl. felvásárlás)
+  
+  Új platform támogatása
 
 **Hibamenedzsment**
 
 - Hiba-követés
-
+  
   - Fontos, mert sok hiba van/lesz: kategorizálás, prioritások
     felállítása, követés elengedhetetlen
-
+  
   - Hibaadatbázis, minden hibának egyedi aonosító
-
+  
   - Számon van tartva a hiba felvevője, a hiba súlyossága, meg van-e javítva stb.
-
+  
   - Fontos a hiba életútjának rögzítése
 
 - Általánosabb: változtatás-menedzsment
-
+  
   - CR (change request) adatbázis nyilvántartása
 
 #### Szoftvermérés, metrikák
 
 - **Szoftvermérés**: termék vagy folyamat valamely jellemzőjét numerikusan kifejezni (metrika)
-
+  
   - Ezen értékekből következtetések vonhatók le a minőségre vonatkozóan
 
 - Szisztematikus szoftvermérés még nem elterjedt
-
+  
   - Mérési eredmény használata még nem kiforrott
-
+  
   - Mérés szabványosításának (metrikák, eszközök) hiánya
 
 - Metrikák két csoportja:
-
+  
   - **Vezérlési metrikák**: Folyamattal kapcsolatosak, pl. egy hiba javításához szükséges átlagos idő
-
+  
   - **Prediktor metrikák**: Termékkel kapcsolatosak, pl. LOC, ciklomatikus komplexitás, osztály metódusainak száma
 
 - Mindkettő befolyásolja a vezetői döntéshozatalt
@@ -9860,23 +9860,23 @@ Idom i = {
 **Minőségi jellemzők mérése**
 
 - Jellemzőket lehetetlen közvetlenül mérni
-
+  
   - Magasabb szintű absztrakciók, sok mindentől függnek
-
+  
   - Hierarchikus összetétel (jellemzők származtatása)
-
+  
   - Sokszor szervezet- vagy termékfüggő
-
+  
   - Több metrika együttes vizsgálata
-
+  
   - Metrikák változása az idő függvényében
-
+  
   - Statisztikai technikák alkalmazása
 
 - Metrikák (belső jellemző) és (külső) jellemzők közötti kapcsolatokra fel kell állítani egy modellt (Sok projekt esettanulmányának vizsgálata)
 
 - Példa jellemző származtatásra:
-
+  
   <img src="../img/2022-05-06-18-25-06-image.png" title="" alt="" width="399">
 
 **Mérési folyamat**
@@ -9896,21 +9896,21 @@ Idom i = {
 **Termékmetrikák**
 
 - Dinamikus
-
+  
   - Szorosabb kapcsolat egyes minőségi jellemzőkkel
 
 - Statikus
-
+  
   - Közvetett kapcsolat
 
 - Fajták:
-
+  
   - Méret
-
+  
   - Komplexitás, csatolás, kohézió
-
+  
   - Objektumorientáltsággal kapcsolatos metrikák
-
+  
   - Rossz előjelek, tervezési, kódolási problémák száma
 
 **Tesztelés „mérése” és fejlesztése**
@@ -9918,11 +9918,11 @@ Idom i = {
 - Tesztelési környezet is minőségvizsgálatra szorul
 
 - Metrikák, amiket definiálhatunk:
-
+  
   - Lefedettség: adott változtatás hány %-át érintik a tesztek
-
+  
   - Regressziós teszt hatékonysága
-
+  
   - Tesztesetek redundanciája
 
 - Tesztelési/fejlesztési költségek becsülhetővé válnak
@@ -9948,17 +9948,17 @@ Idom i = {
 - A minőség és hatékonyság szempontjából a legfontosabb tényező a munkatársak képzettsége és motiváltsága
 
 - Személyes metrikák
-
+  
   - Hiba riportok
-
+  
   - Sorok száma modulonként
-
+  
   - PSP (Personal Software Process) – személyre szabott folyamat
 
 - Publikus metrikák: projekt szinten összegzett metrikák
 
 - Hiba analízis
-
+  
   - hibák forrása, javítási költségeik, kategórizálásuk stb.
 
 **Projekt metrikák**
@@ -9970,11 +9970,11 @@ Idom i = {
 - Minőség (hibák szoftverfejlesztési feladatonként)
 
 - Egy másik modell
-
+  
   - Input(az erőforrások mérése)
-
+  
   - funcOutput(a létrejött termék mérése)
-
+  
   - Eredmény(a létrejött termék ‘átadandó’ használhatósága)
 
 - Projekt menedzser használja ezeket a metrikákat
@@ -10004,31 +10004,31 @@ Idom i = {
 - Az Fj (j=1 … 13) a bonyolultságot befolyásoló tényezők
 
 - A tényezők számításához kérdések (minden kérdést 0-5 skálán pontozunk):
-
+  
   - A rendszer megköveteli-e a biztonsági mentéseket és helyreállításokat?
-
+  
   - Adatkommunikáció szükséges-e?
-
+  
   - Kritikus-e a hatékonyság?
-
+  
   - A rendszer intenzíven használt környezetben működik?
-
+  
   - Van on-line adatbevitel?
-
+  
   - Az on-line adatbevitelhez szükség van összetett képernyő kezelésre?
-
+  
   - A fájlok aktualizálása on-line módon történik?
-
+  
   - Bonyolultak az inputok,outputok,fájlok vagy lekérdezések?
-
+  
   - Bonyolult a belső feldolgozás?
-
+  
   - A forráskód újrafelhasználhatóra lett tervezve?
-
+  
   - A konverzió és az installáció a tervezés része?
-
+  
   - A rendszer többszöri installációra lett tervezve különböző szervezeteknél?
-
+  
   - Változások támogatása lett tervezve?
 
 - FP programozási nyelv független
@@ -10040,15 +10040,15 @@ Idom i = {
 - Az eredeti FP mérték információs rendszerekre lett tervezve, egyéb rendszereknél kiegészítésekre van szükség
 
 - 3D Funkció pont mérték
-
+  
   - Adat dimenzió
-
+  
   - Funkcionális dimenzió – a belső műveletek (transzformációk) száma
-
+  
   - Vezérlési dimenzió – átmenetek állapotok között. Pl telefonnál automatikus hívás állapotba pihenő állapotból
-
+  
   - Számítás: Index=input+output+lekérdezés+fájlok+külső interfész +transzformáció+átmenetek
-
+    
     ![](../img/2022-05-07-16-18-15-image.png)
 
 **Metrikák alkalmazása szoftver-minőség mérésére**
@@ -10056,37 +10056,37 @@ Idom i = {
 - Elsődleges a hibák és hiányosságok mérése
 
 - A minőség mérése:
-
+  
   - Helyesség (hiányosság/KLOC)
-
+  
   - Karbantarthatóság (nincs mérőszám)
-
+  
   - Integritás: külső támadások elleni védelem
-
+    
     - Fenyegetettség: annak valószínűsége, hogy egy adott típusú támadás bekövetkezik egy adott időszakban
-
+    
     - Biztonság: annak valószínűsége, hogy egy adott típusú támadást visszaver a rendszer
-
+    
     - Integritás = Σ [1-(fenyegetettség x (1-biztonság))] (Összegzés a különböző támadás típusokra történik)
-
+  
   - Használhatóság – a felhasználó barátság mérése (milyen könnyű használni stb.)
-
+  
   - DRE (defect removal efficiency)
-
+    
     - DRE = E/(E+D), ahol E olyan hibák száma, amelyeket még az átadás előtt felfedezünk, D pedig az átadás után a felhasználó által észlelt hiányosságok száma
-
+    
     - Cél a DRE növelése(minél több hiba megtalálása az átadás előtt)
-
+    
     - Fontos, hogy a hibákat a fejlesztés minél korábbi fázisában találjuk meg (analízis, tervezés)
 
 - Néhány tipikus kérdés, amikre metrikákkal tudunk válaszolni:
-
+  
   - Milyen felhasználói igények változnak a leggyakrabban?
-
+  
   - A rendszer melyik komponensében várható a legtöbb hiba?
-
+  
   - Mennyi tesztelést tervezzünk a komponensekre?
-
+  
   - Mennyi és milyen típusú hibát várhatunk el a tesztelés kezdetekor?
 
 **Metrikus baseline**
@@ -10104,13 +10104,13 @@ Idom i = {
 - Statisztikailag érvényes trendek megállapítása
 
 - Vezérlési diagramm(metrikák stabilitásának mérése)
-
+  
   - ER=hibák száma/ellenőrzésre fordított idő
 
 - A változási tartomány mérése
-
+  
   - mR bar – középvonal,UCL – felső vezérlési korlát
-
+  
   <img title="" src="../img/2022-05-07-17-11-35-image.png" alt="" width="385">
 
 **Összegzés**
