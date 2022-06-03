@@ -2,6 +2,8 @@
 
 ### 1. Véges automata és változatai, a felismert nyelv definíciója. A reguláris nyelvtanok, a véges automaták, és a reguláris kifejezések ekvivalenciája. Reguláris nyelvekre vonatkozó pumpáló lemma, alkalmazása és következményei.
 
+> rendszerint adok egy **példa automatát, megkérdezem h det vagy nemdet és miért**, felismeri-e ezt meg ezt a szót és miért, a képen **hogy hívják a bogyókat meg a nyilakat**, van h beadok pár **regexet h mondjál szavakat amik csak erre illeszkednek és a többire nem és miért**, van h **regexből kérem h csináljunk automatát,** van h **nd automatából determinisztikust**, van h egy **konkrét egyszerűbb nyelvet mondok és arra kéne regext vagy automatát készíteni**
+
 #### Véges automata
 
 Az $M = (Q, \Sigma, \delta, q_0, F)$ rendszert **determinisztikus automatának** nevezzük, ahol:
@@ -307,6 +309,8 @@ Mivel $|w_1w_2| \le k$, a középső $w_2$ szó csak $a$ betűkből áll. Továb
 - Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz $REG \subset CF$. Például ilyen az előző $L$ nyelv.
 
 ### 2. A környezetfüggetlen nyelvtan, és nyelv definíciója. Derivációk, és derivációs fák kapcsolata. Veremautomaták, és környezetfüggetlen nyelvtanok ekvivalenciája. A Bar-Hillel lemma és alkalmazása.
+
+> mondjuk **adok egy nyelvet, arra kérem h építs veremautomatát vagy CF nyelvtant** (itt shameless self-promóként ajánlom a weblapomról a fonya alatti gyak recapomat), ott is **megkérdezgetek dolgokat h példa derivációs fát rajzolj le egyet hozzá**, esetleg azt h a **nyelvtant konvertáld veremautomatává**
 
 #### Környezetfüggetlen nyelvtan
 

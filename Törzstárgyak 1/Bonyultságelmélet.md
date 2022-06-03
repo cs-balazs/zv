@@ -2,6 +2,8 @@
 
 ### 1. Hatékony visszavezetés. Nemdeterminizmus. A P és NP osztályok. NP-teljes problémák.
 
+> szoktam érdeklődni h **futásidőt minek a függvényében számolunk**, pl h ebben vagy ebben a problémában **mennyi lesz az az n inputméret**, hogy számoljuk ki, mi a **visszavezetés/nehézség/teljesség meg az NP osztály**, aztán **egy-két NP-teljes <= NP-teljes visszavezetést** szoktam kérni h példán keresztül mutassa be a user h hogy megy, a példát is én adom rendszerint, megkérdezem h miért lesz ez tényleg visszavezetés (**miért tartja a választ, miért polinomidejű**)
+
 ### A P osztály
 
 R az eldönthető problémák osztálya.
@@ -269,6 +271,8 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 > TODO: erős-, gyenge NP-teljesség kell-e ide?
 
 ### 2. A PSPACE osztály. PSPACE-teljes problémák. Logaritmikus tárigényű visszavezetés. NL-teljes problémák.
+
+> amit tudni kéne, az szintén az **inputméret** és mondjuk példa **rövid forráskódnak a tárigény elemzése** h az mennyi lesz ordóban és miért, az **elérhetőségről a tanult nemdet és det jó tárigényű algoritmusok tárigényét és h miért annyi**, az **elérhetőségi módszer miről szól**, tudni mi a **savitch és mi az immerman-szelepcsényi tétel** (utóbbinak a bizonyításába nem kérdezek, előbbi a det jó tárigényű algo az elérhetőségre), meg h **mi a QSAT és mi a földrajzi probléma és azok milyen nehezek** + ott is **adok példát h ez itt egy "igen" vagy egy "nem" példánya** a problémának és miért. ott **nem kérdezem** a QSAT <= Földrajzi játék visszavezetést
 
 #### A PSPACE osztály
 
