@@ -1295,6 +1295,8 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 
 ### 1. Hatékony visszavezetés. Nemdeterminizmus. A P és NP osztályok. NP-teljes problémák.
 
+> szoktam érdeklődni h **futásidőt minek a függvényében számolunk**, pl h ebben vagy ebben a problémában **mennyi lesz az az n inputméret**, hogy számoljuk ki, mi a **visszavezetés/nehézség/teljesség meg az NP osztály**, aztán **egy-két NP-teljes <= NP-teljes visszavezetést** szoktam kérni h példán keresztül mutassa be a user h hogy megy, a példát is én adom rendszerint, megkérdezem h miért lesz ez tényleg visszavezetés (**miért tartja a választ, miért polinomidejű**)
+
 ### A P osztály
 
 R az eldönthető problémák osztálya.
@@ -1563,6 +1565,8 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 ### 2. A PSPACE osztály. PSPACE-teljes problémák. Logaritmikus tárigényű visszavezetés. NL-teljes problémák.
 
+> amit tudni kéne, az szintén az **inputméret** és mondjuk példa **rövid forráskódnak a tárigény elemzése** h az mennyi lesz ordóban és miért, az **elérhetőségről a tanult nemdet és det jó tárigényű algoritmusok tárigényét és h miért annyi**, az **elérhetőségi módszer miről szól**, tudni mi a **savitch és mi az immerman-szelepcsényi tétel** (utóbbinak a bizonyításába nem kérdezek, előbbi a det jó tárigényű algo az elérhetőségre), meg h **mi a QSAT és mi a földrajzi probléma és azok milyen nehezek** + ott is **adok példát h ez itt egy "igen" vagy egy "nem" példánya** a problémának és miért. ott **nem kérdezem** a QSAT <= Földrajzi játék visszavezetést
+
 #### A PSPACE osztály
 
 Determinisztikusan (vagy nemdeterminisztikusan), polinomidőben megoldható problémák osztálya.
@@ -1743,6 +1747,8 @@ Tárigénye <img src="https://latex.codecogs.com/svg?O(n%5E2)" />, mert a rekurz
 ## Formális Nyelvek
 
 ### 1. Véges automata és változatai, a felismert nyelv definíciója. A reguláris nyelvtanok, a véges automaták, és a reguláris kifejezések ekvivalenciája. Reguláris nyelvekre vonatkozó pumpáló lemma, alkalmazása és következményei.
+
+> rendszerint adok egy **példa automatát, megkérdezem h det vagy nemdet és miért**, felismeri-e ezt meg ezt a szót és miért, a képen **hogy hívják a bogyókat meg a nyilakat**, van h beadok pár **regexet h mondjál szavakat amik csak erre illeszkednek és a többire nem és miért**, van h **regexből kérem h csináljunk automatát,** van h **nd automatából determinisztikust**, van h egy **konkrét egyszerűbb nyelvet mondok és arra kéne regext vagy automatát készíteni**
 
 #### Véges automata
 
@@ -2049,6 +2055,8 @@ Mivel <img src="https://latex.codecogs.com/svg?%7Cw_1w_2%7C%20%5Cle%20k" />, a k
 - Van olyan környezetfüggetlen nyelv, ami nem reguláris. Azaz <img src="https://latex.codecogs.com/svg?REG%20%5Csubset%20CF" />. Például ilyen az előző <img src="https://latex.codecogs.com/svg?L" /> nyelv.
 
 ### 2. A környezetfüggetlen nyelvtan, és nyelv definíciója. Derivációk, és derivációs fák kapcsolata. Veremautomaták, és környezetfüggetlen nyelvtanok ekvivalenciája. A Bar-Hillel lemma és alkalmazása.
+
+> mondjuk **adok egy nyelvet, arra kérem h építs veremautomatát vagy CF nyelvtant** (itt shameless self-promóként ajánlom a weblapomról a fonya alatti gyak recapomat), ott is **megkérdezgetek dolgokat h példa derivációs fát rajzolj le egyet hozzá**, esetleg azt h a **nyelvtant konvertáld veremautomatává**
 
 #### Környezetfüggetlen nyelvtan
 
@@ -2795,6 +2803,8 @@ quad(@fxlog, 2, 4);
 > Eredményül 6.7041-et logol az interpreter.
 ## Logika és informatikai alkalmazásai
 
+> rendszerint azzal indítok h példát adok fel, az elsőben **hilbertes és/vagy rezolúciós következtetést**, a másodikban **elsőrendű/alap rezolúciósat**, hogy na akkor ezen induljunk el és **közben kérdezgetem a táblán levő dolgokról h azok mik** (pl a másodikban a |= jelre, p-re, f-re hogy az mi, a két kvantorra h az melyik melyik, a változókra h azok mit vehetnek fel értékül, ilyesmit); a **másodikban valszeg az input eleve nem lesz skolemben**, arra is kell majd hozni, végén lehet megkérdem h **mi ez a helyességi-teljességi tétel, mit jelent a két szó közül melyik**
+
 ### 1. Normálformák az ítéletkalkulusban, Boole-függvények teljes rendszerei. Következtető módszerek: Hilbert-kalkulus és rezolúció, ezek helyessége és teljessége.
 
 #### Normálformák az ítéletkalkulusban
@@ -2993,47 +3003,57 @@ Legyen <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulák egy halma
 
 és melyre <img src="https://latex.codecogs.com/svg?F_n%20%3D%20F" />. (Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> üres, akkor <img src="https://latex.codecogs.com/svg?%5Cemptyset%20%5Cvdash%20F" /> helyett <img src="https://latex.codecogs.com/svg?%5Cvdash%20F" />-et is írhatunk) 
 
+###### Példa
+
+Feladat:
+
+<img src="https://latex.codecogs.com/svg?%5C%7B~(q%20%5Cto%20p)%20%5Cto%20r~%2C~r%20%5Cto%20%5Cdownarrow%20~%5C%7D~%5Cvdash~p%20%5Cto%20%5Cdownarrow" />
+
+**Bal oldalt**: <img src="https://latex.codecogs.com/svg?%5CSigma" /> **formulahalmaz**, ezekből akarjuk **levezetni** a **jobb oldalt**
+
+**Ha sikerül levezetni**, akkor a jobb oldalt álló formula a <img src="https://latex.codecogs.com/svg?%5CSigma" /> logikai következménye
+
+**Dedukciós tétel** alkalmazása:
+
+<img src="https://latex.codecogs.com/svg?%5C%7B~(q%20%5Cto%20p)%20%5Cto%20r~%2C~r%20%5Cto%20%5Cdownarrow%2C%20p%20~%5C%7D~%5Cvdash~%20%5Cdownarrow" />
+
+**Lépések**:
+
+1. <img src="https://latex.codecogs.com/svg?p" /> : fel lehet venni, mert <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+2. <img src="https://latex.codecogs.com/svg?p%20%5Cto%20(q%20%5Cto%20p)" /> : Fel lehet venni, mert <img src="https://latex.codecogs.com/svg?Ax2%5BF%2Fp%2C%20G%2Fq%5D" />, azaz a második axióma példánya
+
+3. <img src="https://latex.codecogs.com/svg?q%20%5Cto%20p" /> : Fel lehet venni, mert az <img src="https://latex.codecogs.com/svg?1." /> és a <img src="https://latex.codecogs.com/svg?2." /> felvett formulákból leválasztási következtetéssel, más néven modus ponensel kijön
+
+4. <img src="https://latex.codecogs.com/svg?(q%20%5Cto%20p)%20%5Cto%20r" /> : <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+5. <img src="https://latex.codecogs.com/svg?r" /> : <img src="https://latex.codecogs.com/svg?MP(3.%2C%204.)" />
+
+6. <img src="https://latex.codecogs.com/svg?r%20%5Cto%20%5Cdownarrow" /> : <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+7. <img src="https://latex.codecogs.com/svg?%5Cdownarrow" /> : <img src="https://latex.codecogs.com/svg?MP(5.%2C%206.)" />
+
+Eredmény: A jobb oldali formulát (<img src="https://latex.codecogs.com/svg?%5Cdownarrow" />) sikeresen levezettük <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból, a hilbert rendszer helyessége miatt kijelenthető, hogy <img src="https://latex.codecogs.com/svg?%5Cdownarrow" /> <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak logikai következménye
+
+> Szóval amit a lépésekkor lehet: <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból felvenni, MP-elni, és axiómát példányosítani. Az axiómákba nem csak 1-1 változó kerülhet hanem összetettebb formulák is, pl <img src="https://latex.codecogs.com/svg?%5BF%20%2Fp%20%5Cto%20q%5D" />
+
+> Változók logikai értékeket vehetnek fel
+
+> Dedukciós tételt nem szabad elfelejteni
+
+> Eléggé azon múlik, hogy meg van-e a jó axióma példányosítás, lehet pl. úgy gondolkodni, mit kell példányosítani, hogy utána egy meglévővel MP-elni lehessen
+
+> <img src="https://latex.codecogs.com/svg?%5Cvdash" />: Levezetés Hilbert rendszerében
+> <img src="https://latex.codecogs.com/svg?%5CvDash" />: Logikai következmény
+> Mivel helyes, teljes, így ekvivalens, de mást jelent ettől a két jel
+
 ##### Helyesség, teljesség
-
-###### Tautológia példányai is tautológiák
-
-Tehát a Hilbert-rendszer **axióma-példányai tautológiák**.
-
-Ez egy általánosabb összefüggés következménye:
-
-Legyenek az <img src="https://latex.codecogs.com/svg?F" /> formulában szereplő változók <img src="https://latex.codecogs.com/svg?p_1%2C%20...%2C%20p_n" />, és <img src="https://latex.codecogs.com/svg?F_1%2C%20...%2C%20F_n" /> további formulák (melyekben más változók is előfordulhatnak).
-Legyen <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" /> egy tetszőleges értékadás.
-Definiáljuk <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D" /> értékadást a következőképpen: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D(p_i)%20%3A%3D%20%5Cmathcal%7BA%7D(F_i)" />
-(a <img src="https://latex.codecogs.com/svg?p_i" /> értéke <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D" />-ben legyen az az érték, ami <img src="https://latex.codecogs.com/svg?F_i" /> értéke <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D" />-ban)
-Ekkor: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BB%7D(F)%20%3D%20%5Cmathcal%7BA%7D(F%5Bp_1%2FF_1%2C%20...%2C%20p_n%2FF_n%5D)" />
 
 ###### Helyesség
 
 Ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F" />.
 
 > Azaz, ha egy formulát le lehet vezetni <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból Hilbert rendszerében, akkor az következménye is <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak.
-
-**Bizonyítás**:
-
-- Legyen <img src="https://latex.codecogs.com/svg?F_1%2C%20...%2C%20F_n" /> egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> fölötti levezetése <img src="https://latex.codecogs.com/svg?F" />-nek. Teljes indukcióval megmutatjuk, hogy minden <img src="https://latex.codecogs.com/svg?i" />-re <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" />
-
-- Ha <img src="https://latex.codecogs.com/svg?F_i%20%5Cin%20%5CSigma" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" />
-
-- Ha <img src="https://latex.codecogs.com/svg?F_i" /> axiómapéldány, akkor <img src="https://latex.codecogs.com/svg?%5Cemptyset%20%5CvDash%20F_i" /> (tautológiák minden elméletben szerepelnek, és az axiómapéldányok a korábbi szabály miatt tautológiák), így a monotonitás miatt <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" /> is igaz (nyílván ha az <img src="https://latex.codecogs.com/svg?%5Cemptyset" />-nak következménye, akkor egy bővebb halmaznak, a <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak is).
-
-- Ha pedig <img src="https://latex.codecogs.com/svg?F_i%20%3D%20MP(F_j%2C%20F_k)" /> a <img src="https://latex.codecogs.com/svg?j%2C%20k%20%3C%20i" /> indexekre, akkor
-  
-  - Az indukciós feltevés szerint <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_j" /> és <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_k" /> (feltételezzük, hogy a korábban felvett formulák már logikai következmények)
-  
-  - Tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_k%20~%20%5C%7D" />
-  
-  - MP def miatt <img src="https://latex.codecogs.com/svg?F_k%20%3D%20F_j%20%5Cto%20F_i%3A%20%5CSigma%20%5CvDash%20%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D" />
-  
-  - A leválasztási következtetés: <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%5C%7D%20%5CvDash%20F_i" />
-  
-  - A tranzitivitás miatt tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F_i" /> (tranzitivitást kihasználjuk, mivel <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%7B%20~%20F_j%2C%20F_j%20%5Cto%20F_i%20~%20%7D%20%5CvDash%20F_i" />)
-
-Így a **Hilbert-rendszer egy helyes következtető rendszer**.
 
 ###### Teljesség
 
@@ -3065,67 +3085,11 @@ Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> maximális H-konziszten
 
 Tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> formulahalmaz pontosan akkor kielégíthető, ha H-konzisztens.
 
-**A Hilbert-rendszer helyessége és teljessége**:
+**A Hilbert-rendszer teljessége**:
 
-Ezt kell belátni: <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F%20%5CLeftrightarrow%20%5CSigma%20%5Cvdash%20F" />
+Ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />
 
-> Most itt egyszerre van belátva mindkettő, de a helyesség fentebbi alapján külön is belátható.
-
-Sorban minden ekvivalenciát tovább fejtünk ekvivalencia mentén:
-
-<img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F%20~%20~%20%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5CvDash%20%5Cdownarrow" />
-
-> Ennek az alapja egy tétel: <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20F" /> pontosan akkor igaz, ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Ccup%20%5C%7B%20~%20%5Cneg%20F%20~%20%5C%7D" /> kielégíthetetlen. Ez van itt felírva Hilbert-rendszerében.
-
-<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Ccup%20%5C%7B%20~%20F%20%5Cto%20%5Cdownarrow%20~%20%5C%7D%20%5Cvdash%20%5Cdownarrow" />
-
-> Itt a bal oldal azt jelenti, hogy az a halmaz kielégíthetetlen (az összeuniózott). Akkor ez a halmaz nem H-konzisztens, és ekkor levezethető belőle Hilbert-rendszerében az azonosan hamis.
-
-<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow" />
-
-> Dedukciós tétel alkalmazása.
-
-<img src="https://latex.codecogs.com/svg?%5CLeftrightarrow%20~%20~%20%5CSigma%20%5Cvdash%20F" />
-
-Ennek a legutolsó lépésnek a belátása kicsit nehezebb:
-
-- Egyik irány: <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)%20%5Cto%20(%5CSigma%20%5Cvdash%20F)" />
-  
-  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F" />
-  
-  - > A 3. axióma példányosítása
-  
-  - <img src="https://latex.codecogs.com/svg?%5CSigma%20%5Cvdash%20F" />
-  
-  - > Modus ponens alkalmazása
-
-- Másik irány: <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Cvdash%20F)%20%5Cto%20(%5CSigma%20%5Cvdash%20(F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20%5Cdownarrow)" />
-  
-  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow%20))%20%5Cto%20(((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow%20))" />
-  
-  - > Az 1. axióma példányosítása
-  
-  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20(F%20%5Cto%20%5Cdownarrow)" />
-  
-  - > Ilyet ér felvenni, hiszen <img src="https://latex.codecogs.com/svg?G%20%5Cto%20G" /> alakú, és erre volt példa, hogy az ilyenek az <img src="https://latex.codecogs.com/svg?%5Cemptyset" />-nak is logikai következményei.
-  
-  - <img src="https://latex.codecogs.com/svg?((F%20%5Cto%20%5Cdownarrow%20)%20%5Cto%20F)%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow)" />
-  
-  - > Előző kettő MP-el
-  
-  - <img src="https://latex.codecogs.com/svg?F%20%5Cto%20((F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F%20)" />
-  
-  - > A 2. axióma példánya
-  
-  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20F" />
-  
-  - > Előző formula, és feltevés miatt <img src="https://latex.codecogs.com/svg?F" /> MP-e
-  
-  - <img src="https://latex.codecogs.com/svg?(F%20%5Cto%20%5Cdownarrow)%20%5Cto%20%5Cdownarrow" />
-  
-  - > Előző, és az előtt kettővel levő formulák MP-je
-
-Az ekvivalenciák mentén beláttuk, hogy **Hilbert-rendszere helyes, és teljes**. Azaz tetszőleges <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmazból Hilbert rendszerében **pontosan** <img src="https://latex.codecogs.com/svg?%5CSigma" /> következményei vezethetőek le.
+> Azaz ha egy formula logikai következménye <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak, azt le lehet vezetni Hilbert rendszerében
 
 #### Rezolúció
 
@@ -3163,91 +3127,59 @@ Ha már nem tudunk új klózt felvenni és <img src="https://latex.codecogs.com/
 
 > Egyszerre több literál mentén nem ér rezolválni!!
 
+###### Példa
+
+Feladat:
+
+<img src="https://latex.codecogs.com/svg?%5C%7B%20(r%5Cto%20%5Cneg%20t)%5Cvee%20%5Cneg%20t%20%2C%20%5Cneg%20s%20%2C%20%5Cneg%20p%5Cto%20(s%5Cvee%20t)%20%5C%7D%20%5CvDash%20%5Cneg((%5Cneg%20p%5Cto%20%5Cneg%20r)%5Cto%20(t%5Cwedge%20s))" />
+
+Következtetést kell csinálni
+
+Az algoritmus alapvetően azt csinálja, hogy kap egy klóz halmazt, és ha kielégíthetetlen, ezt megmondja
+
+Ennek megfelelően kell formalizálni a következtetést. A jobb oldal negáltját hozzá kell venni a bal oldalhoz:
+
+<img src="https://latex.codecogs.com/svg?%5C%7B%20(r%5Cto%20%5Cneg%20t)%5Cvee%20%5Cneg%20t%20%2C%20%5Cneg%20s%20%2C%20%5Cneg%20p%5Cto%20(s%5Cvee%20t)%2C%20(%5Cneg%20p%5Cto%20%5Cneg%20r)%5Cto%20(t%5Cwedge%20s)%20%5C%7D" />
+
+Majd ezt "összeéselni", és CNF-re kell hozni, hiszen ez a rezolúció inputja:
+
+<img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5C%7B%5Cneg%20p%2C%20s%20%5C%7D%20~%20%2C%20~%20%5C%7B%20r%2C%20t%20%5C%7D%20~%20%2C%20~%20%5C%7B%20%5Cneg%20r%2C%20%5Cneg%20t%20%5C%7D%20~%20%2C%20~%20%5C%7B%20p%2C%20s%2C%20t%20%5C%7D%20~%20%2C%20~%20%5C%7Br%2C%20s%20%5C%7D%20~%20%2C%20~%20%5C%7B%5Cneg%20p%2C%20t%20%5C%7D%20~%20%2C%20~%20%5C%7B%20%5Cneg%20s%20%5C%7D%20~%5C%7D" />
+
+> CNF-re hozás fent le van írva
+
+Tehát azt akarjuk belátni, hogy a <img src="https://latex.codecogs.com/svg?%5CSigma" /> klózok halmaza, ami valójában egy CNF, kielégíthetetlen, mert ha az, akkor logikai következménye az eredetileg jobb oldalon álló formula (hiszen a negáltját hozzáéselve kielégíthetetlen a formula)
+
+Levezetés:
+
+1. <img src="https://latex.codecogs.com/svg?%5C%7Bp%2C%20s%2C%20t%5C%7D" />: fel lehet venni, mert <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli
+
+2. <img src="https://latex.codecogs.com/svg?%5C%7B%20%5Cneg%20p%2C%20s%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+3. <img src="https://latex.codecogs.com/svg?%5C%7Bs%2C%20t%5C%7D" />: fel lehet venni, mert az <img src="https://latex.codecogs.com/svg?1." /> és <img src="https://latex.codecogs.com/svg?2." /> rezolvense <img src="https://latex.codecogs.com/svg?p" /> mentén
+
+4. <img src="https://latex.codecogs.com/svg?%5C%7B%20%5Cneg%20r%2C%20%5Cneg%20t%5C%7D" />: <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+5. <img src="https://latex.codecogs.com/svg?%5C%7B%20s%2C%20%5Cneg%20r%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?Res(3.%2C%204.)" />
+
+6. <img src="https://latex.codecogs.com/svg?%5C%7B%20r%2C%20s%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+7. <img src="https://latex.codecogs.com/svg?%5C%7B%20s%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?Res(5.%2C%206.)" />
+
+8. <img src="https://latex.codecogs.com/svg?%5C%7B%20%5Cneg%20s%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?%5Cin%20%5CSigma" />
+
+9. <img src="https://latex.codecogs.com/svg?%5C%7B%20%5C%7D" />: <img src="https://latex.codecogs.com/svg?Res(7.%2C%208.)" />
+
+> **Egyszerre két változó mentén** rezolválni SZIGORÚAN TILOS
+
+Eredény: Megkaptuk az üres klózt, azaz a formula kielégíthetetlen, azaz az eredeti jobb oldalon álló formula logikai következménye a bal oldalnak
+
 ###### Helyesség
 
 Ha az algoritmus "kielégíthetetlen" válasszal áll meg, akkor az input <img src="https://latex.codecogs.com/svg?%5CSigma" /> valóban kielégíthetetlen.
 
-Azt látjuk be, hogy minden klóz, ami a listára kerül, az logikai következménye <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak. Ezt indukcióval tesszük: ha a <img src="https://latex.codecogs.com/svg?C" /> klóz <img src="https://latex.codecogs.com/svg?n" />. elemként kerül a listára, akkor:
-
-- Ha <img src="https://latex.codecogs.com/svg?C%20%5Cin%20%5CSigma" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C" /> mindig teljesül.
-
-- Ha <img src="https://latex.codecogs.com/svg?C" /> a korábban felvett <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> klózok **rezolvense**, akkor
-  
-  - indukciós feltevés szerint <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C_1" /> és <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C_2" />
-  
-  - tehát <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D" /> (nyílván, összevagyolni ér őket)
-  
-  - a **rezolúciós következtetés** szerint pedig <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20C" /> (rezolúciós rész eleje) (onnan tudjuk, hogy <img src="https://latex.codecogs.com/svg?C" /> a rezolvense <img src="https://latex.codecogs.com/svg?C_1" />-nek, és <img src="https://latex.codecogs.com/svg?C_2" />-nek, hogy ez a feltevés ebben a második esetben)
-  
-  - így a <img src="https://latex.codecogs.com/svg?%5CvDash" /> tranzitivitása miatt <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20C" />.
-
-Így tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5Csquare" />, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> valóban kielégíthetetlen, mert kövezketménye a *hamis*. (<img src="https://latex.codecogs.com/svg?Mod(%5Csquare)%20%3D%20%5Cemptyset" />, nincs őt kielégítő értékadás)
-
 ###### Teljesség
 
 Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az algoritmus mindig a "kielégíthetetlen" válasszal áll meg.
-
-**Minimális kielégíthetetlen részhalmaz**:
-A <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen klózhalmaznak a <img src="https://latex.codecogs.com/svg?%5CSigma'%20%5Csubseteq%20%5CSigma" /> egy **minimális kielégíthetetlen részhalmaza**, ha <img src="https://latex.codecogs.com/svg?%5CSigma'" /> is kielégíthetetlen, de <img src="https://latex.codecogs.com/svg?%5CSigma'" /> bármelyik valódi részhalmaza már kielégíthető. 
-
-**Lineáris rezolúció**:
-**Input**: <img src="https://latex.codecogs.com/svg?%5CSigma" /> klózhalmaz.
-**Output**: Kielégíthetetlen-e <img src="https://latex.codecogs.com/svg?%5CSigma" />?
-**Algoritmus**: Listát vezetünk klózokról:
-
-- Az első lépésben felvehetjük <img src="https://latex.codecogs.com/svg?%5CSigma" /> **bármelyik elemét**, ez lesz a levezetés **bázisa**.
-
-- Minden további lépésben felvehetjük az előző lépésben felvett klóznak, és egy vagy már a listán szereplő, vagy <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli klóznak a rezolvensét. Ezt a másik klózt hívjuk ennek a lépésnek az **oldalklózának**.
-
-**Lineáris rezolúció teljessége**:
-
-Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, és <img src="https://latex.codecogs.com/svg?C%20%5Cin%20%5CSigma" /> benne van a <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy **minimális kielégíthetetlen részhalmazában**, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból levezethető az üres klóz olyan **lineáris rezolúciós** levezetéssel, melynek **bázisa** <img src="https://latex.codecogs.com/svg?C" />.
-
-**Bizonyítás**:
-
-Az állítást a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli változók <img src="https://latex.codecogs.com/svg?n" /> száma szerinti indukcióval látjuk be.
-
-- Ha <img src="https://latex.codecogs.com/svg?n%20%3D%200" />, azaz <img src="https://latex.codecogs.com/svg?%5CSigma" />-ban nincs változó, akkor vagy <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20%5C%7D" /> (ekkor nincsen benne klóz), vagy <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> (ekkor van benn egy klóz, az üres klóz)
-  
-  - A kettő közül <img src="https://latex.codecogs.com/svg?%5CSigma%20%3D%20%5C%7B%20~%20%5Csquare%20~%20%5C%7D" /> a kielégíthetetlen.
-  
-  - Ennek <img src="https://latex.codecogs.com/svg?%5Csquare" /> az egyetlen eleme, ez egy minimális kielégíthetetlen részhalmazának is eleme.
-  
-  - Ha felvesszük bázisként, már le is vezettük az üres klózt.
-
-- Ha <img src="https://latex.codecogs.com/svg?n%20%3E%200" />, akkor vegyünk egy <img src="https://latex.codecogs.com/svg?C" /> klózt, mely szerepel <img src="https://latex.codecogs.com/svg?%5CSigma" /> egy minimális kielégíthetetlen részhalmazában. Legyen ez a részhalmaz <img src="https://latex.codecogs.com/svg?%5CSigma'" />.
-  
-  - Ha <img src="https://latex.codecogs.com/svg?C%20%3D%20%5Csquare" />, kész vagyunk: vegyük fel bázisnak.
-  
-  - Különben legyen <img src="https://latex.codecogs.com/svg?l%20%5Cin%20C" /> egy <img src="https://latex.codecogs.com/svg?C" />-beli literál.
-  
-  - Vegyük észre: minimális kielégíthetetlen részhalmazban nincs pure literál, hiszen ha <img src="https://latex.codecogs.com/svg?l" /> pure literál lenne, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" />-nak egy valódi részhalmaza <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> is kielégíthetetlen lenne. Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'" />-ben <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" /> is szerepel valahol.
-
-- Vegyük a <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" /> és <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> klózhalmazokat.
-
-- Mivel <img src="https://latex.codecogs.com/svg?%5CSigma'" /> kielégíthetetlen, ezek is azok.
-
-- Bennük csak legfeljebb <img src="https://latex.codecogs.com/svg?n%20-%201" /> változó szerepel (mert <img src="https://latex.codecogs.com/svg?l" /> változója kiesik), így alkalmazhatjuk az indukciós feltevést.
-
-- A <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%3D0%7D" /> klózhalmaznak <img src="https://latex.codecogs.com/svg?C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> is eleme, sőt egy minimális kielégíthetetlen részhalmazának is eleme (mert különben <img src="https://latex.codecogs.com/svg?%5CSigma'%20-%20%5C%7B%20~%20C%20~%20%5C%7D" /> is kielégíthetetlen lenne).
-
-- Tehát <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%200%7D" />-ból az indukciós feltevés szerint van <img src="https://latex.codecogs.com/svg?%5Csquare" />-nak egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_m" /> lineáris rezolúciós levezetése, melynek <img src="https://latex.codecogs.com/svg?C_1%20%3D%20C%20-%20%5C%7B%20~%20l%20~%20%5C%7D" /> a bázisa.
-
-- "Visszaemelve" a <img src="https://latex.codecogs.com/svg?%5CSigma%7C_%7Bl%20%3D%200%7D" /> cáfolatot <img src="https://latex.codecogs.com/svg?%5CSigma'" /> fölötti levezetéssé, az új levezetésben minden klózba bekerül az <img src="https://latex.codecogs.com/svg?l" /> literál.
-
-- Ez igaz a bázisra, és minden lépésben az eredeti <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> klózok rezolvense helyett a <img src="https://latex.codecogs.com/svg?C%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> és <img src="https://latex.codecogs.com/svg?C_2" /> vagy <img src="https://latex.codecogs.com/svg?C_2%20%5Ccup%20%5C%7B%20~%20l%20~%20%5C%7D" /> klózok rezolvensét kapjuk, ami rezolvens, plusz <img src="https://latex.codecogs.com/svg?l" />
-
-- Tehát a konstrukciónak a végén az <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" /> egységklóznál jár a lineáris rezolúciós levezetés.
-
-- Mivel <img src="https://latex.codecogs.com/svg?%5CSigma'" /> minimális kielégíthetetlen, kell legyen benne olyan <img src="https://latex.codecogs.com/svg?C" /> klóz is, mely <img src="https://latex.codecogs.com/svg?%5Coverline%7Bl%7D" />-t tartalmazza.
-
-- Akkor <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek egy minimális kielégíthetetlen részhalmazában szerepel <img src="https://latex.codecogs.com/svg?C%20-%20%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />
-
-- Ebből a klózból indulva az indukciós feltevés szerint van <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" />-nek lineáris rezolúciós cáfolata
-
-- Az előző fázisban kapott <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" /> egységklózt tudjuk rezolválni ezzel a <img src="https://latex.codecogs.com/svg?C" /> klózzal, tehát a <img src="https://latex.codecogs.com/svg?%5CSigma'%7C_%7Bl%20%3D%201%7D" /> cáfolatát "fel tudjuk emelni" <img src="https://latex.codecogs.com/svg?%5CSigma'" /> fölötti levezetéssé.
-
-- A felemelt levezetés végén vagy <img src="https://latex.codecogs.com/svg?%5Csquare" />-t, vagy <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20%5Coverline%7Bl%7D%20~%20%5C%7D" />-t kapunk. Utóbbi esetben még egyszer rezolválunk <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20l%20~%20%5C%7D" />-lel mint oldalklózzal, és kész vagyunk
 
 ### 2. Normálformák az elsőrendű logikában. Egyesítési algoritmus. Következtető módszerek: Alap rezolúció, és elsőrendű rezolúció, ezek helyessége és teljessége.
 
@@ -3429,23 +3361,23 @@ Mivel <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> általában vég
 
 ![ ](../img/herbrand_kiterjesztes_2.png)
 
+##### Példa:
+
+![ ](../img/alaprez_generalt_pelda.png)
+
+Hasonló, mint az íréletkalkulus beli rezolúció, annyi, hogy <img src="https://latex.codecogs.com/svg?E(%5CSigma)" />-ból lehet felvenni klózokat, ami annyi tesz, hogy a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli kiválasztott klózban lehet a változókat valamilyen alaptermmel helyettesíteni.
+
+Az alapterm változó nélküli term, függvényjelekből, konstansokból összerakva (févtelen sok lehet)
+
+Inputnak kapott formulát majd zárt Skolem-re kell hozni előbb, és a magját CNF-re (a CNF-et már ugyan úgy kell, mint ítéletkalkulusban)
+
+> Változók értéke mi lehet? A struktúra határozza meg, amiben <img src="https://latex.codecogs.com/svg?%5Cphi" /> értékes ad a változóknak <img src="https://latex.codecogs.com/svg?A" />-ból, azaz az értékük <img src="https://latex.codecogs.com/svg?A" />-beli objektum
+
 ##### Helyesség, és teljesség
 
-- A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát <img src="https://latex.codecogs.com/svg?%5CSigma" /> pontosan akkor kielégíthetetlen, ha <img src="https://latex.codecogs.com/svg?%5CSigma'" /> az
+**Helyesség**: Ha sikerül levezetni az üres klózt, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> valóban kielégíthetetlen
 
-- A Herbrand-tétel következménye szerint <img src="https://latex.codecogs.com/svg?%5CSigma'" /> pontosan akkor kielégíthetetlen, ha <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> az
-
-> Mert a Herbrand-kiterjesztés s-ekvivalens transzformáció
-
-- Az ítéletkalkulus kompaktsági tétele szerint <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> pontosan akkor kielégíthetetlen, ha van egy véges <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> kielégíthetetlen részhalmaza
-
-> Azaz elég véges sokat legyártani
-
-- A rezolúciós algoritmus teljessége szerint ha a <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
-
-- Tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az algoritmus leáll ezzel a válasszal akkor, amikor egy ilyen <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük <img src="https://latex.codecogs.com/svg?%5Csquare" />-t) 
-
-> Az alap rezolúcióval az lehet a probléma, hogy nagy a keresési tere azáltal, hogy a változókat alaptermekkel helyettesítgetjük
+**Teljesség**: Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor ezt le tudjuk vezetni
 
 #### Elsőrendű rezolúció
 
@@ -3495,39 +3427,47 @@ Különben, ha már nem tudunk több klózt lebezetni, <img src="https://latex.c
 
 > <img src="https://latex.codecogs.com/svg?Res%5E*(%5CSigma)" /> pedig a <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból rezolúcióval levezethető összes klóz halmazát jelöli.
 
-##### Helyesség
+##### Példa
 
-- A helyesség a rezolvensképzés helyességéből következik
+![ ](../img/elsorendu_rez_generalt_pelda_1.png)
 
-- Mivel a klózik univerzálisan kvantáltak (a Skolem alakból), így tetszőleges <img src="https://latex.codecogs.com/svg?C" /> klózra, és <img src="https://latex.codecogs.com/svg?s" /> helyettesítésre <img src="https://latex.codecogs.com/svg?C%20%5CvDash%20C%20%5Ccdot%20s" />
+![ ](../img/elsorendu_rez_generalt_pelda_2.png)
 
-- Tehát a rezolvensképzésnél felírt <img src="https://latex.codecogs.com/svg?C_1" />-nek <img src="https://latex.codecogs.com/svg?C_1%20%5Ccdot%20s_1%20%5Ccdot%20s" />, <img src="https://latex.codecogs.com/svg?C_2" />-nek pedig <img src="https://latex.codecogs.com/svg?C_2%20%5Ccdot%20s_2%20%5Ccdot%20s" /> egy-egy logikai következménye
+Zárt Skolemre, magját CNF-re kell hozni majd a formulának
 
-- Tehát <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20C_1%2C%20C_2%20~%20%5C%7D%20%5CvDash%20%5C%7B%20~%20C_1s_1s%2C%20C_2s_2s%20~%20%5C%7D" />
+<img src="https://latex.codecogs.com/svg?%5CSigma" />-ból felvenni ér
 
-- Ennek a két klóznak pedig a rezolvens következménye (az "eredeti" rezolúciós következtetés szerint)
+Rezolválásra példa (5. sor kifejtve):
 
-##### Teljesség
+- Nincsenek ütköző változó nevek a két klózban, nem kell átnevezni
 
-- A teljességi irányhoz felhasználjuk az alap rezolúció teljességét
+- Egyikből ugye pozitív literál kell, másikból negatív: <img src="https://latex.codecogs.com/svg?%5Cneg%20q(...)" /> és <img src="https://latex.codecogs.com/svg?q(...)" />
 
-- Tehát: Ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az üres klóznak van egy <img src="https://latex.codecogs.com/svg?C_1'%2C%20C_2'%2C%20...%2C%20C_n'%20%3D%20%5Csquare" /> alaprezolúciós levezetése.
-
-- Ebből az alaprezolúciós levezetésből fogunk készíteni egy <img src="https://latex.codecogs.com/svg?C_1%2C%20C_2%2C%20...%2C%20C_n" /> elsőrendű rezolúciós levezetést.
-
-- A klózokat úgy fogjuk elkészíteni indukcióval <img src="https://latex.codecogs.com/svg?n" /> szerint, hogy minden <img src="https://latex.codecogs.com/svg?i" />-re a <img src="https://latex.codecogs.com/svg?C_i" />-nek a <img src="https://latex.codecogs.com/svg?C_i'" /> egy (alap) példánya lesz.
+- Ezeket kell egyesíteni (negáció erre a lépésre leketül persze)
   
-  - Ha <img src="https://latex.codecogs.com/svg?C_i'%20%5Cin%20E(%5CSigma)" />, azaz <img src="https://latex.codecogs.com/svg?C_i'" /> egy <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli <img src="https://latex.codecogs.com/svg?C" /> klóz (alap) példánya, akkor legyen <img src="https://latex.codecogs.com/svg?C_i%20%3A%3D%20C" />
+  - Két (vagy akár több) klózt egymás mellé helyezve el kell indulni balról jobbra
   
-  - A másik lehetőség, hogy <img src="https://latex.codecogs.com/svg?C_i'" /> a <img src="https://latex.codecogs.com/svg?C_j'" /> és <img src="https://latex.codecogs.com/svg?C_k'" /> klózok, <img src="https://latex.codecogs.com/svg?j%2C%20k%20%3C%20i" />, egy rezolvense.
+  - Ahol eltérés van ott fel kell jegyezni egy olyan átírási szabályt, holgy egyezzenek meg az adott pozíción
+  
+  - Ezt addig ismételni, míg teljesen meg nem egyeznek
+  
+  - Jelen esetben:
     
-    - Ennek az esetnek a belátásához felítjuk az ún. lift lemmát:
+    - <img src="https://latex.codecogs.com/svg?%5Bx_1%20%2F%20g(c%2C%20c)%5D" />, mivel balról jobbra haladva ez az első eltérés amit találunk
     
-    - Ha <img src="https://latex.codecogs.com/svg?C_1" />-nek <img src="https://latex.codecogs.com/svg?C_1'" />, <img src="https://latex.codecogs.com/svg?C_2" />-nek pedig <img src="https://latex.codecogs.com/svg?C_2'" /> alap példányai, melyeknek <img src="https://latex.codecogs.com/svg?R'" /> rezolvense, akkor van <img src="https://latex.codecogs.com/svg?C_1" />-nek, és <img src="https://latex.codecogs.com/svg?C_2" />-nek olyan elsőrendű <img src="https://latex.codecogs.com/svg?R" /> rezolvense, melynek <img src="https://latex.codecogs.com/svg?R'" /> alap példánya.
+    - <img src="https://latex.codecogs.com/svg?%5By%2F%20f(x_2)%5D" />
 
-> Lift lemma bizonyítása kell?
+- A feljegyzett átírási szabályokat azokra literálokra, amik nem vettek részt az egyesítésben, jelen esetben <img src="https://latex.codecogs.com/svg?p(f(x)%2C%20y)" />-ra.
+  
+  - <img src="https://latex.codecogs.com/svg?p(f(x)%2C%20y)%5Bx_1%2Fg(c%2C%20c)%2C%20y%2Ff(x_2)%5D%20%3D%20p(f(x)%2C%20f(x_2))" />
 
-- Mivel a <img src="https://latex.codecogs.com/svg?C_n'%20%3D%20%5Csquare" /> üres klóz csak önmagának példánya, így <img src="https://latex.codecogs.com/svg?C_n%20%3D%20%5Csquare" /> kell legyen.
+- Az összes literálon elvégezzük ezt ami nem volt egyesítve, és az ezekből alkozott klóz lesz a rezolvens
+
+##### Helyesség, és teljesség
+
+Helyesség: Ha le tudjuk vezetni a <img src="https://latex.codecogs.com/svg?%5Cdownarrow" />-t, akkor kielégíthetetlen
+
+Teljesség: Ha kielégíthetetlen, akkor le tudjuk vezetni a <img src="https://latex.codecogs.com/svg?%5Cdownarrow" />-t
 ## Mesterséges Intelligencia 1.
 
 ### 1. Keresési feladat: feladatreprezentáció, vak keresés, informált keresés, heurisztikák. Kétszemélyes zéró összegű játékok: minimax, alfa-béta eljárás. Korlátozás kielégítési feladat.
