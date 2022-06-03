@@ -1,6 +1,6 @@
 ## Közelítő és szimbolikus számítások
 
-> Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása meggkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
+> Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása mekkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
 
 ### 1. Eliminációs módszerek, mátrixok trianguláris felbontásai. Lineáris egyenletrendszerek megoldása iterációs módszerekkel. Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása.
 
@@ -45,7 +45,7 @@ Megengedett transzformációk:
 
 ##### Egyenletrendszerek megoldása
 
-Ilyen átalakításokkal próbálunk háromszögmátrixot vagy diagonális mátrixot létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
+Ilyen (ekvivalens) átalakításokkal próbálunk **háromszögmátrixot** vagy **diagonális mátrixot** létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
 
 $$
 \begin{bmatrix}
@@ -131,7 +131,7 @@ e_j^T =
 \end{bmatrix}
 $$
 
-$j = 3$ miatt a $g^{(j)}$ harmadik sora nulla, illetve az $e_j^T$ harmadik koordinátája is nulla.
+$j = 3$ miatt a $g^{(j)}$ harmadik sora nulla, illetve az $e_j^T$ csak haramdik koordinátája $1$.
 
 ###### Eliminációs mártix jelentősége
 
@@ -271,7 +271,7 @@ y = R' \ b;
 x = R \ y;
 ```
 
-> A `'` operátor transzponál, a `\` pedig: `1R \ y := Az Rx = y egyenletrendszer megoldása`
+> A `'` operátor transzponál, a `\` pedig: `R \ y := Az Rx = y` egyenletrendszer megoldása
 
 A Cholesky felbontás numerikusan stabilis, műveletigénye $ \frac{1}{3} n^3 + O(n^2)$. Feleannyi, mint egy általános mátrix LU felbontásáé.
 
@@ -310,7 +310,7 @@ A módszer:
 
 2. Választunk egy kiindulási $x_0$ vektort.
 
-3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett báltozó jobb oldalába (nulladik iterációban $x_0$-t).
+3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett változó jobb oldalába (nulladik iterációban $x_0$-t).
 
 4. Ezt addig ismételgethetjük, amíg az eltérés két eredmény között megfelelően kicsi.
 
@@ -354,7 +354,7 @@ Vizsgáljuk meg az $x^{(k+1)} = Bx^{(k)} + c$ iteráció által definiált $\{ ~
 
 Tetszőleges $x^{(0)}$ kezdővektor, esetén a $k$-adik közelítés eltérése az $x^*$ megoldástól $e_k = B^k e_0$
 
-Következmény: Ha a $B$ mátrix **nilpotens**, akkor $B^j e_0 = 0$, tehát az iterációs eljárás véges sok lépésben megtalálja  amegoldást.
+Következmény: Ha a $B$ mátrix **nilpotens**, akkor $B^j e_0 = 0$, tehát az iterációs eljárás véges sok lépésben megtalálja a megoldást.
 
 > A nilpotens azt jelenti, hogy van olyan $j$ index, amire $B^j =0$
 
@@ -412,8 +412,6 @@ $$
 K_i = \left\{ z \in C ~ \Bigg| ~ |z - a_{ii}| \le \sum_{k=1, k \ne i}^n |a_{ik}| \right\}
 $$
 
-
-
 ##### Hatványmódszer
 
 > A.K.A. *von Mieses vektoriterációja*
@@ -430,7 +428,7 @@ Kiindulási vektor:
 
 - $x^0 \ne 0$, és
 
-- $x_0$ nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
+- $x^0$ nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
 
 ###### Matlabban
 
@@ -488,7 +486,7 @@ valamely pozitív $C$ konstanssal.
 Legyen $x^*$ az $f(x) = 0$ egyenlet egyszeres gyöke. Válasszunk alkalmas $x_0$ és $x_1$ kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
 
 $$
-x_{k + 1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(k_{k-1})} = \frac{ f(x_k) x_{k-1} - f(x_{k-1}) x_k }{ f(x_k) - f(x_{k - 1}) } ~ ~ ~ ~ k = 1, 2, ...
+x_{k + 1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(x_{k-1})} = \frac{ f(x_k) x_{k-1} - f(x_{k-1}) x_k }{ f(x_k) - f(x_{k - 1}) } ~ ~ ~ ~ k = 1, 2, ...
 $$
 
 Valójában annyiban tér el a Newton-módszertől, hogy $f'(x_k)$ helyett annak közelítéseként a **numerikus derivált**,
@@ -496,7 +494,7 @@ Valójában annyiban tér el a Newton-módszertől, hogy $f'(x_k)$ helyett annak
 $$
 \frac
 { f(x_k) - f(x_{k-1}) }
-{ x_k - k_{k-1} }
+{ x_k - x_{k-1} }
 $$
 
 szerepel.
@@ -509,7 +507,7 @@ $x_{k + 1}$ nem más, mint az $(x_k, f(x_k))$ és az $(x_{k-1}, f(x_{k-1}))$ pon
 
 ##### Tulajdonságok
 
-- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a $x^*$ gyököt.
+- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **közrefogják** a $x^*$ gyököt.
 
 - Ha $f'(x^*) > 0$, és $f''(x^*) > 0$, akkor $x^*$-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
 
@@ -529,7 +527,7 @@ Optimalitálás elvein alapuló módszer.
 
 Szimmetrikus pozitív definit mátrixú lineáris egyenletrendszerek megoldására alkalmas.
 
-Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
+Pontos aritmetikával ugyan véges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
 
 Legyen $A$ egy szimmetrikus, pozitív definit mátrix, akkor a 
 
@@ -567,7 +565,7 @@ Adott $x_0$ kezdőpontra legyen $s_0 = r_0 = b - Ax_0$, és iteráljuk $k = 1, 2
 > Korábbi gradiensmódszerek esetén egyszerűen a negatív gradienst követik minden iterációs lépésben, de felismerték hogy ez a meredek falú, enyhén lejtő völgyszerű függvények esetén szükségtelenül sok iterációs lépést eredményez a völgy két oldalán való oda-vissza ugrálás miatt. A kisebb meredekséggel rendelkező irányban viszont lényegesen gyorsabban lehetett volna haladni.
 > A konjugált gradiens módszer a lépésenkénti megfelelő irányváltoztatással kiküszöböli ezt a hibát.
 
-A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékek alatt maradjanak.
+A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékekJaaj csak köszit meg rf-et ne alatt maradjanak.
 
 ##### Matlabban
 
@@ -584,7 +582,7 @@ for k = 1:20
 end
 ```
 
-> Az `rr` valójában $r_{k+1}$, csak mivel `s` kiszámolásához $r_k$-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
+> Az `rr` valójában $r_{k+1}$, csak mivel `s` kiszámolásához $r_k$-ra is szükség van, így csak az után adjuk értékül `r`-nek (`rr`-t).
 
 #### Lagrange interpoláció
 

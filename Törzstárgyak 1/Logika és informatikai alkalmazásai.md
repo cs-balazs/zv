@@ -462,6 +462,12 @@ Függvényjelek, predikátumjelek **aritása / rangja**: Hány változósak
 
 **Alapterm**: Olyan term, amiben nincs változó
 
+**Term**:
+
+- Változók
+
+- $f/n$ függvényjel, és $t_1, ..., t_n$ termek esetén $f(t_1, ..., t_n)$ is term
+
 ##### * Struktúra
 
 Egy $\mathcal{A} = (A, I, \phi)$ hármas, ahol
@@ -478,7 +484,7 @@ Egy $\mathcal{A} = (A, I, \phi)$ hármas, ahol
   
   - > Objektum(ok)ból objektumot csinál
   
-  - ha $p / n$ **predikátumjel**, akkor $I(p)$ egy $A^n \to \{ ~ 0, 1 ~ \}$ predikárum
+  - ha $p / n$ **predikátumjel**, akkor $I(p)$ egy $A^n \to \{ ~ 0, 1 ~ \}$ predikátum
   
   - > Objektum(ok)ból igazságértéket csinál
 
@@ -572,7 +578,7 @@ A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden $F$ formul�
     
     - $f$ egy teljesen új függvényszimbólum,
     
-    - $x_1, ..., x_n$ pedig az $y$ előtt szereplő $\forall$-kötött vűétozók.
+    - $x_1, ..., x_n$ pedig az $y$ előtt szereplő $\forall$-kötött változók.
 
 ###### Zárt Skolem alak
 
@@ -608,7 +614,7 @@ Ha kielégíthető, akkor vagy ezt vezeti le, vagy végtelen ciklusba esik
   
   - Jelölje $\Sigma'$ a kapott klóz halmazt
 
-- Ekkor $E(\Sigma)'$ a klózok **alap példányainak halmaza**
+- Ekkor $E(\Sigma ')$ a klózok **alap példányainak halmaza**
 
 > Ez annyit takar, hogy a klózban a változók helyére ízlés szerint alaptermeket helyettesítünk, minden ilyennek a halmaza
 
@@ -624,6 +630,10 @@ Mivel $E(\Sigma')$ általában végtelen, így az algoritmus (mondjuk)
 
 - különben generáljuk a következő elemet.
 
+![ ](../img/herbrand_kiterjesztes_1.png)
+
+![ ](../img/herbrand_kiterjesztes_2.png)
+
 ##### Helyesség, és teljesség
 
 - A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát $\Sigma$ pontosan akkor kielégíthetetlen, ha $\Sigma'$ az
@@ -636,9 +646,9 @@ Mivel $E(\Sigma')$ általában végtelen, így az algoritmus (mondjuk)
 
 > Azaz elég véges sokat legyártani
 
-- A rezolúciós algoritmus teljessége szerinte ha a $\Sigma_0$ véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
+- A rezolúciós algoritmus teljessége szerint ha a $\Sigma_0$ véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
 
-- Tehát ha $\Sigma$ kielégíthetetlen, akko az aalgoritmus leáll ezzel a válasszal akkor, amikor egy ilyen $\Sigma_0$ halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük $\square$-t) 
+- Tehát ha $\Sigma$ kielégíthetetlen, akkor az algoritmus leáll ezzel a válasszal akkor, amikor egy ilyen $\Sigma_0$ halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük $\square$-t) 
 
 > Az alap rezolúcióval az lehet a probléma, hogy nagy a keresési tere azáltal, hogy a változókat alaptermekkel helyettesítgetjük
 
@@ -660,17 +670,21 @@ Két elsőrendű logikai klóz, $C_1$ és $C_2$ elsőrendű rezolvensét így ka
 
 A kapott $R$ klóz a $C_1$ és $C_2$ egy elsőrendű rezolvense.
 
+###### Példa
+
+![ ](../img/elsorendu_rezolucio_rezolvenskepzes_pelda.png)
+
 ##### Algoritmus
 
 **Input**: Elsőrendű klózok egy $\Sigma$ halmaza. Úgy tekintjük, mintha a $\Sigma$-beli klózok változói univerzálisan lennének kvantálva.
 
-> Atért tekinthetjük így, mert $\forall x (F \land G) \equiv \forall F \land \forall G$
+> Azért tekinthetjük így, mert $\forall x (F \land G) \equiv \forall F \land \forall G$
 
 **Output**:
 
 - Ha $\Sigma \vDash \downarrow$, akkor "kielégíthetetlen"
 
-- Különben "kielégíthető", vagy végtelen cikus
+- Különben "kielégíthető", vagy végtelen ciklus
 
 Listát vezetünk klózokról, egy klózt felveszünk, ha
 
@@ -678,11 +692,11 @@ Listát vezetünk klózokról, egy klózt felveszünk, ha
 
 - két, már a listán szereplő klóz rezolvense.
 
-Ha $\square$ rálerül a listára, akkor $\Sigma$ kielégíthetetlen.
+Ha $\square$ rákerül a listára, akkor $\Sigma$ kielégíthetetlen.
 
 Különben, ha már nem tudunk több klózt lebezetni, $\Sigma$ kielégíthető.
 
-> $Res(\Sigma)$ jelöli azt a halmazt, amely tartalmazza $\Sigma$ elemeit, és a belőlök egy rezolvensképzéssel levezethető klózokat.
+> $Res(\Sigma)$ jelöli azt a halmazt, amely tartalmazza $\Sigma$ elemeit, és a belőlük egy rezolvensképzéssel levezethető klózokat.
 
 > $Res^*(\Sigma)$ pedig a $\Sigma$-ból rezolúcióval levezethető összes klóz halmazát jelöli.
 

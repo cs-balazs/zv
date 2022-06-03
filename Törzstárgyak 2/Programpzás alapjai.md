@@ -1109,7 +1109,6 @@ jelzok.flag3 = 1;
 if (jelzok.flag1 == 0 && jelzok.flag3 == 1) {
     /* ... */
 }
-
 ```
 
 > Meg lehet adni, melyik mező hány bites legyen.

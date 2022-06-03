@@ -3,11 +3,11 @@
 ### 1. Simítás/szűrés képtérben (átlagoló szűrők, Gauss simítás és mediánszűrés); élek detektálása (gradiens-operátorokkal és Marr-Hildreth módszerrel).
 
 > **Konvolúció**
->
+> 
 > <img src="../img/digikep_kepek/2022-05-14-16-09-00-image.png" title="" alt="" width="544">
->
+> 
 > Lényege, hogy van egy kernel (a képen "Convolution filter", egy mátrix), amit végigléptetünk egy nála nagyobb mátrixon. Minden egyes pozícióban a kernelben lévő számokat összeszorozzuk az "alattuk" lévő számokkal, a szorzatokat szummázzuk, utána ezt az eredményt egy harmadik (vagy a forrás mátrixal egyenlő méretű, vagy nem, attól függ mekkora méretű képet akarunk visszakapni) célmátrixba írjuk. Így a forrsáképen való végighaladás után kitöltődik az egész célmátrix.
->
+> 
 > (maszk=kernel)
 
 #### Átlagoló szűrés
@@ -21,35 +21,35 @@
 - Lényege, hogy minden egyes pixelt a környezete (ebbe beleszámít a helyettesíteni kívánt pixel is) átlagával helyettesítünk
 
 - Ezt egy olyan konvolúciós szűréssel éri el, ahol a kernel (vagy konvolúciós maszk) egy olyan mátrix, ahol az elemek összege mindig 1
-
+  
   - Példák konvolúciós maszkokra:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-14-16-40-04-image.png" alt="" width="608">
 
 - Pálda átlag szűrésre:
-
+  
   <img src="../img/digikep_kepek/2022-05-14-16-45-17-image.png" title="" alt="" width="476">
 
 - Az átlag-szűrő hatása és tulajdonságai
-
+  
   - a képpontok felveszik a környezetük átlagát
-
+  
   - a szűrt kép intenzitásértékei a kiindulási kép intenzitástartományában maradnak
-
+  
   - lineáris operátor (mivel a is konvolúció az)
-
+  
   - haszna: csökkenti a zajt
-
+  
   - kára: gyengíti az éleket, homályossá teszi a képet
 
 - Szűrés a környezet súlyozott átlagával
-
+  
   - Átlagolás: a környezetbe eső valamennyi pont intenzitása egyforma súllyal esik a latba.
-
+    
     <img src="../img/digikep_kepek/2022-05-14-16-52-12-image.png" title="" alt="" width="98">
-
+  
   - Súlyozott átlag: a környezet intenzitásaihoz (általában a távolsággal arányosan csökkenő) súlyokat rendelünk
-
+  
   - <img src="../img/digikep_kepek/2022-05-14-16-54-34-image.png" title="" alt="" width="108">
 
 #### Medián szűrés
@@ -61,136 +61,136 @@
 - Ennél a szűrésnél is egy meghatározott méretű környezet van figyelembe véve, de itt nem a szomszédos pixelek átlagával, hanem a mediánjával helyettesíti az egyes pixeleket
 
 - Illusztrálva:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-14-19-35-35-image.png" alt="" width="479">
 
 - Alkalmazása:
-
+  
   <img src="../img/digikep_kepek/2022-05-14-19-41-45-image.png" title="" alt="" width="465">
 
 - A medián-szűrés hatása
-
+  
   - Megszünteti az egyedi (és a „kis” kiterjedésű) kiugrásokat
-
+  
   - „Jobban” megőrzi az éleket, mint az átlagolás
-
+  
   - „Nagy” kiterjedésű zajfoltoknál jel-elnyomó.
 
 #### Gauss simítás
 
 > **Pascal háromszög**
->
+> 
 > <img src="../img/digikep_kepek/2022-05-15-15-38-03-image.png" title="" alt="" width="549">
 
 - Szintén zajszűrésre használatos
 
 - A Gauss simítás alkalmazása egy képre nem más, mint konvolválni a képet a Gauss függvénnyel
-
+  
   - A maszk egy ("harang alakú") Gauss görbét fog reprezentálni
 
 - 1 dimenziós Gauss függvény
-
+  
   - σ a szórást jelöli
-
+    
     <img src="../img/digikep_kepek/2022-05-15-14-22-37-image.png" title="" alt="" width="553">
 
 - 2 dimenziós Gauss függvény
-
+  
   <img src="https://homepages.inf.ed.ac.uk/rbf/HIPR2/eqns/eqngaus2.gif" title="" alt="Eqn:eqngaus2" width="274">
 
 <img title="" src="../img/digikep_kepek/2022-05-15-14-49-19-image.png" alt="" width="571">
 
 - Diszkrét közelítése a Pascal háromszög segítségével (attól függ hogy melyik szintjéből kell kiindulnunk, hogy mekkora maszkot akarunk)
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-15-42-51-image.png" alt="" width="452">
-
+  
   <img src="../img/digikep_kepek/2022-05-15-15-44-21-image.png" title="" alt="" width="441">
 
 - Példa Gauss szűrésre 3x3-as maszkkal:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-15-51-56-image.png" alt="" width="324">
 
 #### Éldetektálás
 
 > **Tangens függvény**
->
+> 
 > <img title="" src="../img/digikep_kepek/2022-05-15-16-12-51-image.png" alt="" width="324">
->
+> 
 > **Első rendű derivált**
->
+> 
 > Geometriai jelentése: az érintő iránytangense.
->
+> 
 > Elárulja, hogy a függvény hol nő és hol csökken és hogy milyen mértékben.
->
+> 
 > A derivált (meredekség):
->
+> 
 > - pozitív, ha a függvény nő,
 > - negatív, ha csökken
 
 **Éldetektálás Gradiens operátorokkal**
 
 - A képen ott található él, ahol a kép-függvény valamely irány mentén hirtelen változik.
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-03-32-image.png" alt="" width="482">
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-05-12-image.png" alt="" width="415">
 
 - Tipikus élprofilok
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-06-03-image.png" alt="" width="360">
 
 - Az első deriváltat felhasználhatjuk éldetektálásra: ahol kiemelkedőbb lokális maximuma (vagy minimuma) van az első deriváltnak, ott jó esélyel él található. A lokális minimumok miatt abszolútértéket szokás venni, így csak a maximumokra kell odafigyelni
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-17-25-33-image.png" alt="" width="433">
 
 - 2 dimenziós képnél parciális derivált használata: változások detektálása az _x_ és _y_ koordináta mentén
-
+  
   - a két érték alapján tudjuk hogy hol vannak élek
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-17-51-33-image.png" alt="" width="387">
-
+  
   - Gradiens nagysága:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-18-01-26-image.png" alt="" width="238">
-
+  
   - Gradiens iránya:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-18-02-27-image.png" alt="" width="232">
 
 - Diszkrét gradiens operátorok:
-
+  
   - Roberts operátor
-
+    
     - a maszkelemek összege 0
-
+    
     - könnyen számítható, de zajérzékeny
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-08-45-image.png" title="" alt="" width="354">
-
+  
   - Prewitt operátor
-
+    
     - a maszkelemek összege 0
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-10-52-image.png" title="" alt="" width="331">
-
+  
   - Sobel operátor
-
+    
     - a maszkelemek összege 0
-
+    
     - simító hatással bír
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-11-47-image.png" title="" alt="" width="338">
-
+  
   - Frei-Chen (izotropikus) operátor
-
+    
     - a maszkelemek összege 0
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-13-46-image.png" title="" alt="" width="338">
 
 - Gradiens maszk tervezése (x-irányban)
-
+  
   <img src="../img/digikep_kepek/2022-05-15-18-40-31-image.png" title="" alt="" width="181">
-
+  
   - Feltételek:
 
 $$
@@ -202,69 +202,69 @@ a_{ij}=0\ \text{(Az elemek összege 0)}
 $$
 
 - 8-irányban élt kereső gradiens operátorok
-
+  
   - Prewitt compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-39-27-image.png" title="" alt="" width="538">
-
+  
   - Robinson-3 compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-40-14-image.png" title="" alt="" width="533">
-
+  
   - Robinson-5 compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-41-15-image.png" title="" alt="" width="520">
-
+  
   - Kirsch compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-42-12-image.png" title="" alt="" width="519">
 
 **Laplace éldetektálás**
 
 - Másodrendű derivált: az első rendű deriváltal szemben a nullán való áthaladás helyén lesz az él, nem a lokális maximumnál vagy minimumnál
-
+  
   <img src="../img/digikep_kepek/2022-05-15-22-45-19-image.png" title="" alt="" width="452">
 
 - Kétváltozós függvény Laplace operátora: az _x_ szerinti és _y_ szerinti másdorendű deriváltak összege (a képen látható ahogy az összegből tényleg megkapjuk az összes élt)
-
+  
   <img src="../img/digikep_kepek/2022-05-15-22-59-38-image.png" title="" alt="" width="405">
-
+  
   <img src="../img/digikep_kepek/2022-05-15-23-04-05-image.png" title="" alt="" width="418">
 
 - A Laplace operátor egy lineáris differenciál-operátor a másodrendű derivált közelítésére (a gradiens operátor önmagával vett belső szorzata)
-
+  
   - Tulajdonságai:
-
+    
     - forgásinvariáns
-
+    
     - egyetlen maszkkal számítható
-
+    
     - csak a magnitúdó számítható
-
+    
     - duplán érzékelhet éleket
-
+    
     - zajérzékeny
-
+    
     <img src="../img/digikep_kepek/2022-05-15-23-55-06-image.png" title="" alt="" width="464">
 
 - Egy diszkrét Laplace operátor (A maszkelemek összege 0):
-
+  
   <img src="../img/digikep_kepek/2022-05-15-23-22-14-image.png" title="" alt="" width="490">
 
 - A másodrendű derivált érzékeny a zajra -> hajtunk végre először Gauss simítást a képen
 
 - Az Laplace operátor és a Gauss operátor is lineáris -> megspórolhatunk egy konvolúciót azzal, ha a Gauss operátoron alkalmazzuk a Laplace transzformációt, amiből egy új konvolúciós maszkot kapunk
-
+  
   <img src="../img/digikep_kepek/2022-05-16-00-02-13-image.png" title="" alt="" width="390">
-
+  
   - A Gauss függvény Laplace transzformáltja (LoG – Laplacian of Gaussian)
-
+  
   - "fordított sombrero"
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-16-00-00-17-image.png" alt="" width="470">
 
 - A LoG egy diszkrét közelítése:
-
+  
   <img src="../img/digikep_kepek/2022-05-16-00-01-30-image.png" title="" alt="" width="391">
 
 **Marr-Hildreth éldetektor**
@@ -274,18 +274,17 @@ Lényege:
 1. Konvolváljuk a képet egy (vagy több) alkalmas LoG függvénnyel.
 
 2. Keressünk (közös) nulla-átmeneteket.
-
+   
    (Nulla-átmenet ott van, ahol az adott pont egy „kis” (pl. 2x2-es vagy 3x3-as)
    környezetében pozitív és negatív értékek is előfordulnak.)
-
 - Példa:
-
+  
   - σ a szórást jelöli
-
+    
     <img src="../img/digikep_kepek/2022-05-16-00-08-45-image.png" title="" alt="" width="451">
 
 - Nagyon lapos nulla átmeneteknél "fantom" élt is detektálhat
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-16-00-13-42-image.png" alt="" width="513">
 
 ### 2. Alakreprezentáció, határ- és régió-alapú alakleíró jellemzők, Fourier leírás.
@@ -299,11 +298,11 @@ A moduláris gépi látás általános modellje:
 ![](../img/digikep_kepek/2022-05-16-23-17-39-image.png)
 
 - Az alakreprezentáció módszerei:
-
+  
   - az objektumot körülvevő **határ** leírása
-
+  
   - az objektum által elfoglalt **régió** leírása
-
+  
   - **transzformációs** megközelítés
 
 #### Határvonal alapú tulajdonságok
@@ -330,11 +329,11 @@ A moduláris gépi látás általános modellje:
 - **Határpont:** az alakzatnak olyan pontja, melynek van az alakzathoz nem tartozó 8-, ill. 4-szomszédja (4, ill. 8 irány esetén).
 
 - Az elemi elmozdulások kódjai:
-
+  
   <img src="../img/digikep_kepek/2022-05-17-20-17-23-image.png" title="" alt="" width="422">
 
 - Példa 8-as lánckódra:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-17-20-18-36-image.png" alt="" width="425">
 
 **_<u>Normalizált lánckód</u>_**
@@ -352,42 +351,42 @@ Normalizálás:
 <img title="" src="../img/digikep_kepek/2022-05-17-21-58-32-image.png" alt="" width="477">
 
 - Az első ábránál (lánckód: 1002335657):
-
+  
   - Különbségkód:
-
+    
     - ha a 8-irányos iránytűn az óramutató járásával ellentétesen haladunk, akkor 1-től 0-ig 7 lépésben tudunk eljutni (a lánckód első két elembéből számoljuk a különbségkód első elemét)
-
+    
     - második számjegye a 0 és 0 közti távolság, vagyis 0
-
+    
     - harmadik számjegye 0 és 2 távolsága, ami 2 (még mindig az iránytűn, óramutató járásának ellentétesen)
-
+    
     - ez így megy végig, utolsó szám az elsőhöz lesz hasonlítva
-
+  
   - Alakleíró szám: úgy kell rendezni a különbségkódot hogy a lehető legkisebb számot adják
-
+    
     - mivel a 2 alakzat megegyezik, ezért mindkettő esetben ugyanaz lesz az alakleíró szám
     - invariáns a forgatásra is, ha a forgatási szög k·π/2
 
 **A lánckód tulajdonságai**
 
 - Előnyök (a mátrixos reprezentációval szemben):
-
+  
   - kompakt (tömör),
-
+  
   - eltolás-invariáns,
-
+  
   - gyors algoritmus,
-
+  
   - gyorsan rekonstruálható belőle az alakzat
 
 - Hátrányok:
-
+  
   - nem forgás-invariáns,
-
+  
   - nem skála-invariáns
-
+  
   - a pontosság legfeljebb pixelnyi lehet,
-
+  
   - érzékeny a zajra
 
 **Kerület számítása 8-as lánckódból**
@@ -409,7 +408,7 @@ Normalizálás:
 **Kompaktság:** kompaktság = (kerület)^2 / terület
 
 - Pl:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-17-23-07-36-image.png" alt="" width="360">
 
 **Cirkularitás (körszerűség):** cirkularitás = 1 / kompaktság = terület / (kerület)^2
@@ -481,7 +480,7 @@ Pl:
 - főtengely: az alakzaton belül haladó leghosszabb egyenes szakasz
 
 - melléktengely: az alakzaton belüli, a főtengelyre merőleges leghosszabb egyenes szakasz
-
+  
   <img src="../img/digikep_kepek/2022-05-17-23-36-12-image.png" title="" alt="" width="335">
 
 **Átmérő**
@@ -504,13 +503,13 @@ Pl:
 
 - A fa elágazási pontjaiban lévő alakzatok nem konvexek, míg minden levélalakzat
   konvex.
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-01-29-image.png" title="" alt="" width="529">
 
 **Partícionált határ**
 
 - a határ partícionálható aszerint, hogy hol kezdődik, ill. fejeződik be a konvex kiegészítés valamely komponense
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-18-00-02-36-image.png" alt="" width="208">
 
 **Vetületek**
@@ -548,17 +547,17 @@ Pl.:
 - üregek (cavity) száma: #C
 
 - Euler szám: #F - #E + #V = #O - #C
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-18-00-13-42-image.png" alt="" width="403">
 
 **Összefüggőségi fa**
 
 - A bináris képekhez rendelt irányított gráf, ahol:
-
+  
   - minden egyes szögpont megfelel a kép egy (fehér vagy fekete) komponensének
-
+  
   - a gráf tartalmazza az (X,Y) élet, ha az Xkomponens „körülveszi” a vele szomszédos Y komponenst.
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-15-29-image.png" title="" alt="" width="386">
 
 **Az Euler-szám és az összefüggőségi fa**
@@ -568,57 +567,57 @@ Pl.:
 **Váz (skeleton):** A váz egy gyakran alkalmazott régió-alapú alakleíró jellemző, mely leírja az objektumok általános formáját.
 
 - A váz meghatározásai:
-
+  
   1. A váz a középtengely transzformáció (Medial Axis Transform, MAT) eredménye: a vázat az objektum azon pontjai alkotják, melyekre kettő vagy több legközelebbi határpont található.
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-24-12-image.png" title="" alt="" width="285">
-
+  
   2. Préritűz-hasonlat: Az objektum határát (minden pontjában) egyidejűleg felgyújtjuk. A váz azokból a pontokból áll, ahol a tűzfrontok találkoznak és kioltják egymást. (Feltételezzük, hogy a tűzfrontok minden irányban egyenletes sebességgel, vagyis izotropikusan terjednek.)
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-25-17-image.png" title="" alt="" width="468">
-
+  
   3. A vázat az objektumba beírható maximális (nyílt) hipergömbök középpontjai alkotják. Egy beírható hipergömb maximális, ha őt nem tartalmazza egyetlen másik beírható hipergömb sem. A beírható maximális (nyílt) hipergömbök egyesítése a kiindulási objektum egy lefedőrendszerét adja.
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-26-24-image.png" title="" alt="" width="403">
 
 - Belső- és külső váz
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-27-35-image.png" title="" alt="" width="389">
 
 - A váz:
-
+  
   - Reprezentálja az objektum
-
+    
     - általános formáját
-
+    
     - topológiai szerkezetét és a
-
+    
     - lokális objektum szimmetriákat
-
+  
   - Invariáns
-
+    
     - az eltolásra,
-
+    
     - az elforgatásra és az
-
+    
     - uniform skálázásra
-
+  
   - Egyszerűbb szerkezet („vékony”, csökkenti a dimenziót).
 
 - Váz gráf:
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-30-34-image.png" title="" alt="" width="186">
 
 **Momentumok**
 
 - Az alakjellemzésben a momentumok előnye:
-
+  
   - számok,
-
+  
   - többszintű képekre is értelmezettek,
-
+  
   - invariánsak (a fontosabb geometriai transzformációkra).
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-36-15-image.png" title="" alt="" width="414">
 
 **Súlypont**

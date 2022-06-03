@@ -90,7 +90,7 @@ Nincsenek felhasználók, emiatt nem megszakítható ütemezési algoritmusok, v
   > Megszakítható, mindig azt a processzust választja az ütemező, amelynek legkevesebb a befejeződésig még a hátralévő ideje, új processzus esetén ha kevesebb időt igényel az új processzus, akkor lecseréljük az új processzusra. Az új, rövid feladatok jó kiszolgálásban részesülnek.
 
 - **Háromszintű ütemezés:**
-    
+  
   > - **Bebocsátó ütemező:**
   >   
   >       Megfelelő keveréket állít elő a CPU és I/O igényes processzusokból, a rövid feladatokat előbb beengedi, de a hosszabbaknak várakozniuk kell.
@@ -103,7 +103,7 @@ Nincsenek felhasználók, emiatt nem megszakítható ütemezési algoritmusok, v
   >           - *Mennyi CPU időt használt fel processzus nemrégiben?*
   >           - *Melyen nagy a processzus?*
   >           - *Mennyire fontos?*
-  >
+  > 
   > - **CPU-ütemező:**
   >   
   >       Valójában kiválasztja, hogy a futásrakész processzusok közül melyik fusson következőnek.
@@ -132,22 +132,26 @@ Az időnkénti megszakítás nélkülözhetetlen, nehogy valamely processzus kis
 - **Legrövidebb processzus következzen**
 
 Interaktív processzusok általában a következő sémát követik:
-1. Várakozás utasításra
-2. Utasítás végrehajtása
-3. GOTO 1.
-  
-  > Kötegelt rendszerben ez minimális válaszidőt ad, viszont párhuzamos processzusoknál nehéz meghatározni, hogy melyik a legrövidebb. Becslés végrehajtása múltbéli viselkedés alapján. Becslés aktualizálása súlyozott átlag számolásával:
-  > 
-  > $$
-  > 𝑎𝑇_0+(1−𝑎)𝑇_1
-  > $$
-  > Ahol *`T`* a becsült idő és az *`a`* megválasztásával megválaszthatjuk, hogy a processzus gyorsan elfelejtse-e a régi futásokat, vagy sokáig emlékezzen rájuk. Az a = 1/2 választással a következő egymás utáni becsléseket kapjuk:
-  > $$
-  > 𝑇_0, \space 𝑇_0/2+𝑇_1/2, \space 𝑇_0/4+𝑇_1/4+T_2/2, \space 𝑇_0/8+𝑇_1/8+T_2/8+T_3/2,
-  > $$
-  > 
-  > Öregedéssel számolva: vesszük a mért érték és az előző becslés súlyozott átlagát.
 
+1. Várakozás utasításra
+
+2. Utasítás végrehajtása
+
+3. GOTO 1.
+   
+   > Kötegelt rendszerben ez minimális válaszidőt ad, viszont párhuzamos processzusoknál nehéz meghatározni, hogy melyik a legrövidebb. Becslés végrehajtása múltbéli viselkedés alapján. Becslés aktualizálása súlyozott átlag számolásával:
+   > 
+   > $$
+   > 𝑎𝑇_0+(1−𝑎)𝑇_1
+   > $$
+   > 
+   > Ahol *`T`* a becsült idő és az *`a`* megválasztásával megválaszthatjuk, hogy a processzus gyorsan elfelejtse-e a régi futásokat, vagy sokáig emlékezzen rájuk. Az a = 1/2 választással a következő egymás utáni becsléseket kapjuk:
+   > 
+   > $$
+   > 𝑇_0, \space 𝑇_0/2+𝑇_1/2, \space 𝑇_0/4+𝑇_1/4+T_2/2, \space 𝑇_0/8+𝑇_1/8+T_2/8+T_3/2,
+   > $$
+   > 
+   > Öregedéssel számolva: vesszük a mért érték és az előző becslés súlyozott átlagát.
 - **Garantált ütemezés**
   
   > Ígéret tétele a felhasználónak a teljesítménnyel kapcsolatbanés ezt be is tartjuk. ( Példa: *n* felhasználó esetén a CPU *1/n*-ed részét kapod ). A betartáshoz nyomon kell követni hogy a CPU mennyi időt kapott a létrehozása óta, ezután kiszámítja mindegyikhez a neki járó mennyiséget.
@@ -241,7 +245,7 @@ Egy módszer amely biztosítja, hogy ha egy processzus használ valamely megoszt
   Hardveres segítséget igényel. Általában többprocesszoros gépeknél alkalmazandó. TSL RX,LOCK utasítás van. (Test and Set Lock)
   Beolvassa a LOCK memória szót az RX regiszterbe, nem nulla értéket ír a memória címre
   A memória elérés más CPU-knak tiltva van a művelet befejezéséig
-
+  
   A TSL utasítás alkalmazásához egy **`LOCK`** megosztottváltozót használunk, ezzel összehangolva a megosztott memória elérést. Amikor a **`LOCK`** 0 akkor bármelyik processzus beállíthatja azt 1-re a TSL utasítás használatával és ezután írhatja, olvashatja a megosztott memóriát. Ha megtette a processzus visszaállítja a **`LOCK`** értékét 0-ra.
   
   > Párban kell használni az eljárásokat, mivel ha valaki csal, akkor a kölcsönös kizárás meghiúsul.

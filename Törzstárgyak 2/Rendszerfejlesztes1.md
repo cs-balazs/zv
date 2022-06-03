@@ -1108,7 +1108,7 @@
 
 **Méret alapú metrikák**
 
-- Széleskörűen használják ezeket a metrikákat, de nagyon sok vita van alkalmazásokról (könnyű szűmolni, de prog nyelveknél eltérő)
+- Széleskörűen használják ezeket a metrikákat, de nagyon sok vita van alkalmazásokról (könnyű számolni, de prog nyelveknél eltérő)
 
 - PL.: Költség / LOC, Hibák / KLOC, Költség / dokumentációs oldal
 
