@@ -2143,7 +2143,7 @@ Tetszőleges <img src="https://latex.codecogs.com/svg?X%20%5Cin%20(N%20%5Ccup%20
 <img src="https://latex.codecogs.com/svg?L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
 ## Közelítő és szimbolikus számítások
 
-> Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása meggkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
+> Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása mekkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
 
 ### 1. Eliminációs módszerek, mátrixok trianguláris felbontásai. Lineáris egyenletrendszerek megoldása iterációs módszerekkel. Mátrixok sajátértékeinek, és sajátvektorainak numerikus meghatározása.
 
@@ -2179,7 +2179,7 @@ Megengedett transzformációk:
 
 ##### Egyenletrendszerek megoldása
 
-Ilyen átalakításokkal próbálunk háromszögmátrixot vagy diagonális mátrixot létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
+Ilyen (ekvivalens) átalakításokkal próbálunk **háromszögmátrixot** vagy **diagonális mátrixot** létrehozni. Ez azért jó, mert ilyen alakban az egyenletrendszer könnyen megoldható:
 
 <img src="https://latex.codecogs.com/svg?%0A%5Cbegin%7Bbmatrix%7D%0Au_%7B11%7D%20%26%20u_%7B12%7D%20%26%20u_%7B13%7D%20%5C%5C%0A0%20%26%20u_%7B22%7D%20%26%20u_%7B23%7D%20%5C%5C%0A0%20%26%200%20%26%20u_%7B33%7D%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ax_1%20%5C%5C%0Ax_2%20%5C%5C%0Ax_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A%0A%3D%0A%0A%5Cbegin%7Bbmatrix%7D%0Ab_1%20%5C%5C%0Ab_2%20%5C%5C%0Ab_3%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
@@ -2218,7 +2218,7 @@ x(1) = b(1) / U(1, 1);
 
 <img src="https://latex.codecogs.com/svg?%0Ag%5E%7B(j)%7D%20%3D%20%0A%5Cbegin%7Bbmatrix%7D%0A2%20%5C%5C%0A3%20%5C%5C%0A0%20%5C%5C%0A%5Cend%7Bbmatrix%7D%20%3B%0Ae_j%5ET%20%3D%0A%5Cbegin%7Bbmatrix%7D%0A~%200%20~%200%20~%201%20~%20%5C%5C%0A%5Cend%7Bbmatrix%7D%0A" />
 
-<img src="https://latex.codecogs.com/svg?j%20%3D%203" /> miatt a <img src="https://latex.codecogs.com/svg?g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://latex.codecogs.com/svg?e_j%5ET" /> harmadik koordinátája is nulla.
+<img src="https://latex.codecogs.com/svg?j%20%3D%203" /> miatt a <img src="https://latex.codecogs.com/svg?g%5E%7B(j)%7D" /> harmadik sora nulla, illetve az <img src="https://latex.codecogs.com/svg?e_j%5ET" /> csak haramdik koordinátája <img src="https://latex.codecogs.com/svg?1" />.
 
 ###### Eliminációs mártix jelentősége
 
@@ -2316,7 +2316,7 @@ y = R' \ b;
 x = R \ y;
 ```
 
-> A `'` operátor transzponál, a `\` pedig: `1R \ y := Az Rx = y egyenletrendszer megoldása`
+> A `'` operátor transzponál, a `\` pedig: `R \ y := Az Rx = y` egyenletrendszer megoldása
 
 A Cholesky felbontás numerikusan stabilis, műveletigénye <img src="https://latex.codecogs.com/svg?%20%5Cfrac%7B1%7D%7B3%7D%20n%5E3%20%2B%20O(n%5E2)" />. Feleannyi, mint egy általános mátrix LU felbontásáé.
 
@@ -2353,7 +2353,7 @@ A módszer:
 
 2. Választunk egy kiindulási <img src="https://latex.codecogs.com/svg?x_0" /> vektort.
 
-3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett báltozó jobb oldalába (nulladik iterációban <img src="https://latex.codecogs.com/svg?x_0" />-t).
+3. Elkezdjük az iterációt, mindig a megkapott értékeket behelyettesítjük a kifejezett változó jobb oldalába (nulladik iterációban <img src="https://latex.codecogs.com/svg?x_0" />-t).
 
 4. Ezt addig ismételgethetjük, amíg az eltérés két eredmény között megfelelően kicsi.
 
@@ -2381,7 +2381,7 @@ Vizsgáljuk meg az <img src="https://latex.codecogs.com/svg?x%5E%7B(k%2B1)%7D%20
 
 Tetszőleges <img src="https://latex.codecogs.com/svg?x%5E%7B(0)%7D" /> kezdővektor, esetén a <img src="https://latex.codecogs.com/svg?k" />-adik közelítés eltérése az <img src="https://latex.codecogs.com/svg?x%5E*" /> megoldástól <img src="https://latex.codecogs.com/svg?e_k%20%3D%20B%5Ek%20e_0" />
 
-Következmény: Ha a <img src="https://latex.codecogs.com/svg?B" /> mátrix **nilpotens**, akkor <img src="https://latex.codecogs.com/svg?B%5Ej%20e_0%20%3D%200" />, tehát az iterációs eljárás véges sok lépésben megtalálja  amegoldást.
+Következmény: Ha a <img src="https://latex.codecogs.com/svg?B" /> mátrix **nilpotens**, akkor <img src="https://latex.codecogs.com/svg?B%5Ej%20e_0%20%3D%200" />, tehát az iterációs eljárás véges sok lépésben megtalálja a megoldást.
 
 > A nilpotens azt jelenti, hogy van olyan <img src="https://latex.codecogs.com/svg?j" /> index, amire <img src="https://latex.codecogs.com/svg?B%5Ej%20%3D0" />
 
@@ -2437,8 +2437,6 @@ A mátrix összes sajátértéke benne van a
 
 <img src="https://latex.codecogs.com/svg?%0AK_i%20%3D%20%5Cleft%5C%7B%20z%20%5Cin%20C%20~%20%5CBigg%7C%20~%20%7Cz%20-%20a_%7Bii%7D%7C%20%5Cle%20%5Csum_%7Bk%3D1%2C%20k%20%5Cne%20i%7D%5En%20%7Ca_%7Bik%7D%7C%20%5Cright%5C%7D%0A" />
 
-
-
 ##### Hatványmódszer
 
 > A.K.A. *von Mieses vektoriterációja*
@@ -2453,7 +2451,7 @@ Kiindulási vektor:
 
 - <img src="https://latex.codecogs.com/svg?x%5E0%20%5Cne%200" />, és
 
-- <img src="https://latex.codecogs.com/svg?x_0" /> nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
+- <img src="https://latex.codecogs.com/svg?x%5E0" /> nem merőleges a legnagyobb abszolút értékű sajátértékhez tartozó sajátvektorra.
 
 ###### Matlabban
 
@@ -2506,11 +2504,11 @@ valamely pozitív <img src="https://latex.codecogs.com/svg?C" /> konstanssal.
 
 Legyen <img src="https://latex.codecogs.com/svg?x%5E*" /> az <img src="https://latex.codecogs.com/svg?f(x)%20%3D%200" /> egyenlet egyszeres gyöke. Válasszunk alkalmas <img src="https://latex.codecogs.com/svg?x_0" /> és <img src="https://latex.codecogs.com/svg?x_1" /> kezdőértékeket, és ezekből kiindulva hajtsuk végre azt az iterációt, amit a következő képlet definiál:
 
-<img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)(x_k%20-%20x_%7Bk-1%7D)%7D%7Bf(x_k)%20-%20f(k_%7Bk-1%7D)%7D%20%3D%20%5Cfrac%7B%20f(x_k)%20x_%7Bk-1%7D%20-%20f(x_%7Bk-1%7D)%20x_k%20%7D%7B%20f(x_k)%20-%20f(x_%7Bk%20-%201%7D)%20%7D%20~%20~%20~%20~%20k%20%3D%201%2C%202%2C%20...%0A" />
+<img src="https://latex.codecogs.com/svg?%0Ax_%7Bk%20%2B%201%7D%20%3D%20x_k%20-%20%5Cfrac%7Bf(x_k)(x_k%20-%20x_%7Bk-1%7D)%7D%7Bf(x_k)%20-%20f(x_%7Bk-1%7D)%7D%20%3D%20%5Cfrac%7B%20f(x_k)%20x_%7Bk-1%7D%20-%20f(x_%7Bk-1%7D)%20x_k%20%7D%7B%20f(x_k)%20-%20f(x_%7Bk%20-%201%7D)%20%7D%20~%20~%20~%20~%20k%20%3D%201%2C%202%2C%20...%0A" />
 
 Valójában annyiban tér el a Newton-módszertől, hogy <img src="https://latex.codecogs.com/svg?f'(x_k)" /> helyett annak közelítéseként a **numerikus derivált**,
 
-<img src="https://latex.codecogs.com/svg?%0A%5Cfrac%0A%7B%20f(x_k)%20-%20f(x_%7Bk-1%7D)%20%7D%0A%7B%20x_k%20-%20k_%7Bk-1%7D%20%7D%0A" />
+<img src="https://latex.codecogs.com/svg?%0A%5Cfrac%0A%7B%20f(x_k)%20-%20f(x_%7Bk-1%7D)%20%7D%0A%7B%20x_k%20-%20x_%7Bk-1%7D%20%7D%0A" />
 
 szerepel.
 
@@ -2522,7 +2520,7 @@ szerepel.
 
 ##### Tulajdonságok
 
-- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **köztefogják** a <img src="https://latex.codecogs.com/svg?x%5E*" /> gyököt.
+- Szokás a szelő módszert olyan kezdőértékekkel indítani, amik **közrefogják** a <img src="https://latex.codecogs.com/svg?x%5E*" /> gyököt.
 
 - Ha <img src="https://latex.codecogs.com/svg?f'(x%5E*)%20%3E%200" />, és <img src="https://latex.codecogs.com/svg?f''(x%5E*)%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?x%5E*" />-nál nagyobb, de ahhoz közeli kezdőértékekkel **szigorúan monoton konvergencia** érhető el.
 
@@ -2542,7 +2540,7 @@ Optimalitálás elvein alapuló módszer.
 
 Szimmetrikus pozitív definit mátrixú lineáris egyenletrendszerek megoldására alkalmas.
 
-Pontos aritmetikával ugyan váges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
+Pontos aritmetikával ugyan véges sok lépésben megtalálná a megoldást, de a kerekítési hibák miatt mégis iterációs eljárásnak kell tekinteni.
 
 Legyen <img src="https://latex.codecogs.com/svg?A" /> egy szimmetrikus, pozitív definit mátrix, akkor a 
 
@@ -2578,7 +2576,7 @@ Adott <img src="https://latex.codecogs.com/svg?x_0" /> kezdőpontra legyen <img 
 > Korábbi gradiensmódszerek esetén egyszerűen a negatív gradienst követik minden iterációs lépésben, de felismerték hogy ez a meredek falú, enyhén lejtő völgyszerű függvények esetén szükségtelenül sok iterációs lépést eredményez a völgy két oldalán való oda-vissza ugrálás miatt. A kisebb meredekséggel rendelkező irányban viszont lényegesen gyorsabban lehetett volna haladni.
 > A konjugált gradiens módszer a lépésenkénti megfelelő irányváltoztatással kiküszöböli ezt a hibát.
 
-A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékek alatt maradjanak.
+A megállási feltétel szokás szerint az, hogy a felhasználó előírja, hogy az utolsó néhány iterált közelítés eltérése és a lineáris egyenletrendszer két oldala különbsége normája ezekben a pontokban adott kis pozitív értékekJaaj csak köszit meg rf-et ne alatt maradjanak.
 
 ##### Matlabban
 
@@ -2595,7 +2593,7 @@ for k = 1:20
 end
 ```
 
-> Az `rr` valójában <img src="https://latex.codecogs.com/svg?r_%7Bk%2B1%7D" />, csak mivel `s` kiszámolásához <img src="https://latex.codecogs.com/svg?r_k" />-ra is szükség van, így csak az után adjuk ártákül `r`-nek (`rr`-t).
+> Az `rr` valójában <img src="https://latex.codecogs.com/svg?r_%7Bk%2B1%7D" />, csak mivel `s` kiszámolásához <img src="https://latex.codecogs.com/svg?r_k" />-ra is szükség van, így csak az után adjuk értékül `r`-nek (`rr`-t).
 
 #### Lagrange interpoláció
 
@@ -3259,6 +3257,12 @@ Függvényjelek, predikátumjelek **aritása / rangja**: Hány változósak
 
 **Alapterm**: Olyan term, amiben nincs változó
 
+**Term**:
+
+- Változók
+
+- <img src="https://latex.codecogs.com/svg?f%2Fn" /> függvényjel, és <img src="https://latex.codecogs.com/svg?t_1%2C%20...%2C%20t_n" /> termek esetén <img src="https://latex.codecogs.com/svg?f(t_1%2C%20...%2C%20t_n)" /> is term
+
 ##### * Struktúra
 
 Egy <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I%2C%20%5Cphi)" /> hármas, ahol
@@ -3275,7 +3279,7 @@ Egy <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BA%7D%20%3D%20(A%2C%20I
   
   - > Objektum(ok)ból objektumot csinál
   
-  - ha <img src="https://latex.codecogs.com/svg?p%20%2F%20n" /> **predikátumjel**, akkor <img src="https://latex.codecogs.com/svg?I(p)" /> egy <img src="https://latex.codecogs.com/svg?A%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> predikárum
+  - ha <img src="https://latex.codecogs.com/svg?p%20%2F%20n" /> **predikátumjel**, akkor <img src="https://latex.codecogs.com/svg?I(p)" /> egy <img src="https://latex.codecogs.com/svg?A%5En%20%5Cto%20%5C%7B%20~%200%2C%201%20~%20%5C%7D" /> predikátum
   
   - > Objektum(ok)ból igazságértéket csinál
 
@@ -3369,7 +3373,7 @@ A Skolem-alakra hozás **nem ekvivalens, csak s-ekvivalens**: Minden <img src="h
     
     - <img src="https://latex.codecogs.com/svg?f" /> egy teljesen új függvényszimbólum,
     
-    - <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_n" /> pedig az <img src="https://latex.codecogs.com/svg?y" /> előtt szereplő <img src="https://latex.codecogs.com/svg?%5Cforall" />-kötött vűétozók.
+    - <img src="https://latex.codecogs.com/svg?x_1%2C%20...%2C%20x_n" /> pedig az <img src="https://latex.codecogs.com/svg?y" /> előtt szereplő <img src="https://latex.codecogs.com/svg?%5Cforall" />-kötött változók.
 
 ###### Zárt Skolem alak
 
@@ -3405,7 +3409,7 @@ Ha kielégíthető, akkor vagy ezt vezeti le, vagy végtelen ciklusba esik
   
   - Jelölje <img src="https://latex.codecogs.com/svg?%5CSigma'" /> a kapott klóz halmazt
 
-- Ekkor <img src="https://latex.codecogs.com/svg?E(%5CSigma)'" /> a klózok **alap példányainak halmaza**
+- Ekkor <img src="https://latex.codecogs.com/svg?E(%5CSigma%20')" /> a klózok **alap példányainak halmaza**
 
 > Ez annyit takar, hogy a klózban a változók helyére ízlés szerint alaptermeket helyettesítünk, minden ilyennek a halmaza
 
@@ -3421,6 +3425,10 @@ Mivel <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> általában vég
 
 - különben generáljuk a következő elemet.
 
+![ ](../img/herbrand_kiterjesztes_1.png)
+
+![ ](../img/herbrand_kiterjesztes_2.png)
+
 ##### Helyesség, és teljesség
 
 - A zárt Skolem alakra hozás s-ekvivalens átalakítás, tehát <img src="https://latex.codecogs.com/svg?%5CSigma" /> pontosan akkor kielégíthetetlen, ha <img src="https://latex.codecogs.com/svg?%5CSigma'" /> az
@@ -3433,9 +3441,9 @@ Mivel <img src="https://latex.codecogs.com/svg?E(%5CSigma')" /> általában vég
 
 > Azaz elég véges sokat legyártani
 
-- A rezolúciós algoritmus teljessége szerinte ha a <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
+- A rezolúciós algoritmus teljessége szerint ha a <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> véges klózhalmaz kielégíthetetlen, akkor az algoritmus ezt levezeti
 
-- Tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akko az aalgoritmus leáll ezzel a válasszal akkor, amikor egy ilyen <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük <img src="https://latex.codecogs.com/svg?%5Csquare" />-t) 
+- Tehát ha <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen, akkor az algoritmus leáll ezzel a válasszal akkor, amikor egy ilyen <img src="https://latex.codecogs.com/svg?%5CSigma_0" /> halmaznak már legenerálta az összes elemét (és rezolvenseit, köztük <img src="https://latex.codecogs.com/svg?%5Csquare" />-t) 
 
 > Az alap rezolúcióval az lehet a probléma, hogy nagy a keresési tere azáltal, hogy a változókat alaptermekkel helyettesítgetjük
 
@@ -3457,17 +3465,21 @@ Két elsőrendű logikai klóz, <img src="https://latex.codecogs.com/svg?C_1" />
 
 A kapott <img src="https://latex.codecogs.com/svg?R" /> klóz a <img src="https://latex.codecogs.com/svg?C_1" /> és <img src="https://latex.codecogs.com/svg?C_2" /> egy elsőrendű rezolvense.
 
+###### Példa
+
+![ ](../img/elsorendu_rezolucio_rezolvenskepzes_pelda.png)
+
 ##### Algoritmus
 
 **Input**: Elsőrendű klózok egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> halmaza. Úgy tekintjük, mintha a <img src="https://latex.codecogs.com/svg?%5CSigma" />-beli klózok változói univerzálisan lennének kvantálva.
 
-> Atért tekinthetjük így, mert <img src="https://latex.codecogs.com/svg?%5Cforall%20x%20(F%20%5Cland%20G)%20%5Cequiv%20%5Cforall%20F%20%5Cland%20%5Cforall%20G" />
+> Azért tekinthetjük így, mert <img src="https://latex.codecogs.com/svg?%5Cforall%20x%20(F%20%5Cland%20G)%20%5Cequiv%20%5Cforall%20F%20%5Cland%20%5Cforall%20G" />
 
 **Output**:
 
 - Ha <img src="https://latex.codecogs.com/svg?%5CSigma%20%5CvDash%20%5Cdownarrow" />, akkor "kielégíthetetlen"
 
-- Különben "kielégíthető", vagy végtelen cikus
+- Különben "kielégíthető", vagy végtelen ciklus
 
 Listát vezetünk klózokról, egy klózt felveszünk, ha
 
@@ -3475,11 +3487,11 @@ Listát vezetünk klózokról, egy klózt felveszünk, ha
 
 - két, már a listán szereplő klóz rezolvense.
 
-Ha <img src="https://latex.codecogs.com/svg?%5Csquare" /> rálerül a listára, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen.
+Ha <img src="https://latex.codecogs.com/svg?%5Csquare" /> rákerül a listára, akkor <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthetetlen.
 
 Különben, ha már nem tudunk több klózt lebezetni, <img src="https://latex.codecogs.com/svg?%5CSigma" /> kielégíthető.
 
-> <img src="https://latex.codecogs.com/svg?Res(%5CSigma)" /> jelöli azt a halmazt, amely tartalmazza <img src="https://latex.codecogs.com/svg?%5CSigma" /> elemeit, és a belőlök egy rezolvensképzéssel levezethető klózokat.
+> <img src="https://latex.codecogs.com/svg?Res(%5CSigma)" /> jelöli azt a halmazt, amely tartalmazza <img src="https://latex.codecogs.com/svg?%5CSigma" /> elemeit, és a belőlük egy rezolvensképzéssel levezethető klózokat.
 
 > <img src="https://latex.codecogs.com/svg?Res%5E*(%5CSigma)" /> pedig a <img src="https://latex.codecogs.com/svg?%5CSigma" />-ból rezolúcióval levezethető összes klóz halmazát jelöli.
 
@@ -5216,7 +5228,7 @@ Nincsenek felhasználók, emiatt nem megszakítható ütemezési algoritmusok, v
   > Megszakítható, mindig azt a processzust választja az ütemező, amelynek legkevesebb a befejeződésig még a hátralévő ideje, új processzus esetén ha kevesebb időt igényel az új processzus, akkor lecseréljük az új processzusra. Az új, rövid feladatok jó kiszolgálásban részesülnek.
 
 - **Háromszintű ütemezés:**
-    
+  
   > - **Bebocsátó ütemező:**
   >   
   >       Megfelelő keveréket állít elő a CPU és I/O igényes processzusokból, a rövid feladatokat előbb beengedi, de a hosszabbaknak várakozniuk kell.
@@ -5229,7 +5241,7 @@ Nincsenek felhasználók, emiatt nem megszakítható ütemezési algoritmusok, v
   >           - *Mennyi CPU időt használt fel processzus nemrégiben?*
   >           - *Melyen nagy a processzus?*
   >           - *Mennyire fontos?*
-  >
+  > 
   > - **CPU-ütemező:**
   >   
   >       Valójában kiválasztja, hogy a futásrakész processzusok közül melyik fusson következőnek.
@@ -5258,18 +5270,22 @@ Az időnkénti megszakítás nélkülözhetetlen, nehogy valamely processzus kis
 - **Legrövidebb processzus következzen**
 
 Interaktív processzusok általában a következő sémát követik:
-1. Várakozás utasításra
-2. Utasítás végrehajtása
-3. GOTO 1.
-  
-  > Kötegelt rendszerben ez minimális válaszidőt ad, viszont párhuzamos processzusoknál nehéz meghatározni, hogy melyik a legrövidebb. Becslés végrehajtása múltbéli viselkedés alapján. Becslés aktualizálása súlyozott átlag számolásával:
-  > 
-  > <img src="https://latex.codecogs.com/svg?%0A%20%20%3E%20%F0%9D%91%8E%F0%9D%91%87_0%2B(1%E2%88%92%F0%9D%91%8E)%F0%9D%91%87_1%0A%20%20%3E%20" />
-  > Ahol *`T`* a becsült idő és az *`a`* megválasztásával megválaszthatjuk, hogy a processzus gyorsan elfelejtse-e a régi futásokat, vagy sokáig emlékezzen rájuk. Az a = 1/2 választással a következő egymás utáni becsléseket kapjuk:
-  > <img src="https://latex.codecogs.com/svg?%0A%20%20%3E%20%F0%9D%91%87_0%2C%20%5Cspace%20%F0%9D%91%87_0%2F2%2B%F0%9D%91%87_1%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F4%2B%F0%9D%91%87_1%2F4%2BT_2%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F8%2B%F0%9D%91%87_1%2F8%2BT_2%2F8%2BT_3%2F2%2C%0A%20%20%3E%20" />
-  > 
-  > Öregedéssel számolva: vesszük a mért érték és az előző becslés súlyozott átlagát.
 
+1. Várakozás utasításra
+
+2. Utasítás végrehajtása
+
+3. GOTO 1.
+   
+   > Kötegelt rendszerben ez minimális válaszidőt ad, viszont párhuzamos processzusoknál nehéz meghatározni, hogy melyik a legrövidebb. Becslés végrehajtása múltbéli viselkedés alapján. Becslés aktualizálása súlyozott átlag számolásával:
+   > 
+   > <img src="https://latex.codecogs.com/svg?%0A%20%20%20%3E%20%F0%9D%91%8E%F0%9D%91%87_0%2B(1%E2%88%92%F0%9D%91%8E)%F0%9D%91%87_1%0A%20%20%20%3E%20" />
+   > 
+   > Ahol *`T`* a becsült idő és az *`a`* megválasztásával megválaszthatjuk, hogy a processzus gyorsan elfelejtse-e a régi futásokat, vagy sokáig emlékezzen rájuk. Az a = 1/2 választással a következő egymás utáni becsléseket kapjuk:
+   > 
+   > <img src="https://latex.codecogs.com/svg?%0A%20%20%20%3E%20%F0%9D%91%87_0%2C%20%5Cspace%20%F0%9D%91%87_0%2F2%2B%F0%9D%91%87_1%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F4%2B%F0%9D%91%87_1%2F4%2BT_2%2F2%2C%20%5Cspace%20%F0%9D%91%87_0%2F8%2B%F0%9D%91%87_1%2F8%2BT_2%2F8%2BT_3%2F2%2C%0A%20%20%20%3E%20" />
+   > 
+   > Öregedéssel számolva: vesszük a mért érték és az előző becslés súlyozott átlagát.
 - **Garantált ütemezés**
   
   > Ígéret tétele a felhasználónak a teljesítménnyel kapcsolatbanés ezt be is tartjuk. ( Példa: *n* felhasználó esetén a CPU *1/n*-ed részét kapod ). A betartáshoz nyomon kell követni hogy a CPU mennyi időt kapott a létrehozása óta, ezután kiszámítja mindegyikhez a neki járó mennyiséget.
@@ -5363,7 +5379,7 @@ Egy módszer amely biztosítja, hogy ha egy processzus használ valamely megoszt
   Hardveres segítséget igényel. Általában többprocesszoros gépeknél alkalmazandó. TSL RX,LOCK utasítás van. (Test and Set Lock)
   Beolvassa a LOCK memória szót az RX regiszterbe, nem nulla értéket ír a memória címre
   A memória elérés más CPU-knak tiltva van a művelet befejezéséig
-
+  
   A TSL utasítás alkalmazásához egy **`LOCK`** megosztottváltozót használunk, ezzel összehangolva a megosztott memória elérést. Amikor a **`LOCK`** 0 akkor bármelyik processzus beállíthatja azt 1-re a TSL utasítás használatával és ezután írhatja, olvashatja a megosztott memóriát. Ha megtette a processzus visszaállítja a **`LOCK`** értékét 0-ra.
   
   > Párban kell használni az eljárásokat, mivel ha valaki csal, akkor a kölcsönös kizárás meghiúsul.
@@ -6764,11 +6780,11 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 ### 1. Simítás/szűrés képtérben (átlagoló szűrők, Gauss simítás és mediánszűrés); élek detektálása (gradiens-operátorokkal és Marr-Hildreth módszerrel).
 
 > **Konvolúció**
->
+> 
 > <img src="../img/digikep_kepek/2022-05-14-16-09-00-image.png" title="" alt="" width="544">
->
+> 
 > Lényege, hogy van egy kernel (a képen "Convolution filter", egy mátrix), amit végigléptetünk egy nála nagyobb mátrixon. Minden egyes pozícióban a kernelben lévő számokat összeszorozzuk az "alattuk" lévő számokkal, a szorzatokat szummázzuk, utána ezt az eredményt egy harmadik (vagy a forrás mátrixal egyenlő méretű, vagy nem, attól függ mekkora méretű képet akarunk visszakapni) célmátrixba írjuk. Így a forrsáképen való végighaladás után kitöltődik az egész célmátrix.
->
+> 
 > (maszk=kernel)
 
 #### Átlagoló szűrés
@@ -6782,35 +6798,35 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - Lényege, hogy minden egyes pixelt a környezete (ebbe beleszámít a helyettesíteni kívánt pixel is) átlagával helyettesítünk
 
 - Ezt egy olyan konvolúciós szűréssel éri el, ahol a kernel (vagy konvolúciós maszk) egy olyan mátrix, ahol az elemek összege mindig 1
-
+  
   - Példák konvolúciós maszkokra:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-14-16-40-04-image.png" alt="" width="608">
 
 - Pálda átlag szűrésre:
-
+  
   <img src="../img/digikep_kepek/2022-05-14-16-45-17-image.png" title="" alt="" width="476">
 
 - Az átlag-szűrő hatása és tulajdonságai
-
+  
   - a képpontok felveszik a környezetük átlagát
-
+  
   - a szűrt kép intenzitásértékei a kiindulási kép intenzitástartományában maradnak
-
+  
   - lineáris operátor (mivel a is konvolúció az)
-
+  
   - haszna: csökkenti a zajt
-
+  
   - kára: gyengíti az éleket, homályossá teszi a képet
 
 - Szűrés a környezet súlyozott átlagával
-
+  
   - Átlagolás: a környezetbe eső valamennyi pont intenzitása egyforma súllyal esik a latba.
-
+    
     <img src="../img/digikep_kepek/2022-05-14-16-52-12-image.png" title="" alt="" width="98">
-
+  
   - Súlyozott átlag: a környezet intenzitásaihoz (általában a távolsággal arányosan csökkenő) súlyokat rendelünk
-
+  
   - <img src="../img/digikep_kepek/2022-05-14-16-54-34-image.png" title="" alt="" width="108">
 
 #### Medián szűrés
@@ -6822,204 +6838,204 @@ Nem tranzitív függés, mivel a felhasználónév függ az emailtől.
 - Ennél a szűrésnél is egy meghatározott méretű környezet van figyelembe véve, de itt nem a szomszédos pixelek átlagával, hanem a mediánjával helyettesíti az egyes pixeleket
 
 - Illusztrálva:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-14-19-35-35-image.png" alt="" width="479">
 
 - Alkalmazása:
-
+  
   <img src="../img/digikep_kepek/2022-05-14-19-41-45-image.png" title="" alt="" width="465">
 
 - A medián-szűrés hatása
-
+  
   - Megszünteti az egyedi (és a „kis” kiterjedésű) kiugrásokat
-
+  
   - „Jobban” megőrzi az éleket, mint az átlagolás
-
+  
   - „Nagy” kiterjedésű zajfoltoknál jel-elnyomó.
 
 #### Gauss simítás
 
 > **Pascal háromszög**
->
+> 
 > <img src="../img/digikep_kepek/2022-05-15-15-38-03-image.png" title="" alt="" width="549">
 
 - Szintén zajszűrésre használatos
 
 - A Gauss simítás alkalmazása egy képre nem más, mint konvolválni a képet a Gauss függvénnyel
-
+  
   - A maszk egy ("harang alakú") Gauss görbét fog reprezentálni
 
 - 1 dimenziós Gauss függvény
-
+  
   - σ a szórást jelöli
-
+    
     <img src="../img/digikep_kepek/2022-05-15-14-22-37-image.png" title="" alt="" width="553">
 
 - 2 dimenziós Gauss függvény
-
+  
   <img src="https://homepages.inf.ed.ac.uk/rbf/HIPR2/eqns/eqngaus2.gif" title="" alt="Eqn:eqngaus2" width="274">
 
 <img title="" src="../img/digikep_kepek/2022-05-15-14-49-19-image.png" alt="" width="571">
 
 - Diszkrét közelítése a Pascal háromszög segítségével (attól függ hogy melyik szintjéből kell kiindulnunk, hogy mekkora maszkot akarunk)
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-15-42-51-image.png" alt="" width="452">
-
+  
   <img src="../img/digikep_kepek/2022-05-15-15-44-21-image.png" title="" alt="" width="441">
 
 - Példa Gauss szűrésre 3x3-as maszkkal:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-15-51-56-image.png" alt="" width="324">
 
 #### Éldetektálás
 
 > **Tangens függvény**
->
+> 
 > <img title="" src="../img/digikep_kepek/2022-05-15-16-12-51-image.png" alt="" width="324">
->
+> 
 > **Első rendű derivált**
->
+> 
 > Geometriai jelentése: az érintő iránytangense.
->
+> 
 > Elárulja, hogy a függvény hol nő és hol csökken és hogy milyen mértékben.
->
+> 
 > A derivált (meredekség):
->
+> 
 > - pozitív, ha a függvény nő,
 > - negatív, ha csökken
 
 **Éldetektálás Gradiens operátorokkal**
 
 - A képen ott található él, ahol a kép-függvény valamely irány mentén hirtelen változik.
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-03-32-image.png" alt="" width="482">
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-05-12-image.png" alt="" width="415">
 
 - Tipikus élprofilok
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-16-06-03-image.png" alt="" width="360">
 
 - Az első deriváltat felhasználhatjuk éldetektálásra: ahol kiemelkedőbb lokális maximuma (vagy minimuma) van az első deriváltnak, ott jó esélyel él található. A lokális minimumok miatt abszolútértéket szokás venni, így csak a maximumokra kell odafigyelni
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-15-17-25-33-image.png" alt="" width="433">
 
 - 2 dimenziós képnél parciális derivált használata: változások detektálása az _x_ és _y_ koordináta mentén
-
+  
   - a két érték alapján tudjuk hogy hol vannak élek
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-17-51-33-image.png" alt="" width="387">
-
+  
   - Gradiens nagysága:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-18-01-26-image.png" alt="" width="238">
-
+  
   - Gradiens iránya:
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-15-18-02-27-image.png" alt="" width="232">
 
 - Diszkrét gradiens operátorok:
-
+  
   - Roberts operátor
-
+    
     - a maszkelemek összege 0
-
+    
     - könnyen számítható, de zajérzékeny
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-08-45-image.png" title="" alt="" width="354">
-
+  
   - Prewitt operátor
-
+    
     - a maszkelemek összege 0
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-10-52-image.png" title="" alt="" width="331">
-
+  
   - Sobel operátor
-
+    
     - a maszkelemek összege 0
-
+    
     - simító hatással bír
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-11-47-image.png" title="" alt="" width="338">
-
+  
   - Frei-Chen (izotropikus) operátor
-
+    
     - a maszkelemek összege 0
-
+      
       <img src="../img/digikep_kepek/2022-05-15-18-13-46-image.png" title="" alt="" width="338">
 
 - Gradiens maszk tervezése (x-irányban)
-
+  
   <img src="../img/digikep_kepek/2022-05-15-18-40-31-image.png" title="" alt="" width="181">
-
+  
   - Feltételek:
 
 <img src="https://latex.codecogs.com/svg?%0D%0A%5Ctext%7B1.%20Szimmeteria%3A%20%7D%20a_%7B1j%7D%20%3Da_%7B3j%7D%20%5Ctext%7B%20(j%3D1%2C2%2C3)%7D%20%5C%5C%0D%0A%5Ctext%7B2.%20Antiszimmetria%3A%20%7D%20a_%7Bi1%7D%3D-a_%7Bi3%7D%2C%5C%20a_%7Bi1%7D%3E0%5C%20%5Ctext%7B%C3%A9s%20%7D%0D%0Aa_%7Bi2%7D%3D0%5C%20%5Ctext%7B(i%3D1%2C2%2C3)%7D%5C%5C%0D%0A%5Ctext%7B3.%20Nem%20reag%C3%A1l%20konstans%20r%C3%A9gi%C3%B3ra%3A%20%7D%20%5Csum_%7Bi%3D1%7D%5E%7B3%7D%5Csum_%7Bj%3D1%7D%5E%7B3%7D%0D%0Aa_%7Bij%7D%3D0%5C%20%5Ctext%7B(Az%20elemek%20%C3%B6sszege%200)%7D%0D%0A" />
 
 - 8-irányban élt kereső gradiens operátorok
-
+  
   - Prewitt compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-39-27-image.png" title="" alt="" width="538">
-
+  
   - Robinson-3 compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-40-14-image.png" title="" alt="" width="533">
-
+  
   - Robinson-5 compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-41-15-image.png" title="" alt="" width="520">
-
+  
   - Kirsch compass operátor
-
+    
     <img src="../img/digikep_kepek/2022-05-15-19-42-12-image.png" title="" alt="" width="519">
 
 **Laplace éldetektálás**
 
 - Másodrendű derivált: az első rendű deriváltal szemben a nullán való áthaladás helyén lesz az él, nem a lokális maximumnál vagy minimumnál
-
+  
   <img src="../img/digikep_kepek/2022-05-15-22-45-19-image.png" title="" alt="" width="452">
 
 - Kétváltozós függvény Laplace operátora: az _x_ szerinti és _y_ szerinti másdorendű deriváltak összege (a képen látható ahogy az összegből tényleg megkapjuk az összes élt)
-
+  
   <img src="../img/digikep_kepek/2022-05-15-22-59-38-image.png" title="" alt="" width="405">
-
+  
   <img src="../img/digikep_kepek/2022-05-15-23-04-05-image.png" title="" alt="" width="418">
 
 - A Laplace operátor egy lineáris differenciál-operátor a másodrendű derivált közelítésére (a gradiens operátor önmagával vett belső szorzata)
-
+  
   - Tulajdonságai:
-
+    
     - forgásinvariáns
-
+    
     - egyetlen maszkkal számítható
-
+    
     - csak a magnitúdó számítható
-
+    
     - duplán érzékelhet éleket
-
+    
     - zajérzékeny
-
+    
     <img src="../img/digikep_kepek/2022-05-15-23-55-06-image.png" title="" alt="" width="464">
 
 - Egy diszkrét Laplace operátor (A maszkelemek összege 0):
-
+  
   <img src="../img/digikep_kepek/2022-05-15-23-22-14-image.png" title="" alt="" width="490">
 
 - A másodrendű derivált érzékeny a zajra -> hajtunk végre először Gauss simítást a képen
 
 - Az Laplace operátor és a Gauss operátor is lineáris -> megspórolhatunk egy konvolúciót azzal, ha a Gauss operátoron alkalmazzuk a Laplace transzformációt, amiből egy új konvolúciós maszkot kapunk
-
+  
   <img src="../img/digikep_kepek/2022-05-16-00-02-13-image.png" title="" alt="" width="390">
-
+  
   - A Gauss függvény Laplace transzformáltja (LoG – Laplacian of Gaussian)
-
+  
   - "fordított sombrero"
-
+    
     <img title="" src="../img/digikep_kepek/2022-05-16-00-00-17-image.png" alt="" width="470">
 
 - A LoG egy diszkrét közelítése:
-
+  
   <img src="../img/digikep_kepek/2022-05-16-00-01-30-image.png" title="" alt="" width="391">
 
 **Marr-Hildreth éldetektor**
@@ -7029,18 +7045,17 @@ Lényege:
 1. Konvolváljuk a képet egy (vagy több) alkalmas LoG függvénnyel.
 
 2. Keressünk (közös) nulla-átmeneteket.
-
+   
    (Nulla-átmenet ott van, ahol az adott pont egy „kis” (pl. 2x2-es vagy 3x3-as)
    környezetében pozitív és negatív értékek is előfordulnak.)
-
 - Példa:
-
+  
   - σ a szórást jelöli
-
+    
     <img src="../img/digikep_kepek/2022-05-16-00-08-45-image.png" title="" alt="" width="451">
 
 - Nagyon lapos nulla átmeneteknél "fantom" élt is detektálhat
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-16-00-13-42-image.png" alt="" width="513">
 
 ### 2. Alakreprezentáció, határ- és régió-alapú alakleíró jellemzők, Fourier leírás.
@@ -7054,11 +7069,11 @@ A moduláris gépi látás általános modellje:
 ![](../img/digikep_kepek/2022-05-16-23-17-39-image.png)
 
 - Az alakreprezentáció módszerei:
-
+  
   - az objektumot körülvevő **határ** leírása
-
+  
   - az objektum által elfoglalt **régió** leírása
-
+  
   - **transzformációs** megközelítés
 
 #### Határvonal alapú tulajdonságok
@@ -7085,11 +7100,11 @@ A moduláris gépi látás általános modellje:
 - **Határpont:** az alakzatnak olyan pontja, melynek van az alakzathoz nem tartozó 8-, ill. 4-szomszédja (4, ill. 8 irány esetén).
 
 - Az elemi elmozdulások kódjai:
-
+  
   <img src="../img/digikep_kepek/2022-05-17-20-17-23-image.png" title="" alt="" width="422">
 
 - Példa 8-as lánckódra:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-17-20-18-36-image.png" alt="" width="425">
 
 **_<u>Normalizált lánckód</u>_**
@@ -7107,42 +7122,42 @@ Normalizálás:
 <img title="" src="../img/digikep_kepek/2022-05-17-21-58-32-image.png" alt="" width="477">
 
 - Az első ábránál (lánckód: 1002335657):
-
+  
   - Különbségkód:
-
+    
     - ha a 8-irányos iránytűn az óramutató járásával ellentétesen haladunk, akkor 1-től 0-ig 7 lépésben tudunk eljutni (a lánckód első két elembéből számoljuk a különbségkód első elemét)
-
+    
     - második számjegye a 0 és 0 közti távolság, vagyis 0
-
+    
     - harmadik számjegye 0 és 2 távolsága, ami 2 (még mindig az iránytűn, óramutató járásának ellentétesen)
-
+    
     - ez így megy végig, utolsó szám az elsőhöz lesz hasonlítva
-
+  
   - Alakleíró szám: úgy kell rendezni a különbségkódot hogy a lehető legkisebb számot adják
-
+    
     - mivel a 2 alakzat megegyezik, ezért mindkettő esetben ugyanaz lesz az alakleíró szám
     - invariáns a forgatásra is, ha a forgatási szög k·π/2
 
 **A lánckód tulajdonságai**
 
 - Előnyök (a mátrixos reprezentációval szemben):
-
+  
   - kompakt (tömör),
-
+  
   - eltolás-invariáns,
-
+  
   - gyors algoritmus,
-
+  
   - gyorsan rekonstruálható belőle az alakzat
 
 - Hátrányok:
-
+  
   - nem forgás-invariáns,
-
+  
   - nem skála-invariáns
-
+  
   - a pontosság legfeljebb pixelnyi lehet,
-
+  
   - érzékeny a zajra
 
 **Kerület számítása 8-as lánckódból**
@@ -7164,7 +7179,7 @@ Normalizálás:
 **Kompaktság:** kompaktság = (kerület)^2 / terület
 
 - Pl:
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-17-23-07-36-image.png" alt="" width="360">
 
 **Cirkularitás (körszerűség):** cirkularitás = 1 / kompaktság = terület / (kerület)^2
@@ -7236,7 +7251,7 @@ Pl:
 - főtengely: az alakzaton belül haladó leghosszabb egyenes szakasz
 
 - melléktengely: az alakzaton belüli, a főtengelyre merőleges leghosszabb egyenes szakasz
-
+  
   <img src="../img/digikep_kepek/2022-05-17-23-36-12-image.png" title="" alt="" width="335">
 
 **Átmérő**
@@ -7259,13 +7274,13 @@ Pl:
 
 - A fa elágazási pontjaiban lévő alakzatok nem konvexek, míg minden levélalakzat
   konvex.
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-01-29-image.png" title="" alt="" width="529">
 
 **Partícionált határ**
 
 - a határ partícionálható aszerint, hogy hol kezdődik, ill. fejeződik be a konvex kiegészítés valamely komponense
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-18-00-02-36-image.png" alt="" width="208">
 
 **Vetületek**
@@ -7303,17 +7318,17 @@ Pl.:
 - üregek (cavity) száma: #C
 
 - Euler szám: #F - #E + #V = #O - #C
-
+  
   <img title="" src="../img/digikep_kepek/2022-05-18-00-13-42-image.png" alt="" width="403">
 
 **Összefüggőségi fa**
 
 - A bináris képekhez rendelt irányított gráf, ahol:
-
+  
   - minden egyes szögpont megfelel a kép egy (fehér vagy fekete) komponensének
-
+  
   - a gráf tartalmazza az (X,Y) élet, ha az Xkomponens „körülveszi” a vele szomszédos Y komponenst.
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-15-29-image.png" title="" alt="" width="386">
 
 **Az Euler-szám és az összefüggőségi fa**
@@ -7323,57 +7338,57 @@ Pl.:
 **Váz (skeleton):** A váz egy gyakran alkalmazott régió-alapú alakleíró jellemző, mely leírja az objektumok általános formáját.
 
 - A váz meghatározásai:
-
+  
   1. A váz a középtengely transzformáció (Medial Axis Transform, MAT) eredménye: a vázat az objektum azon pontjai alkotják, melyekre kettő vagy több legközelebbi határpont található.
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-24-12-image.png" title="" alt="" width="285">
-
+  
   2. Préritűz-hasonlat: Az objektum határát (minden pontjában) egyidejűleg felgyújtjuk. A váz azokból a pontokból áll, ahol a tűzfrontok találkoznak és kioltják egymást. (Feltételezzük, hogy a tűzfrontok minden irányban egyenletes sebességgel, vagyis izotropikusan terjednek.)
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-25-17-image.png" title="" alt="" width="468">
-
+  
   3. A vázat az objektumba beírható maximális (nyílt) hipergömbök középpontjai alkotják. Egy beírható hipergömb maximális, ha őt nem tartalmazza egyetlen másik beírható hipergömb sem. A beírható maximális (nyílt) hipergömbök egyesítése a kiindulási objektum egy lefedőrendszerét adja.
-
+     
      <img src="../img/digikep_kepek/2022-05-18-00-26-24-image.png" title="" alt="" width="403">
 
 - Belső- és külső váz
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-27-35-image.png" title="" alt="" width="389">
 
 - A váz:
-
+  
   - Reprezentálja az objektum
-
+    
     - általános formáját
-
+    
     - topológiai szerkezetét és a
-
+    
     - lokális objektum szimmetriákat
-
+  
   - Invariáns
-
+    
     - az eltolásra,
-
+    
     - az elforgatásra és az
-
+    
     - uniform skálázásra
-
+  
   - Egyszerűbb szerkezet („vékony”, csökkenti a dimenziót).
 
 - Váz gráf:
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-30-34-image.png" title="" alt="" width="186">
 
 **Momentumok**
 
 - Az alakjellemzésben a momentumok előnye:
-
+  
   - számok,
-
+  
   - többszintű képekre is értelmezettek,
-
+  
   - invariánsak (a fontosabb geometriai transzformációkra).
-
+  
   <img src="../img/digikep_kepek/2022-05-18-00-36-15-image.png" title="" alt="" width="414">
 
 **Súlypont**
@@ -7678,6 +7693,19 @@ Példa a Fourier leírásra:
       - Elemi és összetett folyamato
     
     - Csatornák: két folyamat közötti adatátvitelre szolgál
+## Programozás 1 & 2
+
+### 1. Objektum orientált paradigma, és annak megvalósítása a JAVA és C++ nyelvekben. Az absztrakt adattípus, az osztály. AZ egységbe zárás, az információ elrejtés, az öröklődés, az újrafelhasználás, és a polimorfizmus. A polimorfizmus feloldásának módszere.
+
+TODO
+
+### 2. Objektumok életciklusa, létrehozás, inicializálás, másolás, megszüntetés. Dinamikus, lokális, és statikus objektumok létrehozása. A statikus adattagok és metódusok, valamint szerepük a programozásban. Operáció, és operátor overloading JAVA és C++ nyelvekben. Kivételkezelés.
+
+TODO
+
+### 3. JAVA és C++ programok fordítása és futtatása. Parancssori paraméterek, fordítási opciók, nagyobb projektek fordítása. Absztrakt-, interfész-, és generikus osztályok, virtuális eljárások. A virtuális eljárások megvalósítása, szerepe, használata.
+
+TODO
 ## Programozás alapjai
 
 ### 1. Algoritmusok vezérlési szerkezetei és megvalósításuk C programozási nyelven. A szekvenciális, iterációs, elágazásos, és az eljárás vezérlés.
@@ -8789,7 +8817,6 @@ jelzok.flag3 = 1;
 if (jelzok.flag1 == 0 && jelzok.flag3 == 1) {
     /* ... */
 }
-
 ```
 
 > Meg lehet adni, melyik mező hány bites legyen.
@@ -9981,7 +10008,7 @@ Idom i = {
 
 **Méret alapú metrikák**
 
-- Széleskörűen használják ezeket a metrikákat, de nagyon sok vita van alkalmazásokról (könnyű szűmolni, de prog nyelveknél eltérő)
+- Széleskörűen használják ezeket a metrikákat, de nagyon sok vita van alkalmazásokról (könnyű számolni, de prog nyelveknél eltérő)
 
 - PL.: Költség / LOC, Hibák / KLOC, Költség / dokumentációs oldal
 
