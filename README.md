@@ -26,7 +26,7 @@ Nyékyné Gaizler Judit - Programozási nyelvek 2003.
 
 [London András - Operációkutatás I.](https://www.inf.u-szeged.hu/~london/opkutEA.html)
 
-Andrew S. Tanenbaum & Albert S. Woodhull. (2007). *Operációs rendszerek*. Budapest: Panem Könyvkiado Kft.
+Andrew S. Tanenbaum & Albert S. Woodhull. (2007). _Operációs rendszerek_. Budapest: Panem Könyvkiado Kft.
 
 Gergely Tamás - Programozás alapjai, 2020
 
@@ -55,3 +55,13 @@ dr. Katona Endre - Adatbázisok
 [https://www.guru99.com/dbms-functional-dependency.html](https://www.guru99.com/dbms-functional-dependency.html)
 
 [https://www.javatpoint.com/dbms-relational-decomposition](https://www.guru99.com/dbms-functional-dependency.html)
+
+[https://www.youtube.com/watch?v=7PtTn38f4os](https://www.youtube.com/watch?v=7PtTn38f4os)
+
+[https://hu.wikipedia.org/wiki/Transmission_Control_Protocol](https://hu.wikipedia.org/wiki/Transmission_Control_Protocol)
+
+[https://hu.wikipedia.org/wiki/OSI-modell](https://hu.wikipedia.org/wiki/OSI-modell)
+
+[https://hu.wikipedia.org/wiki/Point-to-Point_Protocol](https://hu.wikipedia.org/wiki/Point-to-Point_Protocol)
+
+[https://hu.wikipedia.org/wiki/HTTP](https://hu.wikipedia.org/wiki/HTTP)
