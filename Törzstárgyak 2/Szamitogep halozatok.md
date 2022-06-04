@@ -36,13 +36,13 @@
   
   - a gerincben lévő eszközök nem futtatnak felhasználói programokat
   
-  - a vég rendszeern lévő alkalmazások lehetővé teszik a gyors alkalmazás fejlesztést és terjesztést
+  - a vég rendszeren lévő alkalmazások lehetővé teszik a gyors alkalmazás fejlesztést és terjesztést
 
 **Kliens/szerver architektúra**
 
 - szerver:
   
-  - mindég bekapcsolt/elérhető
+  - mindíg bekapcsolt/elérhető
   
   - állandó IP cím
   
@@ -320,7 +320,7 @@ A legismertebb alkalmazási réteg szintű protokollok a _HTTP_, az _SMTP_, az *
 >   
 >   - megvizsgálja a bejövő keret MAC címét, csak kiválasztott kimenetre vagy kimenetekkre továbbítja, CSMA/CD –t használ az adott szegmensek elérésére
 > 
-> - Traszparens: az állomások nem rzékelik a kapcsolókat
+> - Traszparens: az állomások nem érzékelik a kapcsolókat
 > 
 > - Plug-and-play, öntanuló: a kapcsolókat nem kell előre konfigurálni
 
