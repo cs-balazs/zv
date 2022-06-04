@@ -1293,11 +1293,33 @@ Ha tudjuk, mennyi elem lesz a táblában, akkor meg tudjuk választani a rések 
 Érdemes mindig elgondolkodni, hogy milyen reprezentációt választunk, az alapján, hogy milyen gráfogkra számítunk, azaz várhatóan milyen az élek és csúcsok eloszlása, azaz mennyire ritka / sűrű a gráf. Ha az élek száma arányos a csúcsok számával, az egy sűrű gráf, ha az élek száma arányos a csúcsok számának négyzetével, az egy ritka gráf.
 ## Bonyolultságelmélet
 
+**Inputméret**:
+
+`n`: input bitjeinek száma
+
+- `N` egész, `n` szám esetén pl. `N = 0 ... 2^n`, így `N = O(2^n)` és `n = O(log N)`
+
+- `T` tömb esetén 2 véglet:
+  
+  - `n` db 1 bites érték van a tömbben, így `T.length = 0 ... n`, ami `O(log n)` biten elfér
+  
+  - 1 db `n` bites érték van a tömbben, így `T[i] = 0 ... 2^n`, ami `O(n)` biten fér el
+
+- `G` szomszédsági mátrixal ábrázolt gráf esetén:
+  
+  - Legyen `N` a csúcsok száma
+  
+  - `n = O(N^2)` és `N = O(sqrt(n))`
+  
+  - Azaz a csúcsok száma kicsi a teljes gráf bitjeinek számához képest
+
+Futásidőt, és tárigényt `n` azaz az input bitjeinek számának függvényében számolunk.
+
 ### 1. Hatékony visszavezetés. Nemdeterminizmus. A P és NP osztályok. NP-teljes problémák.
 
 > szoktam érdeklődni h **futásidőt minek a függvényében számolunk**, pl h ebben vagy ebben a problémában **mennyi lesz az az n inputméret**, hogy számoljuk ki, mi a **visszavezetés/nehézség/teljesség meg az NP osztály**, aztán **egy-két NP-teljes <= NP-teljes visszavezetést** szoktam kérni h példán keresztül mutassa be a user h hogy megy, a példát is én adom rendszerint, megkérdezem h miért lesz ez tényleg visszavezetés (**miért tartja a választ, miért polinomidejű**)
 
-### A P osztály
+#### A P osztály
 
 R az eldönthető problémák osztálya.
 
@@ -1307,7 +1329,7 @@ Tehát minden olyan **eldöntési probléma** P-ben van, amire létezik <img src
 
 > Ezeket a problémákat tartjuk **hatékonyan megoldhatónak**.
 
-#### Elérhetőség
+##### Elérhetőség
 
 P-beli probléma.
 
@@ -1561,8 +1583,6 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 **Output**: Van-e a tárgyaknak olyan részhalmaza, melynek összsúlya legfeljebb <img src="https://latex.codecogs.com/svg?W" />, összértéke pedig legalább <img src="https://latex.codecogs.com/svg?C" />?
 
-> TODO: erős-, gyenge NP-teljesség kell-e ide?
-
 ### 2. A PSPACE osztály. PSPACE-teljes problémák. Logaritmikus tárigényű visszavezetés. NL-teljes problémák.
 
 > amit tudni kéne, az szintén az **inputméret** és mondjuk példa **rövid forráskódnak a tárigény elemzése** h az mennyi lesz ordóban és miért, az **elérhetőségről a tanult nemdet és det jó tárigényű algoritmusok tárigényét és h miért annyi**, az **elérhetőségi módszer miről szól**, tudni mi a **savitch és mi az immerman-szelepcsényi tétel** (utóbbinak a bizonyításába nem kérdezek, előbbi a det jó tárigényű algo az elérhetőségre), meg h **mi a QSAT és mi a földrajzi probléma és azok milyen nehezek** + ott is **adok példát h ez itt egy "igen" vagy egy "nem" példánya** a problémának és miért. ott **nem kérdezem** a QSAT <= Földrajzi játék visszavezetést
@@ -1732,6 +1752,8 @@ Tárigénye <img src="https://latex.codecogs.com/svg?O(n%5E2)" />, mert a rekurz
 - Először az első játékos kezd, lerakja az egyetlen bábuját a gráf kezdőcsúcsára.
 
 - Ezután a második játékos lép, majd az első, stb., felváltva, mindketten a bábut az aktuális pozíciójából egy olyan csúcsba kell húzzák, ami egy lépésben elérhető, és ahol még nem volt a játék során. Aki először nem tud lépni, vesztett.
+
+![ ](../img/foldrajzi_jatek_pelda.png)
 
 ##### További PSPACE-teljes problémák
 
@@ -1967,7 +1989,7 @@ Az összes reguláris nyelvek halmazát <img src="https://latex.codecogs.com/svg
 
 > Azaz vannak olyan környezetfüggetlen nyelvek, amik nem regulárisak.
 
-##### \* Reguláris kifejezések
+##### Reguláris kifejezések
 
 Egy <img src="https://latex.codecogs.com/svg?%5CSigma" /> ábécé feletti reguláris kifejezések halmaza a <img src="https://latex.codecogs.com/svg?(%5CSigma%20%5Ccup%20%5C%7B~%20%5Cemptyset%2C%20%5Cepsilon%2C%20(%2C%20)%2C%20%2B%2C%20*%20~%5C%7D)%5E*" /> halmaz legszűkebb olyan <img src="https://latex.codecogs.com/svg?U" /> részhalmaza, amelyre az alábbi feltételek teljesülnek:
 
@@ -2149,6 +2171,36 @@ Tetszőleges <img src="https://latex.codecogs.com/svg?X%20%5Cin%20(N%20%5Ccup%20
 ##### Generált nyelv definiálása derivációs fákkal
 
 <img src="https://latex.codecogs.com/svg?L(G)%20%3D%20%5C%7B%20~%20fr(t)%20~%20%7C%20~%20t%20%5Cin%20D_S%2C%20fr(t)%20%5Cin%20%5CSigma%5E*%20~%20%5C%7D" />
+
+#### Veremautomata
+
+![ ](../img/veremautomata_def.png)
+
+![ ](../img/veremautomata_pelda.png)
+
+Ez a veremautomata felismeri a <img src="https://latex.codecogs.com/svg?%5C%7B%20a%5En%20b%5En%20%3A%20n%20%5Cge%200%20%5C%7D" /> nyelvet
+
+#### Ekvivalencia
+
+Minden CF nyelv felismerhető veremautomatával.
+
+> Ráadásul egyetlen állapottal, üres veremmel ismer fel
+
+Minden veremautomatával felismerhető nyelv CF.
+
+#### Bar-Hillel lemma és alkalmazása
+
+![ ](../img/bar_hillel_def.png)
+
+> <img src="https://latex.codecogs.com/svg?w_2" />-t, és <img src="https://latex.codecogs.com/svg?w_4" />-et egyszerre pumpáljuk
+
+> Ha egy nyelv CF, akkor teljesül az állítás
+
+Belátható vele, hogy egy nyelv környezetfüggetlen-e.
+
+Pl.: <img src="https://latex.codecogs.com/svg?L%20%3D%20%5C%7B%20a%5En%20b%20%5E%20n%20c%20%5E%20n%20%7C%20n%20%5Cge%201%20%5C%7D" /> nem környezetfüggetlen, mert nem pumpálható két ponton.
+
+"Környezetfüggetlen nyelvtan képes számolni 'két valamit', de nem képes számolni 'három valamit'"
 ## Közelítő és szimbolikus számítások
 
 > Numerikus stabilitás jelentése: A függvény argumantumainak megváltozása mekkora eltérést eredményez a függvényértékben. Ha nagyot akkor numerikusan nem stabilis.
