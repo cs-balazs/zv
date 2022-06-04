@@ -9,12 +9,21 @@ Az **objektumorientált programozás** az objektumok fogalmán alapuló program
 ###### *`JAVA`* nyelvben egy osztály deklaráció:
 
 ```java
-class Alakzat {
-    int szin;
-    float terulet;
-    Koordinata xy;
+public class Ember {
+    String nev;
+    int kor;
+    boolean ferfi;
+
+    public void koszon(){
+        System.out.println("Szia! " + nev + " vagyok és " + kor + " éves, mellesleg " + (ferfi ? "férfi." : "nő."));
+    }
 }
 ```
+
+> Az adott osztály tagjainak meg lehet adni a láthatóságát
+> **`public:`** *mindenhonnan látható* 
+> **`protected:`** *a csomag, az osztály és az azokból származtatott gyermekosztályok látják* 
+> **`private:`** *csak maga az osztály látja*
 
 ###### *`C++`* nyelvben egy osztály deklaráció:
 
@@ -57,7 +66,6 @@ Az osztály egyben egy absztrakt adattípus is
 
 - Adatok és a rajtuk végzett műveletek egységbezárása
   *(encapsulation)*
-  
 
 **Osztály:** tulajdonság + viselkedés
 
@@ -75,9 +83,8 @@ Alakzat a = new Alakzat ();
 Ez így önmagában még nem sok mindenre jó, testre kell szabni.
 
 - Attribútum hozzáadása
-  
+
 - Operációk hozzáadása
-  
 
 > Osztály attribútuma (mezője, adattagja) lehet másik osztály típusú (referenciát tárol), létre kell hozni **`new`**-val *(inicializálás)*
 > 
@@ -92,7 +99,6 @@ Ez így önmagában még nem sok mindenre jó, testre kell szabni.
 > Az operációk funkcionalitást biztosítanak az objektumoknak, meghatározzák, hogy milyen üzeneteket fogadhat.
 > 
 > - Részei: név, paraméterek, visszatérési típus, törzs
->   
 > 
 > ```C++
 > visszateresiTipus operacioNev( /* paraméter lista */ ) {
@@ -142,10 +148,58 @@ Az újrafelhasználhatóság egyik alapeszköze
 Öröklődés feltárása:
 
 - általánosítás
-  
+
 - specializálás
-  
+
 ![](../img/egyszeres_orok.png)
+
+###### Java
+
+```java
+public class SzulinapiTorta extends Torta {
+    private int gyertyakSzama;
+
+    public SzulinapiTorta(int szelet, String iz, int gyertyakSzama) {
+        super(szelet, iz);
+        this.gyertyakSzama = gyertyakSzama;
+    }
+
+    public void kivansagotTeljesit() {
+        System.out.println("Kívánságod teljesült!");
+    }
+
+    public void info() {
+        System.out.println("Ez a szülinapi torta " + this.getIz() + " ízű, és "
+                + this.szelet + " szeletes." + this.gyertyakSzama
+                + " db gyertya van rajta");
+    }
+
+}
+```
+
+A `super` kulcsszóval érhető el az ős konstruktora
+
+`extends` kulcsszóval érhető el az öröklődés
+
+###### C++
+
+```c++
+class PhD_hallgato : public Hallgato {
+  unsigned oktatott_oraszam;
+public:
+  PhD_hallgato(const std::string nev, unsigned felvett_oraszam, unsigned oktatott_oraszam) :
+    Hallgato(nev, felvett_oraszam),
+    oktatott_oraszam(oktatott_oraszam) {}
+
+  unsigned get_oktatott_oraszam() const { return oktatott_oraszam; }
+
+  void orat_tart() const {
+      std::cout << "Orat tart a PhD_hallgato" << std::endl;
+  }
+};
+```
+
+> Öröklősésnek is van láthatósága: Azt mondja meg, mi legyen a minimum láthatósága az örökölt adattagoknak / metódusoknak. Pl. ha az ősben private volt, de `private` az öröklődés, ugyan az az adattag a leszármazottban `private` láthatósággal lesz jelen.
 
 ###### Többszörös öröklődés
 
@@ -157,9 +211,8 @@ Öröklődés feltárása:
 Problémák adódhatnak, például:
 
 - név ütközések
-  
+
 - többszörösen örökölt operációk, attribútumok
-  
 
 Megoldható: C++ virtuális öröklődés
 
@@ -170,6 +223,30 @@ nagy odafigyeléssel
 
 > Java-ban nincs rá lehetőség
 
+**C++ példa többszörös öröklődésre:**
+
+```c++
+class Vizijarmu
+{
+public:
+  const int max_merules;
+  Vizijarmu(int m) : max_merules(m){};
+};
+
+class Legijarmu
+{
+public:
+  const int max_magassag;
+  Legijarmu(int m) : max_magassag(m){};
+};
+
+class Hidroplan : public Vizijarmu, public Legijarmu
+{
+public:
+  Hidroplan(int me, int ma) : Vizijarmu(me), Legijarmu(ma){}; // konstr . inic . listaban a konstruktorok meg van hivva
+};
+```
+
 #### Az újrafelhasználás
 
 A objektum-orientált programozás egyik alapelve az újrafelhasználás.
@@ -177,11 +254,10 @@ A objektum-orientált programozás egyik alapelve az újrafelhasználás.
 Aggregáció, kompozíció
 
 - Rész-egész kapcsolat
-  
+
 - Az újrafelhasználás során „módosítás nélkül” felhasználunk egy már meglévő típus
-  
+
 - „C-ben is létezett”
-  
 
 #### Polimorfizmus **`Többalakúság`**
 
@@ -215,8 +291,8 @@ public class AlakzatPelda {
     // ...
         a.rajzolj(); 
     }
- 
- 
+
+
     public static void main(String[] args) {
         Kor k = new Kor();
         Haromszog h = new Haromszog ();
@@ -231,7 +307,9 @@ public class AlakzatPelda {
 
 #### A polimorfizmus feloldásának módszere
 
-FOGGALMAM SINCS
+**Kései kötés**: Futásidőben dől el, melyik metódust kell meghívni, nem statikusan fordításkor (statikus kötés).
+
+Ilyenkor a virtuális függvény táblából lookup-olja a nyelv, hogy melyik metódust kell meghívni (persze csak ha megfelelően virtual az ősben a metódus, és a leszármazott signature-je megegyezik), felismeri, hogy az átadott paraméter egy leszármazott, és a VFT (virtual function table)-ből megszerzi a helyes függvény pointert.
 
 ### 2. Objektumok életciklusa, létrehozás, inicializálás, másolás, megszüntetés. Dinamikus, lokális, és statikus objektumok létrehozása. A statikus adattagok és metódusok, valamint szerepük a programozásban. Operáció, és operátor overloading JAVA és C++ nyelvekben. Kivételkezelés.
 
@@ -585,5 +663,3 @@ int main () {
   Tomb <int, 5> tomb;
 }
 ```
-
-
