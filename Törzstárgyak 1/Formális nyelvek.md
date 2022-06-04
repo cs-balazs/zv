@@ -221,7 +221,7 @@ $REG \subset CF$
 
 > Azaz vannak olyan környezetfüggetlen nyelvek, amik nem regulárisak.
 
-##### \* Reguláris kifejezések
+##### Reguláris kifejezések
 
 Egy $\Sigma$ ábécé feletti reguláris kifejezések halmaza a $(\Sigma \cup \{~ \emptyset, \epsilon, (, ), +, * ~\})^*$ halmaz legszűkebb olyan $U$ részhalmaza, amelyre az alábbi feltételek teljesülnek:
 
@@ -403,3 +403,33 @@ Tetszőleges $X \in (N \cup \Sigma)$ és $\alpha \in (N \cup \Sigma)^*$ esetén 
 ##### Generált nyelv definiálása derivációs fákkal
 
 $L(G) = \{ ~ fr(t) ~ | ~ t \in D_S, fr(t) \in \Sigma^* ~ \}$
+
+#### Veremautomata
+
+![ ](../img/veremautomata_def.png)
+
+![ ](../img/veremautomata_pelda.png)
+
+Ez a veremautomata felismeri a $\{ a^n b^n : n \ge 0 \}$ nyelvet
+
+#### Ekvivalencia
+
+Minden CF nyelv felismerhető veremautomatával.
+
+> Ráadásul egyetlen állapottal, üres veremmel ismer fel
+
+Minden veremautomatával felismerhető nyelv CF.
+
+#### Bar-Hillel lemma és alkalmazása
+
+![ ](../img/bar_hillel_def.png)
+
+> $w_2$-t, és $w_4$-et egyszerre pumpáljuk
+
+> Ha egy nyelv CF, akkor teljesül az állítás
+
+Belátható vele, hogy egy nyelv környezetfüggetlen-e.
+
+Pl.: $L = \{ a^n b ^ n c ^ n | n \ge 1 \}$ nem környezetfüggetlen, mert nem pumpálható két ponton.
+
+"Környezetfüggetlen nyelvtan képes számolni 'két valamit', de nem képes számolni 'három valamit'"

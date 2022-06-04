@@ -1,10 +1,32 @@
 ## Bonyolultságelmélet
 
+**Inputméret**:
+
+`n`: input bitjeinek száma
+
+- `N` egész, `n` szám esetén pl. `N = 0 ... 2^n`, így `N = O(2^n)` és `n = O(log N)`
+
+- `T` tömb esetén 2 véglet:
+  
+  - `n` db 1 bites érték van a tömbben, így `T.length = 0 ... n`, ami `O(log n)` biten elfér
+  
+  - 1 db `n` bites érték van a tömbben, így `T[i] = 0 ... 2^n`, ami `O(n)` biten fér el
+
+- `G` szomszédsági mátrixal ábrázolt gráf esetén:
+  
+  - Legyen `N` a csúcsok száma
+  
+  - `n = O(N^2)` és `N = O(sqrt(n))`
+  
+  - Azaz a csúcsok száma kicsi a teljes gráf bitjeinek számához képest
+
+Futásidőt, és tárigényt `n` azaz az input bitjeinek számának függvényében számolunk.
+
 ### 1. Hatékony visszavezetés. Nemdeterminizmus. A P és NP osztályok. NP-teljes problémák.
 
 > szoktam érdeklődni h **futásidőt minek a függvényében számolunk**, pl h ebben vagy ebben a problémában **mennyi lesz az az n inputméret**, hogy számoljuk ki, mi a **visszavezetés/nehézség/teljesség meg az NP osztály**, aztán **egy-két NP-teljes <= NP-teljes visszavezetést** szoktam kérni h példán keresztül mutassa be a user h hogy megy, a példát is én adom rendszerint, megkérdezem h miért lesz ez tényleg visszavezetés (**miért tartja a választ, miért polinomidejű**)
 
-### A P osztály
+#### A P osztály
 
 R az eldönthető problémák osztálya.
 
@@ -14,7 +36,7 @@ Tehát minden olyan **eldöntési probléma** P-ben van, amire létezik $O(n^k)$
 
 > Ezeket a problémákat tartjuk **hatékonyan megoldhatónak**.
 
-#### Elérhetőség
+##### Elérhetőség
 
 P-beli probléma.
 
@@ -268,8 +290,6 @@ Horn-átnevezhető formulák kielégítése is polinomidőben eldönthető.
 
 **Output**: Van-e a tárgyaknak olyan részhalmaza, melynek összsúlya legfeljebb $W$, összértéke pedig legalább $C$?
 
-> TODO: erős-, gyenge NP-teljesség kell-e ide?
-
 ### 2. A PSPACE osztály. PSPACE-teljes problémák. Logaritmikus tárigényű visszavezetés. NL-teljes problémák.
 
 > amit tudni kéne, az szintén az **inputméret** és mondjuk példa **rövid forráskódnak a tárigény elemzése** h az mennyi lesz ordóban és miért, az **elérhetőségről a tanult nemdet és det jó tárigényű algoritmusok tárigényét és h miért annyi**, az **elérhetőségi módszer miről szól**, tudni mi a **savitch és mi az immerman-szelepcsényi tétel** (utóbbinak a bizonyításába nem kérdezek, előbbi a det jó tárigényű algo az elérhetőségre), meg h **mi a QSAT és mi a földrajzi probléma és azok milyen nehezek** + ott is **adok példát h ez itt egy "igen" vagy egy "nem" példánya** a problémának és miért. ott **nem kérdezem** a QSAT <= Földrajzi játék visszavezetést
@@ -439,6 +459,8 @@ Tárigénye $O(n^2)$, mert a rekurziókor lemásoljuk az inputot, ami $O(n)$ mé
 - Először az első játékos kezd, lerakja az egyetlen bábuját a gráf kezdőcsúcsára.
 
 - Ezután a második játékos lép, majd az első, stb., felváltva, mindketten a bábut az aktuális pozíciójából egy olyan csúcsba kell húzzák, ami egy lépésben elérhető, és ahol még nem volt a játék során. Aki először nem tud lépni, vesztett.
+
+![ ](../img/foldrajzi_jatek_pelda.png)
 
 ##### További PSPACE-teljes problémák
 
