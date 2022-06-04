@@ -2,7 +2,236 @@
 
 ### 1. Objektum orientált paradigma, és annak megvalósítása a JAVA és C++ nyelvekben. Az absztrakt adattípus, az osztály. AZ egységbe zárás, az információ elrejtés, az öröklődés, az újrafelhasználás, és a polimorfizmus. A polimorfizmus feloldásának módszere.
 
-TODO
+#### Objektumorientáltág fogalma
+
+Az **objektumorientált programozás** az objektumok fogalmán alapuló programozási paradigma. Az objektumok egységbe foglalják az adatokat és a hozzájuk tartozó műveleteket. Az adatokat ismerik mezők, attribútumok, tulajdonságok néven, a műveleteket metódusokként szokták emlegetni. Az objektum által tartalmazott adatokon általában az objektum metódusai végeznek műveletet. A legtöbb objektumorientált nyelv osztály alapú, azaz az objektumok osztályok példányai, és típusuk az osztály.
+
+###### *`JAVA`* nyelvben egy osztály deklaráció:
+
+```java
+class Alakzat {
+    int szin;
+    float terulet;
+    Koordinata xy;
+}
+```
+
+###### *`C++`* nyelvben egy osztály deklaráció:
+
+```C++
+class Kutya {
+    int szul_ev; // adattag (attributum)
+private:
+    string szin, nev; // adattag (attributum)
+public:
+    void eszik() { // metodus (tagfuggveny)
+        /* ... */
+    }
+    void elkeresztel(string s); // metodus deklaracio
+}; // pontosvesszo!
+```
+
+> Az adott osztály tagjainak meg lehet adni a láthatóságát
+> **`public:`** *Mindenki számára korlátozás nélkül elérhető*
+> **`protected:`** *Csak az adott osztályból és a leszármazott osztályból érhető el*
+> **`private:`** *Csak az adott osztályból érhető el*
+
+#### Az absztrakt adattípus
+
+Az adattípus leírásának legmagasabb szintje, amelyben az adattípust úgy specifikáljuk, hogy az adatok ábrázolására és a műveletek implementációjára semmilyen előírást nem adunk. Lehetőleg matematikai fogalmakat használva írjuk
+le az adattípust (halmazok és ezeken értelmezett műveletek).
+
+**Absztrakció:** Elvonatkoztatás. Segítségével privát implementációkat rejthetünk el egy nyilvános interfész mögé.
+
+> Példa: java.util csomagban List interfész és az interfészt implementáló ArrayList, illetve LinkedList osztályok. Az absztrakció lehetővé teszi, hogy
+> mindkét osztály példányait ugyanazon List interfész műveletein keresztül
+> kezeljük.
+
+#### Az osztály
+
+Az osztály egy felhasználói típus, amelynek alapján példányok (objektumok) hozhatók létre. Az osztály alapvetően adat és metódus (művelet) definíciókat tartalmaz.
+
+Az objektumok típusa, a **`class`** kulcsszóval definiáljuk.
+
+Az osztály egyben egy absztrakt adattípus is
+
+- Adatok és a rajtuk végzett műveletek egységbezárása
+  *(encapsulation)*
+  
+
+**Osztály:** tulajdonság + viselkedés
+
+Tulajdonság = **attribútumok** *(adattagok, mezők)*
+Viselkedés = **operációk** *(metódusok, tagfüggvények)*
+
+Új, egy osztályba tartozó objektumokhoz típus hozzárendelése: **`class`** kulcsszóval. Pl.:
+
+```C++
+class Alakzat { /* az osztály törzse */ }
+// ...
+Alakzat a = new Alakzat ();
+```
+
+Ez így önmagában még nem sok mindenre jó, testre kell szabni.
+
+- Attribútum hozzáadása
+  
+- Operációk hozzáadása
+  
+
+> Osztály attribútuma (mezője, adattagja) lehet másik osztály típusú (referenciát tárol), létre kell hozni **`new`**-val *(inicializálás)*
+> 
+> ```C++
+> class Alakzat {
+>     int szin;
+>     float terulet;
+>     Koordinata xy;
+> }
+> ```
+
+> Az operációk funkcionalitást biztosítanak az objektumoknak, meghatározzák, hogy milyen üzeneteket fogadhat.
+> 
+> - Részei: név, paraméterek, visszatérési típus, törzs
+>   
+> 
+> ```C++
+> visszateresiTipus operacioNev( /* paraméter lista */ ) {
+>     /* metódus törzs */
+> }
+> ```
+> 
+> Csak osztályoknak lehetnek operációi (metódusai).
+
+#### Az egységbe zárás *`Encapsulation`*
+
+Az adatok és a metódusok osztályba való összezárását jelenti. Tulajdonképpen az objektum egységbezárja az állapotot (adattagok értékei) a viselkedésmóddal (műveletekkel).
+
+**Következmény:** az objektum állapotát csak a műveletein keresztül
+módosíthatjuk.
+
+#### Az információ elrejtés
+
+Az objektum elrejti az adatait és bizonyos műveleteit. Ez azt jelenti, hogy nem tudjuk pontosan, hogy egy objektumban hogyan vannak az adatok ábrázolva, sőt a műveletek implementációit sem ismerjük. Az információk elrejtése az objektum biztonságát szolgálja, amelyeket csak a ellenőrzött műveleteken keresztül érhetünk
+el.
+
+#### Az öröklődés
+
+> Olyan osztályok között értelmezett viszony, amely segítségével egy általánosabb típusból (ősosztály) egy sajátosabb típust tudunk létrehozni (utódosztály). Az utódosztály adatokat és műveleteket (viselkedésmódot) örököl, kiegészíti ezeket saját adatokkal és műveletekkel, illetve felülírhat bizonyos műveleteket. A kód újrafelhasználásának egyik módja. Megkülönböztetünk egyszeres és többszörös
+> örökítést.
+
+Osztályok közötti kapcsolat (reláció), ahol egy osztály megosztja a
+struktúráját és/vagy a viselkedését egy vagy több másik osztállyal
+
+A származtatott osztály örököl az ősosztály(ok)tól
+
+Az attribútumokat és operációkat a lehető legfelsőbb szinten kell
+definiálni
+
+> A származtatott (gyerek) osztály mindent örököl az őstől (relációkat
+> is) és kiegészítheti ezeket sajátokkal
+
+A származtatott osztály egy örökölt operáció saját implementációját
+is nyújthatja: polimorfizmus *(felüldefiniálás, overriding)*
+
+Az öröklődés relációnak nincs neve, multiplicitása
+
+> Tipikus öröklődési szintek száma: 3-5
+
+Az újrafelhasználhatóság egyik alapeszköze
+
+Öröklődés feltárása:
+
+- általánosítás
+  
+- specializálás
+  
+![](../img/egyszeres_orok.png)
+
+###### Többszörös öröklődés
+
+> Példa: a kétéltű jármű egy motorgépjármű (ami egy jármű) és egyben
+> egy vízi jármű is (ami ugyancsak egy jármű)
+
+![](../img/tobbszoros_orok.png)
+
+Problémák adódhatnak, például:
+
+- név ütközések
+  
+- többszörösen örökölt operációk, attribútumok
+  
+
+Megoldható: C++ virtuális öröklődés
+
+Kevésbé karbantartható kódhoz vezet
+
+Csak akkor szabad használni, ha tényleg szükséges, de akkor is csak
+nagy odafigyeléssel
+
+> Java-ban nincs rá lehetőség
+
+#### Az újrafelhasználás
+
+A objektum-orientált programozás egyik alapelve az újrafelhasználás.
+
+Aggregáció, kompozíció
+
+- Rész-egész kapcsolat
+  
+- Az újrafelhasználás során „módosítás nélkül” felhasználunk egy már meglévő típus
+  
+- „C-ben is létezett”
+  
+
+#### Polimorfizmus **`Többalakúság`**
+
+Egy típuselméleti fogalom, amely szerint egy ősosztály típusú változó hivatkozhat ugyanazon közös ősosztályból származó *(vagy ugyanazon interfészt megvalósító)* osztályok példányaira.
+
+A polimorfizmus lehet **statikus** és **dinamikus**.
+
+**statikus polimorfizmus:** metódusok túlterhelése, függvénysablonok, osztálysablonok. Satikus, fordításidejű kötés.
+
+**dinamikus polimorfizmus:** metódusok felülírása. Dinamikus, futásidejű kötés.
+
+```C++
+class Alakzat {
+    public void rajzolj() {/*A*/}
+}
+class Haromszog extends Alakzat { 
+    public void rajzolj() {/*H*/}
+}
+class Negyzet extends Alakzat { 
+    public void rajzolj() {/*N*/}
+}
+class Kor extends Alakzat { 
+    public void rajzolj() {/*K*/}
+}
+```
+
+```C++
+public class AlakzatPelda { 
+
+    static void csinald(Alakzat a) {
+    // ...
+        a.rajzolj(); 
+    }
+ 
+ 
+    public static void main(String[] args) {
+        Kor k = new Kor();
+        Haromszog h = new Haromszog ();
+        Negyzet n = new Negyzet();
+
+        csinald(k);
+        csinald(h);
+        csinald(n);
+     } 
+}
+```
+
+#### A polimorfizmus feloldásának módszere
+
+FOGGALMAM SINCS
 
 ### 2. Objektumok életciklusa, létrehozás, inicializálás, másolás, megszüntetés. Dinamikus, lokális, és statikus objektumok létrehozása. A statikus adattagok és metódusok, valamint szerepük a programozásban. Operáció, és operátor overloading JAVA és C++ nyelvekben. Kivételkezelés.
 
