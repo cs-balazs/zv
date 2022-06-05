@@ -16,13 +16,13 @@ Következőekkel modellezzük a feladatot:
 
 - **Lehetséges cselekvések** halmaza
 
-- Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusó, rendezett párokból álló halmazt.
+- Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusú, rendezett párokból álló halmazt.
 
 - Állapotátmenet **költségvüggvénye**, amely minden lehetséges állapot-cselekvés-állapot hármashoz egy $c(x, a, y)$ valós nemnegatív költségértéket rendel
 
 - **Célállapotok** halmaza
 
-Ez egy gúlyozott gráfot definiál, amiben a **csúcsok az állapotok**, **élek a cselekvések**, **súlyok a költségek**.
+Ez egy súlyozott gráfot definiál, amiben a **csúcsok az állapotok**, **élek a cselekvések**, **súlyok a költségek**.
 
 Ez a gráf az **állapottér**
 
@@ -36,7 +36,7 @@ Ez a gráf az **állapottér**
 
 **Megvalósítás**: **Keresőfával**, azaz a kezdőállapotból növesztünk egy fát a szomszédos állapotok hozzávételével amíg célállapotot nem találunk.
 
-> Keresőfe nem azonos az állapottérrel! Hiszen az állapottér nem is feltétle fa.
+> Keresőfa nem azonos az állapottérrel! Hiszen az állapottér nem is feltétle fa.
 
 Keresőfa egy csúcsában tárolt információ:
 
@@ -106,7 +106,7 @@ fakereses() {
 
 ###### Iteratívan mélyülő keresés
 
-**Mélységi keresések** sorozata 1, 2, 3 srb. **mélységekre korlátozva**, amíg célállapotot nem találunk.
+**Mélységi keresések** sorozata 1, 2, 3 stb. **mélységekre korlátozva**, amíg célállapotot nem találunk.
 
 - Teljesség és optimalitás a szélességi kereséssel egyezik meg.
 
@@ -126,7 +126,7 @@ Ez a **legjobb informálatlan kereső**.
 
 Költség alapján rendezi a permet, először a legkisebb útiköltségű csúcsot fejtjük ki.
 
-###### Gráflekeresés
+###### Gráfkeresés
 
 Ha nem fa az állapottér.
 
@@ -162,9 +162,9 @@ Mi van, ha egy zárt halmazban levő csúcshoz **találnánk jobb megoldást**?
 
 ##### Informált keresés
 
-Az eddigi algoritmusok nem fogtak semmit arról, hogy merre haladnak tovább.
+Az eddigi algoritmusok nem tudtak semmit arról, hogy merre haladnak tovább.
 
-Heurisztika: Minden állapotból megbeszülni, hogy mekkora az optimális út költsége az adott állapotból egy célállapotba. Ez alapján tudjuk kiválasztani, merre érdemes haladni.
+**Heurisztika**: Minden állapotból megbecsülni, hogy mekkora az optimális út költsége az adott állapotból egy célállapotba. Ez alapján tudjuk kiválasztani, merre érdemes haladni.
 
 > Például útvonal-tervezési probléma esetén jó heurisztika lehet a légvonal-beli távolság.
 
@@ -198,11 +198,11 @@ $h$ **elfogadható** (megengedhető): Ha nem ad nagyobb értéket, mint a tényl
 
 Fakeresés esetén ha $h$ elfogadható, és a keresési fa véges, akkor az $A^*$ optimális.
 
-$h$ **konzisztens** (monoton): Ha $h(n) \le c(n, a, n') + h(n~)$ minden $n$-re, és $n$ minden $n'$ szomszédjára.
+$h$ **konzisztens** (monoton): Ha $h(n) \le c(n, a, n') + h(n)$ minden $n$-re, és $n$ minden $n'$ szomszédjára.
 
 Gráfkeresés esetén ha $h$ konzisztens, és az állapottér véges, akkot az $A^*$ optimális.
 
-**Hatákonyság**
+**Hatékonyság**
 
 Az $A^*$ optimálisan hatékony, hiszen csak azokat a csúcsokat terjeszti ki, amelyekre $f() < C^*$ ($C^*$ az optimális költség).
 
@@ -226,7 +226,7 @@ Teljes, ha a legkisebb mélységű célállapot mélységényi csúcs belefér a
 
 Hasonló költségű utak esetén előfordulhat, hogy ugrál a két út közt, így lassan talál megoldást.
 
-###### Relaxáció
+##### Relaxáció
 
 Feltételek elhagyása.
 
@@ -337,7 +337,7 @@ minErtek(n) {
 
  Az eljárás `maxErtek(kezdőállapot)` hívással indul, hiszen a MAX játékos kezd.
 
-Ha van a játékgráfban köt, akkor nem terminál. Ez a gyakorlatban azért nem probléma, mert csak adott mélységig futtatjuk.
+Ha van a játékgráfban kör, akkor nem terminál. Ez a gyakorlatban azért nem probléma, mert csak adott mélységig futtatjuk.
 
 > Sok játék esetén a szabályok kizárják a végtelenségig futó köröket.
 
@@ -349,7 +349,7 @@ Ha tudjuk, hogy MAX egy adott csúcs rekurzív kiértékelése közben talált o
 
 Új paraméterek:
 
-- **Alfa**: **MAX-nak** már felfedeztünk egy olyan stratégiát, amely **alfa** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az $n$ állapotból a gyökér felé vezetű úton van.
+- **Alfa**: **MAX-nak** már felfedeztünk egy olyan stratégiát, amely **alfa** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az $n$ állapotból a gyökér felé vezető úton van.
 
 - **Béta**: **MIN-nek** már felfedeztünk egy olyan stratégiát, amely **béta** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az n állapotból a gyökér felé vezetű úton van.
 
@@ -385,6 +385,8 @@ Ha mindig a legjobb lépést vesszük, akkor $O(b^{m / 2})$, amúgy $O(b^m)$.
 
 > Gyakorlatban használhatunk rendezési heurisztikákat, amik sokszor közel kerülnek az optimális esethez. 
 
+![ ](../img/alpha_beta_pelda.png)
+
 #### Korlátozás kielégítési feladat
 
 **Lehetséges állapotok halmaza**: $\mathcal{D} = \mathcal{D}_1 \times ... \times \mathcal{D}_n$, ahol $\mathcal{D}_i$ az $i$. változó lehetséges értékei, azaz a feladat állapotai az $n$ db változó lehetséges értékkombinációi.
@@ -407,7 +409,7 @@ A probléma éllapottárbeli keresésként értelmezve:
 
 > Mélységi keresés jó választás lehet, mert a keresőfa mélysége kicsi.
 
-Informált kereséssel: próbáljunk nehezen kielégíthatő változókat kifejteni előbb:
+Informált kereséssel: próbáljunk nehezen kielégíthető változókat kifejteni előbb:
 
 - Amelyikhez a legkevesebb megengedett lépés maradt
 
@@ -503,11 +505,11 @@ Az $a$ és $b$ kijelentések függetlenek akkor, és csak akkor, ha $P(a \land b
 
 Az $A$ és $B$ véletlen változók függetlenek akkor, és csak akkor, ha $P(A, B) = P(A)P(B)$, vagy ekvivalensen $P(A|B) = P(A)$, illetve $P(B|A) = P(B)$
 
-Azaz két változó független, ha az egyik sem tartalmaz információt a másikról.
+Azaz két változó független, ha az **egyik sem tartalmaz információt a másikról**.
 
 #### * Feltételes függetlenség
 
-Az $a$ és $b$ **kijelentések** feltételesen függetlenek $c$ feltételével akkor, és csak akkor, ha $P(a \land b | c) = P(a | b)P(b|c)$. Ekkor $a$ és $b$ nem feltétlenül független abszolút értelemben.
+Az $a$ és $b$ **kijelentések** feltételesen függetlenek $c$ feltételével akkor, és csak akkor, ha $P(a \land b | c) = P(a | c)P(b|c)$. Ekkor $a$ és $b$ nem feltétlenül független abszolút értelemben.
 
 Tipikus eset, ha $a$ és $b$ közös **oka** $c$.
 
@@ -532,7 +534,7 @@ $$
 Ez a naiv Bayes modell alakja. Itt $O(n)$ tömörítés érhető el, hiszen
 
 $$
-P(B_1, ..., B_n | A) = P(A) \prod_{i=1}^n P(B_i | A)
+P(B_1, ..., B_n, A) = P(A) \prod_{i=1}^n P(B_i | A)
 $$
 
 #### Teljes együttes eloszlás tömör reprezentációja
@@ -541,7 +543,7 @@ $$
 
 ##### Láncszabály
 
-Legyen $X_1, ..., X_n$ a féletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
+Legyen $X_1, ..., X_n$ a véletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
 
 $$
 P(X_1, ..., X_n) = P(X_1 | X_2, ..., X_n) P(X_2, ..., X_n) = \\
@@ -621,7 +623,7 @@ Egy $h : X \to Y$-t keresünk, ami $f$-et **közelíti**.
 
 A $h$ függvény **konzisztens** az adatokkal, ha $h(x_i) = f(x_i)$ minden példára.
 
-A $h$ függvényt mindig egy $H$ **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alapkabn keressüg, pl. adott fokszámú polinom.
+A $h$ függvényt mindig egy $H$ **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alakban keressük, pl. adott fokszámú polinom.
 
 A tanulás **realizálható**, ha létezik $h \in H$, amelyre $H$ konzisztens.
 
@@ -669,7 +671,7 @@ Mivel $Y$ véges halmaz, osztályozási feladatról beszélünk, ahol $X$ elemei
 
 Ez a döntési fa pl. azt határozza meg, hogy az adott jellemzők mellett ($X$) érdemes-e asztalra várni az étteremben ($Y$).
 
-Ennek az előnye, hogy a döntések megmagyarázhatóak, emberikel értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
+Ennek az előnye, hogy a döntések megmagyarázhatóak, emberileg értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
 
 ###### Kifejezőerő
 
@@ -685,9 +687,9 @@ T.f.h. a címke logikai érték.
   
   - Fából formula: Az "igen" címkékhez vezető utakban összeéseljük az éleket, majd összevagyoljuk az utakat.
   
-  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy $A_1, ..., A_n$ felsorolását, az $A_1$ a gyökérm $A_1$ értékei az élek, és az $i$. szinten a fában minden pontban $A_i$ van, amely pontokból az élek $A_i$ értékei. Az $A_n$ változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
+  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy $A_1, ..., A_n$ felsorolását, az $A_1$ a gyökérelem $A_1$ értékei az élek, és az $i$. szinten a fában minden pontban $A_i$ van, amely pontokból az élek $A_i$ értékei. Az $A_n$ változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
   
-  > Ez a faépítés nagy fákat eredményez, a gyakorlatban éltalában alkalmaznak tömörítési technikákat.
+  > Ez a faépítés nagy fákat eredményez, a gyakorlatban általában alkalmaznak tömörítési technikákat.
 
 ###### Döntési fa építése
 
@@ -709,9 +711,9 @@ Adottak ilyen felépítésű példák:
 )
 ```
 
-És ilyenekből minél több, legalább már száz.
+És ilyenekből minél több, legalább pár száz.
 
-Példákat bemagolni könnyő, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
+Példákat bemagolni könnyű, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
 
 De a magolás nem általánosít!
 
@@ -748,7 +750,7 @@ H \left( \frac{n^+}{n^+ + n^-} , \frac{n^-}{n^+ + n^-} \right) = \\
 - \frac{n^+}{n^+ + n^-} log \frac{n^+}{n^+ + n^-} - \frac{n^-}{n^+ + n^-} log \frac{n^-}{n^+ + n^-}
 $$
 
-Információnyereség egy $A$ változóra nézve:
+**Információnyereség** egy $A$ változóra nézve:
 
 $$
 H \left( \frac{n^+}{n^+ + n^-}, \frac{n^-}{n^+ + n^-} \right) - \sum_i \frac{n_i^+ + n_i^-}{n^+ + n^-} H \left( \frac{n_i^+}{n_i^+ + n_i^-}, \frac{n_i^-}{n_i^+ + n_i^-} \right)
@@ -756,7 +758,7 @@ $$
 
 > Példahalmaz entrópiájának, és a az $A$ változó lehetséges értékei szerinti felosztás után keletkező részhalmazok átlagos entrópiájának a különbsége.
 
-> $n_i^+$ és $n_i^-$ az $A$ változó $i$. lehetséges értékét tartalmazópozitív illetve negatív példák száma.
+> $n_i^+$ és $n_i^-$ az $A$ változó $i$. lehetséges értékét tartalmazó pozitív illetve negatív példák száma.
 
 Ez alapján választható egy maximális nyereségű változó.
 
@@ -792,7 +794,7 @@ $$
 
 ###### Naiv Bayes algoritmus
 
-Statisztikai következtetű módszer.
+Statisztikai következtető módszer.
 
 Adatbázis-beli példák alapján példákat osztályoz
 
@@ -810,7 +812,7 @@ $$
 P(A|b_1, ..., b_n) = \alpha P(A) P(b_1, ..., b_n |A) \approx \alpha P(A) \prod_{i=1}^n P(b_i|A)
 $$
 
-Első egyenlőség: a Bayes tétel alkalmazása. $\alpha = 1 / P(n_1, ..., b_n)$. 
+Első egyenlőség: a Bayes tétel alkalmazása. $\alpha = 1 / P(b_1, ..., b_n)$. 
 
 Második közelítő egyenlőség: naiv Bayes feltevés. A pontatlanságért cserébe (ezért csak közelítő egyenlőség) $P(A)$ és $P(b_i |A)$ könnyen közelíthető az adatbázisban található példák segítségével.
 
@@ -822,7 +824,7 @@ Adottak a $\{ ~ (x_1, y_1), ..., (x_n, y_n) ~ \} \subseteq X \times Y$ példák.
 
 Egy $h^*: X \to Y$ függvényt keresünk, amely a példákra jól illeszkedik, és jól általánosít.
 
-Optimalizációs megközelítés: Definiáljuk az $l : X \times Y \times H \to \mathbb{R}$ veszteségfüggvényt, amely egy $(x, y) \in X \times Y$ példára megadja, hogy az adott $h \in H$ hipotézis "bennyi bajt okoz" az adott példán.
+Optimalizációs megközelítés: Definiáljuk az $l : X \times Y \times H \to \mathbb{R}$ veszteségfüggvényt, amely egy $(x, y) \in X \times Y$ példára megadja, hogy az adott $h \in H$ hipotézis "mennyi bajt okoz" az adott példán.
 
 > Példa veszteségfüggvényre: Nényzetes hiba: $l(x, y, g) = (h(x)-y)^2$
 
@@ -978,7 +980,7 @@ Optimalizáció alapú megközelítést alkalmazunk, ennek komponensei lehetnek 
 
 - Optimalizáló algoritmus legyen gradiens módszer
 
-Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimenetenjelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
+Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimeneten jelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
 
 Több osztály esetén több kimeneti neuron, veszteségfüggvény: **kereszt entrópia**
 
@@ -994,7 +996,7 @@ $d$ dimenziós input $k$ dimenziós inputra leképezése:
 
 Összes input össze van kötve az összes kimenettel, összesen $d \cdot k$ kapcsolat, mind külön súllyal.
 
-Tehár összesen eltolási súlyokkal együtt $d \cdot k + k$ súly van.
+Tehát összesen eltolási súlyokkal együtt $d \cdot k + k$ súly van.
 
 ###### Konvolúciós réteg
 

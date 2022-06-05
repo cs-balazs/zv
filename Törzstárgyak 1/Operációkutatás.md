@@ -39,7 +39,7 @@ $$
 
 #### Példa
 
-Játékgyártó cék kétféle terméket gyárt:
+Játékgyártó cég kétféle terméket gyárt:
 
 - **Katonákat**
   
@@ -87,7 +87,7 @@ Lehetséges megoldás: $x = (20, 20)$
 
 > Azaz 20 katona, 20 vonat
 
-Optimális megoldás: $x^* = (20. 60)$
+Optimális megoldás: $x^* = (20, 60)$
 
 Optimum értéke: $z^* = 180$ (Célfüggvénybe helyettesítve: $3 * 20 + 2 * 60$)
 
@@ -175,13 +175,13 @@ A legszűkebb korlátot adó egyenletből fejezzük ki a belépő változót.
 
 Azon előfordulások közül, ahol a belépő változó negatív előjelű együtthatóval szerepel, kiválasztjuk azt ahol a ($b_{i} / |a_{ij}|$) a legkisebb.
 
-> Ami pozitív együtthetóval szerepel, az nem ad korlátot a változóra!
+> Ami pozitív együtthatóval szerepel, az nem ad korlátot a változóra!
 
 ##### Optimális bázismegoldás
 
 Honnan tudjuk, hogy az aktuális bázismegoldás optimális?
 
-**Tétel**: Ha egy szótárban nincs pozitív $c_j = (j = 1, 2, ..., n+m)$ célfüggvény együttható és negatív $b_i (i = 1, 2, ... ,m)$ konstans a feltételes egyenleteiben, akkor a szótár bázismegoldása optimális megoldás.
+**Tétel**: Ha egy szótárban nincs pozitív $c_j = (j = 1, 2, ..., n+m)$ célfüggvény együttható és negatív $b_i (i = 1, 2, ... ,m)$ konstans a feltételek egyenleteiben, akkor a szótár bázismegoldása optimális megoldás.
 
 ##### Az algoritmus
 
@@ -349,7 +349,7 @@ Bázismegoldások = poliéder csúcsok.
 
 Játékgyáras példához:
 
-Legyen egy egység fa piaci ára $y_1$, egy egység festég ára $y_2$
+Legyen egy egység fa piaci ára $y_1$, egy egység festék ára $y_2$
 
 A gyártó opciói:
 
@@ -389,7 +389,7 @@ Maga az eredeti feladat a **primál** feladat.
 
 A duális feladat megoldásában $y_i^*$ az eredeti (primál) feladat $i$. erőforrásáfoz tartozó piaci ár, amit marginális árnak vagy árnyék árnak nevezünk
 
-- Ez az erőforrás éeréke az LP megoldójának szemszögéből
+- Ez az erőforrás értéke az LP megoldójának szemszögéből
 
 - Az $i$ erőforrás mennyiségének egy egységnyi növelésével éppen $y_i^*$-gal nő a nyereség (azaz a célfüggvény értéke)
 
@@ -405,7 +405,7 @@ $$
 c^T x \le b^T y
 $$
 
-> Azaz a duális feladat bármely lehetséges megoldása feéső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
+> Azaz a duális feladat bármely lehetséges megoldása felső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
 
 ###### Erős dualitás tétele
 
@@ -459,13 +459,15 @@ Vagyis
   
   - "a feltétel éles"
 
-- Ha az $i$-edik feltétel nem éles, azaz $x_{n+} > 0$, akkor $y_i = 0$
+- Ha az $i$-edik feltétel nem éles, azaz $x_{n+i} > 0$, akkor $y_i = 0$
 
 > Hiszen a $y^T xs = 0$ és a $x^T ye = 0$ egyenletek esetén ez a két lehetőség van, hogy egyenlőség legyen
 
+![ ](../img/komplementaritas_pelda.png)
+
 ##### Komplementaritási tétel
 
-Tegyük fel, hogy $x$ a primál, $y$ a duál feladat lehetséges megoldása. Az $x$ és $y$ akkor, éd csak akkor optimálisak, ha komplementárisak is.
+Tegyük fel, hogy $x$ a primál, $y$ a duál feladat lehetséges megoldása. Az $x$ és $y$ **akkor, és csak akkor optimálisak, ha komplementárisak is**.
 
 Ezért ha $x$ a primál optimális megoldása, akkor igazak:
 
@@ -475,9 +477,15 @@ Ezért ha $x$ a primál optimális megoldása, akkor igazak:
 
 ##### Komplementáris lazaság
 
+Komplementartiás segítségével ellenőrizni tudjuk, hogy egy megoldás javaslat optimális-e
+
+![ ](../img/komplementaris_lazasag_1.png)
+
+![ ](../img/komplementaris_lazasag_2.png)
+
 - Adott $x$, egy javasolt primál megoldás, ellenőrizzük, hogy lehetséges-e
 
-- Nézzük meg, mely $y_i$ változóknak kell $0$-nka lennie
+- Nézzük meg, mely $y_i$ változóknak kell $0$-nak lennie
 
 - Nézzük meg, mely duál feltételnek kell élesnek lennie, így egy egyenletrendszert kapunk
 
@@ -525,7 +533,7 @@ Egy egészértékű programozási feladat LP-lazítása az az LP, amelyet úgy k
 
 Akkor alkalmazzuk, ha egy IP feladat megoldásakor LP-lazításon dolgozunk, és az optimum nem egész
 
-Ehhor egy $x_i$ nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha $x_i$ értéke $x_i^*$ akkor $x_i \le \lfloor x_i^* \rfloor$, illetve $x_i \ge \lceil x_i^* \rceil$ feltételeket vesszük hozzá egy-egy új feladatunkhoz.
+Ekkor egy $x_i$ nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha $x_i$ értéke $x_i^*$ akkor $x_i \le \lfloor x_i^* \rfloor$, illetve $x_i \ge \lceil x_i^* \rceil$ feltételeket vesszük hozzá egy-egy új feladatunkhoz.
 
 Ezeket a részproblémákat egy fába rendezzük.
 
@@ -547,7 +555,7 @@ Egy csúcs **felderített** (lezárt), ha:
 
 - Megoldása egészértékű
 
-- Felderítettünk már olyan egész megoldást, mai jobb a részfeladat megoldásánál
+- Felderítettünk már olyan egész megoldást, ami jobb a részfeladat megoldásánál
 
 Egy részfeladatot **kizárunk**, ha:
 

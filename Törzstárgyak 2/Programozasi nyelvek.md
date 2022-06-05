@@ -216,6 +216,8 @@
   - Bonyolultabb a szekvenciálisnál
 
 - A párhuzamos programok alapvetően nem determinisztikusak
+  
+  - A nemdeterminisztikusság abból eredhet, hogy a számítások sorrendisége eltérhet egyes futások között attól függően, hogy melyik szál mikor, mennyi ideig tud futni  ( https://cs.stackexchange.com/questions/41628/why-doesnt-parallelism-necessarily-imply-non-determinism )
 
 - Sokféle párhuzamos programozási modell van
 
@@ -260,6 +262,6 @@
       - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell
         fordítani
       
-      - Elemi és összetett folyamato
+      - Elemi és összetett folyamatok
     
     - Csatornák: két folyamat közötti adatátvitelre szolgál
