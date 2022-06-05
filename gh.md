@@ -3538,13 +3538,13 @@ Következőekkel modellezzük a feladatot:
 
 - **Lehetséges cselekvések** halmaza
 
-- Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusó, rendezett párokból álló halmazt.
+- Egy **állapotátmenet függvény**: Minden állapothoz rendel egy **(cselekvés, állapot)** típusú, rendezett párokból álló halmazt.
 
 - Állapotátmenet **költségvüggvénye**, amely minden lehetséges állapot-cselekvés-állapot hármashoz egy <img src="https://latex.codecogs.com/svg?c(x%2C%20a%2C%20y)" /> valós nemnegatív költségértéket rendel
 
 - **Célállapotok** halmaza
 
-Ez egy gúlyozott gráfot definiál, amiben a **csúcsok az állapotok**, **élek a cselekvések**, **súlyok a költségek**.
+Ez egy súlyozott gráfot definiál, amiben a **csúcsok az állapotok**, **élek a cselekvések**, **súlyok a költségek**.
 
 Ez a gráf az **állapottér**
 
@@ -3558,7 +3558,7 @@ Ez a gráf az **állapottér**
 
 **Megvalósítás**: **Keresőfával**, azaz a kezdőállapotból növesztünk egy fát a szomszédos állapotok hozzávételével amíg célállapotot nem találunk.
 
-> Keresőfe nem azonos az állapottérrel! Hiszen az állapottér nem is feltétle fa.
+> Keresőfa nem azonos az állapottérrel! Hiszen az állapottér nem is feltétle fa.
 
 Keresőfa egy csúcsában tárolt információ:
 
@@ -3628,7 +3628,7 @@ fakereses() {
 
 ###### Iteratívan mélyülő keresés
 
-**Mélységi keresések** sorozata 1, 2, 3 srb. **mélységekre korlátozva**, amíg célállapotot nem találunk.
+**Mélységi keresések** sorozata 1, 2, 3 stb. **mélységekre korlátozva**, amíg célállapotot nem találunk.
 
 - Teljesség és optimalitás a szélességi kereséssel egyezik meg.
 
@@ -3648,7 +3648,7 @@ Ez a **legjobb informálatlan kereső**.
 
 Költség alapján rendezi a permet, először a legkisebb útiköltségű csúcsot fejtjük ki.
 
-###### Gráflekeresés
+###### Gráfkeresés
 
 Ha nem fa az állapottér.
 
@@ -3684,9 +3684,9 @@ Mi van, ha egy zárt halmazban levő csúcshoz **találnánk jobb megoldást**?
 
 ##### Informált keresés
 
-Az eddigi algoritmusok nem fogtak semmit arról, hogy merre haladnak tovább.
+Az eddigi algoritmusok nem tudtak semmit arról, hogy merre haladnak tovább.
 
-Heurisztika: Minden állapotból megbeszülni, hogy mekkora az optimális út költsége az adott állapotból egy célállapotba. Ez alapján tudjuk kiválasztani, merre érdemes haladni.
+**Heurisztika**: Minden állapotból megbecsülni, hogy mekkora az optimális út költsége az adott állapotból egy célállapotba. Ez alapján tudjuk kiválasztani, merre érdemes haladni.
 
 > Például útvonal-tervezési probléma esetén jó heurisztika lehet a légvonal-beli távolság.
 
@@ -3720,11 +3720,11 @@ A peremben a rendezést <img src="https://latex.codecogs.com/svg?f()%20%3D%20h()
 
 Fakeresés esetén ha <img src="https://latex.codecogs.com/svg?h" /> elfogadható, és a keresési fa véges, akkor az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimális.
 
-<img src="https://latex.codecogs.com/svg?h" /> **konzisztens** (monoton): Ha <img src="https://latex.codecogs.com/svg?h(n)%20%5Cle%20c(n%2C%20a%2C%20n')%20%2B%20h(n~)" /> minden <img src="https://latex.codecogs.com/svg?n" />-re, és <img src="https://latex.codecogs.com/svg?n" /> minden <img src="https://latex.codecogs.com/svg?n'" /> szomszédjára.
+<img src="https://latex.codecogs.com/svg?h" /> **konzisztens** (monoton): Ha <img src="https://latex.codecogs.com/svg?h(n)%20%5Cle%20c(n%2C%20a%2C%20n')%20%2B%20h(n)" /> minden <img src="https://latex.codecogs.com/svg?n" />-re, és <img src="https://latex.codecogs.com/svg?n" /> minden <img src="https://latex.codecogs.com/svg?n'" /> szomszédjára.
 
 Gráfkeresés esetén ha <img src="https://latex.codecogs.com/svg?h" /> konzisztens, és az állapottér véges, akkot az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimális.
 
-**Hatákonyság**
+**Hatékonyság**
 
 Az <img src="https://latex.codecogs.com/svg?A%5E*" /> optimálisan hatékony, hiszen csak azokat a csúcsokat terjeszti ki, amelyekre <img src="https://latex.codecogs.com/svg?f()%20%3C%20C%5E*" /> (<img src="https://latex.codecogs.com/svg?C%5E*" /> az optimális költség).
 
@@ -3748,7 +3748,7 @@ Teljes, ha a legkisebb mélységű célállapot mélységényi csúcs belefér a
 
 Hasonló költségű utak esetén előfordulhat, hogy ugrál a két út közt, így lassan talál megoldást.
 
-###### Relaxáció
+##### Relaxáció
 
 Feltételek elhagyása.
 
@@ -3859,7 +3859,7 @@ minErtek(n) {
 
  Az eljárás `maxErtek(kezdőállapot)` hívással indul, hiszen a MAX játékos kezd.
 
-Ha van a játékgráfban köt, akkor nem terminál. Ez a gyakorlatban azért nem probléma, mert csak adott mélységig futtatjuk.
+Ha van a játékgráfban kör, akkor nem terminál. Ez a gyakorlatban azért nem probléma, mert csak adott mélységig futtatjuk.
 
 > Sok játék esetén a szabályok kizárják a végtelenségig futó köröket.
 
@@ -3871,7 +3871,7 @@ Ha tudjuk, hogy MAX egy adott csúcs rekurzív kiértékelése közben talált o
 
 Új paraméterek:
 
-- **Alfa**: **MAX-nak** már felfedeztünk egy olyan stratégiát, amely **alfa** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az <img src="https://latex.codecogs.com/svg?n" /> állapotból a gyökér felé vezetű úton van.
+- **Alfa**: **MAX-nak** már felfedeztünk egy olyan stratégiát, amely **alfa** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az <img src="https://latex.codecogs.com/svg?n" /> állapotból a gyökér felé vezető úton van.
 
 - **Béta**: **MIN-nek** már felfedeztünk egy olyan stratégiát, amely **béta** hasznosságot biztosít egy olyan állapotból indulva, ami a keresőfában az n állapotból a gyökér felé vezetű úton van.
 
@@ -3907,6 +3907,8 @@ Ha mindig a legjobb lépést vesszük, akkor <img src="https://latex.codecogs.co
 
 > Gyakorlatban használhatunk rendezési heurisztikákat, amik sokszor közel kerülnek az optimális esethez. 
 
+![ ](../img/alpha_beta_pelda.png)
+
 #### Korlátozás kielégítési feladat
 
 **Lehetséges állapotok halmaza**: <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BD%7D%20%3D%20%5Cmathcal%7BD%7D_1%20%5Ctimes%20...%20%5Ctimes%20%5Cmathcal%7BD%7D_n" />, ahol <img src="https://latex.codecogs.com/svg?%5Cmathcal%7BD%7D_i" /> az <img src="https://latex.codecogs.com/svg?i" />. változó lehetséges értékei, azaz a feladat állapotai az <img src="https://latex.codecogs.com/svg?n" /> db változó lehetséges értékkombinációi.
@@ -3929,7 +3931,7 @@ A probléma éllapottárbeli keresésként értelmezve:
 
 > Mélységi keresés jó választás lehet, mert a keresőfa mélysége kicsi.
 
-Informált kereséssel: próbáljunk nehezen kielégíthatő változókat kifejteni előbb:
+Informált kereséssel: próbáljunk nehezen kielégíthető változókat kifejteni előbb:
 
 - Amelyikhez a legkevesebb megengedett lépés maradt
 
@@ -4025,11 +4027,11 @@ Az <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.co
 
 Az <img src="https://latex.codecogs.com/svg?A" /> és <img src="https://latex.codecogs.com/svg?B" /> véletlen változók függetlenek akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(A%2C%20B)%20%3D%20P(A)P(B)" />, vagy ekvivalensen <img src="https://latex.codecogs.com/svg?P(A%7CB)%20%3D%20P(A)" />, illetve <img src="https://latex.codecogs.com/svg?P(B%7CA)%20%3D%20P(B)" />
 
-Azaz két változó független, ha az egyik sem tartalmaz információt a másikról.
+Azaz két változó független, ha az **egyik sem tartalmaz információt a másikról**.
 
 #### * Feltételes függetlenség
 
-Az <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> **kijelentések** feltételesen függetlenek <img src="https://latex.codecogs.com/svg?c" /> feltételével akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b%20%7C%20c)%20%3D%20P(a%20%7C%20b)P(b%7Cc)" />. Ekkor <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> nem feltétlenül független abszolút értelemben.
+Az <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> **kijelentések** feltételesen függetlenek <img src="https://latex.codecogs.com/svg?c" /> feltételével akkor, és csak akkor, ha <img src="https://latex.codecogs.com/svg?P(a%20%5Cland%20b%20%7C%20c)%20%3D%20P(a%20%7C%20c)P(b%7Cc)" />. Ekkor <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> nem feltétlenül független abszolút értelemben.
 
 Tipikus eset, ha <img src="https://latex.codecogs.com/svg?a" /> és <img src="https://latex.codecogs.com/svg?b" /> közös **oka** <img src="https://latex.codecogs.com/svg?c" />.
 
@@ -4051,7 +4053,7 @@ Ha <img src="https://latex.codecogs.com/svg?A" /> feltevése mellett <img src="h
 
 Ez a naiv Bayes modell alakja. Itt <img src="https://latex.codecogs.com/svg?O(n)" /> tömörítés érhető el, hiszen
 
-<img src="https://latex.codecogs.com/svg?%0AP(B_1%2C%20...%2C%20B_n%20%7C%20A)%20%3D%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(B_i%20%7C%20A)%0A" />
+<img src="https://latex.codecogs.com/svg?%0AP(B_1%2C%20...%2C%20B_n%2C%20A)%20%3D%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(B_i%20%7C%20A)%0A" />
 
 #### Teljes együttes eloszlás tömör reprezentációja
 
@@ -4059,7 +4061,7 @@ Ez a naiv Bayes modell alakja. Itt <img src="https://latex.codecogs.com/svg?O(n)
 
 ##### Láncszabály
 
-Legyen <img src="https://latex.codecogs.com/svg?X_1%2C%20...%2C%20X_n" /> a féletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
+Legyen <img src="https://latex.codecogs.com/svg?X_1%2C%20...%2C%20X_n" /> a véletlen változók egy tetszőleges felsorolása, ekkor a láncszabály:
 
 <img src="https://latex.codecogs.com/svg?%0AP(X_1%2C%20...%2C%20X_n)%20%3D%20P(X_1%20%7C%20X_2%2C%20...%2C%20X_n)%20P(X_2%2C%20...%2C%20X_n)%20%3D%20%5C%5C%0AP(X_1%20%7C%20X_2%2C%20...%2C%20X_n)%20P(X_2%20%7C%20X_3%2C%20...%2C%20X_n)%20P(X_3%20%7C%20X_4%2C%20...%2C%20X_n)%20...%20P(X_n)%20%3D%20%5C%5C%0A%5Cprod_%7Bi%20%3D%201%7D%5En%20P(X_i%20%7C%20X_%7Bi%20%2B%20)%7D%2C%20...%2C%20X_n)%0A" />
 
@@ -4129,7 +4131,7 @@ Egy <img src="https://latex.codecogs.com/svg?h%20%3A%20X%20%5Cto%20Y" />-t keres
 
 A <img src="https://latex.codecogs.com/svg?h" /> függvény **konzisztens** az adatokkal, ha <img src="https://latex.codecogs.com/svg?h(x_i)%20%3D%20f(x_i)" /> minden példára.
 
-A <img src="https://latex.codecogs.com/svg?h" /> függvényt mindig egy <img src="https://latex.codecogs.com/svg?H" /> **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alapkabn keressüg, pl. adott fokszámú polinom.
+A <img src="https://latex.codecogs.com/svg?h" /> függvényt mindig egy <img src="https://latex.codecogs.com/svg?H" /> **hipotézistérben** keressük. Azaz a függvényt mindig egy adott alakban keressük, pl. adott fokszámú polinom.
 
 A tanulás **realizálható**, ha létezik <img src="https://latex.codecogs.com/svg?h%20%5Cin%20H" />, amelyre <img src="https://latex.codecogs.com/svg?H" /> konzisztens.
 
@@ -4177,7 +4179,7 @@ Mivel <img src="https://latex.codecogs.com/svg?Y" /> véges halmaz, osztályozá
 
 Ez a döntési fa pl. azt határozza meg, hogy az adott jellemzők mellett (<img src="https://latex.codecogs.com/svg?X" />) érdemes-e asztalra várni az étteremben (<img src="https://latex.codecogs.com/svg?Y" />).
 
-Ennek az előnye, hogy a döntések megmagyarázhatóak, emberikel értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
+Ennek az előnye, hogy a döntések megmagyarázhatóak, emberileg értelmezhető a fenti ábra. Míg mesterséges neuron hálók esetében ez nem igaz.
 
 ###### Kifejezőerő
 
@@ -4193,9 +4195,9 @@ T.f.h. a címke logikai érték.
   
   - Fából formula: Az "igen" címkékhez vezető utakban összeéseljük az éleket, majd összevagyoljuk az utakat.
   
-  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy <img src="https://latex.codecogs.com/svg?A_1%2C%20...%2C%20A_n" /> felsorolását, az <img src="https://latex.codecogs.com/svg?A_1" /> a gyökérm <img src="https://latex.codecogs.com/svg?A_1" /> értékei az élek, és az <img src="https://latex.codecogs.com/svg?i" />. szinten a fában minden pontban <img src="https://latex.codecogs.com/svg?A_i" /> van, amely pontokból az élek <img src="https://latex.codecogs.com/svg?A_i" /> értékei. Az <img src="https://latex.codecogs.com/svg?A_n" /> változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
+  - Formulából fa: A formula igazságtábláját fel lehet írni fa alakban. Vegyük a változók egy <img src="https://latex.codecogs.com/svg?A_1%2C%20...%2C%20A_n" /> felsorolását, az <img src="https://latex.codecogs.com/svg?A_1" /> a gyökérelem <img src="https://latex.codecogs.com/svg?A_1" /> értékei az élek, és az <img src="https://latex.codecogs.com/svg?i" />. szinten a fában minden pontban <img src="https://latex.codecogs.com/svg?A_i" /> van, amely pontokból az élek <img src="https://latex.codecogs.com/svg?A_i" /> értékei. Az <img src="https://latex.codecogs.com/svg?A_n" /> változóból kivezető élek már levelek lesznek, értékük az igazságtáblában található érték (a levéltől gyökérig vezető út meghatározza, az igazságtábla melyik sora kell).
   
-  > Ez a faépítés nagy fákat eredményez, a gyakorlatban éltalában alkalmaznak tömörítési technikákat.
+  > Ez a faépítés nagy fákat eredményez, a gyakorlatban általában alkalmaznak tömörítési technikákat.
 
 ###### Döntési fa építése
 
@@ -4217,9 +4219,9 @@ Adottak ilyen felépítésű példák:
 )
 ```
 
-És ilyenekből minél több, legalább már száz.
+És ilyenekből minél több, legalább pár száz.
 
-Példákat bemagolni könnyő, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
+Példákat bemagolni könnyű, pl. tekinthetjük a példákat az igazságtábla ismert sorainak, és az alapján építünk fát a korábbiak szerint. Ismeretlen sorokhoz véletlenszerű értéket írhatunk. Ez konzisztens az adatokkal.
 
 De a magolás nem általánosít!
 
@@ -4251,13 +4253,13 @@ Legyen egy példahalmazban <img src="https://latex.codecogs.com/svg?n%5E%2B" /> 
 
 <img src="https://latex.codecogs.com/svg?%0AH%20%5Cleft(%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%2C%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%5Cright)%20%3D%20%5C%5C%0A-%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20log%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20-%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20log%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%0A" />
 
-Információnyereség egy <img src="https://latex.codecogs.com/svg?A" /> változóra nézve:
+**Információnyereség** egy <img src="https://latex.codecogs.com/svg?A" /> változóra nézve:
 
 <img src="https://latex.codecogs.com/svg?%0AH%20%5Cleft(%20%5Cfrac%7Bn%5E%2B%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%2C%20%5Cfrac%7Bn%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20%5Cright)%20-%20%5Csum_i%20%5Cfrac%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%7Bn%5E%2B%20%2B%20n%5E-%7D%20H%20%5Cleft(%20%5Cfrac%7Bn_i%5E%2B%7D%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%2C%20%5Cfrac%7Bn_i%5E-%7D%7Bn_i%5E%2B%20%2B%20n_i%5E-%7D%20%5Cright)%0A" />
 
 > Példahalmaz entrópiájának, és a az <img src="https://latex.codecogs.com/svg?A" /> változó lehetséges értékei szerinti felosztás után keletkező részhalmazok átlagos entrópiájának a különbsége.
 
-> <img src="https://latex.codecogs.com/svg?n_i%5E%2B" /> és <img src="https://latex.codecogs.com/svg?n_i%5E-" /> az <img src="https://latex.codecogs.com/svg?A" /> változó <img src="https://latex.codecogs.com/svg?i" />. lehetséges értékét tartalmazópozitív illetve negatív példák száma.
+> <img src="https://latex.codecogs.com/svg?n_i%5E%2B" /> és <img src="https://latex.codecogs.com/svg?n_i%5E-" /> az <img src="https://latex.codecogs.com/svg?A" /> változó <img src="https://latex.codecogs.com/svg?i" />. lehetséges értékét tartalmazó pozitív illetve negatív példák száma.
 
 Ez alapján választható egy maximális nyereségű változó.
 
@@ -4289,7 +4291,7 @@ Pl.: <img src="https://latex.codecogs.com/svg?%5Cchi%20%5E2" /> (**khí-négyzet
 
 ###### Naiv Bayes algoritmus
 
-Statisztikai következtetű módszer.
+Statisztikai következtető módszer.
 
 Adatbázis-beli példák alapján példákat osztályoz
 
@@ -4305,7 +4307,7 @@ Ehhez a következő átalakításokat, illetve függetlenségi feltevéseket tes
 
 <img src="https://latex.codecogs.com/svg?%0AP(A%7Cb_1%2C%20...%2C%20b_n)%20%3D%20%5Calpha%20P(A)%20P(b_1%2C%20...%2C%20b_n%20%7CA)%20%5Capprox%20%5Calpha%20P(A)%20%5Cprod_%7Bi%3D1%7D%5En%20P(b_i%7CA)%0A" />
 
-Első egyenlőség: a Bayes tétel alkalmazása. <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%201%20%2F%20P(n_1%2C%20...%2C%20b_n)" />. 
+Első egyenlőség: a Bayes tétel alkalmazása. <img src="https://latex.codecogs.com/svg?%5Calpha%20%3D%201%20%2F%20P(b_1%2C%20...%2C%20b_n)" />. 
 
 Második közelítő egyenlőség: naiv Bayes feltevés. A pontatlanságért cserébe (ezért csak közelítő egyenlőség) <img src="https://latex.codecogs.com/svg?P(A)" /> és <img src="https://latex.codecogs.com/svg?P(b_i%20%7CA)" /> könnyen közelíthető az adatbázisban található példák segítségével.
 
@@ -4317,7 +4319,7 @@ Adottak a <img src="https://latex.codecogs.com/svg?%5C%7B%20~%20(x_1%2C%20y_1)%2
 
 Egy <img src="https://latex.codecogs.com/svg?h%5E*%3A%20X%20%5Cto%20Y" /> függvényt keresünk, amely a példákra jól illeszkedik, és jól általánosít.
 
-Optimalizációs megközelítés: Definiáljuk az <img src="https://latex.codecogs.com/svg?l%20%3A%20X%20%5Ctimes%20Y%20%5Ctimes%20H%20%5Cto%20%5Cmathbb%7BR%7D" /> veszteségfüggvényt, amely egy <img src="https://latex.codecogs.com/svg?(x%2C%20y)%20%5Cin%20X%20%5Ctimes%20Y" /> példára megadja, hogy az adott <img src="https://latex.codecogs.com/svg?h%20%5Cin%20H" /> hipotézis "bennyi bajt okoz" az adott példán.
+Optimalizációs megközelítés: Definiáljuk az <img src="https://latex.codecogs.com/svg?l%20%3A%20X%20%5Ctimes%20Y%20%5Ctimes%20H%20%5Cto%20%5Cmathbb%7BR%7D" /> veszteségfüggvényt, amely egy <img src="https://latex.codecogs.com/svg?(x%2C%20y)%20%5Cin%20X%20%5Ctimes%20Y" /> példára megadja, hogy az adott <img src="https://latex.codecogs.com/svg?h%20%5Cin%20H" /> hipotézis "mennyi bajt okoz" az adott példán.
 
 > Példa veszteségfüggvényre: Nényzetes hiba: <img src="https://latex.codecogs.com/svg?l(x%2C%20y%2C%20g)%20%3D%20(h(x)-y)%5E2" />
 
@@ -4465,7 +4467,7 @@ Optimalizáció alapú megközelítést alkalmazunk, ennek komponensei lehetnek 
 
 - Optimalizáló algoritmus legyen gradiens módszer
 
-Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimenetenjelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
+Visszaterjesztés (**backpropagation**): Valójában a gradiens kiszámolására szolgál. A kimeneten jelentkező veszteség visszaterjesztődik a rejtett neuronokra, ez alapján a súlyok állítása.
 
 Több osztály esetén több kimeneti neuron, veszteségfüggvény: **kereszt entrópia**
 
@@ -4481,7 +4483,7 @@ Több osztály esetén több kimeneti neuron, veszteségfüggvény: **kereszt en
 
 Összes input össze van kötve az összes kimenettel, összesen <img src="https://latex.codecogs.com/svg?d%20%5Ccdot%20k" /> kapcsolat, mind külön súllyal.
 
-Tehár összesen eltolási súlyokkal együtt <img src="https://latex.codecogs.com/svg?d%20%5Ccdot%20k%20%2B%20k" /> súly van.
+Tehát összesen eltolási súlyokkal együtt <img src="https://latex.codecogs.com/svg?d%20%5Ccdot%20k%20%2B%20k" /> súly van.
 
 ###### Konvolúciós réteg
 
@@ -4596,7 +4598,7 @@ Az algoritmus hibái:
 
 #### Példa
 
-Játékgyártó cék kétféle terméket gyárt:
+Játékgyártó cég kétféle terméket gyárt:
 
 - **Katonákat**
   
@@ -4638,7 +4640,7 @@ Lehetséges megoldás: <img src="https://latex.codecogs.com/svg?x%20%3D%20(20%2C
 
 > Azaz 20 katona, 20 vonat
 
-Optimális megoldás: <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20(20.%2060)" />
+Optimális megoldás: <img src="https://latex.codecogs.com/svg?x%5E*%20%3D%20(20%2C%2060)" />
 
 Optimum értéke: <img src="https://latex.codecogs.com/svg?z%5E*%20%3D%20180" /> (Célfüggvénybe helyettesítve: <img src="https://latex.codecogs.com/svg?3%20*%2020%20%2B%202%20*%2060" />)
 
@@ -4726,13 +4728,13 @@ A legszűkebb korlátot adó egyenletből fejezzük ki a belépő változót.
 
 Azon előfordulások közül, ahol a belépő változó negatív előjelű együtthatóval szerepel, kiválasztjuk azt ahol a (<img src="https://latex.codecogs.com/svg?b_%7Bi%7D%20%2F%20%7Ca_%7Bij%7D%7C" />) a legkisebb.
 
-> Ami pozitív együtthetóval szerepel, az nem ad korlátot a változóra!
+> Ami pozitív együtthatóval szerepel, az nem ad korlátot a változóra!
 
 ##### Optimális bázismegoldás
 
 Honnan tudjuk, hogy az aktuális bázismegoldás optimális?
 
-**Tétel**: Ha egy szótárban nincs pozitív <img src="https://latex.codecogs.com/svg?c_j%20%3D%20(j%20%3D%201%2C%202%2C%20...%2C%20n%2Bm)" /> célfüggvény együttható és negatív <img src="https://latex.codecogs.com/svg?b_i%20(i%20%3D%201%2C%202%2C%20...%20%2Cm)" /> konstans a feltételes egyenleteiben, akkor a szótár bázismegoldása optimális megoldás.
+**Tétel**: Ha egy szótárban nincs pozitív <img src="https://latex.codecogs.com/svg?c_j%20%3D%20(j%20%3D%201%2C%202%2C%20...%2C%20n%2Bm)" /> célfüggvény együttható és negatív <img src="https://latex.codecogs.com/svg?b_i%20(i%20%3D%201%2C%202%2C%20...%20%2Cm)" /> konstans a feltételek egyenleteiben, akkor a szótár bázismegoldása optimális megoldás.
 
 ##### Az algoritmus
 
@@ -4900,7 +4902,7 @@ Bázismegoldások = poliéder csúcsok.
 
 Játékgyáras példához:
 
-Legyen egy egység fa piaci ára <img src="https://latex.codecogs.com/svg?y_1" />, egy egység festég ára <img src="https://latex.codecogs.com/svg?y_2" />
+Legyen egy egység fa piaci ára <img src="https://latex.codecogs.com/svg?y_1" />, egy egység festék ára <img src="https://latex.codecogs.com/svg?y_2" />
 
 A gyártó opciói:
 
@@ -4940,7 +4942,7 @@ Maga az eredeti feladat a **primál** feladat.
 
 A duális feladat megoldásában <img src="https://latex.codecogs.com/svg?y_i%5E*" /> az eredeti (primál) feladat <img src="https://latex.codecogs.com/svg?i" />. erőforrásáfoz tartozó piaci ár, amit marginális árnak vagy árnyék árnak nevezünk
 
-- Ez az erőforrás éeréke az LP megoldójának szemszögéből
+- Ez az erőforrás értéke az LP megoldójának szemszögéből
 
 - Az <img src="https://latex.codecogs.com/svg?i" /> erőforrás mennyiségének egy egységnyi növelésével éppen <img src="https://latex.codecogs.com/svg?y_i%5E*" />-gal nő a nyereség (azaz a célfüggvény értéke)
 
@@ -4954,7 +4956,7 @@ Ha <img src="https://latex.codecogs.com/svg?x%20%3D%20%5Bx_1%2C%20...%2C%20x_n%5
 
 <img src="https://latex.codecogs.com/svg?%0Ac%5ET%20x%20%5Cle%20b%5ET%20y%0A" />
 
-> Azaz a duális feladat bármely lehetséges megoldása feéső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
+> Azaz a duális feladat bármely lehetséges megoldása felső korlátot ad a primál bármely lehetséges megoldására (így az optimális megoldásra is)
 
 ###### Erős dualitás tétele
 
@@ -5004,13 +5006,15 @@ Vagyis
   
   - "a feltétel éles"
 
-- Ha az <img src="https://latex.codecogs.com/svg?i" />-edik feltétel nem éles, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%2B%7D%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?y_i%20%3D%200" />
+- Ha az <img src="https://latex.codecogs.com/svg?i" />-edik feltétel nem éles, azaz <img src="https://latex.codecogs.com/svg?x_%7Bn%2Bi%7D%20%3E%200" />, akkor <img src="https://latex.codecogs.com/svg?y_i%20%3D%200" />
 
 > Hiszen a <img src="https://latex.codecogs.com/svg?y%5ET%20xs%20%3D%200" /> és a <img src="https://latex.codecogs.com/svg?x%5ET%20ye%20%3D%200" /> egyenletek esetén ez a két lehetőség van, hogy egyenlőség legyen
 
+![ ](../img/komplementaritas_pelda.png)
+
 ##### Komplementaritási tétel
 
-Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?x" /> a primál, <img src="https://latex.codecogs.com/svg?y" /> a duál feladat lehetséges megoldása. Az <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> akkor, éd csak akkor optimálisak, ha komplementárisak is.
+Tegyük fel, hogy <img src="https://latex.codecogs.com/svg?x" /> a primál, <img src="https://latex.codecogs.com/svg?y" /> a duál feladat lehetséges megoldása. Az <img src="https://latex.codecogs.com/svg?x" /> és <img src="https://latex.codecogs.com/svg?y" /> **akkor, és csak akkor optimálisak, ha komplementárisak is**.
 
 Ezért ha <img src="https://latex.codecogs.com/svg?x" /> a primál optimális megoldása, akkor igazak:
 
@@ -5020,9 +5024,15 @@ Ezért ha <img src="https://latex.codecogs.com/svg?x" /> a primál optimális me
 
 ##### Komplementáris lazaság
 
+Komplementartiás segítségével ellenőrizni tudjuk, hogy egy megoldás javaslat optimális-e
+
+![ ](../img/komplementaris_lazasag_1.png)
+
+![ ](../img/komplementaris_lazasag_2.png)
+
 - Adott <img src="https://latex.codecogs.com/svg?x" />, egy javasolt primál megoldás, ellenőrizzük, hogy lehetséges-e
 
-- Nézzük meg, mely <img src="https://latex.codecogs.com/svg?y_i" /> változóknak kell <img src="https://latex.codecogs.com/svg?0" />-nka lennie
+- Nézzük meg, mely <img src="https://latex.codecogs.com/svg?y_i" /> változóknak kell <img src="https://latex.codecogs.com/svg?0" />-nak lennie
 
 - Nézzük meg, mely duál feltételnek kell élesnek lennie, így egy egyenletrendszert kapunk
 
@@ -5070,7 +5080,7 @@ Egy egészértékű programozási feladat LP-lazítása az az LP, amelyet úgy k
 
 Akkor alkalmazzuk, ha egy IP feladat megoldásakor LP-lazításon dolgozunk, és az optimum nem egész
 
-Ehhor egy <img src="https://latex.codecogs.com/svg?x_i" /> nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha <img src="https://latex.codecogs.com/svg?x_i" /> értéke <img src="https://latex.codecogs.com/svg?x_i%5E*" /> akkor <img src="https://latex.codecogs.com/svg?x_i%20%5Cle%20%5Clfloor%20x_i%5E*%20%5Crfloor" />, illetve <img src="https://latex.codecogs.com/svg?x_i%20%5Cge%20%5Clceil%20x_i%5E*%20%5Crceil" /> feltételeket vesszük hozzá egy-egy új feladatunkhoz.
+Ekkor egy <img src="https://latex.codecogs.com/svg?x_i" /> nem egész változó szerint két részfeladatra bontjuk a feladatot. Ha <img src="https://latex.codecogs.com/svg?x_i" /> értéke <img src="https://latex.codecogs.com/svg?x_i%5E*" /> akkor <img src="https://latex.codecogs.com/svg?x_i%20%5Cle%20%5Clfloor%20x_i%5E*%20%5Crfloor" />, illetve <img src="https://latex.codecogs.com/svg?x_i%20%5Cge%20%5Clceil%20x_i%5E*%20%5Crceil" /> feltételeket vesszük hozzá egy-egy új feladatunkhoz.
 
 Ezeket a részproblémákat egy fába rendezzük.
 
@@ -5092,7 +5102,7 @@ Egy csúcs **felderített** (lezárt), ha:
 
 - Megoldása egészértékű
 
-- Felderítettünk már olyan egész megoldást, mai jobb a részfeladat megoldásánál
+- Felderítettünk már olyan egész megoldást, ami jobb a részfeladat megoldásánál
 
 Egy részfeladatot **kizárunk**, ha:
 
@@ -7638,6 +7648,8 @@ Példa a Fourier leírásra:
   - Bonyolultabb a szekvenciálisnál
 
 - A párhuzamos programok alapvetően nem determinisztikusak
+  
+  - A nemdeterminisztikusság abból eredhet, hogy a számítások sorrendisége eltérhet egyes futások között attól függően, hogy melyik szál mikor, mennyi ideig tud futni  ( https://cs.stackexchange.com/questions/41628/why-doesnt-parallelism-necessarily-imply-non-determinism )
 
 - Sokféle párhuzamos programozási modell van
 
@@ -7682,7 +7694,7 @@ Példa a Fourier leírásra:
       - Befejeződés helyett holtpontba is kerülhet, erre különös figyelmet kell
         fordítani
       
-      - Elemi és összetett folyamato
+      - Elemi és összetett folyamatok
     
     - Csatornák: két folyamat közötti adatátvitelre szolgál
 ## Programozás 1 & 2
